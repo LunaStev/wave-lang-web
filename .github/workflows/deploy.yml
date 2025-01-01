@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # 사용하려는 Node.js 버전
+          node-version: '18'  # 사용하려는 Node.js 버전
 
       # 3. 의존성 설치
       - name: Install dependencies

@@ -18,7 +18,7 @@ const config = {
   url: 'https://wave-lang.dev',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -108,11 +108,11 @@ const config = {
             items: [
               {
                 label: 'Docs',
-                to: '/docs/intro/intro',
+                to: '/docs/intro/',
               },
               {
                 label: 'Grammar',
-                to: '/docs/grammar/intro',
+                to: '/docs/Syntax/intro',
               },
             ],
           },
