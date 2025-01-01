@@ -36,7 +36,7 @@ const config = {
     locales: ['en', 'ko'],
     path: 'i18n'
   },
-
+  
   presets: [
     [
       'classic',
