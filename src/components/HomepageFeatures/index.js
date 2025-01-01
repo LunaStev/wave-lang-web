@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import Translate from "@docusaurus/Translate";
 
 const FeatureList = [
   {
@@ -8,9 +9,11 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
+      <Translate id="one">
         Wave is built to handle everything from low-level system programming to
         high-level applications, offering flexibility and performance in one unified
         language.
+      </Translate>
       </>
     ),
   },
@@ -19,8 +22,10 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
+      <Translate id="two">
         With Wave, you can concentrate on solving complex problems directly, using
         a single language across diverse domains like web development, AI, and hardware.
+      </Translate>
       </>
     ),
   },
@@ -29,8 +34,10 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
+      <Translate id="three">
         Wave allows you to write high-performance code that runs efficiently on any
         platform, without compromising on ease of use or safety.
+      </Translate>
       </>
     ),
   },
