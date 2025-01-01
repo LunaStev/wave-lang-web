@@ -1,0 +1,9 @@
+
+> wave-lang@0.0.0 start
+> docusaurus start --host 0.0.0.0
+
+[INFO] Starting the development server...
+[SUCCESS] Docusaurus website is running at: http://localhost:3000/
+[webpackbar] ℹ Compiling Client
+[webpackbar] ✔ Client: Compiled successfully in 4.03s
+client (webpack 5.97.1) compiled successfully
