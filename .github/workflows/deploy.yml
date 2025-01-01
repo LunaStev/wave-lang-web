@@ -37,7 +37,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # 배포할 브랜치 (gh-pages)
-          folder: build  # 빌드된 파일이 들어 있는 폴더 (예: `build` 또는 `dist`)
+          folder: build     # 빌드된 파일이 들어 있는 폴더 (예: `build` 또는 `dist`)
+          token: ${{ secrets.GH_TOKEN }}  # GitHub Actions에서 제공하는 GITHUB_TOKEN을 명시적으로 지정
 
       # 6. 완료 메시지
       - name: Clean up
