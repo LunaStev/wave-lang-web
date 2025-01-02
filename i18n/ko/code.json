@@ -1,11 +1,4 @@
 {
-  "navbar": {
-    "items": [
-      {
-        "label": "문서"
-      }
-    ]
-  },
   "menu-docs": {
     "message": "문서"
   },
