@@ -87,10 +87,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: {
-              en: 'Docs',
-              ko: '문서',
-            },
+            label: 'Docs',
           },
           {
             type: 'localeDropdown',
