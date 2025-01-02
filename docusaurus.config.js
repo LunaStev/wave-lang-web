@@ -112,8 +112,8 @@ const config = {
                 to: '/docs/intro/',
               },
               {
-                label: 'Grammar',
-                to: '/docs/syntax/intro',
+                label: 'Syntax',
+                to: '/docs/syntax/',
               },
             ],
           },
