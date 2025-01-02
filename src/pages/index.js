@@ -18,7 +18,7 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">
             <Translate id="tagline">
-                {siteConfig.tagline}
+                One Language, Infinite Possibilities
             </Translate>
             </p>
         <div className={styles.buttons}>
