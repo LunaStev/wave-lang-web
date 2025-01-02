@@ -9,7 +9,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-      <Translate id="one">
+      <Translate id="main-one">
         Wave is built to handle everything from low-level system programming to
         high-level applications, offering flexibility and performance in one unified
         language.
@@ -22,7 +22,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-      <Translate id="two">
+      <Translate id="main-two">
         With Wave, you can concentrate on solving complex problems directly, using
         a single language across diverse domains like web development, AI, and hardware.
       </Translate>
@@ -34,7 +34,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-      <Translate id="three">
+      <Translate id="main-three">
         Wave allows you to write high-performance code that runs efficiently on any
         platform, without compromising on ease of use or safety.
       </Translate>
