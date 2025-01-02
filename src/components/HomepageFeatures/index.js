@@ -5,7 +5,13 @@ import Translate from "@docusaurus/Translate";
 
 const FeatureList = [
   {
-    title: 'Powerful and Flexible',
+    title: (
+        <>
+        <Translate id="paf">
+          Powerful and Flexible
+        </Translate>
+        </>
+    ),
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
@@ -18,7 +24,13 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Focus on Efficiency',
+    title: (
+        <>
+          <Translate id="foe">
+            Focus on Efficiency
+          </Translate>
+        </>
+    ),
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
@@ -30,7 +42,13 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Optimized for Performance',
+    title: (
+        <>
+          <Translate id="ofp">
+            Optimized for Performance
+          </Translate>
+        </>
+    ),
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>

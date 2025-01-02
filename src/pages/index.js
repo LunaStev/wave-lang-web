@@ -21,7 +21,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-              <Translate description="find-out">
+              <Translate id="find-out">
                 Find out about Wave.
               </Translate>
           </Link>
