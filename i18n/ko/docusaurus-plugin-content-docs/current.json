@@ -1,16 +1,18 @@
 {
-  "home": {
-    "title": "Wave에 오신 것을 환영합니다!",
-    "description": "Wave는 저수준 개발과 고수준 개발을 연결하는 현대적인 프로그래밍 언어입니다."
-  },
   "docs": {
     "intro": {
-      "title": "Wave 소개",
+      "title": "소개",
       "content": "Wave는 시스템 프로그래밍부터 웹 개발까지 다양한 도메인을 지원하는 다목적 프로그래밍 언어입니다."
     },
-    "wavesyntax": {
-      "title": "Wave 설치",
-      "content": "시스템에 Wave를 설치하는 방법을 따라 하세요."
+    "Syntax": {
+      "intro": {
+        "title": "구문 소개",
+        "content": "Wave 언어의 기본 구문과 구조에 대해 배웁니다. 여기에서는 변수 선언, 조건문, 반복문 등을 다룹니다."
+      },
+      "wavesyntax": {
+        "title": "함수와 변수",
+        "content": "Wave에서는 함수와 변수를 선언하는 방식이 매우 직관적입니다. 함수 정의와 변수 선언에 대해 배우게 됩니다."
+      }
     }
   }
 }
