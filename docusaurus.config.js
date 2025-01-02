@@ -113,7 +113,7 @@ const config = {
               },
               {
                 label: 'Syntax',
-                to: '/docs/syntax/intro',
+                to: '/docs/Syntax/intro',
               },
             ],
           },
