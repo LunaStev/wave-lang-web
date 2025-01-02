@@ -84,6 +84,17 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {name: 'keywords', content: 'Wave, programming language, web development, operating systems, AI, blockchain, hardware, cryptography, networking, compilers'},
+        {name: 'description', content: 'Wave is a modern programming language that redefines development with an integrated ecosystem across web, OS, AI, and hardware.'},
+        {name: 'author', content: 'LunaStev'},
+        {name: 'robots', content: 'index, follow'},
+        {property: 'og:title', content: 'Wave Programming Language'},
+        {property: 'og:description', content: 'Wave is a modern programming language that integrates web, OS, AI, blockchain, hardware, and more into one ecosystem.'},
+        {property: 'og:url', content: 'https://wave-lang.dev'},
+        {name: 'twitter:title', content: 'Wave Programming Language'},
+        {name: 'twitter:description', content: 'Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware.'},
+      ],
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.png',
       navbar: {
