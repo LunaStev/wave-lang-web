@@ -5,7 +5,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
-import Translate from "@docusaurus/Translate";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -88,13 +87,10 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: (
-                  <>
-                    <Translate id="menu-docs">
-                      Docs
-                    </Translate>
-                  </>
-            ),
+            label: {
+              en: 'Docs',
+              ko: '문서',
+            },
           },
           {
             type: 'localeDropdown',
