@@ -7,7 +7,7 @@ const FeatureList = [
   {
     title: (
         <>
-        <Translate id="paf">
+        <Translate id="powerful-and-flexible">
           Powerful and Flexible
         </Translate>
         </>
@@ -26,7 +26,7 @@ const FeatureList = [
   {
     title: (
         <>
-          <Translate id="foe">
+          <Translate id="focus-on-efficiency">
             Focus on Efficiency
           </Translate>
         </>
@@ -44,7 +44,7 @@ const FeatureList = [
   {
     title: (
         <>
-          <Translate id="ofp">
+          <Translate id="optimized-for-performance">
             Optimized for Performance
           </Translate>
         </>

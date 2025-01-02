@@ -75,7 +75,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/docusaurus-social-card.png',
       navbar: {
         title: 'Wave',
         logo: {
@@ -87,7 +87,8 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Introduction',
+            label: 'Docs',
+            id: 'menu-docs',
           },
           {
             type: 'localeDropdown',
