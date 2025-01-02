@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "Wave에 오신 것을 환영합니다!",
+    "description": "Wave는 저수준 개발과 고수준 개발을 연결하는 현대적인 프로그래밍 언어입니다."
+  },
+  "docs": {
+    "intro": {
+      "title": "Wave 소개",
+      "content": "Wave는 시스템 프로그래밍부터 웹 개발까지 다양한 도메인을 지원하는 다목적 프로그래밍 언어입니다."
+    },
+    "wavesyntax": {
+      "title": "Wave 설치",
+      "content": "시스템에 Wave를 설치하는 방법을 따라 하세요."
+    }
+  }
+}
