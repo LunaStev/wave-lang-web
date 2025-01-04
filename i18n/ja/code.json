@@ -1,0 +1,26 @@
+{
+  "tagline": {
+    "message": "一つの言語、無限の可能性"
+  },
+  "find-out": {
+    "message": "Waveについて知る"
+  },
+  "powerful-and-flexible": {
+    "message": "強力で柔軟な"
+  },
+  "focus-on-efficiency": {
+    "message": "効率性に焦点を当てる"
+  },
+  "optimized-for-performance": {
+    "message": "パフォーマンスの最適化"
+  },
+  "main-one": {
+    "message": "Waveは低レベルのシステムプログラミングから高レベルのアプリケーションまで、すべてを処理できるように設計されており、統合された言語で柔軟性とパフォーマンスを提供します。"
+  },
+  "main-two": {
+    "message": "Waveを使うことで、Web開発、人工知能、ハードウェアなど、さまざまな分野で単一の言語で複雑な問題を直接解決することに集中できます。"
+  },
+  "main-three": {
+    "message": "Waveは、使いやすさや安全性を損なうことなく、どのプラットフォームでも効率的に実行される高性能なコードを作成できるようにします。"
+  }
+}

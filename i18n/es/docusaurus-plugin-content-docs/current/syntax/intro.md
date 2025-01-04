@@ -68,8 +68,8 @@ En este ejemplo:
 
 ### Variables inmutables
 Cuando se declara una variable como **inmutable**, su valor no puede cambiar una vez que se le ha asignado.
-Las variables inmutables se declaran usando **var imm**.
 
+Las variables inmutables se declaran usando **var imm**.
 ```wave
 var imm y :i32 = 5;     // Variable inmutable
 // y = 10;              // Error: No se puede modificar una variable inmutable

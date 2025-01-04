@@ -34,16 +34,25 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     /*
+     - 순서 -
      영어 'en',
-     한국어 'ko',
      스페인어 'es',
      프랑스어 'fr',
      독일어 'de',
+     한국어 'ko',
      일본어 'ja',
      중국어(간체) 'zh_CN',
      중국어(번체) 'zh_TW'
     */
-    locales: ['en', 'ko', 'es'],
+    locales:
+        [
+          'en',
+          'es',
+          'fr',
+          'de',
+          'ko',
+          'ja'
+        ],
     path: 'i18n',
   },
 
