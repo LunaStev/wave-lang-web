@@ -42,6 +42,9 @@ const config = {
      독일어 'de',
      러시아어 'ru',
      일본어 'ja',
+     힌디어 'hi',
+     타밀어 'ta',
+     - 지원 예정 -
      중국어(간체) 'zh_CN',
      중국어(번체) 'zh_TW'
     */
@@ -53,7 +56,9 @@ const config = {
           'fr',
           'de',
           'ru',
-          'ja'
+          'ja',
+          'hi',
+          'ta'
         ],
     path: 'i18n',
   },
