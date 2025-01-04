@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate sitemap
         run: |
-          npm run generate-sitemap
+          npx sitemap-generator-cli https://wave-lang.dev --output ./static/sitemap.xml  
 
       - name: Build the website
         run: |
