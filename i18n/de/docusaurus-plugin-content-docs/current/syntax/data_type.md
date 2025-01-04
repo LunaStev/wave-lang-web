@@ -85,6 +85,7 @@ var ptr :ptr = &someVariable;
 Der Array-Typ wird verwendet, um **mehrere Werte des gleichen Datentyps** in einer Reihenfolge zu speichern.
 Arrays werden mit dem Schlüsselwort `array` deklariert, und ihre Größe sowie der Datentyp können festgelegt werden.
 
+Beispiel:
 ```wave
 var numbers: array<i32> = [1, 2, 3, 4, 5];
 ```

@@ -86,6 +86,7 @@ var ptr :ptr = &someVariable;
 Le type tableau est utilisé pour stocker **plusieurs éléments du même type de données** de manière séquentielle.
 Il est déclaré avec le mot-clé `array`, et vous pouvez spécifier la taille ou le type des éléments du tableau.
 
+Exemple :
 ```wave
 var numbers: array<i32> = [1, 2, 3, 4, 5];
 ```

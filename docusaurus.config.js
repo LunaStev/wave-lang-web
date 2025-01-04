@@ -36,10 +36,11 @@ const config = {
     /*
      - 순서 -
      영어 'en',
+     한국어 'ko',
      스페인어 'es',
      프랑스어 'fr',
      독일어 'de',
-     한국어 'ko',
+     러시아어 'ru',
      일본어 'ja',
      중국어(간체) 'zh_CN',
      중국어(번체) 'zh_TW'
@@ -47,10 +48,11 @@ const config = {
     locales:
         [
           'en',
+          'ko',
           'es',
           'fr',
           'de',
-          'ko',
+          'ru',
           'ja'
         ],
     path: 'i18n',

@@ -87,6 +87,7 @@ var ptr :ptr = &someVariable;
 El tipo de arreglo se utiliza para almacenar **múltiples valores del mismo tipo de dato** en una secuencia ordenada.
 Se declara utilizando la palabra clave `array`, y se puede especificar el tamaño o el tipo del arreglo.
 
+Ejemplo:
 ```wave
 var numbers: array<i32> = [1, 2, 3, 4, 5];
 ```
