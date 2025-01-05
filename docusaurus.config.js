@@ -44,6 +44,7 @@ const config = {
      일본어 'ja',
      힌디어 'hi',
      타밀어 'ta',
+     스와힐리어 'sw',
      - 지원 예정 -
      중국어(간체) 'zh_CN',
      중국어(번체) 'zh_TW'
@@ -58,7 +59,8 @@ const config = {
           'ru',
           'ja',
           'hi',
-          'ta'
+          'ta',
+          'sw',
         ],
     path: 'i18n',
   },
