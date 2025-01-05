@@ -11,6 +11,7 @@ It is a comprehensive development ecosystem that helps programmers work creative
 
 ## Components of the Wave Ecosystem
 1. Wave
+
 The core of the Wave ecosystem is the Wave programming language.
 Based on the philosophies of C and Rust, it is designed to balance low-level control with high productivity.
 
@@ -18,6 +19,7 @@ Based on the philosophies of C and Rust, it is designed to balance low-level con
 * **Powerful features**:  Supports a variety of data types such as pointers, arrays, and serialization.
 
 2. Standard Library
+
 Wave provides a rich standard library to prevent programmers from having to rely on external libraries.
 
 * hardwave: Hardware control
@@ -28,6 +30,7 @@ Wave provides a rich standard library to prevent programmers from having to rely
 * quantum: Quantum computing support
 
 3. Community and Ecosystem Philosophy
+
 Wave values interaction with developers, not just the language itself.
 
 * **Developer-centered design**: Respects various languages and cultures.
@@ -55,4 +58,5 @@ The Wave ecosystem evolves around the following values:
 ---
 
 The Wave ecosystem is not just about providing tools; it aims to offer a **comprehensive and innovative environment** that delivers better experiences and efficiency for developers.
+
 Explore new possibilities with Wave!
