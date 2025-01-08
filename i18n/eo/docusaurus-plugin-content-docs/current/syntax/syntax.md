@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 문법
+# Gramatiko
 
 Ĉi tiu dokumento klarigas la gramatikon de la programlingvo **Wave**. La dezajno de Wave ankoraŭ estas en evoluo, do parto de la gramatiko kaj funkcioj eble ne estas kompletaj aŭ povus esti ŝanĝitaj.
 Tamen, ĉi tiu dokumento celas helpi vin kompreni la nunan staton kaj la ĉefajn konceptojn, kaj donas komprenon pri la estontaj evoluoj.
