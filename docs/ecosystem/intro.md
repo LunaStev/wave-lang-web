@@ -64,6 +64,7 @@ Wave OS can be used in various fields.
 * **IoT**: Seamlessly integrates with hardware in IoT devices, supporting effective development in IoT environments.
 * **High-Performance Servers**: Wave OS offers stable and efficient operation in high-performance system and server environments.
 * **Real-Time Systems**: Demonstrates powerful performance in systems with hardware control and real-time processing requirements.
+* **User Convenience**: It supports users by providing a convenient interface, ensuring they can use it without any discomfort.
 
 ---
 
