@@ -11,7 +11,6 @@ It is a comprehensive development ecosystem that helps programmers work creative
 
 ## Components of the Wave Ecosystem
 ### Wave
-
 The core of the Wave ecosystem is the Wave programming language.
 Based on the philosophies of C and Rust, it is designed to balance low-level control with high productivity.
 
@@ -19,18 +18,16 @@ Based on the philosophies of C and Rust, it is designed to balance low-level con
 * **Powerful features**:  Supports a variety of data types such as pointers, arrays, and serialization.
 
 ### Standard Library
-
 Wave provides a rich standard library to prevent programmers from having to rely on external libraries.
 
-* hardwave: Hardware control
-* http: HTTP and WebSocket communication
-* iosys: File and stream I/O
-* sys: System control
-* wson: High-performance data serialization format
-* quantum: Quantum computing support
+* **hardwave**: Hardware control
+* **http**: HTTP and WebSocket communication
+* **iosys**: File and stream I/O
+* **sys**: System control
+* **wson**: High-performance data serialization format
+* **quantum**: Quantum computing support
 
 ### Community and Ecosystem Philosophy
-
 Wave values interaction with developers, not just the language itself.
 
 * **Developer-centered design**: Respects various languages and cultures.
@@ -38,12 +35,10 @@ Wave values interaction with developers, not just the language itself.
 * **Future-oriented technology**: Supports quantum computing and next-generation security standards.
 
 ### Toolchain
-
 Wave maximizes productivity through a complete set of development tools.
 
 * **Wave Package Manager (WPAK)**: Platform-independent builds and deployments.
 * **Wave Debugger**: Intuitive debugging.
-
 
 ---
 

@@ -10,7 +10,6 @@ It provides high performance, stability, and flexibility, and reflects the philo
 
 ## Features of Wave OS
 ### Integration with Wave Language
-
 Wave OS is deeply connected with the Wave language, designed to **maximize the capabilities of the Wave language**. 
 By combining the Wave language’s powerful low-level control features with Wave OS's direct hardware control capabilities, **efficient system development** is made possible.
 
@@ -18,28 +17,24 @@ By combining the Wave language’s powerful low-level control features with Wave
 * Easy low-level hardware control and optimization.
 
 ### Lightweight Design
-
 Wave OS minimizes unnecessary features, offering an **efficient and lightweight** operating system.
 
 * **Small, fast, and stable** kernel design.
 * **Low resource consumption**, suitable for embedded systems, IoT devices, servers, and more.
 
 ### Hardware Control
-
 Wave OS provides **close integration with hardware**, allowing developers to control and optimize hardware directly.
 
 * **Device Drivers**: Provides drivers for easy integration with various hardware.
 * **Hardware Control**: Allows control of hardware through code written in the Wave language, enabling real-time systems.
 
 ### Multitasking and Process Management
-
 Wave OS supports **multitasking**, offering efficient process management and concurrent execution.
 
 * **Thread and Process Management**: Ensures stable operation in multi-threaded and multi-processing environments, with inter-process communication and synchronization features.
 * **Scheduler**: A scheduler that efficiently allocates system resources while maintaining high performance.
 
 ### Advanced System Features
-
 Wave OS provides more than just basic operating system functionalities.
 
 * **File System**: High-performance file system and I/O management features.
