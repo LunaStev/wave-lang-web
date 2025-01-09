@@ -48,7 +48,9 @@ const config = {
      타밀어 'ta',
      스와힐리어 'sw',
      중국어(간체) 'zh_CN',
-     중국어(번체) 'zh_TW'
+     중국어(번체) 'zh_TW',
+     광동어 'yue',
+
     */
     locales:
         [
@@ -65,7 +67,8 @@ const config = {
           'ta',
           'sw',
           'zh_CN',
-          'zh_TW'
+          'zh_TW',
+          'yue'
         ],
     path: 'i18n',
   },
