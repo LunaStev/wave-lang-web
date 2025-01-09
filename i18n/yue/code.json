@@ -1,26 +1,26 @@
 {
   "tagline": {
-    "message": "하나의 언어, 무한한 가능성"
+    "message": "一種語言，無限可能"
   },
   "find-out": {
-    "message": "Wave에 대해 알아보세요."
+    "message": "了解Wave"
   },
   "powerful-and-flexible": {
-    "message": "강력하고 유연한"
+    "message": "強大同靈活"
   },
   "focus-on-efficiency": {
-    "message": "효율성에 집중하기"
+    "message": "專注於效率"
   },
   "optimized-for-performance": {
-    "message": "성능 최적화"
+    "message": "性能優化"
   },
   "main-one": {
-    "message": "Wave는 저수준 시스템 프로그래밍부터 고수준 애플리케이션까지 모든 것을 처리할 수 있도록 설계되어, 하나의 통합된 언어로 유연성과 성능을 제공합니다."
+    "message": "Wave被設計成可以處理由低層系統編程到高層應用程式的所有內容，提供一個統一的語言來實現靈活性同性能。"
   },
   "main-two": {
-    "message": "Wave를 사용하면 웹 개발, 인공지능, 하드웨어 등 다양한 분야에서 단일 언어로 복잡한 문제를 직접 해결하는 데 집중할 수 있습니다."
+    "message": "使用Wave，您可以專注於用單一語言解決網頁開發、人工智能、硬件等多個領域中嘅複雜問題。"
   },
   "main-three": {
-    "message": "Wave는 사용 용이성이나 안전성을 해치지 않으면서, 어떤 플랫폼에서도 효율적으로 실행되는 고성능 코드를 작성할 수 있게 해줍니다."
+    "message": "Wave令您可以喺唔犧牲易用性或者安全性嘅情況下，編寫可以喺任何平台上高效運行嘅高效能代碼。"
   }
 }
