@@ -47,8 +47,8 @@ const config = {
      힌디어 'hi',
      타밀어 'ta',
      스와힐리어 'sw',
-     중국어(간체) 'zh_CN',
-     중국어(번체) 'zh_TW',
+     중국어(간체) 'zh-CN',
+     중국어(번체) 'zh-TW',
      광동어 'yue',
 
     */
@@ -66,8 +66,8 @@ const config = {
           'hi',
           'ta',
           'sw',
-          'zh_CN',
-          'zh_TW',
+          'zh-CN',
+          'zh-TW',
           'yue'
         ],
     path: 'i18n',
