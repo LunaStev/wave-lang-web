@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwave_lang=self.webpackChunkwave_lang||[]).push([[903],{1912:e=>{e.exports=JSON.parse('{"blogBasePath":"/yue/blog","blogTitle":"Blog","authorsListPath":"/yue/blog/authors"}')}}]);
