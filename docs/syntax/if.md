@@ -18,7 +18,7 @@ if (condition) {
 }
 ```
 
-The condition is written using comparison operators (==, !=, <, >, <=, >=) or logical operators (&&, ||, !) and so on.
+The condition is written using comparison operators (`==`, `!=`, `<`, `>`, `<=`, `>=`) or logical operators (`&&`, `||`, `!`) and so on.
 If the condition is false, the code block is not executed.
 
 ## Example
