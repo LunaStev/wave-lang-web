@@ -107,6 +107,16 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      'plugin-google-gtag',
+      {
+        trackingID: 'G-Y41SKWE3MZ',
+        anonymizeIP: true,
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
