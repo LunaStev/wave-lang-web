@@ -131,10 +131,6 @@ const config = {
         {name: 'twitter:title', content: 'Wave Programming Language'},
         {name: 'twitter:description', content: 'Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware.'},
       ],
-      gtag: {
-        trackingID: 'G-Y41SKWE3MZ',
-        anonymizeIP: true,
-      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.png',
       navbar: {
