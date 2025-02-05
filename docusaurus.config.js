@@ -107,6 +107,7 @@ const config = {
     ],
   ],
 
+  /*
   plugins: [
     [
       'plugin-google-gtag',
@@ -116,6 +117,7 @@ const config = {
       },
     ],
   ],
+   */
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
