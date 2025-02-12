@@ -34,23 +34,22 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     /*
-     - 순서 -
-     영어 'en',
-     한국어 'ko',
-     스페인어 'es',
-     프랑스어 'fr',
-     독일어 'de',
-     러시아어 'ru',
-     일본어 'ja',
-     타이어 'th',
-     에스페란토 'eo',
-     힌디어 'hi',
-     타밀어 'ta',
-     스와힐리어 'sw',
-     중국어(간체) 'zh-CN',
-     중국어(번체) 'zh-TW',
-     광동어 'yue',
-
+      - 순서 -
+      영어 'en',
+      한국어 'ko',
+      스페인어 'es',
+      프랑스어 'fr',
+      독일어 'de',
+      러시아어 'ru',
+      일본어 'ja',
+      타이어 'th',
+      힌디어 'hi',
+      타밀어 'ta',
+      스와힐리어 'sw',
+      중국어(간체) 'zh-CN',
+      중국어(번체) 'zh-TW',
+      광동어 'yue',
+      에스페란토 'eo',
     */
     locales:
         [
@@ -107,18 +106,6 @@ const config = {
     ],
   ],
 
-  /*
-  plugins: [
-    [
-      'plugin-google-gtag',
-      {
-        trackingID: 'G-Y41SKWE3MZ',
-        anonymizeIP: true,
-      },
-    ],
-  ],
-   */
-
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -172,7 +159,11 @@ const config = {
               },
               {
                 label: 'Syntax',
-                to: '/docs/syntax/intro',
+                to: '/docs/syntax/',
+              },
+              {
+                label: 'Ecosystem',
+                to: '/docs/ecosystem/',
               },
             ],
           },
@@ -203,7 +194,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Wave with LunaStev. Built with Docusaurus.`,
+        copyright: `Copyright © 2023 - ${new Date().getFullYear()} Wave with LunaStev. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
