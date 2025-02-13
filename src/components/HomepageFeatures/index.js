@@ -44,12 +44,36 @@ export default function HomepageFeatures() {
     {
       name: "LunaStev",
       roleId: 'homepage.contributors.role.founder'
+    },
+    {
+      name: "LunaStev",
+      roleId: 'homepage.contributors.role.founder'
+    },
+    {
+      name: "LunaStev",
+      roleId: 'homepage.contributors.role.founder'
+    },
+    {
+      name: "LunaStev",
+      roleId: 'homepage.contributors.role.founder'
     }
   ];
 
   const sponsors = [
     {
-      name: "TechCorp",
+      name: "heymanbug",
+      tierId: 'homepage.sponsors.tier.honor'
+    },
+    {
+      name: "heymanbug",
+      tierId: 'homepage.sponsors.tier.honor'
+    },
+    {
+      name: "heymanbug",
+      tierId: 'homepage.sponsors.tier.honor'
+    },
+    {
+      name: "heymanbug",
       tierId: 'homepage.sponsors.tier.honor'
     }
   ];
