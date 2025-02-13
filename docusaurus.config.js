@@ -49,6 +49,7 @@ const config = {
       중국어(간체) 'zh-CN',
       중국어(번체) 'zh-TW',
       광동어 'yue',
+      아카드어 'akk',
       에스페란토 'eo',
     */
     locales:
@@ -67,8 +68,15 @@ const config = {
           'zh-CN',
           'zh-TW',
           'yue',
+          'akk',
           'eo',
         ],
+    localeConfigs: {
+      akk: {
+        label: '𒀝𒅗𒁺𒌑',
+        dir: 'ltr',
+      }
+    },
     path: 'i18n',
   },
 
