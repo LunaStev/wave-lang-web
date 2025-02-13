@@ -4,23 +4,5 @@
   },
   "find-out": {
     "message": "了解Wave"
-  },
-  "powerful-and-flexible": {
-    "message": "強大同靈活"
-  },
-  "focus-on-efficiency": {
-    "message": "專注於效率"
-  },
-  "optimized-for-performance": {
-    "message": "性能優化"
-  },
-  "main-one": {
-    "message": "Wave被設計成可以處理由低層系統編程到高層應用程式的所有內容，提供一個統一的語言來實現靈活性同性能。"
-  },
-  "main-two": {
-    "message": "使用Wave，您可以專注於用單一語言解決網頁開發、人工智能、硬件等多個領域中嘅複雜問題。"
-  },
-  "main-three": {
-    "message": "Wave令您可以喺唔犧牲易用性或者安全性嘅情況下，編寫可以喺任何平台上高效運行嘅高效能代碼。"
   }
 }

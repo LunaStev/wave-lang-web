@@ -1,0 +1,47 @@
+{
+  "homepage.features.type.title": {
+    "message": "Powerful Type System"
+  },
+  "homepage.features.type.description": {
+    "message": "Wave provides a powerful static type system that catches many bugs at compile time."
+  },
+  "homepage.features.parallel.title": {
+    "message": "Parallel Programming Support"
+  },
+  "homepage.features.parallel.description": {
+    "message": "Built-in concurrency features enable efficient parallel programming."
+  },
+  "homepage.features.memory.title": {
+    "message": "Memory Safety"
+  },
+  "homepage.features.memory.description": {
+    "message": "Automatic memory management prevents memory leaks and related bugs."
+  },
+  "homepage.code.title": {
+    "message": "Wave Code Example"
+  },
+  "homepage.contributors.title": {
+    "message": "Contributors"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Language Designer"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Compiler Development"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Standard Library Maintainer"
+  },
+  "homepage.sponsors.title": {
+    "message": "Sponsors"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Platinum Sponsor"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Gold Sponsor"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Silver Sponsor"
+  }
+}

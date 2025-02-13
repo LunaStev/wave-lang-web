@@ -4,23 +4,5 @@
   },
   "find-out": {
     "message": "Erfahren Sie mehr über Wave."
-  },
-  "powerful-and-flexible": {
-    "message": "Leistungsstark und flexibel"
-  },
-  "focus-on-efficiency": {
-    "message": "Fokus auf Effizienz"
-  },
-  "optimized-for-performance": {
-    "message": "Optimiert für Leistung"
-  },
-  "main-one": {
-    "message": "Wave wurde entwickelt, um alles vom Low-Level-Systemprogrammieren bis hin zu High-Level-Anwendungen zu bewältigen und bietet Flexibilität und Leistung in einer einzigen integrierten Sprache."
-  },
-  "main-two": {
-    "message": "Mit Wave können Sie sich auf die direkte Lösung komplexer Probleme in Bereichen wie Webentwicklung, künstliche Intelligenz, Hardware und mehr konzentrieren, indem Sie eine einzige Sprache verwenden."
-  },
-  "main-three": {
-    "message": "Wave ermöglicht es Ihnen, leistungsstarken Code zu schreiben, der auf jeder Plattform effizient ausgeführt wird, ohne die Benutzerfreundlichkeit oder Sicherheit zu beeinträchtigen."
   }
 }

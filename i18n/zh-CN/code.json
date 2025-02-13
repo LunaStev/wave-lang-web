@@ -4,23 +4,5 @@
   },
   "find-out": {
     "message": "了解Wave"
-  },
-  "powerful-and-flexible": {
-    "message": "强大而灵活"
-  },
-  "focus-on-efficiency": {
-    "message": "专注于效率"
-  },
-  "optimized-for-performance": {
-    "message": "性能优化"
-  },
-  "main-one": {
-    "message": "Wave被设计成能够处理从低级系统编程到高级应用程序的所有任务，提供一个统一的语言，兼具灵活性和性能。"
-  },
-  "main-two": {
-    "message": "使用Wave，您可以在Web开发、人工智能、硬件等多个领域，通过单一语言专注于解决复杂问题。"
-  },
-  "main-three": {
-    "message": "Wave使您能够编写高性能代码，在不牺牲易用性或安全性的情况下，在任何平台上高效运行。"
   }
 }
