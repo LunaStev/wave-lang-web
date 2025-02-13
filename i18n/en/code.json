@@ -23,6 +23,9 @@
   "homepage.contributors.title": {
     "message": "Contributors"
   },
+  "homepage.contributors.role.founder": {
+    "message": "Language Founder"
+  },
   "homepage.contributors.role.designer": {
     "message": "Language Designer"
   },
@@ -34,6 +37,9 @@
   },
   "homepage.sponsors.title": {
     "message": "Sponsors"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Honor Sponsor"
   },
   "homepage.sponsors.tier.platinum": {
     "message": "Platinum Sponsor"

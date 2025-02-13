@@ -29,6 +29,9 @@
   "homepage.contributors.title": {
     "message": "기여자"
   },
+  "homepage.contributors.role.founder": {
+    "message": "언어 창시자"
+  },
   "homepage.contributors.role.designer": {
     "message": "언어 설계자"
   },
@@ -40,6 +43,9 @@
   },
   "homepage.sponsors.title": {
     "message": "스폰서"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "명예 스폰서"
   },
   "homepage.sponsors.tier.platinum": {
     "message": "플래티넘 스폰서"
