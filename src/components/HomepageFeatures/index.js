@@ -42,31 +42,15 @@ export default function HomepageFeatures() {
 
   const contributors = [
     {
-      name: "Jane Doe",
-      roleId: 'homepage.contributors.role.designer'
-    },
-    {
-      name: "John Smith",
-      roleId: 'homepage.contributors.role.compiler'
-    },
-    {
-      name: "Alice Johnson",
-      roleId: 'homepage.contributors.role.library'
+      name: "LunaStev",
+      roleId: 'homepage.contributors.role.founder'
     }
   ];
 
   const sponsors = [
     {
       name: "TechCorp",
-      tierId: 'homepage.sponsors.tier.platinum'
-    },
-    {
-      name: "DevFoundation",
-      tierId: 'homepage.sponsors.tier.gold'
-    },
-    {
-      name: "CodeInstitute",
-      tierId: 'homepage.sponsors.tier.silver'
+      tierId: 'homepage.sponsors.tier.honor'
     }
   ];
 
