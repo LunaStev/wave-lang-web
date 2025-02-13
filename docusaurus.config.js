@@ -74,7 +74,7 @@ const config = {
     localeConfigs: {
       akk: {
         label: '𒀝𒅗𒁺𒌑',
-        dir: 'ltr',
+        direction: 'ltr',
       }
     },
     path: 'i18n',
