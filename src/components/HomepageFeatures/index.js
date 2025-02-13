@@ -21,16 +21,16 @@ function Feature({titleId, descriptionId}) {
 export default function HomepageFeatures() {
   const features = [
     {
-      titleId: 'homepage.features.type.title',
-      descriptionId: 'homepage.features.type.description',
+      titleId: 'homepage.features.one.title',
+      descriptionId: 'homepage.features.one.description',
     },
     {
-      titleId: 'homepage.features.parallel.title',
-      descriptionId: 'homepage.features.parallel.description',
+      titleId: 'homepage.features.two.title',
+      descriptionId: 'homepage.features.two.description',
     },
     {
-      titleId: 'homepage.features.memory.title',
-      descriptionId: 'homepage.features.memory.description',
+      titleId: 'homepage.features.three.title',
+      descriptionId: 'homepage.features.three.description',
     },
   ];
 

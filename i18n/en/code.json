@@ -1,21 +1,21 @@
 {
-  "homepage.features.type.title": {
-    "message": "Powerful Type System"
+  "homepage.features.one.title": {
+    "message": "Powerful and Flexible"
   },
-  "homepage.features.type.description": {
-    "message": "Wave provides a powerful static type system that catches many bugs at compile time."
+  "homepage.features.one.description": {
+    "message": "Wave is built to handle everything from low-level system programming to high-level applications, offering flexibility and performance in one unified language."
   },
-  "homepage.features.parallel.title": {
-    "message": "Parallel Programming Support"
+  "homepage.features.two.title": {
+    "message": "Focus on Efficiency"
   },
-  "homepage.features.parallel.description": {
-    "message": "Built-in concurrency features enable efficient parallel programming."
+  "homepage.features.two.description": {
+    "message": "With Wave, you can concentrate on solving complex problems directly, using a single language across diverse domains like web development, AI, and hardware."
   },
-  "homepage.features.memory.title": {
-    "message": "Memory Safety"
+  "homepage.features.three.title": {
+    "message": "Optimized for Performance"
   },
-  "homepage.features.memory.description": {
-    "message": "Automatic memory management prevents memory leaks and related bugs."
+  "homepage.features.three.description": {
+    "message": "Wave allows you to write high-performance code that runs efficiently on any platform, without compromising on ease of use or safety."
   },
   "homepage.code.title": {
     "message": "Wave Code Example"
