@@ -4,5 +4,57 @@
   },
   "find-out": {
     "message": "Узнайте больше о Wave."
+  },
+  "homepage.features.one.title": {
+    "message": "Мощный и гибкий"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave разработан для обработки всего, от низкоуровневого системного программирования до высокоуровневых приложений, предлагая единственный язык с гибкостью и производительностью."
+  },
+  "homepage.features.two.title": {
+    "message": "Фокус на эффективности"
+  },
+  "homepage.features.two.description": {
+    "message": "Используя Wave, вы можете сосредоточиться на решении сложных задач с помощью одного языка в различных областях, таких как веб-разработка, искусственный интеллект и аппаратное обеспечение."
+  },
+  "homepage.features.three.title": {
+    "message": "Оптимизация производительности"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave позволяет вам писать высокопроизводительный код, который эффективно работает на любой платформе, не жертвуя удобством использования или безопасностью."
+  },
+  "homepage.code.title": {
+    "message": "Пример кода Wave"
+  },
+  "homepage.contributors.title": {
+    "message": "Участники"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Основатель языка"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Дизайнер языка"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Разработка компилятора"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Ответственный за стандартную библиотеку"
+  },
+  "homepage.sponsors.title": {
+    "message": "Спонсоры"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Почетный спонсор"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Платиновый спонсор"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Золотой спонсор"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Серебряный спонсор"
   }
+
 }

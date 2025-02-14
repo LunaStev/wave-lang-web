@@ -4,5 +4,56 @@
   },
   "find-out": {
     "message": "Wave के बारे में जानें।"
+  },
+  "homepage.features.one.title": {
+    "message": "शक्तिशाली और लचीला"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave को निम्न-स्तरीय सिस्टम प्रोग्रामिंग से लेकर उच्च-स्तरीय एप्लिकेशन तक सब कुछ संभालने के लिए डिज़ाइन किया गया है, जो एक एकीकृत भाषा के साथ लचीलापन और प्रदर्शन प्रदान करता है।"
+  },
+  "homepage.features.two.title": {
+    "message": "कुशलता पर ध्यान केंद्रित करना"
+  },
+  "homepage.features.two.description": {
+    "message": "Wave का उपयोग करते हुए, आप वेब विकास, कृत्रिम बुद्धिमत्ता, हार्डवेयर और अन्य क्षेत्रों में एकल भाषा का उपयोग करके जटिल समस्याओं को हल करने पर ध्यान केंद्रित कर सकते हैं।"
+  },
+  "homepage.features.three.title": {
+    "message": "प्रदर्शन अनुकूलन"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave आपको उच्च-प्रदर्शन कोड लिखने की अनुमति देता है जो किसी भी प्लेटफ़ॉर्म पर प्रभावी ढंग से चलता है, बिना उपयोगिता या सुरक्षा से समझौता किए।"
+  },
+  "homepage.code.title": {
+    "message": "Wave कोड उदाहरण"
+  },
+  "homepage.contributors.title": {
+    "message": "योगदानकर्ता"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "भाषा संस्थापक"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "भाषा डिज़ाइनर"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "कंपाइलर विकास"
+  },
+  "homepage.contributors.role.library": {
+    "message": "मानक पुस्तकालय के प्रभारी"
+  },
+  "homepage.sponsors.title": {
+    "message": "प्रायोजक"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "मानद प्रायोजक"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "प्लैटिनम प्रायोजक"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "स्वर्ण प्रायोजक"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "चांदी प्रायोजक"
   }
 }

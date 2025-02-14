@@ -4,5 +4,56 @@
   },
   "find-out": {
     "message": "Jifunze kuhusu Wave."
+  },
+  "homepage.features.one.title": {
+    "message": "Nguvu na Flexible"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave imeundwa kushughulikia kila kitu, kuanzia programu za mifumo za kiwango cha chini hadi programu za kiwango cha juu, ikitoa lugha moja iliyo na ufanisi na utendaji."
+  },
+  "homepage.features.two.title": {
+    "message": "Lengo la Ufanisi"
+  },
+  "homepage.features.two.description": {
+    "message": "Kwa kutumia Wave, unaweza kuzingatia kutatua matatizo magumu moja kwa moja kwa kutumia lugha moja katika maeneo mbalimbali kama vile maendeleo ya wavuti, akili bandia, na vifaa."
+  },
+  "homepage.features.three.title": {
+    "message": "Kuboresha Utendaji"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave inakuruhusu kuandika nambari yenye utendaji wa juu inayotekelezwa kwa ufanisi kwenye majukwaa yoyote bila kuathiri urahisi wa matumizi au usalama."
+  },
+  "homepage.code.title": {
+    "message": "Mfano wa Nambari ya Wave"
+  },
+  "homepage.contributors.title": {
+    "message": "Washiriki"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Mwanasayansi wa Lugha"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Mundaji wa Lugha"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Mendeleo ya Kompila"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Msimamizi wa Maktaba ya Kawaida"
+  },
+  "homepage.sponsors.title": {
+    "message": "Wadhamini"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Mwadhamini wa Heshima"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Mwadhamini wa Platinamu"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Mwadhamini wa Dhahabu"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Mwadhamini wa Fedha"
   }
 }

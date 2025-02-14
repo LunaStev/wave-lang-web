@@ -4,5 +4,56 @@
   },
   "find-out": {
     "message": "Découvrez Wave."
+  },
+  "homepage.features.one.title": {
+    "message": "Puissant et flexible"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave est conçu pour gérer tout, de la programmation système de bas niveau aux applications de haut niveau, offrant un langage unifié avec flexibilité et performance."
+  },
+  "homepage.features.two.title": {
+    "message": "Concentré sur l'efficacité"
+  },
+  "homepage.features.two.description": {
+    "message": "Avec Wave, vous pouvez vous concentrer sur la résolution de problèmes complexes directement avec un seul langage dans des domaines variés tels que le développement web, l'intelligence artificielle et le matériel."
+  },
+  "homepage.features.three.title": {
+    "message": "Optimisation des performances"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave vous permet d'écrire un code haute performance qui s'exécute de manière efficace sur toutes les plateformes sans compromettre la facilité d'utilisation ni la sécurité."
+  },
+  "homepage.code.title": {
+    "message": "Exemple de code Wave"
+  },
+  "homepage.contributors.title": {
+    "message": "Contributeurs"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Fondateur du langage"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Concepteur du langage"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Développement du compilateur"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Responsable de la bibliothèque standard"
+  },
+  "homepage.sponsors.title": {
+    "message": "Sponsors"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Sponsor d'honneur"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Sponsor Platine"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Sponsor Or"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Sponsor Argent"
   }
 }
