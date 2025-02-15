@@ -2,7 +2,7 @@
 sidebar_position: 0
 ---
 
-# Introductio
+# Introduction
 ## Wave's philosophy and goals
 Wave is designed to simplify and complement low-level programming by providing a versatile, unified language that bridges diverse domains of development. Rather than aiming to replace low-level languages like C and Assembly, Wave focuses on creating a robust and cohesive development ecosystem that spans areas such as web development, operating systems, artificial intelligence, blockchain, hardware, compilers, networking, and cryptography.
 
