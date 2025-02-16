@@ -39,6 +39,7 @@ const config = {
       한국어 'ko',
       스페인어 'es',
       프랑스어 'fr',
+      네덜란드어 'nl',
       독일어 'de',
       러시아어 'ru',
       일본어 'ja',
@@ -57,6 +58,7 @@ const config = {
           'ko',
           'es',
           'fr',
+          'nl',
           'de',
           'ru',
           'ja',
@@ -70,9 +72,8 @@ const config = {
           'eo',
         ],
     localeConfigs: {
-      akk: {
-        label: '𒀝𒅗𒁺𒌑',
-        direction: 'ltr',
+      ar: {
+        direction: 'rtr',
       }
     },
     path: 'i18n',
