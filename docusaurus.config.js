@@ -71,11 +71,11 @@ const config = {
           'yue',
           'eo',
         ],
-    localeConfigs: {
-      ar: {
-        direction: 'rtr',
-      }
-    },
+    // localeConfigs: {
+    //   ar: {
+    //     direction: 'rtr',
+    //   }
+    // },
     path: 'i18n',
   },
 
