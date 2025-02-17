@@ -37,7 +37,7 @@ Wave ondersteunt modulair programmeren, zodat ontwikkelaars code efficiënt kunn
 
 Wave biedt intuïtieve en duidelijke foutmeldingen en debugging-tools, waardoor ontwikkelaars problemen snel kunnen identificeren en oplossen.
 
-## Wave의 로드맵과 계획
+## Wave's routekaart en plannen
 1. Uitbreiding van kernfunctionaliteiten
 
 Wave zal beginnen met een basisversie die zich richt op fundamentele syntaxis en functies. Vervolgens worden updates uitgebracht met features zoals patroonmatching, asynchrone programmering en geavanceerde datastructuren.
