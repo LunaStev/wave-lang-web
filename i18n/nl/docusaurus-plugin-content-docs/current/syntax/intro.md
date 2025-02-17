@@ -13,7 +13,7 @@ Door te begrijpen hoe functies en variabelen worden gedefinieerd en beheerd, kun
 
 ---
 
-## 함수
+## functie
 In Wave zijn functies **herbruikbare codeblokken** die onafhankelijk kunnen worden uitgevoerd.
 Ze encapsuleren specifieke acties en kunnen worden aangeroepen waar nodig in het programma.
 Dit maakt het mogelijk om berekeningen uit te voeren, I/O-operaties te beheren en code te organiseren in beheersbare eenheden.
