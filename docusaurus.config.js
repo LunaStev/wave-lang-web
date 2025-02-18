@@ -155,11 +155,15 @@ const config = {
             position: 'right',
           },
           {
+            href: 'https://github.com/LunaStev/Wave/releases',
+            label: 'Releases',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/LunaStev/Wave',
             label: 'GitHub',
             position: 'right',
           },
-
         ],
       },
       footer: {
