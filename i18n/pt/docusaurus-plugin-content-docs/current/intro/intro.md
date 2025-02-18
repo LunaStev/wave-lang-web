@@ -12,7 +12,7 @@ Uma das principais características do Wave é sua biblioteca de hardware, proje
 
 O Wave busca eliminar a divisão entre programação de alto e baixo nível, oferecendo um ambiente de linguagem unificado e intuitivo que simplifica a experiência de desenvolvimento.
 
-## Wave의 주요 특징과 특성
+## Roteiro e Planos do Wave
 1. Estrutura de linguagem integrada
 
 O Wave integra diversas áreas de desenvolvimento em uma única linguagem, eliminando a necessidade de aprender várias linguagens diferentes.

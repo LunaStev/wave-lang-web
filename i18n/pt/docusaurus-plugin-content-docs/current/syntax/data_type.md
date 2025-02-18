@@ -2,92 +2,91 @@
 sidebar_position: 2
 ---
 
-# 데이터 타입
+# Tipos de Dados
 
-이 문서는 Wave 프로그래밍 언어에서 제공하는 다양한 데이터 타입에 대해 설명합니다. 
-Wave 프로그래밍 언어는 다양한 데이터 타입을 사용하여 값을 저장하고 연산할 수 있습니다. 
-주요 데이터 타입에는 정수, 부동소수점, 문자열 등이 있습니다. 각 데이터 타입은 해당 데이터의 특성과 메모리 처리 방식을 정의 합니다.
+Este documento explica os diversos tipos de dados disponíveis na linguagem de programação Wave.
+O Wave permite armazenar e operar valores usando diferentes tipos de dados, como inteiros, números de ponto flutuante, strings, entre outros.
+Cada tipo de dado define as características do valor armazenado e como ele é tratado na memória.
 
-## 정수 타입
-정수 타입은 **정수 값**을 저장하는 데 사용됩니다. 
-기본적으로 정수는 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)로 선언됩니다.
-Wave 프로그래밍 언어에서는 정수의 범위를 세밀하게 설정할 수 있는 다양한 크기의 옵션을 제공 합니다.
+## Tipos Inteiros
+Os tipos inteiros são usados para armazenar valores numéricos inteiros.
+Por padrão, os inteiros podem ser declarados como `i32` (inteiro com sinal de 32 bits) ou `u32` (inteiro sem sinal de 32 bits).
+A linguagem Wave oferece várias opções de tamanhos para controle preciso dos valores armazenados.
 
-* `i4` ~ `i32768`: 부호가 있는 정수 타입이며, 4비트부터 32768비트까지 크기를 설정할 수 있습니다.
-* `u4` ~ `u32768`: 부호가 없는 정수 타입으로, 4비트부터 32768비트까지 크기 설정이 가능합니다.
+* `i4` ~ `i32768`: Inteiros com sinal, variando de 4 a 32.768 bits.
+* `u4` ~ `u32768`: Inteiros sem sinal, variando de 4 a 32.768 bits.
 
-예시:
+Exemplo:
 ```wave
 var a :i32 = 100;
 var b :u32 = 200;
 ```
 
-## 부동소수점 타입
-부동소수점 타입은 실수 값을 저장하는 데 사용됩니다. 
-기본적으로 부동소수점 숫자는 `f32`로 선언됩니다. 
-또한, 부동소수점 숫자의 크기를 서밀하게 정의 할 수 있는 다양한 크기 옵션을 제공합니다.
+## Tipos de Ponto Flutuante
+Os tipos de ponto flutuante são usados para armazenar valores decimais.
+Por padrão, os números de ponto flutuante são declarados como `f32`, mas o Wave também permite definir tamanhos maiores para cálculos mais precisos.
 
-* `f32` ~ `f32768`: 부동소수점 타입은 32비트부터 32768비트까지 크기를 설정할 수 있습니다. 이를 통해 더 높은 정밀도의 실수 계산을 할 수 있습니다.
+* `f32` ~ `f32768`: Tipos de ponto flutuante que variam de 32 a 32.768 bits, proporcionando maior precisão nos cálculos.
 
-예시:
+Exemplo:
 ```wave
 var pi :f32 = 3.14;
 var e :f64 = 2.71828;
 ```
 
-## 문자열 타입
-문자열 타입을 텍스트 데이터를 다루는 데 사용됩니다. `str` 키워드를 사용하여 문자열을 선언합니다. 
-문자열은 일반적으로 큰따옴표(`"`)로 감싸서 정의하며, 변수에 문자열 값을 할당할 수 있습니다.
+## Tipo String
+O tipo string é usado para armazenar dados textuais.
+As strings são declaradas com a palavra-chave `str` e geralmente são definidas usando aspas duplas (`"`).
 
-예시:
+Exemplo:
 ```wave
 var text :str = "Hello Wave";
 ```
 
-## 불리언 타입
-불리언 타입은 **참(Ture)** 또는 **거짓(False)** 값을 나타내는 데이터 타입입니다. 
-조건문에서 주로 사용되며, 값은 `true` 또는 `false`로 설정됩니다.
+## Tipo Booleano
+O tipo booleano representa valores **verdadeiro (`true`)** ou **falso (`false`)**.
+É amplamente utilizado em estruturas condicionais.
 
-예시:
+Exemplo:
 ```wave
 var isActive :bool = true;
 var isAvailable :bool = true;
 ```
 
-## 문자 타입
-문자 타입은 단일 문자를 저장하는 데 사용됩니다.
-`char` 키워드를 사용하여 선언되며, 하나의 문자 값만을 담을 수 있습니다.
+## Tipo Caractere
+O tipo **caractere (`char`)** armazena um único caractere.
+Os caracteres são declarados usando aspas simples (`'`).
 
-예시:
+Exemplo:
 ```wave
 var letter :char = 'A';
 ```
 
-## 바이트 타입
-바이트 타입은 **1바이트** 크기의 데이터를 저장하는 데 사용됩니다.
-주로 바이너리 데이터를 다루는 경우에 유용합니다. `byte` 키워드를 사용하여 선언합니다.
+## Tipo Byte
+O tipo byte armazena dados binários de 1 byte.
+É útil para manipular dados em nível binário.
 
-예시:
+Exemplo:
 ```wave
 var byteData :byte = 0xFF;
 ```
 
-## 포인터 타입
-포인터 타입은 **메모리 주소**를 참조하는 데 사용됩니다.
-`ptr` 키워드를 사용하여 포인터를 선언하고, 메모리 주소를 저장하는 데 사용됩니다.
+## Tipo Ponteiro
+Os ponteiros armazenam endereços de memória e são usados para manipulação direta de memória.
+São declarados com a palavra-chave `ptr`.
 
-예시:
+Exemplo:
 ```wave
 var ptr :ptr = &someVariable;
 ```
 
-## 배열 타입
-배열 타입은 **여러 개의 동일한 데이터 타입**을 순차적으로 저장하는 데 사용됩니다.
-`array` 키워드를 사용하며, 배열의 크기나 타입을 지정할 수 있습니다.
+## Tipo Array
+Os arrays armazenam múltiplos valores do mesmo tipo em uma estrutura sequencial.
+São declarados com a palavra-chave `array`, permitindo definir o tamanho e o tipo dos elementos.
 
-예시:
+Exemplo:
 ```wave
 var numbers: array<i32> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 다양한 범위와 크기를 설정할 수 있기 때문에, 사용자의 필요에 맞는 타입을 선택하여 효육적인 메모리 관리와 계산을 할 수 있습니다.
+Cada tipo de dado pode ser ajustado conforme a necessidade, permitindo controle eficiente da memória e execução otimizada dos cálculos.
