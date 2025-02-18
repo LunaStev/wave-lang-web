@@ -38,7 +38,9 @@ const config = {
       영어 'en',
       한국어 'ko',
       스페인어 'es',
+      포르투갈어 'pt',
       프랑스어 'fr',
+      이탈리아어 'it',
       네덜란드어 'nl',
       독일어 'de',
       러시아어 'ru',
@@ -48,6 +50,7 @@ const config = {
       힌디어 'hi',
       타밀어 'ta',
       스와힐리어 'sw',
+      아랍어 'ar',
       중국어(간체) 'zh-CN',
       중국어(번체) 'zh-TW',
       광동어 'yue',
@@ -58,7 +61,9 @@ const config = {
           'en',
           'ko',
           'es',
+          'pt',
           'fr',
+          'it',
           'nl',
           'de',
           'ru',
@@ -68,16 +73,17 @@ const config = {
           'hi',
           'ta',
           'sw',
+          'ar',
           'zh-CN',
           'zh-TW',
           'yue',
           'eo',
         ],
-    // localeConfigs: {
-    //   ar: {
-    //     direction: 'rtr',
-    //   }
-    // },
+    localeConfigs: {
+      ar: {
+        direction: 'rtr',
+      }
+    },
     path: 'i18n',
   },
 
