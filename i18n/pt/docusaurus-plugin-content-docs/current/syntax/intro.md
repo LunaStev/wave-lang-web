@@ -2,25 +2,26 @@
 sidebar_position: 1
 ---
 
-# 함수와 변수
+# Funções e Variáveis
 
-## 소개
+## Introdução
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화의 균형을 이루어 소프트웨어 개발에 효율적이고 유연한 환경을 제공하는 것입니다.
-이 섹션에서는 Wave 프로그램의 기본 구성 요소인 함수와 변수를 소개합니다. 이러한 구성 요소는 프로그램 내에서 논리를 구성하고 데이터를 관리하는 데 필수적입니다.
-함수와 변수를 정의하고 다루는 방법을 이해하면 Wave의 잠재력을 최대한 활용할 수 있습니다.
+A filosofia central do design da linguagem de programação Wave é equilibrar desempenho de baixo nível com abstração de alto nível, proporcionando um ambiente eficiente e flexível para o desenvolvimento de software.
+Esta seção introduz dois componentes fundamentais dos programas em Wave: funções e variáveis.
+Esses elementos são essenciais para estruturar a lógica do programa e gerenciar dados.
+Compreender como definir e manipular funções e variáveis permitirá que você aproveite ao máximo o potencial do Wave.
 
 ---
 
-## 함수
-Wave에서 함수는 독립적으로 실행할 수 있는 **재사용 가능한 코드 블록** 역할을 합니다.
-함수는 특정 동작을 캡슐화하고 프로그램 전반에서 필요할 때 호출할 수 있도록 해줍니다.
-이를 통해 계산을 수행하거나, I/O 작업을 관리하거나, 코드를 관리 가능한 단위로 분리할 수 있습니다.
+## Funções
+Em Wave, uma função é um bloco reutilizável de código que pode ser executado independentemente.
+As funções encapsulam operações específicas e podem ser chamadas em diferentes partes do programa sempre que necessário.
+Isso permite realizar cálculos, gerenciar operações de entrada e saída (I/O) e dividir o código em partes mais organizadas e modulares.
 
-Wave에서 함수의 시그니처는 `fun` 키워드로 시작하며, 함수 이름, 매개변수(있을 경우), 그리고 중괄호 `{}`로 감싸인 함수 본체로 구성됩니다.
+A assinatura de uma função em Wave começa com a palavra-chave `fun`, seguida pelo nome da função, seus parâmetros (se houver) e um bloco de código delimitado por `{}`.
 
-### 함수 정의하기
-Wave에서 기본적인 함수는 다음과 같이 정의됩니다:
+### Definição de uma função
+Uma função básica em Wave é definida da seguinte forma:
 
 ```wave
 fun main() {

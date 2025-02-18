@@ -81,7 +81,7 @@ const config = {
         ],
     localeConfigs: {
       ar: {
-        direction: 'rtr',
+        direction: 'rtl',
       }
     },
     path: 'i18n',
