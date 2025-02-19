@@ -29,6 +29,7 @@
 }
 
 .codeSection {
+  direction: ltr;
   margin: 4rem 0;
   padding: 2rem;
   background: var(--wave-bg-secondary);

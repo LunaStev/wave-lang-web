@@ -87,7 +87,7 @@ export default function HomepageFeatures() {
             ))}
           </div>
 
-          <div className={styles.codeSection}>
+          <div className={styles.codeSection} dir={"ltr"}>
             <Heading as="h2">
               <Translate id="homepage.code.title" />
             </Heading>
