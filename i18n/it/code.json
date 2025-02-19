@@ -1,59 +1,59 @@
 {
   "tagline": {
-    "message": "하나의 언어, 무한한 가능성"
+    "message": "Una lingua, possibilità infinite"
   },
   "find-out": {
-    "message": "Wave에 대해 알아보세요."
+    "message": "Scopri di più su Wave."
   },
   "homepage.features.one.title": {
-    "message": "강력하고 유연한"
+    "message": "Potente e flessibile"
   },
   "homepage.features.one.description": {
-    "message": "Wave는 저수준 시스템 프로그래밍부터 고수준 애플리케이션까지 모든 것을 처리할 수 있도록 설계되어, 하나의 통합된 언어로 유연성과 성능을 제공합니다."
+    "message": "Wave è progettato per gestire tutto, dalla programmazione di sistema a basso livello alle applicazioni di alto livello, offrendo flessibilità e prestazioni in un'unica lingua integrata."
   },
   "homepage.features.two.title": {
-    "message": "효율성에 집중하기"
+    "message": "Focus sull'efficienza"
   },
   "homepage.features.two.description": {
-    "message": "Wave를 사용하면 웹 개발, 인공지능, 하드웨어 등 다양한 분야에서 단일 언어로 복잡한 문제를 직접 해결하는 데 집중할 수 있습니다."
+    "message": "Con Wave, puoi concentrarti sulla risoluzione diretta di problemi complessi in vari settori, come lo sviluppo web, l'intelligenza artificiale e l'hardware, utilizzando un'unica lingua."
   },
   "homepage.features.three.title": {
-    "message": "성능 최적화"
+    "message": "Ottimizzazione delle prestazioni"
   },
   "homepage.features.three.description": {
-    "message": "Wave는 사용 용이성이나 안전성을 해치지 않으면서, 어떤 플랫폼에서도 효율적으로 실행되는 고성능 코드를 작성할 수 있게 해줍니다."
+    "message": "Wave consente di scrivere codice ad alte prestazioni che viene eseguito in modo efficiente su qualsiasi piattaforma, senza compromettere facilità d'uso o sicurezza."
   },
   "homepage.code.title": {
-    "message": "Wave 코드 예시"
+    "message": "Esempio di codice Wave"
   },
   "homepage.contributors.title": {
-    "message": "기여자"
+    "message": "Collaboratori"
   },
   "homepage.contributors.role.founder": {
-    "message": "언어 창시자"
+    "message": "Fondatore della lingua"
   },
   "homepage.contributors.role.designer": {
-    "message": "언어 설계자"
+    "message": "Progettista della lingua"
   },
   "homepage.contributors.role.compiler": {
-    "message": "컴파일러 개발"
+    "message": "Sviluppatore del compilatore"
   },
   "homepage.contributors.role.library": {
-    "message": "표준 라이브러리 담당"
+    "message": "Responsabile della libreria standard"
   },
   "homepage.sponsors.title": {
-    "message": "스폰서"
+    "message": "Sponsor"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "명예 스폰서"
+    "message": "Sponsor d'onore"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "플래티넘 스폰서"
+    "message": "Sponsor platino"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "골드 스폰서"
+    "message": "Sponsor oro"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "실버 스폰서"
+    "message": "Sponsor argento"
   }
 }

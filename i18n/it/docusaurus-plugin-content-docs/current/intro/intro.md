@@ -2,65 +2,66 @@
 sidebar_position: 0
 ---
 
-# 소개
-## Wave의 철학과 목표
-Wave는 저수준 프로그래밍 언어(C 및 어셈블리와 같은 언어)를 보완하고 단순화하며, 다양한 개발 분야를 아우르는 다재다능하고 통합된 언어를 제공하는 것을 목표로 합니다. Wave는 저수준 언어를 대체하는 대신, 웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어, 컴파일러, 네트워킹, 암호화 등 다양한 영역을 포괄하는 견고하고 일관된 개발 생태계를 만드는 데 중점을 둡니다.
+# Introduzione
+## Filosofia e obiettivi di Wave
+Wave mira a integrare e semplificare i linguaggi di programmazione di basso livello (come C e Assembly), offrendo un linguaggio versatile e unificato che copre diversi ambiti di sviluppo. Piuttosto che sostituire i linguaggi di basso livello, Wave si concentra sulla creazione di un ecosistema di sviluppo solido e coerente, adatto a settori come sviluppo web, sistemi operativi, intelligenza artificiale, blockchain, hardware, compilatori, networking e crittografia.
 
-Wave의 핵심 철학은 강력한 표준 라이브러리를 통해 고수준 추상화를 제공하는 동시에 정밀한 저수준 제어 능력을 유지하는 것입니다. 이를 통해 복잡한 작업을 직관적으로 수행하는 한편, 필요한 경우 정교한 작업도 가능하게 합니다.
+La filosofia centrale di Wave è fornire un'astrazione di alto livello attraverso una potente libreria standard, mantenendo al contempo un controllo preciso a basso livello. Questo permette di eseguire operazioni complesse in modo intuitivo, senza sacrificare la possibilità di operare con precisione quando necessario.
 
-Wave의 주요 특징 중 하나는 하드웨어 라이브러리로, 하드웨어에 대한 전문 지식이 부족한 개발자도 쉽게 사용할 수 있도록 설계되었습니다. 또한, 세부적인 하드웨어 제어가 필요할 때 직접 제어할 수 있는 유연성도 제공합니다. 이러한 조합은 개발자가 성능을 희생하지 않고 하드웨어 기능을 직관적으로 활용할 수 있도록 돕습니다.
+Uno degli elementi distintivi di Wave è la sua libreria hardware, progettata per essere accessibile anche agli sviluppatori senza competenze specifiche in ambito hardware, ma abbastanza flessibile da permettere un controllo dettagliato quando richiesto. Questa combinazione consente di sfruttare le funzionalità hardware in modo intuitivo senza compromettere le prestazioni.
 
-Wave는 고수준과 저수준 프로그래밍 간의 경계를 허물어, 직관적이고 통합된 언어 환경을 제공하며 개발 경험을 단순화하는 것을 목표로 합니다.
-## Wave의 주요 특징과 특성
-1. 통합된 언어 구조
+Wave si propone di abbattere le barriere tra programmazione di alto e basso livello, offrendo un ambiente di sviluppo unificato e intuitivo, semplificando l'esperienza dello sviluppatore.
 
-Wave는 다양한 개발 분야를 하나의 언어로 통합하여 개발자가 여러 언어를 학습할 필요를 없앱니다.
+## Caratteristiche principali di Wave
+1. Struttura del linguaggio integrata
 
-2. 고수준 추상화
+Wave unifica diversi ambiti di sviluppo in un unico linguaggio, eliminando la necessità di apprendere più linguaggi.
 
-Wave는 강력한 표준 라이브러리를 통해 복잡한 작업을 간단히 수행할 수 있도록 하여 생산성을 크게 향상시킵니다.
+2. Astrazione di alto livello
 
-3. 하드웨어 접근의 용이성
+Grazie a una potente libreria standard, Wave semplifica operazioni complesse, migliorando significativamente la produttività.
 
-Wave의 하드웨어 라이브러리는 비전문가도 하드웨어와 상호작용할 수 있도록 사용자 친화적으로 설계되었으며, 정밀한 제어가 필요한 경우 직접 제어 옵션도 제공합니다.
+3. Accessibilità all’hardware
 
-4. 성능 최적화
+La libreria hardware di Wave è progettata per essere user-friendly anche per chi non ha esperienza in hardware, offrendo al contempo opzioni di controllo dettagliato per chi ne ha bisogno.
 
-Wave는 중요한 작업에서 최적의 성능을 보장하기 위해 효율적인 컴파일러와 메모리 관리 시스템을 제공하며, 성능이 중요한 응용 프로그램에서도 원활히 작동합니다.
+4. Ottimizzazione delle prestazioni
 
-5. 모듈화 및 재사용성
+Wave garantisce prestazioni ottimali attraverso un compilatore efficiente e un sistema avanzato di gestione della memoria, funzionando in modo fluido anche per applicazioni critiche in termini di performance.
 
-Wave는 모듈화 프로그래밍을 지원하여 개발자가 코드를 효율적으로 재사용하고 프로젝트 복잡성을 줄일 수 있도록 합니다.
+5. Modularità e riutilizzabilità
 
-6. 강력한 에러 처리 및 디버깅
+Wave supporta la programmazione modulare, permettendo agli sviluppatori di riutilizzare il codice in modo efficiente e ridurre la complessità dei progetti.
 
-Wave는 직관적이고 명확한 에러 메시지와 디버깅 도구를 제공하여 개발자가 문제를 신속하게 해결할 수 있도록 돕습니다.
+6. Gestione degli errori e debugging avanzati
 
-## Wave의 로드맵과 계획
-1. 코어 언어 기능 확장
+Wave offre messaggi di errore chiari e strumenti di debugging intuitivi, facilitando la risoluzione rapida dei problemi.
 
-Wave는 기본 구문과 기능에 중점을 둔 초기 버전을 출시한 후, 패턴 매칭, 비동기 프로그래밍, 고급 데이터 구조와 같은 기능을 포함한 업데이트를 이어나갈 계획입니다.
+## Roadmap e piani di sviluppo di Wave
+1. Espansione delle funzionalità del linguaggio
 
-2. 표준 라이브러리 강화
+Dopo il rilascio della versione iniziale con sintassi e funzionalità di base, Wave introdurrà aggiornamenti con caratteristiche avanzate come pattern matching, programmazione asincrona e strutture dati avanzate.
 
-표준 라이브러리는 사용자 요구를 충족시키기 위해 지속적으로 확장되며, 개발자가 더 쉽고 효율적으로 작업할 수 있도록 다양한 기능이 추가될 예정입니다.
+2. Miglioramento della libreria standard
 
-3. 하드웨어 라이브러리 개선
+La libreria standard verrà continuamente ampliata per soddisfare le esigenze degli sviluppatori, aggiungendo funzionalità per semplificare e ottimizzare il lavoro.
 
-Wave의 핵심 요소 중 하나인 하드웨어 라이브러리는 다양한 장치와의 호환성을 높이고 새로운 제어 기능을 추가하며, 지속적으로 발전할 것입니다.
+3. Evoluzione della libreria hardware
 
-4. 커뮤니티 피드백 반영
+Essendo un elemento chiave di Wave, la libreria hardware sarà costantemente migliorata per garantire una maggiore compatibilità con diversi dispositivi e aggiungere nuove funzionalità di controllo.
 
-개발자 피드백은 Wave의 발전에 중요한 역할을 하며, 이를 위해 포럼과 피드백 채널을 통해 사용자 의견을 적극적으로 수렴할 계획입니다.
+4. Integrazione del feedback della community
 
-5. 문서화 및 교육 자료 제공
+Il feedback degli sviluppatori è fondamentale per la crescita di Wave, e verrà raccolto attivamente attraverso forum e canali dedicati.
 
-Wave는 완성도 높은 문서화와 함께 학습을 지원하기 위한 다양한 교육 자료와 튜토리얼을 제공할 예정입니다. 이를 통해 초보 사용자도 쉽게 Wave를 배우고 활용할 수 있습니다.
+5. Documentazione e materiali didattici
 
-6. 다양한 플랫폼 지원
+Wave fornirà documentazione dettagliata e risorse educative, tra cui tutorial, per rendere l’apprendimento accessibile anche ai principianti.
 
-Wave는 Windows, macOS, Linux를 포함한 주요 운영 체제에서 일관된 성능과 접근성을 제공할 수 있도록 최적화될 것입니다.
+6. Supporto multipiattaforma
 
-7. 오픈소스 커뮤니티와의 협력 강화
+Wave sarà ottimizzato per garantire prestazioni costanti e accessibilità su sistemi operativi principali come Windows, macOS e Linux.
 
-Wave는 오픈소스 커뮤니티와의 협력을 통해 혁신을 주도하고, Wave의 발전을 촉진할 기여를 장려할 것입니다.
+7. Collaborazione con la community open-source
+
+Wave promuoverà l'innovazione attraverso la collaborazione con la community open-source, incentivando i contributi per accelerare la sua evoluzione.
