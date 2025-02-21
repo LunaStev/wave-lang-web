@@ -87,12 +87,12 @@ export default function HomepageFeatures() {
             ))}
           </div>
 
-          <div className={styles.codeSection} dir={"ltr"}>
+          <div className={styles.codeSection}>
             <Heading as="h2">
               <Translate id="homepage.code.title" />
             </Heading>
             <pre>
-            <code className="language-wave">{codeExample}</code>
+            <code className="language-wave" dir={"ltr"}>{codeExample}</code>
           </pre>
           </div>
 
