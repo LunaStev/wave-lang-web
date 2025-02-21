@@ -2,86 +2,87 @@
 sidebar_position: 3
 ---
 
-# IF 문
-## 소개
-이 섹션에서는 Wave의 제어문 중 하나인 IF 문의 문법에 대해 소개합니다.
-IF 문은 프로그래밍에서 조건을 평가하고, 조건이 참일 때 특정 코드를 실행하는 제어문입니다.
-이를 통해 조건에 따라 프로그램의 흐름을 제어하고, 유연하고 논리적인 코드를 작성할 수 있습니다.
+# ISTRUZIONE IF
+## Introduzione
+In questa sezione, introdurremo la sintassi dell'istruzione IF, una delle strutture di controllo di Wave.
+L'istruzione IF è una struttura di controllo che valuta una condizione ed esegue un determinato blocco di codice solo se la condizione è vera.
+Questo permette di controllare il flusso del programma e scrivere codice più flessibile e logico.
 
-## 기본 구조
-IF 문은 특정 조건을 평가한 후, 해당 조건이 참(True)일 때만 지정된 코드 블록을 실행합니다. 
-Wave의 IF 문 기본 구조는 아래와 같습니다:
+## Struttura di base
+L'istruzione IF valuta una determinata condizione ed esegue il blocco di codice corrispondente solo se la condizione risulta vera (True).
+La struttura di base dell'istruzione IF in Wave è la seguente:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condizione) {
+    // Codice eseguito se la condizione è vera
 }
 ```
 
-조건은 비교 연산자(`==`, `!=`, `<`, `>`, `<=`, `>=`)나 논리 형산자(`&&`, `||`, `!`) 등을 활용하여 작성합니다. 조건이 거짓(False)이라면, 코드 블록은 실행되지 않습니다.
+La condizione viene scritta utilizzando operatori di confronto (`==`, `!=`, `<`, `>`, `<=`, `>=`) o operatori logici (`&&`, `||`, `!`).
+Se la condizione è falsa (False), il blocco di codice non verrà eseguito.
 
-## 예제
-다음은 간단한 IF 문의 예제입니다:
+## Esempio
+Ecco un semplice esempio di istruzione IF:
 
 ```wave
-var temperature :i32 = 30;
+var temperatura :i32 = 30;
 
-if (temperature > 25) {
-    println("날씨가 덥습니다.");
+if (temperatura > 25) {
+    println("Fa caldo.");
 }
 ```
 
-위 코드에서는 temperature 값이 25보다 클 경우, "날씨가 덥습니다."라는 메시지가 출력됩니다.
+In questo codice, se il valore di temperatura è maggiore di 25, verrà stampato il messaggio "Fa caldo.".
 
-## IF_ELSE 문
-조건이 참이 아닐 경우, 대체로 실행할 코드를 작성할려면 IF-ELSE 문을 사용합니다.
-구조는 아래와 같습니다:
+## ISTRUZIONE IF-ELSE
+Se si vuole eseguire un codice alternativo quando la condizione non è vera, si utilizza l'istruzione IF-ELSE.
+La struttura è la seguente:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condizione) {
+    // Codice eseguito se la condizione è vera
 } else {
-    // 조건이 거짓일 경우 실행될 코드
+    // Codice eseguito se la condizione è falsa
 }
 ```
 
-### 예제:
+### Esempio:
 
 ```wave
-var score :i32 = 70;
+var punteggio :i32 = 70;
 
-if (score >= 60) {
-    println("합격입니다!");
+if (punteggio >= 60) {
+    println("Promosso!");
 } else {
-    println("불합격입니다.");
+    println("Bocciato.");
 }
 ```
 
-score가 60 이상일 경우 "합격입니다!"가 출력되고, 그렇지 않을 경우 "불합격입니다."가 출력됩니다.
+Se punteggio è maggiore o uguale a 60, verrà stampato "Promosso!", altrimenti verrà stampato "Bocciato.".
 
-## 중첩 IF 문
-IF 문은 다른 IF 문 안에서 사용될 수도 있습니다. 이를 중첩 IF 문이라고 하며, 복잡한 조건을 처리할 때 유용합니다.
+## ISTRUZIONE IF ANNIDATA
+Le istruzioni IF possono essere utilizzate all'interno di altre istruzioni IF. Questo è utile per gestire condizioni più complesse.
 
 ```wave
-var score :i32 = 85;
+var punteggio :i32 = 85;
 
-if (score >= 60) {
-    if (score >= 90) {
-        println("우수한 성적입니다!");
+if (punteggio >= 60) {
+    if (punteggio >= 90) {
+        println("Ottimo risultato!");
     } else {
-        println("합격입니다.");
+        println("Promosso.");
     } 
 } else {
-    println("불합격입니다.");
+    println("Bocciato.");
 }
 ```
 
-위 예제에서는 점수에 따라 "우수한 성적입니다!", "합격입니다.", 또는 "불합격입니다."라는 메시지가 출력됩니다.
+In questo esempio, a seconda del valore di punteggio, verranno stampati i messaggi "Ottimo risultato!", "Promosso." o "Bocciato.".
 
-## 요약
+## Riepilogo
 
-* IF 문은 조건을 평가하여 특정 코드 블록을 실행하는 제어문입니다.
-* ELSE 문을 추가하여 조건이 거짓일 경우 실행할 코드도 지정할 수 있습니다.
-* 중첩 IF 문은 복잡한 조건을 다룰 때 사용됩니다.
+* L'istruzione IF valuta una condizione ed esegue un blocco di codice solo se la condizione è vera.
+* L'istruzione IF-ELSE permette di eseguire un codice alternativo se la condizione è falsa.
+* L'istruzione IF annidata consente di gestire condizioni più complesse.
 
-IF 문을 활용하면 프로그램의 흐름을 더욱 논리적이고 동적으로 구성할 수 있습니다!
+Utilizzando le istruzioni IF, puoi rendere il flusso del tuo programma più logico e dinamico!
