@@ -13,8 +13,8 @@ Der Ganzzahl-Typ wird verwendet, um ganzzahlige Werte zu speichern.
 Standardmäßig werden Ganzzahlen als `i32` (vorzeichenbehaftete 32-Bit-Ganzzahl) und `u32` (vorzeichenlose 32-Bit-Ganzzahl) deklariert.
 Die Wave-Programmiersprache bietet verschiedene Größenoptionen, um den Bereich der Ganzzahlen fein zu definieren.
 
-* `i4` bis `i32768`: Vorzeichenbehaftete Ganzzahlen, deren Größe von 4 Bit bis 32768 Bit eingestellt werden kann.
-* `u4` bis `u32768`: Vorzeichenlose Ganzzahlen, deren Größe von 4 Bit bis 32768 Bit eingestellt werden kann.
+* `i8` bis `i1024`: Vorzeichenbehaftete Ganzzahlen, deren Größe von 8 Bit bis 1024 Bit eingestellt werden kann.
+* `u8` bis `u1024`: Vorzeichenlose Ganzzahlen, deren Größe von 8 Bit bis 1024 Bit eingestellt werden kann.
 
 Beispiel:
 ```wave
@@ -27,7 +27,7 @@ Der Fließkomma-Typ wird verwendet, um **Fließkommazahlen** zu speichern.
 Standardmäßig wird eine Fließkommazahl als `f32` deklariert.
 Es werden auch verschiedene Größenoptionen angeboten, um die Fließkommazahl genauer zu definieren.
 
-* `f32` bis `f32768`: Der Fließkomma-Typ kann in Größen von 32 Bit bis 32768 Bit festgelegt werden. Dies ermöglicht genauere Berechnungen mit Fließkommazahlen.
+* `f32` bis `f1024`: Der Fließkomma-Typ kann in Größen von 32 Bit bis 1024 Bit festgelegt werden. Dies ermöglicht genauere Berechnungen mit Fließkommazahlen.
 
 Beispiel:
 ```wave

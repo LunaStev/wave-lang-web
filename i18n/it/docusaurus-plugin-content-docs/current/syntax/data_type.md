@@ -13,8 +13,8 @@ Il tipo intero viene utilizzato per memorizzare valori interi.
 Di default, gli interi vengono dichiarati come `i32` (intero con segno a 32 bit) e `u32` (intero senza segno a 32 bit).
 Il linguaggio Wave offre diverse opzioni per impostare l'intervallo dei numeri interi con varie dimensioni.
 
-* `i4` ~ `i32768`: tipo intero con segno, che può essere impostato da 4 bit a 32768 bit.
-* `u4` ~ `u32768`: tipo intero senza segno, che può essere impostato da 4 bit a 32768 bit.
+* `i8` ~ `i1024`: tipo intero con segno, che può essere impostato da 8 bit a 1024 bit.
+* `u8` ~ `u1024`: tipo intero senza segno, che può essere impostato da 8 bit a 1024 bit.
 
 Esempio:
 ```wave
@@ -27,7 +27,7 @@ Il tipo in virgola mobile viene utilizzato per memorizzare valori reali.
 Di default, i numeri in virgola mobile vengono dichiarati come `f32`.
 Inoltre, è possibile definire con precisione la dimensione dei numeri in virgola mobile attraverso varie opzioni di dimensione.
 
-* `f32` ~ `f32768`: il tipo in virgola mobile può essere impostato da 32 bit a 32768 bit, consentendo calcoli con maggiore precisione.
+* `f32` ~ `f1024`: il tipo in virgola mobile può essere impostato da 32 bit a 1024 bit, consentendo calcoli con maggiore precisione.
 
 Esempio:
 ```wave

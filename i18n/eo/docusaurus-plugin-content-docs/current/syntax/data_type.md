@@ -13,8 +13,8 @@ Entjera tipo estas uzata por stoki **entjerajn valorojn**.
 Ĝenerale, entjeroj estas deklaritaj kiel `i32` (subskriba 32-bit-entro) aŭ `u32` (ne-subskriba 32-bit-entro).
 Wave subtenas diversajn longojn de entjeroj, kiuj permesas precizigan skalon de valoro.
 
-* `i4` ~ `i32768`: Subskribaj entjeroj kun grandeco de 4 bitoj ĝis 32768 bitoj.
-* `u4` ~ `u32768`: Ne-subskribaj entjeroj kun grandeco de 4 bitoj ĝis 32768 bitoj.
+* `i8` ~ `i1024`: Subskribaj entjeroj kun grandeco de 8 bitoj ĝis 1024 bitoj.
+* `u8` ~ `u1024`: Ne-subskribaj entjeroj kun grandeco de 8 bitoj ĝis 1024 bitoj.
 
 Ekzemplo:
 ```wave
@@ -27,7 +27,7 @@ Poentnombra tipo estas uzata por stoki **realajn valorojn**.
 Ĝenerale, poentnombroj estas deklaritaj kiel `f32`.
 Wave ankaŭ permesas precizigi la grandecon de poentnombro por ebligi pli altan precizecon.
 
-* `f32` ~ `f32768`: Poentnombraj tipoj de 32 bitoj ĝis 32768 bitoj. Ĉi tio ebligas realajn kalkulojn kun pli alta precizeco.
+* `f32` ~ `f1024`: Poentnombraj tipoj de 32 bitoj ĝis 1024 bitoj. Ĉi tio ebligas realajn kalkulojn kun pli alta precizeco.
 
 Ekzemplo:
 ```wave

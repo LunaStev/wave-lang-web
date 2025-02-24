@@ -11,8 +11,8 @@ The main data types include integers, floating-point numbers, strings, and more.
 The integer type is used to store **integer values**.
 By default, integers are declared as `i32` (signed 32-bit integer) and `u32` (unsigned 32-bit integer).
 The Wave programming language provides various size options that allow you to finely adjust the range of integers.
-* `i4` ~ `i32768`: Signed integer type, with sizes ranging from 4 bits to 32768 bits.
-* `u4` ~ `u32768`: Unsigned integer type, with sizes ranging from 4 bits to 32768 bits.
+* `i8` ~ `i1024`: Signed integer type, with sizes ranging from 8 bits to 1024 bits.
+* `u8` ~ `u1024`: Unsigned integer type, with sizes ranging from 8 bits to 1024 bits.
 
 Example:
 ```wave
@@ -25,7 +25,7 @@ The floating-point type is used to store real (decimal) values.
 By default, floating-point numbers are declared as `f32`.
 Additionally, the language offers various size options to finely define the range of floating-point numbers.
 
-* `f32` ~ `f32768`: The floating-point type can range from 32 bits to 32768 bits, allowing for higher precision in real number calculations.
+* `f32` ~ `f1024`: The floating-point type can range from 32 bits to 1024 bits, allowing for higher precision in real number calculations.
 
 Example:
 ```wave

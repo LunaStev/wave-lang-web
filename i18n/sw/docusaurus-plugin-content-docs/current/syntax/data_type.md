@@ -13,8 +13,8 @@ Aina ya nambari kamili hutumiwa kuhifadhi thamani za nambari kamili.
 Kwa kawaida, nambari kamili zinatangazwa kama `i32` (nambari kamili zenye ishara za biti 32) na `u32` (nambari kamili zisizo na ishara za biti 32).
 Lugha ya Wave inatoa chaguzi mbalimbali za ukubwa za kudhibiti upeo wa nambari kamili kwa usahihi.
 
-* `i4` ~ `i32768`: Aina ya nambari kamili yenye ishara, na ukubwa unaweza kuwa kati ya biti 4 na biti 32768.
-* `u4` ~ `u32768`: Aina ya nambari kamili zisizo na ishara, na ukubwa unaweza kuwa kati ya biti 4 na biti 32768.
+* `i8` ~ `i1024`: Aina ya nambari kamili yenye ishara, na ukubwa unaweza kuwa kati ya biti 8 na biti 1024.
+* `u8` ~ `u1024`: Aina ya nambari kamili zisizo na ishara, na ukubwa unaweza kuwa kati ya biti 8 na biti 1024.
 
 Mfano:
 ```wave
@@ -28,7 +28,7 @@ Aina ya nambari za mzunguko hutumiwa kuhifadhi thamani za nambari za kweli.
 Kwa kawaida, nambari za mzunguko zinatangazwa kama `f32`.
 Pia, inatoa chaguzi mbalimbali za ukubwa ili kufafanua ukubwa wa nambari za mzunguko.
 
-* `f32` ~ `f32768`: Aina ya nambari za mzunguko inatoa chaguzi za ukubwa kuanzia biti 32 hadi 32768, ambayo inaruhusu mahesabu sahihi ya nambari za mzunguko.
+* `f32` ~ `f1024`: Aina ya nambari za mzunguko inatoa chaguzi za ukubwa kuanzia biti 32 hadi 1024, ambayo inaruhusu mahesabu sahihi ya nambari za mzunguko.
 
 Mfano:
 ```wave

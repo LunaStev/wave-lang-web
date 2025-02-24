@@ -14,8 +14,8 @@ El tipo de entero se utiliza para almacenar **valores enteros**.
 Por defecto, los enteros se declaran como `i32` (entero con signo de 32 bits) y `u32` (entero sin signo de 32 bits).
 El lenguaje de programación Wave ofrece varias opciones con tamaños ajustables para definir con precisión el rango de los enteros.
 
-* `i4` ~ `i32768`: Tipo de entero con signo, con tamaños que van desde 4 bits hasta 32768 bits.
-* `u4` ~ `u32768`: Tipo de entero sin signo, con tamaños que van desde 4 bits hasta 32768 bits.
+* `i8` ~ `i1024`: Tipo de entero con signo, con tamaños que van desde 8 bits hasta 1024 bits.
+* `u8` ~ `u1024`: Tipo de entero sin signo, con tamaños que van desde 8 bits hasta 1024 bits.
 
 Ejemplo:
 ```wave
@@ -28,7 +28,7 @@ El tipo de punto flotante se utiliza para almacenar valores de **números reales
 Por defecto, los números de punto flotante se declaran como `f32`.
 Además, ofrece varias opciones de tamaños que permiten definir con precisión el tamaño del número de punto flotante.
 
-* `f32` ~ `f32768`: El tipo de punto flotante puede configurarse con tamaños que van desde 32 bits hasta 32768 bits, lo que permite realizar cálculos con mayor precisión en números reales.
+* `f32` ~ `f1024`: El tipo de punto flotante puede configurarse con tamaños que van desde 32 bits hasta 1024 bits, lo que permite realizar cálculos con mayor precisión en números reales.
 
 Ejemplo:
 ```wave

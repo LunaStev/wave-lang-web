@@ -14,8 +14,8 @@ Kiểu số nguyên được sử dụng để lưu trữ các giá trị số n
 Mặc định, số nguyên có thể được khai báo bằng `i32` (số nguyên có dấu 32-bit) và `u32` (số nguyên không dấu 32-bit).
 Wave cũng cung cấp nhiều tùy chọn kích thước để kiểm soát phạm vi số nguyên một cách chi tiết.
 
-* `i4` ~ `i32768`: Số nguyên có dấu, từ 4-bit đến 32.768-bit.
-* `u4` ~ `u32768`: Số nguyên không dấu, từ 4-bit đến 32.768-bit.
+* `i8` ~ `i1024`: Số nguyên có dấu, từ 8-bit đến 1024-bit.
+* `u8` ~ `u1024`: Số nguyên không dấu, từ 8-bit đến 1024-bit.
 
 Ví dụ:
 ```wave
@@ -28,7 +28,7 @@ Kiểu số thực dấu chấm động được sử dụng để lưu trữ c�
 Mặc định, số thực được khai báo bằng `f32`.
 Ngoài ra, Wave cung cấp nhiều tùy chọn kích thước để kiểm soát độ chính xác trong các phép tính số thực.
 
-* `f32` ~ `f32768`: Kiểu số thực từ 32-bit đến 32.768-bit, cho phép tính toán số thực với độ chính xác cao hơn.
+* `f32` ~ `f1024`: Kiểu số thực từ 32-bit đến 1024-bit, cho phép tính toán số thực với độ chính xác cao hơn.
 
 Ví dụ:
 ```wave

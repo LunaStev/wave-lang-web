@@ -14,8 +14,8 @@ Le type entier est utilisé pour stocker des **valeurs entières**.
 Par défaut, les entiers sont déclarés sous `i32` (entier signé sur 32 bits) et `u32` (entier non signé sur 32 bits).
 Le langage Wave propose également diverses options pour définir des tailles d'entiers avec des plages plus fines.
 
-* `i4` ~ `i32768`: Types d'entiers signés, avec des tailles allant de 4 bits à 32768 bits.
-* `u4` ~ `u32768`: Types d'entiers non signés, avec des tailles allant de 4 bits à 32768 bits.
+* `i8` ~ `i1024`: Types d'entiers signés, avec des tailles allant de 8 bits à 1024 bits.
+* `u8` ~ `u1024`: Types d'entiers non signés, avec des tailles allant de 8 bits à 1024 bits.
 
 Exemple :
 ```wave
@@ -28,7 +28,7 @@ Le type à virgule flottante est utilisé pour stocker des valeurs **réelles**.
 Par défaut, les nombres à virgule flottante sont déclarés sous `f32`.
 De plus, Wave offre diverses options pour définir des tailles d'entiers avec une précision plus fine.
 
-* `f32` ~ `f32768`: Le type à virgule flottante peut avoir des tailles allant de 32 bits à 32768 bits, ce qui permet des calculs réels avec une précision accrue.
+* `f32` ~ `f1024`: Le type à virgule flottante peut avoir des tailles allant de 32 bits à 1024 bits, ce qui permet des calculs réels avec une précision accrue.
 
 Exemple :
 ```wave
@@ -49,7 +49,7 @@ var text :str = "Hello Wave";
 Le type booléen représente des valeurs **vraies (true)** ou **fausses (false)**.
 Il est principalement utilisé dans les conditions, et les valeurs sont définies comme `true` ou `false`.
 
-예시:
+Exemple :
 ```wave
 var isActive :bool = true;
 var isAvailable :bool = true;

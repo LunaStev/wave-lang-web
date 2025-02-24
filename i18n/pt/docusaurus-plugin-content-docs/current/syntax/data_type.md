@@ -13,8 +13,8 @@ Os tipos inteiros são usados para armazenar valores numéricos inteiros.
 Por padrão, os inteiros podem ser declarados como `i32` (inteiro com sinal de 32 bits) ou `u32` (inteiro sem sinal de 32 bits).
 A linguagem Wave oferece várias opções de tamanhos para controle preciso dos valores armazenados.
 
-* `i4` ~ `i32768`: Inteiros com sinal, variando de 4 a 32.768 bits.
-* `u4` ~ `u32768`: Inteiros sem sinal, variando de 4 a 32.768 bits.
+* `i8` ~ `i1024`: Inteiros com sinal, variando de 8 a 1024 bits.
+* `u8` ~ `u1024`: Inteiros sem sinal, variando de 8 a 1024 bits.
 
 Exemplo:
 ```wave
@@ -26,7 +26,7 @@ var b :u32 = 200;
 Os tipos de ponto flutuante são usados para armazenar valores decimais.
 Por padrão, os números de ponto flutuante são declarados como `f32`, mas o Wave também permite definir tamanhos maiores para cálculos mais precisos.
 
-* `f32` ~ `f32768`: Tipos de ponto flutuante que variam de 32 a 32.768 bits, proporcionando maior precisão nos cálculos.
+* `f32` ~ `f1024`: Tipos de ponto flutuante que variam de 32 a 1024 bits, proporcionando maior precisão nos cálculos.
 
 Exemplo:
 ```wave

@@ -14,8 +14,8 @@ Gehele getallen worden gebruikt om hele waarden op te slaan.
 Standaard worden gehele getallen gedefinieerd als `i32` (32-bits integer met teken) en `u32` (32-bits integer zonder teken).
 Wave biedt echter ook flexibiliteit door verschillende bitgroottes toe te staan.
 
-* `i4` ~ `i32768`: Gehele getallen met teken, variërend van 4-bits tot 32768-bits.
-* `u4` ~ `u32768`: Gehele getallen zonder teken, variërend van 4-bits tot 32768-bits.
+* `i8` ~ `i1024`: Gehele getallen met teken, variërend van 8-bits tot 1024-bits.
+* `u8` ~ `u1024`: Gehele getallen zonder teken, variërend van 8-bits tot 1024-bits.
 
 Voorbeeld:
 ```wave
@@ -27,7 +27,7 @@ var b :u32 = 200;
 Drijvende-komma getallen worden gebruikt voor decimale waarden.
 Standaard worden ze gedefinieerd als `f32`, maar Wave biedt meerdere bitgroottes voor nauwkeurigere berekeningen.
 
-* `f32` ~ `f32768`: Drijvende-komma getallen variërend van 32-bits tot 32768-bits, geschikt voor complexe berekeningen.
+* `f32` ~ `f1024`: Drijvende-komma getallen variërend van 32-bits tot 1024-bits, geschikt voor complexe berekeningen.
 
 Voorbeeld:
 ```wave
