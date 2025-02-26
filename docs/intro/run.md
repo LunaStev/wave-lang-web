@@ -12,7 +12,7 @@ sidebar_position: 3
 
 ## 코드 작성하기
 
-`hello.wave` 파일에 다음 코드를 장성합니다:
+`hello.wave` 파일에 다음 코드를 작성합니다:
 
 ```wave
 fun main() {
