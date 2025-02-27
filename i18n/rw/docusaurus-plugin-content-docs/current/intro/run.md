@@ -2,17 +2,15 @@
 sidebar_position: 3
 ---
 
-# 첫 번째 프로그램 실행하기
+# Gukoresha Porogaramu ya Mbere
 
-이전의 설치 문서에서 Wave를 이미 설치하셨다면, 이제 첫 번째 프로그램을 실행해봅시다!
+Niba waramaze gushyiraho Wave nk'uko twabisobanuye mu nyandiko y'uburyo bwo kuyishyiraho, noneho reka dutangire gukora porogaramu ya mbere!
 
-## `hello.wave` 파일 만들기.
+## Kurema Idosiye yitwa `hello.wave`
+Ubanza kurema idosiye nshya yitwa `hello.wave`.
 
-먼저, `hello.wave`라는 이름의 새로운 파일을 만듭니다.
-
-## 코드 작성하기
-
-`hello.wave` 파일에 다음 코드를 작성합니다:
+## Kwandika Kode
+Andika iyi kode muri dosiye yawe `hello.wave`:
 
 ```wave
 fun main() {
@@ -20,22 +18,20 @@ fun main() {
 }
 ```
 
-여기서 `fun main()`은 프로그램의 시작 지점을 의미하며, `println` 함수는 텍스트를 화면에 출력하는 역할을 합니다.
+Aha, fun `main()` ni yo ntangiriro ya porogaramu, naho `println` ikoreshwa mu kwerekana ubutumwa kuri ecran.
 
-## 프로그램 실행하기
-
-이제 Wave 프로그램을 실행해봅시다. 터미널을 열고, 아래 명령어를 입력하세요:
+## Gukoresha Porogaramu
+Kugira ngo utangize iyi porogaramu ya Wave, fungura terminal hanyuma winjize iri tegeko:
 
 ```bash
 wave run hello.wave
 ```
 
-## 출력 확인하기
-
-프로그램을 실행하면, 다음과 같은 출력이 나타날 것입니다:
+## Kugenzura Ibisohoka
+Niba byose byagenze neza, uzakira ubu butumwa kuri ecran:
 
 ```
 Hello Wave
 ```
 
-이제 Wave가 정상적으로 설치되어 작동하는지 확인할 수 있습니다. 축하합니다! 첫번째 프로그램을 성공적으로 실행했어요.
+Ubu ushobora kwemeza ko Wave yashyizweho neza kandi irakora. Mukomere! Mukoze porogaramu yanyu ya mbere!

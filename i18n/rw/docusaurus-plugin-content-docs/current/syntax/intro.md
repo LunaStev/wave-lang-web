@@ -2,36 +2,35 @@
 sidebar_position: 1
 ---
 
-# 함수와 변수
+# Imikorere na Variables
 
-## 소개
+## Intangiriro
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화의 균형을 이루어 소프트웨어 개발에 효율적이고 유연한 환경을 제공하는 것입니다.
-이 섹션에서는 Wave 프로그램의 기본 구성 요소인 함수와 변수를 소개합니다. 이러한 구성 요소는 프로그램 내에서 논리를 구성하고 데이터를 관리하는 데 필수적입니다.
-함수와 변수를 정의하고 다루는 방법을 이해하면 Wave의 잠재력을 최대한 활용할 수 있습니다.
+Ingingo nyamukuru y’igenzura rya porogaramu ya Wave ni ukugira ihuriro hagati y'ubushobozi bwo kugenzura hasi no hejuru, bituma itanga ibidukikije byiza kandi byoroshye mu gukora porogaramu. Muri iyi ngingo, tuzareba ibice by’ibanze bya porogaramu ya Wave, ari byo imikorere (functions) na variables. Izi ni ingingo z'ingenzi mu gushyiraho ibitekerezo by'ingenzi no gucunga amakuru muri porogaramu. Kumenya uburyo bwo gushyiraho no gukoresha imikorere na variables bizatuma ushobora gukoresha ubushobozi bwa Wave mu buryo bwiza.
 
 ---
 
-## 함수
-Wave에서 함수는 독립적으로 실행할 수 있는 **재사용 가능한 코드 블록** 역할을 합니다.
-함수는 특정 동작을 캡슐화하고 프로그램 전반에서 필요할 때 호출할 수 있도록 해줍니다.
-이를 통해 계산을 수행하거나, I/O 작업을 관리하거나, 코드를 관리 가능한 단위로 분리할 수 있습니다.
+## Imikorere (Functions)
 
-Wave에서 함수의 시그니처는 `fun` 키워드로 시작하며, 함수 이름, 매개변수(있을 경우), 그리고 중괄호 `{}`로 감싸인 함수 본체로 구성됩니다.
+Muri Wave, imikorere (functions) ni ibice by'ibikorwa bishobora gukoreshwa kandi bikaza mu buryo bwo kongera kubyazwa umusaruro. Imikorere ikora ibikorwa bimwe na bimwe kandi ushobora kuyikoresha igihe cyose ukeneeye.
 
-### 함수 정의하기
-Wave에서 기본적인 함수는 다음과 같이 정의됩니다:
+Imikorere ituma ushobora gukoresha kode imwe mu bice bitandukanye bya porogaramu. Mu buryo bworoshye, imikorere ifasha gukora igenzura ry’ibikorwa cyangwa kugabanya ibikubiye mu rwego rwo hejuru mu buryo bworoshye kandi buhuriweho.
+
+Mu kwandika imikorere muri Wave, dukoresha ijambo `fun` nk'ibimenyetso byo gutangiza imikorere, ikurikirwa n'izina ry'imikorere, imbonerahamwe y'ibice bihabwa agaciro (parameters), hamwe n'ibikubiye muri `{}`.
+
+### Gushyiraho Imikorere
+Imikorere isanzwe muri Wave yandikwa muri ubu buryo:
 
 ```wave
 fun main() {
-    // 여기에 코드를 작성하세요
+    // Andika kode hano
 }
 ```
 
-* `main` 함수는 프로그램 실행을 위한 진입점으로 항상 필요합니다.
-* 함수는 매개변수를 가질 수 있으며, 값을 반환할 수 있습니다. 반환 타입은 함수 이름 뒤에 명시합니다.
+* `main` ni imikorere isanzwe izajya itangira porogaramu kandi ikaba ari ngombwa.
+* Imikorere ishobora kugira ibice bihabwa agaciro (parameters) kandi igasubiza (return) agaciro. Ibisubizo bigomba kugaragazwa nyuma y'izina ry'imikorere.
 
-### 예제: 간단한 함수
+### Urugero: Imikorere Yoroheje
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -39,60 +38,58 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // add 함수 호출
-    println(result);            // 출력: 12
+    var result = add(5, 7);     // Gukoresha imikorere ya add
+    println(result);            // Ibisohoka: 12
 }
 ```
 
-위 예제에서:
+Mu rugero rwo hejuru:
 
-* `add` 함수는 두 정수 `a`와 `b`를 받아 합계를 반환합니다.
-* `main` 함수는 `add`를 호출하여 결과를 출력합니다.
+* `add` ni imikorere yakira `a` na `b`, byombi ni imibare (i32), hanyuma igasubiza is suma yabyo.
+* `main` niyo ikoresha `add`, igasohora igisubizo cyayo.
 
-## 변수
-변수는 프로그램 내에서 데이터를 저장하고 조작하는 데 사용됩니다.
-Wave는 변수 선언에서 **가변 변수**와 **불변 변수**를 모두 지원하여 데이터 관리에 대한 개발자의 제어권을 제공합니다.
+## Variables
+Variables ni uburyo bwo kubika no gucunga amakuru muri porogaramu. Mu rurimi rwa Wave, ushobora kugenga variables zishobora guhinduka (mutable) cyangwa variables zidahinduka (immutable).
 
-### 가변 변수
-Wave에서 변수는 기본적으로 **가변(mutable)** 입니다. 즉, 프로그램 실행 중에 값을 변경할 수 있습니다.
+### Variables Zishobora Guhinduka
+Muri Wave, variables zishobora guhinduka ni zo zikoreshwa cyane. Ibi bivuze ko igihe porogaramu irimo gukora, ushobora guhindura agaciro ka variable.
 
-가변 변수는 var 키워드를 사용해 선언합니다.
+Variables zishobora guhinduka zishyirwaho hakoreshejwe ijambo `var`.
 ```wave
-var x :i32 = 10; // 가변 변수
+var x :i32 = 10; // Variable ishobora guhinduka
 x = 20;
 ```
 
-위 예제에서:
-* `x`는 가변 변수로, 초기값 `10`을 가지며 이후에 `20`으로 값을 변경할 수 있습니다.
+Mu rugero hejuru:
+* `x` ni variable ishobora guhinduka, ifite agaciro ka mbere `10`, ariko nyuma ishobora guhindurwa kugera kuri `20`.
 
-### 불변 변수
-변수를 **불변(immutable)** 으로 선언하면, 한 번 값이 할당된 후에는 변경할 수 없습니다.
+### Variables Zidahinduka
+Variables zidahinduka zishyirwaho mu buryo budahinduka, aho guhindura agaciro bishobora kubangamira porogaramu. Iyo umaze guha agaciro variable, ntushobora kugahindura ukundi.
 
-불변 변수는 `var imm` 키워드를 사용해 선언합니다.
+Variables zidahinduka zishyirwaho hakoreshejwe ijambo `var imm`.
 ```wave
-var imm y :i32 = 5;     // 불변 변수
-// y = 10;              // 오류: 불변 변수는 값을 변경할 수 없습니다.
+var imm y :i32 = 5;     // Variable idahinduka
+// y = 10;              // Ikosa: Variable idahinduka ntishobora guhindurwa
 ```
 
-여기서:
-* `y`는 불변 변수로, 값을 변경하려고 하면 컴파일 오류가 발생합니다.
+Aha:
+* `y` ni variable idahinduka. Niba ushaka kuyihindura, uzabona ikosa muri compilation.
 
-### 변수 선언 예제
-다양한 타입의 가변 및 불변 변수를 선언하는 예제는 다음과 같습니다:
+### Urugero rwa Variables
+Hano hari urugero rwo gushyiraho variables zitandukanye:
 
 ```wave
-var x :i32 = 10;                    // 가변 정수 변수
-var imm y :f64 = 3.14159;           // 불변 부동소수점 변수
-var name :str = "Wave";             // 가변 문자열 변수
-var imm is_active :bool = true;     // 불변 논리 변수
+var x :i32 = 10;                    // Variable ishobora guhinduka y'ubwoko bwa integer
+var imm y :f64 = 3.14159;           // Variable idahinduka y'ubwoko bwa floating-point
+var name :str = "Wave";             // Variable ishobora guhinduka y'ubwoko bwa string
+var imm is_active :bool = true;     // Variable idahinduka y'ubwoko bwa boolean
 ```
 
-* `x`는 가변 정수입니다.
-* `y`는 불변 부동소수점 숫자입니다..
-* `name`은 가변 문자열입니다.
-* `is_active`는 불변 논리값입니다.
+* `x` ni variable ishobora guhinduka y'ubwoko bwa integer.
+* `y` ni variable idahinduka y'ubwoko bwa floating-point.
+* `name` ni variable ishobora guhinduka y'ubwoko bwa string.
+* `is_active` ni variable idahinduka y'ubwoko bwa boolean.
 
-Wave에서는 `var` 키워드를 사용해 가변 변수를 선언하며, `var imm` 키워드를 사용해 초기 할당 후 변경할 수 없는 불변 변수를 선언합니다.
+Muri Wave, ukoresha `var` mu gushyiraho variables zishobora guhinduka, naho `var imm` mu gushyiraho variables zidahinduka nyuma yo guha agaciro.
 
-가변 변수와 불변 변수를 구분함으로써, Wave는 데이터 일관성과 프로그램 상태를 더욱 효과적으로 제어할 수 있게 합니다.
-이로써 더욱 견고하고 예측 가능한 코드를 작성할 수 있습니다.
+Mu kumenyekanisha variables ishobora guhinduka n'izidahinduka, Wave ifasha kugenzura ibimenyetso n'uburyo bw'imikorere ya porogaramu ku buryo bunoze, bityo igafasha gukoresha kode yizewe kandi ifite umurongo uhamye.
