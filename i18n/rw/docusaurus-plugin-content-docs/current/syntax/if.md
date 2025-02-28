@@ -2,40 +2,40 @@
 sidebar_position: 3
 ---
 
-# IF 문
-## 소개
-이 섹션에서는 Wave의 제어문 중 하나인 IF 문의 문법에 대해 소개합니다.
-IF 문은 프로그래밍에서 조건을 평가하고, 조건이 참일 때 특정 코드를 실행하는 제어문입니다.
-이를 통해 조건에 따라 프로그램의 흐름을 제어하고, 유연하고 논리적인 코드를 작성할 수 있습니다.
+# ITEGEKO IF
+## Intangiriro
+Muri iki gice, turaza kwerekana imiterere y'itegeko rya IF, rimwe mu mategeko ya Wave.
+ITEGEKO IF ni itegeko rikoreshwa mu gufata imyanzuro mu gusuzuma niba ibyo ugerageza kuba ari ukuri, hanyuma ugashyira mu bikorwa code imwe mu gihe ibyo ugerageza ari ukuri.
+Ibi bituma ushobora kugenzura uko porogaramu ikora, ndetse ukandika kode yoroshye kandi ifite logic.
 
-## 기본 구조
-IF 문은 특정 조건을 평가한 후, 해당 조건이 참(True)일 때만 지정된 코드 블록을 실행합니다. 
-Wave의 IF 문 기본 구조는 아래와 같습니다:
+## Imiterere Isanzwe
+ITEGEKO IF isuzuma kimwe mu bipimo, hanyuma igihe icyo gipimo kiba ari ukuri (True), itegeka ryashyirwa mu bikorwa.
+Imiterere isanzwe y'itegeko IF muri Wave ni uku:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (igipimo) {
+    // Code izashyirwa mu bikorwa igihe igipimo ari ukuri
 }
 ```
 
-조건은 비교 연산자(`==`, `!=`, `<`, `>`, `<=`, `>=`)나 논리 형산자(`&&`, `||`, `!`) 등을 활용하여 작성합니다. 조건이 거짓(False)이라면, 코드 블록은 실행되지 않습니다.
+Igipimo kirimo kugereranya ibimenyetso (`==`, `!=`, `<`, `>`, `<=`, `>=`) cyangwa ibimenyetso by’imyifatire (`&&`, `||`, `!`) kugira ngo gikorwe. Iyo igipimo kiri kubiri (False), kode ntabwo izashyirwa mu bikorwa.
 
-## 예제
-다음은 간단한 IF 문의 예제입니다:
+## Urugero
+Dore urugero rworoshye rw'itegeko IF:
 
 ```wave
-var temperature :i32 = 30;
+var ubushyuhe :i32 = 30;
 
-if (temperature > 25) {
-    println("날씨가 덥습니다.");
+if (ubushyuhe > 25) {
+    println("Igihe kirashyushye.");
 }
 ```
 
-위 코드에서는 temperature 값이 25보다 클 경우, "날씨가 덥습니다."라는 메시지가 출력됩니다.
+Muri iki kode, igihe ubushyuhe buzarenga 25, ubutumwa "Igihe kirashyushye." buzagaragara.
 
-## IF_ELSE 문
-조건이 참이 아닐 경우, 대체로 실행할 코드를 작성할려면 IF-ELSE 문을 사용합니다.
-구조는 아래와 같습니다:
+## ITEGEKO IF_ELSE
+Niba igipimo kitari ukuri, ushobora gukoresha IF-ELSE kugira ngo ushyireho code izashyirwa mu bikorwa mu gihe igipimo kitarimo ukuri.
+Imiterere yayo ni:
 
 ```wave
 if (조건) {
@@ -45,43 +45,43 @@ if (조건) {
 }
 ```
 
-### 예제:
+### Urugero:
 
 ```wave
-var score :i32 = 70;
+var amanota :i32 = 70;
 
-if (score >= 60) {
-    println("합격입니다!");
+if (amanota >= 60) {
+    println("Watsinze!");
 } else {
-    println("불합격입니다.");
+    println("Ntutsinze.");
 }
 ```
 
-score가 60 이상일 경우 "합격입니다!"가 출력되고, 그렇지 않을 경우 "불합격입니다."가 출력됩니다.
+Iyo amanota azamuka ku 60 cyangwa arenga, ubutumwa "Watsinze!" buzagaragara, mu gihe bitari byo "Ntutsinze." buzaba bwanditse.
 
-## 중첩 IF 문
-IF 문은 다른 IF 문 안에서 사용될 수도 있습니다. 이를 중첩 IF 문이라고 하며, 복잡한 조건을 처리할 때 유용합니다.
+## ITEGEKO IF ISUMBUYE
+ITEGEKO IF rishobora no gushyirwa mu rindi tegeko IF, ibintu byitwa Nested IF. Bikoreshwa mu kugenzura ibipimo bigoye.
 
 ```wave
-var score :i32 = 85;
+var amanota :i32 = 85;
 
-if (score >= 60) {
-    if (score >= 90) {
-        println("우수한 성적입니다!");
+if (amanota >= 60) {
+    if (amanota >= 90) {
+        println("Watsinze neza!");
     } else {
-        println("합격입니다.");
+        println("Watsinze.");
     } 
 } else {
-    println("불합격입니다.");
+    println("Ntutsinze.");
 }
 ```
 
-위 예제에서는 점수에 따라 "우수한 성적입니다!", "합격입니다.", 또는 "불합격입니다."라는 메시지가 출력됩니다.
+Muri uru rugero, bitewe n'amanota, ubutumwa "Watsinze neza!", "Watsinze.", cyangwa "Ntutsinze." buzagaragara.
 
-## 요약
+## Isuzuma
 
-* IF 문은 조건을 평가하여 특정 코드 블록을 실행하는 제어문입니다.
-* ELSE 문을 추가하여 조건이 거짓일 경우 실행할 코드도 지정할 수 있습니다.
-* 중첩 IF 문은 복잡한 조건을 다룰 때 사용됩니다.
+* ITEGEKO IF rikoreshwa mu gusuzuma ibipimo hanyuma rikuzuza code igihe icyo gipimo ari ukuri.
+* Ushobora kongeramo ELSE kugira ngo ushyireho code izashyirwa mu bikorwa igihe igipimo kitari ukuri.
+* Nested IF ikoreshwa mu gusuzuma ibipimo biremereye.
 
-IF 문을 활용하면 프로그램의 흐름을 더욱 논리적이고 동적으로 구성할 수 있습니다!
+Koresha ITEGEKO IF kugira ngo ugire porogaramu ifite logic kandi irambuye!
