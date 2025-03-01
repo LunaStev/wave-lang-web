@@ -20,7 +20,7 @@ if (igipimo) {
 
 Igipimo kirimo kugereranya ibimenyetso (`==`, `!=`, `<`, `>`, `<=`, `>=`) cyangwa ibimenyetso by’imyifatire (`&&`, `||`, `!`) kugira ngo gikorwe. Iyo igipimo kiri kubiri (False), kode ntabwo izashyirwa mu bikorwa.
 
-## Urugero르완다어
+## Urugero
 Dore urugero rworoshye rw'itegeko IF:
 
 ```wave
