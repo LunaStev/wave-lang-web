@@ -153,12 +153,6 @@ const config = {
             label: 'Docs',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'wsonSidebar',
-            position: 'left',
-            label: 'WSON',
-          },
-          {
             type: 'localeDropdown',
             position: 'right',
           },
