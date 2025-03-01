@@ -154,9 +154,9 @@ const config = {
           },
           {
             type: 'docSidebar',
-            href: 'https://wave-lang.dev/docs/wson',
-            label: 'WSON',
+            sidebarId: 'wsonSidebar',
             position: 'left',
+            label: 'WSON',
           },
           {
             type: 'localeDropdown',
