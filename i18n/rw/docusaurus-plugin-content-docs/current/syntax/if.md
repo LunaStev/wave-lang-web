@@ -20,7 +20,7 @@ if (igipimo) {
 
 Igipimo kirimo kugereranya ibimenyetso (`==`, `!=`, `<`, `>`, `<=`, `>=`) cyangwa ibimenyetso by’imyifatire (`&&`, `||`, `!`) kugira ngo gikorwe. Iyo igipimo kiri kubiri (False), kode ntabwo izashyirwa mu bikorwa.
 
-## Urugero
+## Urugero르완다어
 Dore urugero rworoshye rw'itegeko IF:
 
 ```wave
@@ -38,10 +38,10 @@ Niba igipimo kitari ukuri, ushobora gukoresha IF-ELSE kugira ngo ushyireho code 
 Imiterere yayo ni:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (imiterere) {
+    // Kode igomba gukorwa niba ibisabwa ari ukuri
 } else {
-    // 조건이 거짓일 경우 실행될 코드
+    // Kode igomba gukorwa niba ibisabwa ari ibinyoma
 }
 ```
 
