@@ -153,6 +153,12 @@ const config = {
             label: 'Docs',
           },
           {
+            type: 'docSidebar',
+            href: 'https://wave-lang.dev/docs/wson',
+            label: 'WSON',
+            position: 'left',
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
