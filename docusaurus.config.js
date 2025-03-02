@@ -150,12 +150,9 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Wave',
           },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
+          {to: '/math', label: 'Math', position: 'left'},
           {
             href: 'https://github.com/LunaStev/Wave/releases',
             label: 'Releases',
