@@ -153,12 +153,6 @@ const config = {
             label: 'Wave',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'mathSidebar',
-            position: 'left',
-            label: 'Math',
-          },
-          {
             href: 'https://github.com/LunaStev/Wave/releases',
             label: 'Releases',
             position: 'right',
