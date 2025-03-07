@@ -154,7 +154,7 @@ const config = {
           },
           {
             type: 'localeDropdown',
-            position: 'left',
+            position: 'right',
           },
           {
             href: 'https://github.com/LunaStev/Wave/releases',
