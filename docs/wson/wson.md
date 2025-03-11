@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
-# 소개
+# Wave Serialized Object Notation
 WSON(Wave Serialized Object Notation)은 Wave 프로그래밍 언어의 기본 데이터 직렬화 포맷으로, 기존 JSON의 한계를 극복하고 보다 강력한 기능과 효율성을 제공하기 위해 설계되었습니다. WSON은 사람이 읽고 쓰기 쉬운 구조를 유지하면서도 성능을 극대화하여, 다양한 환경에서 데이터를 더욱 안전하고 빠르게 교환할 수 있도록 지원합니다.
 
 ## 특징
