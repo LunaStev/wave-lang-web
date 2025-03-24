@@ -38,7 +38,7 @@ Wave non si limita a essere un linguaggio di programmazione, ma enfatizza l'inte
 ### Strumenti di sviluppo
 Wave ottimizza la produttività attraverso un set completo di strumenti di sviluppo.
 
-* **Gestore pacchetti Wave (WPAK)**: compilazione e distribuzione indipendente dalla piattaforma.
+* **Gestore pacchetti Wave (Vex)**: compilazione e distribuzione indipendente dalla piattaforma.
 * **Debugger Wave**: debugging intuitivo e avanzato.
 
 ---

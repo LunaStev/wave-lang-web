@@ -38,7 +38,7 @@ Wave legt nicht nur Wert auf die Sprache selbst, sondern auch auf die Interaktio
 ### Toolchain
 Wave maximiert die Produktivität durch ausgereifte Entwicklungstools.
 
-* **Wave Paketmanager (WPAK)**: Plattformunabhängige Erstellung und Bereitstellung.
+* **Wave Paketmanager (Vex)**: Plattformunabhängige Erstellung und Bereitstellung.
 * **Wave Debugger**: Intuitive Fehlerbehebung.
 
 ---

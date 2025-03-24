@@ -38,7 +38,7 @@ O Wave não é apenas uma linguagem, mas uma plataforma que valoriza a interaç�
 ### Ferramentas de Desenvolvimento
 O Wave maximiza a produtividade por meio de um conjunto de ferramentas robusto.
 
-* **Gerenciador de Pacotes Wave (WPAK)**: permite compilação e distribuição multiplataforma.
+* **Gerenciador de Pacotes Wave (Vex)**: permite compilação e distribuição multiplataforma.
 * **Depurador Wave**: debugging intuitivo e eficiente.
 
 ---

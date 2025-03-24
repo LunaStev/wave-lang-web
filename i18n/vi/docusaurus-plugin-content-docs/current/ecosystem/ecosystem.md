@@ -37,7 +37,7 @@ Wave không chỉ là ngôn ngữ, mà còn quan trọng việc tương tác v�
 ### Công cụ phát triển
 Wave tối đa hóa năng suất thông qua sự hoàn thiện của công cụ phát triển.
 
-* `Trình quản lý gói Wave (WPAK)`: Xây dựng và triển khai độc lập nền tảng.
+* `Trình quản lý gói Wave (Vex)`: Xây dựng và triển khai độc lập nền tảng.
 * `Trình gỡ lỗi Wave`: Gỡ lỗi trực quan.
 
 ---

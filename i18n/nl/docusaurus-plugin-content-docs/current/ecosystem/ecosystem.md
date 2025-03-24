@@ -35,7 +35,7 @@ Wave hecht niet alleen waarde aan de taal zelf, maar ook aan de interactie met d
 ### Toolchain
 Wave maximaliseert de productiviteit door de voltooiing van ontwikkeltools.
 
-* **Wave Package Manager (WPAK)**: Platformonafhankelijke builds en distributie.
+* **Wave Package Manager (Vex)**: Platformonafhankelijke builds en distributie.
 * **Wave Debugger**: Intuïtieve foutopsporing.
 
 ---

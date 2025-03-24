@@ -38,7 +38,7 @@ Wave ne nur emfazas la lingvon mem, sed ankaŭ interagon kun disvolvantoj.
 ### Iloĉeno
 Wave maksimumas produktivecon per perfekta iloĉeno.
 
-* **Wave Pakaĵa Administrilo (WPAK)**: Platform-independa konstruado kaj disvastigo.
+* **Wave Pakaĵa Administrilo (Vex)**: Platform-independa konstruado kaj disvastigo.
 * **Wave Debugilo**: Intuicia debuggado.
 
 ---

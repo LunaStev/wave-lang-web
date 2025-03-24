@@ -39,7 +39,7 @@ Wave valora no solo el lenguaje en sí, sino también la interacción con los de
 ### Cadena de herramientas
 Wave maximiza la productividad a través de la perfección de las herramientas de desarrollo.
 
-* **Gestor de paquetes Wave (WPAK)**: Construcción y distribución independiente de la plataforma.
+* **Gestor de paquetes Wave (Vex)**: Construcción y distribución independiente de la plataforma.
 * **Depurador Wave**: Depuración intuitiva.
 
 ---

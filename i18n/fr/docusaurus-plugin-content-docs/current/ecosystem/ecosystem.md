@@ -37,7 +37,7 @@ Wave valorise non seulement le langage lui-même, mais aussi l'interaction avec 
 ### Chaîne d'outils
 Wave maximise la productivité grâce à l'achèvement des outils de développement.
 
-* **Gestionnaire de paquets Wave (WPAK)** : Compilation et déploiement indépendants de la plateforme.
+* **Gestionnaire de paquets Wave (Vex)** : Compilation et déploiement indépendants de la plateforme.
 * **Débogueur Wave** : Débogage intuitif.
 
 ---

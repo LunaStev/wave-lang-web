@@ -37,7 +37,7 @@ Wave values interaction with developers, not just the language itself.
 ### Toolchain
 Wave maximizes productivity through a complete set of development tools.
 
-* **Wave Package Manager (WPAK)**: Platform-independent builds and deployments.
+* **Wave Package Manager (Vex)**: Platform-independent builds and deployments.
 * **Wave Debugger**: Intuitive debugging.
 
 ---

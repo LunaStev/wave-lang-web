@@ -37,7 +37,7 @@ Wave ni zaidi ya lugha yenyewe; inathamini mwingiliano na waendelezaji.
 ### Mnyororo wa Zana
 Wave inakuza tija kupitia ukamilifu wa zana za maendeleo.
 
-* Meneja wa Pakiti wa Wave (WPAK): Kujenga na kugawa bila utegemezi wa jukwaa.
+* Meneja wa Pakiti wa Wave (Vex): Kujenga na kugawa bila utegemezi wa jukwaa.
 * Wave Debugger: Upimaji wa makosa kwa njia rahisi.
 
 ---
