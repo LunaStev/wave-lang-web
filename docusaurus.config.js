@@ -55,6 +55,7 @@ const config = {
       중국어(간체) 'zh-CN',
       중국어(번체) 'zh-TW',
       광동어 'yue',
+      아이누어 '',
       에스페란토 'eo',
     */
     locales:
