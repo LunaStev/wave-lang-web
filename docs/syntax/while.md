@@ -75,7 +75,7 @@ Wave에서는 `while` 문 안에 또 다른 `while` 문을 넣는 중첩 반복�
 var i :i32 = 0;
 
 while (i < 3) {
-    let j: int = 0;
+    var j: int = 0;
 
     while (j < 2) {
         println("i={}, j={}", i, j);
