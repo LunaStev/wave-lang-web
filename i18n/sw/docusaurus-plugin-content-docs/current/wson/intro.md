@@ -2,35 +2,32 @@
 sidebar_position: 2
 ---
 
-# 문법
+# Sintaksia
 
-## 1. 기본 구조
+## 1. Muundo wa Msingi
+* Maudhui ya faili huanza na kumalizika na kitu kilichozungukwa na mabano `{}`.
 
-- 파일의 내용은 `{}` 중괄호로 둘러싸여 있는 객체(`object`)로 시작하고 끝난다.
+* Kitu kinajumuisha jozi za ufunguo-thamani, ambapo ufunguo ni jina la sifa na thamani ni thamani ya sifa hiyo.
 
-- 객체는 속성 이름(key)과 값(value) 쌍으로 구성된다.
+* Ufunguzi na thamani vinatenganishwa kwa kutumia alama ya koloni (`:`) au alama ya usawa (`=`).
 
-- 속성 이름과 값은 콜론(`:`) 또는 등호(`=`)로 구분한다.
+## 2. Maoni
+* Maoni huanza na `//` au `#` na yanaandikwa kwenye mstari mmoja.
 
-## 2. 주석
+* Maoni yanatumika hadi mwisho wa mstari.
 
-- 주석은 `//` 또는  `#` 으로 시작하며, 한줄 단위로 작성된다.
+* Maoni ya mistari mingi hayakubaliwi. Ikiwa unahitaji kuandika maoni kwenye mistari mingi, lazima uongeze `//` au `#` mwanzoni mwa kila mstari.
 
-- 주석은 해당 줄의 끝까지 적용된다.
+## 3. Kitu (Object)
+* Kitu kinazungukwa na mabano `{}` na kina jozi za ufunguo-thamani.
 
-- 여러 줄 주석을 따로 지원하지 않으며, 여러 줄에 걸쳐 주석을 작성할 경우 각줄마다 `//` 또는 `#` 을 추가해야 한다.
+* Unaweza kutumia alama ya : au = kati ya ufunguo na thamani. Alama zote mbili zinaweza kutumika.
 
-## 3. 객체(Object)
+* Kila sifa inatenganishwa kwa alama ya koma (`,`).
 
-- 객체는 중괄호 `{}` 로 둘러싸여 있으며, 키-값 쌍을 포합한다.
+* Unaweza kuweka vitu vingine ndani ya kitu.
 
-- 키와 값 사이에는 `:` 또는 `=` 기호를 사용할 수 있다. 두기호는 혼용 가능하다.
-
-- 각 속성은 쉼표(`,`)로 구분된다.
-
-- 객체 안에 다른 객체를 중첩하여 사용할 수 있다.
-
-예시:
+Mfano:
 
 ```
 {
@@ -40,15 +37,14 @@ sidebar_position: 2
 }
 ```
 
-## 4. 배열(Array)
+## 4. Orodha (Array)
+* Orodha inazungukwa na mabano ya mraba `[]`, na vipengele vimezungukwa na alama ya koma (`,`).
 
-- 배열은 대괄호 `[]` 로 둘러싸여 있으며, 요소들은 쉼표(`,`)로 구분된다.
+* Vipengele vya orodha vinaweza kuwa vitu, herufi, nambari, au aina nyingine za data.
 
-- 배열의 요소는 객체, 문자열, 숫자 등 다양한 자료형이 될 수 있다.
+* Katika WSON, orodha inaweza kuwekwa ndani ya kitu, na orodha inaweza kuwa na orodha nyingine au vitu.
 
-- WSON에서 배열은 객체 내에 포함될 수 있으며, 배열 안에는 다른 배열이나 객체가 중첩될 수 있다.
-
-예시:
+Mfano:
 
 ```
 tasks: [
@@ -57,52 +53,51 @@ tasks: [
 ]
 ```
 
-## 5. 키-값 쌍 (Key-Value Pair)
+## 5. Jozi za Ufunguothamani (Key-Value Pair)
+* Majina ya sifa ni herufi na yanapelekwa moja kwa moja baada ya `:` au `=`, bila nafasi yoyote.
 
-- 속성 이름은 문자열로 구성되며, 공백 없이 `:`, `=` 뒤에 값을 배치한다.
+* Aina ya thamani inaweza kuwa herufi, nambari, booleans, kitu, au orodha.
 
-- 값의 유형에는 문자열, 숫자, 불리언, 객체, 배열 등이 있다.
+* Herufi zimezungukwa na mabano ya maneno mawili (`"`).
 
-- 문자열은 큰따옴표 `“` 로 둘러싸인다.
+* Nambari zinaandikwa bila mabano ya maneno na zinaweza kuwa nambari kamili au ya desimali.
 
-- 숫자는 큰 따옴표 없이 사용하며, 정수 또는 실수 형태로 가능하다.
-
-예시:
+Mfano:
 
 ```
 name: "John Doe"
 age = 25
 ```
 
-## 6. 데이터 유형 (Data Types)
-
-- 문자열(String): 큰따옴표 `"` 로 묶인 텍스트다.
+## 6. Aina za Data (Data Types)
+* Herufi (String): Maneno yaliyozungukwa na mabano ya maneno mawili (`"`).
 
 ```
 "hello world"
 ```
 
-- 숫자(Number): 정수 또는 실수 값이다.
+- Nambari (Number): Thamani ya nambari kamili au ya desimali.
 
 ```
 42
 3.14
 ```
 
-- 불리언(Boolean): `true` 또는 `false` 값을 사용한다.
+- Booleans (Boolean): Thamani ni `true` au `false`.
 
 ```
 is_active = true
 ```
 
-- 객체(Object): 중괄호 `{}` 로 묶인 키-ㄱ밧 쌍이다.
-- 배열(Array): 대괄호 `[]` 로 묶인 요소 목록이다.
+* Kitu (Object): Aseti ya jozi za ufunguo-thamani iliyozungukwa na `{}`.
 
-## 7. 예제 설명
+* Orodha (Array): Orodha ya vipengele iliyozungukwa na `[]`.
+
+## 7. Ufafanuzi wa Mfano
 
 ```ws
 {
-    // 상태 코드와 메시지 정보
+    // Habari za msimbo wa hali na ujumbe
     status: "success",
     code: 200,
     message: "Data retrieved successfully",
@@ -111,7 +106,7 @@ is_active = true
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        age: 25  # 사용자 나이
+        age: 25  # Umri wa mtumiaji
     },
 
     tasks: [
