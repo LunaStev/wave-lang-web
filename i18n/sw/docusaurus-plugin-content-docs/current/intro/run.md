@@ -24,7 +24,7 @@ Hapa, `fun main()` ni hatua ya kuanzia ya programu, na kazi ya `println` ni kuch
 Sasa, tutaenda kukimbia programu ya Wave. Fungua terminal yako na ingiza amri ifuatayo:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Angalia Matokeo

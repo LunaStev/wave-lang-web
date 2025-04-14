@@ -24,7 +24,7 @@ Ici, `fun main()` représente le point d'entrée du programme, et la fonction `p
 Maintenant, exécutons le programme Wave. Ouvrez votre terminal et entrez la commande suivante :
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Vérifier la sortie

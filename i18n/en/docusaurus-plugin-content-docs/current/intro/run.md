@@ -27,7 +27,7 @@ Here, `fun main()` represents the entry point of the program, and the `println` 
 Now, let's run the Wave program. Open your terminal and enter the following command:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Checking the Output

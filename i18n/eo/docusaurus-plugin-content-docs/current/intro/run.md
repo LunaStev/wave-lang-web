@@ -27,7 +27,7 @@ Hier steht `fun main()` für den Einstiegspunkt des Programms, und die Funktion 
 Lass uns nun das Wave-Programm ausführen. Öffne dein Terminal und gib den folgenden Befehl ein:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Ausgabe überprüfen

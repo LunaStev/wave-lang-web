@@ -31,7 +31,7 @@ source ~/.bashrc
 Por kontroli ĉu la instalado estas kompleta, enmetu la jenan komandon en la terminalon:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Se versio-informo estas montrata, la instalado estas sukcese kompletigita.

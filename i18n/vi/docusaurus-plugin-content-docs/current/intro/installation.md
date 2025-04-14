@@ -29,7 +29,7 @@ source ~/.bashrc
 Để kiểm tra xem cài đặt đã hoàn tất hay chưa, hãy nhập lệnh sau vào terminal:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Nếu thông tin phiên bản hiển thị, cài đặt đã thành công.

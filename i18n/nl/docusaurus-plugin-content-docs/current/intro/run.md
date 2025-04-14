@@ -23,7 +23,7 @@ Hier vertegenwoordigt `fun main()` het ingangspunt van het programma en de funct
 Laten we nu het Wave-programma uitvoeren. Open de terminal en typ het volgende commando:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Controleer de uitvoer

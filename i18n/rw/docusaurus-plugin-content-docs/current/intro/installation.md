@@ -29,7 +29,7 @@ source ~/.bashrc
 Kugenzura niba installation yarangiye, andika iyi command muri terminal:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Niba amakuru ya version yerekana, bivuze ko installation yakozwe neza.

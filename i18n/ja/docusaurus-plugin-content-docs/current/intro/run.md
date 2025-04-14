@@ -23,7 +23,7 @@ fun main() {
 次に、Waveのプログラムを実行してみましょう。ターミナルを開き、以下のコマンドを入力します：
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## 出力の確認

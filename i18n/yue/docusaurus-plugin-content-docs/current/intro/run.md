@@ -23,7 +23,7 @@ fun main() {
 現在，讓我們來運行Wave程序。打開終端並輸入以下命令：
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## 檢查輸出

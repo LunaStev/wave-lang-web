@@ -31,7 +31,7 @@ source ~/.bashrc
 Um zu überprüfen, ob die Installation erfolgreich war, gib folgenden Befehl im Terminal ein:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Wenn die Versionsinformationen angezeigt werden, war die Installation erfolgreich.

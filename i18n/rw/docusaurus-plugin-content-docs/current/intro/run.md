@@ -24,7 +24,7 @@ Aha, fun `main()` ni yo ntangiriro ya porogaramu, naho `println` ikoreshwa mu kw
 Kugira ngo utangize iyi porogaramu ya Wave, fungura terminal hanyuma winjize iri tegeko:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Kugenzura Ibisohoka

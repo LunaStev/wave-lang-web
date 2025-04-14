@@ -29,7 +29,7 @@ source ~/.bashrc
 Ili kuthibitisha kama ufungaji umekamilika, ingiza amri hii kwenye terminal:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Ikiwa taarifa ya toleo itaonyeshwa, ufungaji umekamilika kwa mafanikio.

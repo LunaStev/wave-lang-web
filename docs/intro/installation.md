@@ -31,7 +31,7 @@ source ~/.bashrc
 설치가 완료되었는지 확인하려면 터미널에 다음 명령어를 입력하세요.
 
 ```bash
-wave --version
+wavec --version
 ```
 
 버전 정보가 출력되면 설치가 성공적으로 완료된 것입니다.

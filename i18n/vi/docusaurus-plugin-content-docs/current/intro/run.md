@@ -23,7 +23,7 @@ fun main() {
 Bây giờ, hãy chạy chương trình Wave. Mở terminal và nhập lệnh sau:
 
 ```bash
-wave run hello.wave
+wavec run hello.wave
 ```
 
 ## Kiểm tra kết quả

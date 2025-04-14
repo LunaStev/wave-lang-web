@@ -29,7 +29,7 @@ source ~/.bashrc
 Para verificar se a instalação foi concluída, digite o seguinte comando no terminal:
 
 ```bash
-wave --version
+wavec --version
 ```
 
 Se as informações da versão forem exibidas, a instalação foi concluída com sucesso.
