@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwave_lang=self.webpackChunkwave_lang||[]).push([[3905],{5535:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/pl/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
