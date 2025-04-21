@@ -78,7 +78,7 @@ Zeiger werden mit dem Schlüsselwort `ptr` deklariert und speichern eine Speiche
 
 Beispiel:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Array-Typ
@@ -87,7 +87,7 @@ Arrays werden mit dem Schlüsselwort `array` deklariert, und ihre Größe sowie 
 
 Beispiel:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Jeder Datentyp bietet eine Vielzahl von Optionen, um den Bereich und die Größe genau zu definieren, sodass der Benutzer den am besten geeigneten Typ auswählen kann, um eine effiziente Speicherverwaltung und Berechnungen durchzuführen.

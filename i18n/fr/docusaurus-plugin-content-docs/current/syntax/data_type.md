@@ -79,7 +79,7 @@ Il est déclaré avec le mot-clé `ptr` et est utilisé pour stocker des adresse
 
 Exemple :
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Type tableau
@@ -88,7 +88,7 @@ Il est déclaré avec le mot-clé `array`, et vous pouvez spécifier la taille o
 
 Exemple :
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Chaque type de donnée permet de définir des plages et des tailles variées, ce qui permet à l'utilisateur de choisir le type qui correspond le mieux à ses besoins pour une gestion efficace de la mémoire et des calculs.

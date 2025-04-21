@@ -80,7 +80,7 @@ Se declara utilizando la palabra clave `ptr` y se usa para almacenar direcciones
 
 Ejemplo:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Tipo de Arreglo
@@ -89,7 +89,7 @@ Se declara utilizando la palabra clave `array`, y se puede especificar el tamañ
 
 Ejemplo:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Dado que cada tipo de dato tiene diferentes rangos y tamaños, se puede elegir el tipo adecuado según las necesidades del usua

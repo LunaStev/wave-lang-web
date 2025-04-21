@@ -80,7 +80,7 @@ var byteData :byte = 0xFF;
 
 例:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## 配列型
@@ -89,7 +89,7 @@ var ptr :ptr = &someVariable;
 
 例:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 各データ型はさまざまな範囲やサイズを設定できるため、ユーザーのニーズに合わせた型を選択し、効率的なメモリ管理や計算が可能です。

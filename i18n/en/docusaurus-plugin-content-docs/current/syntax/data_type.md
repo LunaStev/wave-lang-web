@@ -76,7 +76,7 @@ The `ptr` keyword is used to declare a pointer, and it is used to store memory a
 
 Example:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Array Type
@@ -84,7 +84,7 @@ The array type is used to store **multiple values of the same data type** in a s
 The `array` keyword is used, and you can specify the size or type of the array.
 
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Since each data type can be set with various ranges and sizes, you can choose the appropriate type to ensure efficient memory management and calculations based on your needs.

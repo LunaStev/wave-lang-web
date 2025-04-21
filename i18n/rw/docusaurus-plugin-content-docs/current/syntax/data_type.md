@@ -69,7 +69,7 @@ Imiterere y'ikimenyetso ikoreshwa mu kubika ahantu ha adresse ya memory. Gahunda
 
 Urugero:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Imiterere y'Ibyiciro
@@ -78,7 +78,7 @@ Imiterere y'ibyiciro ikoreshwa mu kubika agaciro k'ibintu byinshi bingana. Iyo u
 
 Urugero:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Buri bwoko bw'ibintu butanga amahitamo yo kubushyiraho ubunini n'ubunini, bituma abakoresha bashobora guhitamo ubwoko bukwiriye kugira ngo bagenzure imikoreshereze ya memory no gukorera ku mibare.

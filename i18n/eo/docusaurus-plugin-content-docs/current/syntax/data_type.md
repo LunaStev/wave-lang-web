@@ -78,7 +78,7 @@ La ŝlosilvorto `ptr` estas uzata por deklari pointerojn, kiuj stokenas memoradr
 
 Ekzemplo:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Aranĝa Tipo
@@ -87,7 +87,7 @@ La ŝlosilvorto `array` estas uzata, kaj oni povas precizigi la grandeco de la a
 
 Ekzemplo:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Ĉiu datumtipo en Wave povas havi malsamajn intervalojn kaj grandecojn, kiuj permesas al uzantoj elekti la plej taŭgan tipon por efika memoro-administrado kaj kalkulado.

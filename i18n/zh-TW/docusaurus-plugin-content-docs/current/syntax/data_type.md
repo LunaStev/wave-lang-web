@@ -78,7 +78,7 @@ var byteData :byte = 0xFF;
 
 範例：
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## 陣列型別
@@ -87,7 +87,7 @@ var ptr :ptr = &someVariable;
 
 範例：
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 每個資料型別都提供了可調整的範圍和大小選項，讓開發者可以根據需求選擇適合的型別，從而達到高效的記憶體管理和運算。

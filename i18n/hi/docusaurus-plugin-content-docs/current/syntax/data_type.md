@@ -78,7 +78,7 @@ var byteData :byte = 0xFF;
 
 उदाहरण:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## ऐरे प्रकार
@@ -87,7 +87,7 @@ var ptr :ptr = &someVariable;
 
 उदाहरण:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 प्रत्येक डेटा प्रकार विभिन्न सीमा और आकार विकल्पों के साथ सेट किया जा सकता है, जिससे उपयोगकर्ता अपनी आवश्यकता के अनुसार प्रकार चुनकर प्रभावी मेमोरी प्रबंधन और गणना कर सकते हैं।

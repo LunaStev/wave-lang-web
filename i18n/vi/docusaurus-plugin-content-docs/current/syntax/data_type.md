@@ -79,7 +79,7 @@ Khai báo bằng từ khóa `ptr`.
 
 Ví dụ:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Kiểu Mảng
@@ -88,7 +88,7 @@ Khai báo bằng từ khóa `array`.
 
 Ví dụ:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Mỗi kiểu dữ liệu có nhiều tùy chọn về phạm vi và kích thước, giúp lập trình viên lựa chọn kiểu phù hợp

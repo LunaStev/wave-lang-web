@@ -77,7 +77,7 @@ Een **pointer** slaat een **geheugenadres** op en wordt gedeclareerd met het sle
 
 Voorbeeld:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Array type
@@ -86,7 +86,7 @@ Een array wordt gedeclareerd met het sleutelwoord `array`.
 
 Voorbeeld:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Wave biedt uitgebreide controle over geheugengebruik en precisie door verschillende gegevenstypen aan te bieden.

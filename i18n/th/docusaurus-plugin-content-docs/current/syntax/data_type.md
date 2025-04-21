@@ -80,7 +80,7 @@ var byteData :byte = 0xFF;
 
 ตัวอย่าง:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## ประเภทอาเรย์ (Array Type)
@@ -89,7 +89,7 @@ var ptr :ptr = &someVariable;
 
 ตัวอย่าง:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 ประเภทข้อมูลที่หลากหลายช่วยให้คุณสามารถเลือกใช้ได้ตามความเหมาะสม

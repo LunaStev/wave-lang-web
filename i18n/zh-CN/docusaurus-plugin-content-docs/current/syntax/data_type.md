@@ -78,7 +78,7 @@ var byteData :byte = 0xFF;
 
 示例：
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## 数组类型
@@ -87,7 +87,7 @@ var ptr :ptr = &someVariable;
 
 示例：
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 每种数据类型可以设置不同的范围和大小，开发者可以根据需求选择合适的类型，以实现高效的内存管理和计算。

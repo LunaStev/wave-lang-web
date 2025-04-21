@@ -34,9 +34,9 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 * 포맷 출력, 타입 지정
 
-* 포인터 설계 (`ptr<i32>` 형태)
+* 포인터 설계 (`ptr<T>` 형태)
 
-* 배열 설계 (`array<i32, N>`)
+* 배열 설계 (`array<T, N>`)
 
 * 타입 검사 및 구조적 AST
 

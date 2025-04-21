@@ -79,7 +79,7 @@ Si utilizza la parola chiave `ptr` per dichiarare un puntatore, che memorizza un
 
 Esempio:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Tipo Array
@@ -88,7 +88,7 @@ La parola chiave `array` viene utilizzata per dichiarare un array, e può essere
 
 Esempio:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Ogni tipo di dato offre una gamma di intervalli e dimensioni diverse, quindi è possibile scegliere il tipo che meglio si adatta alle proprie esigenze per una gestione più efficiente della memoria e dei calcoli.

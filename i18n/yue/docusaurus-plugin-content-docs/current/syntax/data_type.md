@@ -81,7 +81,7 @@ var byteData :byte = 0xFF;
 
 範例：
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## 陣列類型
@@ -90,7 +90,7 @@ var ptr :ptr = &someVariable;
 
 範例：
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Wave 支援廣泛的資料類型，允許使用者根據需求選擇適當的類型以實現高效的記憶體管理與運算。

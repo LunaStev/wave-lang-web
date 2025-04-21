@@ -79,7 +79,7 @@ Aina ya pointer hutumika kurejelea **anwani za kumbukumbu**.
 
 Mfano:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## Aina ya Orodha
@@ -88,7 +88,7 @@ Aina ya orodha hutumika kuhifadhi **seti ya data ya aina moja** kwa mpangilio.
 
 Mfano:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Kila aina ya data ina chaguzi za ukubwa na upeo mbalimbali, hivyo basi mtumiaji anaweza kuchagua aina inayofaa ili kufanikisha usimamizi bora wa kumbukumbu na mahesabu.

@@ -1,0 +1,59 @@
+{
+  "tagline": {
+    "message": "Jedno język, nieskończone możliwości"
+  },
+  "find-out": {
+    "message": "Dowiedz się więcej o Wave."
+  },
+  "homepage.features.one.title": {
+    "message": "Potężny i elastyczny"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave został zaprojektowany, aby obsługiwać wszystko — od programowania systemowego niskiego poziomu po aplikacje wysokiego poziomu, zapewniając elastyczność i wydajność w jednej zintegrowanej języku."
+  },
+  "homepage.features.two.title": {
+    "message": "Skupienie na wydajności"
+  },
+  "homepage.features.two.description": {
+    "message": "Używając Wave, możesz skoncentrować się na rozwiązywaniu skomplikowanych problemów w różnych dziedzinach, takich jak rozwój stron internetowych, sztuczna inteligencja, sprzęt i inne, używając jednego języka."
+  },
+  "homepage.features.three.title": {
+    "message": "Optymalizacja wydajności"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave pozwala pisać kod o wysokiej wydajności, który działa efektywnie na każdej platformie, nie rezygnując z łatwości użycia lub bezpieczeństwa."
+  },
+  "homepage.code.title": {
+    "message": "Przykład kodu Wave"
+  },
+  "homepage.contributors.title": {
+    "message": "Współtwórcy"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Twórca języka"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Projektant języka"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Rozwój kompilatora"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Odpowiedzialny za bibliotekę standardową"
+  },
+  "homepage.sponsors.title": {
+    "message": "Sponsorzy"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Sponsor honorowy"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Sponsor platynowy"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Sponsor złoty"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Sponsor srebrny"
+  }
+}

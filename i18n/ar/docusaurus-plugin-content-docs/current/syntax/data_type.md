@@ -67,7 +67,7 @@ var byteData :byte = 0xFF;
 
 مثال:
 ```wave
-var ptr :ptr = &someVariable;
+var ptr :ptr<T> = &someVariable;
 ```
 
 ## نوع البيانات المصفوفة
@@ -75,7 +75,7 @@ var ptr :ptr = &someVariable;
 
 مثال:
 ```wave
-var numbers: array<i32> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 كل نوع من أنواع البيانات يوفر مجموعة من النطاقات والأحجام القابلة للتخصيص، مما يسمح للمستخدمين باختيار النوع المناسب لإدارة الذاكرة وإجراء الحسابات بشكل فعال.
