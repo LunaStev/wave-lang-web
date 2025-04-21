@@ -34,9 +34,9 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 * Formatowane wyjście, przypisanie typów
 
-* Projektowanie wskaźników (ptr<i32>)
+* Projektowanie wskaźników (`ptr<i32>`)
 
-* Projektowanie tablic (array<i32, N>)
+* Projektowanie tablic (`array<i32, N>`)
 
 * Sprawdzanie typów i strukturalny AST
 
