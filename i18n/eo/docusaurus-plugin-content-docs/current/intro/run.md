@@ -2,17 +2,17 @@
 sidebar_position: 3
 ---
 
-# Kuru la unuan programon
+# Ruli la unuan programon
 
-Se vi jam instalis Wave en la antaŭa instalada dokumento, ni funkciigu la unuan programon nun!
+Se vi jam instalis Wave laŭ la antaŭa instala gvidilo, ni nun rulu vian unuan programon!
 
-## Kreu dosieron 'saluton.wave'.
+## Kreu la dosieron `hello.wave`
 
-Unue, kreu novan dosieron nomatan 'Hello.Wave'.
+Unue, kreu novan dosieron kun la nomo `hello.wave`.
 
-## Skribado de Kodo
+## Skribu la kodon
 
-Skribu la jenan kodon en la dosiero 'Hello.wave':
+Skribu la jenan kodon en la dosiero `hello.wave`:
 
 ```wave
 fun main() {
@@ -20,22 +20,20 @@ fun main() {
 }
 ```
 
-'Fun Main ()' ĉi tie signifas la deirpunkton de la programo, kaj la funkcio 'println' ludas rolon en eligo de la teksto sur la ekrano.
+Ĉi tie, `fun main()` signifas la komencpunkton de la programo, kaj la funkcio `println` eligas tekston sur la ekrano.
 
-## Kuru la programon
-
-Nun ni kuru la ondan programon. Malfermu la terminalon, enigu la jenan komandon:
+## Rulu la programon
+Nun ni rulu la Wave-programon. Malfermu terminalon kaj entajpu la jenan komandon:
 
 ```bash
 wavec run hello.wave
 ```
 
-## Kontrolu eliron
-
-Kiam vi aranĝos la programon, la sekva eligo aperos:
+## Kontrolu la eligon
+Kiam la programo estos rulita, vi vidos la jenan eligon:
 
 ``
-Saluton Ondo
+Hello World
 ``
 
-Nun vi povas vidi, ĉu la ondo estas instalita normale kaj funkcias. Gratulon! Mi sukcese aranĝas la unuan programon.
+Nun vi povas konfirmi, ke Wave estas ĝuste instalita kaj funkcias. Gratulon! Vi sukcese rulis vian unuan programon.
