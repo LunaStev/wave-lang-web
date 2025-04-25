@@ -2,17 +2,17 @@
 sidebar_position: 3
 ---
 
-# Dein erstes Programm ausführen
+# Kuru la unuan programon
 
-Wenn du Wave bereits gemäß der vorherigen Installationsanleitung installiert hast, ist es jetzt an der Zeit, dein erstes Programm auszuführen!
+Se vi jam instalis Wave en la antaŭa instalada dokumento, ni funkciigu la unuan programon nun!
 
-## Die Datei `hello.wave` erstellen
+## Kreu dosieron 'saluton.wave'.
 
-Erstelle zunächst eine neue Datei mit dem Namen `hello.wave`.
+Unue, kreu novan dosieron nomatan 'Hello.Wave'.
 
-## Code schreiben
+## Skribado de Kodo
 
-Schreibe den folgenden Code in die Datei `hello.wave`:
+Skribu la jenan kodon en la dosiero 'Hello.wave':
 
 ```wave
 fun main() {
@@ -20,22 +20,22 @@ fun main() {
 }
 ```
 
-Hier steht `fun main()` für den Einstiegspunkt des Programms, und die Funktion `println` gibt Text auf dem Bildschirm aus.
+'Fun Main ()' ĉi tie signifas la deirpunkton de la programo, kaj la funkcio 'println' ludas rolon en eligo de la teksto sur la ekrano.
 
-## Das Programm ausführen
+## Kuru la programon
 
-Lass uns nun das Wave-Programm ausführen. Öffne dein Terminal und gib den folgenden Befehl ein:
+Nun ni kuru la ondan programon. Malfermu la terminalon, enigu la jenan komandon:
 
 ```bash
 wavec run hello.wave
 ```
 
-## Ausgabe überprüfen
+## Kontrolu eliron
 
-Nach dem Ausführen des Programms solltest du folgende Ausgabe sehen:
+Kiam vi aranĝos la programon, la sekva eligo aperos:
 
-```
-Hello Wave
-```
+``
+Saluton Ondo
+``
 
-Jetzt hast du bestätigt, dass Wave korrekt installiert und funktionsfähig ist. Glückwunsch! Du hast dein erstes Programm erfolgreich ausgeführt.
+Nun vi povas vidi, ĉu la ondo estas instalita normale kaj funkcias. Gratulon! Mi sukcese aranĝas la unuan programon.
