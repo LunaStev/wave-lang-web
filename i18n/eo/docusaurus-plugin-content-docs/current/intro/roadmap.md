@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-#Wave + Balena Integrita Disvolva Vojo V2
+# Wave + Whale Integrita Disvolva Vojo v2
 
-## Plena Stadio
+## Tuta Etapo
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → release
@@ -12,164 +12,166 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 ---
 
-## antaŭ-beta stadio
+## Pre-Beta Etapo
 
-> Celo: Plena funkcia efektivigo uzante la antaŭan finon de la ondolingvo + LLVM -backend
+> Celo: Kompletigi la front-end de la lingvo Wave + efektivigi ĉiujn funkciojn per LLVM-backend
 
-### Ĉefa ĉefaĵo
-* Uzu nur llvm (neniu baleno(Whale))
+### Ĉefaj Trajtoj
+* Uzi nur LLVM (Whale ne estas uzata)
 
-* Ne ekzistas gramatiko, nur la ekzistantaj specifaĵoj estas efektivigitaj
+* Neniu nova gramatiko, nur efektivigo de ekzistantaj specifoj
 
-* Eraraj mesaĝoj, tajpaj provoj, ŝanĝiĝemaj celoj kiel antaŭ -centrita strukturo stabiligo
+* Stabiligo de front-end strukturo: erarmesaĝoj, tipkontrolo, variabla amplekso, ktp.
 
-### efektiviga gamo
-* Varia deklaro, eligo, operacio
+### Efektiviga Amplekso
+* Deklaro de variabloj, eligo, kaj operacioj
 
-* Funkcia difino kaj alvoko
+* Difino kaj alvoko de funkcioj
 
-* if / else if / else
+* if / else if / else strukturoj
 
-* while / break / continue
+* while / break / continue bukloj
 
-* Formata eligo, tipo -nomado
+* Formatita eligo, tipo-specifo
 
-* Pointer Design (`PTR <T>` formo)
+* Pointer-dizajno (`ptr<T>` formo)
 
-* Array Design (`Array <T, N>`)
+* Tabelo-dizajno (`array<T, N>`)
 
-* Tipo inspektadon kaj strukturan AST
+* Tipkontrolo kaj struktura AST
 
-### uzteknologio
-* Rust (Wave Compiler ĉiuj)
+### Uzataj Teknologioj
+* Rust (por tuta Wave-kompililo)
 
-* LLVM (IR -Kreado, AOT -Ekzekuto)
+* LLVM (IR-generado kaj AOT-rulado)
 
 * inkwell / llvm-sys
 
 ---
 
-## Alpha Stage
+## Alpha Etapo
 
-> Celo: Whale Enkonduko komenciĝas, kombinita kun LLVM / balen -bazita backend -efektivigo
+> Celo: Komenci enkondukon de Whale, efektivigi Whale-bazitan backend kune kun LLVM
 
-### Ĉefa ĉefaĵo
-* Llvm estas defaŭlta backend
+
+
+### Ĉefaj Trajtoj
+* LLVM estas la defaŭlta backend
 
 * Whale estas laŭvola backend
 
-* Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+* Eblas elekti backend per opcio --backend dum rulado
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale rilata laboro
-* Whale IR -strukturo -projektado kaj difino (instrukcio, valoro, bloko, ktp.)
+### Taskoj Rilataj al Whale
+* Dezajno kaj difino de Whale IR-strukturo (Instrukcioj, Valoroj, Blokoj, ktp.)
 
-* Efektivigo de IR -generatoro por Whale
+* IR-generatoro por Whale
 
-* Kreado de Whale -Kodo (Asembleo aŭ Binara)
+* Kodo-generado de Whale (asemblea aŭ binara)
 
-* Tipo -efektivigo uzebla nur kun Whale (i1024, luksa montrilo, ktp.)
+* Specialaj tipoj uzeblaj nur en Whale (ekz. `i1024`, altnivelaj pointeroj)
 
-### kontrolpunkto
-* Saluton monda eligo al Whale
+### Kontrolpunktoj
+* Eligo de "Hello World" per Whale
 
-* Deklaro de variabloj de Whale
+* Deklaro kaj atribuo de variabloj en Whale
 
-* Efektivigo de Balenaj IR -Elpurigaj Iloj
+* Whale IR sencimigaj iloj
 
-* Procesado de montriloj en Whale
+* Prilaborado de pointer-tipoj en Whale
 
-* Ondo(Wave) → Whale IR -Konverta Progreso
+* Progreso de Wave → Whale IR konvertado
 
 ---
 
-## beta -stadio
+## Beta Etapo
 
-> Celo: tute ŝanĝita al Whale, forigante LLVM. Whale + Wave -kombina optimumigo
+> Celo: Plene transiri al Whale, forigi LLVM. Plibonigo de la kombino Whale + Wave
 
-### Ĉefa ĉefaĵo
-* Uzu nur Whale
+### Ĉefaj Trajtoj
+* Uzi nur Whale
 
-* La tuta forigo de LLVM (Akuzito kaj Modulo)
+* Kompleta forigo de LLVM (inkluzive de dependecoj kaj moduloj)
 
-* Centro pri Optimigo de Kodoj
+* Fokuso pri koda optimumigo
 
-* IR → kuras rapide kaj efike
+* IR ĝis ruligo – rapida kaj efika
 
 ### Ĝi estis proksimume tradukita ĉi tie.
 
-### Optimuma gamo
-* Dezajno de Balena IR -Optimumiga Enirpermesilo
+### Optimumiga Amplekso
+* Dezajno de Whale IR-optimumigaj paŝoj
 
-* Balen -koda generacia rapideca plibonigo
+* Plibonigo de Whale-koda generrapideco
 
-* Ĉiu gramatiko de ondo estas plene subtenata de baleno
+* Ĉiuj gramatikaj elementoj de Wave estas plene subtenataj de Whale
 
-### testo
-* Unueco -testo + plena test -suite
+### Testado
+* Unuocaj testoj + plena testa kadro
 
-* WSON, Norma Biblioteko -Kongrua Testo
+* Testado de kongrueco por WSON kaj la norma biblioteko
 
-* Krucplatforma Balenkonstrua Kontrolo
-
----
-
-## RC (Liberigu Kandidatan) Stadion
-
-> Celo: Ondo -ekkuro ekkuro - Rust -kodo plena forigi
-
-### Ĉefa ĉefaĵo
-* Komencu reeldonadon de ondo -kompililo kun ondo
-
-* Kuru ondkodo mem surbaze de baleno
-
-* Baleno eniras la mem-gastigan paŝon
-
-### labora gamo
-* Renovigebla ondo IR -generatoro bazita sur baleno
-
-* Rust -forigo + ondkodo
-
-* Skribita de std kaj kernaj bibliotekaj ondoj
-
-* La unua ond-denaska kompililo naskiĝis pro bootstrap-sukceso
+* Kontrolo de transplatformaj konstruoj per Whale
 
 ---
 
-## Eldona Paŝo (v0.0.1)
+## RC (Release Candidate) Etapo
 
-> Celo: Oficiala lanĉo / provizita de plena balen -bazita sendependa lingva ekosistemo
+> Celo: Komenci Wave-bootstrap – plene forigi Rust-kodon
 
-### komponanto
-* Ondo (Lingvo kaj Norma Biblioteko)
+### Ĉefaj Trajtoj
+* Rekomenci skribon de Wave-kompililo per Wave mem
 
-* Baleno (kompililo -ilaro)
+* Rulado de Wave-kodo rekte surbaze de Whale
 
-* VEX (Paka Administranto)
+* Whale atingas memgastigan fazon
+
+### Tasko-Amplekso
+* Reeskribi Wave IR-generatoron baziĝante sur Whale
+
+* Forigo de Rust + anstataŭigo per Wave-kodo
+
+* Skribi std kaj core bibliotekojn en Wave
+
+* Unua denaska Wave-kompililo naskiĝas per bootstrap-sukceso
+
+---
+
+## Eldona Etapo (v0.0.1)
+
+> Celo: Oficiale lanĉi plenan, Whale-bazitan, sendependan lingvan ekosistemon
+
+### Komponantoj
+* Wave (lingvo kaj norma biblioteko)
+
+* Whale (kompilila ilaro)
+
+* Vex (paka administrilo)
 
 * WSON (datumformato)
 
-### Karakterizaĵo
-* Kompleta ondo-nur kompililo (sukceso de ekkuro)
+### Trajtoj
+* Plene sendependa Wave-kompililo (bootstrap sukcesis)
 
-* Balena optimumiga kompletigo
+* Whale-optimumigo kompletigita
 
-* Vex Build and Distribution System Settlement
+* Vex-bazita konstruado kaj distribua sistemo stabiligita
 
-* Inkluzive de WSON -analizilo + serialigo
+* WSON-parsero + serialigilo inkluzivitaj
 
-* Kruca OS -Konstruaĵo (`Vex Build -Windows ', ktp.)
+* Trans-OS konstruado ebla (`vex build --windows` ktp.)
 
 ---
 
-## disvolva meta -strategio
+## Evolua Metastrategio
 
-| Strategio | Priskribo |
-| -------------------------------------------------------------------------
-| Trajno+Fervoja Strategio | Disvolvi balenon kaj samtempe formi ondon malantaŭa |
-| Back End Branch Strategy | Opcio '-Backend' por elekti llvm/balenon, gravan strukturon en alfa |
-| Reversa Plano de Rescue | Ekde RC, ondkodo estas kompilita per baleno |
+| Strategio                  | Priskribo                                                           |
+|----------------------------|---------------------------------------------------------------------|
+| Trajno + Relo Strategio    | Disvolvi Whale dum samtempe formi Wave-backendon                    |
+| Backend-Dividado Strategio | Elekto de LLVM/Whale per --backend, ŝlosila strukturo en alpha-fazo |
+| Inversa Rekonkerplano      | Ekde RC, Wave-kodo estas kompilata per Whale mem                    |
