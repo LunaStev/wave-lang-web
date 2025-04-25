@@ -51,7 +51,7 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 ## Alpha 단계
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> 목표: Whale 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
 
 ### 주요 특징
 * LLVM은 디폴트 백엔드
