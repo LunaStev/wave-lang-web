@@ -20,7 +20,7 @@ jobs:
 
       - name: Replace VERSION in SVG
         run: |
-          sed "s/{{VERSION}}/${{ steps.get_tag.outputs.tag }}/g" img/template.svg > img/version-badge.svg
+          sed "s/{{VERSION}}/${{ steps.get_tag.outputs.tag }}/g" static/img/template.svg > static/img/version-badge.svg
 
       - name: Commit and push
         run: |
