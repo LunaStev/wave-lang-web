@@ -167,6 +167,11 @@ const config = {
             position: 'right',
           },
           {
+            type: 'html',
+            position: 'right',
+            value: '<img src="/img/version.svg" alt="Wave Version" style="height: 24px; margin-left: 0.5rem;" />',
+          },
+          {
             href: 'https://github.com/LunaStev/Wave/releases',
             label: 'Releases',
             position: 'right',
