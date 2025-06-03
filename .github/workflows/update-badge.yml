@@ -23,12 +23,12 @@ jobs:
 
       - name: Generate SVG
         run: |
-          sed "s/{{VERSION}}/${{ steps.get_wave_version.outputs.version }}/g" img/template.svg > img/version-badge.svg
+          sed "s/{{VERSION}}/${{ steps.get_wave_version.outputs.version }}/g" static/img/template.svg > static/img/version-badge.svg
 
       - name: Commit and push badge
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add img/version-badge.svg
+          git add static/img/version.svg
           git commit -m "Update version badge to ${{ steps.get_wave_version.outputs.version }}"
           git push
