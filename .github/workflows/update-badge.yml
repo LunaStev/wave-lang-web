@@ -1,0 +1,31 @@
+name: Update version badge
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  generate-badge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Replace VERSION in SVG
+        run: |
+          sed "s/{{VERSION}}/${{ steps.get_tag.outputs.tag }}/g" img/template.svg > img/version-badge.svg
+
+      - name: Commit and push
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add static/img/version.svg
+          git commit -m "Update version badge to ${{ steps.get_tag.outputs.tag }}"
+          git push
