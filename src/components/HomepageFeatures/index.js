@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Translate from "@docusaurus/Translate";
-import { Analytics } from "@vercel/analytics/next"
 
 function Feature({titleId, descriptionId}) {
   return (
@@ -11,7 +10,6 @@ function Feature({titleId, descriptionId}) {
           <Heading as="h3">
             <Translate id={titleId} />
           </Heading>
-          <Analytics/>
           <p>
             <Translate id={descriptionId} />
           </p>
