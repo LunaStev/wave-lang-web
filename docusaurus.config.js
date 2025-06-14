@@ -63,21 +63,14 @@ const config = {
     */
     /*
     임시 번역 문서
-    'es',
     'rw',
     'pt',
-    'fr',
     'it',
     'nl',
-    'de',
-    'ru',
     'be',
     'pl',
     'uk',
-    'ja',
-    'vi',
     'th',
-    'hi',
     'ta',
     'sw',
     'ar',
@@ -90,6 +83,13 @@ const config = {
         [
           'en',
           'ko',
+          'es',
+          'fr',
+          'de',
+          'ru',
+          'ja',
+          'vi',
+          'hi',
         ],
     localeConfigs: {
       ar: {
