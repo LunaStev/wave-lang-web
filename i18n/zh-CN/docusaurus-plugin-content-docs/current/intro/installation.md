@@ -2,21 +2,20 @@
 sidebar_position: 1
 ---
 
-# 설치
+# 安装
 
-## Linux 설치 방법
+## 在 Linux 上的安装方法
 
-### 다운로드 및 압축 해제
-공식 GitHub 릴리즈 페이지에서 최신 버전의 Wave를 다운로드합니다.
+### 下载并解压
+从官方 GitHub 发布页面下载最新版本的 Wave。
 
 ```bash
 wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
 sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
 ```
 
-#### LLVM 설정 (Pre Beta 기준)
-
-Wave의 Pre Beta 버전에는 임시로 LLVM을 사용하므로 다음 명령어로 LLVM을 설치합니다..
+#### 配置 LLVM（基于 Pre-Beta 版本）
+由于 Wave 的 Pre-Beta 版本暂时使用 LLVM，请使用以下命令安装：
 
 ```bash
 sudo apt-get update
@@ -26,12 +25,11 @@ export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
 source ~/.bashrc
 ```
 
-### 설치 확인
-
-설치가 완료되었는지 확인하려면 터미널에 다음 명령어를 입력하세요.
+### 验证安装
+要确认是否安装成功，请在终端中输入以下命令：
 
 ```bash
 wavec --version
 ```
 
-버전 정보가 출력되면 설치가 성공적으로 완료된 것입니다.
+如果显示版本信息，说明安装已成功完成。

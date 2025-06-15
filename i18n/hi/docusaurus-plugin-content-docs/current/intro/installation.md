@@ -2,21 +2,20 @@
 sidebar_position: 1
 ---
 
-# 설치
+# इंस्टॉलेशन
 
-## Linux 설치 방법
+## Linux पर इंस्टॉल कैसे करें
 
-### 다운로드 및 압축 해제
-공식 GitHub 릴리즈 페이지에서 최신 버전의 Wave를 다운로드합니다.
+### डाउनलोड और निकालना (Extract करना)
+GitHub के आधिकारिक रिलीज़ पेज से Wave का नवीनतम संस्करण डाउनलोड करें।
 
 ```bash
 wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
 sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
 ```
 
-#### LLVM 설정 (Pre Beta 기준)
-
-Wave의 Pre Beta 버전에는 임시로 LLVM을 사용하므로 다음 명령어로 LLVM을 설치합니다..
+#### LLVM सेटअप (Pre-Beta संस्करण के अनुसार)
+Wave का Pre-Beta संस्करण अस्थायी रूप से LLVM का उपयोग करता है, इसलिए निम्नलिखित कमांड का उपयोग करके LLVM इंस्टॉल करें:
 
 ```bash
 sudo apt-get update
@@ -26,12 +25,11 @@ export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
 source ~/.bashrc
 ```
 
-### 설치 확인
-
-설치가 완료되었는지 확인하려면 터미널에 다음 명령어를 입력하세요.
+### इंस्टॉलेशन की पुष्टि करें
+यह जांचने के लिए कि इंस्टॉलेशन सफल रहा है या नहीं, टर्मिनल में निम्नलिखित कमांड दर्ज करें:
 
 ```bash
 wavec --version
 ```
 
-버전 정보가 출력되면 설치가 성공적으로 완료된 것입니다.
+यदि संस्करण की जानकारी दिखाई देती है, तो इंस्टॉलेशन सफलतापूर्वक पूरा हो गया है।

@@ -72,7 +72,7 @@ wavec run main.wave --backend=llvm
 
 * Whale 코드 생성기 (어셈블리 or 바이너리)
 
-* Whale로만 가능한 타입 구현 (i1024, 고급 포인터 등)
+* Whale로만 가능한 타입 구현 (`i1024`, 고급 포인터 등)
 
 ### 체크포인트
 * Whale로 Hello World 출력

@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Wave + Whale 集成开发路线图 v2
 
-## 전체 단계
+## 总体阶段
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → release
@@ -12,162 +12,162 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 ---
 
-## Pre-Beta 단계
+## Pre-Beta 阶段
 
-> 목표: Wave 언어의 프론트엔드 완성 + LLVM 백엔드를 이용한 전체 기능 구현
+> 目标：完成 Wave 语言的前端 + 利用 LLVM 后端实现全部功能
 
-### 주요 특징
-* LLVM만 사용 (Whale 없음)
+### 主要特点
+* 仅使用 LLVM（不引入 Whale）
 
-* 문법 추가는 없음, 기존 사양만 구현
+* 不新增语法，仅实现已有规范
 
-* 에러 메시지, 타입 검사, 변수 스코프 등 프론트 중심 구조 안정화
+* 稳定以前端为中心的结构：错误信息、类型检查、变量作用域等
 
-### 구현 범위
-* 변수 선언, 출력, 연산
+### 实现范围
+* 变量声明、输出、运算
 
-* 함수 정의 및 호출
+* 函数定义与调用
 
-* if / else if / else
+* if / else if / else 条件语句
 
-* while / break / continue
+* while / break / continue 循环控制
 
-* 포맷 출력, 타입 지정
+* 格式化输出、明确类型声明
 
-* 포인터 설계 (`ptr<T>` 형태)
+* 指针设计（如 `ptr<T>`）
 
-* 배열 설계 (`array<T, N>`)
+* 数组设计（如 `array<T, N>`）
 
-* 타입 검사 및 구조적 AST
+* 类型检查与结构化 AST 构建
 
-### 사용 기술
-* Rust (Wave 컴파일러 전부)
+### 使用技术
+* Rust（实现完整 Wave 编译器）
 
-* LLVM (IR 생성, AOT 실행)
+* LLVM（生成 IR，中间代码，进行 AOT 执行）
 
 * inkwell / llvm-sys
 
 ---
 
-## Alpha 단계
+## Alpha 阶段
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> 目标：开始引入 Whale，与 LLVM 并行使用 / 开始实现基于 Whale 的后端
 
-### 주요 특징
-* LLVM은 디폴트 백엔드
+### 主要特点
+* LLVM 是默认后端
 
-* Whale은 선택적 백엔드
+* Whale 为可选后端
 
-* Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+* 使用 `--backend` 参数选择后端执行 Wave 代码
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale 관련 작업
-* Whale IR 구조 설계 및 정의 (Instruction, Value, Block 등)
+### Whale 相关任务
+* 设计并定义 Whale 的 IR 结构（Instruction、Value、Block 等）
 
-* Whale용 IR Generator 구현
+* 实现 Whale 的 IR 生成器
 
-* Whale 코드 생성기 (어셈블리 or 바이너리)
+* Whale 的代码生成器（汇编或二进制）
 
-* Whale로만 가능한 타입 구현 (i1024, 고급 포인터 등)
+* 支持 Whale 专属类型（如 `i1024`、高级指针类型）
 
-### 체크포인트
-* Whale로 Hello World 출력
+### 关键节点
+* 使用 Whale 输出 “Hello World”
 
-* Whale에서 변수 선언/할당
+* 在 Whale 中实现变量声明和赋值
 
-* Whale IR 디버깅 도구 구현
+* 实现 Whale IR 调试工具
 
-* Whale에서 포인터 타입 처리
+* 实现指针类型的支持
 
-* Wave → Whale IR 변환 진행
-
----
-
-## Beta 단계
-
-> 목표: Whale로 완전 전환, LLVM 제거. Whale + Wave 조합 최적화
-
-### 주요 특징
-* Whale만 사용
-
-* LLVM 전체 제거 (디펜던시 및 모듈)
-
-* 코드 최적화 중심
-
-* IR → 실행까지 빠르고 효율적으로
-
-### 최적화 범위
-* Whale IR 최적화 Pass 설계
-
-* Whale 코드 생성 속도 개선
-
-* Wave의 모든 문법이 Whale에서 완벽 지원
-
-### 테스트
-* 단위 테스트 + 전체 테스트 스위트
-
-* WSON, 표준 라이브러리 호환성 테스트
-
-* 크로스 플랫폼 Whale 빌드 확인
+* 启动 Wave → Whale IR 的转换
 
 ---
 
-## RC (Release Candidate) 단계
+## Beta 阶段
 
-> 목표: Wave 부트스트랩 시작 — Rust 코드 전면 제거
+> 目标：全面转向 Whale，彻底移除 LLVM。优化 Whale 与 Wave 的组合性能
 
-### 주요 특징
-* Wave로 Wave 컴파일러를 재작성 시작
+### 主要特点
+* 仅使用 Whale
 
-* Whale 기반으로 Wave 코드 자체 실행
+* 完全移除 LLVM（包括依赖和模块）
 
-* Whale은 self-hosting 단계 진입
+* 聚焦代码优化
 
-### 작업 범위
-* Whale 기반으로 Wave IR 생성기 재작성
+* IR 到执行的过程更快、更高效
 
-* Rust 제거 + Wave 코드로 대체
+### 优化范围
+* 设计 Whale IR 的优化 Pass
 
-* std 및 core 라이브러리 Wave로 작성
+* 提高 Whale 代码生成速度
 
-* 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
+* 在 Whale 上完整支持 Wave 所有语法
 
----
+### 测试内容
+* 单元测试 + 全套测试集
 
-## Release 단계 (v0.0.1)
+* WSON 和标准库兼容性测试
 
-> 목표: 공식 출시 / 완전한 Whale 기반 독립 언어 생태계 제공
-
-### 구성 요소
-* Wave (언어 및 표준 라이브러리)
-
-* Whale (컴파일러 툴체인)
-
-* Vex (패키지 매니저)
-
-* WSON (데이터 포맷)
-
-### 특징
-* 완전한 Wave-only 컴파일러 (부트스트랩 성공)
-
-* Whale 최적화 완료
-
-* Vex 빌드 및 배포 시스템 정착
-
-* WSON 파서 + 직렬화 포함
-
-* 크로스 OS 빌드 가능 (`vex build --windows` 등)
+* 验证 Whale 在多平台上的构建能力
 
 ---
 
-## 개발 메타 전략
+## RC 阶段（Release Candidate）
 
-| 전략           | 설명                                                                 |
-|----------------|----------------------------------------------------------------------|
-| 열차+레일 전략 | Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 병행 진행       |
-| 백엔드 분기 전략 | `--backend` 옵션으로 LLVM/Whale 선택, alpha에서 중요한 구조            |
-| 구조 역전 계획 | rc 이후부터 Wave 코드가 Whale을 통해 Wave 자신을 컴파일               |
+> 目标：开始对 Wave 进行自举（bootstrap）— 完全去除 Rust 代码
+
+### 主要特点
+* 使用 Wave 本身重写 Wave 编译器
+
+* 基于 Whale 后端执行 Wave 代码
+
+* Whale 进入自托管（self-hosting）阶段
+
+### 实施内容
+* 用 Whale 重新实现 Wave 的 IR 生成器
+
+* 删除 Rust，用 Wave 语言替代
+
+* 使用 Wave 编写 std 和 core 标准库
+
+* 自举成功后，诞生首个原生 Wave 编译器
+
+---
+
+## Release 阶段（v0.0.1）
+
+> 目标：正式发布 / 提供完全基于 Whale 的独立语言生态系统
+
+### 组件
+* Wave（语言及标准库）
+
+* Whale（编译器工具链）
+
+* Vex（包管理器）
+
+* WSON（数据格式）
+
+### 特点
+* 完全用 Wave 实现的编译器（自举成功）
+
+* Whale 完成优化
+
+* 建立完整的 Vex 构建与发布系统
+
+* 包含 WSON 解析与序列化功能
+
+* 支持跨操作系统构建（如：`vex build --windows`）
+
+---
+
+## 开发元策略
+
+| 策略      | 说明                                           |
+| ------- | -------------------------------------------- |
+| 列车+轨道策略 | 一边开发 Whale，一边构建 Wave 的后端                     |
+| 后端分支策略  | 使用 `--backend` 切换 LLVM / Whale，Alpha 阶段的关键结构 |
+| 结构反转计划  | 从 RC 阶段开始，Wave 通过 Whale 实现自我编译               |

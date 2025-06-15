@@ -2,66 +2,53 @@
 sidebar_position: 0
 ---
 
-# 소개
-## Wave의 철학과 목표
-Wave는 저수준 프로그래밍 언어(C 및 어셈블리와 같은 언어)를 보완하고 단순화하며, 다양한 개발 분야를 아우르는 다재다능하고 통합된 언어를 제공하는 것을 목표로 합니다. Wave는 저수준 언어를 대체하는 대신, 웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어, 컴파일러, 네트워킹, 암호화 등 다양한 영역을 포괄하는 견고하고 일관된 개발 생태계를 만드는 데 중점을 둡니다.
+# Introducción
+## Filosofía y objetivos de Wave
+Wave tiene como objetivo complementar y simplificar los lenguajes de programación de bajo nivel (como C y ensamblador), ofreciendo un lenguaje versátil y unificado que abarque diversos campos del desarrollo. En lugar de reemplazar los lenguajes de bajo nivel, Wave se enfoca en crear un ecosistema de desarrollo sólido y coherente que incluya desarrollo web, sistemas operativos, inteligencia artificial, blockchain, hardware, compiladores, redes y criptografía.
 
-Wave의 핵심 철학은 강력한 표준 라이브러리를 통해 고수준 추상화를 제공하는 동시에 정밀한 저수준 제어 능력을 유지하는 것입니다. 이를 통해 복잡한 작업을 직관적으로 수행하는 한편, 필요한 경우 정교한 작업도 가능하게 합니다.
+La filosofía central de Wave es proporcionar abstracción de alto nivel mediante una potente biblioteca estándar, al mismo tiempo que mantiene la capacidad de control preciso a bajo nivel. Esto permite realizar tareas complejas de manera intuitiva, y realizar operaciones sofisticadas cuando sea necesario.
 
-Wave의 주요 특징 중 하나는 하드웨어 라이브러리로, 하드웨어에 대한 전문 지식이 부족한 개발자도 쉽게 사용할 수 있도록 설계되었습니다. 또한, 세부적인 하드웨어 제어가 필요할 때 직접 제어할 수 있는 유연성도 제공합니다. 이러한 조합은 개발자가 성능을 희생하지 않고 하드웨어 기능을 직관적으로 활용할 수 있도록 돕습니다.
+Una de las características clave de Wave es su biblioteca de hardware, diseñada para ser accesible incluso para desarrolladores sin conocimientos especializados en hardware. A la vez, proporciona flexibilidad para un control detallado cuando se requiere. Esta combinación ayuda a los desarrolladores a aprovechar el hardware de forma intuitiva sin sacrificar el rendimiento.
 
-Wave는 고수준과 저수준 프로그래밍 간의 경계를 허물어, 직관적이고 통합된 언어 환경을 제공하며 개발 경험을 단순화하는 것을 목표로 합니다.
+Wave busca eliminar la frontera entre la programación de alto y bajo nivel, ofreciendo un entorno de lenguaje intuitivo e integrado que simplifica la experiencia de desarrollo.
 
-## Wave의 주요 특징과 특성
-1. 통합된 언어 구조
+## Características y propiedades principales de Wave
+1. Estructura de lenguaje unificada
+Wave integra múltiples áreas del desarrollo en un solo lenguaje, eliminando la necesidad de aprender varios lenguajes.
 
-Wave는 다양한 개발 분야를 하나의 언어로 통합하여 개발자가 여러 언어를 학습할 필요를 없앱니다.
+2. Abstracción de alto nivel
+Gracias a su potente biblioteca estándar, Wave permite realizar tareas complejas de forma sencilla, aumentando significativamente la productividad.
 
-2. 고수준 추상화
+3. Facilidad de acceso al hardware
+La biblioteca de hardware está diseñada para ser fácil de usar por no expertos, con opciones de control directo disponibles cuando se necesita un manejo preciso.
 
-Wave는 강력한 표준 라이브러리를 통해 복잡한 작업을 간단히 수행할 수 있도록 하여 생산성을 크게 향상시킵니다.
+4. Optimización del rendimiento
+Wave ofrece un compilador eficiente y un sistema de gestión de memoria que garantizan el mejor rendimiento en tareas críticas, funcionando sin problemas incluso en aplicaciones sensibles al rendimiento.
 
-3. 하드웨어 접근의 용이성
+5. Modularidad y reutilización
+Wave admite la programación modular, lo que permite reutilizar el código de forma eficiente y reducir la complejidad del proyecto.
 
-Wave의 하드웨어 라이브러리는 비전문가도 하드웨어와 상호작용할 수 있도록 사용자 친화적으로 설계되었으며, 정밀한 제어가 필요한 경우 직접 제어 옵션도 제공합니다.
+6. Gestión de errores y depuración sólida
+Wave proporciona mensajes de error claros e intuitivos, junto con herramientas de depuración que ayudan a resolver problemas rápidamente.
 
-4. 성능 최적화
+## Hoja de ruta y planes de Wave
+1. Expansión de funciones del lenguaje principal
+Tras lanzar una versión inicial centrada en la sintaxis y funciones básicas, Wave seguirá actualizándose con características como coincidencia de patrones, programación asíncrona y estructuras de datos avanzadas.
 
-Wave는 중요한 작업에서 최적의 성능을 보장하기 위해 효율적인 컴파일러와 메모리 관리 시스템을 제공하며, 성능이 중요한 응용 프로그램에서도 원활히 작동합니다.
+2. Mejora de la biblioteca estándar
+La biblioteca estándar se ampliará constantemente para satisfacer las necesidades de los usuarios, añadiendo funciones que faciliten y optimicen el trabajo de los desarrolladores.
 
-5. 모듈화 및 재사용성
+3. Desarrollo de la biblioteca de hardware
+Como uno de los elementos centrales de Wave, la biblioteca de hardware evolucionará para aumentar la compatibilidad con diferentes dispositivos y añadir nuevas funciones de control.
 
-Wave는 모듈화 프로그래밍을 지원하여 개발자가 코드를 효율적으로 재사용하고 프로젝트 복잡성을 줄일 수 있도록 합니다.
+4. Incorporación de comentarios de la comunidad
+La retroalimentación de los desarrolladores es fundamental para la evolución de Wave. Se utilizarán foros y canales de retroalimentación para recoger activamente las opiniones de los usuarios.
 
-6. 강력한 에러 처리 및 디버깅
+5. Documentación y materiales educativos
+Wave ofrecerá documentación detallada junto con materiales educativos y tutoriales que facilitarán el aprendizaje, incluso para principiantes.
 
-Wave는 직관적이고 명확한 에러 메시지와 디버깅 도구를 제공하여 개발자가 문제를 신속하게 해결할 수 있도록 돕습니다.
+6. Compatibilidad con múltiples plataformas
+Wave estará optimizado para ofrecer un rendimiento constante y accesibilidad en los principales sistemas operativos, incluidos Windows, macOS y Linux.
 
-## Wave의 로드맵과 계획
-1. 코어 언어 기능 확장
-
-Wave는 기본 구문과 기능에 중점을 둔 초기 버전을 출시한 후, 패턴 매칭, 비동기 프로그래밍, 고급 데이터 구조와 같은 기능을 포함한 업데이트를 이어나갈 계획입니다.
-
-2. 표준 라이브러리 강화
-
-표준 라이브러리는 사용자 요구를 충족시키기 위해 지속적으로 확장되며, 개발자가 더 쉽고 효율적으로 작업할 수 있도록 다양한 기능이 추가될 예정입니다.
-
-3. 하드웨어 라이브러리 개선
-
-Wave의 핵심 요소 중 하나인 하드웨어 라이브러리는 다양한 장치와의 호환성을 높이고 새로운 제어 기능을 추가하며, 지속적으로 발전할 것입니다.
-
-4. 커뮤니티 피드백 반영
-
-개발자 피드백은 Wave의 발전에 중요한 역할을 하며, 이를 위해 포럼과 피드백 채널을 통해 사용자 의견을 적극적으로 수렴할 계획입니다.
-
-5. 문서화 및 교육 자료 제공
-
-Wave는 완성도 높은 문서화와 함께 학습을 지원하기 위한 다양한 교육 자료와 튜토리얼을 제공할 예정입니다. 이를 통해 초보 사용자도 쉽게 Wave를 배우고 활용할 수 있습니다.
-
-6. 다양한 플랫폼 지원
-
-Wave는 Windows, macOS, Linux를 포함한 주요 운영 체제에서 일관된 성능과 접근성을 제공할 수 있도록 최적화될 것입니다.
-
-7. 오픈소스 커뮤니티와의 협력 강화
-
-Wave는 오픈소스 커뮤니티와의 협력을 통해 혁신을 주도하고, Wave의 발전을 촉진할 기여를 장려할 것입니다.
+7. Colaboración con la comunidad de código abierto
+Wave fomentará la innovación y el desarrollo continuo a través de la colaboración con la comunidad de código abierto, incentivando las contribuciones que impulsen su crecimiento.

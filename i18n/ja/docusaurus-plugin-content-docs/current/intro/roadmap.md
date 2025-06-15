@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Wave + Whale 統合開発ロードマップ v2
 
-## 전체 단계
+## 全体フェーズ
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → release
@@ -12,162 +12,162 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 ---
 
-## Pre-Beta 단계
+## Pre-Beta フェーズ
 
-> 목표: Wave 언어의 프론트엔드 완성 + LLVM 백엔드를 이용한 전체 기능 구현
+> 目標：Wave言語のフロントエンド完成 + LLVMバックエンドによるすべての機能の実装
 
-### 주요 특징
-* LLVM만 사용 (Whale 없음)
+### 主な特徴
+* LLVM のみ使用（Whale なし）
 
-* 문법 추가는 없음, 기존 사양만 구현
+* 新しい構文の追加なし、既存仕様のみを実装
 
-* 에러 메시지, 타입 검사, 변수 스코프 등 프론트 중심 구조 안정화
+* エラーメッセージ、型チェック、変数スコープなど、フロントエンド中心の構造を安定化
 
-### 구현 범위
-* 변수 선언, 출력, 연산
+### 実装範囲
+* 変数宣言、出力、演算
 
-* 함수 정의 및 호출
+* 関数の定義と呼び出し
 
 * if / else if / else
 
 * while / break / continue
 
-* 포맷 출력, 타입 지정
+* フォーマット付き出力、型の明示
 
-* 포인터 설계 (`ptr<T>` 형태)
+* ポインタ設計（`ptr<T>` 形式）
 
-* 배열 설계 (`array<T, N>`)
+* 配列設計（`array<T, N>` 形式）
 
-* 타입 검사 및 구조적 AST
+* 型チェックと構造的ASTの構築
 
-### 사용 기술
-* Rust (Wave 컴파일러 전부)
+### 使用技術
+* Rust（Waveコンパイラ全体）
 
-* LLVM (IR 생성, AOT 실행)
+* LLVM（IR生成、AOT実行）
 
 * inkwell / llvm-sys
 
 ---
 
-## Alpha 단계
+## Alpha フェーズ
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> 目標：Whale の導入開始、LLVMと併用 / Whale ベースのバックエンドを実装開始
 
-### 주요 특징
-* LLVM은 디폴트 백엔드
-
-* Whale은 선택적 백엔드
-
-* Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+### 主な特徴
+* LLVM がデフォルトバックエンド
+* 
+* Whale は選択式バックエンド
+* 
+* `--backend` オプションでバックエンドを切り替えてWaveコードを実行可能
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale 관련 작업
-* Whale IR 구조 설계 및 정의 (Instruction, Value, Block 등)
+### Whale 関連作業
+* Whale IR の構造設計（Instruction、Value、Blockなど）
 
-* Whale용 IR Generator 구현
+* Whale用IRジェネレータの実装
 
-* Whale 코드 생성기 (어셈블리 or 바이너리)
+* Whale コードジェネレータ（アセンブリまたはバイナリ）
 
-* Whale로만 가능한 타입 구현 (i1024, 고급 포인터 등)
+* Whale専用の型（例：`i1024`、高機能ポインタなど）の実装
 
-### 체크포인트
-* Whale로 Hello World 출력
+### チェックポイント
+* Whaleで「Hello World」出力
 
-* Whale에서 변수 선언/할당
+* Whaleで変数の宣言・代入
 
-* Whale IR 디버깅 도구 구현
+* Whale IR用のデバッグツール実装
 
-* Whale에서 포인터 타입 처리
+* Whaleでポインタ型の処理
 
-* Wave → Whale IR 변환 진행
-
----
-
-## Beta 단계
-
-> 목표: Whale로 완전 전환, LLVM 제거. Whale + Wave 조합 최적화
-
-### 주요 특징
-* Whale만 사용
-
-* LLVM 전체 제거 (디펜던시 및 모듈)
-
-* 코드 최적화 중심
-
-* IR → 실행까지 빠르고 효율적으로
-
-### 최적화 범위
-* Whale IR 최적화 Pass 설계
-
-* Whale 코드 생성 속도 개선
-
-* Wave의 모든 문법이 Whale에서 완벽 지원
-
-### 테스트
-* 단위 테스트 + 전체 테스트 스위트
-
-* WSON, 표준 라이브러리 호환성 테스트
-
-* 크로스 플랫폼 Whale 빌드 확인
+* Wave → Whale IR変換を開始
 
 ---
 
-## RC (Release Candidate) 단계
+## Beta フェーズ
 
-> 목표: Wave 부트스트랩 시작 — Rust 코드 전면 제거
+> 目標：Whale へ完全移行、LLVM の除去。Whale + Wave 組み合わせの最適化
 
-### 주요 특징
-* Wave로 Wave 컴파일러를 재작성 시작
+### 主な特徴
+* Whale のみ使用
 
-* Whale 기반으로 Wave 코드 자체 실행
+* LLVM を完全に削除（依存関係とモジュールすべて）
 
-* Whale은 self-hosting 단계 진입
+* コードの最適化に集中
 
-### 작업 범위
-* Whale 기반으로 Wave IR 생성기 재작성
+* IR から実行まで高速かつ効率的に処理
 
-* Rust 제거 + Wave 코드로 대체
+### 最適化範囲
+* Whale IR の最適化パス設計
 
-* std 및 core 라이브러리 Wave로 작성
+* Whale のコード生成速度向上
 
-* 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
+* Whale 上で Wave のすべての構文を完全サポート
 
----
+### テスト
+* 単体テスト + 総合テストスイート
 
-## Release 단계 (v0.0.1)
+* WSON、および標準ライブラリとの互換性テスト
 
-> 목표: 공식 출시 / 완전한 Whale 기반 독립 언어 생태계 제공
-
-### 구성 요소
-* Wave (언어 및 표준 라이브러리)
-
-* Whale (컴파일러 툴체인)
-
-* Vex (패키지 매니저)
-
-* WSON (데이터 포맷)
-
-### 특징
-* 완전한 Wave-only 컴파일러 (부트스트랩 성공)
-
-* Whale 최적화 완료
-
-* Vex 빌드 및 배포 시스템 정착
-
-* WSON 파서 + 직렬화 포함
-
-* 크로스 OS 빌드 가능 (`vex build --windows` 등)
+* クロスプラットフォームでのWhaleビルドの確認
 
 ---
 
-## 개발 메타 전략
+## RC（リリース候補）フェーズ
 
-| 전략           | 설명                                                                 |
-|----------------|----------------------------------------------------------------------|
-| 열차+레일 전략 | Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 병행 진행       |
-| 백엔드 분기 전략 | `--backend` 옵션으로 LLVM/Whale 선택, alpha에서 중요한 구조            |
-| 구조 역전 계획 | rc 이후부터 Wave 코드가 Whale을 통해 Wave 자신을 컴파일               |
+> 目標：Wave のブートストラップ開始 — Rustコードを完全に除去
+
+### 主な特徴
+* WaveコンパイラをWave言語で再実装し始める
+
+* WhaleベースでWaveコードを実行
+
+* Whaleはセルフホスティング段階へ突入
+
+### 作業範囲
+* WhaleベースのWave IRジェネレータを再実装
+
+* Rust を削除し、Waveコードに置き換え
+
+* stdおよびcoreライブラリをWaveで記述
+
+* ブートストラップ成功時、初のネイティブWaveコンパイラが誕生
+
+---
+
+## リリースフェーズ（v0.0.1）
+
+> 目標：公式リリース / 完全なWhaleベースの独立した言語エコシステムを提供
+
+### 構成要素
+* Wave（言語と標準ライブラリ）
+
+* Whale（コンパイラツールチェーン）
+
+* Vex（パッケージマネージャ）
+
+* WSON（データフォーマット）
+
+### 特徴
+* 完全なWaveオンリーコンパイラ（ブートストラップ成功）
+
+* Whaleの最適化完了
+
+* Vexによるビルド・デプロイシステムが確立
+
+* WSONパーサとシリアライザを含む
+
+* クロスOSビルド可能（例：`vex build --windows`）
+
+---
+
+## 開発メタ戦略
+
+| 戦略         | 説明                                            |
+| ---------- | --------------------------------------------- |
+| 列車＋レール戦略   | Whaleを開発しつつ、同時にWaveバックエンドを構築                  |
+| バックエンド分岐戦略 | `--backend` オプションでLLVMとWhaleを切り替え、alphaで重要な構造 |
+| 構造逆転計画     | RCフェーズ以降、WaveコードがWhaleを通じてWave自身をコンパイルする      |
