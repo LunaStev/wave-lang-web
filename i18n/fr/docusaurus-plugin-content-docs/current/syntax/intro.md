@@ -34,7 +34,7 @@ fun main() {
 ### 예제: 간단한 함수
 
 ```wave
-fun add(a :i32; b :i32) -> i32 {
+fun add(a :i32, b :i32) -> i32 {
     return a + b;
 }
 
