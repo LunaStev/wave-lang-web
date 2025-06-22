@@ -183,6 +183,11 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://testing.wave-lang.dev/',
+            label: 'Wave Testing',
+            position: 'right',
+          },
         ],
       },
       footer: {
