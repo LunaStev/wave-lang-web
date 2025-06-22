@@ -184,7 +184,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://testing.wave-lang.dev/',
+            href: 'https://lunastev.github.io/wave-testing/',
             label: 'Wave Testing',
             position: 'right',
           },
