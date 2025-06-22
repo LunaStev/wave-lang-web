@@ -1,0 +1,53 @@
+{
+  "homepage.features.one.title": {
+    "message": "قدرتمند و انعطاف‌پذیر"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave برای انجام همه چیز از برنامه‌نویسی سطح پایین تا برنامه‌های سطح بالا طراحی شده است و در یک زبان یکپارچه، انعطاف‌پذیری و عملکرد را ارائه می‌دهد."
+  },
+  "homepage.features.two.title": {
+    "message": "تمرکز بر بهره‌وری"
+  },
+  "homepage.features.two.description": {
+    "message": "با Wave می‌توانید مستقیماً بر حل مسائل پیچیده تمرکز کنید، با استفاده از یک زبان در حوزه‌های متنوعی مانند توسعه وب، هوش مصنوعی و سخت‌افزار."
+  },
+  "homepage.features.three.title": {
+    "message": "بهینه‌سازی شده برای عملکرد"
+  },
+  "homepage.features.three.description": {
+    "message": "Wave به شما اجازه می‌دهد کدی با عملکرد بالا بنویسید که روی هر پلتفرمی به‌طور کارآمد اجرا شود، بدون اینکه از راحتی یا ایمنی چشم‌پوشی شود."
+  },
+  "homepage.code.title": {
+    "message": "نمونه کد Wave"
+  },
+  "homepage.contributors.title": {
+    "message": "مشارکت‌کنندگان"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "بنیان‌گذار زبان"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "طراح زبان"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "توسعه‌دهنده کامپایلر"
+  },
+  "homepage.contributors.role.library": {
+    "message": "نگهدارنده کتابخانه استاندارد"
+  },
+  "homepage.sponsors.title": {
+    "message": "حامیان مالی"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "حامی افتخاری"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "حامی پلاتینی"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "حامی طلایی"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "حامی نقره‌ای"
+  }
+}

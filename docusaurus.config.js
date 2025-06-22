@@ -38,6 +38,7 @@ const config = {
       영어 'en',
       한국어 'ko',
       스페인어 'es',
+      페르시아어 'fa',
       르완다어 'rw',
       포르투갈어 'pt',
       프랑스어 'fr',
@@ -83,6 +84,7 @@ const config = {
           'en',
           'ko',
           'es',
+          'fa',
           'zh-CN',
           'fr',
           'de',
@@ -92,7 +94,7 @@ const config = {
           'hi',
         ],
     localeConfigs: {
-      ar: {
+      fa: {
         direction: 'rtl',
       }
     },
