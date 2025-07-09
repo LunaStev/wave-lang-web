@@ -54,9 +54,6 @@ fun main() {
                     </Translate>
                 </p>
                 <div className={styles.buttons}>
-                    <Link className="button button--primary button--lg" to="/docs/getting-started/installation">
-                        <Translate id="get-started">Get Started in 5min</Translate>
-                    </Link>
                     <Link className="button button--secondary button--lg" to="/docs/intro">
                         <Translate id="read-the-docs">Read the Docs</Translate>
                     </Link>
@@ -162,7 +159,8 @@ const InfiniteScroll = ({ children, direction = 'left', speed = 40 }) => (
 const CommunitySection = () => {
     // TODO: 이 데이터는 나중에 실제 데이터로 교체하세요.
     const contributors = [
-        { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://github.com/lunastev.png' },
+        { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' },
+        { name: "Kuo, Mei-Chun", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' },
         // 예시: { name: "github_username", roleId: 'homepage.contributors.role.compiler', avatar: 'https://github.com/github_username.png' }
     ];
     const sponsors = [
