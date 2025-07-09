@@ -1,50 +1,17 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
-import Heading from '@theme/Heading';
-import styles from './index.module.css';
-import Translate from "@docusaurus/Translate";
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">
-            <Translate id="tagline">
-                {siteConfig.tagline}
-            </Translate>
-            </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-              <Translate id="find-out">
-                Find out about Wave.
-              </Translate>
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <Layout
-      title={`Official ${siteConfig.title}`}
-      description="One Language, Infinite Possibilities <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
-  );
+    const { siteConfig } = useDocusaurusContext();
+    return (
+        <Layout
+            title={`${siteConfig.title}: A Modern, Fast, and Safe Programming Language`}
+            description="Discover Wave, the programming language designed for performance and developer happiness. Write clean, concurrent, and safe code with an intuitive syntax.">
+            <main>
+                <HomepageFeatures />
+            </main>
+        </Layout>
+    );
 }
