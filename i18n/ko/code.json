@@ -50,6 +50,9 @@
   "homepage.contributors.role.library": {
   "message": "표준 라이브러리 담당"
   },
+  "homepage.contributors.role.contributor": {
+  "message": "기여자"
+  },
   "homepage.sponsors.title": {
   "message": "스폰서"
   },

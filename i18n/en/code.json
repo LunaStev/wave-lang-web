@@ -49,5 +49,8 @@
   },
   "homepage.sponsors.tier.silver": {
     "message": "Silver Sponsor"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Contributor"
   }
 }
