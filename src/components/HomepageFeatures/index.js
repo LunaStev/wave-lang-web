@@ -159,8 +159,8 @@ const InfiniteScroll = ({ children, direction = 'left', speed = 40 }) => (
 const CommunitySection = () => {
     // TODO: 이 데이터는 나중에 실제 데이터로 교체하세요.
     const contributors = [
-        { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' },
-        { name: "Kuo, Mei-Chun", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' },
+        { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4', link: 'https://github.com/LunaStev' },
+        { name: "Kuo, Mei-Chun", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4', link: 'https://github.com/Megan0704-1' },
         // 예시: { name: "github_username", roleId: 'homepage.contributors.role.compiler', avatar: 'https://github.com/github_username.png' }
     ];
     const sponsors = [
