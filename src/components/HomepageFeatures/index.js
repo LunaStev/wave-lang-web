@@ -20,7 +20,7 @@ function InteractiveHero() {
         variables: {
             title: 'Variables & Types',
             code: `fun main() {
-  var name: string = "Wave";
+  var name: str = "Wave";
   let year: i32 = 2024; // immutable
   
   println("Language: {}, Year: {}", name, year);
@@ -29,7 +29,7 @@ function InteractiveHero() {
         },
         functions: {
             title: 'Functions',
-            code: `fun greet(name: string): string {
+            code: `fun greet(name: str) -> str {
   return "Hello, " + name;
 }
 
@@ -106,8 +106,8 @@ http.get("/users/:id") { req, res =>
             icon: '🚀',
             code: `// Compile to native code
 // Zero-cost abstractions
-fun fib(n: i64): i64 {
-  if n <= 1 { return n; }
+fun fib(n: i64) -> i64 {
+  if (n <= 1) { return n; }
   return fib(n - 1) + fib(n - 2);
 }`
         },
@@ -116,7 +116,7 @@ fun fib(n: i64): i64 {
             descriptionId: 'homepage.features.three.description',
             icon: '🛡️',
             code: `// No null pointer exceptions
-var name: string? = fetchName();
+var name: str? = fetchName();
 // Compiler ensures safe access
 println(name?.length() ?? 0);`
         },
