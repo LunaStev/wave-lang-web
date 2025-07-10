@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Einführung
 ## Philosophie und Ziele von Wave
-Wave hat das Ziel, Low-Level-Programmiersprachen (wie C und Assembler) zu ergänzen und zu vereinfachen, indem es eine vielseitige und einheitliche Sprache bietet, die eine Vielzahl von Entwicklungsbereichen abdeckt. Anstatt Low-Level-Sprachen zu ersetzen, konzentriert sich Wave auf den Aufbau eines robusten und konsistenten Entwicklungsökosystems, das Webentwicklung, Betriebssysteme, Künstliche Intelligenz, Blockchain, Hardware, Compiler, Netzwerke und Verschlüsselung umfasst.
+Wave hat das Ziel, Low-Level-Programmiersprachen zu ergänzen und zu vereinfachen, indem es eine vielseitige und einheitliche Sprache bietet, die eine Vielzahl von Entwicklungsbereichen abdeckt. Anstatt Low-Level-Sprachen zu ersetzen, konzentriert sich Wave auf den Aufbau eines robusten und konsistenten Entwicklungsökosystems, das Webentwicklung, Betriebssysteme, Künstliche Intelligenz, Blockchain, Hardware, Compiler, Netzwerke und Verschlüsselung umfasst.
 
 Die zentrale Philosophie von Wave besteht darin, durch eine leistungsstarke Standardbibliothek eine High-Level-Abstraktion bereitzustellen und gleichzeitig die präzise Kontrolle auf Low-Level-Ebene zu erhalten. So können komplexe Aufgaben intuitiv erledigt werden, während bei Bedarf auch detaillierte Eingriffe möglich sind.
 

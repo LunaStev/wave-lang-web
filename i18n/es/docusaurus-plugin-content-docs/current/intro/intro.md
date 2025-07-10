@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Introducción
 ## Filosofía y objetivos de Wave
-Wave tiene como objetivo complementar y simplificar los lenguajes de programación de bajo nivel (como C y ensamblador), ofreciendo un lenguaje versátil y unificado que abarque diversos campos del desarrollo. En lugar de reemplazar los lenguajes de bajo nivel, Wave se enfoca en crear un ecosistema de desarrollo sólido y coherente que incluya desarrollo web, sistemas operativos, inteligencia artificial, blockchain, hardware, compiladores, redes y criptografía.
+Wave tiene como objetivo complementar y simplificar los lenguajes de programación de bajo nivel, ofreciendo un lenguaje versátil y unificado que abarque diversos campos del desarrollo. En lugar de reemplazar los lenguajes de bajo nivel, Wave se enfoca en crear un ecosistema de desarrollo sólido y coherente que incluya desarrollo web, sistemas operativos, inteligencia artificial, blockchain, hardware, compiladores, redes y criptografía.
 
 La filosofía central de Wave es proporcionar abstracción de alto nivel mediante una potente biblioteca estándar, al mismo tiempo que mantiene la capacidad de control preciso a bajo nivel. Esto permite realizar tareas complejas de manera intuitiva, y realizar operaciones sofisticadas cuando sea necesario.
 

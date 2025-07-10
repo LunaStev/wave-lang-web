@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Giới thiệu
 ## Triết lý và Mục tiêu của Wave
-Wave nhằm mục tiêu bổ sung và đơn giản hóa các ngôn ngữ lập trình cấp thấp (như C và Assembly), đồng thời cung cấp một ngôn ngữ thống nhất và đa năng bao phủ nhiều lĩnh vực phát triển khác nhau. Thay vì thay thế các ngôn ngữ cấp thấp, Wave tập trung vào việc xây dựng một hệ sinh thái phát triển vững chắc và nhất quán, bao gồm phát triển web, hệ điều hành, trí tuệ nhân tạo, blockchain, phần cứng, trình biên dịch, mạng và mã hóa.
+Wave nhằm mục tiêu bổ sung và đơn giản hóa các ngôn ngữ lập trình cấp thấp, đồng thời cung cấp một ngôn ngữ thống nhất và đa năng bao phủ nhiều lĩnh vực phát triển khác nhau. Thay vì thay thế các ngôn ngữ cấp thấp, Wave tập trung vào việc xây dựng một hệ sinh thái phát triển vững chắc và nhất quán, bao gồm phát triển web, hệ điều hành, trí tuệ nhân tạo, blockchain, phần cứng, trình biên dịch, mạng và mã hóa.
 
 Triết lý cốt lõi của Wave là cung cấp mức trừu tượng cao thông qua thư viện tiêu chuẩn mạnh mẽ, đồng thời vẫn duy trì khả năng kiểm soát chi tiết ở cấp thấp. Điều này cho phép nhà phát triển thực hiện các tác vụ phức tạp một cách trực quan, nhưng vẫn có thể can thiệp chính xác khi cần.
 

@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Introduction
 ## Philosophy and Goals of Wave
-Wave aims to complement and simplify low-level programming languages (such as C and Assembly) while providing a versatile and unified language that spans various development fields. Rather than replacing low-level languages, Wave focuses on creating a robust and consistent development ecosystem that encompasses web development, operating systems, artificial intelligence, blockchain, hardware, compilers, networking, and cryptography.
+Wave aims to complement and simplify low-level programming languages while providing a versatile and unified language that spans various development fields. Rather than replacing low-level languages, Wave focuses on creating a robust and consistent development ecosystem that encompasses web development, operating systems, artificial intelligence, blockchain, hardware, compilers, networking, and cryptography.
 
 The core philosophy of Wave is to offer high-level abstractions through a powerful standard library while preserving precise low-level control capabilities. This allows developers to perform complex tasks intuitively while still enabling fine-grained operations when needed.
 
