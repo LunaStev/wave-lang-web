@@ -17,10 +17,12 @@ esac
 
 usage() {
   echo "Wave Installer"
-  echo "Usage: bash install.sh --version <tag>"
-  echo "Example:"
+  echo "Usage:"
+  echo "  bash install.sh --version <tag>"
+  echo "  bash install.sh latest"
+  echo "Examples:"
   echo "  --version v0.1.3-pre-beta"
-  echo "  --version v0.1.3-pre-beta-nightly-2025-07-11"
+  echo "  latest"
   exit 1
 }
 
@@ -31,6 +33,11 @@ while [[ $# -gt 0 ]]; do
       VERSION="$2"
       shift 2
       ;;
+    latest)
+      VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name":' | cut -d '"' -f4)
+      echo "[info] latest version is: $VERSION"
+      shift
+      ;;
     *)
       usage
       ;;
@@ -38,7 +45,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$VERSION" ]]; then
-  echo "Error: --version is required."
+  echo "Error: --version is required or use 'latest'."
   usage
 fi
 
