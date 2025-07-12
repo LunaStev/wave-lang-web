@@ -14,6 +14,10 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ### 示例
 
 ```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
+```
+
+```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
