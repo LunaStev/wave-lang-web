@@ -4,32 +4,46 @@ sidebar_position: 1
 
 # Cài đặt
 
-## Cách cài đặt trên Linux
-
-### Tải về và giải nén
-Tải phiên bản mới nhất của Wave từ trang phát hành chính thức trên GitHub.
+## Cách cài đặt
+Chạy lệnh sau trong terminal:
 
 ```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-#### Cấu hình LLVM (dành cho bản Pre-Beta)
-Vì phiên bản Pre-Beta của Wave tạm thời sử dụng LLVM, hãy cài đặt nó bằng các lệnh sau:
+### Ví dụ
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-### Kiểm tra cài đặt
-Để kiểm tra xem việc cài đặt có thành công hay không, hãy nhập lệnh sau trong terminal:
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## Các bước được thực hiện trong quá trình cài đặt
+- Cài đặt LLVM 14 và các gói liên quan (sử dụng `apt-get`)
+
+- Tạo liên kết tượng trưng (symbolic link) tới `/usr/lib/libllvm-14.so`
+
+- Thiết lập biến môi trường LLVM_SYS_140_PREFIX (trong `~/.bashrc`)
+
+- Tải xuống phiên bản `.tar.gz` của Wave đã chỉ định
+
+- Giải nén và cài đặt wavec vào thư mục `/usr/local/bin`
+
+- Xác minh cài đặt bằng lệnh `wavec --version`
+
+## Kiểm tra cài đặt
 
 ```bash
 wavec --version
 ```
 
-Nếu thông tin phiên bản được hiển thị, điều đó có nghĩa là bạn đã cài đặt thành công.
+## Hướng dẫn gỡ cài đặt Wave (`uninstall.sh`)
+### Cách gỡ cài đặt
+Chạy lệnh sau trong terminal:
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```

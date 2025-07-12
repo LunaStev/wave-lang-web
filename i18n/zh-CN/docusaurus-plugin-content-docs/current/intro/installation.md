@@ -4,32 +4,46 @@ sidebar_position: 1
 
 # 安装
 
-## 在 Linux 上的安装方法
-
-### 下载并解压
-从官方 GitHub 发布页面下载最新版本的 Wave。
+## 安装方法
+在终端中运行以下命令：
 
 ```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-#### 配置 LLVM（基于 Pre-Beta 版本）
-由于 Wave 的 Pre-Beta 版本暂时使用 LLVM，请使用以下命令安装：
+### 示例
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-### 验证安装
-要确认是否安装成功，请在终端中输入以下命令：
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## 安装过程中执行的操作
+- 安装 LLVM 14 及相关软件包（通过 `apt-get`）
+
+- 创建指向 `/usr/lib/libllvm-14.so` 的符号链接
+
+- 设置环境变量 LLVM_SYS_140_PREFIX（写入 `~/.bashrc`）
+
+- 下载指定版本的 Wave `.tar.gz` 文件
+
+- 解压并将 `wavec` 安装到 `/usr/local/bin`
+
+- 通过命令 `wavec --version` 验证是否安装成功
+
+## 验证安装
 
 ```bash
 wavec --version
 ```
 
-如果显示版本信息，说明安装已成功完成。
+## Wave 卸载指南（`uninstall.sh`）
+### 卸载方法
+在终端中运行以下命令：
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```

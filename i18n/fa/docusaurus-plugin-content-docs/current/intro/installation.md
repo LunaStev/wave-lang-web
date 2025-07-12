@@ -4,32 +4,47 @@ sidebar_position: 1
 
 # نصب
 
-## روش نصب در لینوکس
+## روش نصب
 
-### دانلود و استخراج
-جدیدترین نسخه Wave را از صفحه رسمی انتشار در GitHub دانلود کنید.
-
-```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
-```
-
-#### تنظیم LLVM (مطابق نسخه Pre-Beta)
-از آنجا که نسخه Pre-Beta از Wave به طور موقت از LLVM استفاده می‌کند، با استفاده از دستورات زیر LLVM را نصب کنید:
+دستور زیر را در ترمینال اجرا کنید:
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### بررسی نصب
-برای اطمینان از اینکه نصب با موفقیت انجام شده است، دستور زیر را در ترمینال وارد کنید:
+### مثال
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
+```
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## اقدامات انجام‌شده هنگام نصب
+- نصب LLVM نسخه ۱۴ و بسته‌های مرتبط (با استفاده از `apt-get`)
+
+- ایجاد یک لینک نمادین به مسیر `/usr/lib/libllvm-14.so`
+
+- تنظیم متغیر محیطی `LLVM_SYS_140_PREFIX` در فایل `~/.bashrc`
+
+- دانلود نسخه مشخص‌شده‌ی Wave به‌صورت فایل `.tar.gz`
+
+- استخراج فایل و نصب `wavec` در مسیر `/usr/local/bin`
+
+- بررسی نصب با اجرای دستور `wavec --version`
+
+## بررسی نصب
 
 ```bash
 wavec --version
 ```
 
-اگر اطلاعات نسخه نمایش داده شد، نصب با موفقیت انجام شده است.
+## راهنمای حذف Wave (`uninstall.sh`)
+### روش حذف
+برای حذف Wave، دستور زیر را در ترمینال اجرا کنید:
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```

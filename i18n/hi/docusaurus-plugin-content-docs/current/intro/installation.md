@@ -2,34 +2,49 @@
 sidebar_position: 1
 ---
 
-# इंस्टॉलेशन
+# स्थापना
 
-## Linux पर इंस्टॉल कैसे करें
+## स्थापना की विधि
 
-### डाउनलोड और निकालना (Extract करना)
-GitHub के आधिकारिक रिलीज़ पेज से Wave का नवीनतम संस्करण डाउनलोड करें।
-
-```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
-```
-
-#### LLVM सेटअप (Pre-Beta संस्करण के अनुसार)
-Wave का Pre-Beta संस्करण अस्थायी रूप से LLVM का उपयोग करता है, इसलिए निम्नलिखित कमांड का उपयोग करके LLVM इंस्टॉल करें:
+टर्मिनल में निम्नलिखित कमांड चलाएँ:
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### इंस्टॉलेशन की पुष्टि करें
-यह जांचने के लिए कि इंस्टॉलेशन सफल रहा है या नहीं, टर्मिनल में निम्नलिखित कमांड दर्ज करें:
+### उदाहरण
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
+```
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## स्थापना के दौरान किए जाने वाले कार्य
+- LLVM 14 और संबंधित पैकेज इंस्टॉल करना (`apt-get` के माध्यम से)
+
+- `/usr/lib/libllvm-14.so` का प्रतीकात्मक (symbolic) लिंक बनाना
+
+- `LLVM_SYS_140_PREFIX` एनवायरनमेंट वेरिएबल सेट करना (`~/.bashrc` में)
+
+- चुने गए संस्करण का Wave `.tar.gz` फ़ाइल डाउनलोड करना
+
+- फ़ाइल को अनज़िप करके `wavec` को `/usr/local/bin` में इंस्टॉल करना
+
+- `wavec --version` कमांड से इंस्टॉलेशन की पुष्टि करना
+
+## इंस्टॉलेशन की पुष्टि
 
 ```bash
 wavec --version
 ```
 
-यदि संस्करण की जानकारी दिखाई देती है, तो इंस्टॉलेशन सफलतापूर्वक पूरा हो गया है।
+## Wave को हटाने के लिए गाइड (`uninstall.sh`)
+### हटाने की विधि
+टर्मिनल में निम्नलिखित कमांड चलाएँ:
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```

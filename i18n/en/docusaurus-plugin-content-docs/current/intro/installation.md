@@ -4,32 +4,47 @@ sidebar_position: 1
 
 # Installation
 
-## How to Install on Linux
+## How to Install
 
-### Download and Extract
-Download the latest version of Wave from the official GitHub releases page.
-
-```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
-```
-
-#### LLVM Setup (as of Pre-Beta)
-Since the Pre-Beta version of Wave temporarily uses LLVM, install it using the following commands:
+Run the following command in your terminal:
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### Verify Installation
-To verify that the installation was successful, enter the following command in your terminal:
+### Example
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
+```
+
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## What Happens During Installation
+- Installs LLVM 14 and related packages (`apt-get`)
+
+- Creates a symbolic link at `/usr/lib/libllvm-14.so`
+
+- Sets the `LLVM_SYS_140_PREFIX` environment variable (`~/.bashrc`)
+
+- Downloads the specified version of Wave as a `.tar.gz` file
+
+- Extracts and installs `wavec` into `/usr/local/bin`
+
+- Verifies installation using `wavec --version`
+
+## Verify Installation
 
 ```bash
 wavec --version
 ```
 
-If the version information is displayed, the installation was successful.
+## Wave Uninstallation Guide (`uninstall.sh`)
+### How to Uninstall
+Run the following command in your terminal:
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```

@@ -4,32 +4,46 @@ sidebar_position: 1
 
 # Installation
 
-## Comment installer sur Linux
-
-### Téléchargement et extraction
-Téléchargez la dernière version de Wave depuis la page officielle des versions GitHub.
+## Méthode d'installation
+Exécutez la commande suivante dans le terminal :
 
 ```bash
-wget https://github.com/LunaStev/Wave/releases/latest/download/wave-vx.x.x-linux.tar.gz
-sudo tar -xvzf wave-linux.tar.gz -C /usr/local/bin
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-#### Configuration de LLVM (version Pre-Beta)
-La version Pre-Beta de Wave utilise temporairement LLVM. Installez-le avec les commandes suivantes :
+### Exemple
 
 ```bash
-sudo apt-get update
-sudo apt-get install llvm-14 llvm-14-dev clang-14 libclang-14-dev lld-14 clang
-sudo ln -s /usr/lib/llvm-14/lib/libLLVM-14.so /usr/lib/libllvm-14.so
-export LLVM_SYS_140_PREFIX=/usr/lib/llvm-14
-source ~/.bashrc
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-### Vérification de l'installation
-Pour vérifier que l'installation a réussi, entrez la commande suivante dans le terminal :
+```bash
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
+```
+
+## Étapes effectuées lors de l'installation
+- Installation de LLVM 14 et des paquets associés (`apt-get`)
+
+- Création d’un lien symbolique vers `/usr/lib/libllvm-14.so`
+
+- Définition de la variable d’environnement `LLVM_SYS_140_PREFIX` (dans `~/.bashrc`)
+
+- Téléchargement de la version spécifiée de Wave au format `.tar.gz`
+
+- Extraction et installation de `wavec` dans `/usr/local/bin`
+
+- Vérification de l’installation avec `wavec --version`
+
+## Vérification de l'installation
 
 ```bash
 wavec --version
 ```
 
-Si les informations de version s'affichent, l'installation a été effectuée avec succès.
+## Guide de désinstallation de Wave (`uninstall.sh`)
+### Méthode de désinstallation
+Exécutez la commande suivante dans le terminal :
+
+```bash
+curl -fsSL https://wave-lang.dev/uninstall.sh | bash
+```
