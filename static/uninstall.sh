@@ -15,7 +15,7 @@ else
 fi
 
 if grep -q "$LLVM_EXPORT" "$BASHRC"; then
-  sed -i "/$LLVM_EXPORT/d" "$BASHRC"
+  sed -i "\#${LLVM_EXPORT}#d" "$BASHRC"
   echo "[2/2] Removed LLVM export from ~/.bashrc"
 else
   echo "[2/2] No LLVM export found in ~/.bashrc"
