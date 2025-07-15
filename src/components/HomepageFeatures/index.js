@@ -173,15 +173,16 @@ const CommunitySection = () => {
             <div className="container">
                 <div className={styles.communityContainer}>
                     <Heading as="h2" className={clsx('text--center', styles.sectionTitle)}>
-                        <Translate id="homepage.contributors.title" />
+                        <Translate id="homepage.contributors.title"/>
                     </Heading>
                     <InfiniteScroll direction="right" speed={50}>
                         {contributors.map((c, idx) => (
-                            <a href={`https://github.com/${c.name}`} target="_blank" rel="noopener noreferrer" key={idx} className={styles.contributorCard}>
-                                <img src={c.avatar} alt={c.name} />
+                            <a href={`https://github.com/${c.name}`} target="_blank" rel="noopener noreferrer" key={idx}
+                               className={styles.contributorCard}>
+                                <img src={c.avatar} alt={c.name}/>
                                 <div>
                                     <h3>{c.name}</h3>
-                                    <p><Translate id={c.roleId} /></p>
+                                    <p><Translate id={c.roleId}/></p>
                                 </div>
                             </a>
                         ))}
@@ -189,17 +190,37 @@ const CommunitySection = () => {
                 </div>
                 <div className={styles.communityContainer}>
                     <Heading as="h2" className={clsx('text--center', styles.sectionTitle)}>
-                        <Translate id="homepage.sponsors.title" />
+                        <Translate id="homepage.sponsors.title"/>
                     </Heading>
                     <InfiniteScroll>
                         {sponsors.map((sponsor, idx) => (
-                            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" key={idx} className={styles.sponsorCard}>
+                            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" key={idx}
+                               className={styles.sponsorCard}>
                                 <h3>{sponsor.name}</h3>
-                                <p><Translate id={sponsor.tierId} /></p>
+                                <p><Translate id={sponsor.tierId}/></p>
                             </a>
                         ))}
                     </InfiniteScroll>
                 </div>
+            </div>
+
+            <div className={clsx(styles.communityContainer, styles.translateSection)}>
+                <Heading as="h2" className={styles.sectionTitle}>
+                    <Translate id="homepage.translations.title">Help Translate Wave</Translate>
+                </Heading>
+                <p>
+                    <Translate id="homepage.translations.subtitle">
+                        Make Wave accessible to developers worldwide by contributing translations.
+                    </Translate>
+                </p>
+                <a
+                    href="https://crowdin.com/project/wave-website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.translateButton}
+                >
+                    🌐 <Translate id="homepage.translations.button">Contribute on Crowdin</Translate>
+                </a>
             </div>
         </section>
     );
@@ -209,9 +230,9 @@ const CommunitySection = () => {
 export default function HomepageFeatures() {
     return (
         <>
-            <InteractiveHero />
-            <WhyWaveSection />
-            <CommunitySection />
+            <InteractiveHero/>
+            <WhyWaveSection/>
+            <CommunitySection/>
         </>
     );
 }
