@@ -2,17 +2,17 @@
 sidebar_position: 1
 ---
 
-# 설치
+# Installation
 
-## 설치 방법
+## Installation Method
 
-터미널에서 다음 명령어를 실행:
+Run the following command in the terminal:
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### 예시
+### Example
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
@@ -26,31 +26,31 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
 ```
 
-## 설치 중 수행되는 작업
+## Tasks performed during installation
 
-- LLVM 14 및 관련 패키지 설치 (`apt-get`)
+- Install LLVM 14 and related packages (`apt-get`)
 
-- `/usr/lib/libllvm-14.so` 심볼릭 링크 생성
+- Create symbolic link `/usr/lib/libllvm-14.so`
 
-- `LLVM_SYS_140_PREFIX` 환경변수 설정 (`~/.bashrc`)
+- Set `LLVM_SYS_140_PREFIX` environment variable (`~/.bashrc`)
 
-- 지정한 버전의 Wave `.tar.gz` 다운로드
+- Download the specified version of Wave `.tar.gz`
 
-- 압축 해제 후 `wavec`를 `/usr/local/bin`에 설치
+- Extract and install `wavec` to `/usr/local/bin`
 
-- `wavec --version` 으로 설치 확인
+- Verify installation with `wavec --version`
 
-## 설치 확인
+## Installation Verification
 
 ```bash
 wavec --version
 ```
 
-## Wave 제거 가이드 (`uninstall.sh`)
+## Wave Uninstallation Guide (`uninstall.sh`)
 
-### 제거 방법
+### Uninstallation Method
 
-터미널에서 다음 명령어를 실행:
+Run the following command in the terminal:
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
