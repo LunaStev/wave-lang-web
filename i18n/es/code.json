@@ -67,5 +67,14 @@
   },
   "homepage.sponsors.tier.silver": {
     "message": "Patrocinador plata"
+  },
+  "homepage.translations.title": {
+    "message": "Wave 번역에 참여하기"
+  },
+  "homepage.translations.subtitle": {
+    "message": "전 세계 개발자들이 언어 장벽 없이 Wave를 배울 수 있도록 번역에 기여해주세요."
+  },
+  "homepage.translations.button": {
+    "message": "Crowdin에서 번역 참여하기"
   }
 }
