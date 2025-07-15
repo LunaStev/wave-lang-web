@@ -85,7 +85,7 @@ const config = {
           'ko',
           'es',
           'fa',
-          'zh-CN',
+          'zh',
           'fr',
           'de',
           'ru',
