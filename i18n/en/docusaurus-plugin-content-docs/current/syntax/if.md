@@ -2,92 +2,92 @@
 sidebar_position: 3
 ---
 
-# IF 문
+# IF Statement
 
-## 소개
+## Introduction
 
-이 섹션에서는 Wave의 제어문 중 하나인 IF 문의 문법에 대해 소개합니다.
-IF 문은 프로그래밍에서 조건을 평가하고, 조건이 참일 때 특정 코드를 실행하는 제어문입니다.
-이를 통해 조건에 따라 프로그램의 흐름을 제어하고, 유연하고 논리적인 코드를 작성할 수 있습니다.
+This section introduces the syntax of the IF statement, one of the control statements in Wave.
+The IF statement is a control statement in programming that evaluates a condition and executes a specific code if the condition is true.
+This allows you to control the flow of a program based on conditions, enabling the creation of flexible and logical code.
 
-## 기본 구조
+## Basic Structure
 
-IF 문은 특정 조건을 평가한 후, 해당 조건이 참(True)일 때만 지정된 코드 블록을 실행합니다.
-Wave의 IF 문 기본 구조는 아래와 같습니다:
+The IF statement evaluates a specific condition and executes the specified code block only if that condition is true.
+The basic structure of the IF statement in Wave is as follows:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condition) {
+    // Code to execute if the condition is true
 }
 ```
 
-조건은 비교 연산자(`==`, `!=`, `<`, `>`, `<=`, `>=`)나 논리 형산자(`&&`, `||`, `!`) 등을 활용하여 작성합니다. 조건이 거짓(False)이라면, 코드 블록은 실행되지 않습니다.
+Conditions are written using comparison operators (`==`, `!=`, `<`, `>`, `<=`, `>=`) or logical operators (`&&`, `||`, `!`). If the condition is false, the code block is not executed.
 
-## 예제
+## Example
 
-다음은 간단한 IF 문의 예제입니다:
+The following is a simple example of an IF statement:
 
 ```wave
 var temperature :i32 = 30;
 
 if (temperature > 25) {
-    println("날씨가 덥습니다.");
+    println("The weather is hot.");
 }
 ```
 
-위 코드에서는 temperature 값이 25보다 클 경우, "날씨가 덥습니다."라는 메시지가 출력됩니다.
+In the code above, if the temperature value is greater than 25, the message "The weather is hot." will be printed.
 
-## IF_ELSE 문
+## IF_ELSE Statement
 
-조건이 참이 아닐 경우, 대체로 실행할 코드를 작성할려면 IF-ELSE 문을 사용합니다.
-구조는 아래와 같습니다:
+If the condition is not true, you can write alternative code to execute using the IF-ELSE statement.
+The structure is as follows:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condition) {
+    // Code to execute if the condition is true
 } else {
-    // 조건이 거짓일 경우 실행될 코드
+    // Code to execute if the condition is false
 }
 ```
 
-### 예제:
+### Example:
 
 ```wave
 var score :i32 = 70;
 
 if (score >= 60) {
-    println("합격입니다!");
+    println("You passed!");
 } else {
-    println("불합격입니다.");
+    println("You failed.");
 }
 ```
 
-score가 60 이상일 경우 "합격입니다!"가 출력되고, 그렇지 않을 경우 "불합격입니다."가 출력됩니다.
+"You passed!" is printed if the score is 60 or higher, otherwise "You failed." is printed.
 
-## 중첩 IF 문
+## Nested IF Statement
 
-IF 문은 다른 IF 문 안에서 사용될 수도 있습니다. 이를 중첩 IF 문이라고 하며, 복잡한 조건을 처리할 때 유용합니다.
+An IF statement can be used inside another IF statement. This is called a nested IF statement, and it is useful for handling complex conditions.
 
 ```wave
 var score :i32 = 85;
 
 if (score >= 60) {
     if (score >= 90) {
-        println("우수한 성적입니다!");
+        println("Excellent grade!");
     } else {
-        println("합격입니다.");
+        println("You passed.");
     } 
 } else {
-    println("불합격입니다.");
+    println("You failed.");
 }
 ```
 
-위 예제에서는 점수에 따라 "우수한 성적입니다!", "합격입니다.", 또는 "불합격입니다."라는 메시지가 출력됩니다.
+In the example above, messages "Excellent grade!", "You passed.", or "You failed." are printed depending on the score.
 
-## 요약
+## Summary
 
-- IF 문은 조건을 평가하여 특정 코드 블록을 실행하는 제어문입니다.
-- ELSE 문을 추가하여 조건이 거짓일 경우 실행할 코드도 지정할 수 있습니다.
-- 중첩 IF 문은 복잡한 조건을 다룰 때 사용됩니다.
+- The IF statement is a control statement that evaluates a condition to execute a specific block of code.
+- An ELSE statement can be added to specify code to execute if the condition is false.
+- Nested IF statements are used to handle complex conditions.
 
-IF 문을 활용하면 프로그램의 흐름을 더욱 논리적이고 동적으로 구성할 수 있습니다!
+Using the IF statement, you can make the flow of a program more logical and dynamic!
