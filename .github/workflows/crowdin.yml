@@ -38,4 +38,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add i18n/*
           git commit -m "Update translations from Crowdin [skip ci]" || echo "No changes"
-          git push origin main
+          git push origin master
