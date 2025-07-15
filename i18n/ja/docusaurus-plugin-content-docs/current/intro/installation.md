@@ -2,17 +2,17 @@
 sidebar_position: 1
 ---
 
-# 설치
+# インストール
 
-## 설치 방법
+## インストール方法
 
-터미널에서 다음 명령어를 실행:
+ターミナルで次のコマンドを実行します:
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### 예시
+### 例
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
@@ -26,31 +26,31 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
 ```
 
-## 설치 중 수행되는 작업
+## インストール中に実行される作業
 
-- LLVM 14 및 관련 패키지 설치 (`apt-get`)
+- LLVM 14および関連パッケージのインストール（`apt-get`）
 
-- `/usr/lib/libllvm-14.so` 심볼릭 링크 생성
+- `/usr/lib/libllvm-14.so` シンボリックリンクの作成
 
-- `LLVM_SYS_140_PREFIX` 환경변수 설정 (`~/.bashrc`)
+- `LLVM_SYS_140_PREFIX` 環境変数の設定（`~/.bashrc`）
 
-- 지정한 버전의 Wave `.tar.gz` 다운로드
+- 指定されたバージョンのWave `.tar.gz` のダウンロード
 
-- 압축 해제 후 `wavec`를 `/usr/local/bin`에 설치
+- 解凍後、`wavec`を`/usr/local/bin`にインストール
 
-- `wavec --version` 으로 설치 확인
+- `wavec --version` でインストールを確認
 
-## 설치 확인
+## インストールの確認
 
 ```bash
 wavec --version
 ```
 
-## Wave 제거 가이드 (`uninstall.sh`)
+## Wave削除ガイド（`uninstall.sh`）
 
-### 제거 방법
+### 削除方法
 
-터미널에서 다음 명령어를 실행:
+ターミナルで次のコマンドを実行します:
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash

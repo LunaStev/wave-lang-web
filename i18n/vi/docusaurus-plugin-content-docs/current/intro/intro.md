@@ -2,70 +2,70 @@
 sidebar_position: 0
 ---
 
-# 소개
+# Giới thiệu
 
-## Wave의 철학과 목표
+## Triết lý và mục tiêu của Wave
 
-Wave는 저수준 프로그래밍 언어를 보완하고 단순화하며, 다양한 개발 분야를 아우르는 다재다능하고 통합된 언어를 제공하는 것을 목표로 합니다. Wave는 저수준 언어를 대체하는 대신, 웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어, 컴파일러, 네트워킹, 암호화 등 다양한 영역을 포괄하는 견고하고 일관된 개발 생태계를 만드는 데 중점을 둡니다.
+Wave hướng đến việc bổ sung và đơn giản hóa các ngôn ngữ lập trình cấp thấp, cung cấp một ngôn ngữ đa năng và tích hợp bao quát nhiều lĩnh vực phát triển khác nhau. Thay vì thay thế ngôn ngữ cấp thấp, Wave tập trung vào việc xây dựng một hệ sinh thái phát triển vững chắc và nhất quán bao quát nhiều lĩnh vực khác nhau như phát triển web, hệ điều hành, trí tuệ nhân tạo, blockchain, phần cứng, trình biên dịch, mạng, mã hóa, v.v.
 
-Wave의 핵심 철학은 강력한 표준 라이브러리를 통해 고수준 추상화를 제공하는 동시에 정밀한 저수준 제어 능력을 유지하는 것입니다. 이를 통해 복잡한 작업을 직관적으로 수행하는 한편, 필요한 경우 정교한 작업도 가능하게 합니다.
+Triết lý cốt lõi của Wave là cung cấp trừu tượng hóa cấp cao thông qua thư viện chuẩn mạnh mẽ đồng thời duy trì khả năng kiểm soát cấp thấp chính xác. Điều này cho phép thực hiện các tác vụ phức tạp một cách trực quan, đồng thời có khả năng thực hiện các tác vụ tinh vi khi cần.
 
-Wave의 주요 특징 중 하나는 하드웨어 라이브러리로, 하드웨어에 대한 전문 지식이 부족한 개발자도 쉽게 사용할 수 있도록 설계되었습니다. 또한, 세부적인 하드웨어 제어가 필요할 때 직접 제어할 수 있는 유연성도 제공합니다. 이러한 조합은 개발자가 성능을 희생하지 않고 하드웨어 기능을 직관적으로 활용할 수 있도록 돕습니다.
+Một trong những đặc tính chính của Wave là thư viện phần cứng, được thiết kế để có thể dễ dàng sử dụng bởi các nhà phát triển không có kiến thức chuyên môn về phần cứng. Ngoài ra, nó còn cung cấp sự linh hoạt cho phép bạn kiểm soát trực tiếp khi cần điều khiển chi tiết phần cứng. Sự kết hợp này giúp các nhà phát triển có thể tận dụng chức năng phần cứng một cách trực quan mà không phải hy sinh hiệu suất.
 
-Wave는 고수준과 저수준 프로그래밍 간의 경계를 허물어, 직관적이고 통합된 언어 환경을 제공하며 개발 경험을 단순화하는 것을 목표로 합니다.
+Wave nhằm mục đích phá vỡ ranh giới giữa lập trình cấp cao và cấp thấp, cung cấp môi trường ngôn ngữ trực quan và tích hợp và đơn giản hóa trải nghiệm phát triển.
 
-## Wave의 주요 특징과 특성
+## Đặc điểm và tính năng chính của Wave
 
-1. 통합된 언어 구조
+1. Cấu trúc ngôn ngữ tích hợp
 
-Wave는 다양한 개발 분야를 하나의 언어로 통합하여 개발자가 여러 언어를 학습할 필요를 없앱니다.
+Wave tích hợp nhiều lĩnh vực phát triển thành một ngôn ngữ duy nhất, loại bỏ nhu cầu học nhiều ngôn ngữ của các lập trình viên.
 
-2. 고수준 추상화
+2. Trừu tượng hóa cấp cao
 
-Wave는 강력한 표준 라이브러리를 통해 복잡한 작업을 간단히 수행할 수 있도록 하여 생산성을 크게 향상시킵니다.
+Wave cải thiện đáng kể năng suất bằng cách cho phép thực hiện các tác vụ phức tạp một cách đơn giản thông qua thư viện chuẩn mạnh mẽ.
 
-3. 하드웨어 접근의 용이성
+3. Khả năng tiếp cận phần cứng dễ dàng
 
-Wave의 하드웨어 라이브러리는 비전문가도 하드웨어와 상호작용할 수 있도록 사용자 친화적으로 설계되었으며, 정밀한 제어가 필요한 경우 직접 제어 옵션도 제공합니다.
+Thư viện phần cứng của Wave được thiết kế thân thiện với người dùng để cả những người không chuyên cũng có thể tương tác với phần cứng, và cung cấp tùy chọn điều khiển trực tiếp khi cần thiết.
 
-4. 성능 최적화
+4. Tối ưu hóa hiệu suất
 
-Wave는 중요한 작업에서 최적의 성능을 보장하기 위해 효율적인 컴파일러와 메모리 관리 시스템을 제공하며, 성능이 중요한 응용 프로그램에서도 원활히 작동합니다.
+Wave cung cấp hệ thống trình biên dịch và quản lý bộ nhớ hiệu quả để đảm bảo hiệu suất tối ưu trong các tác vụ quan trọng, hoạt động trơn tru cả trong các ứng dụng yêu cầu hiệu suất.
 
-5. 모듈화 및 재사용성
+5. Mô-đun hóa và khả năng tái sử dụng
 
-Wave는 모듈화 프로그래밍을 지원하여 개발자가 코드를 효율적으로 재사용하고 프로젝트 복잡성을 줄일 수 있도록 합니다.
+Wave hỗ trợ lập trình mô-đun giúp lập trình viên tái sử dụng mã hiệu quả và giảm bớt sự phức tạp của dự án.
 
-6. 강력한 에러 처리 및 디버깅
+6. Xử lý lỗi và gỡ lỗi mạnh mẽ
 
-Wave는 직관적이고 명확한 에러 메시지와 디버깅 도구를 제공하여 개발자가 문제를 신속하게 해결할 수 있도록 돕습니다.
+Wave cung cấp các thông báo lỗi rõ ràng và trực quan cùng công cụ gỡ lỗi giúp lập trình viên giải quyết vấn đề nhanh chóng.
 
-## Wave의 로드맵과 계획
+## Lộ trình và kế hoạch của Wave
 
-1. 코어 언어 기능 확장
+1. Mở rộng chức năng ngôn ngữ cốt lõi
 
-Wave는 기본 구문과 기능에 중점을 둔 초기 버전을 출시한 후, 패턴 매칭, 비동기 프로그래밍, 고급 데이터 구조와 같은 기능을 포함한 업데이트를 이어나갈 계획입니다.
+Sau khi phát hành phiên bản đầu tiên tập trung vào cú pháp và chức năng cơ bản, Wave dự định tiếp tục cập nhật với các tính năng như đối sánh mẫu, lập trình bất đồng bộ, cấu trúc dữ liệu tiên tiến.
 
-2. 표준 라이브러리 강화
+2. Củng cố thư viện chuẩn
 
-표준 라이브러리는 사용자 요구를 충족시키기 위해 지속적으로 확장되며, 개발자가 더 쉽고 효율적으로 작업할 수 있도록 다양한 기능이 추가될 예정입니다.
+Thư viện chuẩn liên tục được mở rộng để đáp ứng nhu cầu người dùng, dự kiến bổ sung nhiều tính năng đa dạng để lập trình viên có thể làm việc dễ dàng và hiệu quả hơn.
 
-3. 하드웨어 라이브러리 개선
+3. Cải tiến thư viện phần cứng
 
-Wave의 핵심 요소 중 하나인 하드웨어 라이브러리는 다양한 장치와의 호환성을 높이고 새로운 제어 기능을 추가하며, 지속적으로 발전할 것입니다.
+Thư viện phần cứng, một trong những yếu tố cốt lõi của Wave, sẽ tăng cường khả năng tương thích với nhiều thiết bị và bổ sung các chức năng kiểm soát mới, luôn phát triển liên tục.
 
-4. 커뮤니티 피드백 반영
+4. Phản ánh phản hồi từ cộng đồng
 
-개발자 피드백은 Wave의 발전에 중요한 역할을 하며, 이를 위해 포럼과 피드백 채널을 통해 사용자 의견을 적극적으로 수렴할 계획입니다.
+Phản hồi từ các nhà phát triển đóng vai trò quan trọng trong sự phát triển của Wave, vì vậy dự kiến sẽ tích cực tiếp nhận ý kiến người dùng thông qua các diễn đàn và kênh phản hồi.
 
-5. 문서화 및 교육 자료 제공
+5. Cung cấp tư liệu và tài liệu giáo dục
 
-Wave는 완성도 높은 문서화와 함께 학습을 지원하기 위한 다양한 교육 자료와 튜토리얼을 제공할 예정입니다. 이를 통해 초보 사용자도 쉽게 Wave를 배우고 활용할 수 있습니다.
+Wave dự kiến cung cấp tài liệu hoàn thiện kèm theo nhiều tài liệu giáo dục và tài liệu hướng dẫn để hỗ trợ việc học. Nhờ đó, người dùng mới cũng có thể dễ dàng học và sử dụng Wave.
 
-6. 다양한 플랫폼 지원
+6. Hỗ trợ nhiều nền tảng khác nhau
 
-Wave는 Windows, macOS, Linux를 포함한 주요 운영 체제에서 일관된 성능과 접근성을 제공할 수 있도록 최적화될 것입니다.
+Wave sẽ được tối ưu hóa để cung cấp hiệu suất nhất quán và khả năng tiếp cận trên các hệ điều hành chính bao gồm Windows, macOS, Linux.
 
-7. 오픈소스 커뮤니티와의 협력 강화
+7. Tăng cường hợp tác với cộng đồng mã nguồn mở
 
-Wave는 오픈소스 커뮤니티와의 협력을 통해 혁신을 주도하고, Wave의 발전을 촉진할 기여를 장려할 것입니다.
+Wave sẽ khuyến khích sự đóng góp thúc đẩy sự phát triển của Wave bằng cách tăng cường hợp tác với cộng đồng mã nguồn mở.

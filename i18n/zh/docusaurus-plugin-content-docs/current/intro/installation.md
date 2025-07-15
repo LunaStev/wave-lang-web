@@ -2,17 +2,17 @@
 sidebar_position: 1
 ---
 
-# 설치
+# 安装
 
-## 설치 방법
+## 安装方法
 
-터미널에서 다음 명령어를 실행:
+在终端执行以下命令：
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### 예시
+### 例子
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
@@ -26,31 +26,31 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
 ```
 
-## 설치 중 수행되는 작업
+## 安装过程中执行的操作
 
-- LLVM 14 및 관련 패키지 설치 (`apt-get`)
+- 安装LLVM 14及相关包 (`apt-get`)
 
-- `/usr/lib/libllvm-14.so` 심볼릭 링크 생성
+- 创建`/usr/lib/libllvm-14.so`的符号链接
 
-- `LLVM_SYS_140_PREFIX` 환경변수 설정 (`~/.bashrc`)
+- 设置`LLVM_SYS_140_PREFIX`环境变量（`~/.bashrc`）
 
-- 지정한 버전의 Wave `.tar.gz` 다운로드
+- 下载指定版本的Wave `.tar.gz`
 
-- 압축 해제 후 `wavec`를 `/usr/local/bin`에 설치
+- 解压后将`wavec`安装到`/usr/local/bin`
 
-- `wavec --version` 으로 설치 확인
+- 通过`wavec --version`确认安装
 
-## 설치 확인
+## 确认安装
 
 ```bash
 wavec --version
 ```
 
-## Wave 제거 가이드 (`uninstall.sh`)
+## Wave卸载指南（`uninstall.sh`）
 
-### 제거 방법
+### 卸载方法
 
-터미널에서 다음 명령어를 실행:
+在终端执行以下命令：
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
