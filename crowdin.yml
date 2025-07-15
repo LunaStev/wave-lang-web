@@ -1,0 +1,9 @@
+project_id: 809082
+api_token_env: CROWDIN_PERSONAL_TOKEN
+preserve_hierarchy: true
+
+files:
+  - source: '/docs/**/*.md'
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%'
+  - source: '/i18n/ko/code.json'
+    translation: '/i18n/%two_letters_code%/code.json'
