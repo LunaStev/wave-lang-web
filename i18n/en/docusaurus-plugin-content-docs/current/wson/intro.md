@@ -2,35 +2,35 @@
 sidebar_position: 2
 ---
 
-# 문법
+# Syntax
 
-## 1. 기본 구조
+## 1. Basic Structure
 
-- 파일의 내용은 `{}` 중괄호로 둘러싸여 있는 객체(`object`)로 시작하고 끝난다.
+- The content of the file starts and ends with an object (`object`) enclosed in curly braces `{}`.
 
-- 객체는 속성 이름(key)과 값(value) 쌍으로 구성된다.
+- An object consists of pairs of attribute names (key) and values (value).
 
-- 속성 이름과 값은 콜론(`:`) 또는 등호(`=`)로 구분한다.
+- Attribute names and values are separated by a colon (`:`) or an equal sign (`=`).
 
-## 2. 주석
+## 2. Comments
 
-- 주석은 `//` 또는  `#` 으로 시작하며, 한줄 단위로 작성된다.
+- Comments start with `//` or `#` and are written on a single line.
 
-- 주석은 해당 줄의 끝까지 적용된다.
+- Comments apply until the end of the line.
 
-- 여러 줄 주석을 따로 지원하지 않으며, 여러 줄에 걸쳐 주석을 작성할 경우 각줄마다 `//` 또는 `#` 을 추가해야 한다.
+- Multi-line comments are not supported separately, and if you write comments over multiple lines, you must add `//` or `#` to each line.
 
-## 3. 객체(Object)
+## 3. Object
 
-- 객체는 중괄호 `{}` 로 둘러싸여 있으며, 키-값 쌍을 포합한다.
+- An object is enclosed in curly braces `{}` and includes key-value pairs.
 
-- 키와 값 사이에는 `:` 또는 `=` 기호를 사용할 수 있다. 두기호는 혼용 가능하다.
+- You can use a `:` or `=` symbol between keys and values. Both symbols can be used interchangeably.
 
-- 각 속성은 쉼표(`,`)로 구분된다.
+- Each attribute is separated by a comma (`,`).
 
-- 객체 안에 다른 객체를 중첩하여 사용할 수 있다.
+- Objects can nest other objects inside them.
 
-예시:
+Example:
 
 ```
 {
@@ -40,15 +40,15 @@ sidebar_position: 2
 }
 ```
 
-## 4. 배열(Array)
+## 4. Array
 
-- 배열은 대괄호 `[]` 로 둘러싸여 있으며, 요소들은 쉼표(`,`)로 구분된다.
+- An array is enclosed in square brackets `[]`, and its elements are separated by commas (`,`).
 
-- 배열의 요소는 객체, 문자열, 숫자 등 다양한 자료형이 될 수 있다.
+- Elements of an array can be of various data types such as objects, strings, and numbers.
 
-- WSON에서 배열은 객체 내에 포함될 수 있으며, 배열 안에는 다른 배열이나 객체가 중첩될 수 있다.
+- In WSON, arrays can be included within objects, and arrays can nest other arrays or objects inside them.
 
-예시:
+Example:
 
 ```
 tasks: [
@@ -57,52 +57,52 @@ tasks: [
 ]
 ```
 
-## 5. 키-값 쌍 (Key-Value Pair)
+## 5. Key-Value Pair
 
-- 속성 이름은 문자열로 구성되며, 공백 없이 `:`, `=` 뒤에 값을 배치한다.
+- Attribute names are composed of strings, with the value placed after `:` or `=` without spaces.
 
-- 값의 유형에는 문자열, 숫자, 불리언, 객체, 배열 등이 있다.
+- Types of values include strings, numbers, booleans, objects, and arrays.
 
-- 문자열은 큰따옴표 `“` 로 둘러싸인다.
+- A string is enclosed in double quotes `"`.
 
-- 숫자는 큰 따옴표 없이 사용하며, 정수 또는 실수 형태로 가능하다.
+- Numbers are used without double quotes and can be integers or floating-point numbers.
 
-예시:
+Example:
 
 ```
 name: "John Doe"
 age = 25
 ```
 
-## 6. 데이터 유형 (Data Types)
+## 6. Data Types
 
-- 문자열(String): 큰따옴표 `"` 로 묶인 텍스트다.
+- A string is a piece of text enclosed in double quotes `"`.
 
 ```
 "hello world"
 ```
 
-- 숫자(Number): 정수 또는 실수 값이다.
+- Numbers: integer or floating-point values.
 
 ```
 42
 3.14
 ```
 
-- 불리언(Boolean): `true` 또는 `false` 값을 사용한다.
+- Boolean: uses the values `true` or `false`.
 
 ```
 is_active = true
 ```
 
-- 객체(Object): 중괄호 `{}` 로 묶인 키-ㄱ밧 쌍이다.
-- 배열(Array): 대괄호 `[]` 로 묶인 요소 목록이다.
+- Object: a pair of keys and values enclosed in curly braces `{}`.
+- Array: a list of elements enclosed in square brackets `[]`.
 
-## 7. 예제 설명
+## 7. Example Description
 
 ```ws
 {
-    // 상태 코드와 메시지 정보
+    // Status code and message information
     status: "success",
     code: 200,
     message: "Data retrieved successfully",
@@ -111,7 +111,7 @@ is_active = true
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        age: 25  # 사용자 나이
+        age: 25  # User age
     },
 
     tasks: [

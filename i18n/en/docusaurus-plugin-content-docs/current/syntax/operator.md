@@ -2,115 +2,115 @@
 sidebar_position: 5
 ---
 
-# 연산자
+# Operator
 
-## 소개
+## Introduction
 
-Wave 언어는 다양한 연산자를 제공하여 변수 간의 계산, 논리 판단, 비교, 비트 연산 등을 수행할 수 있습니다.
+Wave language provides various operators to perform calculations, logical judgments, comparisons, and bit operations between variables.
 
-이 문서에서는 Wave에서 사용할 수 있는 주요 연산자들을 종류별로 나누어 설명하고, 각각의 동작 방식과 예제를 함께 제공합니다.
+This document categorizes the main operators available in Wave and explains their operation methods, accompanied by examples.
 
-연산자는 다음과 같은 범주로 나뉩니다:
+Operators are divided into the following categories:
 
-- 산술 연산자
-- 비교 연산자
-- 논리 연산자
-- 비트 연산자
-- 할당 연산자
-- 기타 특수 연산자
-
----
-
-## 산술 연산자
-
-산술 연산자는 숫자 데이터를 대상으로 기본적인 수학 연산을 수행합니다.
-
-| 연산자 | 설명     | 예시 (`a = 10`, `b = 3`) |
-| --- | ------ | ----------------------------------------- |
-| `+` | 덧셈     | `a + b` → `13`                            |
-| `-` | 뺄셈     | `a - b` → `7`                             |
-| `*` | 곱셈     | `a * b` → `30`                            |
-| `/` | 나눗셈    | `a / b` → `3` (정수 나눗셈) |
-| `%` | 나머지 연산 | `a % b` → `1`                             |
+- Arithmetic Operators
+- Comparison Operators
+- Logical Operators
+- Bitwise Operators
+- Assignment Operators
+- Other Special Operators
 
 ---
 
-## 비교 연산자
+## Arithmetic Operators
 
-비교 연산자는 두 값을 비교한 결과로 `bool` 값을 반환합니다.
+Arithmetic operators perform basic mathematical operations on numerical data.
 
-| 연산자  | 설명     | 예시 (`a = 10`, `b = 3`) |
-| ---- | ------ | ----------------------------------------- |
-| `==` | 같음     | `a == b` → `false`                        |
-| `!=` | 다름     | `a != b` → `true`                         |
-| `<`  | 작음     | `a < b` → `false`                         |
-| `>`  | 큼      | `a > b` → `true`                          |
-| `<=` | 작거나 같음 | `a <= 10` → `true`                        |
-| `>=` | 크거나 같음 | `a >= b` → `true`                         |
-
----
-
-## 논리 연산자
-
-논리 연산자는 `bool` 값에 대해 참/거짓의 조합을 처리합니다.
-
-| 연산자    | 이름     | 설명                                    | 예시                        |
-| ------ | ------ | ------------------------------------- | ------------------------- |
-| `&&`   | 논리 AND | 두 값이 모두 `true`일 때만 `true`             | `true && false` → `false` |
-| \`\\ | 논리 OR  | 둘 중 하나라도 `true`이면 `true`              | \`true \\               |
-| `!`    | 논리 NOT | `true`를 `false`로, `false`를 `true`로 반전 | `!true` → `false`         |
+| Operator | Description         | Example (`a = 10`, `b = 3`)      |
+| -------- | ------------------- | --------------------------------------------------- |
+| `+`      | Addition            | `a + b` → `13`                                      |
+| `-`      | Subtraction         | `a - b` → `7`                                       |
+| `*`      | Multiplication      | `a * b` → `30`                                      |
+| `/`      | Division            | `a / b` → `3` (Integer Division) |
+| `%`      | Remainder Operation | `a % b` → `1`                                       |
 
 ---
 
-## 비트 연산자
+## Comparison Operators
 
-비트 연산자는 정수형 데이터를 비트 단위로 조작합니다.
+Comparison operators return a `bool` value as a result of comparing two values.
 
-| 연산자    | 이름      | 설명                | 예시              |
-| ------ | ------- | ----------------- | --------------- |
-| `&`    | 비트 AND  | 두 비트가 모두 1일 때 1   | `a & b` → `2`   |
-| \`\\ | 비트 OR   | 두 비트 중 하나라도 1이면 1 | b`→`7\`         |
-| `^`    | 비트 XOR  | 두 비트가 다를 때 1      | `a ^ b` → `5`   |
-| `~`    | 비트 NOT  | 비트를 반전            | `~a` → `-7`     |
-| `<<`   | 왼쪽 시프트  | 비트를 왼쪽으로 이동       | `a << 1` → `12` |
-| `>>`   | 오른쪽 시프트 | 비트를 오른쪽으로 이동      | `a >> 1` → `3`  |
-
----
-
-## 할당 연산자
-
-값을 변수에 저장할 때 사용합니다. 대부분의 경우 산술 연산자와 결합하여 축약할 수 있습니다.
-
-| 연산자  | 설명       | 예시 (`a = 5`) |
-| ---- | -------- | ------------------------------- |
-| `=`  | 기본 할당    | `a = 10`                        |
-| `+=` | 덧셈 후 할당  | `a += 2` → `7`                  |
-| `-=` | 뺄셈 후 할당  | `a -= 1` → `4`                  |
-| `*=` | 곱셈 후 할당  | `a *= 3` → `15`                 |
-| `/=` | 나눗셈 후 할당 | `a /= 5` → `1`                  |
-| `%=` | 나머지 후 할당 | `a %= 4` → `1`                  |
+| Operator | Description              | Example (`a = 10`, `b = 3`) |
+| -------- | ------------------------ | ---------------------------------------------- |
+| `==`     | Equal                    | `a == b` → `false`                             |
+| `!=`     | Not Equal                | `a != b` → `true`                              |
+| `<`      | Less Than                | `a < b` → `false`                              |
+| `>`      | Greater Than             | `a > b` → `true`                               |
+| `<=`     | Less Than or Equal To    | `a <= 10` → `true`                             |
+| `>=`     | Greater Than or Equal To | `a >= b` → `true`                              |
 
 ---
 
-## 기타 특수 연산자
+## Logical Operators
 
-Wave는 다음과 같은 고유 또는 특별한 의미를 가진 연산자들도 제공합니다.
+Logical operators handle combinations of true/false values for `bool` values.
 
-| 연산자     | 이름                                 | 설명                       | 예시                       |
-| ------- | ---------------------------------- | ------------------------ | ------------------------ |
-| `??`    | null 병합 연산자                        | 왼쪽 값이 null일 경우 오른쪽 값을 사용 | `a ?? b` → `a가 null이면 b` |
-| `?:`    | 조건 연산자 (삼항 연산자) | 조건에 따라 값을 선택             | `조건 ? 참값 : 거짓값`          |
-| `in`    | 포함 여부 확인                           | 값이 컬렉션에 포함되어 있는지 확인      | `"a" in list`            |
-| `is`    | 타입 비교 연산자                          | 값의 타입을 확인                | `x is i32`               |
-| `!&`    | NAND                               | 논리 NAND 연산               | 고급 논리 연산                 |
-| \`!\\ | NOR                                | 논리 NOR 연산                | 고급 논리 연산                 |
-| `~^`    | XNOR                               | 논리 XNOR 연산               | 고급 논리 연산                 |
+| Operator | Name        | Description                                 | Example                   |
+| -------- | ----------- | ------------------------------------------- | ------------------------- |
+| `&&`     | Logical AND | Only `true` if both values are `true`       | `true && false` → `false` |
+| \`\\   | Logical OR  | `true` if at least one is `true`            | \`true \\               |
+| `!`      | Logical NOT | Invert `true` to `false`, `false` to `true` | `!true` → `false`         |
 
 ---
 
-## 요약
+## Bitwise Operators
 
-Wave는 수학적 연산부터 논리 판단, 비트 조작, 조건 분기까지 다양한 연산자를 제공합니다.
-이러한 연산자들은 변수와 상호작용하거나 조건을 구성하고, 복잡한 계산이나 흐름 제어에 필수적인 도구입니다.
+Bitwise operators manipulate integer type data at the bit level.
 
-각 연산자의 우선순위와 결합 방향 등은 추후 "우선순위 및 평가 순서" 섹션에서 다룰 수 있습니다.
+| Operator | Name        | Description                 | Example         |
+| -------- | ----------- | --------------------------- | --------------- |
+| `&`      | Bitwise AND | 1 if both bits are 1        | `a & b` → `2`   |
+| \`\\   | Bitwise OR  | 1 if at least one bit is 1  | b`→`7\`         |
+| `^`      | Bitwise XOR | 1 if the bits are different | `a ^ b` → `5`   |
+| `~`      | Bitwise NOT | Invert bits                 | `~a` → `-7`     |
+| `<<`     | Left Shift  | Move bits to the left       | `a << 1` → `12` |
+| `>>`     | Right Shift | Move bits to the right      | `a >> 1` → `3`  |
+
+---
+
+## Assignment Operators
+
+Used to store a value in a variable. In most cases, they can be combined with arithmetic operators for shorthand notation.
+
+| Operator | Description               | Example (`a = 5`) |
+| -------- | ------------------------- | ------------------------------------ |
+| `=`      | Basic Assignment          | `a = 10`                             |
+| `+=`     | Addition Assignment       | `a += 2` → `7`                       |
+| `-=`     | Subtraction Assignment    | `a -= 1` → `4`                       |
+| `*=`     | Multiplication Assignment | `a *= 3` → `15`                      |
+| `/=`     | Division Assignment       | `a /= 5` → `1`                       |
+| `%=`     | Remainder Assignment      | `a %= 4` → `1`                       |
+
+---
+
+## Other Special Operators
+
+Wave also provides operators with unique or special meanings as follows.
+
+| Operator | Name                                                       | Description                                    | Example                                |
+| -------- | ---------------------------------------------------------- | ---------------------------------------------- | -------------------------------------- |
+| `??`     | Null Coalescing Operator                                   | Uses the right value if the left value is null | `a ?? b` → `if a is null, then b`      |
+| `?:`     | Conditional Operator (Ternary Operator) | Selects a value based on a condition           | `condition ? true value : false value` |
+| `in`     | Inclusion Check                                            | Check if a value is included in a collection   | `"a" in list`                          |
+| `is`     | Type Comparison Operator                                   | Check the type of a value                      | `x is i32`                             |
+| `!&`     | NAND                                                       | Logical NAND Operation                         | Advanced Logical Operation             |
+| \`!\\  | NOR                                                        | Logical NOR Operation                          | Advanced Logical Operation             |
+| `!^`     | XNOR                                                       | Logical XNOR Operation                         | Advanced Logical Operation             |
+
+---
+
+## Summary
+
+Wave provides a variety of operators ranging from mathematical operations to logical decisions, bit manipulation, and conditional branching.
+These operators are essential tools for interacting with variables, constructing conditions, and managing complex computations or flow control.
+
+The precedence and associativity of each operator will be covered later in the "Precedence and Evaluation Order" section.

@@ -2,108 +2,108 @@
 sidebar_position: 2
 ---
 
-# 데이터 타입
+# Data Type
 
-이 문서는 Wave 프로그래밍 언어에서 제공하는 다양한 데이터 타입에 대해 설명합니다.
-Wave 프로그래밍 언어는 다양한 데이터 타입을 사용하여 값을 저장하고 연산할 수 있습니다.
-주요 데이터 타입에는 정수, 부동소수점, 문자열 등이 있습니다. 각 데이터 타입은 해당 데이터의 특성과 메모리 처리 방식을 정의 합니다.
+This document describes the various data types provided by the Wave programming language.
+The Wave programming language can store and manipulate values using various data types.
+Major data types include integers, floating-point numbers, and strings. Each data type defines the characteristics and memory handling of the data.
 
-## 정수 타입
+## Integer Type
 
-정수 타입은 **정수 값**을 저장하는 데 사용됩니다.
-기본적으로 정수는 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)로 선언됩니다.
-Wave 프로그래밍 언어에서는 정수의 범위를 세밀하게 설정할 수 있는 다양한 크기의 옵션을 제공 합니다.
+The integer type is used to store **integer values**.
+By default, integers are declared as `i32` (signed 32-bit integer) and `u32` (unsigned 32-bit integer).
+The Wave programming language offers options for fine-grain control over the range of integers.
 
-- `i8` ~ `i1024`: 부호가 있는 정수 타입이며, 8비트부터 1024비트까지 크기를 설정할 수 있습니다.
-- `u8` ~ `u1024`: 부호가 없는 정수 타입으로, 8비트부터 1024비트까지 크기 설정이 가능합니다.
+- `i8` ~ `i1024`: Signed integer type, can be set from 8-bit to 1024-bit.
+- `u8` ~ `u1024`: Unsigned integer type, allows size setting from 8-bit to 1024-bit.
 
-예시:
+Example:
 
 ```wave
 var a :i32 = 100;
 var b :u32 = 200;
 ```
 
-## 부동소수점 타입
+## Floating-Point Type
 
-부동소수점 타입은 실수 값을 저장하는 데 사용됩니다.
-기본적으로 부동소수점 숫자는 `f32`로 선언됩니다.
-또한, 부동소수점 숫자의 크기를 서밀하게 정의 할 수 있는 다양한 크기 옵션을 제공합니다.
+The floating-point type is used to store real-number values.
+By default, floating-point numbers are declared as `f32`.
+Additionally, it offers various size options for precise definition of floating-point numbers.
 
-- `f32` ~ `f1024`: 부동소수점 타입은 32비트부터 1024비트까지 크기를 설정할 수 있습니다. 이를 통해 더 높은 정밀도의 실수 계산을 할 수 있습니다.
+- `f32` ~ `f1024`: The floating-point type can be set from 32-bit to 1024-bit. This allows for higher precision in real-number calculations.
 
-예시:
+Example:
 
 ```wave
 var pi :f32 = 3.14;
 var e :f64 = 2.71828;
 ```
 
-## 문자열 타입
+## String Type
 
-문자열 타입을 텍스트 데이터를 다루는 데 사용됩니다. `str` 키워드를 사용하여 문자열을 선언합니다.
-문자열은 일반적으로 큰따옴표(`"`)로 감싸서 정의하며, 변수에 문자열 값을 할당할 수 있습니다.
+The string type is used to handle text data. Use the `str` keyword to declare a string.
+Strings are typically defined inside double quotes (`"`), allowing assignment to variables.
 
-예시:
+Example:
 
 ```wave
 var text :str = "Hello Wave";
 ```
 
-## 불리언 타입
+## Boolean Type
 
-불리언 타입은 **참(Ture)** 또는 **거짓(False)** 값을 나타내는 데이터 타입입니다.
-조건문에서 주로 사용되며, 값은 `true` 또는 `false`로 설정됩니다.
+The boolean type represents data with **True** or **False** values.
+Primarily used in conditional statements, with values set to `true` or `false`.
 
-예시:
+Example:
 
 ```wave
 var isActive :bool = true;
 var isAvailable :bool = true;
 ```
 
-## 문자 타입
+## Character Type
 
-문자 타입은 단일 문자를 저장하는 데 사용됩니다.
-`char` 키워드를 사용하여 선언되며, 하나의 문자 값만을 담을 수 있습니다.
+The character type is used to store a single character.
+Declared using the `char` keyword, it holds only a single character value.
 
-예시:
+Example:
 
 ```wave
 var letter :char = 'A';
 ```
 
-## 바이트 타입
+## Byte Type
 
-바이트 타입은 **1바이트** 크기의 데이터를 저장하는 데 사용됩니다.
-주로 바이너리 데이터를 다루는 경우에 유용합니다. `byte` 키워드를 사용하여 선언합니다.
+The byte type is used to store data of **1-byte** size.
+It is mainly useful for handling binary data. Declared using the `byte` keyword.
 
-예시:
+Example:
 
 ```wave
 var byteData :byte = 0xFF;
 ```
 
-## 포인터 타입
+## Pointer Type
 
-포인터 타입은 **메모리 주소**를 참조하는 데 사용됩니다.
-`ptr` 키워드를 사용하여 포인터를 선언하고, 메모리 주소를 저장하는 데 사용됩니다.
+The pointer type is used to reference **memory addresses**.
+Declared using the `ptr` keyword, it's used to store memory addresses.
 
-예시:
+Example:
 
 ```wave
 var ptr :ptr<T> = &someVariable;
 ```
 
-## 배열 타입
+## Array Type
 
-배열 타입은 **여러 개의 동일한 데이터 타입**을 순차적으로 저장하는 데 사용됩니다.
-`array` 키워드를 사용하며, 배열의 크기나 타입을 지정할 수 있습니다.
+The array type is used to sequentially store **multiple identical data types**.
+Using the `array` keyword, you can specify the size or type of the array.
 
-예시:
+Example:
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 다양한 범위와 크기를 설정할 수 있기 때문에, 사용자의 필요에 맞는 타입을 선택하여 효육적인 메모리 관리와 계산을 할 수 있습니다.
+Since each data type can be set with various ranges and sizes, users can select a type that suits their needs for efficient memory management and computation.

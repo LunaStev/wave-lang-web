@@ -1,71 +1,71 @@
 {
   "tagline": {
-    "message": "하나의 언어, 무한한 가능성"
+    "message": "一种语言，无限可能"
   },
   "get-started": {
-    "message": "5분 안에 시작하기"
+    "message": "五分钟内开始"
   },
   "read-the-docs": {
-    "message": "문서 읽기"
+    "message": "阅读文档"
   },
   "homepage.hero.title": {
-    "message": "개발의 새로운 물결을 위한 현대적인 언어"
+    "message": "为开发新潮流提供现代语言"
   },
   "homepage.hero.subtitle": {
-    "message": "직관적인 문법, 강력한 성능, 그리고 내장된 안전성. Wave는 당신의 생산성을 높이고 애플리케이션을 견고하게 만들기 위해 설계되었습니다."
+    "message": "直观的语法，强大的性能，以及内置的安全性。Wave旨在提高您的生产力并增强应用程序的稳固性。"
   },
   "homepage.why_wave.title": {
-    "message": "왜 Wave를 선택해야 할까요?"
+    "message": "为何选择Wave？"
   },
   "homepage.features.one.title": {
-    "message": "간결하고 직관적인"
+    "message": "简洁且直观"
   },
   "homepage.features.one.description": {
-    "message": "Wave는 불필요한 코드를 줄이고 핵심 로직에 집중할 수 있게 해줍니다. 현대적인 문법으로 배우기 쉽고 사용하기 즐겁습니다."
+    "message": "Wave减少不必要的代码，使您能够专注于核心逻辑。借助现代语法，学习容易，使用愉快。"
   },
   "homepage.features.two.title": {
-    "message": "빠르고 효율적인"
+    "message": "快速且高效"
   },
   "homepage.features.two.description": {
-    "message": "네이티브 코드로 컴파일되며, 제로-코스트 추상화를 통해 C++ 수준의 성능을 달성합니다. 리소스가 중요한 작업에 이상적입니다."
+    "message": "编译为本机代码，通过零成本抽象实现C++级别的性能。对于资源密集型任务是理想的选择。"
   },
   "homepage.features.three.title": {
-    "message": "안전하고 동시적인"
+    "message": "安全且并发"
   },
   "homepage.features.three.description": {
-    "message": "Null 참조 오류와 같은 일반적인 버그를 컴파일 시점에 방지합니다. 내장된 동시성 모델로 멀티코어 프로그래밍이 그 어느 때보다 쉬워집니다."
+    "message": "在编译时防止NULL引用错误等常见BUG。内置并发模型使多核编程比以往更加简单。"
   },
   "homepage.contributors.title": {
-    "message": "기여자"
+    "message": "贡献者"
   },
   "homepage.contributors.role.founder": {
-    "message": "언어 창시자"
+    "message": "语言创始人"
   },
   "homepage.contributors.role.designer": {
-    "message": "언어 설계자"
+    "message": "语言设计师"
   },
   "homepage.contributors.role.compiler": {
-    "message": "컴파일러 개발"
+    "message": "编译器开发"
   },
   "homepage.contributors.role.library": {
-    "message": "표준 라이브러리 담당"
+    "message": "标准库负责人"
   },
   "homepage.contributors.role.contributor": {
-    "message": "기여자"
+    "message": "贡献者"
   },
   "homepage.sponsors.title": {
-    "message": "스폰서"
+    "message": "赞助商"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "명예 스폰서"
+    "message": "荣誉赞助商"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "플래티넘 스폰서"
+    "message": "白金赞助商"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "골드 스폰서"
+    "message": "黄金赞助商"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "실버 스폰서"
+    "message": "白银赞助商"
   }
 }
