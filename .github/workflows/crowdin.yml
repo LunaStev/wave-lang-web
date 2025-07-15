@@ -1,4 +1,4 @@
-name: Crowdin Sync
+name: Crowdin Upload Only
 
 on:
   push:
@@ -7,20 +7,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  crowdin:
+  crowdin-upload:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
 
       - name: Install Crowdin CLI
         run: npm install -g @crowdin/cli
@@ -29,16 +24,3 @@ jobs:
         run: crowdin upload sources
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Download translations from Crowdin
-        run: crowdin download
-        env:
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Commit & Push translations
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add i18n/*
-          git commit -m "Update translations from Crowdin [skip ci]" || echo "No changes"
-          git push origin master
