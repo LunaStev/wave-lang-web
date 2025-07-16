@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "Une langue, des possibilités infinies"
+  },
+  "get-started": {
+    "message": "Commencez en 5 minutes"
+  },
+  "read-the-docs": {
+    "message": "Lire les documents"
+  },
+  "homepage.hero.title": {
+    "message": "Un langage moderne pour la nouvelle vague de développement"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Syntaxe intuitive, performance puissante et sécurité intégrée. Wave est conçu pour augmenter votre productivité et rendre vos applications robustes."
+  },
+  "homepage.why_wave.title": {
+    "message": "Pourquoi choisir Wave ?"
+  },
+  "homepage.features.one.title": {
+    "message": "Concise et intuitive"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave permet de réduire le code inutile et de se concentrer sur la logique principale. Il est facile à apprendre et agréable à utiliser grâce à sa syntaxe moderne."
+  },
+  "homepage.features.two.title": {
+    "message": "Rapide et efficace"
+  },
+  "homepage.features.two.description": {
+    "message": "Compilé en code natif, il atteint des performances de niveau C++ grâce à des abstractions sans coût. Idéal pour les tâches où les ressources sont cruciales."
+  },
+  "homepage.features.three.title": {
+    "message": "Sûr et simultané"
+  },
+  "homepage.features.three.description": {
+    "message": "Il prévient les bugs courants tels que les erreurs de référence nulles au moment de la compilation. Grâce à son modèle de simultanéité intégré, la programmation multicœur n'a jamais été aussi simple."
+  },
+  "homepage.contributors.title": {
+    "message": "Contributeurs"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Fondateur du langage"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Concepteur du langage"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Développement du compilateur"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Responsable de la bibliothèque standard"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Contributeur"
+  },
+  "homepage.sponsors.title": {
+    "message": "Sponsors"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Sponsor d'honneur"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Sponsor de platine"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Sponsor d'or"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Sponsor d'argent"
+  },
+  "homepage.translations.title": {
+    "message": "Participez à la traduction de Wave"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Contribuez à la traduction pour permettre aux développeurs du monde entier d'apprendre Wave sans barrière linguistique."
+  },
+  "homepage.translations.button": {
+    "message": "Participer à la traduction sur Crowdin"
+  }
+}
