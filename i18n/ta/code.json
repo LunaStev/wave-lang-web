@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "ஒரு மொழி, முடிவற்ற võimalங்கள்"
+  },
+  "get-started": {
+    "message": "5 நிமிடங்களில் தொடங்குங்கள்"
+  },
+  "read-the-docs": {
+    "message": "ஆவணங்களை வாசிக்கவும்"
+  },
+  "homepage.hero.title": {
+    "message": "வளர்ச்சிக்கான புதிய அலைக்காக ஒரு 현대 மொழி"
+  },
+  "homepage.hero.subtitle": {
+    "message": "நுண்ணறிவான இலக்கணம், வலுவான செயல்திறன் மற்றும் அடங்கிய பாதுகாப்பு. Wave உங்களின் உற்பத்தியை உயர்த்துவதற்கு மற்றும் பயன்பாடுகளை உறுதியானதாக மாற்றுவதற்கு வடிவமைக்கப்பட்டுள்ளது."
+  },
+  "homepage.why_wave.title": {
+    "message": "ஏன் Wave-னை தேர்வு செய்ய வேண்டும்?"
+  },
+  "homepage.features.one.title": {
+    "message": "சுருக்கமான மற்றும் நுண்ணறிவு திறனுள்ள"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave தேவையற்ற குறியீட்டைக் குறைத்து முக்கியமான விவரங்களுக்கு கவனம் செலுத்துவதை அனுமதிக்கிறது. நவீன சமூகத்தால் கற்றுக் கொள்ள எளிதானது மற்றும் உபயோகிக்க மனமகிழ்ச்சியளிக்கிறது."
+  },
+  "homepage.features.two.title": {
+    "message": "வேகமான மற்றும் திறமையான"
+  },
+  "homepage.features.two.description": {
+    "message": "நேடிவ் குறியீடு மூலம் தொகுக்கப்படுகிறது, சி++ அளவிலான செயல்திறனை மண்புழுவில்லா வாயிலாக அடைகிறது. வளக் குறைபாடு சிக்கல்களில் சிறந்தது."
+  },
+  "homepage.features.three.title": {
+    "message": "பாதுகாப்பாகவும் ஒத்துப்போராட்டமாகவும் உள்ளது"
+  },
+  "homepage.features.three.description": {
+    "message": "நல் மூலத்தொடர்புப் பிழைகளைப் போன்ற பொதுவான பிழைகளை உறுதிசெய்யும் போது தவிர்க்கிறது. உள்ளமைப்புள்ள ஒத்துப்போராட்ட மாதிரியை கொண்டு பலபிரிவு நிரலாக்கத்தை அடைய எளிதுடையதாக ஆக்குகிறது."
+  },
+  "homepage.contributors.title": {
+    "message": "உள்ளென்ன"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "மொழியாசிரியர்"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "மொழி வடிவமைப்பாளர்"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "தொகுப்பாளர் மேம்பாடு"
+  },
+  "homepage.contributors.role.library": {
+    "message": "நிலையான நூலக பொறுப்பாளர்"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "உள்ளென்ன"
+  },
+  "homepage.sponsors.title": {
+    "message": "நிதியுதவியாளர்"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "மரியாதையில் நிதியுதவியாளர்"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "பிளாட்டினம் நிதியுதவியாளர்"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "தங்க நிதியுதவியாளர்"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "வெள்ளி நிதியுதவியாளர்"
+  },
+  "homepage.translations.title": {
+    "message": "Wave மொழிபெயர்ப்பில் கலந்து கொள்ளுங்கள்"
+  },
+  "homepage.translations.subtitle": {
+    "message": "உலகம் முழுவதும் உள்ள வரைஞர்கள் மொழி தடையின்றி Wave-ஐக் கற்க அனுமதிக்க மொழிபெயர்ப்பில் பங்களியுங்கள்."
+  },
+  "homepage.translations.button": {
+    "message": "Crowdin-ல் மொழிபெயர்ப்பில் பங்கேற்கவும்"
+  }
+}

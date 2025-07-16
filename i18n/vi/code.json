@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "Một ngôn ngữ, vô hạn khả năng"
+  },
+  "get-started": {
+    "message": "Bắt đầu trong 5 phút"
+  },
+  "read-the-docs": {
+    "message": "Đọc tài liệu"
+  },
+  "homepage.hero.title": {
+    "message": "Ngôn ngữ hiện đại cho làn sóng phát triển mới"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Ngữ pháp trực quan, hiệu suất mạnh mẽ và độ an toàn tích hợp. Wave được thiết kế để nâng cao năng suất của bạn và làm cho ứng dụng của bạn trở nên vững chắc."
+  },
+  "homepage.why_wave.title": {
+    "message": "Tại sao nên chọn Wave?"
+  },
+  "homepage.features.one.title": {
+    "message": "Ngắn gọn và trực quan"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave giảm thiểu mã không cần thiết và giúp bạn tập trung vào logic cốt lõi. Dễ học với ngữ pháp hiện đại và thú vị khi sử dụng."
+  },
+  "homepage.features.two.title": {
+    "message": "Nhanh chóng và hiệu quả"
+  },
+  "homepage.features.two.description": {
+    "message": "Biên dịch thành mã gốc và đạt được hiệu suất cấp độ C++ thông qua các trừu tượng chi phí bằng không. Lý tưởng cho các tác vụ mà tài nguyên quan trọng."
+  },
+  "homepage.features.three.title": {
+    "message": "An toàn và đồng thời"
+  },
+  "homepage.features.three.description": {
+    "message": "Ngăn ngừa các lỗi phổ biến như lỗi tham chiếu Null tại thời điểm biên dịch. Mô hình đồng thời tích hợp làm cho lập trình đa lõi dễ dàng hơn bao giờ hết."
+  },
+  "homepage.contributors.title": {
+    "message": "Người đóng góp"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Người sáng lập ngôn ngữ"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Nhà thiết kế ngôn ngữ"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Phát triển trình biên dịch"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Phụ trách thư viện chuẩn"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Người đóng góp"
+  },
+  "homepage.sponsors.title": {
+    "message": "Nhà tài trợ"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Nhà tài trợ danh dự"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Nhà tài trợ bạch kim"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Nhà tài trợ vàng"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Nhà tài trợ bạc"
+  },
+  "homepage.translations.title": {
+    "message": "Tham gia dịch Wave"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Hãy đóng góp dịch thuật để các nhà phát triển trên toàn thế giới có thể học Wave mà không gặp rào cản ngôn ngữ."
+  },
+  "homepage.translations.button": {
+    "message": "Tham gia dịch trên Crowdin"
+  }
+}

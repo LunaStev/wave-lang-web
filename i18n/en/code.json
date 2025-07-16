@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "One language, infinite possibilities"
+  },
+  "get-started": {
+    "message": "Start in 5 minutes"
+  },
+  "read-the-docs": {
+    "message": "Read the documentation"
+  },
+  "homepage.hero.title": {
+    "message": "A modern language for a new wave of development"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Intuitive syntax, powerful performance, and built-in safety. Wave is designed to boost your productivity and make your application robust."
+  },
+  "homepage.why_wave.title": {
+    "message": "Why choose Wave?"
+  },
+  "homepage.features.one.title": {
+    "message": "Concise and intuitive"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave reduces unnecessary code and allows you to focus on core logic. It is easy to learn and enjoyable to use with modern syntax."
+  },
+  "homepage.features.two.title": {
+    "message": "Fast and efficient"
+  },
+  "homepage.features.two.description": {
+    "message": "Compiles to native code, achieving C++ level performance through zero-cost abstractions. Ideal for resource-intensive tasks."
+  },
+  "homepage.features.three.title": {
+    "message": "Safe and concurrent"
+  },
+  "homepage.features.three.description": {
+    "message": "Prevents common bugs like null reference errors at compile time. Built-in concurrency model makes multicore programming easier than ever."
+  },
+  "homepage.contributors.title": {
+    "message": "Contributors"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Language Founder"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Language Designer"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Compiler Development"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Standard Library Maintenance"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Contributor"
+  },
+  "homepage.sponsors.title": {
+    "message": "Sponsors"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Honor Sponsor"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Platinum Sponsor"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Gold Sponsor"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Silver Sponsor"
+  },
+  "homepage.translations.title": {
+    "message": "Participate in Wave translation"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Contribute translations to help developers around the world learn Wave without language barriers."
+  },
+  "homepage.translations.button": {
+    "message": "Participate in translation on Crowdin"
+  }
+}
