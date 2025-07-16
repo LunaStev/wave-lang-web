@@ -2,73 +2,73 @@
 sidebar_position: 6
 ---
 
-# 포인터
+# Puntero
 
-## 소개
+## Introducción
 
-이 문서는 Wave의 포인터 활용 방식에 관하여 설명하는 문서입니다.
-Wave는 저수준 시스템 프로그래밍을 지원하는 언어로서, 명시적인 메모리 주소 조작을 가능하게 하기 위해 포인터 기능을 제공합니다.
-포인터는 특정 타입의 메모리 주소를 가리키는 변수이며, 이를 통해 값에 대한 직접적인 접근 및 수정이 가능합니다.
+Este documento explica cómo Wave utiliza punteros.
+Wave es un lenguaje que soporta la programación de sistemas de bajo nivel, ofreciendo funcionalidades de punteros para permitir la manipulación explícita de direcciones de memoria.
+Un puntero es una variable que señala una dirección de memoria de un tipo específico, permitiendo un acceso y modificación directos de los valores.
 
 ---
 
-## 포인터 선언
+## Declaración de puntero
 
-Wave에서 포인터는 `ptr<타입>` 형식으로 선언합니다. 예를 들어, 정수형 포인터는 다음과 같이 선언할 수 있습니다:
+En Wave, un puntero se declara en el formato `ptr<tipo>`. Por ejemplo, un puntero de tipo entero se puede declarar de la siguiente manera:
 
 ```wave
 var p: ptr<i32>;
 ```
 
-이 선언은 `i32` 타입 값을 가리키는 포인터 `p`를 생성합니다.
+Esta declaración crea un puntero `p` que apunta a un valor de tipo `i32`.
 
 ---
 
-## 포인터 초기화
+## Inicialización de punteros
 
-포인터는 변수의 주소를 `&` 연산자를 사용하여 초기화할 수 있습니다:
+Se puede inicializar un puntero con la dirección de una variable usando el operador `&`:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 ```
 
-여기서 `&a`는 변수 `a`의 메모리 주소를 의미하며, `p`는 해당 주소를 가리키는 포인터가 됩니다.
+Aquí, `&a` significa la dirección de memoria de la variable `a`, y `p` se convierte en un puntero que apunta a esa dirección.
 
 ---
 
-## 포인터 역참조
+## Desreferenciación de punteros
 
-포인터가 가리키는 값을 읽거나 수정하려면 `deref` 키워드를 사용합니다. 이를 역참조라고 합니다:
+Para leer o modificar el valor al que apunta un puntero, se utiliza la palabra clave `deref`. A esto se le llama desreferenciación:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 
-println("{}", deref p); // 10 출력
+println("{}", deref p); // output 10
 
 deref p = 20;
-println("{}", a); // 20 출력
+println("{}", a); // output 20
 ```
 
 ---
 
-## NULL 포인터
+## Puntero NULO
 
-Wave에서는 널 포인터를 `null` 키워드를 통해 표현합니다.
-포인터 변수는 `null`로 초기화될 수 있스며, 이 경우 어떤 유효한 메모리도 가리키지 않습니다:
+En Wave, un puntero nulo se representa con la palabra clave `null`.
+Una variable puntero puede inicializarse como `null`, en cuyo caso no apuntará a ninguna memoria válida:
 
 ```wave
 var p: ptr<i32> = null;
 ```
 
-널 포인터를 역참조할 경우 컴파일러는 오류를 발생시킵니다.
+Si se desreferencia un puntero nulo, el compilador generará un error.
 
 ---
 
-## 다중 포인터
+## Punteros múltiples
 
-Wave는 다중 포인터를 지원합니다. 포인터를 여러 단계로 중첩하여 선언하고 사용할 수 있습니다:
+Wave admite punteros múltiples. Se pueden declarar y usar punteros anidados en múltiples niveles:
 
 ```wave
 var x: i32 = 1;
@@ -83,11 +83,11 @@ println("{}", deref deref deref p3);   // 1
 
 ---
 
-## 배열과 포인터
+## Arrays y punteros
 
-포인터는 배열 요소 또는 배열 자체를 가리킬 수도 있습니다.
+Los punteros también pueden apuntar a elementos de un array o al array en sí.
 
-### 배열 요소를 가리키는 포인터
+### Punteros que apuntan a elementos de un array
 
 ```wave
 var a: i32 = 10;
@@ -97,19 +97,19 @@ var arr: array<ptr<i32>, 2> = [&a, &b];
 println("deref arr[0] = {}, deref arr[1] = {}", deref arr[0], deref arr[1]); // 10, 20
 ```
 
-### 배열 전체를 가리키는 포인터
+### Punteros que apuntan al array completo
 
 ```wave
 var arr: ptr<array<i32, 3>> = &[1, 2, 3];
-println("{}", arr); // 메모리 주소 출력
+println("{}", arr); // salida dirección de memoria
 ```
 
 ---
 
-## 안전성과 소유권
+## Seguridad y propiedad
 
-Wave는 Rust와 유사한 방식으 소유권 및 수명 시스템을 도입하여 포인터 사용시 메모리 안정성을 보장하려고 합니다.
-따라서 유효하지 않은 포인터 역참조, 이중 해제, 댕글링 포인터 등의 문제가 발생하지 않도록 철저히 검사합니다.
+Wave intenta garantizar la estabilidad de la memoria al usar punteros mediante la introducción de un sistema de propiedad y ciclo de vida similar al de Rust.
+Por lo tanto, verifica meticulosamente para evitar problemas como la desreferenciación de punteros no válidos, la liberación doble y los punteros colgantes.
 
 ```wave
 fun main() {
@@ -123,7 +123,7 @@ fun main() {
 }
 ```
 
-출력:
+Salida:
 
 ```text
 x = 42
@@ -132,8 +132,7 @@ x = 99
 
 ---
 
-## 결론
+## Conclusión
 
-포인터는 Wave에서 고성능 저수준 프로그래밍을 가능하게 하는 핵심 기능 중 하나입니다.
-직접적인 메모리 제어가 필요한 시스템 개발, 네이티브 라이브러리, 하드웨어 제어 등에 매우 유용하며,
-Wave의 안전한 컴파일러 구조 덕분에 포인터 사용 중 발생할 수 있는 위험 요소들을 효과적으로 방지할 수 있습니다.
+Los punteros son una de las características clave que permiten la programación de bajo nivel de alto rendimiento en Wave.
+Son muy útiles en el desarrollo de sistemas, bibliotecas nativas, control de hardware, etc., donde se necesita control directo de memoria, y gracias a la estructura del compilador seguro de Wave, se pueden prevenir eficazmente los riesgos relacionados con el uso de punteros.
