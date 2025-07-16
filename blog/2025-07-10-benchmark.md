@@ -1,7 +1,7 @@
 ---
 slug: benchmark
 title: "Wave Language Performance Benchmark: Comparison with C and Rust"
-authors: LunaStev
+authors: lunastev
 tags: [wave, review]
 ---
 

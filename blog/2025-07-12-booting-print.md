@@ -1,7 +1,7 @@
 ---
 slug: booting-print
 title: "Booting from Scratch in Wave: Printing ‘H’ at 0x7C00"
-authors: LunaStev
+authors: lunastev
 tags: [wave, review]
 ---
 

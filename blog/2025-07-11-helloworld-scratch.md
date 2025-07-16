@@ -1,7 +1,7 @@
 ---
 slug: helloworld-scratch
 title: "Printing Hello World from Scratch in Wave"
-authors: LunaStev
+authors: lunastev
 tags: [wave, review]
 ---
 
