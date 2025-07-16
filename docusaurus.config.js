@@ -91,7 +91,9 @@ const config = {
           'ru',
           'ja',
           'vi',
+          'sw',
           'hi',
+          'ta',
         ],
     localeConfigs: {
       fa: {
