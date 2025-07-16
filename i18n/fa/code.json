@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "یک زبان، بی نهایت امکان"
+  },
+  "get-started": {
+    "message": "شروع در ۵ دقیقه"
+  },
+  "read-the-docs": {
+    "message": "خواندن مستندات"
+  },
+  "homepage.hero.title": {
+    "message": "زبانی مدرن برای موج جدید توسعه"
+  },
+  "homepage.hero.subtitle": {
+    "message": "دستور زبان ساده، عملکرد قدرتمند، و امنیت داخلی. Wave برای افزایش بهره‌وری شما و ساخت برنامه‌های مستحکم طراحی شده است."
+  },
+  "homepage.why_wave.title": {
+    "message": "چرا باید Wave را انتخاب کنید؟"
+  },
+  "homepage.features.one.title": {
+    "message": "ساده و قابل درک"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave باعث کاهش کدهای غیرضروری شده و تمرکز را بر روی منطق اصلی امکان‌پذیر می‌کند. یادگیری با دستور زبان مدرن، آسان و استفاده از آن لذت‌بخش است."
+  },
+  "homepage.features.two.title": {
+    "message": "سریع و کارآمد"
+  },
+  "homepage.features.two.description": {
+    "message": "به کد بومی کامپایل می‌شود و از طریق تجرید بدون هزینه به عملکردی در سطح C++ می‌رسد. برای کارهایی که منابع اهمیت بالایی دارند ایده‌آل است."
+  },
+  "homepage.features.three.title": {
+    "message": "ایمن و همزمان"
+  },
+  "homepage.features.three.description": {
+    "message": "اشتباهات متداول مانند خطای مرجع Null را در زمان کامپایل جلوگیری می‌کند. با استفاده از مدل همزمانی داخلی، برنامه‌نویسی چند هسته‌ای آسان‌تر از همیشه شده است."
+  },
+  "homepage.contributors.title": {
+    "message": "مشارکت‌کنندگان"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "بنیان‌گذار زبان"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "طراح زبان"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "توسعه کامپایلر"
+  },
+  "homepage.contributors.role.library": {
+    "message": "مسئول کتابخانه استاندارد"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "مشارکت‌کننده"
+  },
+  "homepage.sponsors.title": {
+    "message": "حامیان"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "حامی افتخاری"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "حامی پلاتینیوم"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "حامی طلایی"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "حامی نقره‌ای"
+  },
+  "homepage.translations.title": {
+    "message": "در ترجمه Wave مشارکت کنید"
+  },
+  "homepage.translations.subtitle": {
+    "message": "لطفاً در ترجمه کمک کنید تا توسعه‌دهندگان در سراسر جهان بتوانند بدون مانع زبانی، Wave را یاد بگیرند."
+  },
+  "homepage.translations.button": {
+    "message": "در Crowdin مشارکت در ترجمه"
+  }
+}
