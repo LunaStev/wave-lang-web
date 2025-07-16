@@ -2,92 +2,92 @@
 sidebar_position: 3
 ---
 
-# IF 문
+# comando IF
 
-## 소개
+## Introducción
 
-이 섹션에서는 Wave의 제어문 중 하나인 IF 문의 문법에 대해 소개합니다.
-IF 문은 프로그래밍에서 조건을 평가하고, 조건이 참일 때 특정 코드를 실행하는 제어문입니다.
-이를 통해 조건에 따라 프로그램의 흐름을 제어하고, 유연하고 논리적인 코드를 작성할 수 있습니다.
+En esta sección se presenta la sintaxis del comando IF, uno de los comandos de control de Wave.
+El comando IF es una instrucción de control que evalúa una condición y ejecuta un bloque de código determinado cuando la condición es verdadera.
+Esto permite controlar el flujo del programa según una condición, escribiendo código flexible y lógico.
 
-## 기본 구조
+## Estructura básica
 
-IF 문은 특정 조건을 평가한 후, 해당 조건이 참(True)일 때만 지정된 코드 블록을 실행합니다.
-Wave의 IF 문 기본 구조는 아래와 같습니다:
+El comando IF evalúa una condición específica y sólo ejecuta el bloque de código designado si esa condición es verdadera (True).
+La estructura básica del comando IF en Wave es la siguiente:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condición) {
+    // Código a ejecutar si la condición es verdadera
 }
 ```
 
-조건은 비교 연산자(`==`, `!=`, `<`, `>`, `<=`, `>=`)나 논리 형산자(`&&`, `||`, `!`) 등을 활용하여 작성합니다. 조건이 거짓(False)이라면, 코드 블록은 실행되지 않습니다.
+La condición se redacta utilizando operadores de comparación (`==`, `!=`, `<`, `>`, `<=`, `>=`) o lógicos (`&&`, `||`, `!`). Si la condición es falsa (False), el bloque de código no se ejecuta.
 
-## 예제
+## Ejemplo
 
-다음은 간단한 IF 문의 예제입니다:
+A continuación, se presenta un ejemplo simple de un comando IF:
 
 ```wave
-var temperature :i32 = 30;
+var temperatura :i32 = 30;
 
-if (temperature > 25) {
-    println("날씨가 덥습니다.");
+if (temperatura > 25) {
+    println("Hace calor.");
 }
 ```
 
-위 코드에서는 temperature 값이 25보다 클 경우, "날씨가 덥습니다."라는 메시지가 출력됩니다.
+En el código anterior, si el valor de temperatura es mayor que 25, se imprimirá el mensaje "Hace calor.".
 
-## IF_ELSE 문
+## comando IF_ELSE
 
-조건이 참이 아닐 경우, 대체로 실행할 코드를 작성할려면 IF-ELSE 문을 사용합니다.
-구조는 아래와 같습니다:
+Para redactar el código que se ejecutará si la condición no es verdadera, se utiliza el comando IF-ELSE.
+La estructura es la siguiente:
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (condición) {
+    // Código a ejecutar si la condición es verdadera
 } else {
-    // 조건이 거짓일 경우 실행될 코드
+    // Código a ejecutar si la condición es falsa
 }
 ```
 
-### 예제:
+### Ejemplo:
 
 ```wave
-var score :i32 = 70;
+var puntaje :i32 = 70;
 
-if (score >= 60) {
-    println("합격입니다!");
+if (puntaje >= 60) {
+    println("¡Aprobado!");
 } else {
-    println("불합격입니다.");
+    println("No aprobado.");
 }
 ```
 
-score가 60 이상일 경우 "합격입니다!"가 출력되고, 그렇지 않을 경우 "불합격입니다."가 출력됩니다.
+Si el puntaje es 60 o más, se imprimirá "¡Aprobado!", de lo contrario, se imprimirá "No aprobado.".
 
-## 중첩 IF 문
+## comando IF anidado
 
-IF 문은 다른 IF 문 안에서 사용될 수도 있습니다. 이를 중첩 IF 문이라고 하며, 복잡한 조건을 처리할 때 유용합니다.
+El comando IF también puede ser utilizado dentro de otro comando IF. Esto se denomina comando IF anidado y es útil para manejar condiciones complejas.
 
 ```wave
-var score :i32 = 85;
+var puntaje :i32 = 85;
 
-if (score >= 60) {
-    if (score >= 90) {
-        println("우수한 성적입니다!");
+if (puntaje >= 60) {
+    if (puntaje >= 90) {
+        println("¡Excelente calificación!");
     } else {
-        println("합격입니다.");
+        println("Aprobado.");
     } 
 } else {
-    println("불합격입니다.");
+    println("No aprobado.");
 }
 ```
 
-위 예제에서는 점수에 따라 "우수한 성적입니다!", "합격입니다.", 또는 "불합격입니다."라는 메시지가 출력됩니다.
+En el ejemplo anterior, se imprimirá el mensaje "¡Excelente calificación!", "Aprobado." o "No aprobado." según el puntaje.
 
-## 요약
+## Resumen
 
-- IF 문은 조건을 평가하여 특정 코드 블록을 실행하는 제어문입니다.
-- ELSE 문을 추가하여 조건이 거짓일 경우 실행할 코드도 지정할 수 있습니다.
-- 중첩 IF 문은 복잡한 조건을 다룰 때 사용됩니다.
+- El comando IF es una instrucción de control que evalúa una condición y ejecuta un bloque de código específico.
+- Al agregar el comando ELSE, también se puede especificar el código que se ejecutará si la condición es falsa.
+- El comando IF anidado se utiliza para manejar condiciones complejas.
 
-IF 문을 활용하면 프로그램의 흐름을 더욱 논리적이고 동적으로 구성할 수 있습니다!
+¡El uso del comando IF permite estructurar el flujo del programa de forma más lógica y dinámica!
