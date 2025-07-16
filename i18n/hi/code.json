@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "एक भाषा, अनंत संभावनाएं"
+  },
+  "get-started": {
+    "message": "5 मिनट में शुरू करें"
+  },
+  "read-the-docs": {
+    "message": "दस्तावेज़ पढ़ें"
+  },
+  "homepage.hero.title": {
+    "message": "विकास की नई लहर के लिए आधुनिक भाषा"
+  },
+  "homepage.hero.subtitle": {
+    "message": "स्वाभाविक व्याकरण, शक्तिशाली प्रदर्शन, और निर्मित सुरक्षा। Wave आपकी उत्पादकता को बढ़ाने और आपके अनुप्रयोग को दृढ़ बनाने के लिए डिज़ाइन किया गया है।"
+  },
+  "homepage.why_wave.title": {
+    "message": "Wave को क्यों चुनें?"
+  },
+  "homepage.features.one.title": {
+    "message": "संक्षिप्त और सहज"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave अनावश्यक कोड को कम करता है और मुख्य लॉजिक पर ध्यान केंद्रित करने देता है। आधुनिक व्याकरण के साथ सीखना आसान और उपयोग करना आनंददायक है।"
+  },
+  "homepage.features.two.title": {
+    "message": "तेज़ और कुशल"
+  },
+  "homepage.features.two.description": {
+    "message": "नेवटीव कोड में संकलित होता है, और शून्य-लागत अमूर्तता के माध्यम से C++ स्तर का प्रदर्शन प्राप्त करता है। संसाधन-महत्वपूर्ण कार्यों के लिए आदर्श है।"
+  },
+  "homepage.features.three.title": {
+    "message": "सुरक्षित और समानांतर"
+  },
+  "homepage.features.three.description": {
+    "message": "Null संदर्भ त्रुटियों जैसे सामान्य बगों को संकलन समय पर रोकता है। निर्मित समानांतरता मॉडल के साथ मल्टीकोर प्रोग्रामिंग अब कहीं ज़्यादा आसान है।"
+  },
+  "homepage.contributors.title": {
+    "message": "योगदानकर्ता"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "भाषा संस्थापक"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "भाषा डिज़ाइनर"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "कंपाइलर विकास"
+  },
+  "homepage.contributors.role.library": {
+    "message": "मानक पुस्तकालय प्रभारी"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "योगदानकर्ता"
+  },
+  "homepage.sponsors.title": {
+    "message": "प्रायोजक"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "मानद प्रायोजक"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "प्लैटिनम प्रायोजक"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "गोल्ड प्रायोजक"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "सिल्वर प्रायोजक"
+  },
+  "homepage.translations.title": {
+    "message": "Wave अनुवाद में भाग लें।"
+  },
+  "homepage.translations.subtitle": {
+    "message": "दुनिया भर के डेवलपर्स को भाषा की बाधाओं के बिना Wave सीखने में मदद करने के लिए अनुवाद में योगदान दें।"
+  },
+  "homepage.translations.button": {
+    "message": "Crowdin में अनुवाद में भाग लें।"
+  }
+}
