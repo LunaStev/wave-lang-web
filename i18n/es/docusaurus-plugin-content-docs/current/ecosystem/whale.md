@@ -2,51 +2,50 @@
 sidebar_position: 3
 ---
 
-# Whale 컴파일러 툴체인
+# Whale (cadena de herramientas del compilador)
 
-## 개요
+## Resumen
 
-Whale은 Wave 프로그래밍 언어를 위한 전용 컴파일러 툴체인입니다..
-Whale은 Wave로 작성된 소스 코드를 분석, 최적화, 타겟 플랫폼용 바이너리로 변환하는 전 과정을 책임집니다.
-이 툴체인은 Wave 언어 전용으로 설계되었으며, 타 언어 지원이나 외부 툴체인 통합을 고려하지 않습니다..
+Whale es una cadena de herramientas de compilador dedicada para el lenguaje de programación Wave.
+Whale se encarga de todo el proceso de análisis, optimización y conversión de código fuente escrito en Wave a binarios para plataformas objetivo.
+Esta cadena de herramientas está diseñada exclusivamente para el lenguaje Wave y no considera soporte para otros lenguajes o integración con cadenas de herramientas externas.
 
-## 설계 목표
+## Objetivos de diseño
 
-Whale의 주요 설계 목표는 다음과 같습니다:
+Los principales objetivos de diseño de Whale son los siguientes:
 
-- Wave 전용 지원: Whale은 Wave 언어만을 지원하며, 타 언어와의 통합을 고려하지 않습니다.
-- 모듈화 구조: 각 기능은 독립적인 모듈로 구성되며, 필요에 따라 추가하거나 제거할 수 있습니다.
-- 독립적 IR 사용: Whale은 LLVM IR 등 기존 외부 IR을 사용하지 않고, 자체 중간 표현을 정의합니다.
-- 다중 타겟 플랫폼 지원: 운영체제 및 하드웨어 아키텍처에 관계없이 다양한 환경을 타겟으로 빌드할 수 있습니다.
-- 정밀한 제어: 컴파일의 전 과정을 개발자가 세부적으로 제어할 수 있도록 구성됩니다.
-- 외부 의존성 제거: Whale은 외부 C/C++ 런타임 또는 컴파일러에 의존하지 않습니다.
+- Soporte exclusivo para Wave: Whale solo admite el lenguaje Wave y no considera la integración con otros lenguajes.
+- Estructura modular: Cada función está compuesta de módulos independientes que se pueden agregar o eliminar según sea necesario.
+- Uso de IR independiente: Whale no utiliza IR externos existentes como LLVM IR, sino que define su propia representación intermedia.
+- Soporte para múltiples plataformas objetivo: Se pueden compilar en varios entornos independientemente del sistema operativo y la arquitectura de hardware.
+- Control preciso: Está estructurado para que el desarrollador pueda controlar detalladamente todo el proceso de compilación.
+- Eliminación de dependencias externas: Whale no depende de tiempos de ejecución o compiladores de C/C++ externos.
 
-## 타겟 지원
+## Soporte de objetivo
 
-Whale은 다음과 같은 대상 환경을 지원하는 것을 목표로 합니다:
+Whale tiene como objetivo apoyar los siguientes entornos destino:
 
-- 운영체제:
+- Sistemas operativos:
     - Linux
     - Windows
     - macOS
-    - UEFI (BIOS 제외)
-    - WaveOS (자체 OS)
-- 아키텍처:
+    - UEFI (excluyendo BIOS)
+    - WaveOS (sistema operativo propio)
+- Arquitecturas:
     - x86_64 (AMD64)
     - ARM64
-    - 기타는 모듈 추가를 통해 확장 가능
+    - Otros se pueden ampliar mediante la adición de módulos
 
-## 외부 연동(FFI)
+## Integración externa (FFI)
 
-Whale은 기술적으로 FFI(Foreign Function Interface)를 지원할 수 있도록 설계되지만,
-Wave의 철학상 외부 언어와의 연동은 권장되지 않으며 표준적으로 제공되지 않습니다.
-Wave는 자체 언어 내에서 모든 기능을 구현할 수 있도록 설계됩니다.
+Whale está diseñado técnicamente para soportar FFI (Interfaz de Función Extranjera), pero de acuerdo con la filosofía de Wave, la interconexión con lenguajes externos no se recomienda ni se proporciona de manera estándar.
+Wave está diseñado para implementar todas sus funciones dentro de su propio lenguaje.
 
-## 확장성
+## Escalabilidad
 
-Whale은 다음과 같은 방식으로 확장이 가능합니다:
+Whale se puede escalar de las siguientes maneras:
 
-- 새로운 운영체제 또는 아키텍처에 대한 모듈 추가
-- 사용자 정의 최적화 알고리즘 삽입
-- 빌드 프로필 및 링커 설정의 커스터마이징
-- 자체 실행 포맷 정의
+- Adición de módulos para nuevos sistemas operativos o arquitecturas
+- Inserción de algoritmos de optimización definidos por el usuario
+- Personalización de perfiles de compilación y configuraciones del enlazador
+- Definición de formato de ejecución propio
