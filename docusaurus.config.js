@@ -168,6 +168,7 @@ const config = {
             position: 'left',
             label: 'Wave',
           },
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
             type: 'html',
             position: 'right',
