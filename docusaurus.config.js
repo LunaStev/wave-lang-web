@@ -93,7 +93,9 @@ const config = {
           'vi',
           'sw',
           'hi',
+          'bn',
           'ta',
+          'te',
         ],
     localeConfigs: {
       fa: {
