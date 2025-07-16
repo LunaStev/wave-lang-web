@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "Lugha moja, uwezekano usio na kikomo"
+  },
+  "get-started": {
+    "message": "Anza ndani ya dakika 5"
+  },
+  "read-the-docs": {
+    "message": "Soma hati"
+  },
+  "homepage.hero.title": {
+    "message": "Lugha ya kisasa kwa ajili ya wimbi jipya la maendeleo"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Sarufi inayoeleweka, utendaji wenye nguvu, na usalama uliyojengwa ndani. Wave imeundwa kuongeza tija yako na kuifanya maombi yako kuwa imara."
+  },
+  "homepage.why_wave.title": {
+    "message": "Kwa nini uchague Wave?"
+  },
+  "homepage.features.one.title": {
+    "message": "Rahisi na inayoeleweka"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave hupunguza msimbo usio wa lazima na inawezesha kukazia fikra kwenye mantiki kuu. Ni rahisi kujifunza na kufurahia kutumia kwa sarufi ya kisasa."
+  },
+  "homepage.features.two.title": {
+    "message": "Haraka na yenye ufanisi"
+  },
+  "homepage.features.two.description": {
+    "message": "Inachakata kwa msimbo wa asili, ikifika utendaji wa kiwango cha C++ kupitia uondoaji wa gharama sifuri. Inafaa kwa kazi ambapo rasilimali ni muhimu."
+  },
+  "homepage.features.three.title": {
+    "message": "Salama na ya msingi wa wakati mmoja"
+  },
+  "homepage.features.three.description": {
+    "message": "Inazuia hitilafu za kawaida kama za rejea ya Null wakati wa kuchakata. Na kwa mfano wa msingi wa wakati mmoja, programu ya multicore ni rahisi zaidi kuliko wakati wowote."
+  },
+  "homepage.contributors.title": {
+    "message": "Wachangiaji"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Mwanzilishi wa lugha"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Mbunifu wa lugha"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Maendeleo ya mchakataji"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Msimamizi wa maktaba ya kawaida"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Mchangiaji"
+  },
+  "homepage.sponsors.title": {
+    "message": "Mdhamini"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Mdhamini wa heshima"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Mdhamini wa platinum"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Mdhamini wa dhahabu"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Mdhamini wa fedha"
+  },
+  "homepage.translations.title": {
+    "message": "Shiriki katika tafsiri ya Wave"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Tafadhali changia ili watengenezaji duniani kote waweze kujifunza Wave bila vizuizi vya lugha."
+  },
+  "homepage.translations.button": {
+    "message": "Shiriki katika kutafsiri katika Crowdin"
+  }
+}
