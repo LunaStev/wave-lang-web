@@ -1,1 +1,80 @@
-{}
+{
+  "tagline": {
+    "message": "一种语言，无限可能"
+  },
+  "get-started": {
+    "message": "五分钟内开始"
+  },
+  "read-the-docs": {
+    "message": "阅读文档"
+  },
+  "homepage.hero.title": {
+    "message": "为开发新潮流提供现代语言"
+  },
+  "homepage.hero.subtitle": {
+    "message": "直观的语法，强大的性能，以及内置的安全性。Wave旨在提高您的生产力并增强应用程序的稳固性。"
+  },
+  "homepage.why_wave.title": {
+    "message": "为何选择Wave？"
+  },
+  "homepage.features.one.title": {
+    "message": "简洁且直观"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave减少不必要的代码，使您能够专注于核心逻辑。借助现代语法，学习容易，使用愉快。"
+  },
+  "homepage.features.two.title": {
+    "message": "快速且高效"
+  },
+  "homepage.features.two.description": {
+    "message": "编译为本机代码，通过零成本抽象实现C++级别的性能。对于资源密集型任务是理想的选择。"
+  },
+  "homepage.features.three.title": {
+    "message": "安全且并发"
+  },
+  "homepage.features.three.description": {
+    "message": "在编译时防止NULL引用错误等常见BUG。内置并发模型使多核编程比以往更加简单。"
+  },
+  "homepage.contributors.title": {
+    "message": "贡献者"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "语言创始人"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "语言设计师"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "编译器开发"
+  },
+  "homepage.contributors.role.library": {
+    "message": "标准库负责人"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "贡献者"
+  },
+  "homepage.sponsors.title": {
+    "message": "赞助商"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "荣誉赞助商"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "白金赞助商"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "黄金赞助商"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "白银赞助商"
+  },
+  "homepage.translations.title": {
+    "message": "参与Wave翻译"
+  },
+  "homepage.translations.subtitle": {
+    "message": "请帮助翻译，助力全球开发者学习Wave。"
+  },
+  "homepage.translations.button": {
+    "message": "在Crowdin参与翻译"
+  }
+}
