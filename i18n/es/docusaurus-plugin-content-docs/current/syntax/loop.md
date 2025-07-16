@@ -2,78 +2,78 @@
 sidebar_position: 4
 ---
 
-# 반복문
+# Bucle
 
-## 소개
+## Introducción
 
-Wave 언어에서는 코드를 반복적으로 실행할 수 있도록 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 반복 실행하거나, 특정 횟수만큼 반복할 때 사용됩니다.
+En el lenguaje Wave, se proporcionan bucles para poder ejecutar el código repetidamente.
+Los bucles se utilizan para ejecutar el código repetidamente mientras se cumple una determinada condición, o para repetirlo un número específico de veces.
 
-Wave에서 지원하는 반복문은 다음과 같습니다:
+Los bucles admitidos en Wave incluyen:
 
-- while 문: 조건 기반 반복
+- while loop: repetición basada en condiciones
 
-- for 문: 횟수 기반 반복
+- for loop: repetición basada en el número de veces
 
-또한 반복 중간에 흐름을 제어할 수 있는 break, continue 키워드도 함께 제공됩니다.
-이 섹션에서는 반복문의 사용법과 흐름 제어 키워드를 모두 설명합니다.
+También se proporcionan las palabras clave break y continue, que permiten controlar el flujo durante la repetición.
+Esta sección explica cómo usar los bucles y las palabras clave de control de flujo.
 
 ---
 
-## while 문
+## while loop
 
-`while` 문은 주어진 조건식이 `true`로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건이 `false`가 되면 반복은 종료됩니다.
+El bucle `while` ejecuta repetidamente un bloque de código mientras la expresión condicional dada se evalúe como `true`.
+La repetición finalizará cuando la condición sea `false`.
 
-### 기본 구조
+### Estructura básica
 
-다음은 `while` 문의 기본 문법입니다:
+La siguiente es la sintaxis básica de un bucle `while`:
 
 ```wave
-while (조건식) {
-    // 반복할 코드
+while (condición) {
+    // código a repetir
 }
 ```
 
-- 조건식은 `bool` 타입이어야 합니다.
+- La condición debe ser de tipo `bool`.
 
-- 코드 블록은 `{}`로 감싸며, 하나 이상의 명령문을 포함할 수 있습니다.
+- El bloque de código debe estar entre `{}` y puede contener una o más declaraciones.
 
-### 예제: 0부터 4까지 출력
+### Ejemplo: Imprimir desde 0 hasta 4
 
 ```wave
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i는 {}입니다.", i);
+    println("i es {}.", i);
     i = i + 1;
 }
 ```
 
-이 예제는 `i`가 5보다 작을 때까지 반복되며, 매 반복마다 값을 출력하고 1씩 증가합니다.
+Este ejemplo se repite mientras `i` sea menor que 5, imprimiendo el valor en cada repetición y aumentando en 1 cada vez.
 
 ---
 
-## for 문
+## Bucle for
 
-`for` 문은 반복 횟수가 정해져 있는 경우에 유용하게 사용됩니다.
-초기값, 종료 조건, 증감식을 함께 명시하여 반복을 구성합니다.
+El bucle `for` se utiliza de manera útil cuando se conoce el número de repeticiones.
+Se compone especificando el valor inicial, la condición de término y la expresión de incremento.
 
-### 기본 구조
+### Estructura básica
 
 ```wave
-for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
-    // 반복할 코드
+for (var nombreVariable: tipo = valorInicial; condición; incremento) {
+    // código a repetir
 }
 ```
 
-- 변수명: 반복 제어에 사용되는 변수
+- nombreVariable: la variable utilizada para controlar la repetición
 
-- 조건식: `true`인 동안 반복이 실행됩니다
+- condición: se ejecuta mientras sea `true`
 
-- 증감식: 반복 변수 값을 변경합니다
+- incremento: cambia el valor de la variable de repetición
 
-### 예제: 1부터 5까지 출력
+### Ejemplo: Imprimir de 1 a 5
 
 ```wave
 for (var i: i32 = 1; i <= 5; i = i + 1) {
@@ -83,12 +83,12 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 
 ---
 
-## 중첩 반복문
+## Bucle anidado
 
-반복문 내부에 또 다른 반복문을 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-예를 들어 2차원 배열이나 조합을 순회할 때 유용합니다.
+Se puede escribir otro bucle dentro de un bucle, lo que se llama bucle anidado.
+Son útiles, por ejemplo, al recorrer matrices bidimensionales o combinaciones.
 
-### 예제: 2중 while 문
+### Ejemplo: Bucle while doble
 
 ```wave
 var i :i32 = 0;
@@ -107,12 +107,12 @@ while (i < 3) {
 
 ---
 
-## break 문
+## Bucle break
 
-`break` 문은 반복문을 즉시 종료하고 바깥으로 빠져나옵니다.
-조건이 충족되었을 때 반복을 중단하고자 할 때 유용합니다.
+El bucle `break` finaliza inmediatamente el bucle y sale.
+Es útil cuando se desea detener la repetición al cumplir una condición.
 
-### 예제: 특정 값에서 반복 종료
+### Ejemplo: Finalización de la repetición en un valor específico
 
 ```wave
 var i :i32 = 0;
@@ -129,12 +129,12 @@ while (true) {
 
 ---
 
-## continue 문
+## Bucle continue
 
-`continue` 문은 현재 반복의 나머지 부분을 건너뛰고 다음 반복을 시작합니다.
-특정 조건일 때만 반복 블록의 일부를 실행하고 싶을 때 사용합니다.
+El bucle `continue` omite el resto de la repetición actual y comienza la siguiente repetición.
+Se usa cuando solo se desea ejecutar parte del bloque de repetición bajo ciertas condiciones.
 
-### 예제: 짝수만 출력
+### Ejemplo: Imprimir solo números pares
 
 ```wave
 for (var i: i32 = 0; i <= 10; i = i + 1) {
@@ -148,15 +148,15 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 
 ---
 
-## 요약
+## Resumen
 
-| 문법       | 설명                     |
-| -------- | ---------------------- |
-| while    | 조건이 참일 동안 반복           |
-| for      | 초기값, 조건, 증감식을 통한 반복 수행 |
-| break    | 반복문 즉시 종료              |
-| continue | 다음 반복으로 건너뜀            |
+| Gramática | Descripción                                                                       |
+| --------- | --------------------------------------------------------------------------------- |
+| while     | Repetición mientras la condición sea verdadera                                    |
+| for       | Ejecución de la repetición con valor inicial, condición y expresión de incremento |
+| break     | Finalización inmediata del bucle                                                  |
+| continue  | Saltar a la siguiente repetición                                                  |
 
-Wave의 반복문은 조건 또는 횟수 기반의 반복 작업을 모두 유연하게 처리할 수 있도록 설계되었습니다.
+Los bucles de Wave están diseñados para manejar de manera flexible tanto las operaciones de repetición basadas en condiciones como en el número de veces.
 
-`break`, `continue` 문을 함께 사용하면 더 정교한 반복 흐름 제어도 가능합니다.
+La combinación de `break` y `continue` permite un control más sofisticado del flujo de repetición.
