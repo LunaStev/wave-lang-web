@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: ২
 ---
 
 # ওয়েভের দর্শন ও লক্ষ্য
