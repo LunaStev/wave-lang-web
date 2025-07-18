@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: ۴
 ---
 
 # نقشه‌راه توسعه‌ی یکپارچه Wave + Whale نسخه ۲
