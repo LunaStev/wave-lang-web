@@ -195,15 +195,18 @@ const config: Config = {
             items: [
               {
                 label: 'Docs',
-                to: '/docs/intro/intro',
+                type: 'doc',
+                docId: 'intro/intro',
               },
               {
                 label: 'Syntax',
-                to: '/docs/syntax/syntax',
+                type: 'doc',
+                docId: 'syntax/syntax',
               },
               {
                 label: 'Ecosystem',
-                to: '/docs/ecosystem/ecosystem',
+                type: 'doc',
+                docId: 'ecosystem/ecosystem',
               },
             ],
           },
