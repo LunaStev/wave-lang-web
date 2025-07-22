@@ -195,16 +195,16 @@ const config: Config = {
             title: 'Docs',
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/intro/intro',
+                label: 'Docs',
+                to: '/docs/intro/',
               },
               {
                 label: 'Syntax',
-                to: '/docs/syntax/syntax',
+                to: '/docs/syntax/',
               },
               {
                 label: 'Ecosystem',
-                to: '/docs/ecosystem/ecosystem',
+                to: '/docs/ecosystem/',
               },
             ],
           },
