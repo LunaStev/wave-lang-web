@@ -22,6 +22,10 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
+  customFields: {
+    githubUrl: 'https://github.com/LunaStev/Wave',
+  },
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'LunaStev', // Usually your GitHub org/user name.
