@@ -168,12 +168,7 @@ const config: Config = {
           src: 'img/logo.svg',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Wave',
-          },
+          { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             type: 'html',
