@@ -203,7 +203,7 @@ const config: Config = {
               },
               {
                 label: 'Ecosystem',
-                to: '/docs/ecosystem/syntax',
+                to: '/docs/ecosystem/ecosystem',
               },
             ],
           },
