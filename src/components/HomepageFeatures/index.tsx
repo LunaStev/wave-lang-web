@@ -1,15 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Translate from "@docusaurus/Translate";
 import Link from "@docusaurus/Link";
 
-// --- 섹션 1: 새로운 Hero 섹션 (인터랙티브 코드 예제 포함) ---
-function InteractiveHero() {
-    const [activeTab, setActiveTab] = useState('hello');
+// --- 타입 정의 ---
+interface CodeExample {
+    title: string;
+    code: string;
+    output: string;
+}
 
-    const codeExamples = {
+type CodeTabKey = 'hello' | 'variables' | 'functions';
+
+interface FeatureItem {
+    titleId: string;
+    descriptionId: string;
+    icon: string;
+    code: string;
+}
+
+interface Contributor {
+    name: string;
+    roleId: string;
+    avatar: string;
+}
+
+interface Sponsor {
+    name: string;
+    tierId: string;
+    link: string;
+}
+
+interface InfiniteScrollProps {
+    children: ReactNode;
+    direction?: 'left' | 'right';
+    speed?: number;
+}
+
+// --- 섹션 1: InteractiveHero ---
+function InteractiveHero(): JSX.Element {
+    const [activeTab, setActiveTab] = useState<CodeTabKey>('hello');
+
+    const codeExamples: Record<CodeTabKey, CodeExample> = {
         hello: {
             title: 'Hello, World',
             code: `fun main() {
@@ -22,7 +56,7 @@ function InteractiveHero() {
             code: `fun main() {
   var name: str = "Wave";
   let year: i32 = 2024; // immutable
-  
+
   println("Language: {}, Year: {}", name, year);
 }`,
             output: 'Language: Wave, Year: 2024',
@@ -61,13 +95,13 @@ fun main() {
 
                 <div className={styles.interactiveEditor}>
                     <div className={styles.editorTabs}>
-                        {Object.keys(codeExamples).map(key => (
+                        {Object.keys(codeExamples).map((key) => (
                             <button
                                 key={key}
                                 className={clsx(styles.editorTab, { [styles.activeTab]: activeTab === key })}
-                                onClick={() => setActiveTab(key)}
+                                onClick={() => setActiveTab(key as CodeTabKey)}
                             >
-                                {codeExamples[key].title}
+                                {codeExamples[key as CodeTabKey].title}
                             </button>
                         ))}
                     </div>
@@ -86,10 +120,9 @@ fun main() {
     );
 }
 
-
-// --- 섹션 2: Why Wave? (핵심 장점) ---
-const WhyWaveSection = () => {
-    const features = [
+// --- 섹션 2: Why Wave? ---
+const WhyWaveSection: React.FC = () => {
+    const features: FeatureItem[] = [
         {
             titleId: 'homepage.features.one.title',
             descriptionId: 'homepage.features.one.description',
@@ -142,30 +175,33 @@ println(name?.length() ?? 0);`
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-// --- 무한 스크롤 컴포넌트 ---
-const InfiniteScroll = ({ children, direction = 'left', speed = 40 }) => (
+// --- InfiniteScroll ---
+const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, direction = 'left', speed = 40 }) => (
     <div className={styles.scrollWrapper}>
-        <div className={styles.scrollContent} style={{ '--scroll-speed': `${speed}s`, '--scroll-direction': direction === 'left' ? 'normal' : 'reverse' }}>
+        <div
+            className={styles.scrollContent}
+            style={{
+                ['--scroll-speed' as any]: `${speed}s`,
+                ['--scroll-direction' as any]: direction === 'left' ? 'normal' : 'reverse',
+            }}
+        >
             <div className={styles.scrollGroup}>{children}</div>
             <div className={styles.scrollGroup} aria-hidden="true">{children}</div>
         </div>
     </div>
 );
 
-// --- 기여자 및 스폰서 섹션 ---
-const CommunitySection = () => {
-    // TODO: 이 데이터는 나중에 실제 데이터로 교체하세요.
-    const contributors = [
+// --- CommunitySection ---
+const CommunitySection: React.FC = () => {
+    const contributors: Contributor[] = [
         { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' },
         { name: "Megan0704-1", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' },
-        // 예시: { name: "github_username", roleId: 'homepage.contributors.role.compiler', avatar: 'https://github.com/github_username.png' }
     ];
-    const sponsors = [
+    const sponsors: Sponsor[] = [
         { name: "heymanbug", tierId: 'homepage.sponsors.tier.honor', link: 'https://github.com/heymanbug' },
-        // 예시: { name: "SponsorName", tierId: 'homepage.sponsors.tier.platinum', link: '#' },
     ];
 
     return (
@@ -173,31 +209,42 @@ const CommunitySection = () => {
             <div className="container">
                 <div className={styles.communityContainer}>
                     <Heading as="h2" className={clsx('text--center', styles.sectionTitle)}>
-                        <Translate id="homepage.contributors.title"/>
+                        <Translate id="homepage.contributors.title" />
                     </Heading>
                     <InfiniteScroll direction="right" speed={50}>
                         {contributors.map((c, idx) => (
-                            <a href={`https://github.com/${c.name}`} target="_blank" rel="noopener noreferrer" key={idx}
-                               className={styles.contributorCard}>
-                                <img src={c.avatar} alt={c.name}/>
+                            <a
+                                href={`https://github.com/${c.name}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                key={idx}
+                                className={styles.contributorCard}
+                            >
+                                <img src={c.avatar} alt={c.name} />
                                 <div>
                                     <h3>{c.name}</h3>
-                                    <p><Translate id={c.roleId}/></p>
+                                    <p><Translate id={c.roleId} /></p>
                                 </div>
                             </a>
                         ))}
                     </InfiniteScroll>
                 </div>
+
                 <div className={styles.communityContainer}>
                     <Heading as="h2" className={clsx('text--center', styles.sectionTitle)}>
-                        <Translate id="homepage.sponsors.title"/>
+                        <Translate id="homepage.sponsors.title" />
                     </Heading>
                     <InfiniteScroll>
                         {sponsors.map((sponsor, idx) => (
-                            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" key={idx}
-                               className={styles.sponsorCard}>
+                            <a
+                                href={sponsor.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                key={idx}
+                                className={styles.sponsorCard}
+                            >
                                 <h3>{sponsor.name}</h3>
-                                <p><Translate id={sponsor.tierId}/></p>
+                                <p><Translate id={sponsor.tierId} /></p>
                             </a>
                         ))}
                     </InfiniteScroll>
@@ -227,12 +274,14 @@ const CommunitySection = () => {
 };
 
 // --- 최종 렌더링 컴포넌트 ---
-export default function HomepageFeatures() {
+const HomepageFeatures: React.FC = () => {
     return (
         <>
-            <InteractiveHero/>
-            <WhyWaveSection/>
-            <CommunitySection/>
+            <InteractiveHero />
+            <WhyWaveSection />
+            <CommunitySection />
         </>
     );
-}
+};
+
+export default HomepageFeatures;
