@@ -118,15 +118,16 @@ const config: Config = {
       ({
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: '/docs',
+          routeBasePath: 'docs',
           path: 'docs',
-          id: 'default',
-          sidebarItemsGenerator: async function ({defaultSidebarItemsGenerator, ...args}) {
-            const sidebarItems = await defaultSidebarItemsGenerator(args);
-            return sidebarItems;
-          },
+          include: ['**/*.md', '**/*.mdx'],
         },
-        // ...
+        blog: {
+          showReadingTime: true,
+        },
+        theme: {
+          customCss: './src/css/custom.css',
+        },
       }),
     ],
   ],
@@ -192,23 +193,23 @@ const config: Config = {
         links: [
           {
             title: 'Docs',
-            items: [
+            links: [
               {
-                label: 'Docs',
-                type: 'doc',
-                docId: 'intro/intro',
-              },
-              {
-                label: 'Syntax',
-                type: 'doc',
-                docId: 'syntax/syntax',
-              },
-              {
-                label: 'Ecosystem',
-                type: 'doc',
-                docId: 'ecosystem/ecosystem',
-              },
-            ],
+                title: 'Docs',
+                items: [
+                  {
+                    label: 'Docs',
+                    to: '/docs/intro/intro',
+                  },
+                  {
+                    label: 'Syntax',
+                    to: '/docs/syntax/syntax',
+                  },
+                  {
+                    label: 'Ecosystem',
+                    to: '/docs/ecosystem/ecosystem',
+                  },
+                ],
           },
           {
             title: 'Community',
