@@ -154,7 +154,12 @@ const config: Config = {
           src: 'img/logo.svg',
         },
         items: [
-          { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
+          {
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
+            position: 'left',
+            label: 'Docs',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             type: 'html',
