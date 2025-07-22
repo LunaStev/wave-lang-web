@@ -1,5 +1,5 @@
 ---
-sidebar_position: ۳
+sidebar_position: 3
 ---
 
 # اجرا کردن اولین برنامه
