@@ -163,10 +163,6 @@ const config: Config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            type: 'custom-LogoVersion',
-            position: 'right',
-          },
-          {
             type: 'localeDropdown',
             position: 'right',
           },
