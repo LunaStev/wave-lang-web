@@ -152,7 +152,7 @@ const config: Config = {
         title: 'Wave',
         logo: {
           alt: 'Wave Logo',
-          src: 'img/logo.svg',
+          src: '/img/logo.svg',
         },
         items: [
           {
