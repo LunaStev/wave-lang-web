@@ -163,9 +163,8 @@ const config: Config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            type: 'html',
+            type: 'custom-LogoVersion',
             position: 'right',
-            value: '<img src="/img/version.svg" alt="Wave Version" style="height: 24px; margin-left: 0.5rem;" />',
           },
           {
             type: 'localeDropdown',
