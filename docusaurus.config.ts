@@ -199,11 +199,11 @@ const config: Config = {
               },
               {
                 label: 'Syntax',
-                to: '/docs/syntax/',
+                to: '/docs/syntax/syntax',
               },
               {
                 label: 'Ecosystem',
-                to: '/docs/ecosystem/',
+                to: '/docs/ecosystem/syntax',
               },
             ],
           },
