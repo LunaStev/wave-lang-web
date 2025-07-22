@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
 import { useThemeConfig } from '@docusaurus/theme-common';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import type { NavbarItemConfig } from '@docusaurus/theme-common';
 
 import styles from './styles.module.css';
