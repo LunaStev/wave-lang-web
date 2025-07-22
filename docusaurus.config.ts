@@ -193,23 +193,20 @@ const config: Config = {
         links: [
           {
             title: 'Docs',
-            links: [
+            items: [
               {
-                title: 'Docs',
-                items: [
-                  {
-                    label: 'Docs',
-                    to: '/docs/intro/intro',
-                  },
-                  {
-                    label: 'Syntax',
-                    to: '/docs/syntax/syntax',
-                  },
-                  {
-                    label: 'Ecosystem',
-                    to: '/docs/ecosystem/ecosystem',
-                  },
-                ],
+                label: 'Introduction',
+                to: '/docs/intro/intro',
+              },
+              {
+                label: 'Syntax',
+                to: '/docs/syntax/syntax',
+              },
+              {
+                label: 'Ecosystem',
+                to: '/docs/ecosystem/ecosystem',
+              },
+            ],
           },
           {
             title: 'Community',
