@@ -118,29 +118,15 @@ const config: Config = {
       ({
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/LunaStev/wave-lang-web/tree/master/',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
+          routeBasePath: '/docs',
+          path: 'docs',
+          id: 'default',
+          sidebarItemsGenerator: async function ({defaultSidebarItemsGenerator, ...args}) {
+            const sidebarItems = await defaultSidebarItemsGenerator(args);
+            return sidebarItems;
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
         },
-        theme: {
-          customCss: './src/css/custom.css',
-        },
+        // ...
       }),
     ],
   ],
@@ -204,7 +190,7 @@ const config: Config = {
             items: [
               {
                 label: 'Docs',
-                to: '/docs/intro/',
+                to: '/docs/intro/intro',
               },
               {
                 label: 'Syntax',
