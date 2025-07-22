@@ -1,27 +1,62 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Docusaurus의 CSS 변수를 여기서 오버라이드할 수 있습니다.
+ * 최종 완성도를 위해 사이트 전체에 적용되는 스타일을 추가합니다.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ---------------------------------------------- */
+/* 1. 가장 중요: 기존의 불필요한 스타일 삭제!     */
+/* .heroBanner { ... } 와 .buttons { ... } 규칙을 */
+/* 이 파일에서 반드시 삭제해주세요.               */
+/* ---------------------------------------------- */
 
-  background-image: url('/img/docusaurus-social-card.png');
-  background-size: cover;
-  background-position: center;
+
+/* 2. 전역 디자인 폴리싱 */
+html {
+  /* 페이지 내 앵커 이동을 부드럽게 만듭니다. */
+  scroll-behavior: smooth;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+/* 3. 커스텀 스크롤바 (사이트의 세련미를 더하는 디테일) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wave-bg-dark-primary);
+}
+[data-theme='light'] ::-webkit-scrollbar-track {
+  background: var(--wave-bg-light-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--wave-primary-dark);
+  border-radius: 20px;
+  border: 3px solid var(--wave-bg-dark-primary);
+}
+[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background-color: var(--wave-primary);
+  border: 3px solid var(--wave-bg-light-secondary);
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+/* 4. 홈페이지 전용 네비게이션 바 스타일 (핵심!) */
+
+/* 홈페이지에서는 기본적으로 네비게이션 바를 투명하게 만듭니다. */
+.homepage-wrapper .navbar {
+  background: transparent;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+/* 스크롤을 내렸을 때 Docusaurus가 붙여주는 .navbar--scrolled 클래스를 활용합니다. */
+.homepage-wrapper .navbar--scrolled {
+  /* 우리가 정의한 변수를 사용해 배경색과 그림자를 부드럽게 적용합니다. */
+  background-color: var(--wave-bg-dark-primary);
+  box-shadow: var(--ifm-navbar-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 라이트 모드일 때도 동일하게 적용합니다. */
+[data-theme='light'] .homepage-wrapper .navbar--scrolled {
+  background-color: rgba(248, 250, 252, 0.85); /* 약간의 투명도를 주어 고급스러움을 더함 */
+  backdrop-filter: blur(8px); /* 블러 효과 추가 */
 }

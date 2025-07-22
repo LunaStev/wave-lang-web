@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode, CSSProperties } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -39,6 +39,63 @@ interface InfiniteScrollProps {
     speed?: number;
 }
 
+const AnimatedWave = () => (
+    <div className={styles.waveContainer}>
+        <svg
+            className="waves"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28"
+            preserveAspectRatio="none"
+            shapeRendering="auto"
+            style={{ width: '100%', height: '100%' }}
+        >
+            <defs>
+                <path
+                    id="gentle-wave"
+                    d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+                />
+            </defs>
+            <g className="parallax">
+                <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(139, 92, 246,0.7)" />
+                <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(139, 92, 246,0.5)" />
+                <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(139, 92, 246,0.3)" />
+                <use xlinkHref="#gentle-wave" x="48" y="7" fill="rgba(139, 92, 246,1)" />
+            </g>
+        </svg>
+        {/* Docusaurus는 style jsx가 안 먹을 수 있으므로 일반 style 태그로 변경 */}
+        <style>{`
+      .parallax > use {
+        animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+      }
+      .parallax > use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+      }
+      .parallax > use:nth-child(2) {
+        animation-delay: -3s;
+        animation-duration: 10s;
+      }
+      .parallax > use:nth-child(3) {
+        animation-delay: -4s;
+        animation-duration: 13s;
+      }
+      .parallax > use:nth-child(4) {
+        animation-delay: -5s;
+        animation-duration: 20s;
+      }
+      @keyframes move-forever {
+        0% {
+          transform: translate3d(-90px, 0, 0);
+        }
+        100% {
+          transform: translate3d(85px, 0, 0);
+        }
+      }
+    `}</style>
+    </div>
+);
+
 // --- 섹션 1: InteractiveHero ---
 function InteractiveHero(): JSX.Element {
     const [activeTab, setActiveTab] = useState<CodeTabKey>('hello');
@@ -77,16 +134,20 @@ fun main() {
     const { code, output } = codeExamples[activeTab];
 
     return (
-        <header className={clsx('hero', styles.heroBanner)}>
-            <div className="container">
+        <header className={clsx(styles.heroBanner)}>
+            <div className={clsx('container', styles.heroContent)}>
                 <Heading as="h1" className={styles.heroTitle}>
-                    <Translate id="homepage.hero.title">A Modern Language for a New Wave of Developers</Translate>
+                    <Translate id="homepage.hero.title">
+                        A Modern Language for a New Wave of Developers
+                    </Translate>
                 </Heading>
+
                 <p className={styles.heroSubtitle}>
                     <Translate id="homepage.hero.subtitle">
                         Intuitive syntax, powerful performance, and built-in safety. Wave is designed to make you productive and your applications robust.
                     </Translate>
                 </p>
+
                 <div className={styles.buttons}>
                     <Link className="button button--secondary button--lg" to="/docs/intro">
                         <Translate id="read-the-docs">Read the Docs</Translate>
@@ -95,13 +156,13 @@ fun main() {
 
                 <div className={styles.interactiveEditor}>
                     <div className={styles.editorTabs}>
-                        {Object.keys(codeExamples).map((key) => (
+                        {(Object.keys(codeExamples) as CodeTabKey[]).map((key) => (
                             <button
                                 key={key}
                                 className={clsx(styles.editorTab, { [styles.activeTab]: activeTab === key })}
-                                onClick={() => setActiveTab(key as CodeTabKey)}
+                                onClick={() => setActiveTab(key)}
                             >
-                                {codeExamples[key as CodeTabKey].title}
+                                {codeExamples[key].title}
                             </button>
                         ))}
                     </div>
@@ -116,6 +177,7 @@ fun main() {
                     </div>
                 </div>
             </div>
+            <AnimatedWave />
         </header>
     );
 }
@@ -162,8 +224,8 @@ println(name?.length() ?? 0);`
                     <Translate id="homepage.why_wave.title">Why Choose Wave?</Translate>
                 </Heading>
                 <div className={styles.featuresGrid}>
-                    {features.map((feature, idx) => (
-                        <div key={idx} className={styles.featureCard}>
+                    {features.map((feature) => (
+                        <div key={feature.titleId} className={styles.featureCard}>
                             <div className={styles.featureIcon}>{feature.icon}</div>
                             <Heading as="h3"><Translate id={feature.titleId} /></Heading>
                             <p><Translate id={feature.descriptionId} /></p>
@@ -179,20 +241,21 @@ println(name?.length() ?? 0);`
 };
 
 // --- InfiniteScroll ---
-const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, direction = 'left', speed = 40 }) => (
-    <div className={styles.scrollWrapper}>
-        <div
-            className={styles.scrollContent}
-            style={{
-                ['--scroll-speed' as any]: `${speed}s`,
-                ['--scroll-direction' as any]: direction === 'left' ? 'normal' : 'reverse',
-            }}
-        >
-            <div className={styles.scrollGroup}>{children}</div>
-            <div className={styles.scrollGroup} aria-hidden="true">{children}</div>
+const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, direction = 'left', speed = 40 }) => {
+    const styleVars: CSSProperties & { [key: string]: string } = {
+        '--scroll-speed': `${speed}s`,
+        '--scroll-direction': direction === 'left' ? 'normal' : 'reverse',
+    };
+
+    return (
+        <div className={styles.scrollWrapper}>
+            <div className={styles.scrollContent} style={styleVars}>
+                <div className={styles.scrollGroup}>{children}</div>
+                <div className={styles.scrollGroup} aria-hidden="true">{children}</div>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 // --- CommunitySection ---
 const CommunitySection: React.FC = () => {
@@ -212,12 +275,12 @@ const CommunitySection: React.FC = () => {
                         <Translate id="homepage.contributors.title" />
                     </Heading>
                     <InfiniteScroll direction="right" speed={50}>
-                        {contributors.map((c, idx) => (
+                        {contributors.map((c) => (
                             <a
                                 href={`https://github.com/${c.name}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                key={idx}
+                                key={c.name}
                                 className={styles.contributorCard}
                             >
                                 <img src={c.avatar} alt={c.name} />
@@ -235,12 +298,12 @@ const CommunitySection: React.FC = () => {
                         <Translate id="homepage.sponsors.title" />
                     </Heading>
                     <InfiniteScroll>
-                        {sponsors.map((sponsor, idx) => (
+                        {sponsors.map((sponsor) => (
                             <a
                                 href={sponsor.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                key={idx}
+                                key={sponsor.name}
                                 className={styles.sponsorCard}
                             >
                                 <h3>{sponsor.name}</h3>
