@@ -58,3 +58,43 @@
     align-items: center;
     gap: 1rem;
 }
+
+.navbarContent, .navbarItemsEnd {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* 아이템 간 간격 */
+}
+
+/* 전체 네비게이션 바를 양쪽 정렬 */
+.navbar {
+    /* ... 기존 스타일 ... */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbarLogo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--ifm-font-color-base); /* Docusaurus 변수 사용 */
+}
+
+.navbarItems {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Docusaurus의 기본 NavbarItem 스타일을 우리 테마에 맞게 약간 조정 */
+.navbarItemsEnd .navbar__item, .navbarItems .navbar__item {
+    color: var(--ifm-navbar-link-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.navbarItemsEnd .navbar__item:hover, .navbarItems .navbar__item:hover {
+    color: var(--ifm-navbar-link-hover-color);
+}
