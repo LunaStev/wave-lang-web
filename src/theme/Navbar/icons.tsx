@@ -6,11 +6,12 @@ export const GithubIcon = () => (
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill="url(#waveGradient)"
+        fill="url(#githubGradient)" // ✅ ID 변경
         xmlns="http://www.w3.org/2000/svg"
     >
         <defs>
-            <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+            {/* ✅ ID를 고유하게 변경 */}
+            <linearGradient id="githubGradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#8B5CF6" />
                 <stop offset="100%" stopColor="#6D28D9" />
             </linearGradient>
@@ -26,21 +27,20 @@ export const SunIcon = () => (
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke="url(#waveGradient)"
+        stroke="url(#sunGradient)" // ✅ ID 변경
         fill="none"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
     >
         <defs>
-            <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+            {/* ✅ ID를 고유하게 변경 */}
+            <linearGradient id="sunGradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#FBBF24" />
                 <stop offset="100%" stopColor="#FDBA74" />
             </linearGradient>
         </defs>
-        {/* 태양 원 */}
         <circle cx="12" cy="12" r="5" />
-        {/* 빛나는 선 */}
         <line x1="12" y1="1" x2="12" y2="3" />
         <line x1="12" y1="21" x2="12" y2="23" />
         <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
@@ -57,14 +57,15 @@ export const MoonIcon = () => (
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke="url(#waveGradient)"
+        stroke="url(#moonGradient)" // ✅ ID 변경
         fill="none"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
     >
         <defs>
-            <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+            {/* ✅ ID를 고유하게 변경 */}
+            <linearGradient id="moonGradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#8B5CF6" />
                 <stop offset="100%" stopColor="#4C1D95" />
             </linearGradient>
