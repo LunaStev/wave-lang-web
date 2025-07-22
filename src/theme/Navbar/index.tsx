@@ -20,9 +20,12 @@ function Navbar(): JSX.Element {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const [theme, setTheme] = useState(() =>
-        typeof window !== 'undefined' ? document.documentElement.getAttribute('data-theme') || 'dark' : 'dark'
-    );
+    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+    useEffect(() => {
+        const savedTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        setTheme(savedTheme as 'dark' | 'light');
+    }, []);
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
