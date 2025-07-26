@@ -190,10 +190,15 @@ const WhyWaveSection: React.FC = () => {
             descriptionId: 'homepage.features.one.description',
             icon: '✨',
             code: `// Less boilerplate, more focus
-http.get("/users/:id") { req, res =>
-  let user = db.findUser(req.params.id);
-  res.json(user);
-};`
+fun handler(req: Request, res: Response) -> void {
+  var user: User = db.findUser(req.params.id);
+  res.write(to_json(user));
+}
+
+http.route("/users/:id")
+    .method(HttpMethod.GET)
+    .handler(handler)
+    .register();`
         },
         {
             titleId: 'homepage.features.two.title',
@@ -202,7 +207,9 @@ http.get("/users/:id") { req, res =>
             code: `// Compile to native code
 // Zero-cost abstractions
 fun fib(n: i64) -> i64 {
-  if (n <= 1) { return n; }
+  if (n <= 1) {
+    return n;
+  }
   return fib(n - 1) + fib(n - 2);
 }`
         },
