@@ -172,6 +172,11 @@ const config: Config = {
             position: 'right',
           },
           {
+            href: 'https://discord.com/invite/Kuk2qXFjc5',
+            label: 'Discord',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/LunaStev/Wave',
             label: 'GitHub',
             position: 'right',
