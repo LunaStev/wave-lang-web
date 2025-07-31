@@ -173,7 +173,7 @@ const config: Config = {
           },
           {
             href: 'https://discord.com/invite/Kuk2qXFjc5',
-            label: 'Discord',
+            label: 'Community',
             position: 'right',
           },
           {
