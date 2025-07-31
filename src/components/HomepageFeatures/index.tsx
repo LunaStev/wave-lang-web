@@ -153,7 +153,7 @@ fun main() {
                     <Link className="button button--secondary button--lg" to="/docs/intro">
                         <Translate id="read-the-docs">Read the Docs</Translate>
                     </Link>
-                    <Link className="button button--primary button--lg" to="/community">
+                    <Link className="button button--primary button--lg" to="https://discord.com/invite/Kuk2qXFjc5">
                         <Translate id="join-the-community">Join the Community</Translate>
                     </Link>
                 </div>
