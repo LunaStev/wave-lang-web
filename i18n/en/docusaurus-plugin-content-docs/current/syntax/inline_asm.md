@@ -2,62 +2,62 @@
 sidebar_position: 7
 ---
 
-# 인라인 어셈블리
+# Inline Assembly
 
-## 소개
+## Introduction
 
-이 문서는 Wave 언어의 인라인 어셈블리에 대해 다룹니다.
-인라인 어셈블리는 Wave가 제공하는 기능 중 하나로, 고수준 언어의 편의성을 유지하면서도 저수준 하드웨어 제어에 직접 접근할 수 있는 극단적인 수준의 문법입니다.
+This document covers inline assembly in the Wave language.
+Inline assembly is one of the features provided by Wave, offering extreme level syntax that allows direct access to low-level hardware control while maintaining the convenience of high-level language.
 
-즉, 일반적인 Wave 코드로는 다루기 어려운 레지스터 조작, 메모리 직접 접근, 특수 명령어 실행 등을 가능하게 하며, 성능 최적화나 하드웨어 종속적인 작업이 필요할 때 활용됩니다.
+In other words, it enables operations such as register manipulation, direct memory access, and execution of special commands that are difficult to handle with general Wave code. It is used when performance optimization or hardware-dependent tasks are needed.
 
 ---
 
-## 기본 문법
+## Basic Syntax
 
 ```wave
 asm {
-    "어셈블리 명령어"          // 실제 어셈블리 코드 (한 줄에 한 명령어)
+    "assembly command"          // actual assembly code (one command per line)
     ...
-    in("레지스터") 값         // 입력 레지스터 매핑
-    out("레지스터") 변수      // 출력 레지스터 매핑
+    in("register") value         // input register mapping
+    out("register") variable      // output register mapping
 }
 ```
 
-### 문법 요소
+### Grammar Components
 
-1. 어셈블리 명령어
-    - `"..."` 문자열 형태로 작성하며, 실제 CPU에서 실행되는 저수준 어셈블리 명령어 입니다.
-    - 여러 줄 작성 가능하며, 한 줄에 한 개의 명령어를 작성합니다.
-    - 예시:
+1. Assembly Command
+    - Written in `"..."` string format, it is a low-level assembly command executed on the actual CPU.
+    - Multiple lines can be written, with one command per line.
+    - Example:
            ```wave
            "mov rax, 1"
            "syscall"
            ```
 
-2. `in("레지스터") 값`
-    - 변수(또는 표현식)의 값을 지정한 레지스터에 로드합니다.
-    - 예시:
+2. `in("register") value`
+    - Loads the value of a variable (or expression) into the specified register.
+    - Example:
            ```wave
            in("rdi") s
            ```
-        -> 변수 `s`의 값을 x86-64 규약에서 첫 번째 syscall 인자 레지스터인 `rdi`에 넣음.
+        -> Puts the value of the variable `s` into `rdi`, the first syscall argument register in the x86-64 convention.
 
-3. `out("레지스터") 변수`
-    - 지정한 레지스터의 값을 Wave 변수로 가져옵니다.
-    - 예시:
+3. `out("register") variable`
+    - Fetches the value of the specified register into a Wave variable.
+    - Example:
            ```wave
            out("rax") ret
            ```
-        -> `syscall`의 반환값이 저장된 `rax` 레지스터 값을 변수 `ret`에 저장.
+        -> Stores the value of the `rax` register, where the return value of the `syscall` is stored, into the variable `ret`.
 
 ---
 
-## 간단한 예제
+## Simple Example
 
 ```wave
 fun main() {
-    var msg_ptr: ptr<i8> = "Hello from syscall!\n";
+    var msg_ptr: ptr<I8> = "Hello from syscall!\n";
     var ret_val: i64;
 
     asm {
@@ -73,7 +73,7 @@ fun main() {
 
 ---
 
-## 주의사항
+## Precautions
 
-- 인라인 어셈블리는 Wave의 타입 안정성을 우회하므로, 잘못된 멸영어 사용 시 프로그래밍이 비정상 종료되거나 undefined behavior가 발생할 수 있습니다.
-- `in`, `out` 매핑은 컴파일 타임에 검증되지만, 명령어 자체의 유효성은 보장하지 않습니다.
+- Inline assembly circumvents the type safety of Wave, so using incorrect instructions may lead to program crashes or undefined behavior.
+- `in` and `out` mappings are verified at compile time, but the validity of the commands themselves is not guaranteed.

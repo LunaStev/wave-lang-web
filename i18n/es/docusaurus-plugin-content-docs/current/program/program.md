@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 4
 ---
 
-# 간단한 프로그램 만들기
+# Crear un programa simple
 
-이 문서는 Wave로 간단한 프로그램을 만드는 문서입니다. Wave로 간단한 프로그램을 만들면서 Wave에 익숙해지는 시간을 가지도록 도와줍니다.
+Este documento es un documento sobre cómo crear un programa simple con Wave. Ayuda a familiarizarse con Wave creando un programa simple con Wave.

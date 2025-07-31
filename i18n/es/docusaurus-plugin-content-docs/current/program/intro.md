@@ -2,63 +2,63 @@
 sidebar_position: 1
 ---
 
-# Hello Wave 출력하기
+# Imprimir Hola Wave
 
-이 문서는 Wave 언어로 가장 기본적인 출력 프로그램을 작성하는 방법을 설명합니다.
+Este documento explica cómo escribir un programa de salida básico en el lenguaje Wave.
 
 ---
 
-## 예제 코드
+## Código de ejemplo
 
 ```wave
 fun main() {
-    println("Hello Wave");
+    println("Hola Wave");
 }
 ```
 
 ---
 
-## 설명
+## Descripción
 
 - `fun main()`
 
-    Wave 프로그램의 진입점 함수입니다. 실행 시 가장 먼저 호출됩니다.
+    Es la función de entrada del programa Wave. Se llama primero en ejecución.
 
 - `println()`
 
-    임시 출력 함수로 문자열을 출력하며, 출력 후 줄바꿈(`\n`)을 추가합니다.
+    Es una función de salida temporal que imprime una cadena de texto, y añade un salto de línea (`\n`) después de la salida.
 
-- `;` (세미콜론)
+- `;` (punto y coma)
 
-    Wave의 모든 문장은 세미콜론으로 종료됩니다.
+    Todas las sentencias en Wave terminan con un punto y coma.
 
 ---
 
-## 실행 결과
+## Resultado de ejecución
 
 ```text
-Hello Wave
+Hola Wave
 ```
 
 ---
 
-## 추가 예제
+## Ejemplo adicional
 
-Wave는 문자열 보간을 지원합니다.
+Wave admite interpolación de cadenas.
 
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("Hello, {}!", name);
+    println("Hola, {}!", name);
 }
 ```
 
-출력:
+Salida:
 
 ```text
-Hello, Wave!
+Hola, Wave!
 ```
 
 ---
 
-> 이 예제는 Wave 표준 라이브러리의 기본 출력 함수 사용법을 보여줍니다.
+> Este ejemplo muestra el uso básico de la función de salida de la biblioteca estándar de Wave.
