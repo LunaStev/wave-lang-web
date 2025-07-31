@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Hello Wave 출력하기
 
-이 문서는 Wave 언어로 가장 기본적인 출력 프로그램을 작성하는 방법을 설명합니다.
+This document explains how to write the most basic output program in the Wave language.
 
 ---
 
-## 예제 코드
+## Example Code
 
 ```wave
 fun main() {
@@ -18,23 +18,23 @@ fun main() {
 
 ---
 
-## 설명
+## Description
 
 - `fun main()`
 
-    Wave 프로그램의 진입점 함수입니다. 실행 시 가장 먼저 호출됩니다.
+    This is the entry point function of a Wave program. It is called first when executed.
 
 - `println()`
 
-    임시 출력 함수로 문자열을 출력하며, 출력 후 줄바꿈(`\n`)을 추가합니다.
+    A temporary output function that prints a string and adds a newline (`\n`) after output.
 
-- `;` (세미콜론)
+- `;` (semicolon)
 
-    Wave의 모든 문장은 세미콜론으로 종료됩니다.
+    All statements in Wave end with a semicolon.
 
 ---
 
-## 실행 결과
+## Execution Result
 
 ```text
 Hello Wave
@@ -42,9 +42,9 @@ Hello Wave
 
 ---
 
-## 추가 예제
+## Additional Example
 
-Wave는 문자열 보간을 지원합니다.
+Wave supports string interpolation.
 
 ```wave
 fun main() {
@@ -53,7 +53,7 @@ fun main() {
 }
 ```
 
-출력:
+Output:
 
 ```text
 Hello, Wave!
@@ -61,4 +61,4 @@ Hello, Wave!
 
 ---
 
-> 이 예제는 Wave 표준 라이브러리의 기본 출력 함수 사용법을 보여줍니다.
+> This example shows how to use the basic output function of the Wave standard library.
