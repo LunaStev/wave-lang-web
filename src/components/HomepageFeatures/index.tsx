@@ -144,13 +144,17 @@ fun main() {
 
                 <p className={styles.heroSubtitle}>
                     <Translate id="homepage.hero.subtitle">
-                        Intuitive syntax, powerful performance, and built-in safety. Wave is designed to make you productive and your applications robust.
+                        Intuitive syntax, powerful performance, and built-in safety. Wave is designed to make you
+                        productive and your applications robust.
                     </Translate>
                 </p>
 
                 <div className={styles.buttons}>
                     <Link className="button button--secondary button--lg" to="/docs/intro">
                         <Translate id="read-the-docs">Read the Docs</Translate>
+                    </Link>
+                    <Link className="button button--primary button--lg" to="/community">
+                        <Translate id="join-the-community">Join the Community</Translate>
                     </Link>
                 </div>
 
@@ -159,7 +163,7 @@ fun main() {
                         {(Object.keys(codeExamples) as CodeTabKey[]).map((key) => (
                             <button
                                 key={key}
-                                className={clsx(styles.editorTab, { [styles.activeTab]: activeTab === key })}
+                                className={clsx(styles.editorTab, {[styles.activeTab]: activeTab === key})}
                                 onClick={() => setActiveTab(key)}
                             >
                                 {codeExamples[key].title}
@@ -177,7 +181,7 @@ fun main() {
                     </div>
                 </div>
             </div>
-            <AnimatedWave />
+            <AnimatedWave/>
         </header>
     );
 }
