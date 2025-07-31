@@ -358,3 +358,108 @@
   .sectionTitle { font-size: 2rem; margin-bottom: 3rem; }
   .featureCard p { min-height: auto; }
 }
+
+/* --- Discord Widget Section Styles --- */
+
+.discordWidgetSection {
+  padding: 4rem 0;
+  background-color: var(--ifm-background-color);
+}
+
+.discordWidgetCard {
+  background: var(--ifm-card-background-color);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--ifm-global-shadow-lw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.discordWidgetHeader {
+  flex: 1;
+  min-width: 300px;
+}
+
+.discordWidgetHeader h2 {
+  margin-top: 0;
+  font-size: 2.5rem; /* 다른 섹션 타이틀과 일관성 유지 */
+}
+
+.discordWidgetHeader p {
+  color: var(--ifm-color-secondary-darkest);
+  font-size: 1.1rem;
+}
+
+.discordWidgetContent {
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 300px;
+  flex: 0 1 350px; /* 크기 조절 */
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.discordServerInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.discordServerIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.discordServerInfo h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.discordStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ifm-color-secondary-darkest);
+  font-size: 0.9rem;
+}
+
+.onlineIndicator {
+  width: 10px;
+  height: 10px;
+  background-color: #3ba55d; /* Discord Online Green */
+  border-radius: 50%;
+  /* 빛나는 효과 추가 */
+  box-shadow: 0 0 5px #3ba55d;
+}
+
+.discordWidgetContent .button {
+  width: 100%;
+}
+
+.discordError {
+  color: var(--ifm-color-danger);
+}
+
+/* 모바일 화면 대응 */
+@media (max-width: 996px) {
+  .discordWidgetCard {
+    flex-direction: column;
+    text-align: center;
+  }
+  .discordWidgetContent {
+    width: 100%;
+    max-width: 400px;
+  }
+}
