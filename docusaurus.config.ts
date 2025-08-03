@@ -161,7 +161,7 @@ const config: Config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {href: 'https://blog.wave-lang.dev', label: 'Blog', position: 'left'},
           {
             type: 'localeDropdown',
             position: 'right',
