@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30">
     <rect width="150" height="30" fill="#2a2a2a" rx="5"/>
-    <text x="10" y="20" fill="#fff" font-size="14">Wave v0.1.4-pre-beta-nightly-2025-07-16</text>
+    <text x="10" y="20" fill="#fff" font-size="14">Wave v0.1.4-pre-beta</text>
 </svg>
