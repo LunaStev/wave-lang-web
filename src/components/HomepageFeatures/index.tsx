@@ -4,6 +4,7 @@ import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Translate from "@docusaurus/Translate";
 import Link from "@docusaurus/Link";
+import Logo from '@site/static/img/logo.svg';
 
 // --- (기존 타입 정의는 그대로 유지) ---
 interface CodeExample {
@@ -199,7 +200,10 @@ const DiscordWidgetSection: React.FC = () => {
                                         src={discordInfo.icon_url}
                                         alt={`${discordInfo.name} server icon`}
                                         className={styles.discordServerIcon}
-                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                        onError={(e) => {
+                                            e.currentTarget.onerror = null;
+                                            e.currentTarget.src = Logo;
+                                        }}
                                     />
                                     <div>
                                         <h3>{discordInfo.name}</h3>
@@ -212,7 +216,6 @@ const DiscordWidgetSection: React.FC = () => {
                                 </div>
                                 <Link
                                     className="button button--primary button--lg"
-                                    // instant_invite 대신 직접 설정한 초대 링크를 사용합니다.
                                     href={inviteLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
