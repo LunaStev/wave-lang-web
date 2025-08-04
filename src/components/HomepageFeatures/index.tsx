@@ -143,20 +143,42 @@ const CommunitySection: React.FC = () => {
 };
 
 // --- ✨ 새로운 Discord 위젯 섹션 ✨ ---
+interface DiscordInfo {
+    id: string;
+    name: string;
+    instant_invite: string | null;
+    presence_count: number;
+    // 아이콘과 배너를 위한 속성을 추가할 수 있습니다.
+    icon_url: string;
+}
+
 const DiscordWidgetSection: React.FC = () => {
     const [discordInfo, setDiscordInfo] = useState<DiscordInfo | null>(null);
     const [error, setError] = useState<string | null>(null);
     const serverId = "1268404228683202570"; // 제공해주신 서버 ID
+    const inviteLink = "https://discord.gg/your-invite-code"; // 작동하는 실제 서버 초대 링크로 교체해주세요.
 
     useEffect(() => {
+        // Discord 위젯 API는 서버 설정에서 활성화해야 합니다.
+        // 서버 설정 > 위젯 > 서버 위젯 활성화
         fetch(`https://discord.com/api/guilds/${serverId}/widget.json`)
             .then((res) => {
-                if (!res.ok) throw new Error("Failed to fetch Discord data");
+                if (!res.ok) {
+                    // 응답이 실패하면 위젯이 비활성화되었을 가능성이 높습니다.
+                    throw new Error('Failed to fetch Discord data. Please ensure the server widget is enabled.');
+                }
                 return res.json();
             })
-            .then((data) => setDiscordInfo(data))
-            .catch(() => setError("Could not load community details."));
-    }, []);
+            .then((data) => {
+                // 아이콘 URL을 동적으로 생성합니다.
+                // data.icon은 보통 null일 수 있으므로, 서버 아이콘이 있다면 직접 URL을 구성합니다.
+                const iconUrl = `https://cdn.discordapp.com/icons/${serverId}/${data.icon}.png`;
+                setDiscordInfo({ ...data, icon_url: iconUrl });
+            })
+            .catch(() => {
+                setError("Could not load community details. The server widget might be disabled.");
+            });
+    }, [serverId]);
 
     return (
         <section className={styles.discordWidgetSection}>
@@ -179,9 +201,11 @@ const DiscordWidgetSection: React.FC = () => {
                             <>
                                 <div className={styles.discordServerInfo}>
                                     <img
-                                        src={`https://cdn.discordapp.com/icons/${serverId}/${discordInfo.id}.png`}
+                                        src={discordInfo.icon_url}
                                         alt={`${discordInfo.name} server icon`}
                                         className={styles.discordServerIcon}
+                                        // 아이콘 로딩 실패 시 기본 이미지나 다른 처리를 할 수 있습니다.
+                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                                     />
                                     <div>
                                         <h3>{discordInfo.name}</h3>
@@ -194,7 +218,8 @@ const DiscordWidgetSection: React.FC = () => {
                                 </div>
                                 <Link
                                     className="button button--primary button--lg"
-                                    href={discordInfo.instant_invite}
+                                    // instant_invite 대신 직접 설정한 초대 링크를 사용합니다.
+                                    href={inviteLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
