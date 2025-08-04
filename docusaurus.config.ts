@@ -172,7 +172,7 @@ const config: Config = {
             position: 'right',
           },
           {
-            href: 'https://discord.com/invite/Kuk2qXFjc5',
+            href: 'https://discord.com/invite/3nev5nHqq9',
             label: 'Community',
             position: 'right',
           },
@@ -217,7 +217,7 @@ const config: Config = {
               },
               {
                 label: 'Discord',
-                href: 'https://discord.com/invite/Kuk2qXFjc5',
+                href: 'https://discord.com/invite/3nev5nHqq9',
               },
               {
                 label: 'X',

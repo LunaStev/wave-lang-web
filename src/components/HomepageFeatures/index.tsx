@@ -94,7 +94,7 @@ function InteractiveHero(): JSX.Element {
                 <p className={styles.heroSubtitle}><Translate id="homepage.hero.subtitle">Intuitive syntax, powerful performance, and built-in safety. Wave is designed to make you productive and your applications robust.</Translate></p>
                 <div className={styles.buttons}>
                     <Link className="button button--secondary button--lg" to="/docs/intro"><Translate id="read-the-docs">Read the Docs</Translate></Link>
-                    <Link className="button button--primary button--lg" to="https://discord.com/invite/Kuk2qXFjc5"><Translate id="join-the-community">Join the Community</Translate></Link>
+                    <Link className="button button--primary button--lg" to="https://discord.com/invite/3nev5nHqq9"><Translate id="join-the-community">Join the Community</Translate></Link>
                 </div>
                 <div className={styles.interactiveEditor}>
                     <div className={styles.editorTabs}>
