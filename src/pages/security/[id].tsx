@@ -1,22 +1,24 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import React from 'react';
 import Layout from './Layout';
 
-interface AdvisoryMeta {
-    id: string;
-    title: string;
-    severity: string;
-    discovered: string;
-    published: string;
-    affected: string[];
-    fixedIn: string;
-}
+import * as advisory1 from './advisories/WLSA-2025-0001.mdx';
 
-export default function AdvisoryPage({ source, meta }: { source: string; meta: AdvisoryMeta }) {
+const advisoryMap = {
+    'WLSA-2025-0001': advisory1,
+};
+
+export default function AdvisoryPage({ location }: { location: { pathname: string } }) {
+    const id = location.pathname.split('/').pop() || '';
+    const advisory = advisoryMap[id];
+
+    if (!advisory) {
+        return <Layout><h2>Advisory Not Found</h2></Layout>;
+    }
+
+    const { meta, default: Content } = advisory;
+
     return (
-        <Layout title={meta.id + ' - ' + meta.title}>
+        <Layout>
             <h2>{meta.id}: {meta.title}</h2>
             <p><b>Severity:</b> {meta.severity}</p>
             <p><b>Discovered:</b> {meta.discovered}</p>
@@ -24,31 +26,7 @@ export default function AdvisoryPage({ source, meta }: { source: string; meta: A
             <p><b>Affected Versions:</b> {meta.affected.join(', ')}</p>
             <p><b>Fixed In:</b> {meta.fixedIn}</p>
             <hr />
-            <MDXRemote source={source} />
+            <Content />
         </Layout>
     );
-}
-
-export async function getStaticPaths() {
-    const dir = path.join(process.cwd(), 'pages/security/advisories');
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mdx'));
-
-    const paths = files.map((filename) => ({
-        params: { id: filename.replace(/\.mdx$/, '') },
-    }));
-
-    return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }: { params: { id: string } }) {
-    const filePath = path.join(process.cwd(), 'pages/security/advisories', `${params.id}.mdx`);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const { content, data } = matter(fileContent);
-
-    return {
-        props: {
-            source: content,
-            meta: data,
-        },
-    };
 }

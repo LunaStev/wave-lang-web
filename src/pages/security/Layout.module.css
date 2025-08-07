@@ -1,10 +1,8 @@
 .container {
+    font-family: sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    font-family: sans-serif;
-    color: #111;
 }
 
 .header {
@@ -15,14 +13,13 @@
 .main {
     flex: 1;
     padding: 2rem 1.5rem;
-    max-width: 768px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .footer {
     text-align: center;
     padding: 1rem;
-    font-size: 0.85rem;
     border-top: 1px solid #ddd;
     color: #999;
 }
