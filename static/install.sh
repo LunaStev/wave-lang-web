@@ -77,14 +77,31 @@ if [[ "$DISTRO" == "ubuntu" || "$DISTRO" == "debian" ]]; then
   echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}" >> ~/.bashrc
 
 elif [[ "$DISTRO" == "fedora" ]]; then
-  sudo dnf install -y llvm llvm-devel clang clang-devel lld
-  export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm
-  echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm" >> ~/.bashrc
+  echo "[info] Installing LLVM 14..."
+  sudo dnf install -y llvm14 llvm14-libs llvm14-devel
 
-else
-  echo "Error: Unsupported Linux distribution: $DISTRO"
-  exit 1
-fi
+  export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm${LLVM_VERSION}
+  echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm${LLVM_VERSION}" >> ~/.bashrc
+
+  # Add LLVM lib path to LD_LIBRARY_PATH
+  LLVM_LIB_PATH="/usr/lib64/llvm${LLVM_VERSION}/lib"
+  if [ -d "$LLVM_LIB_PATH" ]; then
+    export LD_LIBRARY_PATH="$LLVM_LIB_PATH:$LD_LIBRARY_PATH"
+    if ! grep -q "LD_LIBRARY_PATH=.*llvm${LLVM_VERSION}/lib" ~/.bashrc; then
+      echo "export LD_LIBRARY_PATH=$LLVM_LIB_PATH:\$LD_LIBRARY_PATH" >> ~/.bashrc
+    fi
+
+    # If .so.1 doesn't exist, create symlink
+    LIBFILE="$LLVM_LIB_PATH/libLLVM-${LLVM_VERSION}.so"
+    LINKNAME="$LLVM_LIB_PATH/libLLVM-${LLVM_VERSION}.so.1"
+    if [ -f "$LIBFILE" ] && [ ! -f "$LINKNAME" ]; then
+      echo "[info] Creating symlink: libLLVM-${LLVM_VERSION}.so.1 → libLLVM-${LLVM_VERSION}.so"
+      sudo ln -s "libLLVM-${LLVM_VERSION}.so" "libLLVM-${LLVM_VERSION}.so.1"
+    fi
+  else
+    echo "Warning: LLVM lib path not found at $LLVM_LIB_PATH"
+  fi
+
 
 # Step 2: Download wavec
 FILENAME="wave-${VERSION}-${ARCH}-${OS}-gnu.tar.gz"
