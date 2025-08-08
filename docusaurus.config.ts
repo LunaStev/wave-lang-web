@@ -162,7 +162,7 @@ const config: Config = {
             label: 'Docs',
           },
           {href: 'https://blog.wave-lang.dev', label: 'Blog', position: 'left'},
-          {to: '/security', label: 'Security', position: 'left'},
+          {href: 'https://security.wave-lang.dev', label: 'Security', position: 'left'},
           {
             type: 'localeDropdown',
             position: 'right',
