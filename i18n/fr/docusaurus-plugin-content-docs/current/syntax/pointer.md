@@ -2,79 +2,79 @@
 sidebar_position: 6
 ---
 
-# 포인터
+# Pointeur
 
-## 소개
+## Introduction
 
-이 문서는 Wave의 포인터 활용 방식에 관하여 설명하는 문서입니다.
-Wave는 저수준 시스템 프로그래밍을 지원하는 언어로서, 명시적인 메모리 주소 조작을 가능하게 하기 위해 포인터 기능을 제공합니다.
-포인터는 특정 타입의 메모리 주소를 가리키는 변수이며, 이를 통해 값에 대한 직접적인 접근 및 수정이 가능합니다.
+Ce document explique comment exploiter les pointeurs dans Wave.
+Wave est un langage qui prend en charge la programmation système bas niveau, offrant des fonctionnalités de pointeurs pour permettre la manipulation explicite des adresses mémoire.
+Un pointeur est une variable qui pointe vers une adresse mémoire de type spécifique, permettant un accès et une modification directs de la valeur.
 
 ---
 
-## 포인터 선언
+## Déclaration de pointeur
 
-Wave에서 포인터는 `ptr<타입>` 형식으로 선언합니다. 예를 들어, 정수형 포인터는 다음과 같이 선언할 수 있습니다:
+Dans Wave, un pointeur est déclaré au format `ptr<type>`. Par exemple, un pointeur de type entier se déclare comme suit:
 
 ```wave
-var p: ptr<i32>;
+var p : ptr<i32>;
 ```
 
-이 선언은 `i32` 타입 값을 가리키는 포인터 `p`를 생성합니다.
+Cette déclaration crée un pointeur `p` qui pointe vers une valeur de type `i32`.
 
 ---
 
-## 포인터 초기화
+## Initialisation de pointeur
 
-포인터는 변수의 주소를 `&` 연산자를 사용하여 초기화할 수 있습니다:
+Un pointeur peut être initialisé à l'adresse d'une variable à l'aide de l'opérateur `&`:
 
 ```wave
-var a: i32 = 10;
-var p: ptr<i32> = &a;
+var a :i32 = 10;
+var p :ptr<i32> = &a;
 ```
 
-여기서 `&a`는 변수 `a`의 메모리 주소를 의미하며, `p`는 해당 주소를 가리키는 포인터가 됩니다.
+Ici, `&a` signifie l'adresse mémoire de la variable `a`, et `p` devient un pointeur vers cette adresse.
 
 ---
 
-## 포인터 역참조
+## Déréférencement de pointeur
 
-포인터가 가리키는 값을 읽거나 수정하려면 `deref` 키워드를 사용합니다. 이를 역참조라고 합니다:
+Pour lire ou modifier la valeur pointée par un pointeur, utilisez le mot-clé `deref`. Cela s'appelle le déréférencement:
 
 ```wave
-var a: i32 = 10;
-var p: ptr<i32> = &a;
+var a :i32 = 10;
+var p :ptr<i32> = &a;
 
-println("{}", deref p); // 10 출력
+println("{}", deref p); // Affiche 10
 
 deref p = 20;
-println("{}", a); // 20 출력
+println("{}", a); // Affiche 20
 ```
 
 ---
 
-## NULL 포인터
+## Pointeur NULL
 
-Wave에서는 널 포인터를 `null` 키워드를 통해 표현합니다.
-포인터 변수는 `null`로 초기화될 수 있스며, 이 경우 어떤 유효한 메모리도 가리키지 않습니다:
+Dans Wave, un pointeur nul est représenté par le mot-clé `null`.
+Une variable pointeur peut être initialisée à `null`, signifiant qu'elle ne pointe vers aucune mémoire valide:
 
 ```wave
-var p: ptr<i32> = null;
+var p :ptr<i32> = null;
 ```
 
-널 포인터를 역참조할 경우 컴파일러는 오류를 발생시킵니다.
+Le déréférencement d'un pointeur nul provoque une erreur du compilateur.
 
 ---
 
-## 다중 포인터
+## Pointeurs multiples
 
-Wave는 다중 포인터를 지원합니다. 포인터를 여러 단계로 중첩하여 선언하고 사용할 수 있습니다:
+Wave prend en charge les pointeurs multiples. Les pointeurs peuvent être déclarés et utilisés en plusieurs niveaux imbriqués:
 
 ```wave
-var x: i32 = 1;
-var p1: ptr<i32> = &x;
-var p2: ptr<ptr<i32>> = &p1;
-var p3: ptr<ptr<ptr<i32>>> = &p2;
+var x :i32 = 1;
+var p1 :ptr<i32> = &x;
+var p2 :ptr<ptr<i32>> = &p1;
+var p3 :ptr<ptr<ptr<i32>>> = &p2;
 
 println("{}", deref p1);               // 1
 println("{}", deref deref p2);         // 1
@@ -83,38 +83,38 @@ println("{}", deref deref deref p3);   // 1
 
 ---
 
-## 배열과 포인터
+## Tableaux et pointeurs
 
-포인터는 배열 요소 또는 배열 자체를 가리킬 수도 있습니다.
+Les pointeurs peuvent également pointer vers des éléments de tableau ou le tableau lui-même.
 
-### 배열 요소를 가리키는 포인터
+### Pointeur vers un élément de tableau
 
 ```wave
-var a: i32 = 10;
-var b: i32 = 20;
-var arr: array<ptr<i32>, 2> = [&a, &b];
+var a :i32 = 10;
+var b :i32 = 20;
+var arr :array<ptr<i32>, 2> = [&a, &b];
 
 println("deref arr[0] = {}, deref arr[1] = {}", deref arr[0], deref arr[1]); // 10, 20
 ```
 
-### 배열 전체를 가리키는 포인터
+### Pointeur vers le tableau entier
 
 ```wave
-var arr: ptr<array<i32, 3>> = &[1, 2, 3];
-println("{}", arr); // 메모리 주소 출력
+var arr :ptr<array<i32, 3>> = &[1, 2, 3];
+println("{}", arr); // Affiche l'adresse mémoire
 ```
 
 ---
 
-## 안전성과 소유권
+## Sécurité et propriété
 
-Wave는 Rust와 유사한 방식으 소유권 및 수명 시스템을 도입하여 포인터 사용시 메모리 안정성을 보장하려고 합니다.
-따라서 유효하지 않은 포인터 역참조, 이중 해제, 댕글링 포인터 등의 문제가 발생하지 않도록 철저히 검사합니다.
+Wave introduit un système de propriété et de durée de vie similaire à Rust pour assurer la stabilité de la mémoire lors de l'utilisation des pointeurs.
+Ainsi, elle vérifie strictement pour éviter des problèmes tels que le déréférencement de pointeurs invalides, la double libération ou les pointeurs suspendus.
 
 ```wave
 fun main() {
-    let x: i32 = 42;
-    let p: ptr<i32> = &x;
+    let x :i32 = 42;
+    let p :ptr<i32> = &x;
     
     println("x = {}", deref p);
     
@@ -123,7 +123,7 @@ fun main() {
 }
 ```
 
-출력:
+Sortie:
 
 ```text
 x = 42
@@ -132,8 +132,7 @@ x = 99
 
 ---
 
-## 결론
+## Conclusion
 
-포인터는 Wave에서 고성능 저수준 프로그래밍을 가능하게 하는 핵심 기능 중 하나입니다.
-직접적인 메모리 제어가 필요한 시스템 개발, 네이티브 라이브러리, 하드웨어 제어 등에 매우 유용하며,
-Wave의 안전한 컴파일러 구조 덕분에 포인터 사용 중 발생할 수 있는 위험 요소들을 효과적으로 방지할 수 있습니다.
+Les pointeurs sont l'une des fonctionnalités clés de Wave, permettant une programmation bas-niveau hautement performante.
+Ils sont très utiles pour le développement de systèmes nécessitant un contrôle direct de la mémoire, les bibliothèques natives, le contrôle matériel, et grâce à la structure sécurisée du compilateur de Wave, les risques potentiels liés à l'utilisation des pointeurs peuvent être efficacement évités.
