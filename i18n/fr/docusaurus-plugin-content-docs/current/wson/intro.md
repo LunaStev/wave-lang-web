@@ -2,129 +2,129 @@
 sidebar_position: 2
 ---
 
-# 문법
+# Syntaxe
 
-## 1. 기본 구조
+## 1. Structure de base
 
-- 파일의 내용은 `{}` 중괄호로 둘러싸여 있는 객체(`object`)로 시작하고 끝난다.
+- Le contenu du fichier commence et se termine par un objet encadré par des accolades `{}`.
 
-- 객체는 속성 이름(key)과 값(value) 쌍으로 구성된다.
+- Les objets se composent de paires nom de propriété (clé) et valeur.
 
-- 속성 이름과 값은 콜론(`:`) 또는 등호(`=`)로 구분한다.
+- Les noms et valeurs des propriétés sont séparés par deux-points (`:`) ou signe égal (`=`).
 
-## 2. 주석
+## 2. Commentaire
 
-- 주석은 `//` 또는  `#` 으로 시작하며, 한줄 단위로 작성된다.
+- Les commentaires commencent par `//` ou `#` et sont écrits par ligne.
 
-- 주석은 해당 줄의 끝까지 적용된다.
+- Les commentaires s'appliquent jusqu'à la fin de la ligne.
 
-- 여러 줄 주석을 따로 지원하지 않으며, 여러 줄에 걸쳐 주석을 작성할 경우 각줄마다 `//` 또는 `#` 을 추가해야 한다.
+- Les commentaires multi-lignes ne sont pas pris en charge; pour des commentaires sur plusieurs lignes, `//` ou `#` doit être ajouté à chaque ligne.
 
-## 3. 객체(Object)
+## 3. Objet (Object)
 
-- 객체는 중괄호 `{}` 로 둘러싸여 있으며, 키-값 쌍을 포합한다.
+- Les objets sont entourés par des accolades `{}` et incluent des paires clé-valeur.
 
-- 키와 값 사이에는 `:` 또는 `=` 기호를 사용할 수 있다. 두기호는 혼용 가능하다.
+- On peut utiliser le `:` ou `=` entre la clé et la valeur. Les deux symboles peuvent être mélangés indistinctement.
 
-- 각 속성은 쉼표(`,`)로 구분된다.
+- Chaque propriété est séparée par une virgule (`,`).
 
-- 객체 안에 다른 객체를 중첩하여 사용할 수 있다.
+- Il est possible de faire de l'imbrication avec d'autres objets à l'intérieur d'un objet.
 
-예시:
+Exemple:
 
 ```
 {
-    status: "success",
+    status: "succès",
     code = 200,
     user = { id: 123, name: "John Doe" }
 }
 ```
 
-## 4. 배열(Array)
+## 4. Tableau (Array)
 
-- 배열은 대괄호 `[]` 로 둘러싸여 있으며, 요소들은 쉼표(`,`)로 구분된다.
+- Les tableaux sont entourés par des crochets `[]` et leurs éléments sont séparés par des virgules (`,`).
 
-- 배열의 요소는 객체, 문자열, 숫자 등 다양한 자료형이 될 수 있다.
+- Les éléments d'un tableau peuvent être de différents types de données, tels que des objets, des chaînes de caractère ou des nombres.
 
-- WSON에서 배열은 객체 내에 포함될 수 있으며, 배열 안에는 다른 배열이나 객체가 중첩될 수 있다.
+- Dans WSON, les tableaux peuvent être inclus dans un objet et d'autres tableaux ou objets peuvent être imbriqués à l'intérieur des tableaux.
 
-예시:
+Exemple:
 
 ```
-tasks: [
-    { task_id: 1, title: "Complete project report" },
-    { task_id: 2, title: "Review team feedback" }
+tâches: [
+    { task_id: 1, title: "Compléter le rapport de projet" },
+    { task_id: 2, title: "Revoir les retours d'équipe" }
 ]
 ```
 
-## 5. 키-값 쌍 (Key-Value Pair)
+## 5. Paire clé-valeur (Key-Value Pair)
 
-- 속성 이름은 문자열로 구성되며, 공백 없이 `:`, `=` 뒤에 값을 배치한다.
+- Les noms de propriétés sont constitués de chaînes de caractères, suivies sans espace d'une valeur précédée de `:` ou `=`.
 
-- 값의 유형에는 문자열, 숫자, 불리언, 객체, 배열 등이 있다.
+- Les types de valeurs incluent chaînes, nombres, booléens, objets et tableaux.
 
-- 문자열은 큰따옴표 `“` 로 둘러싸인다.
+- Les chaînes sont entourées de guillemets `"`.
 
-- 숫자는 큰 따옴표 없이 사용하며, 정수 또는 실수 형태로 가능하다.
+- Les nombres sont utilisés sans guillemets et peuvent être des entiers ou des flottants.
 
-예시:
+Exemple:
 
 ```
-name: "John Doe"
-age = 25
+nom: "John Doe"
+âge = 25
 ```
 
-## 6. 데이터 유형 (Data Types)
+## 6. Types de données (Data Types)
 
-- 문자열(String): 큰따옴표 `"` 로 묶인 텍스트다.
+- Chaîne (String) : texte entouré de guillemets `"`.
 
 ```
 "hello world"
 ```
 
-- 숫자(Number): 정수 또는 실수 값이다.
+- Nombre (Number) : valeur entière ou flottante.
 
 ```
 42
-3.14
+3,14
 ```
 
-- 불리언(Boolean): `true` 또는 `false` 값을 사용한다.
+- Booléen (Boolean) : utilise des valeurs `true` ou `false`.
 
 ```
 is_active = true
 ```
 
-- 객체(Object): 중괄호 `{}` 로 묶인 키-ㄱ밧 쌍이다.
-- 배열(Array): 대괄호 `[]` 로 묶인 요소 목록이다.
+- Objet (Object) : paire clé-valeur enveloppée par des accolades `{}`.
+- Tableau (Array) : liste d'éléments entourés par des crochets `[]`.
 
-## 7. 예제 설명
+## 7. Description des exemples
 
 ```ws
 {
-    // 상태 코드와 메시지 정보
+    // Code de statut et information de message
     status: "success",
     code: 200,
-    message: "Data retrieved successfully",
+    message: "Données récupérées avec succès",
 
     user = {
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        age: 25  # 사용자 나이
+        age: 25  # âge de l'utilisateur
     },
 
     tasks: [
         {
             task_id: 1,
-            title: "Complete project report",
-            status: "in-progress",
+            title: "Terminer le rapport de projet",
+            status: "en cours",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "Review team feedback",
-            status: "pending",
+            title: "Examiner les commentaires de l'équipe",
+            status: "en attente",
             due_date: "2024-10-20"
         }
     ]
