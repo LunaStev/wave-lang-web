@@ -2,110 +2,110 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Wave + Whale integrierte Entwicklungs-Roadmap v2
 
-## 전체 단계
+## Alle Stufen
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → release
+pre-alpha → pre-beta → alpha → beta → rc → Veröffentlichung
 ```
 
 ---
 
-## Pre-Beta 단계
+## Pre-Beta Stufe
 
-> 목표: Wave 언어의 프론트엔드 완성 + LLVM 백엔드를 이용한 전체 기능 구현
+> Ziel: Vollständige Frontend-Entwicklung der Wave-Sprache + vollständige Implementierung der Funktionen mit LLVM Backend
 
-### 주요 특징
+### Hauptmerkmale
 
-- LLVM만 사용 (Whale 없음)
+- Nur LLVM verwenden (kein Whale)
 
-- 문법 추가는 없음, 기존 사양만 구현
+- Keine Hinzufügung von Syntax, nur Implementierung der bestehenden Spezifikationen
 
-- 에러 메시지, 타입 검사, 변수 스코프 등 프론트 중심 구조 안정화
+- Stabilisierung der frontend-zentrierten Struktur einschließlich Fehlermeldungen, Typenprüfung, Variablenscope
 
-### 구현 범위
+### Umfang der Implementierung
 
-- 변수 선언, 출력, 연산
+- Variable Deklaration, Ausgabe, Berechnung
 
-- 함수 정의 및 호출
+- Funktionen definieren und aufrufen
 
 - if / else if / else
 
 - while / break / continue
 
-- 포맷 출력, 타입 지정
+- Formatierte Ausgabe, Typenangabe
 
-- 포인터 설계 (`ptr<T>` 형태)
+- Zeigerdesign (`ptr<T>`-Format)
 
-- 배열 설계 (`array<T, N>`)
+- Array-Design (`array<T, N>`)B
 
-- 타입 검사 및 구조적 AST
+- Typenprüfung und strukturelles AST
 
-### 사용 기술
+### Verwendete Technologien
 
-- Rust (Wave 컴파일러 전부)
+- Rust (gesamter Wave-Compiler)
 
-- LLVM (IR 생성, AOT 실행)
+- LLVM (IR-Erzeugung, AOT-Ausführung)
 
 - inkwell / llvm-sys
 
 ---
 
-## Alpha 단계
+## Alpha-Stufe
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> Ziel: Einführung von Whale, parallel mit LLVM verwenden / Implementierung eines Whale-basierten Backends beginnen
 
-### 주요 특징
+### Hauptmerkmale
 
-- LLVM은 디폴트 백엔드
+- LLVM ist das Standard-Backend
 
-- Whale은 선택적 백엔드
+- Whale ist ein optionales Backend
 
-- Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+- Beim Ausführen von Wave-Code mit der Option `--backend` steuerbar
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale 관련 작업
+### Arbeiten im Zusammenhang mit Whale
 
-- Whale IR 구조 설계 및 정의 (Instruction, Value, Block 등)
+- Entwurf und Definition der Whale-IR-Struktur (Instruction, Value, Block usw.)
 
-- Whale용 IR Generator 구현
+- Implementierung eines IR-Generators für Whale
 
-- Whale 코드 생성기 (어셈블리 or 바이너리)
+- Whale-Code-Generator (Assembly oder Binary)
 
-- Whale로만 가능한 타입 구현 (`i1024`, 고급 포인터 등)
+- Typenimplementierung, die nur mit Whale möglich ist (`i1024`, erweitere Zeiger usw.)
 
-### 체크포인트
+### Checkpoint
 
-- Whale로 Hello World 출력
+- Ausgabe von Hello World mit Whale
 
-- Whale에서 변수 선언/할당
+- Variablendeklaration/-zuweisung in Whale
 
-- Whale IR 디버깅 도구 구현
+- Implementierung eines IR-Debugging-Tools für Whale
 
-- Whale에서 포인터 타입 처리
+- Zeigertypenbehandlung in Whale
 
-- Wave → Whale IR 변환 진행
+- Umwandlung von Wave zu Whale IR
 
 ---
 
-## Beta 단계
+## Beta-Stufe
 
-> 목표: Whale로 완전 전환, LLVM 제거. Whale + Wave 조합 최적화
+> Ziel: Vollständige Umstellung auf Whale, Entfernen von LLVM. Optimierung der Whale + Wave-Kombination
 
-### 주요 특징
+### Hauptmerkmale
 
-- Whale만 사용
+- Nur Whale verwenden
 
-- LLVM 전체 제거 (디펜던시 및 모듈)
+- Vollständige Entfernung von LLVM (Abhängigkeiten und Module)
 
-- 코드 최적화 중심
+- Fokus auf Code-Optimierung
 
-- IR → 실행까지 빠르고 효율적으로
+- Schnell und effizient von IR bis zur Ausführung
 
 ### 최적화 범위
 
