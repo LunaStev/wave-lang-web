@@ -2,38 +2,38 @@
 sidebar_position: 1
 ---
 
-# 함수와 변수
+# Funktionen und Variablen
 
-## 소개
+## Einführung
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화의 균형을 이루어 소프트웨어 개발에 효율적이고 유연한 환경을 제공하는 것입니다.
-이 섹션에서는 Wave 프로그램의 기본 구성 요소인 함수와 변수를 소개합니다. 이러한 구성 요소는 프로그램 내에서 논리를 구성하고 데이터를 관리하는 데 필수적입니다.
-함수와 변수를 정의하고 다루는 방법을 이해하면 Wave의 잠재력을 최대한 활용할 수 있습니다.
+Die zentrale Designphilosophie der Wave-Programmiersprache ist es, eine Balance zwischen niedrigem Leistungsniveau und hoher Abstraktion zu schaffen, um eine effiziente und flexible Entwicklungsumgebung zu bieten.
+In diesem Abschnitt werden die grundlegenden Bausteine des Wave-Programms, nämlich Funktionen und Variablen, vorgestellt. Diese Komponenten sind entscheidend, um die Logik innerhalb eines Programms zu strukturieren und Daten zu verwalten.
+Wenn Sie verstehen, wie Funktionen und Variablen definiert und gehandhabt werden, können Sie das Potenzial von Wave maximal nutzen.
 
 ---
 
-## 함수
+## Funktionen
 
-Wave에서 함수는 독립적으로 실행할 수 있는 **재사용 가능한 코드 블록** 역할을 합니다.
-함수는 특정 동작을 캡슐화하고 프로그램 전반에서 필요할 때 호출할 수 있도록 해줍니다.
-이를 통해 계산을 수행하거나, I/O 작업을 관리하거나, 코드를 관리 가능한 단위로 분리할 수 있습니다.
+In Wave fungieren Funktionen als **wiederverwendbare Codeblöcke**, die unabhängig ausgeführt werden können.
+Funktionen kapseln bestimmte Aktionen und können überall im gesamten Programm bei Bedarf aufgerufen werden.
+Dies ermöglicht es, Berechnungen durchzuführen, Ein- und Ausgabeoperationen zu verwalten oder Code in überschaubare Einheiten zu unterteilen.
 
-Wave에서 함수의 시그니처는 `fun` 키워드로 시작하며, 함수 이름, 매개변수(있을 경우), 그리고 중괄호 `{}`로 감싸인 함수 본체로 구성됩니다.
+Die Signatur einer Funktion in Wave beginnt mit dem `fun`-Schlüsselwort, gefolgt vom Funktionsnamen, den Parametern (falls vorhanden) und einem Funktionskörper in geschweiften Klammern `{}`.
 
-### 함수 정의하기
+### Definition von Funktionen
 
-Wave에서 기본적인 함수는 다음과 같이 정의됩니다:
+In Wave wird eine grundlegende Funktion folgendermaßen definiert:
 
 ```wave
 fun main() {
-    // 여기에 코드를 작성하세요
+    // Schreiben Sie hier Ihren Code
 }
 ```
 
-- `main` 함수는 프로그램 실행을 위한 진입점으로 항상 필요합니다.
-- 함수는 매개변수를 가질 수 있으며, 값을 반환할 수 있습니다. 반환 타입은 함수 이름 뒤에 명시합니다.
+- Die `main`-Funktion ist der Einstiegspunkt für die Programmausführung und immer notwendig.
+- Funktionen können Parameter haben und Werte zurückgeben. Der Rückgabetyp wird nach dem Funktionsnamen angegeben.
 
-### 예제: 간단한 함수
+### Beispiel: Einfache Funktion
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -41,75 +41,75 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // add 함수 호출
-    println(result);            // 출력: 12
+    var result = add(5, 7);     // Aufruf der add-Funktion
+    println(result);            // Ausgabe: 12
 }
 ```
 
-위 예제에서:
+Im obigen Beispiel:
 
-- `add` 함수는 두 정수 `a`와 `b`를 받아 합계를 반환합니다.
-- `main` 함수는 `add`를 호출하여 결과를 출력합니다.
+- Die `add`-Funktion nimmt zwei ganze Zahlen `a` und `b` und gibt ihre Summe zurück.
+- Die `main`-Funktion ruft `add` auf und gibt das Ergebnis aus.
 
-## 변수
+## Variablen
 
-변수는 프로그램 내에서 데이터를 저장하고 조작하는 데 사용됩니다.
-Wave는 변수 선언에서 **가변 변수**와 **불변 변수**를 모두 지원하여 데이터 관리에 대한 개발자의 제어권을 제공합니다.
+Variablen werden verwendet, um Daten innerhalb eines Programms zu speichern und zu manipulieren.
+Wave unterstützt sowohl **veränderliche** als auch **unveränderliche** Variablen in der Deklaration, was dem Entwickler Kontrolle über die Datenverwaltung gibt.
 
-### 가변 변수
+### Veränderliche Variablen
 
-Wave에서 변수는 기본적으로 **가변(mutable)** 입니다. 즉, 프로그램 실행 중에 값을 변경할 수 있습니다.
+In Wave sind Variablen standardmäßig **veränderlich (mutable)**. Das bedeutet, dass ihr Wert während der Programmausführung geändert werden kann.
 
-가변 변수는 var 키워드를 사용해 선언합니다.
+Veränderliche Variablen werden mit dem Schlüsselwort var deklariert.
 
 ```wave
-var x :i32 = 10; // 가변 변수
+var x :i32 = 10; // veränderliche Variable
 x = 20;
 ```
 
-위 예제에서:
+Im obigen Beispiel:
 
-- `x`는 가변 변수로, 초기값 `10`을 가지며 이후에 `20`으로 값을 변경할 수 있습니다.
+- `x` ist eine veränderliche Variable mit dem anfänglichen Wert `10`, der später auf `20` geändert werden kann.
 
-### 불변 변수
+### Unveränderliche Variablen
 
-변수를 **불변(immutable)** 으로 선언하면, 한 번 값이 할당된 후에는 변경할 수 없습니다.
+Wenn eine Variable als **unveränderlich (immutable)** deklariert ist, kann ihr Wert nach der Zuweisung nicht mehr geändert werden.
 
-불변 변수는 `let` 키워드를 사용해 선언합니다.
+Unveränderliche Variablen werden mit dem Schlüsselwort `let` deklariert.
 
 ```wave
-let y :i32 = 5;         // 불변 변수
-// y = 10;              // 오류: 불변 변수는 값을 변경할 수 없습니다.
+let y :i32 = 5;         // unveränderliche Variable
+// y = 10;              // Fehler: unveränderliche Variablen können nicht verändert werden.
 ```
 
-여기서:
+Hier:
 
-- `y`는 불변 변수로, 값을 변경하려고 하면 컴파일 오류가 발생합니다.
+- `y` ist eine unveränderliche Variable und jede Änderung führt zu einem Kompilierungsfehler.
 
-하지만 `let` 키워드에서 가변 변수로 사용하고 싶다면 `mut`를 사용해서 일시적 가변 변수로 사용할 수 있습니다.
+Falls Sie eine mit `let` deklarierte Variable veränderlich machen möchten, können Sie `mut` verwenden, um eine vorübergehende Veränderlichkeit zu erreichen.
 
 ```wave
 let mut y :i32 = 5;
 y = 10; 
 ```
 
-### 변수 선언 예제
+### Beispiel für Variablendeklaration
 
-다양한 타입의 가변 및 불변 변수를 선언하는 예제는 다음과 같습니다:
+Ein Beispiel zur Deklaration von variablen und unveränderlichen Variablen verschiedener Typen:
 
 ```wave
-var x :i32 = 10;                    // 가변 정수 변수
-let y :f64 = 3.14159;               // 불변 부동소수점 변수
-var name :str = "Wave";             // 가변 문자열 변수
-let is_active :bool = true;         // 불변 논리 변수
+var x :i32 = 10;                    // veränderliche Ganzzahlvariable
+let y :f64 = 3.14159;               // unveränderliche Fließkommazahlvariable
+var name :str = "Wave";             // veränderliche Zeichenfolgenvariable
+let is_active :bool = true;         // unveränderliche boolesche Variable
 ```
 
-- `x`는 가변 정수입니다.
-- `y`는 불변 부동소수점 숫자입니다..
-- `name`은 가변 문자열입니다.
-- `is_active`는 불변 논리값입니다.
+- `x` ist eine veränderliche Ganzzahl.
+- `y` ist eine unveränderliche Fließkommazahl.
+- `name` ist eine veränderliche Zeichenfolge.
+- `is_active` ist ein unveränderlicher boolescher Wert.
 
-Wave에서는 `var` 키워드를 사용해 가변 변수를 선언하며, `let` 키워드를 사용해 초기 할당 후 변경할 수 없는 불변 변수를 선언합니다.
+In Wave wird das Schlüsselwort `var` verwendet, um veränderliche Variablen zu deklarieren, und das Schlüsselwort `let`, um unveränderliche Variablen zu deklarieren, die nach der ersten Zuweisung nicht mehr geändert werden können.
 
-가변 변수와 불변 변수를 구분함으로써, Wave는 데이터 일관성과 프로그램 상태를 더욱 효과적으로 제어할 수 있게 합니다.
-이로써 더욱 견고하고 예측 가능한 코드를 작성할 수 있습니다.
+Durch die Unterscheidung zwischen veränderlichen und unveränderlichen Variablen ermöglicht Wave eine effektivere Kontrolle von Datenkonsistenz und Programmzustand.
+Damit kann stabilerer und besser vorhersagbarer Code geschrieben werden.

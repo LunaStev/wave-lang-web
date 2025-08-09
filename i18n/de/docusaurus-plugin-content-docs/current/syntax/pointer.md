@@ -2,73 +2,73 @@
 sidebar_position: 6
 ---
 
-# 포인터
+# Zeiger
 
-## 소개
+## Einführung
 
-이 문서는 Wave의 포인터 활용 방식에 관하여 설명하는 문서입니다.
-Wave는 저수준 시스템 프로그래밍을 지원하는 언어로서, 명시적인 메모리 주소 조작을 가능하게 하기 위해 포인터 기능을 제공합니다.
-포인터는 특정 타입의 메모리 주소를 가리키는 변수이며, 이를 통해 값에 대한 직접적인 접근 및 수정이 가능합니다.
+Dieses Dokument beschreibt, wie Wave Zeiger verwendet.
+Wave bietet als Sprache, die Systemprogrammierung auf niedriger Ebene unterstützt, Zeigerfunktionalität an, um explizite Speicheradressmanipulationen zu ermöglichen.
+Ein Zeiger ist eine Variable, die auf eine Speicheradresse eines bestimmten Typs verweist und ermöglicht direkten Zugriff und Änderung von Werten.
 
 ---
 
-## 포인터 선언
+## Zeigerdeklaration
 
-Wave에서 포인터는 `ptr<타입>` 형식으로 선언합니다. 예를 들어, 정수형 포인터는 다음과 같이 선언할 수 있습니다:
+In Wave werden Zeiger im Format `ptr<Typ>` deklariert. Zum Beispiel kann ein ganzzahliger Zeiger wie folgt deklariert werden:
 
 ```wave
 var p: ptr<i32>;
 ```
 
-이 선언은 `i32` 타입 값을 가리키는 포인터 `p`를 생성합니다.
+Diese Deklaration erstellt den Zeiger `p`, der auf einen Wert des Typs `i32` zeigt.
 
 ---
 
-## 포인터 초기화
+## Zeigerinitialisierung
 
-포인터는 변수의 주소를 `&` 연산자를 사용하여 초기화할 수 있습니다:
+Ein Zeiger kann mit der Adresse einer Variablen unter Verwendung des `&` Operators initialisiert werden:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 ```
 
-여기서 `&a`는 변수 `a`의 메모리 주소를 의미하며, `p`는 해당 주소를 가리키는 포인터가 됩니다.
+Hier bezieht sich `&a` auf die Speicheradresse der Variable `a`, und `p` wird zum Zeiger, der auf diese Adresse zeigt.
 
 ---
 
-## 포인터 역참조
+## Zeiger-Dereferenzierung
 
-포인터가 가리키는 값을 읽거나 수정하려면 `deref` 키워드를 사용합니다. 이를 역참조라고 합니다:
+Um den Wert zu lesen oder zu ändern, auf den ein Zeiger zeigt, wird das Schlüsselwort `deref` verwendet. Dies wird Dereferenzierung genannt:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 
-println("{}", deref p); // 10 출력
+println("{}", deref p); // Gibt 10 aus
 
 deref p = 20;
-println("{}", a); // 20 출력
+println("{}", a); // Gibt 20 aus
 ```
 
 ---
 
-## NULL 포인터
+## NULL-Zeiger
 
-Wave에서는 널 포인터를 `null` 키워드를 통해 표현합니다.
-포인터 변수는 `null`로 초기화될 수 있스며, 이 경우 어떤 유효한 메모리도 가리키지 않습니다:
+In Wave werden Null-Zeiger durch das Schlüsselwort `null` dargestellt.
+Zeigervariablen können mit `null` initialisiert werden, wobei sie in diesem Fall keinen gültigen Speicher verweisen:
 
 ```wave
 var p: ptr<i32> = null;
 ```
 
-널 포인터를 역참조할 경우 컴파일러는 오류를 발생시킵니다.
+Der Compiler wird einen Fehler auslösen, wenn versucht wird, einen Null-Zeiger zu dereferenzieren.
 
 ---
 
-## 다중 포인터
+## Mehrfachzeiger
 
-Wave는 다중 포인터를 지원합니다. 포인터를 여러 단계로 중첩하여 선언하고 사용할 수 있습니다:
+Wave unterstützt Mehrfachzeiger. Zeiger können in mehreren Ebenen verschachtelt deklariert und verwendet werden:
 
 ```wave
 var x: i32 = 1;
@@ -83,11 +83,11 @@ println("{}", deref deref deref p3);   // 1
 
 ---
 
-## 배열과 포인터
+## Arrays und Zeiger
 
-포인터는 배열 요소 또는 배열 자체를 가리킬 수도 있습니다.
+Zeiger können sowohl auf Array-Elemente als auch auf das Array selbst zeigen.
 
-### 배열 요소를 가리키는 포인터
+### Zeiger auf Array-Elemente
 
 ```wave
 var a: i32 = 10;
@@ -97,19 +97,19 @@ var arr: array<ptr<i32>, 2> = [&a, &b];
 println("deref arr[0] = {}, deref arr[1] = {}", deref arr[0], deref arr[1]); // 10, 20
 ```
 
-### 배열 전체를 가리키는 포인터
+### Zeiger auf das gesamte Array
 
 ```wave
 var arr: ptr<array<i32, 3>> = &[1, 2, 3];
-println("{}", arr); // 메모리 주소 출력
+println("{}", arr); // Gibt Speicheradresse aus
 ```
 
 ---
 
-## 안전성과 소유권
+## Sicherheit und Eigentum
 
-Wave는 Rust와 유사한 방식으 소유권 및 수명 시스템을 도입하여 포인터 사용시 메모리 안정성을 보장하려고 합니다.
-따라서 유효하지 않은 포인터 역참조, 이중 해제, 댕글링 포인터 등의 문제가 발생하지 않도록 철저히 검사합니다.
+Wave führt ein System ähnlich dem von Rust ein, um Speicherstabilität bei der Verwendung von Zeigern durch Besitz- und Lebensdauer zu gewährleisten.
+Daher werden ungültige Zeigerdereferenzierung, doppelte Freigabe und Dangling-Pointer-Probleme gründlich überprüft, um sie zu verhindern.
 
 ```wave
 fun main() {
@@ -123,7 +123,7 @@ fun main() {
 }
 ```
 
-출력:
+Ausgabe:
 
 ```text
 x = 42
@@ -132,8 +132,7 @@ x = 99
 
 ---
 
-## 결론
+## Fazit
 
-포인터는 Wave에서 고성능 저수준 프로그래밍을 가능하게 하는 핵심 기능 중 하나입니다.
-직접적인 메모리 제어가 필요한 시스템 개발, 네이티브 라이브러리, 하드웨어 제어 등에 매우 유용하며,
-Wave의 안전한 컴파일러 구조 덕분에 포인터 사용 중 발생할 수 있는 위험 요소들을 효과적으로 방지할 수 있습니다.
+Pointer sind eine der wichtigsten Funktionen in Wave, die leistungsstarkes Low-Level-Programmieren ermöglichen.
+Sie sind sehr nützlich für die Systementwicklung, die native Bibliotheken und die Hardwaresteuerung, wo eine direkte Speicherverwaltung erforderlich ist, und dank der sicheren Compilerstruktur von Wave können die Risiken, die bei der Verwendung von Zeigern auftreten können, wirksam vermieden werden.
