@@ -107,80 +107,80 @@ wavec run main.wave --backend=llvm
 
 - Schnell und effizient von IR bis zur Ausführung
 
-### 최적화 범위
+### Optimierungsbereich
 
-- Whale IR 최적화 Pass 설계
+- Whale IR Optimierung Pass Design
 
-- Whale 코드 생성 속도 개선
+- Verbesserung der Whale-Code-Erstellungsgeschwindigkeit
 
-- Wave의 모든 문법이 Whale에서 완벽 지원
+- Alle Syntax von Wave wird von Whale vollständig unterstützt
 
-### 테스트
+### Test
 
-- 단위 테스트 + 전체 테스트 스위트
+- Einzeltest + vollständiges Testsuite
 
-- WSON, 표준 라이브러리 호환성 테스트
+- WSON, Standardbibliothekskompatibilitätstest
 
-- 크로스 플랫폼 Whale 빌드 확인
-
----
-
-## RC (Release Candidate) 단계
-
-> 목표: Wave 부트스트랩 시작 — Rust 코드 전면 제거
-
-### 주요 특징
-
-- Wave로 Wave 컴파일러를 재작성 시작
-
-- Whale 기반으로 Wave 코드 자체 실행
-
-- Whale은 self-hosting 단계 진입
-
-### 작업 범위
-
-- Whale 기반으로 Wave IR 생성기 재작성
-
-- Rust 제거 + Wave 코드로 대체
-
-- std 및 core 라이브러리 Wave로 작성
-
-- 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
+- Überprüfung des plattformübergreifenden Whale-Builds
 
 ---
 
-## Release 단계 (v0.0.1)
+## RC (Release Candidate) Phase
 
-> 목표: 공식 출시 / 완전한 Whale 기반 독립 언어 생태계 제공
+> Ziel: Start des Wave-Bootstraps - vollständige Entfernung des Rust-Codes
 
-### 구성 요소
+### Hauptmerkmale
 
-- Wave (언어 및 표준 라이브러리)
+- Beginn der Neuschreibung des Wave-Compilers mit Wave
 
-- Whale (컴파일러 툴체인)
+- Selbstausführung des Wave-Codes basierend auf Whale
 
-- Vex (패키지 매니저)
+- Whale tritt in die Self-Hosting-Phase ein
 
-- WSON (데이터 포맷)
+### Arbeitsumfang
 
-### 특징
+- Neuschreibung des Wave IR-Generators auf Whale-Basis
 
-- 완전한 Wave-only 컴파일러 (부트스트랩 성공)
+- Entfernung von Rust + Ersatz durch Wave-Code
 
-- Whale 최적화 완료
+- Erstellung der std- und core-Bibliotheken mit Wave
 
-- Vex 빌드 및 배포 시스템 정착
-
-- WSON 파서 + 직렬화 포함
-
-- 크로스 OS 빌드 가능 (`vex build --windows` 등)
+- Bei erfolgreichem Bootstrap entsteht der erste native Wave-Compiler
 
 ---
 
-## 개발 메타 전략
+## Release-Phase (v0.0.1)
 
-| 전략        | 설명                                             |
-| --------- | ---------------------------------------------- |
-| 열차+레일 전략  | Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 병행 진행       |
-| 백엔드 분기 전략 | `--backend` 옵션으로 LLVM/Whale 선택, alpha에서 중요한 구조 |
-| 구조 역전 계획  | rc 이후부터 Wave 코드가 Whale을 통해 Wave 자신을 컴파일        |
+> Ziel: Offizielle Veröffentlichung / Bereitstellung eines vollständigen Whale-basierten unabhängigen Sprachökosystems
+
+### Komponenten
+
+- Wave (Sprache und Standardbibliothek)
+
+- Whale (Compiler Toolchain)
+
+- Vex (Paketmanager)
+
+- WSON (Datenformat)
+
+### Merkmale
+
+- Vollständiger Wave-only Compiler (Bootstrap-Erfolg)
+
+- Whale-Optimierung abgeschlossen
+
+- Implementierung des Vex-Build- und -Verteilungssystems
+
+- Einschließlich WSON-Parser + Serialisierung
+
+- Cross-OS-Build möglich (`vex build --windows` etc.)
+
+---
+
+## Entwicklung Meta-Strategie
+
+| Strategie                  | Beschreibung                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------- |
+| Zug+Schienen Strategie     | Parallel zur Entwicklung von Whale wird gleichzeitig das Wave-Backend aufgebaut |
+| Backend-Zweigstrategie     | Auswahl von LLVM/Whale mit der `--backend`-Option, wichtige Struktur in Alpha   |
+| Plan zur Strukturumkehrung | Nach rc kompiliert der Wave-Code sich selbst über Whale                         |
