@@ -2,78 +2,78 @@
 sidebar_position: 4
 ---
 
-# 반복문
+# Schleife
 
-## 소개
+## Einführung
 
-Wave 언어에서는 코드를 반복적으로 실행할 수 있도록 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 반복 실행하거나, 특정 횟수만큼 반복할 때 사용됩니다.
+In der Wave-Sprache werden Schleifen bereitgestellt, mit denen Code wiederholt ausgeführt werden kann.
+Schleifen werden verwendet, um Code entweder so lange auszuführen, bis eine bestimmte Bedingung erfüllt ist, oder für eine bestimmte Anzahl von Wiederholungen.
 
-Wave에서 지원하는 반복문은 다음과 같습니다:
+Die von Wave unterstützten Schleifen sind folgende:
 
-- while 문: 조건 기반 반복
+- while Schleife: Bedingungsbasierte Wiederholung
 
-- for 문: 횟수 기반 반복
+- for Schleife: Wiederholung auf Basis der Anzahl
 
-또한 반복 중간에 흐름을 제어할 수 있는 break, continue 키워드도 함께 제공됩니다.
-이 섹션에서는 반복문의 사용법과 흐름 제어 키워드를 모두 설명합니다.
+Außerdem werden die Schlüsselwörter break und continue zur Steuerung des Flusses innerhalb einer Schleife bereitgestellt.
+In diesem Abschnitt werden sowohl die Verwendung von Schleifen als auch der Funktionen zur Steuerung des Ablaufs erklärt.
 
 ---
 
-## while 문
+## while Schleife
 
-`while` 문은 주어진 조건식이 `true`로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건이 `false`가 되면 반복은 종료됩니다.
+Eine `while` Schleife führt einen Codeblock aus, solange der Ausdruck als `true` bewertet wird.
+Wenn die Bedingung `false` wird, endet die Schleife.
 
-### 기본 구조
+### Grundstruktur
 
-다음은 `while` 문의 기본 문법입니다:
+Hier ist die grundlegende Syntax der `while` Schleife:
 
 ```wave
-while (조건식) {
-    // 반복할 코드
+while (Bedingung) {
+    // Code zum Wiederholen
 }
 ```
 
-- 조건식은 `bool` 타입이어야 합니다.
+- Der Ausdruck muss von Typ `bool` sein.
 
-- 코드 블록은 `{}`로 감싸며, 하나 이상의 명령문을 포함할 수 있습니다.
+- Der Codeblock wird durch `{}` begrenzt und kann eine oder mehrere Anweisungen enthalten.
 
-### 예제: 0부터 4까지 출력
+### Beispiel: Ausgabe von 0 bis 4
 
 ```wave
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i는 {}입니다.", i);
+    println("i ist {}.", i);
     i = i + 1;
 }
 ```
 
-이 예제는 `i`가 5보다 작을 때까지 반복되며, 매 반복마다 값을 출력하고 1씩 증가합니다.
+Dieses Beispiel wiederholt sich, bis `i` kleiner als 5 ist, gibt den Wert in jeder Schleife aus und erhöht ihn um 1.
 
 ---
 
-## for 문
+## for Schleife
 
-`for` 문은 반복 횟수가 정해져 있는 경우에 유용하게 사용됩니다.
-초기값, 종료 조건, 증감식을 함께 명시하여 반복을 구성합니다.
+Eine `for` Schleife wird nützlich eingesetzt, wenn die Anzahl der Wiederholungen festgelegt ist.
+Durch die Angabe von Anfangswert, Endbedingung und Inkrement wird die Schleife konfiguriert.
 
-### 기본 구조
+### Grundstruktur
 
 ```wave
-for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
-    // 반복할 코드
+for (var Variablenname: Typ = Anfangswert; Bedingung; Inkrement) {
+    // Code zum Wiederholen
 }
 ```
 
-- 변수명: 반복 제어에 사용되는 변수
+- Variablenname: Variable zur Steuerung der Schleife
 
-- 조건식: `true`인 동안 반복이 실행됩니다
+- Bedingung: Wiederholung, solange `true` ist
 
-- 증감식: 반복 변수 값을 변경합니다
+- Inkrement: Ändert den Wert der Schleifenvariable
 
-### 예제: 1부터 5까지 출력
+### Beispiel: Ausgabe von 1 bis 5
 
 ```wave
 for (var i: i32 = 1; i <= 5; i = i + 1) {
@@ -83,12 +83,12 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 
 ---
 
-## 중첩 반복문
+## Verschachtelte Schleifen
 
-반복문 내부에 또 다른 반복문을 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-예를 들어 2차원 배열이나 조합을 순회할 때 유용합니다.
+Man kann eine Schleife innerhalb einer anderen Schleife schreiben, was als verschachtelte Schleife bezeichnet wird.
+Zum Beispiel nützlich für das Durchlaufen von zweidimensionalen Arrays oder Kombinationen.
 
-### 예제: 2중 while 문
+### Beispiel: doppelte while Schleife
 
 ```wave
 var i :i32 = 0;
@@ -107,12 +107,12 @@ while (i < 3) {
 
 ---
 
-## break 문
+## break Anweisung
 
-`break` 문은 반복문을 즉시 종료하고 바깥으로 빠져나옵니다.
-조건이 충족되었을 때 반복을 중단하고자 할 때 유용합니다.
+Eine `break` Anweisung beendet sofort die Schleife und verlässt sie.
+Nützlich, um die Schleife zu unterbrechen, wenn eine Bedingung erfüllt ist.
 
-### 예제: 특정 값에서 반복 종료
+### Beispiel: Schleifenende bei einem bestimmten Wert
 
 ```wave
 var i :i32 = 0;
@@ -129,12 +129,12 @@ while (true) {
 
 ---
 
-## continue 문
+## continue Anweisung
 
-`continue` 문은 현재 반복의 나머지 부분을 건너뛰고 다음 반복을 시작합니다.
-특정 조건일 때만 반복 블록의 일부를 실행하고 싶을 때 사용합니다.
+Eine `continue` Anweisung überspringt den Rest der aktuellen Wiederholung und startet die nächste.
+Wird verwendet, wenn nur ein Teil des Schleifenblocks unter bestimmten Bedingungen ausgeführt werden soll.
 
-### 예제: 짝수만 출력
+### Beispiel: nur gerade Zahlen ausgeben
 
 ```wave
 for (var i: i32 = 0; i <= 10; i = i + 1) {
@@ -148,15 +148,15 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 
 ---
 
-## 요약
+## Zusammenfassung
 
-| 문법       | 설명                     |
-| -------- | ---------------------- |
-| while    | 조건이 참일 동안 반복           |
-| for      | 초기값, 조건, 증감식을 통한 반복 수행 |
-| break    | 반복문 즉시 종료              |
-| continue | 다음 반복으로 건너뜀            |
+| Syntax   | Beschreibung                                                           |
+| -------- | ---------------------------------------------------------------------- |
+| while    | Wiederholung, solange die Bedingung wahr ist                           |
+| for      | Ausführung der Wiederholung durch Anfangswert, Bedingung und Inkrement |
+| break    | Beendet die Schleife sofort                                            |
+| continue | Überspringen zur nächsten Wiederholung                                 |
 
-Wave의 반복문은 조건 또는 횟수 기반의 반복 작업을 모두 유연하게 처리할 수 있도록 설계되었습니다.
+Die Schleifen in Wave sind so konzipiert, dass sie sowohl bedingungsbasierte als auch anzahlbasierte Wiederholungsvorgänge flexibel verarbeiten können.
 
-`break`, `continue` 문을 함께 사용하면 더 정교한 반복 흐름 제어도 가능합니다.
+Durch die gemeinsame Nutzung von `break` und `continue` Befehlen sind auch feinere Kontrollen des Wiederholungsflusses möglich.
