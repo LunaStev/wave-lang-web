@@ -87,24 +87,30 @@ const config: Config = {
      */
     locales:
         [
-          'en',
-          'ko',
-          'es',
-          'fa',
-          'zh',
-          'fr',
-          'de',
-          'ru',
-          'ja',
-          'vi',
-          'sw',
-          'hi',
-          'bn',
-          'ta',
-          'te',
+          'en', // 영어
+          'ko', // 한국어어
+          'es', // 스페인어
+          'fa', // 페르시아어
+          'ar', // 아랍어
+          'zh', // 중국어
+          'fr', // 프랑스어
+          'de', // 독일어어
+          'ru', // 러시아어
+          'ja', // 일본어어
+          'ms', // 마인어
+          'he', // 히브리어
+          'vi', // 베트남어
+          'sw', // 스와힐리어
+          'hi', // 힌디어어
+          'bn', // 벵골어어
+          'ta', // 타밀어어
+          'te', // 텔루구어
         ],
     localeConfigs: {
       fa: {
+        direction: 'rtl',
+      },
+      ar: {
         direction: 'rtl',
       }
     },
@@ -121,9 +127,6 @@ const config: Config = {
           routeBasePath: 'docs',
           path: 'docs',
           include: ['**/*.md', '**/*.mdx'],
-        },
-        blog: {
-          showReadingTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',
