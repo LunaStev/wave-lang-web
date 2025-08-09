@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# 문법
+# Syntaxe
 
-이 문서는 Wave 프로그래밍 언어의 문법을 설명합니다. Wave의 설계는 아직 개발 중이므로, 문법과 기능의 일부는 완성되지 않았거나 변경될 가능성이 있습니다.
-그러나 이 문서는 현재 상태와 주요 개념을 이해할 수 있도록 돕고, 향후 개발 방향에 대한 통찰력을 제공합니다.
+Ce document explique la syntaxe du langage de programmation Wave. La conception de Wave est encore en cours de développement, donc certaines parties de la syntaxe et des fonctionnalités peuvent ne pas être complètes ou susceptibles de changer.
+Cependant, ce document aide à comprendre l'état actuel et les concepts clés et offre un aperçu des orientations futures du développement.
 
-Wave는 **저수준 제어와 고수준 추상화를 결합한 언어로, 시스템 프로그래밍, 웹 개발, 인공지능, 블록체인** 등 다양한 분야에 적합하도록 설계되었습니다.
-이 언어는 뛰어난 성능과 유연성을 제공할 뿐만 아니라, 강력한 표준 라이브러리와 통합된 빌드 시스템을 통해 개발자가 효율적으로 작업할 수 있도록 지원합니다.
+Wave est conçu comme un langage combinant contrôle bas niveau et abstraction de haut niveau, adapté à divers domaines tels que la programmation système, le développement web, l'intelligence artificielle et la blockchain.
+Ce langage offre non seulement d'excellentes performances et une flexibilité, mais aussi un puissant ensemble de bibliothèques standard et un système de construction intégré pour aider les développeurs à travailler efficacement.
 
-Wave의 문법은 C와 Rust 같은 언어와 유사한 점이 있지만, 개발자가 언어를 빠르게 익히고 생산성을 높일 수 있도록 설계되었습니다.
-이 문서에서는 Wave의 기본 문법과 기능을 실제 예제와 함께 소개합니다.
+La syntaxe de Wave présente des similitudes avec des langages comme C et Rust, mais elle est conçue pour que les développeurs puissent l'apprendre rapidement et augmenter leur productivité.
+Ce document présente la syntaxe de base et les fonctionnalités de Wave avec des exemples pratiques.

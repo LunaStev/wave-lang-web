@@ -2,21 +2,21 @@
 sidebar_position: 2
 ---
 
-# Vex 패키지 매니저
+# Gestionnaire de paquets Vex
 
-## 개요
+## Aperçu
 
-Vex는 Wave 프로그래밍 언어를 위한 전용 패키지 관리자이자 빌드 시스템입니다.
-Vex는 소스 코드의 종속성 관리, 빌드 설정, 타겟 플랫폼 지정, 모듈 설치 및 배포 등 프로젝트 관리 전반을 지원합니다.
-외부 언어나 시스템과의 호환은 고려하지 않으며, 오직 Wave 생태계 내에서 동작하도록 설계되었습니다.
+Vex est un gestionnaire de paquets et un système de construction dédiés au langage de programmation Wave.
+Vex prend en charge la gestion des dépendances de code source, la configuration de la construction, la spécification de la plateforme cible, l'installation et le déploiement des modules et la gestion globale du projet.
+La compatibilité avec d'autres langues ou systèmes n'est pas prise en compte, il est conçu pour fonctionner uniquement au sein de l'écosystème Wave.
 
-## 설계 목표
+## Objectifs de conception
 
-Vex는 다음과 같은 목표를 바탕으로 설계되었습니다:
+Vex est conçu sur la base des objectifs suivants :
 
-Wave 전용 설계: Wave 프로젝트만을 대상으로 하며, Wave의 문법, 모듈 구조, 실행 환경에 최적화되어 있습니다.
+Conception dédiée à Wave : Ciblant uniquement les projets Wave, il est optimisé pour la syntaxe, la structure de module et l'environnement d'exécution de Wave.
 
-- 직관적인 명령 체계: 복잡한 빌드 스크립트 없이 단일 명령어로 주요 작업을 수행할 수 있도록 구성됩니다.
-- 멀티 타겟 지원: 운영체제 및 아키텍처에 따라 손쉽게 빌드 타겟을 전환할 수 있습니다.
-- WSON 기반 설정 관리: 모든 프로젝트 구성 정보는 WSON(Wave Serialization Object Notation) 형식으로 정의됩니다.
-- 정적 빌드 및 배포: 실행 파일은 정적으로 빌드되며, 외부 런타임에 의존하지 않고 독립적으로 배포가 가능합니다.
+- Système de commande intuitif : Permet de réaliser les tâches principales avec une seule commande, sans script de construction complexe.
+- Support multi-cible : Permet de changer facilement la cible de construction en fonction du système d'exploitation et de l'architecture.
+- Gestion des configurations basée sur WSON : Toutes les informations de configuration du projet sont définies au format WSON (Wave Serialization Object Notation).
+- Construction et déploiement statiques : Les fichiers exécutables sont construits statiquement et peuvent être déployés de manière indépendante, sans dépendance externe à un runtime.
