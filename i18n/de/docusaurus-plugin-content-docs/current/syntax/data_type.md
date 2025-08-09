@@ -2,108 +2,108 @@
 sidebar_position: 2
 ---
 
-# 데이터 타입
+# Datentypen
 
-이 문서는 Wave 프로그래밍 언어에서 제공하는 다양한 데이터 타입에 대해 설명합니다.
-Wave 프로그래밍 언어는 다양한 데이터 타입을 사용하여 값을 저장하고 연산할 수 있습니다.
-주요 데이터 타입에는 정수, 부동소수점, 문자열 등이 있습니다. 각 데이터 타입은 해당 데이터의 특성과 메모리 처리 방식을 정의 합니다.
+Dieses Dokument erklärt die verschiedenen Datentypen, die von der Wave-Programmiersprache bereitgestellt werden.
+Die Wave-Programmiersprache ermöglicht es, Werte zu speichern und zu berechnen, indem sie verschiedene Datentypen verwendet.
+Zu den wichtigsten Datentypen gehören Ganzzahlen, Gleitkommazahlen und Zeichenketten. Jeder Datentyp definiert die Eigenschaften der Daten und die Art und Weise der Speicherverwaltung.
 
-## 정수 타입
+## Ganzzahl-Typen
 
-정수 타입은 **정수 값**을 저장하는 데 사용됩니다.
-기본적으로 정수는 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)로 선언됩니다.
-Wave 프로그래밍 언어에서는 정수의 범위를 세밀하게 설정할 수 있는 다양한 크기의 옵션을 제공 합니다.
+Ganzzahl-Typen werden verwendet, um **Ganzzahlwerte** zu speichern.
+Grundsätzlich werden Ganzzahlen als `i32` (vorzeichenbehaftete 32-Bit-Ganzzahl) und `u32` (vorzeichenlose 32-Bit-Ganzzahl) deklariert.
+Die Wave-Programmiersprache bietet verschiedene Größenoptionen, um den Bereich der Ganzzahlen detailliert festzulegen.
 
-- `i8` ~ `i1024`: 부호가 있는 정수 타입이며, 8비트부터 1024비트까지 크기를 설정할 수 있습니다.
-- `u8` ~ `u1024`: 부호가 없는 정수 타입으로, 8비트부터 1024비트까지 크기 설정이 가능합니다.
+- `i8` bis `i1024`: Vorzeichenbehafteter Ganzzahltyp, der von 8 Bit bis 1024 Bit skaliert werden kann.
+- `u8` bis `u1024`: Vorzeichenloser Ganzzahltyp, der von 8 Bit bis 1024 Bit konfiguriert werden kann.
 
-예시:
+Beispiel:
 
 ```wave
 var a :i32 = 100;
 var b :u32 = 200;
 ```
 
-## 부동소수점 타입
+## Gleitkomma-Typen
 
-부동소수점 타입은 실수 값을 저장하는 데 사용됩니다.
-기본적으로 부동소수점 숫자는 `f32`로 선언됩니다.
-또한, 부동소수점 숫자의 크기를 서밀하게 정의 할 수 있는 다양한 크기 옵션을 제공합니다.
+Gleitkomma-Typen werden verwendet, um reelle Werte zu speichern.
+Standardmäßig werden Gleitkommazahlen mit `f32` deklariert.
+Er bietet auch verschiedene Größenoptionen, um die Größe von Gleitkommazahlen präzise zu definieren.
 
-- `f32` ~ `f1024`: 부동소수점 타입은 32비트부터 1024비트까지 크기를 설정할 수 있습니다. 이를 통해 더 높은 정밀도의 실수 계산을 할 수 있습니다.
+- `f32` bis `f1024`: Gleitkomma-Typen können von 32 Bit bis 1024 Bit skaliert werden. Dies ermöglicht eine höhere Genauigkeit bei Berechnungen mit reellen Zahlen.
 
-예시:
+Beispiel:
 
 ```wave
 var pi :f32 = 3.14;
 var e :f64 = 2.71828;
 ```
 
-## 문자열 타입
+## Zeichenketten-Typen
 
-문자열 타입을 텍스트 데이터를 다루는 데 사용됩니다. `str` 키워드를 사용하여 문자열을 선언합니다.
-문자열은 일반적으로 큰따옴표(`"`)로 감싸서 정의하며, 변수에 문자열 값을 할당할 수 있습니다.
+Zeichenketten-Typen werden zur Verarbeitung von Textdaten verwendet. Zeichenketten werden mit dem `str`-Schlüsselwort deklariert.
+Zeichenketten werden normalerweise in Anführungszeichen (`"`) eingeschlossen und können Variablen zugewiesen werden.
 
-예시:
+Beispiel:
 
 ```wave
 var text :str = "Hello Wave";
 ```
 
-## 불리언 타입
+## Boolescher Typ
 
-불리언 타입은 **참(Ture)** 또는 **거짓(False)** 값을 나타내는 데이터 타입입니다.
-조건문에서 주로 사용되며, 값은 `true` 또는 `false`로 설정됩니다.
+Boolescher Typ ist ein Datentyp, der **Wahr** (True) oder **Falsch** (False) darstellt.
+Er wird hauptsächlich in Bedingungssätzen verwendet, wobei die Werte `true` oder `false` sind.
 
-예시:
+Beispiel:
 
 ```wave
 var isActive :bool = true;
 var isAvailable :bool = true;
 ```
 
-## 문자 타입
+## Zeichen-Typ
 
-문자 타입은 단일 문자를 저장하는 데 사용됩니다.
-`char` 키워드를 사용하여 선언되며, 하나의 문자 값만을 담을 수 있습니다.
+Zeichen-Typen werden verwendet, um einzelne Zeichen zu speichern.
+Sie werden mit dem Schlüsselwort `char` deklariert und können nur einen Zeichenwert enthalten.
 
-예시:
+Beispiel:
 
 ```wave
 var letter :char = 'A';
 ```
 
-## 바이트 타입
+## Byte-Typ
 
-바이트 타입은 **1바이트** 크기의 데이터를 저장하는 데 사용됩니다.
-주로 바이너리 데이터를 다루는 경우에 유용합니다. `byte` 키워드를 사용하여 선언합니다.
+Der Byte-Typ wird verwendet, um Daten von **1 Byte** Größe zu speichern.
+Es ist nützlich, wenn es um die Verarbeitung von Binärdaten geht. Mit dem `byte`-Schlüsselwort deklariert.
 
-예시:
+Beispiel:
 
 ```wave
 var byteData :byte = 0xFF;
 ```
 
-## 포인터 타입
+## Zeiger-Typ
 
-포인터 타입은 **메모리 주소**를 참조하는 데 사용됩니다.
-`ptr` 키워드를 사용하여 포인터를 선언하고, 메모리 주소를 저장하는 데 사용됩니다.
+Der Zeiger-Typ wird verwendet, um auf **Speicheradressen** zu verweisen.
+Mit dem `ptr`-Schlüsselwort werden Zeiger deklariert und zum Speichern von Speicheradressen verwendet.
 
-예시:
+Beispiel:
 
 ```wave
 var ptr :ptr<T> = &someVariable;
 ```
 
-## 배열 타입
+## Array-Typ
 
-배열 타입은 **여러 개의 동일한 데이터 타입**을 순차적으로 저장하는 데 사용됩니다.
-`array` 키워드를 사용하며, 배열의 크기나 타입을 지정할 수 있습니다.
+Der Array-Typ wird verwendet, um **mehrere gleiche Datentypen** sequenziell zu speichern.
+Verwendet das Schlüsselwort `array`, um die Größe oder den Typ des Arrays anzugeben.
 
-예시:
+Beispiel:
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 다양한 범위와 크기를 설정할 수 있기 때문에, 사용자의 필요에 맞는 타입을 선택하여 효육적인 메모리 관리와 계산을 할 수 있습니다.
+Jeder Datentyp kann in verschiedenen Bereichen und Größen festgelegt werden, sodass Sie den Typ auswählen können, der Ihren Anforderungen entspricht, um eine effiziente Speicherverwaltung und Berechnung zu ermöglichen.
