@@ -2,61 +2,60 @@
 sidebar_position: 2
 ---
 
-# Wave 생태계
+# Wave l'écosystème
 
-## 개요
+## Aperçu
 
-Wave 생태계는 단순히 프로그래밍 언어 그 이상입니다.
-Wave는 다양한 도구, 라이브러리, 그리고 개발 철학이 어우러진 환경을 통해,
-프로그래머가 어떤 분야에서도 창의적으로 작업할 수 있도록 돕는 종합적인 개발 생태계입니다.
+L'écosystème Wave est plus qu'un simple langage de programmation.
+Wave est un écosystème de développement complet qui permet aux programmeurs de travailler de manière créative dans n'importe quel domaine grâce à un environnement intégré d'outils variés, de bibliothèques et de philosophies de développement.
 
-## Wave 생태계의 구성
+## Composition de l'écosystème Wave
 
 ### Wave
 
-Wave 생태계의 핵심은 Wave 프로그래밍 언어입니다.
-C와 Rust의 철학을 기반으로, 저수준 제어와 고주순 생산성 사이의 균형을 목표로 설계되었습니다.
+Le cœur de l'écosystème Wave est le langage de programmation Wave.
+Conçu sur la base des philosophies de C et Rust, il vise à équilibrer le contrôle bas niveau et une productivité élevée.
 
-- **쉬운 학습곡선**: C와 Rust의 중간 난이도.
-- **강력한 기능**: 포인터, 배열, 직렬화 등 다양한 데이터 타입 지원.
+- **Courbe d'apprentissage facile**: Niveau de difficulté intermédiaire entre C et Rust.
+- **Fonctionnalités puissantes**: Prend en charge les pointeurs, tableaux, sérialisation et divers types de données.
 
-### 표준 라이브러리
+### Bibliothèque standard
 
-Wave는 프로그래머가 별도의 외부 라이브러리를 의존하지 않아도 되도록 풍부한 표준 라이브러리르 제공합니다.
+Wave offre une bibliothèque standard riche permettant aux programmeurs de ne pas dépendre de bibliothèques externes.
 
-- **hardwave**: 하드웨어 제어
-- **http**: HTTP 및 WebSocket 통신
-- **iosys**: 파일 및 스트립 I/O
-- **sys**: 시스템 제어
-- **wson**: 고성능 데이터 직렬화 포맷
-- **quantum**: 양자 컴퓨팅 지원
+- **hardwave**: Contrôle du matériel
+- **http**: Communication HTTP et WebSocket
+- **iosys**: E/S de fichiers et de flux
+- **sys**: Contrôle du système
+- **wson**: Format de sérialisation de données haute performance
+- **quantum**: Support pour le calcul quantique
 
-### 커뮤니티와 생태계 철학
+### Philosophie de la communauté et de l'écosystème
 
-Wave는 언어 자체만이 아닌, 개발자와의 상호작용을 중요시합니다.
+Wave accorde de l'importance non seulement au langage lui-même, mais aussi à l'interaction avec les développeurs.
 
-- **개발자 중심 설계**: 다양한 언어와 문화를 존중.
-- **소수언어 및 사어 지원**: 글로벌 언어 다양성을 포용.
-- **미래 지향적 기술**: 양자 컴퓨팅 및 차세대 보안 표준 지원.
+- **Conception centrée sur le développeur**: Respect de la diversité linguistique et culturelle.
+- **Support des langues minoritaires et mortes**: Adoption de la diversité linguistique mondiale.
+- **Technologies orientées vers l'avenir**: Support pour le calcul quantique et les standards de sécurité de nouvelle génération.
 
-### 도구 체인
+### Chaîne d'outils
 
-Wave는 개발 도구의 완성도를 통해 생산성을 극대화합니다.
+Wave maximise la productivité grâce à l'excellence des outils de développement.
 
-- **Wave 패키지 매니저 (Vex)**: 플랫폼 독립적 빌드 및 배포.
-- **Wave 디버거**: 직관적 디버깅.
-
----
-
-## Wave 생태계의 목표
-
-Wave 생태계는 다음의 가치를 중심으로 발전합니다:
-
-1. **다양성을 표용하는 언어**: 모든 개발자가 자신의 언어와 문화에 맞춰 Wave를 사용할 수 있도록 지원.
-2. **모든 개발 영역 통합**: 웹, 하드웨어, AI, 네트워크 등 다양한 분야에서 활용.
-3. **미래를 준비**: 양자 컴퓨팅, 포스트-퀀텀 암호화 등 신기술 대응.
+- **Gestionnaire de paquets Wave (Vex)**: Construction et distribution indépendantes de la plateforme.
+- **Débogueur Wave**: Débogage intuitif.
 
 ---
 
-Wave 생태계는 단순히 도구를 제공하는 것을 넘어, 개발자에게 더 나은 경헙과 효율성을 선사하는 **포괄적이고 혁신적인 환경**을 목표로 합니다.
-Wave와 함께 새로운 가능성을 탐구하세요!
+## Objectifs de l'écosystème Wave
+
+L'écosystème Wave évolue autour des valeurs suivantes :
+
+1. **Langue embrassant la diversité**: Permettre à tous les développeurs d'utiliser Wave conformément à leur langue et culture.
+2. **Intégration de tous les domaines de développement**: Utilisé dans divers domaines tels que le web, le matériel, l'IA et les réseaux.
+3. **Préparation pour l'avenir**: Répondre aux nouvelles technologies telles que le calcul quantique et le cryptage post-quantique.
+
+---
+
+L'écosystème Wave vise à offrir non seulement des outils, mais également une **expérience inclusive et innovante** pour une efficacité accrue pour les développeurs.
+Explorez de nouvelles possibilités avec Wave !
