@@ -186,11 +186,6 @@ const config: Config = {
             label: 'GitHub',
             position: 'right',
           },
-          {
-            href: 'https://lunastev.github.io/wave-testing/',
-            label: 'Wave Testing',
-            position: 'right',
-          },
         ],
       },
       footer: {
