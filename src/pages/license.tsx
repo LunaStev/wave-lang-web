@@ -1,0 +1,98 @@
+// src/pages/license.tsx
+import React from 'react';
+
+const LICENSE = `LSD LICENSE
+Version 1.0
+
+Copyright (c) [YEAR] [AUTHOR OR ORGANIZATION]
+
+---
+
+1. DEFINITIONS
+
+“Covered Software” means any source code, binary, or other work licensed under this License.
+“Contributor” means any individual or entity who creates or modifies the Covered Software.
+“Modification” means any change to the Covered Software, including changes to existing files.
+“New File” means a file that does not modify any part of the Covered Software but may reference its public interfaces or headers without alteration.
+
+---
+
+2. GRANT OF RIGHTS
+
+Subject to the terms of this License, each Contributor hereby grants you a worldwide, royalty-free, non-exclusive license to:
+
+a) Use, reproduce, and distribute the Covered Software in source or binary form.
+b) Create and distribute Modifications and New Files.
+c) Sublicense and convey the Covered Software under the same terms of this License.
+
+---
+
+3. SOURCE CODE AVAILABILITY
+
+a) If you distribute Modifications of the Covered Software, you must make the complete modified source code of the modified files available under this License.
+b) If you distribute New Files that only use unmodified public interfaces or headers from the Covered Software, you must make the source code of those New Files available under this License.
+c) If you distribute the Covered Software in unmodified form, you are not required to provide its source code.
+
+---
+
+4. ATTRIBUTION
+
+a) You must not require or impose inline copyright notices within source files.
+b) Attribution must be provided either in a separate NOTICE file or in accompanying documentation.
+
+---
+
+5. RESTRICTIONS
+
+You may not:
+a) Misrepresent the origin of the Covered Software.
+b) Remove or alter any license terms in the source code or accompanying files.
+c) Impose additional restrictions beyond those in this License when redistributing the Covered Software.
+
+---
+
+6. DISCLAIMER OF WARRANTY
+
+The Covered Software is provided “AS IS”, without warranty of any kind, express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement.
+In no event shall any Contributor be liable for any damages or liability arising from the use of the Covered Software.
+
+---
+
+7. TERMINATION
+
+This License shall terminate automatically if you violate its terms.
+Upon termination, you must cease all use and distribution of the Covered Software.
+
+---
+
+8. GOVERNING LAW
+
+This License shall be governed by and construed in accordance with the laws of the jurisdiction of the original Contributor, unless another governing law is expressly agreed upon in writing.
+
+---
+
+END OF LICENSE`;
+
+export default function LicensePage() {
+    return (
+        <div style={{
+            fontFamily: 'monospace',
+            maxWidth: '800px',
+            margin: '2rem auto',
+            padding: '0 1rem',
+            lineHeight: 1.5
+        }}>
+            <h1 style={{textAlign: 'center'}}>LSD License</h1>
+            <pre style={{
+                whiteSpace: 'pre-wrap',
+                background: '#f8f8f8',
+                padding: '1rem',
+                borderRadius: '4px',
+                border: '1px solid #ddd',
+                fontSize: '14px'
+            }}>
+        {LICENSE}
+      </pre>
+        </div>
+    );
+}

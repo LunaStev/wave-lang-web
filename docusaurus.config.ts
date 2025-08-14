@@ -232,6 +232,10 @@ const config: Config = {
                 label: 'GitHub',
                 href: 'https://github.com/LunaStev/Wave',
               },
+              {
+                label: 'License',
+                to: '/license',
+              },
             ],
           },
         ],
