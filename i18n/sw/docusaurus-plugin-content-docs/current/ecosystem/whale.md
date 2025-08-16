@@ -2,35 +2,35 @@
 sidebar_position: 3
 ---
 
-# Whale 컴파일러 툴체인
+# Zana ya muundo ya Whale
 
-## 개요
+## Muhtasari
 
-Whale은 Wave 프로그래밍 언어를 위한 전용 컴파일러 툴체인입니다..
-Whale은 Wave로 작성된 소스 코드를 분석, 최적화, 타겟 플랫폼용 바이너리로 변환하는 전 과정을 책임집니다.
-이 툴체인은 Wave 언어 전용으로 설계되었으며, 타 언어 지원이나 외부 툴체인 통합을 고려하지 않습니다..
+Whale ni zana ya muundo ya kipekee kwa lugha ya programu ya Wave.
+Whale inasimamia mchakato mzima wa kuchanganua, kuboresha, na kubadili msimbo chanzo ulioandikwa kwa Wave kuwa binari kwa jukwaa lengwa.
+Zana hii ya muundo imeundwa mahsusi kwa lugha ya Wave na haizingatii msaada wa lugha zingine au ushirikiano wa zana za nje.
 
-## 설계 목표
+## Malengo ya muundo
 
-Whale의 주요 설계 목표는 다음과 같습니다:
+Malengo makuu ya muundo wa Whale ni kama yafuatayo:
 
-- Wave 전용 지원: Whale은 Wave 언어만을 지원하며, 타 언어와의 통합을 고려하지 않습니다.
-- 모듈화 구조: 각 기능은 독립적인 모듈로 구성되며, 필요에 따라 추가하거나 제거할 수 있습니다.
-- 독립적 IR 사용: Whale은 LLVM IR 등 기존 외부 IR을 사용하지 않고, 자체 중간 표현을 정의합니다.
-- 다중 타겟 플랫폼 지원: 운영체제 및 하드웨어 아키텍처에 관계없이 다양한 환경을 타겟으로 빌드할 수 있습니다.
-- 정밀한 제어: 컴파일의 전 과정을 개발자가 세부적으로 제어할 수 있도록 구성됩니다.
-- 외부 의존성 제거: Whale은 외부 C/C++ 런타임 또는 컴파일러에 의존하지 않습니다.
+- Msaada wa kipekee wa Wave: Whale inasaidia lugha ya Wave pekee na haizingatii ushirikiano na lugha zingine.
+- Muundo wa kidhibiti: Kila kipengele kinaundwa kama moduli huru, inaweza kuongezwa au kuondolewa inapohitajika.
+- Matumizi ya IR huru: Whale haitumii IR ya nje kama LLVM IR lakini inalenga kufafanua maonyesho ya kati huru.
+- Msaada wa jukwaa lengwa nyingi: Inaruhusu kujenga kwa majukwaa tofauti bila kujali mfumo na usanifu wa vifaa.
+- Udhibiti wa kina: Mchakato mzima wa muundo unapangiliwa ili mtengenezaji aweze kuudhibiti kwa undani.
+- Kuondolewa kwa utegemezi wa nje: Whale hailali kwa wakati wa utekelezaji wa nje wa C/C++ au kiunga.
 
-## 타겟 지원
+## Msaada wa lengwa
 
-Whale은 다음과 같은 대상 환경을 지원하는 것을 목표로 합니다:
+Whale inalenga kutoa msaada wa mazingira yafuatayo ya lengwa:
 
-- 운영체제:
+- Mfumo wa uendeshaji:
     - Linux
     - Windows
     - macOS
-    - UEFI (BIOS 제외)
-    - WaveOS (자체 OS)
+    - UEFI (isipokuwa BIOS)
+    - WaveOS (mfumo wa uendeshaji wa pekee)
 - 아키텍처:
     - x86_64 (AMD64)
     - ARM64
