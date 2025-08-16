@@ -2,21 +2,21 @@
 sidebar_position: 2
 ---
 
-# Vex 패키지 매니저
+# Meneja wa kifurushi cha Vex
 
-## 개요
+## Muhtasari
 
-Vex는 Wave 프로그래밍 언어를 위한 전용 패키지 관리자이자 빌드 시스템입니다.
-Vex는 소스 코드의 종속성 관리, 빌드 설정, 타겟 플랫폼 지정, 모듈 설치 및 배포 등 프로젝트 관리 전반을 지원합니다.
-외부 언어나 시스템과의 호환은 고려하지 않으며, 오직 Wave 생태계 내에서 동작하도록 설계되었습니다.
+Vex ni meneja pekee wa kifurushi na mfumo wa ujenzi kwa lugha ya programu ya Wave.
+Vex inasaidia usimamizi wa utegemezi wa msimbo chanzo, mipangilio ya ujenzi, maelekezo ya jukwaa lengwa, ufungaji na usambazaji wa moduli, na maeno yote ya usimamizi wa mradi.
+Ilibuniwa kufanya kazi tu ndani ya mfumo wa Wave, bila kuzingatia utangamano na lugha au mifumo ya nje.
 
-## 설계 목표
+## Malengo ya muundo
 
-Vex는 다음과 같은 목표를 바탕으로 설계되었습니다:
+Vex ilibuniwa kulingana na malengo yafuatayo:
 
-Wave 전용 설계: Wave 프로젝트만을 대상으로 하며, Wave의 문법, 모듈 구조, 실행 환경에 최적화되어 있습니다.
+Muundo maalum wa Wave: Inalenga miradi ya Wave pekee, inaoptiamishwa kwa sarufi ya Wave, muundo wa moduli, na mazingira ya utekelezaji.
 
-- 직관적인 명령 체계: 복잡한 빌드 스크립트 없이 단일 명령어로 주요 작업을 수행할 수 있도록 구성됩니다.
-- 멀티 타겟 지원: 운영체제 및 아키텍처에 따라 손쉽게 빌드 타겟을 전환할 수 있습니다.
-- WSON 기반 설정 관리: 모든 프로젝트 구성 정보는 WSON(Wave Serialization Object Notation) 형식으로 정의됩니다.
-- 정적 빌드 및 배포: 실행 파일은 정적으로 빌드되며, 외부 런타임에 의존하지 않고 독립적으로 배포가 가능합니다.
+- Mpangilio wa amri angavu: Unawekwa kutekeleza kazi kuu kwa amri moja bila hati ngumu za ujenzi.
+- Usaidizi wa tafauti nyingi: Inaruhusu kubadilisha lengo kwa urahisi kutegemea mfumo wa uendeshaji na usanifu.
+- Usimamizi wa mipangilio ya msingi wa WSON: Habari zote za usanidi wa mradi zinafafanuliwa kupitia muundo wa WSON (Wave Serialization Object Notation).
+- Ujenzi na usambazaji tuli: Faili za utekelezaji zinajengwa kwa mfumo tuli na zinaweza kusambazwa kwa uhuru bila kutegemea mazingira ya upelekaji wa nje.
