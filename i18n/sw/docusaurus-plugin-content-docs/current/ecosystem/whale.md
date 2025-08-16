@@ -31,22 +31,21 @@ Whale inalenga kutoa msaada wa mazingira yafuatayo ya lengwa:
     - macOS
     - UEFI (isipokuwa BIOS)
     - WaveOS (mfumo wa uendeshaji wa pekee)
-- 아키텍처:
+- Muundo:
     - x86_64 (AMD64)
     - ARM64
-    - 기타는 모듈 추가를 통해 확장 가능
+    - Nyingine zinaweza kupanuliwa kupitia kuongeza moduli
 
-## 외부 연동(FFI)
+## Muunganiko wa Nje (FFI)
 
-Whale은 기술적으로 FFI(Foreign Function Interface)를 지원할 수 있도록 설계되지만,
-Wave의 철학상 외부 언어와의 연동은 권장되지 않으며 표준적으로 제공되지 않습니다.
-Wave는 자체 언어 내에서 모든 기능을 구현할 수 있도록 설계됩니다.
+Whale imeundwa kiufundi kusaidia FFI (Makala ya Kazi ya Kigeni), lakini kwa mujibu wa falsafa ya Wave, kuunganisha na lugha za nje haipendekezwi na haijapewa kimkakati.
+Wave imeundwa ili kutekeleza kazi zote ndani ya lugha yake yenyewe.
 
-## 확장성
+## Upanuzi
 
-Whale은 다음과 같은 방식으로 확장이 가능합니다:
+Whale inaweza kupanuliwa kwa njia zifuatazo:
 
-- 새로운 운영체제 또는 아키텍처에 대한 모듈 추가
-- 사용자 정의 최적화 알고리즘 삽입
-- 빌드 프로필 및 링커 설정의 커스터마이징
-- 자체 실행 포맷 정의
+- Kuongeza moduli kwa mfumo mpya wa uendeshaji au muundo
+- Kuweka kanuni za uboreshaji za kimteja
+- Kubinafsisha mipangilio ya wasifu wa ujenzi na wasimamizi
+- Kufafanua umbizo la utekelezaji wa ndani
