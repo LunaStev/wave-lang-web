@@ -1,0 +1,80 @@
+{
+  "tagline": {
+    "message": "Satu bahasa, kemungkinan yang tidak terbatas"
+  },
+  "get-started": {
+    "message": "Mulakan dalam 5 minit"
+  },
+  "read-the-docs": {
+    "message": "Baca dokumen"
+  },
+  "homepage.hero.title": {
+    "message": "Bahasa moden untuk gelombang baru pembangunan"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Tata bahasa intuitif, prestasi yang kuat, dan keselamatan terbina. Wave direka untuk meningkatkan produktiviti anda dan membuat aplikasi lebih stabil."
+  },
+  "homepage.why_wave.title": {
+    "message": "Mengapa memilih Wave?"
+  },
+  "homepage.features.one.title": {
+    "message": "Ringkas dan intuitif"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave mengurangkan kod yang tidak perlu dan membolehkan anda menumpukan perhatian pada logik teras. Mudah dipelajari dan menyeronokkan untuk digunakan dengan tatabahasa moden."
+  },
+  "homepage.features.two.title": {
+    "message": "Cepat dan cekap"
+  },
+  "homepage.features.two.description": {
+    "message": "Dikompaun kepada kod asli, mencapai prestasi tahap C++ melalui abstraction kos sifar. Sesuai untuk tugas di mana sumber adalah penting."
+  },
+  "homepage.features.three.title": {
+    "message": "Selamat dan serentak"
+  },
+  "homepage.features.three.description": {
+    "message": "Mengelakkan pepijat biasa seperti null reference error pada masa kompilasi. Model keserentakan terbina melibatkan pemrograman multicore lebih mudah berbanding sebelum ini."
+  },
+  "homepage.contributors.title": {
+    "message": "Penyumbang"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Pengasas bahasa"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Pereka bahasa"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Pembangunan kompilator"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Penyelenggara perpustakaan standard"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Penyumbang"
+  },
+  "homepage.sponsors.title": {
+    "message": "Penaja"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Penaja kehormat"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Penaja platinum"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Penaja emas"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Penaja perak"
+  },
+  "homepage.translations.title": {
+    "message": "Menyertai terjemahan Wave"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Sila sumbang kepada terjemahan agar pembangun di seluruh dunia dapat mempelajari Wave tanpa halangan bahasa."
+  },
+  "homepage.translations.button": {
+    "message": "Sertai terjemahan di Crowdin"
+  }
+}

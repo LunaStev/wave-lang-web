@@ -2,115 +2,115 @@
 sidebar_position: 5
 ---
 
-# 연산자
+# Wendeshaji
 
-## 소개
+## Utangulizi
 
-Wave 언어는 다양한 연산자를 제공하여 변수 간의 계산, 논리 판단, 비교, 비트 연산 등을 수행할 수 있습니다.
+Lugha ya Wave inatoa wendeshaji mbalimbali ili kutekeleza hesabu kati ya vigezo, uamuzi wa mantiki, kulinganisha, na operesheni za biti.
 
-이 문서에서는 Wave에서 사용할 수 있는 주요 연산자들을 종류별로 나누어 설명하고, 각각의 동작 방식과 예제를 함께 제공합니다.
+Hati hii inaelezea aina kuu za wendeshaji ambazo zinaweza kutumika katika Wave, inaelezea jinsi kila moja inavyofanya kazi, na inatoa mifano pia.
 
-연산자는 다음과 같은 범주로 나뉩니다:
+Wendeshaji zimegawanywa katika makundi yafuatayo:
 
-- 산술 연산자
-- 비교 연산자
-- 논리 연산자
-- 비트 연산자
-- 할당 연산자
-- 기타 특수 연산자
-
----
-
-## 산술 연산자
-
-산술 연산자는 숫자 데이터를 대상으로 기본적인 수학 연산을 수행합니다.
-
-| 연산자 | 설명     | 예시 (`a = 10`, `b = 3`) |
-| --- | ------ | ----------------------------------------- |
-| `+` | 덧셈     | `a + b` → `13`                            |
-| `-` | 뺄셈     | `a - b` → `7`                             |
-| `*` | 곱셈     | `a * b` → `30`                            |
-| `/` | 나눗셈    | `a / b` → `3` (정수 나눗셈) |
-| `%` | 나머지 연산 | `a % b` → `1`                             |
+- Wendeshaji wa hesabu
+- Wendeshaji wa kulinganisha
+- Wendeshaji wa mantiki
+- Wendeshaji wa biti
+- Wendeshaji wa usambazaji
+- Wendeshaji maalum wengine
 
 ---
 
-## 비교 연산자
+## Wendeshaji wa hesabu
 
-비교 연산자는 두 값을 비교한 결과로 `bool` 값을 반환합니다.
+Wendeshaji wa hesabu hufanya shughuli za msingi za hesabu kwa data ya nambari.
 
-| 연산자  | 설명     | 예시 (`a = 10`, `b = 3`) |
-| ---- | ------ | ----------------------------------------- |
-| `==` | 같음     | `a == b` → `false`                        |
-| `!=` | 다름     | `a != b` → `true`                         |
-| `<`  | 작음     | `a < b` → `false`                         |
-| `>`  | 큼      | `a > b` → `true`                          |
-| `<=` | 작거나 같음 | `a <= 10` → `true`                        |
-| `>=` | 크거나 같음 | `a >= b` → `true`                         |
-
----
-
-## 논리 연산자
-
-논리 연산자는 `bool` 값에 대해 참/거짓의 조합을 처리합니다.
-
-| 연산자      | 이름     | 설명                                    | 예시                        |
-| -------- | ------ | ------------------------------------- | ------------------------- |
-| `&&`     | 논리 AND | 두 값이 모두 `true`일 때만 `true`             | `true && false` → `false` |
-| \\`\\ | 논리 OR  | 둘 중 하나라도 `true`이면 `true`              | \`true \\               |
-| `!`      | 논리 NOT | `true`를 `false`로, `false`를 `true`로 반전 | `!true` → `false`         |
+| Wendeshaji | Maelezo              | Mfano (`a = 10`, `b = 3`)                    |
+| ---------- | -------------------- | --------------------------------------------------------------- |
+| `+`        | Penambahan           | `a + b` → `13`                                                  |
+| `-`        | Utoaji               | `a - b` → `7`                                                   |
+| `*`        | Kuzidisha            | `a * b` → `30`                                                  |
+| `/`        | Mgawanyiko           | `a / b` → `3` (mgawanyiko wa nambari kamili) |
+| `%`        | Operesheni ya mabaki | `a % b` → `1`                                                   |
 
 ---
 
-## 비트 연산자
+## Wendeshaji wa kulinganisha
 
-비트 연산자는 정수형 데이터를 비트 단위로 조작합니다.
+Wendeshaji wa kulinganisha hurejesha thamani ya `bool` kama matokeo ya kulinganisha maadili mawili.
 
-| 연산자      | 이름      | 설명                | 예시              |
-| -------- | ------- | ----------------- | --------------- |
-| `&`      | 비트 AND  | 두 비트가 모두 1일 때 1   | `a & b` → `2`   |
-| \\`\\ | 비트 OR   | 두 비트 중 하나라도 1이면 1 | \`a \\        |
-| `^`      | 비트 XOR  | 두 비트가 다를 때 1      | `a ^ b` → `5`   |
-| `~`      | 비트 NOT  | 비트를 반전            | `~a` → `-7`     |
-| `<<`     | 왼쪽 시프트  | 비트를 왼쪽으로 이동       | `a << 1` → `12` |
-| `>>`     | 오른쪽 시프트 | 비트를 오른쪽으로 이동      | `a >> 1` → `3`  |
-
----
-
-## 할당 연산자
-
-값을 변수에 저장할 때 사용합니다. 대부분의 경우 산술 연산자와 결합하여 축약할 수 있습니다.
-
-| 연산자  | 설명       | 예시 (`a = 5`) |
-| ---- | -------- | ------------------------------- |
-| `=`  | 기본 할당    | `a = 10`                        |
-| `+=` | 덧셈 후 할당  | `a += 2` → `7`                  |
-| `-=` | 뺄셈 후 할당  | `a -= 1` → `4`                  |
-| `*=` | 곱셈 후 할당  | `a *= 3` → `15`                 |
-| `/=` | 나눗셈 후 할당 | `a /= 5` → `1`                  |
-| `%=` | 나머지 후 할당 | `a %= 4` → `1`                  |
+| Wendeshaji | Maelezo       | Mfano (`a = 10`, `b = 3`) |
+| ---------- | ------------- | -------------------------------------------- |
+| `==`       | sawa          | `a == b` → `uongo`                           |
+| `!=`       | tofauti       | `a != b` → `kweli`                           |
+| `<`        | ndogo         | `a < b` → `uongo`                            |
+| `>`        | kubwa         | `a > b` → `kweli`                            |
+| `<=`       | ndogo au sawa | `a <= 10` → `kweli`                          |
+| `>=`       | kubwa au sawa | `a >= b` → `kweli`                           |
 
 ---
 
-## 기타 특수 연산자
+## Wendeshaji wa mantiki
 
-Wave는 다음과 같은 고유 또는 특별한 의미를 가진 연산자들도 제공합니다.
+Wendeshaji wa mantiki hushughulikia mchanganyiko wa kweli/uongo kwa thamani za `bool`.
 
-| 연산자       | 이름                                 | 설명                       | 예시                       |
-| --------- | ---------------------------------- | ------------------------ | ------------------------ |
-| `??`      | null 병합 연산자                        | 왼쪽 값이 null일 경우 오른쪽 값을 사용 | `a ?? b` → `a가 null이면 b` |
-| `?:`      | 조건 연산자 (삼항 연산자) | 조건에 따라 값을 선택             | `조건 ? 참값 : 거짓값`          |
-| `in`      | 포함 여부 확인                           | 값이 컬렉션에 포함되어 있는지 확인      | `"a" in list`            |
-| `is`      | 타입 비교 연산자                          | 값의 타입을 확인                | `x is i32`               |
-| `!&`      | NAND                               | 논리 NAND 연산               | 고급 논리 연산                 |
-| \\`!\\ | NOR                                | 논리 NOR 연산                | 고급 논리 연산                 |
-| `~^`      | XNOR                               | 논리 XNOR 연산               | 고급 논리 연산                 |
+| Wendeshaji | Jina        | Maelezo                                            | mfano                      |
+| ---------- | ----------- | -------------------------------------------------- | -------------------------- |
+| `&&`       | Mantiki AND | Ni `kweli` tu wakati thamani zote mbili ni `kweli` | `kweli && uongo` → `uongo` |
+| \\`\\   | Mantiki OR  | `kweli` ikiwa hata moja ni `kweli`                 | \`true \\                |
+| `!`        | Mantiki NOT | Pindua `kweli` kuwa `uongo`, `uongo` kuwa `kweli`  | `!kweli` → `uongo`         |
 
 ---
 
-## 요약
+## Wendeshaji wa biti
 
-Wave는 수학적 연산부터 논리 판단, 비트 조작, 조건 분기까지 다양한 연산자를 제공합니다.
-이러한 연산자들은 변수와 상호작용하거나 조건을 구성하고, 복잡한 계산이나 흐름 제어에 필수적인 도구입니다.
+Wendeshaji wa biti hubadilisha data ya aina ya nambari kwa vitengo vya biti.
 
-각 연산자의 우선순위와 결합 방향 등은 추후 "우선순위 및 평가 순서" 섹션에서 다룰 수 있습니다.
+| Wendeshaji | Jina            | Maelezo                           | mfano           |
+| ---------- | --------------- | --------------------------------- | --------------- |
+| `&`        | Biti AND        | Moja ikiwa biti zote mbili ni 1   | `a & b` → `2`   |
+| \\`\\   | Biti OR         | Moja ikiwa hata moja ya biti ni 1 | \`a \\        |
+| `^`        | Biti XOR        | Moja ikiwa biti tofauti           | `a ^ b` → `5`   |
+| `~`        | Biti SIO        | Geuza biti                        | `~a` → `-7`     |
+| `<<`       | Hamisha kushoto | Hamisha biti kushoto              | `a << 1` → `12` |
+| `>>`       | Hamisha kulia   | Hamisha biti kulia                | `a >> 1` → `3`  |
+
+---
+
+## Wendeshaji wa usambazaji
+
+Inatumika kuhifadhi thamani kwa kigezo. Katika hali nyingi, inaweza kuunganishwa na wendeshaji wa hesabu ili kufupishwa.
+
+| Wendeshaji | Maelezo                    | Mfano (`a = 5`) |
+| ---------- | -------------------------- | ---------------------------------- |
+| `=`        | Ugawaji wa Msingi          | `a = 10`                           |
+| `+=`       | Ugawaji baada ya Kuongeza  | `a += 2` → `7`                     |
+| `-=`       | Ugawaji baada ya Kuondoa   | `a -= 1` → `4`                     |
+| `*=`       | Ugawaji baada ya Kuzidisha | `a *= 3` → `15`                    |
+| `/=`       | Ugawaji baada ya Kugawa    | `a /= 5` → `1`                     |
+| `%=`       | Ugawaji baada ya Mabaki    | `a %= 4` → `1`                     |
+
+---
+
+## Wendeshaji maalum wengine
+
+Wave pia hutoa waendeshaji wenye maana ya kipekee au maalum kama ifuatavyo.
+
+| Wendeshaji | Jina                                                       | Maelezo                                                 | mfano                                           |
+| ---------- | ---------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------- |
+| `??`       | Wendeshaji wa kuunganisha null                             | Tumia thamani ya kulia ikiwa thamani ya kushoto ni null | `a ?? b` → `a ikiwa ni null basi b`             |
+| `?:`       | Wendeshaji wa hali (Ternari Wendeshaji) | Chagua thamani kulingana na hali                        | `Sharti ? Thamani ya ukweli : Thamani ya uongo` |
+| `ndani`    | Kukagua ikiwa inajumuishwa                                 | Kukagua ikiwa thamani ipo katika mkusanyiko             | `"a" katika orodha`                             |
+| `ni`       | Wendeshaji wa kulinganisha aina                            | Kukagua aina ya thamani                                 | `x ni i32`                                      |
+| `!&`       | NAND                                                       | Mantiki ya NAND                                         | Wendeshaji wa mantiki ya juu                    |
+| \\`!\\  | NOR                                                        | Mantiki ya NOR                                          | Wendeshaji wa mantiki ya juu                    |
+| `~^`       | XNOR                                                       | Mantiki ya XNOR                                         | Wendeshaji wa mantiki ya juu                    |
+
+---
+
+## Muhtasari
+
+Wave inatoa wendeshaji mbalimbali kutoka kwa hesabu za kihisabati hadi hukumu za kimantiki, udhibiti wa biti, na tawala za masharti.
+Wendeshaji hawa ni zana muhimu kwa kuwasiliana na mabadiliko au kuunda hali na udhibiti wa mtiririko au mahesabu magumu.
+
+Kipaumbele cha kila wendeshaji na mwelekeo wa kuunganisha vinaweza kushughulikiwa katika sehemu za baadaye za "Kipaumbele na mpangilio wa utathmini."

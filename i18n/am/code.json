@@ -1,0 +1,80 @@
+{
+  "tagline": {
+    "message": "አንድ ቋንቋ፣ በማንኛውም አካባቢ የማስቀመጥ እድል"
+  },
+  "get-started": {
+    "message": "በ5 ደቂቃ ውስጥ ጀምር"
+  },
+  "read-the-docs": {
+    "message": "ፎቶዎችን አንብብ"
+  },
+  "homepage.hero.title": {
+    "message": "ለሃይማኖት ተዋዋቂ ስህተት ግብ ያለው ቃንቃ"
+  },
+  "homepage.hero.subtitle": {
+    "message": "ቀላል የንባብ ፅሁፍ፣ ማየትች የሆነ ምስል አላማ፣ እና የተጠቃሚ መዳረሻን አዳምጧል፡፡ Wave በግብዓት ሪፖርት መጠን እና ማሽንን በማስቀመጥ ላይ ተመስርቷል፡፡"
+  },
+  "homepage.why_wave.title": {
+    "message": "ለምንምንም Wave ምርጡ ዳርነት እንደሚያሳድገው ከከሆነ፤?"
+  },
+  "homepage.features.one.title": {
+    "message": "በቀላል የሚወደድ ፣ የሚስከትም ይሁን፤"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave የመዋቅር ምክትታው ተጨማሪ ይቀንማል፡፡ ወቅታዊ ፅሁፍ በማንነት ተወቅሮ ይታይ፡፡ መጠቆምም ምሳቁ ደስታው በሚል ነው፡፡"
+  },
+  "homepage.features.two.title": {
+    "message": "በሃላፌነት የተጎናኘ"
+  },
+  "homepage.features.two.description": {
+    "message": "네이티브 코드로 컴파일되며, 제로-코스트 추상화를 통해 C++ 수준의 성능을 달성합니다. 리소스가 중요한 작업에 이상적입니다."
+  },
+  "homepage.features.three.title": {
+    "message": "안전하고 동시적인"
+  },
+  "homepage.features.three.description": {
+    "message": "Null 참조 오류와 같은 일반적인 버그를 컴파일 시점에 방지합니다. 내장된 동시성 모델로 멀티코어 프로그래밍이 그 어느 때보다 쉬워집니다."
+  },
+  "homepage.contributors.title": {
+    "message": "기여자"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "언어 창시자"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "언어 설계자"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "컴파일러 개발"
+  },
+  "homepage.contributors.role.library": {
+    "message": "표준 라이브러리 담당"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "기여자"
+  },
+  "homepage.sponsors.title": {
+    "message": "스폰서"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "명예 스폰서"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "플래티넘 스폰서"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "골드 스폰서"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "실버 스폰서"
+  },
+  "homepage.translations.title": {
+    "message": "Wave 번역에 참여하기"
+  },
+  "homepage.translations.subtitle": {
+    "message": "전 세계 개발자들이 언어 장벽 없이 Wave를 배울 수 있도록 번역에 기여해주세요."
+  },
+  "homepage.translations.button": {
+    "message": "Crowdin에서 번역 참여하기"
+  }
+}
