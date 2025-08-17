@@ -1,80 +1,80 @@
 {
   "tagline": {
-    "message": "하나의 언어, 무한한 가능성"
+    "message": "لغة واحدة، إمكانيات لا حصر لها"
   },
   "get-started": {
-    "message": "5분 안에 시작하기"
+    "message": "ابدأ في غضون 5 دقائق"
   },
   "read-the-docs": {
-    "message": "문서 읽기"
+    "message": "اقرأ الوثيقة"
   },
   "homepage.hero.title": {
-    "message": "개발의 새로운 물결을 위한 현대적인 언어"
+    "message": "لغة حديثة لموجة جديدة من التطوير"
   },
   "homepage.hero.subtitle": {
-    "message": "직관적인 문법, 강력한 성능, 그리고 내장된 안전성. Wave는 당신의 생산성을 높이고 애플리케이션을 견고하게 만들기 위해 설계되었습니다."
+    "message": "نحو سهولة في التعلم، أداء قوي، وأمان مدمج. صُممت Wave لزيادة إنتاجيتك وجعل التطبيق أقوى."
   },
   "homepage.why_wave.title": {
-    "message": "왜 Wave를 선택해야 할까요?"
+    "message": "لماذا يجب أن تختار Wave؟"
   },
   "homepage.features.one.title": {
-    "message": "간결하고 직관적인"
+    "message": "بسيط وبديهي"
   },
   "homepage.features.one.description": {
-    "message": "Wave는 불필요한 코드를 줄이고 핵심 로직에 집중할 수 있게 해줍니다. 현대적인 문법으로 배우기 쉽고 사용하기 즐겁습니다."
+    "message": "تمكنك Wave من تقليل الرموز غير الضرورية والتركيز على المنطق الأساسي. التعلم بفضل نحوه الحديث سهل وممتع."
   },
   "homepage.features.two.title": {
-    "message": "빠르고 효율적인"
+    "message": "سريع وفعال"
   },
   "homepage.features.two.description": {
-    "message": "네이티브 코드로 컴파일되며, 제로-코스트 추상화를 통해 C++ 수준의 성능을 달성합니다. 리소스가 중요한 작업에 이상적입니다."
+    "message": "يتم الترجمة إلى شفرة محلية، وتحقيق أداء على مستوى C++ من خلال تجريد بدون تكلفة. مناسب تماماً للمهام التي تتطلب موارد كبيرة."
   },
   "homepage.features.three.title": {
-    "message": "안전하고 동시적인"
+    "message": "آمن ومتعدد المهام"
   },
   "homepage.features.three.description": {
-    "message": "Null 참조 오류와 같은 일반적인 버그를 컴파일 시점에 방지합니다. 내장된 동시성 모델로 멀티코어 프로그래밍이 그 어느 때보다 쉬워집니다."
+    "message": "يمنع الأخطاء الشائعة مثل أخطاء المرجع Null في وقت الترجمة. مع نموذج التزامن المدمج، أصبح البرمجة متعددة الأنوية أسهل من أي وقت مضى."
   },
   "homepage.contributors.title": {
-    "message": "기여자"
+    "message": "مساهمون"
   },
   "homepage.contributors.role.founder": {
-    "message": "언어 창시자"
+    "message": "مؤسس اللغة"
   },
   "homepage.contributors.role.designer": {
-    "message": "언어 설계자"
+    "message": "مصمم اللغة"
   },
   "homepage.contributors.role.compiler": {
-    "message": "컴파일러 개발"
+    "message": "تطوير المترجم"
   },
   "homepage.contributors.role.library": {
-    "message": "표준 라이브러리 담당"
+    "message": "مسؤول مكتبة المعايير"
   },
   "homepage.contributors.role.contributor": {
-    "message": "기여자"
+    "message": "مساهم"
   },
   "homepage.sponsors.title": {
-    "message": "스폰서"
+    "message": "الراعي"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "명예 스폰서"
+    "message": "راعي الشرف"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "플래티넘 스폰서"
+    "message": "الراعي البلاتيني"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "골드 스폰서"
+    "message": "الراعي الذهبي"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "실버 스폰서"
+    "message": "الراعي الفضي"
   },
   "homepage.translations.title": {
-    "message": "Wave 번역에 참여하기"
+    "message": "المشاركة في ترجمة Wave"
   },
   "homepage.translations.subtitle": {
-    "message": "전 세계 개발자들이 언어 장벽 없이 Wave를 배울 수 있도록 번역에 기여해주세요."
+    "message": "ساعد في الترجمة لكي يتمكن المطورون في جميع أنحاء العالم التعلم بدون حواجز لغوية."
   },
   "homepage.translations.button": {
-    "message": "Crowdin에서 번역 참여하기"
+    "message": "المشاركة في الترجمة من خلال Crowdin"
   }
 }
