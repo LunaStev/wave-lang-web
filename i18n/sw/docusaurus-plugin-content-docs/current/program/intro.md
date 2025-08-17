@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Hello Wave 출력하기
+# Kutoa Hello Wave
 
-이 문서는 Wave 언어로 가장 기본적인 출력 프로그램을 작성하는 방법을 설명합니다.
+Hati hii inaelezea jinsi ya kuandika mpango wa msingi wa utoaji kwa lugha ya Wave.
 
 ---
 
-## 예제 코드
+## Msimbo wa Mfano
 
 ```wave
 fun main() {
@@ -18,23 +18,23 @@ fun main() {
 
 ---
 
-## 설명
+## Maelezo
 
 - `fun main()`
 
-    Wave 프로그램의 진입점 함수입니다. 실행 시 가장 먼저 호출됩니다.
+    Ni kazi ya kuingia kwa mpango wa Wave. Huita kwanza wakati wa utekelezaji.
 
 - `println()`
 
-    임시 출력 함수로 문자열을 출력하며, 출력 후 줄바꿈(`\n`)을 추가합니다.
+    Ni kazi ya utoaji ya mpito ambayo inatoa maandishi, na inaongeza mbadala (`\n`) baada ya utoaji.
 
-- `;` (세미콜론)
+- `;` (Sehemu ya Kununulia)
 
-    Wave의 모든 문장은 세미콜론으로 종료됩니다.
+    Kila sentensi ya Wave inaishia na semikoli.
 
 ---
 
-## 실행 결과
+## Matokeo ya utekelezaji
 
 ```text
 Hello Wave
@@ -42,9 +42,9 @@ Hello Wave
 
 ---
 
-## 추가 예제
+## Mfano wa ziada
 
-Wave는 문자열 보간을 지원합니다.
+Wave inasaidia unachanganya maandiko.
 
 ```wave
 fun main() {
@@ -53,7 +53,7 @@ fun main() {
 }
 ```
 
-출력:
+Tokeo:
 
 ```text
 Hello, Wave!
@@ -61,4 +61,4 @@ Hello, Wave!
 
 ---
 
-> 이 예제는 Wave 표준 라이브러리의 기본 출력 함수 사용법을 보여줍니다.
+> Mfano huu unaonyesha matumizi ya kazi ya msingi ya matokeo katika maktaba ya kawaida ya Wave.
