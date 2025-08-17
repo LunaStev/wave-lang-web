@@ -2,67 +2,67 @@
 sidebar_position: 7
 ---
 
-# 인라인 어셈블리
+# Mkusanyiko wa Kwenye Mstari
 
-## 소개
+## Utangulizi
 
-이 문서는 Wave 언어의 인라인 어셈블리에 대해 다룹니다.
-인라인 어셈블리는 Wave가 제공하는 기능 중 하나로, 고수준 언어의 편의성을 유지하면서도 저수준 하드웨어 제어에 직접 접근할 수 있는 극단적인 수준의 문법입니다.
+Hati hii inashughulikia mkusanyiko wa kwenye mstari wa lugha ya Wave.
+Mkusanyiko wa kwenye mstari ni mojawapo ya vipengele vinavyotolewa na Wave, ukitoa sarufi ya kipekee inayoruhusu udhibiti wa moja kwa moja wa vifaa vya kiwango cha chini huku ikihifadhi urahisi wa lugha za kiwango cha juu.
 
-즉, 일반적인 Wave 코드로는 다루기 어려운 레지스터 조작, 메모리 직접 접근, 특수 명령어 실행 등을 가능하게 하며, 성능 최적화나 하드웨어 종속적인 작업이 필요할 때 활용됩니다.
+Kwa maneno mengine, inaruhusu urejelezaji wa rejista, ufikiaji wa moja kwa moja wa kumbukumbu, na utekelezaji wa maagizo maalum ambayo ni magumu kuwasilisha na msimbo wa kawaida wa Wave, na hutumika wakati utumiaji wa utendaji au kazi zinazoegemea vifaa zinahitajika.
 
 ---
 
-## 기본 문법
+## Sarufi ya Msingi
 
 ```wave
-asm {
-    "어셈블리 명령어"          // 실제 어셈블리 코드 (한 줄에 한 명령어)
+pta {
+    "Maagizo ya mkusanyiko"          // Msimbo wa kweli wa mkusanyiko (agizo moja kwa kila mstari)
     ...
-    in("레지스터") 값         // 입력 레지스터 매핑
-    out("레지스터") 변수      // 출력 레지스터 매핑
+    katika("rejista") thamani          // Ulinganifu wa rejista ya uingizaji
+    nje("rejista") kutofautisha       // Ulinganifu wa rejista ya utoaji
 }
 ```
 
-### 문법 요소
+### Vipengele vya Sarufi
 
-1. 어셈블리 명령어
-    - `"..."` 문자열 형태로 작성하며, 실제 CPU에서 실행되는 저수준 어셈블리 명령어 입니다.
-    - 여러 줄 작성 가능하며, 한 줄에 한 개의 명령어를 작성합니다.
-    - 예시:
+1. Maagizo ya Mkusanyiko
+    - Yameandikwa kwa umbo la kamba ya `"..."`, maagizo ya mkusanyiko wa kiwango cha chini yanayotawala CPU halisi.
+    - Inaruhusu maandishi ya mistari mingi, na agizo moja tu huandikwa kwa kila mstari.
+    - Mfano:
            ```wave
-           "mov rax, 1"
-           "syscall"
+           "hamisha rax, 1"
+           "kiitisha mfumo"
            ```
 
-2. `in("레지스터") 값`
-    - 변수(또는 표현식)의 값을 지정한 레지스터에 로드합니다.
-    - 예시:
+2. `in("rejista") thamani`
+    - Inapakia thamani ya kutofautisha (au usemi) katika rejista maalum.
+    - Mfano:
            ```wave
            in("rdi") s
            ```
-        -> 변수 `s`의 값을 x86-64 규약에서 첫 번째 syscall 인자 레지스터인 `rdi`에 넣음.
+        -> Inajaza thamani ya kutofautisha `s` katika `rdi`, rejista ya kwanza ya kiitisho cha mfumo kulingana na mkataba wa ngamizi x86-64.
 
-3. `out("레지스터") 변수`
-    - 지정한 레지스터의 값을 Wave 변수로 가져옵니다.
-    - 예시:
+3. `out("rejista") kutofautisha`
+    - Inaondoka na kuleta thamani kwenye rejista maalum kwa kutofautisha kwa Wave.
+    - Mfano:
            ```wave
            out("rax") ret
            ```
-        -> `syscall`의 반환값이 저장된 `rax` 레지스터 값을 변수 `ret`에 저장.
+        -> Inawakilisha thamani ya rejista `rax` ya thamani rudishwa ya `syscall` kwa kutofautisha `ret`.
 
 ---
 
-## 간단한 예제
+## Mfano Rahisi
 
 ```wave
 fun main() {
-    var msg_ptr: ptr<i8> = "Hello from syscall!\n";
+    var msg_ptr: ptr<i8> = "Habari kutoka kwa syscall!\n";
     var ret_val: i64;
 
     asm {
-        "mov rax, 1"
-        "syscall"
+        "hamisha rax, 1"
+        "kiitisha mfumo"
         in("rdi") 1
         in("rsi") msg_ptr
         in("rdx") 20
@@ -73,7 +73,7 @@ fun main() {
 
 ---
 
-## 주의사항
+## Tahadhari
 
-- 인라인 어셈블리는 Wave의 타입 안정성을 우회하므로, 잘못된 멸영어 사용 시 프로그래밍이 비정상 종료되거나 undefined behavior가 발생할 수 있습니다.
-- `in`, `out` 매핑은 컴파일 타임에 검증되지만, 명령어 자체의 유효성은 보장하지 않습니다.
+- Mkusanyiko wa kwenye mstari hukwepa utulivu wa aina za Wave, hivyo matumizi mabaya ya lugha yanaweza kusababisha programu kufunga kwa kipupwe au utendakazi usioeleweka.
+- Ulinganifu wa `in`, `out` unathibitishwa wakati wa kukusanya, lakini uhalali wa maagizo wenyewe hauhakikishiwi.
