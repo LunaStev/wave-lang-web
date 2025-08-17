@@ -2,148 +2,148 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Ramani ya Maendeleo ya Ujumuishaji wa Wave + Whale v2
 
-## 전체 단계
+## Hatua Zote
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → release
+pre-alpha → pre-beta → alfa → beta → rc → kutolewa
 ```
 
 ---
 
-## Pre-Beta 단계
+## Hatua ya Pre-Beta
 
-> 목표: Wave 언어의 프론트엔드 완성 + LLVM 백엔드를 이용한 전체 기능 구현
+> Lengo: Kukamilisha frontend ya lugha ya Wave + utekelezaji wa kipengele kamili kwa kutumia backend ya LLVM
 
-### 주요 특징
+### Sifa Kuu
 
-- LLVM만 사용 (Whale 없음)
+- Kutumia LLVM pekee (Hakuna Whale)
 
-- 문법 추가는 없음, 기존 사양만 구현
+- Hakuna nyongeza ya sarufi, utekelezaji wa maelezo yaliyopo tu
 
-- 에러 메시지, 타입 검사, 변수 스코프 등 프론트 중심 구조 안정화
+- Uthabiti wa muundo wa mbele, kama vile ujumbe wa hitilafu, ukaguzi wa aina, na wigo wa tofauti
 
-### 구현 범위
+### Upeo wa Utekelezaji
 
-- 변수 선언, 출력, 연산
+- Tamko la kubadilika, pato, operesheni
 
-- 함수 정의 및 호출
+- Ufafanuzi wa kazi na mwito
 
-- if / else if / else
+- ikiwa / vinginevyo ikiwa / vinginevyo
 
-- while / break / continue
+- wakati / pumzika / endelea
 
-- 포맷 출력, 타입 지정
+- Pato la umbizo, uteuzi wa aina
 
-- 포인터 설계 (`ptr<T>` 형태)
+- Ubunifu wa kielekezi (`ptr<T>` muundo)
 
-- 배열 설계 (`array<T, N>`)
+- Ubunifu wa safu (`array<T, N>`)
 
-- 타입 검사 및 구조적 AST
+- Uhakiki wa aina na AST ya kimuundo
 
-### 사용 기술
+### Teknolojia iliyotumika
 
-- Rust (Wave 컴파일러 전부)
+- Rust (Kompyuta yote ya Wave)
 
-- LLVM (IR 생성, AOT 실행)
+- LLVM (Uundaji wa IR, Utekelezaji wa AOT)
 
 - inkwell / llvm-sys
 
 ---
 
-## Alpha 단계
+## Hatua ya Alpha
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> Lengo: Kuanza utangulizi wa Whale, kutumia LLVM sambamba / Kuanzisha utekelezaji wa Whale inayotegemea nyuma
 
-### 주요 특징
+### Sifa Kuu
 
-- LLVM은 디폴트 백엔드
+- LLVM ni mkondo wa nyuma chaguo-msingi
 
-- Whale은 선택적 백엔드
+- Whale ni mkondo wa nyuma wa hiari
 
-- Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+- Wakati wa kutekeleza msimbo wa Wave, inawezekana kugawana kwa kutumia chaguo `--backend`
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale 관련 작업
+### Kazi zinazohusiana na Whale
 
-- Whale IR 구조 설계 및 정의 (Instruction, Value, Block 등)
+- Uundaji na ufafanuzi wa muundo wa Whale IR (Maagizo, Thamani, Kizuizi nk)
 
-- Whale용 IR Generator 구현
+- Utekelezaji wa Kianzilishi cha IR kwa Whale
 
-- Whale 코드 생성기 (어셈블리 or 바이너리)
+- Kianzilishi cha msimbo kwa Whale (Assembly au Binary)
 
-- Whale로만 가능한 타입 구현 (`i1024`, 고급 포인터 등)
+- Utekelezaji wa aina zinazowezekana kwa Whale tu (`i1024`, pointer za hali ya juu nk.)
 
-### 체크포인트
+### Kipengele cha kuangalia
 
-- Whale로 Hello World 출력
+- Hello World yaonyesha kwa Whale
 
-- Whale에서 변수 선언/할당
+- Tamko/ugawaji wa mabadiliko katika Whale
 
-- Whale IR 디버깅 도구 구현
+- Utekelezaji wa chombo cha kuuondoa makosa katika Whale IR
 
-- Whale에서 포인터 타입 처리
+- Ushughulikiaji wa aina za pointers katika Whale
 
-- Wave → Whale IR 변환 진행
-
----
-
-## Beta 단계
-
-> 목표: Whale로 완전 전환, LLVM 제거. Whale + Wave 조합 최적화
-
-### 주요 특징
-
-- Whale만 사용
-
-- LLVM 전체 제거 (디펜던시 및 모듈)
-
-- 코드 최적화 중심
-
-- IR → 실행까지 빠르고 효율적으로
-
-### 최적화 범위
-
-- Whale IR 최적화 Pass 설계
-
-- Whale 코드 생성 속도 개선
-
-- Wave의 모든 문법이 Whale에서 완벽 지원
-
-### 테스트
-
-- 단위 테스트 + 전체 테스트 스위트
-
-- WSON, 표준 라이브러리 호환성 테스트
-
-- 크로스 플랫폼 Whale 빌드 확인
+- Mabadiliko ya Wave → Whale IR yanaendelea
 
 ---
 
-## RC (Release Candidate) 단계
+## Hatua ya Beta
 
-> 목표: Wave 부트스트랩 시작 — Rust 코드 전면 제거
+> Lengo: Kubadilisha kabisa kwa Whale, kuondoa LLVM. Uboreshaji wa mchanganyiko wa Whale + Wave
 
-### 주요 특징
+### Sifa Kuu
 
-- Wave로 Wave 컴파일러를 재작성 시작
+- Matumizi ya Whale pekee
 
-- Whale 기반으로 Wave 코드 자체 실행
+- Kuondoa kabisa LLVM (utaratibu na moduli)
 
-- Whale은 self-hosting 단계 진입
+- Msingi wa uboreshaji wa msimbo
 
-### 작업 범위
+- Kutoka IR hadi utekelezaji kwa haraka na ufanisi
 
-- Whale 기반으로 Wave IR 생성기 재작성
+### Upeo wa Uboreshaji
 
-- Rust 제거 + Wave 코드로 대체
+- Uundaji wa Mchakato wa Uboreshaji wa Whale IR
 
-- std 및 core 라이브러리 Wave로 작성
+- Uboreshaji wa kasi ya uundaji wa msimbo wa Whale
+
+- Syntaksi yote ya Wave inasaidiwa kikamilifu katika Whale
+
+### Jaribio
+
+- Jaribio la kitengo + suite kamili ya majaribio
+
+- Jaribio la utangamano la WSON, maktaba ya kiwango
+
+- Uthibitishaji wa ujenzi wa Whale wa jukwaa kubwa
+
+---
+
+## Hatua ya RC (Mgombea wa Kutolewa)
+
+> Lengo: Kuanza kubunifu upya Wave — Kuondoa kabisa msimbo wa Rust
+
+### Sifa Kuu
+
+- Kuanza kuandika upya kompyuta ya Wave kwa Wave
+
+- Utekelezaji wa msimbo wa Wave yenyewe kwa msingi wa Whale
+
+- Whale inaingia hatua ya kujihostisha
+
+### Upeo wa kazi
+
+- Kuandika upya Kianzilishi cha IR ya Wave kwa msingi wa Whale
+
+- Kuondoa Rust + Kubadilisha na msimbo wa Wave
+
+- Kuandika maktaba ya std na core kwa Wave
 
 - 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
 
