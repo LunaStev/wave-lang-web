@@ -27,54 +27,54 @@
     "message": "በሃላፌነት የተጎናኘ"
   },
   "homepage.features.two.description": {
-    "message": "네이티브 코드로 컴파일되며, 제로-코스트 추상화를 통해 C++ 수준의 성능을 달성합니다. 리소스가 중요한 작업에 이상적입니다."
+    "message": "ወተላይ ኮድ ይምረጣል እና በመስመር ላይ ካለው መከተቢያ ውስጥ በማንኛው ቦታ ላይ ወስት ይፈጥራሉ። ክፍል-ፍትህ የለም ስለዚህ ደብሩ በቻው ሲያስጀመር እና ሼስ ነገር ይጠብቃል። ይልቀሱት ፍቃዱ እንሰይዐል ፣ ዲኤደር ፍለስተታ ይወስደኛል።"
   },
   "homepage.features.three.title": {
-    "message": "안전하고 동시적인"
+    "message": "አሳማሚ እና ቁልፉ ይገለጻል።"
   },
   "homepage.features.three.description": {
-    "message": "Null 참조 오류와 같은 일반적인 버그를 컴파일 시점에 방지합니다. 내장된 동시성 모델로 멀티코어 프로그래밍이 그 어느 때보다 쉬워집니다."
+    "message": "በአብዛኛው ከሆነ በአንደ ዕፁ እንከተን አለፉ፡፡ ማንገዲዩ መስመር ላይ በተጨማሪ በቪጋ ላይ ካለው ፋሽን በነተር ሞዴል ይባል፣ አሁን ራህፋ ነገር እንደ ደርዷው የሚዘ የምሳॻያ ይችላል።"
   },
   "homepage.contributors.title": {
-    "message": "기여자"
+    "message": "ተዋጊ"
   },
   "homepage.contributors.role.founder": {
-    "message": "언어 창시자"
+    "message": "የቋንቋ ተመነ አስጀት"
   },
   "homepage.contributors.role.designer": {
-    "message": "언어 설계자"
+    "message": "የቋንቋ አቀራር አርቆ"
   },
   "homepage.contributors.role.compiler": {
-    "message": "컴파일러 개발"
+    "message": "የኮምፕላይለር አንቀኛ"
   },
   "homepage.contributors.role.library": {
-    "message": "표준 라이브러리 담당"
+    "message": "የመለለመተ ቤት ኢየጋ ዓለም"
   },
   "homepage.contributors.role.contributor": {
-    "message": "기여자"
+    "message": "ተዋጊ"
   },
   "homepage.sponsors.title": {
-    "message": "스폰서"
+    "message": "ኢዱጋ አሰጣገል"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "명예 스폰서"
+    "message": "የክብር ኢዱጋ አሰጣገል"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "플래티넘 스폰서"
+    "message": "ፍላቲነም ኢዱጋ አሰጣገል"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "골드 스폰서"
+    "message": "ወርቅ ኢዱጋ አሰጣገል"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "실버 스폰서"
+    "message": "ብር ኢዱጋ አሰጣገል"
   },
   "homepage.translations.title": {
-    "message": "Wave 번역에 참여하기"
+    "message": "በWave ትርጉም ላይ ማሳካኝ"
   },
   "homepage.translations.subtitle": {
-    "message": "전 세계 개발자들이 언어 장벽 없이 Wave를 배울 수 있도록 번역에 기여해주세요."
+    "message": "ዓለም አቀፍ አትፎስኖች ኃላ ነገር ማሻሻይ የጊዜ ዋኒነ ፤ Wave ትርጉም ተዋጊዎች ሁን."
   },
   "homepage.translations.button": {
-    "message": "Crowdin에서 번역 참여하기"
+    "message": "በCrowdin ትርጉም ተሰምዮ መቀነሸ."
   }
 }
