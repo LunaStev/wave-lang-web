@@ -2,38 +2,38 @@
 sidebar_position: 1
 ---
 
-# 함수와 변수
+# Majukumu na Vigezo
 
-## 소개
+## Utangulizi
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화의 균형을 이루어 소프트웨어 개발에 효율적이고 유연한 환경을 제공하는 것입니다.
-이 섹션에서는 Wave 프로그램의 기본 구성 요소인 함수와 변수를 소개합니다. 이러한 구성 요소는 프로그램 내에서 논리를 구성하고 데이터를 관리하는 데 필수적입니다.
-함수와 변수를 정의하고 다루는 방법을 이해하면 Wave의 잠재력을 최대한 활용할 수 있습니다.
+Falsafa kuu ya muundo wa lugha ya programu ya Wave ni kutoa mazingira madhubuti na yenye kubadilika ya maendeleo ya programu kupitia usawa wa utendaji wa kiwango cha chini na muundo wa kiwango cha juu.
+Sehemu hii inatoa utangulizi kwa vipengele vya kimsingi vya programu ya Wave, ambavyo ni majukumu na vigezo. Vipengele hivi ni muhimu kwa kupanga mantiki na kudhibiti data ndani ya programu.
+Kwa kuelewa jinsi ya kufafanua na kushughulikia majukumu na vigezo, unaweza kutumia uwezo wa Wave kwa upeo wake kamili.
 
 ---
 
-## 함수
+## Jukumu
 
-Wave에서 함수는 독립적으로 실행할 수 있는 **재사용 가능한 코드 블록** 역할을 합니다.
-함수는 특정 동작을 캡슐화하고 프로그램 전반에서 필요할 때 호출할 수 있도록 해줍니다.
-이를 통해 계산을 수행하거나, I/O 작업을 관리하거나, 코드를 관리 가능한 단위로 분리할 수 있습니다.
+Jukumu katika Wave hutumika kama **kizuizi cha msimbo kinachoweza kutumika tena** na kinaweza kutekelezwa kwa uhuru.
+Jukumu hufunga tabia mahususi na kuruhusu kuitwa inapohitajika kote kwenye programu.
+Hii inakuwezesha kutekeleza hesabu, kudhibiti kazi za I/O, au kutenganisha msimbo katika vitengo vinavyoweza kudhibitiwa.
 
-Wave에서 함수의 시그니처는 `fun` 키워드로 시작하며, 함수 이름, 매개변수(있을 경우), 그리고 중괄호 `{}`로 감싸인 함수 본체로 구성됩니다.
+Sahihi ya jukumu katika Wave huanza na neno muhimu `fun` na inajumuisha jina la jukumu, vigezo (ikiwa vipo), na mwili wa jukumu uliofumbwa katika mabano `{}`.
 
-### 함수 정의하기
+### Kufafanua Jukumu
 
-Wave에서 기본적인 함수는 다음과 같이 정의됩니다:
+Jukumu la msingi katika Wave linafafanuliwa kama ifuatavyo:
 
 ```wave
-fun main() {
-    // 여기에 코드를 작성하세요
+fun kuu() {
+    // Andika msimbo hapa
 }
 ```
 
-- `main` 함수는 프로그램 실행을 위한 진입점으로 항상 필요합니다.
-- 함수는 매개변수를 가질 수 있으며, 값을 반환할 수 있습니다. 반환 타입은 함수 이름 뒤에 명시합니다.
+- Jukumu la `kuu` ni lango la kuingia kwa utekelezaji wa programu na linahitajika kila mara.
+- Jukumu linaweza kuwa na vigezo na linaweza kurudisha thamani. Aina ya kurudisha huwekwa baada ya jina la kazi.
 
-### 예제: 간단한 함수
+### Mfano: Kazi rahisi
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -41,75 +41,75 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // add 함수 호출
-    println(result);            // 출력: 12
+    var result = add(5, 7);     // kuita kazi ya kuongeza
+    println(result);            // chapisha: 12
 }
 ```
 
-위 예제에서:
+Katika mfano huo:
 
-- `add` 함수는 두 정수 `a`와 `b`를 받아 합계를 반환합니다.
-- `main` 함수는 `add`를 호출하여 결과를 출력합니다.
+- Kazi ya `add` inachukua nambari mbili kamili `a` na `b` na kurudisha jumla.
+- Kazi ya `main` inaita `add` na kuchapisha matokeo.
 
-## 변수
+## Kigezo
 
-변수는 프로그램 내에서 데이터를 저장하고 조작하는 데 사용됩니다.
-Wave는 변수 선언에서 **가변 변수**와 **불변 변수**를 모두 지원하여 데이터 관리에 대한 개발자의 제어권을 제공합니다.
+Vigezo hutumika kuhifadhi na kudhibiti data katika programu.
+Wave inasaidia tamko la vigezo hivyo kutoa udhibiti wa msanidi programu kwenye usimamizi wa data kama **kigezo kinachoweza kubadilika** na **kigezo kisichobadilika**.
 
-### 가변 변수
+### Kigezo kinachoweza kubadilika
 
-Wave에서 변수는 기본적으로 **가변(mutable)** 입니다. 즉, 프로그램 실행 중에 값을 변경할 수 있습니다.
+Katika Wave, kigezo kwa default kinaweza kubadilika (**mutable**). Hii ina maana kuwa thamani inaweza kubadilishwa wakati wa kutekeleza programu.
 
-가변 변수는 var 키워드를 사용해 선언합니다.
+Vigezo vinavyoweza kubadilika vinatangazwa kwa kutumia neno kuu `var`.
 
 ```wave
-var x :i32 = 10; // 가변 변수
+var x :i32 = 10; // kigezo kinachoweza kubadilika
 x = 20;
 ```
 
-위 예제에서:
+Katika mfano huo:
 
-- `x`는 가변 변수로, 초기값 `10`을 가지며 이후에 `20`으로 값을 변경할 수 있습니다.
+- `x` ni kigezo kinachoweza kubadilika ambacho kina thamani ya awali `10` na inaweza kubadilishwa hadi `20`.
 
-### 불변 변수
+### Kigezo kisichobadilika
 
-변수를 **불변(immutable)** 으로 선언하면, 한 번 값이 할당된 후에는 변경할 수 없습니다.
+Kikitangazwa kama kigezo kisichobadilika (**immutable**), thamani haiwezi kubadilishwa mara imepangwa.
 
-불변 변수는 `let` 키워드를 사용해 선언합니다.
+Vigezo visivyobadilika vinatangazwa kwa kutumia neno kuu `let`.
 
 ```wave
-let y :i32 = 5;         // 불변 변수
-// y = 10;              // 오류: 불변 변수는 값을 변경할 수 없습니다.
+let y :i32 = 5;         // kigezo kisichobadilika
+// y = 10;              // kosa: vigezo visivyobadilika haviwezi kubadilishwa thamani.
 ```
 
-여기서:
+Hapa:
 
-- `y`는 불변 변수로, 값을 변경하려고 하면 컴파일 오류가 발생합니다.
+- `y` ni kigezo kisichobadilika na mabadiliko yoyote itasababisha kosa la uunganishaji.
 
-하지만 `let` 키워드에서 가변 변수로 사용하고 싶다면 `mut`를 사용해서 일시적 가변 변수로 사용할 수 있습니다.
+Lakini unapotaka `let` kutumika kwa kigezo kinachoweza kubadilika, unaweza kutumia maneno `mut` kwa kigezo kinachobadilika kwa muda.
 
 ```wave
 let mut y :i32 = 5;
-y = 10; 
+y = 10;
 ```
 
-### 변수 선언 예제
+### Mfano wa tamko la kigezo
 
-다양한 타입의 가변 및 불변 변수를 선언하는 예제는 다음과 같습니다:
+Mfano wa kutangaza vigezo vya aina mbalimbali vinavyoweza na visivyoweza kubadilika ni kama ifuatavyo:
 
 ```wave
-var x :i32 = 10;                    // 가변 정수 변수
-let y :f64 = 3.14159;               // 불변 부동소수점 변수
-var name :str = "Wave";             // 가변 문자열 변수
-let is_active :bool = true;         // 불변 논리 변수
+var x :i32 = 10;                    // kigezo cha nambari kinachoweza kubadilika
+let y :f64 = 3.14159;               // kigezo cha kudumu cha kipointi cha kufloati
+var name :str = "Wave";             // kigezo cha mfuatano kinachoweza kubadilika
+let is_active :bool = true;         // kigezo cha mantiki kisichobadilika
 ```
 
-- `x`는 가변 정수입니다.
-- `y`는 불변 부동소수점 숫자입니다..
-- `name`은 가변 문자열입니다.
-- `is_active`는 불변 논리값입니다.
+- `x` ni nambari ambayo inaweza kubadilika.
+- `y` ni nambari ya pointi ya kudumu ya kipointi cha kufloati.
+- `name` ni mfuatano unaoweza kubadilika.
+- `is_active` ni thamani ya mantiki isiyobadilika.
 
-Wave에서는 `var` 키워드를 사용해 가변 변수를 선언하며, `let` 키워드를 사용해 초기 할당 후 변경할 수 없는 불변 변수를 선언합니다.
+Katika Wave, tunatumia maneno kuu ya `var` ili kutangaza vigezo ambavyo vinaweza kubadilika, wakati `let` inatumika kwa kigezo ambacho hakibadiliki baada ya kutengwa awali.
 
-가변 변수와 불변 변수를 구분함으로써, Wave는 데이터 일관성과 프로그램 상태를 더욱 효과적으로 제어할 수 있게 합니다.
-이로써 더욱 견고하고 예측 가능한 코드를 작성할 수 있습니다.
+Kwa kutofautisha vigezo vinavyoweza kubadilika na visivyobadilika, Wave inafanya iwe rahisi kudhibiti mwendelezo wa data na hali ya programu.
+Hii inaruhusu kuandika misimbo thabiti na inayoweza kukadiriwa vizuri.
