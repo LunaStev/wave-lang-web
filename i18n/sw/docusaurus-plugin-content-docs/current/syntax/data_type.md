@@ -2,13 +2,13 @@
 sidebar_position: 2
 ---
 
-# 데이터 타입
+# Aina za Data
 
-이 문서는 Wave 프로그래밍 언어에서 제공하는 다양한 데이터 타입에 대해 설명합니다.
-Wave 프로그래밍 언어는 다양한 데이터 타입을 사용하여 값을 저장하고 연산할 수 있습니다.
-주요 데이터 타입에는 정수, 부동소수점, 문자열 등이 있습니다. 각 데이터 타입은 해당 데이터의 특성과 메모리 처리 방식을 정의 합니다.
+Hati hii inaeleza kuhusu aina mbali mbali za data zinazotolewa na lugha ya programu ya Wave.
+Lugha ya programu ya Wave inaweza kutumia aina mbali mbali za data kuhifadhi na kurekebisha thamani.
+Aina kuu za data ni pamoja na nambari kamili, nambari za desimali, mistari ya maandishi, nk. Kila aina ya data inaeleza kuhusu sifa na jinsi ya kuchakatwa kwa kumbukumbu ya data hiyo.
 
-## 정수 타입
+## Aina ya Nambari Kamili
 
 정수 타입은 **정수 값**을 저장하는 데 사용됩니다.
 기본적으로 정수는 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)로 선언됩니다.
