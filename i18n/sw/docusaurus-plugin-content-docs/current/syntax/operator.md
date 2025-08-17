@@ -2,51 +2,51 @@
 sidebar_position: 5
 ---
 
-# 연산자
+# Wendeshaji
 
-## 소개
+## Utangulizi
 
-Wave 언어는 다양한 연산자를 제공하여 변수 간의 계산, 논리 판단, 비교, 비트 연산 등을 수행할 수 있습니다.
+Lugha ya Wave inatoa wendeshaji mbalimbali ili kutekeleza hesabu kati ya vigezo, uamuzi wa mantiki, kulinganisha, na operesheni za biti.
 
-이 문서에서는 Wave에서 사용할 수 있는 주요 연산자들을 종류별로 나누어 설명하고, 각각의 동작 방식과 예제를 함께 제공합니다.
+Hati hii inaelezea aina kuu za wendeshaji ambazo zinaweza kutumika katika Wave, inaelezea jinsi kila moja inavyofanya kazi, na inatoa mifano pia.
 
-연산자는 다음과 같은 범주로 나뉩니다:
+Wendeshaji zimegawanywa katika makundi yafuatayo:
 
-- 산술 연산자
-- 비교 연산자
-- 논리 연산자
-- 비트 연산자
-- 할당 연산자
-- 기타 특수 연산자
-
----
-
-## 산술 연산자
-
-산술 연산자는 숫자 데이터를 대상으로 기본적인 수학 연산을 수행합니다.
-
-| 연산자 | 설명     | 예시 (`a = 10`, `b = 3`) |
-| --- | ------ | ----------------------------------------- |
-| `+` | 덧셈     | `a + b` → `13`                            |
-| `-` | 뺄셈     | `a - b` → `7`                             |
-| `*` | 곱셈     | `a * b` → `30`                            |
-| `/` | 나눗셈    | `a / b` → `3` (정수 나눗셈) |
-| `%` | 나머지 연산 | `a % b` → `1`                             |
+- Wendeshaji wa hesabu
+- Wendeshaji wa kulinganisha
+- Wendeshaji wa mantiki
+- Wendeshaji wa biti
+- Wendeshaji wa usambazaji
+- Wendeshaji maalum wengine
 
 ---
 
-## 비교 연산자
+## Wendeshaji wa hesabu
 
-비교 연산자는 두 값을 비교한 결과로 `bool` 값을 반환합니다.
+Wendeshaji wa hesabu hufanya shughuli za msingi za hesabu kwa data ya nambari.
 
-| 연산자  | 설명     | 예시 (`a = 10`, `b = 3`) |
-| ---- | ------ | ----------------------------------------- |
-| `==` | 같음     | `a == b` → `false`                        |
-| `!=` | 다름     | `a != b` → `true`                         |
-| `<`  | 작음     | `a < b` → `false`                         |
-| `>`  | 큼      | `a > b` → `true`                          |
-| `<=` | 작거나 같음 | `a <= 10` → `true`                        |
-| `>=` | 크거나 같음 | `a >= b` → `true`                         |
+| Wendeshaji | Maelezo              | Mfano (`a = 10`, `b = 3`)                    |
+| ---------- | -------------------- | --------------------------------------------------------------- |
+| `+`        | Penambahan           | `a + b` → `13`                                                  |
+| `-`        | Utoaji               | `a - b` → `7`                                                   |
+| `*`        | Kuzidisha            | `a * b` → `30`                                                  |
+| `/`        | Mgawanyiko           | `a / b` → `3` (mgawanyiko wa nambari kamili) |
+| `%`        | Operesheni ya mabaki | `a % b` → `1`                                                   |
+
+---
+
+## Wendeshaji wa kulinganisha
+
+Wendeshaji wa kulinganisha hurejesha thamani ya `bool` kama matokeo ya kulinganisha maadili mawili.
+
+| Wendeshaji | Maelezo | Mfano (`a = 10`, `b = 3`) |
+| ---------- | ------- | -------------------------------------------- |
+| `==`       | 같음      | `a == b` → `false`                           |
+| `!=`       | 다름      | `a != b` → `true`                            |
+| `<`        | 작음      | `a < b` → `false`                            |
+| `>`        | 큼       | `a > b` → `true`                             |
+| `<=`       | 작거나 같음  | `a <= 10` → `true`                           |
+| `>=`       | 크거나 같음  | `a >= b` → `true`                            |
 
 ---
 
