@@ -145,42 +145,42 @@ wavec run main.wave --backend=llvm
 
 - Kuandika maktaba ya std na core kwa Wave
 
-- 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
+- Kuzaliwa kwa mkusanyaji wa kwanza wa asili wa Wave baada ya kufanikiwa kwa bootstrap
 
 ---
 
-## Release 단계 (v0.0.1)
+## Hatua ya Kutolewa (v0.0.1)
 
-> 목표: 공식 출시 / 완전한 Whale 기반 독립 언어 생태계 제공
+> Lengo: Kuzindua rasmi / Kutoa mfumo wa ikolojia wa lugha huru wa msingi wa Whale
 
-### 구성 요소
+### Vipengele
 
-- Wave (언어 및 표준 라이브러리)
+- Wave (lugha na maktaba ya kawaida)
 
-- Whale (컴파일러 툴체인)
+- Whale (zana ya muundo ya Whale)
 
-- Vex (패키지 매니저)
+- Vex (meneja wa kifurushi cha Vex)
 
-- WSON (데이터 포맷)
+- WSON (muundo wa data)
 
-### 특징
+### Vipengele
 
-- 완전한 Wave-only 컴파일러 (부트스트랩 성공)
+- Mkusanyaji kamili wa Wave pekee (siku ya kwanza ya bootstrap)
 
-- Whale 최적화 완료
+- Uboreshaji wa Whale umekamilika
 
-- Vex 빌드 및 배포 시스템 정착
+- Mfumo wa ujenzi na usambazaji wa Vex umekamilika
 
-- WSON 파서 + 직렬화 포함
+- Ikiwa ni pamoja na parser ya WSON na serialization
 
-- 크로스 OS 빌드 가능 (`vex build --windows` 등)
+- Inaweza kujenga OS-msalaba (`vex build --windows`, nk)
 
 ---
 
-## 개발 메타 전략
+## Mkakati wa Meta wa Maendeleo
 
-| 전략        | 설명                                             |
-| --------- | ---------------------------------------------- |
-| 열차+레일 전략  | Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 병행 진행       |
-| 백엔드 분기 전략 | `--backend` 옵션으로 LLVM/Whale 선택, alpha에서 중요한 구조 |
-| 구조 역전 계획  | rc 이후부터 Wave 코드가 Whale을 통해 Wave 자신을 컴파일        |
+| Mkakati                    | Maelezo                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| Mkakati wa Reli na Treni   | Kujenga na kuendeleza backend ya Wave wakati wa kuendeleza Whale kwa wakati mmoja |
+| Mkakati wa Tawi la Backend | Chagua LLVM/Whale kwa chaguo la `--backend`, kwa muundo muhimu katika alpha       |
+| Mpango wa Kugeuza Muundo   | Baada ya rc, msimbo wa Wave unajikusanya kupitia Whale                            |
