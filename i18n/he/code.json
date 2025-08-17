@@ -1,0 +1,80 @@
+{
+  "tagline": {
+    "message": "שפה אחת, אפשרויות אינסופיות"
+  },
+  "get-started": {
+    "message": "להתחיל תוך 5 דקות"
+  },
+  "read-the-docs": {
+    "message": "קריאת המסמכים"
+  },
+  "homepage.hero.title": {
+    "message": "שפה מודרנית לגל חדש של פיתוחים"
+  },
+  "homepage.hero.subtitle": {
+    "message": "תחביר אינטואיטיבי, ביצועים מעולים ובטיחות מובנית. Wave תוכננה להעלות את הפרודוקטיביות שלך ולהפוך את האפליקציות שלך ליציבות יותר."
+  },
+  "homepage.why_wave.title": {
+    "message": "למה לבחור ב-Wave?"
+  },
+  "homepage.features.one.title": {
+    "message": "תמציתי ואינטואיטיבי"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave מפחיתה את הקוד המיותר ומאפשרת להתרכז בלוגיקה העיקרית. התחביר המודרני הופך את הלמידה והשימוש לקלים ומהנים."
+  },
+  "homepage.features.two.title": {
+    "message": "מהיר ויעיל"
+  },
+  "homepage.features.two.description": {
+    "message": "מתורגם לקוד מקורי ומגיע לביצועים ברמת C++ באמצעות הפשטה חסרת עלות. אידיאלי למשימות שבהן חשובים המשאבים."
+  },
+  "homepage.features.three.title": {
+    "message": "בטוח ותומך בו-זמניות"
+  },
+  "homepage.features.three.description": {
+    "message": "מונע באגים נפוצים כגון שגיאות הפניה ל-Null בזמן התרגום. הדגם המובנה לתמיכה במקביליות הופך את התכנות הרב-ליבתי לנגיש מאי פעם."
+  },
+  "homepage.contributors.title": {
+    "message": "תורמים"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "מייסד השפה"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "מעצב השפה"
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "פיתוח קומפיילר"
+  },
+  "homepage.contributors.role.library": {
+    "message": "אחראי על ספריה סטנדרטית"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "תורמים"
+  },
+  "homepage.sponsors.title": {
+    "message": "ספונסרים"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "ספונסרים של כבוד"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "ספונסרים ברמת פלטינה"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "ספונסרים ברמת זהב"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "ספונסרים ברמת כסף"
+  },
+  "homepage.translations.title": {
+    "message": "להשתתף בתרגום ל-Wave"
+  },
+  "homepage.translations.subtitle": {
+    "message": "עזרו לשאר המפתחים בעולם ללמוד Wave ללא מחסומי שפה על ידי תרומה לתרגום."
+  },
+  "homepage.translations.button": {
+    "message": "השתתפות בתרגום ב-Crowdin"
+  }
+}
