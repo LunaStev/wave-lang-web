@@ -2,61 +2,60 @@
 sidebar_position: 2
 ---
 
-# Wave 생태계
+# Hệ sinh thái Wave
 
-## 개요
+## Tổng quan
 
-Wave 생태계는 단순히 프로그래밍 언어 그 이상입니다.
-Wave는 다양한 도구, 라이브러리, 그리고 개발 철학이 어우러진 환경을 통해,
-프로그래머가 어떤 분야에서도 창의적으로 작업할 수 있도록 돕는 종합적인 개발 생태계입니다.
+Hệ sinh thái Wave vượt xa một ngôn ngữ lập trình đơn thuần.
+Wave là một hệ sinh thái phát triển toàn diện, giúp lập trình viên sáng tạo trong bất kỳ lĩnh vực nào thông qua môi trường kết hợp công cụ, thư viện và triết lý phát triển đa dạng.
 
-## Wave 생태계의 구성
+## Cấu trúc của hệ sinh thái Wave
 
 ### Wave
 
-Wave 생태계의 핵심은 Wave 프로그래밍 언어입니다.
-C와 Rust의 철학을 기반으로, 저수준 제어와 고주순 생산성 사이의 균형을 목표로 설계되었습니다.
+Cốt lõi của hệ sinh thái Wave là ngôn ngữ lập trình Wave.
+Được thiết kế dựa trên triết lý của C và Rust, với mục tiêu cân bằng giữa kiểm soát mức thấp và năng suất cao.
 
-- **쉬운 학습곡선**: C와 Rust의 중간 난이도.
-- **강력한 기능**: 포인터, 배열, 직렬화 등 다양한 데이터 타입 지원.
+- **Độ dốc học tập dễ dàng**: Mức độ khó trung bình giữa C và Rust.
+- **Chức năng mạnh mẽ**: Hỗ trợ nhiều kiểu dữ liệu như con trỏ, mảng, tuần tự hoá.
 
-### 표준 라이브러리
+### Thư viện chuẩn
 
-Wave는 프로그래머가 별도의 외부 라이브러리를 의존하지 않아도 되도록 풍부한 표준 라이브러리르 제공합니다.
+Wave cung cấp thư viện chuẩn phong phú để lập trình viên không cần phụ thuộc vào thư viện bên ngoài.
 
-- **hardwave**: 하드웨어 제어
-- **http**: HTTP 및 WebSocket 통신
-- **iosys**: 파일 및 스트립 I/O
-- **sys**: 시스템 제어
-- **wson**: 고성능 데이터 직렬화 포맷
-- **quantum**: 양자 컴퓨팅 지원
+- **hardwave**: Điều khiển phần cứng
+- **http**: Giao tiếp HTTP và WebSocket
+- **iosys**: Tệp và I/O chuỗi
+- **sys**: Điều khiển hệ thống
+- **wson**: Định dạng tuần tự hoá dữ liệu hiệu suất cao
+- **quantum**: Hỗ trợ tính toán lượng tử
 
-### 커뮤니티와 생태계 철학
+### Cộng đồng và triết lý hệ sinh thái
 
-Wave는 언어 자체만이 아닌, 개발자와의 상호작용을 중요시합니다.
+Wave coi trọng sự tương tác với các nhà phát triển hơn chỉ là ngôn ngữ.
 
-- **개발자 중심 설계**: 다양한 언어와 문화를 존중.
-- **소수언어 및 사어 지원**: 글로벌 언어 다양성을 포용.
-- **미래 지향적 기술**: 양자 컴퓨팅 및 차세대 보안 표준 지원.
+- **Thiết kế lấy nhà phát triển làm trung tâm**: Tôn trọng đa ngôn ngữ và văn hóa.
+- **Hỗ trợ ngôn ngữ thiểu số và từ cổ**: Bao trùm tính đa dạng ngôn ngữ toàn cầu.
+- **Công nghệ hướng tới tương lai**: Hỗ trợ tính toán lượng tử và tiêu chuẩn bảo mật thế hệ tiếp theo.
 
-### 도구 체인
+### Chuỗi công cụ
 
-Wave는 개발 도구의 완성도를 통해 생산성을 극대화합니다.
+Wave tối đa hóa năng suất thông qua sự hoàn thiện của các công cụ phát triển.
 
-- **Wave 패키지 매니저 (Vex)**: 플랫폼 독립적 빌드 및 배포.
-- **Wave 디버거**: 직관적 디버깅.
-
----
-
-## Wave 생태계의 목표
-
-Wave 생태계는 다음의 가치를 중심으로 발전합니다:
-
-1. **다양성을 표용하는 언어**: 모든 개발자가 자신의 언어와 문화에 맞춰 Wave를 사용할 수 있도록 지원.
-2. **모든 개발 영역 통합**: 웹, 하드웨어, AI, 네트워크 등 다양한 분야에서 활용.
-3. **미래를 준비**: 양자 컴퓨팅, 포스트-퀀텀 암호화 등 신기술 대응.
+- **Trình quản lý gói Wave (Vex)**: Xây dựng và phân phối độc lập nền tảng.
+- **Trình gỡ lỗi Wave**: Gỡ lỗi trực quan.
 
 ---
 
-Wave 생태계는 단순히 도구를 제공하는 것을 넘어, 개발자에게 더 나은 경헙과 효율성을 선사하는 **포괄적이고 혁신적인 환경**을 목표로 합니다.
-Wave와 함께 새로운 가능성을 탐구하세요!
+## Mục tiêu của hệ sinh thái Wave
+
+Hệ sinh thái Wave phát triển quanh các giá trị sau:
+
+1. **Ngôn ngữ bao trùm tính đa dạng**: Hỗ trợ mọi nhà phát triển sử dụng Wave theo ngôn ngữ và văn hóa của họ.
+2. **Tích hợp mọi lĩnh vực phát triển**: Sử dụng trong nhiều lĩnh vực như web, phần cứng, AI, mạng lưới.
+3. **Chuẩn bị cho tương lai**: Đối phó với các công nghệ mới như tính toán lượng tử, mã hóa hậu lượng tử.
+
+---
+
+Hệ sinh thái Wave không chỉ cung cấp công cụ, mà còn nhắm tới một **môi trường toàn diện và sáng tạo** mang lại trải nghiệm và hiệu quả tốt hơn cho nhà phát triển.
+Khám phá những khả năng mới cùng Wave!
