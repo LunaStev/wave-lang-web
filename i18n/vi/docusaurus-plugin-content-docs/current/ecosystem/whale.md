@@ -2,49 +2,49 @@
 sidebar_position: 3
 ---
 
-# Whale 컴파일러 툴체인
+# Bộ công cụ biên dịch Whale
 
-## 개요
+## Tổng quan
 
-Whale은 Wave 프로그래밍 언어를 위한 전용 컴파일러 툴체인입니다..
-Whale은 Wave로 작성된 소스 코드를 분석, 최적화, 타겟 플랫폼용 바이너리로 변환하는 전 과정을 책임집니다.
-이 툴체인은 Wave 언어 전용으로 설계되었으며, 타 언어 지원이나 외부 툴체인 통합을 고려하지 않습니다..
+Whale là bộ công cụ biên dịch dành riêng cho ngôn ngữ lập trình Wave.
+Whale chịu trách nhiệm toàn bộ quá trình phân tích, tối ưu hóa và chuyển đổi mã nguồn viết bằng Wave thành binary cho nền tảng mục tiêu.
+Bộ công cụ này được thiết kế dành riêng cho ngôn ngữ Wave, không xem xét tích hợp với các công cụ biên dịch hoặc ngôn ngữ khác.
 
-## 설계 목표
+## Mục tiêu thiết kế
 
-Whale의 주요 설계 목표는 다음과 같습니다:
+Các mục tiêu thiết kế chính của Whale là:
 
-- Wave 전용 지원: Whale은 Wave 언어만을 지원하며, 타 언어와의 통합을 고려하지 않습니다.
-- 모듈화 구조: 각 기능은 독립적인 모듈로 구성되며, 필요에 따라 추가하거나 제거할 수 있습니다.
-- 독립적 IR 사용: Whale은 LLVM IR 등 기존 외부 IR을 사용하지 않고, 자체 중간 표현을 정의합니다.
-- 다중 타겟 플랫폼 지원: 운영체제 및 하드웨어 아키텍처에 관계없이 다양한 환경을 타겟으로 빌드할 수 있습니다.
-- 정밀한 제어: 컴파일의 전 과정을 개발자가 세부적으로 제어할 수 있도록 구성됩니다.
-- 외부 의존성 제거: Whale은 외부 C/C++ 런타임 또는 컴파일러에 의존하지 않습니다.
+- Hỗ trợ riêng cho Wave: Whale chỉ hỗ trợ ngôn ngữ Wave, không xem xét tích hợp với ngôn ngữ khác.
+- Cấu trúc mô-đun: Mỗi chức năng được cấu thành từ các mô-đun độc lập, có thể thêm hoặc loại bỏ theo nhu cầu.
+- Sử dụng IR độc lập: Whale không sử dụng các IR bên ngoài như LLVM IR, mà định nghĩa IR trung gian riêng.
+- Hỗ trợ đa nền tảng mục tiêu: Có thể build cho nhiều loại môi trường không phân biệt hệ điều hành và kiến trúc phần cứng.
+- Kiểm soát chính xác: Được cấu hình để nhà phát triển có thể điều khiển chi tiết toàn bộ quá trình biên dịch.
+- Loại bỏ phụ thuộc bên ngoài: Whale không phụ thuộc vào runtime hoặc công cụ biên dịch C/C++ bên ngoài.
 
-## 타겟 지원
+## Hỗ trợ mục tiêu
 
-Whale은 다음과 같은 대상 환경을 지원하는 것을 목표로 합니다:
+Whale đặt mục tiêu hỗ trợ các môi trường mục tiêu như sau:
 
-- 운영체제:
+- Hệ điều hành:
     - Linux
     - Windows
     - macOS
-    - UEFI (BIOS 제외)
-    - WaveOS (자체 OS)
-- 아키텍처:
+    - UEFI (không bao gồm BIOS)
+    - WaveOS (Hệ điều hành riêng)
+- Kiến trúc:
     - x86_64 (AMD64)
     - ARM64
-    - 기타는 모듈 추가를 통해 확장 가능
+    - Khác có thể mở rộng thông qua việc thêm mô-đun
 
-## 외부 연동(FFI)
+## Liên kết bên ngoài (FFI)
 
-Whale은 기술적으로 FFI(Foreign Function Interface)를 지원할 수 있도록 설계되지만,
-Wave의 철학상 외부 언어와의 연동은 권장되지 않으며 표준적으로 제공되지 않습니다.
-Wave는 자체 언어 내에서 모든 기능을 구현할 수 있도록 설계됩니다.
+Whale được thiết kế để có thể hỗ trợ FFI (Giao diện chức năng nước ngoài) về mặt kỹ thuật,
+nhưng không được khuyến nghị theo triết lý của Wave và không được cung cấp tiêu chuẩn.
+Wave được thiết kế để có thể thực hiện mọi chức năng trong ngôn ngữ riêng của mình.
 
-## 확장성
+## Khả năng mở rộng
 
-Whale은 다음과 같은 방식으로 확장이 가능합니다:
+Whale có thể mở rộng theo các phương thức sau:
 
 - 새로운 운영체제 또는 아키텍처에 대한 모듈 추가
 - 사용자 정의 최적화 알고리즘 삽입
