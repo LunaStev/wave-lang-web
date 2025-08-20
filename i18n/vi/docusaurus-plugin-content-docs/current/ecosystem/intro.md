@@ -64,12 +64,12 @@ Mục tiêu của Wave OS là tối đa hóa sự tự do và hiệu quả của
 Wave OS có thể được sử dụng trong nhiều lĩnh vực khác nhau.
 
 - **Hệ thống nhúng**: Wave OS cung cấp hiệu suất được tối ưu hóa ngay cả
-- **IoT**: IoT 디바이스의 하드웨어와 원활하게 통합되어, IoT 환경에서 효과적인 개발을 지원합니다.
-- **고성능 서버**: Wave OS는 고성능 시스템과 서버 환경에서도 안정적이고 효율적인 작업을 제공합니다.
-- **리얼타임 시스템**: 하드웨어 제어 및 실시간 처리 요구 사항이 있는 시스템에서 강력한 성능을 발휘합니다.
-- **사용자 편의성**: 직관적인 인터페이스로 사용자가 불편함 없이 원활하게 이용할 수 있도록 지원합니다.
+- **IoT**: Phần cứng của thiết bị IoT được tích hợp mượt mà, hỗ trợ phát triển hiệu quả trong môi trường IoT.
+- **Máy chủ hiệu suất cao**: Wave OS cung cấp hoạt động ổn định và hiệu quả ngay cả trong các hệ thống và môi trường máy chủ hiệu suất cao.
+- **Hệ thống thời gian thực**: Phát huy hiệu suất mạnh mẽ trong các hệ thống có yêu cầu điều khiển phần cứng và xử lý thời gian thực.
+- **Tính tiện dụng của người dùng**: Hỗ trợ người dùng sử dụng mượt mà mà không gặp khó khăn với giao diện trực quan.
 
 ---
 
-Wave OS는 Wave 언어와 함께 시스템 개발에 필요한 **모든 도구와 기능**을 제공하는 혁신적인 운영 체제입니다.
-개발자는 Wave OS의 효율적인 설계와 Wave 언어의 강력한 기능을 결합하여, **최적화된 시스템**을 구축할 수 있습니다.
+Wave OS là một hệ điều hành sáng tạo cung cấp **tất cả công cụ và chức năng** cần thiết cho phát triển hệ thống cùng với ngôn ngữ Wave.
+Các nhà phát triển có thể xây dựng **hệ thống tối ưu hóa** bằng cách kết hợp thiết kế hiệu quả của Wave OS và các tính năng mạnh mẽ của ngôn ngữ Wave.
