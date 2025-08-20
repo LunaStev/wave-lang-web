@@ -2,21 +2,21 @@
 sidebar_position: 2
 ---
 
-# Vex 패키지 매니저
+# Vex quản lý gói
 
-## 개요
+## Tổng quan
 
-Vex는 Wave 프로그래밍 언어를 위한 전용 패키지 관리자이자 빌드 시스템입니다.
-Vex는 소스 코드의 종속성 관리, 빌드 설정, 타겟 플랫폼 지정, 모듈 설치 및 배포 등 프로젝트 관리 전반을 지원합니다.
-외부 언어나 시스템과의 호환은 고려하지 않으며, 오직 Wave 생태계 내에서 동작하도록 설계되었습니다.
+Vex là một trình quản lý gói và hệ thống build dành riêng cho ngôn ngữ lập trình Wave.
+Vex hỗ trợ toàn bộ quản lý dự án như quản lý phụ thuộc của mã nguồn, cài đặt build, chỉ định nền tảng mục tiêu, cài đặt và phân phối mô-đun.
+Không xem xét khả năng tương thích với ngôn ngữ hoặc hệ thống bên ngoài, được thiết kế chỉ để hoạt động trong hệ sinh thái Wave.
 
-## 설계 목표
+## Mục tiêu thiết kế
 
-Vex는 다음과 같은 목표를 바탕으로 설계되었습니다:
+Vex được thiết kế dựa trên các mục tiêu sau:
 
-Wave 전용 설계: Wave 프로젝트만을 대상으로 하며, Wave의 문법, 모듈 구조, 실행 환경에 최적화되어 있습니다.
+Thiết kế dành riêng cho Wave: Chỉ nhắm đến các dự án Wave, tối ưu hóa cho cú pháp, cấu trúc mô-đun và môi trường thực thi của Wave.
 
-- 직관적인 명령 체계: 복잡한 빌드 스크립트 없이 단일 명령어로 주요 작업을 수행할 수 있도록 구성됩니다.
-- 멀티 타겟 지원: 운영체제 및 아키텍처에 따라 손쉽게 빌드 타겟을 전환할 수 있습니다.
-- WSON 기반 설정 관리: 모든 프로젝트 구성 정보는 WSON(Wave Serialization Object Notation) 형식으로 정의됩니다.
-- 정적 빌드 및 배포: 실행 파일은 정적으로 빌드되며, 외부 런타임에 의존하지 않고 독립적으로 배포가 가능합니다.
+- Hệ thống lệnh trực quan: Được cấu hình để có thể thực hiện các tác vụ chính với một lệnh duy nhất mà không cần các script build phức tạp.
+- Hỗ trợ đa mục tiêu: Có thể dễ dàng chuyển đổi mục tiêu build tùy theo hệ điều hành và kiến trúc.
+- Quản lý cấu hình dựa trên WSON: Tất cả thông tin cấu hình dự án được xác định theo định dạng WSON (Wave Serialization Object Notation).
+- Build và phân phối tĩnh: Tệp thực thi được build tĩnh, có thể phân phối độc lập mà không phụ thuộc vào runtime bên ngoài.
