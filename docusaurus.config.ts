@@ -23,7 +23,7 @@ const config: Config = {
   baseUrl: '/',
 
   customFields: {
-    githubUrl: 'https://github.com/LunaStev/Wave',
+    githubUrl: 'https://github.com/wavefnd/Wave',
   },
 
   // GitHub pages deployment config.
@@ -172,7 +172,7 @@ const config: Config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/LunaStev/Wave/releases',
+            href: 'https://github.com/wavefnd/Wave/releases',
             label: 'Releases',
             position: 'right',
           },
@@ -182,7 +182,7 @@ const config: Config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/LunaStev/Wave',
+            href: 'https://github.com/wavefnd/Wave',
             label: 'GitHub',
             position: 'right',
           },
@@ -230,7 +230,7 @@ const config: Config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/LunaStev/Wave',
+                href: 'https://github.com/wavefnd/Wave',
               },
               {
                 label: 'License',
