@@ -3,7 +3,7 @@ set -e
 
 VERSION=""
 ARCH="x86_64"
-REPO="LunaStev/Wave"
+REPO="wavefnd/Wave"
 LLVM_VERSION="14"
 
 # Detect OS and Distro
