@@ -4,73 +4,72 @@ sidebar_position: 1
 
 # Wave OS
 
-## 개요
+## Tổng quan
 
-Wave OS는 **Wave 프로그래밍 언어**와 긴밀하게 통합된 **운영 체제**로,
-개발자가 Wave를 사용하여 최적화된 하드웨어 상에서 원활하게 작업할 수 있도록 설계되었습니다.
-Wave OS는 높은 성능, 안정성, 그리고 유연성을 제공하며, Wave 언어의 철학을 충실히 반영하여 **저수준 시스템 프로그래밍**을 쉽고 효율적으로 할 수 있도록 돕습니다.
+Wave OS là một **hệ điều hành** được tích hợp chặt chẽ với **ngôn ngữ lập trình Wave**, được thiết kế để các nhà phát triển làm việc trôi chảy trên phần cứng được tối ưu hóa bằng cách sử dụng Wave.
+Wave OS mang lại hiệu suất cao, ổn định và linh hoạt, phản ánh trung thành triết lý của ngôn ngữ Wave giúp lập trình hệ thống mức thấp một cách dễ dàng và hiệu quả.
 
-## Wave OS의 특징
+## Đặc điểm của Wave OS
 
-### Wave 언어와의 통합
+### Tích hợp với ngôn ngữ Wave
 
-Wave OS는 Wave 언어와 깊게 연관되어 있으며, **Wave 언어의 기능을 극대화**할 수 있도록 설계되었습니다. Wave 언어의 강력한 저수준 제어 능력과 Wave OS의 하드웨어 직접 제어 기능을 결합하여 **효율적인 시스템 개발**이 가능합니다.
+Wave OS liên quan mật thiết với ngôn ngữ Wave và được thiết kế để **tối đa hóa các chức năng của ngôn ngữ Wave**. Kết hợp khả năng kiểm soát mức thấp mạnh mẽ của ngôn ngữ Wave và các tính năng điều khiển phần cứng trực tiếp của Wave OS, cho phép **phát triển hệ thống hiệu quả**.
 
-- Wave의 메모리 모델과 시스템 호출을 자연스럽게 연결.
-- 저수준 하드웨어 제어 및 최적화가 용이.
+- Kết nối tự nhiên giữa mô hình bộ nhớ của Wave và lệnh gọi hệ thống.
+- Dễ dàng kiểm soát và tối ưu hóa phần cứng mức thấp.
 
-### 경량화된 설계
+### Thiết kế nhẹ nhàng
 
-Wave OS는 불필요한 기능을 최소화하여 **효율적이고 경량화된** 운영 체제를 제공합니다.
+Wave OS tối thiểu hóa các chức năng không cần thiết để cung cấp một hệ điều hành **hiệu quả và nhẹ nhàng**.
 
-- **작고 빠르며 안정적인** 커널 설계.
-- **리소스를 적게 소모**하여 임베디드 시스템, IoT 장치, 서버 등 다양한 환경에 적합.
+- Thiết kế kernel **nhỏ, nhanh và ổn định**.
+- **Tiêu thụ ít tài nguyên**, phù hợp với nhiều môi trường như hệ thống nhúng, thiết bị IoT, máy chủ.
 
-### 하드웨어 제어
+### Kiểm soát phần cứng
 
-Wave OS는 **하드웨어와 밀접한 연동**을 제공하여, 개발자가 하드웨어를 직접 제어하고 최적화할 수 있도록 지원합니다.
+Wave OS cung cấp **kết nối chặt chẽ với phần cứng**, hỗ trợ các nhà phát triển có thể điều khiển và tối ưu hóa trực tiếp phần cứng.
 
-- **디바이스 드라이버**: 다양한 하드웨어와 쉽게 연동할 수 있는 드라이버 제공.
-- **하드웨어 제어**: Wave 언어로 작성한 코드로 하드웨어를 제어하고, 실시간 시스템을 구축.
+- **Trình điều khiển thiết bị**: Cung cấp trình điều khiển có thể dễ dàng liên kết với nhiều loại phần cứng khác nhau.
+- **Kiểm soát phần cứng**: Điều khiển phần cứng bằng mã viết bằng ngôn ngữ Wave, xây dựng hệ thống thời gian thực.
 
-### 멀티태스킹 및 프로세스 관리
+### Đa nhiệm và quản lý quy trình
 
-Wave OS는 **멀티태스킹을 지원**하며, 효율적인 프로세스 관리 및 동시 실행을 제공합니다.
+Wave OS **hỗ trợ đa nhiệm**, cung cấp quản lý quy trình hiệu quả và thực thi đồng thời.
 
-- **스레드 및 프로세스 관리**: 프로세스 간 통신 및 동기화 기능을 통해 멀티스레딩 및 멀티프로세싱 환경에서도 안정적으로 작동.
-- **스케줄러**: 높은 성능을 유지하면서 시스템 자원을 효율적으로 배분하는 스케줄러.
+- **Quản lý chủ đề và quy trình**: Hoạt động ổn định trong môi trường đa luồng và đa quy trình thông qua chức năng giao tiếp và đồng bộ hóa giữa các quy trình.
+- **Trình lập lịch**: Trình lập lịch phân bổ hiệu quả các tài nguyên hệ thống trong khi vẫn duy trì hiệu suất cao.
 
-### 고급 시스템 기능
+### Chức năng hệ thống nâng cao
 
-Wave OS는 단순한 운영 체제 이상의 기능을 제공합니다.
+Wave OS cung cấp các chức năng vượt xa một hệ điều hành đơn giản.
 
-- **파일 시스템**: 고성능 파일 시스템과 I/O 관리 기능 제공.
-- **네트워크 통신**: 고속 네트워크 프로토콜을 위한 라이브러리 및 시스템 지원.
-- **보안 기능**: 포스트-퀀텀 암호화와 같은 최신 보안 기술을 지원.
-
----
-
-## Wave OS의 목표
-
-Wave OS의 목표는 시스템 개발의 자유도와 효율성을 극대화하는 것입니다.
-
-- **하드웨어와의 밀접한 통합**을 통해 개발자가 직접 하드웨어와 상호작용할 수 있는 환경을 제공.
-- **Wave 언어의 강력한 기능을 OS 내에서 적극적으로 활용**하여 고성능 시스템을 구현.
-- **개발자 친화적인 설계**로, 시스템 프로그래밍을 직관적이고 쉽게 만드는 것을 목표로 합니다.
+- **Hệ thống tệp**: Cung cấp hệ thống tệp hiệu suất cao và chức năng quản lý I/O.
+- **Giao tiếp mạng**: Hỗ trợ thư viện và hệ thống cho giao thức mạng tốc độ cao.
+- **Chức năng bảo mật**: Hỗ trợ công nghệ bảo mật tiên tiến như mã hóa hậu lượng tử.
 
 ---
 
-## Wave OS의 활용 분야
+## Mục tiêu của Wave OS
 
-Wave OS는 다양한 분야에서 활용될 수 있습니다.
+Mục tiêu của Wave OS là tối đa hóa sự tự do và hiệu quả của phát triển hệ thống.
 
-- **임베디드 시스템**: Wave OS는 경량화된 설계로, 제한된 자원을 가진 시스템에서도 최적화된 성능을 제공합니다.
-- **IoT**: IoT 디바이스의 하드웨어와 원활하게 통합되어, IoT 환경에서 효과적인 개발을 지원합니다.
-- **고성능 서버**: Wave OS는 고성능 시스템과 서버 환경에서도 안정적이고 효율적인 작업을 제공합니다.
-- **리얼타임 시스템**: 하드웨어 제어 및 실시간 처리 요구 사항이 있는 시스템에서 강력한 성능을 발휘합니다.
-- **사용자 편의성**: 직관적인 인터페이스로 사용자가 불편함 없이 원활하게 이용할 수 있도록 지원합니다.
+- Cung cấp môi trường để các nhà phát triển có thể tương tác trực tiếp với phần cứng thông qua **tích hợp chặt chẽ với phần cứng**.
+- Triển khai hệ thống hiệu suất cao bằng cách **tích cực sử dụng các chức năng mạnh mẽ của ngôn ngữ Wave trong OS**.
+- Với **thiết kế thân thiện với nhà phát triển**, mục tiêu của chúng tôi là làm cho lập trình hệ thống trở nên trực quan và dễ dàng.
 
 ---
 
-Wave OS는 Wave 언어와 함께 시스템 개발에 필요한 **모든 도구와 기능**을 제공하는 혁신적인 운영 체제입니다.
-개발자는 Wave OS의 효율적인 설계와 Wave 언어의 강력한 기능을 결합하여, **최적화된 시스템**을 구축할 수 있습니다.
+## Lĩnh vực ứng dụng của Wave OS
+
+Wave OS có thể được sử dụng trong nhiều lĩnh vực khác nhau.
+
+- **Hệ thống nhúng**: Wave OS cung cấp hiệu suất được tối ưu hóa ngay cả
+- **IoT**: Phần cứng của thiết bị IoT được tích hợp mượt mà, hỗ trợ phát triển hiệu quả trong môi trường IoT.
+- **Máy chủ hiệu suất cao**: Wave OS cung cấp hoạt động ổn định và hiệu quả ngay cả trong các hệ thống và môi trường máy chủ hiệu suất cao.
+- **Hệ thống thời gian thực**: Phát huy hiệu suất mạnh mẽ trong các hệ thống có yêu cầu điều khiển phần cứng và xử lý thời gian thực.
+- **Tính tiện dụng của người dùng**: Hỗ trợ người dùng sử dụng mượt mà mà không gặp khó khăn với giao diện trực quan.
+
+---
+
+Wave OS là một hệ điều hành sáng tạo cung cấp **tất cả công cụ và chức năng** cần thiết cho phát triển hệ thống cùng với ngôn ngữ Wave.
+Các nhà phát triển có thể xây dựng **hệ thống tối ưu hóa** bằng cách kết hợp thiết kế hiệu quả của Wave OS và các tính năng mạnh mẽ của ngôn ngữ Wave.
