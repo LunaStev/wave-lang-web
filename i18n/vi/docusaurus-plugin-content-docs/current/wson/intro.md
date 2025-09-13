@@ -2,130 +2,130 @@
 sidebar_position: 2
 ---
 
-# 문법
+# Ngữ pháp
 
-## 1. 기본 구조
+## 1. Cấu trúc cơ bản
 
-- 파일의 내용은 `{}` 중괄호로 둘러싸여 있는 객체(`object`)로 시작하고 끝난다.
+- Nội dung của tập tin bắt đầu và kết thúc bằng một đối tượng (`object`) được bao quanh bởi dấu ngoặc nhọn `{}`.
 
-- 객체는 속성 이름(key)과 값(value) 쌍으로 구성된다.
+- Đối tượng được cấu thành bởi cặp tên thuộc tính (key) và giá trị (value).
 
-- 속성 이름과 값은 콜론(`:`) 또는 등호(`=`)로 구분한다.
+- Tên thuộc tính và giá trị được phân tách bằng dấu hai chấm (`:`) hoặc dấu bằng (`=`).
 
-## 2. 주석
+## 2. Chú thích
 
-- 주석은 `//` 또는  `#` 으로 시작하며, 한줄 단위로 작성된다.
+- Chú thích bắt đầu bằng `//` hoặc `#`, và được viết trên từng dòng.
 
-- 주석은 해당 줄의 끝까지 적용된다.
+- Chú thích áp dụng đến hết dòng.
 
-- 여러 줄 주석을 따로 지원하지 않으며, 여러 줄에 걸쳐 주석을 작성할 경우 각줄마다 `//` 또는 `#` 을 추가해야 한다.
+- Không hỗ trợ chú thích nhiều dòng riêng biệt, khi viết chú thích trên nhiều dòng, phải thêm `//` hoặc `#` trên mỗi dòng.
 
-## 3. 객체(Object)
+## 3. Đối tượng (Object)
 
-- 객체는 중괄호 `{}` 로 둘러싸여 있으며, 키-값 쌍을 포합한다.
+- Đối tượng được bao quanh bởi dấu ngoặc nhọn `{}` và bao gồm cặp khóa-giá trị.
 
-- 키와 값 사이에는 `:` 또는 `=` 기호를 사용할 수 있다. 두기호는 혼용 가능하다.
+- Giữa khóa và giá trị có thể sử dụng dấu `:` hoặc `=`. Hai dấu hiệu có thể được sử dụng cùng nhau.
 
-- 각 속성은 쉼표(`,`)로 구분된다.
+- Mỗi thuộc tính được phân tách bằng dấu phẩy (`,`).
 
-- 객체 안에 다른 객체를 중첩하여 사용할 수 있다.
+- Có thể lồng ghép các đối tượng khác bên trong một đối tượng.
 
-예시:
+Ví dụ:
 
 ```
 {
-    status: "success",
-    code = 200,
-    user = { id: 123, name: "John Doe" }
+    trạng thái: "thành công",
+    mã = 200,
+    người dùng = { id: 123, tên: "John Doe" }
 }
 ```
 
-## 4. 배열(Array)
+## 4. Mảng (Array)
 
-- 배열은 대괄호 `[]` 로 둘러싸여 있으며, 요소들은 쉼표(`,`)로 구분된다.
+- Mảng được bao quanh bởi dấu ngoặc vuông `[]`, và các phần tử được phân tách bằng dấu phẩy (`,`).
 
-- 배열의 요소는 객체, 문자열, 숫자 등 다양한 자료형이 될 수 있다.
+- Các phần tử của mảng có thể là đối tượng, chuỗi ký tự, số và các loại dữ liệu khác.
 
-- WSON에서 배열은 객체 내에 포함될 수 있으며, 배열 안에는 다른 배열이나 객체가 중첩될 수 있다.
+- Trong WSON, mảng có thể nằm trong một đối tượng, và bên trong mảng có thể có những mảng khác hoặc đối tượng.
 
-예시:
+Ví dụ:
 
 ```
-tasks: [
-    { task_id: 1, title: "Complete project report" },
-    { task_id: 2, title: "Review team feedback" }
+nhiệm vụ: [
+    { mã_nhiệm_vụ: 1, tiêu đề: "Hoàn thành báo cáo dự án" },
+    { mã_nhiệm_vụ: 2, tiêu đề: "Xem xét phản hồi của nhóm" }
 ]
 ```
 
-## 5. 키-값 쌍 (Key-Value Pair)
+## 5. Cặp Key-Value
 
-- 속성 이름은 문자열로 구성되며, 공백 없이 `:`, `=` 뒤에 값을 배치한다.
+- Tên thuộc tính được tạo thành từ chuỗi và đặt giá trị không có khoảng trống sau `:`, `=`.
 
-- 값의 유형에는 문자열, 숫자, 불리언, 객체, 배열 등이 있다.
+- Các loại giá trị bao gồm chuỗi, số, boolean, đối tượng, mảng, v.v.
 
-- 문자열은 큰따옴표 `“` 로 둘러싸인다.
+- Chuỗi ký tự được bao quanh bởi dấu ngoặc kép `“`.
 
-- 숫자는 큰 따옴표 없이 사용하며, 정수 또는 실수 형태로 가능하다.
+- Số được sử dụng mà không có dấu ngoặc kép và có thể ở dạng số nguyên hoặc số thực.
 
-예시:
-
-```
-name: "John Doe"
-age = 25
-```
-
-## 6. 데이터 유형 (Data Types)
-
-- 문자열(String): 큰따옴표 `"` 로 묶인 텍스트다.
+Ví dụ:
 
 ```
-"hello world"
+tên: "John Doe"
+tuổi = 25
 ```
 
-- 숫자(Number): 정수 또는 실수 값이다.
+## 6. Các loại dữ liệu
+
+- Chuỗi (String): Văn bản được bao bọc bởi dấu ngoặc kép `"`.
+
+```
+"xin chào thế giới"
+```
+
+- Số (Number): Là giá trị số nguyên hoặc số thực.
 
 ```
 42
 3.14
 ```
 
-- 불리언(Boolean): `true` 또는 `false` 값을 사용한다.
+- Boolean: Sử dụng giá trị `true` hoặc `false`.
 
 ```
-is_active = true
+is_active = đúng
 ```
 
-- 객체(Object): 중괄호 `{}` 로 묶인 키-ㄱ밧 쌍이다.
-- 배열(Array): 대괄호 `[]` 로 묶인 요소 목록이다.
+- Đối tượng (Object): Là cặp khóa-giá trị được bao quanh bởi dấu ngoặc nhọn `{}`.
+- Mảng (Array): Là danh sách các phần tử được bao quanh bởi dấu ngoặc vuông `[]`.
 
-## 7. 예제 설명
+## 7. Giải thích ví dụ
 
 ```ws
 {
-    // 상태 코드와 메시지 정보
-    status: "success",
-    code: 200,
-    message: "Data retrieved successfully",
+    // mã trạng thái và thông điệp
+    trạng thái: "thành công",
+    mã: 200,
+    thông điệp: "Dữ liệu được truy xuất thành công",
 
-    user = {
+    người dùng = {
         id = 123,
-        name: "John Doe",
+        tên: "John Doe",
         email: "john@example.com",
-        age: 25  # 사용자 나이
+        tuổi: 25  # tuổi người dùng
     },
 
-    tasks: [
+    công việc: [
         {
-            task_id: 1,
-            title: "Complete project report",
-            status: "in-progress",
-            due_date: "2024-10-15"
+            id_công_việc: 1,
+            tiêu đề: "Hoàn thành báo cáo dự án",
+            trạng thái: "đang thực hiện",
+            hạn: "2024-10-15"
         },
         {
-            task_id: 2,
-            title: "Review team feedback",
-            status: "pending",
-            due_date: "2024-10-20"
+            id_công_việc: 2,
+            tiêu đề: "Xem xét phản hồi của nhóm",
+            trạng thái: "đang chờ",
+            hạn: "2024-10-20"
         }
     ]
 }
