@@ -90,4 +90,4 @@ Trong ví dụ trên, tùy thuộc vào điểm số, thông báo "Điểm số 
 - Bằng cách thêm câu lệnh ELSE, có thể chỉ định mã thực thi khi điều kiện sai.
 - Cấu trúc IF lồng nhau được sử dụng khi xử lý các điều kiện phức tạp.
 
-IF 문을 활용하면 프로그램의 흐름을 더욱 논리적이고 동적으로 구성할 수 있습니다!
+Sử dụng câu lệnh IF, bạn có thể cấu trúc luồng chương trình theo cách logic và năng động hơn!
