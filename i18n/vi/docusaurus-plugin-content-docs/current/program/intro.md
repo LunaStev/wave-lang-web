@@ -2,63 +2,63 @@
 sidebar_position: 1
 ---
 
-# Hello Wave 출력하기
+# Xuất "Xin chào Wave".
 
-이 문서는 Wave 언어로 가장 기본적인 출력 프로그램을 작성하는 방법을 설명합니다.
+Tài liệu này giải thích cách viết chương trình xuất cơ bản nhất bằng ngôn ngữ Wave.
 
 ---
 
-## 예제 코드
+## Mã ví dụ.
 
 ```wave
 fun main() {
-    println("Hello Wave");
+    println("Xin chào Wave");
 }
 ```
 
 ---
 
-## 설명
+## Mô tả.
 
-- `fun main()`
+- `fun main()`.
 
-    Wave 프로그램의 진입점 함수입니다. 실행 시 가장 먼저 호출됩니다.
+  Đây là hàm điểm vào của chương trình Wave. Được gọi đầu tiên khi thực hiện chạy.
 
-- `println()`
+- `println()`.
 
-    임시 출력 함수로 문자열을 출력하며, 출력 후 줄바꿈(`\n`)을 추가합니다.
+  Là hàm xuất tạm thời, xuất chuỗi và thêm dòng mới (`\n`) sau khi xuất.
 
-- `;` (세미콜론)
+- `;` (dấu chấm phẩy).
 
-    Wave의 모든 문장은 세미콜론으로 종료됩니다.
+  Mọi câu lệnh trong Wave đều kết thúc bằng dấu chấm phẩy.
 
 ---
 
-## 실행 결과
+## Kết quả thực hiện.
 
 ```text
-Hello Wave
+Xin chào Wave.
 ```
 
 ---
 
-## 추가 예제
+## Ví dụ bổ sung.
 
-Wave는 문자열 보간을 지원합니다.
+Wave hỗ trợ nối chuỗi.
 
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("Hello, {}!", name);
+    println("Xin chào, {}!", name);
 }
 ```
 
-출력:
+Xuất:
 
 ```text
-Hello, Wave!
+Xin chào, Wave!
 ```
 
 ---
 
-> 이 예제는 Wave 표준 라이브러리의 기본 출력 함수 사용법을 보여줍니다.
+> Ví dụ này cho thấy cách sử dụng hàm xuất cơ bản của thư viện chuẩn Wave.

@@ -2,40 +2,40 @@
 sidebar_position: 3
 ---
 
-# 첫 번째 프로그램 실행하기
+# Chạy chương trình đầu tiên
 
-이전의 설치 문서에서 Wave를 이미 설치하셨다면, 이제 첫 번째 프로그램을 실행해봅시다!
+Nếu bạn đã cài đặt Wave từ tài liệu trước đó, giờ hãy chạy chương trình đầu tiên!
 
-## `hello.wave` 파일 만들기.
+## Tạo tệp `hello.wave`.
 
-먼저, `hello.wave`라는 이름의 새로운 파일을 만듭니다.
+Đầu tiên, tạo một tệp mới có tên `hello.wave`.
 
-## 코드 작성하기
+## Viết mã
 
-`hello.wave` 파일에 다음 코드를 작성합니다:
+Viết mã sau vào tệp `hello.wave`:
 
 ```wave
 fun main() {
-    println("Hello Wave");
+    println("Xin chào Wave");
 }
 ```
 
-여기서 `fun main()`은 프로그램의 시작 지점을 의미하며, `println` 함수는 텍스트를 화면에 출력하는 역할을 합니다.
+Ở đây, `fun main()` có nghĩa là điểm bắt đầu của chương trình và hàm `println` có nhiệm vụ hiển thị văn bản lên màn hình.
 
-## 프로그램 실행하기
+## Chạy chương trình
 
-이제 Wave 프로그램을 실행해봅시다. 터미널을 열고, 아래 명령어를 입력하세요:
+Hãy chạy chương trình Wave. Mở terminal và nhập lệnh sau:
 
 ```bash
 wavec run hello.wave
 ```
 
-## 출력 확인하기
+## Kiểm tra kết quả đầu ra
 
-프로그램을 실행하면, 다음과 같은 출력이 나타날 것입니다:
+Khi chạy chương trình, kết quả sau sẽ được hiển thị:
 
 ```
-Hello Wave
+Xin chào Wave
 ```
 
-이제 Wave가 정상적으로 설치되어 작동하는지 확인할 수 있습니다. 축하합니다! 첫번째 프로그램을 성공적으로 실행했어요.
+Giờ bạn có thể xác nhận rằng Wave đã được cài đặt và chạy đúng cách. Xin chúc mừng! Bạn đã chạy thành công chương trình đầu tiên.

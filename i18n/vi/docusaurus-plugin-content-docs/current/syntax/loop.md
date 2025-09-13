@@ -2,78 +2,78 @@
 sidebar_position: 4
 ---
 
-# 반복문
+# Vòng lặp
 
-## 소개
+## Giới thiệu
 
-Wave 언어에서는 코드를 반복적으로 실행할 수 있도록 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 반복 실행하거나, 특정 횟수만큼 반복할 때 사용됩니다.
+Ngôn ngữ Wave cung cấp cấu trúc vòng lặp để thực thi mã lệnh lặp lại.
+Vòng lặp được sử dụng để thực thi mã lệnh tuần hoàn trong khi thỏa mãn một điều kiện cụ thể, hoặc lặp lại một số lần nhất định.
 
-Wave에서 지원하는 반복문은 다음과 같습니다:
+Các vòng lặp được hỗ trợ trong Wave gồm:
 
-- while 문: 조건 기반 반복
+- Vòng lặp while: Lặp lại dựa trên điều kiện
 
-- for 문: 횟수 기반 반복
+- Vòng lặp for: Lặp lại dựa trên số lần
 
-또한 반복 중간에 흐름을 제어할 수 있는 break, continue 키워드도 함께 제공됩니다.
-이 섹션에서는 반복문의 사용법과 흐름 제어 키워드를 모두 설명합니다.
+Ngoài ra, cũng cung cấp các từ khóa break, continue để điều khiển luồng trong quá trình lặp.
+Phần này sẽ giải thích cách sử dụng vòng lặp và các từ khóa điều khiển luồng.
 
 ---
 
-## while 문
+## Vòng lặp while
 
-`while` 문은 주어진 조건식이 `true`로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건이 `false`가 되면 반복은 종료됩니다.
+Vòng lặp `while` thực thi mã lệnh trong khối lặp trong khi điều kiện cho trước được đánh giá là `true`.
+Vòng lặp sẽ kết thúc khi điều kiện trở thành `false`.
 
-### 기본 구조
+### Cấu trúc cơ bản
 
-다음은 `while` 문의 기본 문법입니다:
+Dưới đây là cú pháp cơ bản của vòng lặp `while`:
 
 ```wave
-while (조건식) {
-    // 반복할 코드
+while (điều kiện) {
+    // mã lệnh cần lặp lại
 }
 ```
 
-- 조건식은 `bool` 타입이어야 합니다.
+- Điều kiện phải có kiểu `bool`.
 
-- 코드 블록은 `{}`로 감싸며, 하나 이상의 명령문을 포함할 수 있습니다.
+- Khối mã được bao bọc bởi `{}` và có thể chứa một hoặc nhiều câu lệnh.
 
-### 예제: 0부터 4까지 출력
+### Ví dụ: In ra từ 0 đến 4
 
 ```wave
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i는 {}입니다.", i);
+    println("i là {}.", i);
     i = i + 1;
 }
 ```
 
-이 예제는 `i`가 5보다 작을 때까지 반복되며, 매 반복마다 값을 출력하고 1씩 증가합니다.
+Ví dụ này lặp lại cho đến khi `i` nhỏ hơn 5, mỗi lần lặp lại in ra giá trị và tăng thêm 1.
 
 ---
 
-## for 문
+## Vòng lặp for
 
-`for` 문은 반복 횟수가 정해져 있는 경우에 유용하게 사용됩니다.
-초기값, 종료 조건, 증감식을 함께 명시하여 반복을 구성합니다.
+Vòng lặp `for` rất hữu ích khi số lần lặp lại được xác định.
+Cấu thành vòng lặp bằng cách xác định giá trị khởi đầu, điều kiện kết thúc, và biểu thức tăng giảm.
 
-### 기본 구조
+### Cấu trúc cơ bản
 
 ```wave
-for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
-    // 반복할 코드
+for (var tên_biến: kiểu = giá_trị_khởi_đầu; điều_kiện; biểu_thức_tăng_giảm) {
+    // mã lệnh cần lặp lại
 }
 ```
 
-- 변수명: 반복 제어에 사용되는 변수
+- Tên biến: Biến được sử dụng để điều khiển vòng lặp
 
-- 조건식: `true`인 동안 반복이 실행됩니다
+- Điều kiện: Vòng lặp thực thi trong khi điều kiện là `true`
 
-- 증감식: 반복 변수 값을 변경합니다
+- Biểu thức tăng giảm: Thay đổi giá trị của biến lặp lại
 
-### 예제: 1부터 5까지 출력
+### Ví dụ: In ra từ 1 đến 5
 
 ```wave
 for (var i: i32 = 1; i <= 5; i = i + 1) {
@@ -83,12 +83,12 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 
 ---
 
-## 중첩 반복문
+## Vòng lặp lồng nhau
 
-반복문 내부에 또 다른 반복문을 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-예를 들어 2차원 배열이나 조합을 순회할 때 유용합니다.
+Có thể viết một vòng lặp khác bên trong một vòng lặp, và đó gọi là vòng lặp lồng nhau.
+Ví dụ khi duyệt qua mảng hai chiều hoặc tổ hợp.
 
-### 예제: 2중 while 문
+### Ví dụ: Vòng lặp while kép
 
 ```wave
 var i :i32 = 0;
@@ -107,12 +107,12 @@ while (i < 3) {
 
 ---
 
-## break 문
+## Vòng lặp break
 
-`break` 문은 반복문을 즉시 종료하고 바깥으로 빠져나옵니다.
-조건이 충족되었을 때 반복을 중단하고자 할 때 유용합니다.
+Lệnh `break` chấm dứt ngay lập tức vòng lặp và thoát ra ngoài.
+Rất hữu ích khi muốn dừng vòng lặp khi một điều kiện được thoả mãn.
 
-### 예제: 특정 값에서 반복 종료
+### Ví dụ: Kết thúc vòng lặp tại một giá trị cụ thể
 
 ```wave
 var i :i32 = 0;
@@ -129,12 +129,12 @@ while (true) {
 
 ---
 
-## continue 문
+## Vòng lặp continue
 
-`continue` 문은 현재 반복의 나머지 부분을 건너뛰고 다음 반복을 시작합니다.
-특정 조건일 때만 반복 블록의 일부를 실행하고 싶을 때 사용합니다.
+Lệnh `continue` bỏ qua phần còn lại của vòng lặp hiện tại và bắt đầu vòng lặp tiếp theo.
+Sử dụng khi chỉ muốn thực hiện một phần của khối lặp khi thoả mãn một điều kiện cụ thể.
 
-### 예제: 짝수만 출력
+### Ví dụ: chỉ in số chẵn
 
 ```wave
 for (var i: i32 = 0; i <= 10; i = i + 1) {
@@ -148,15 +148,15 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 
 ---
 
-## 요약
+## Tóm tắt
 
-| 문법       | 설명                     |
-| -------- | ---------------------- |
-| while    | 조건이 참일 동안 반복           |
-| for      | 초기값, 조건, 증감식을 통한 반복 수행 |
-| break    | 반복문 즉시 종료              |
-| continue | 다음 반복으로 건너뜀            |
+| Ngữ pháp  | Mô tả                                                               |
+| --------- | ------------------------------------------------------------------- |
+| trong khi | Lặp lại trong khi điều kiện đúng                                    |
+| đối với   | Thực hiện lặp với giá trị ban đầu, điều kiện, và biểu thức thay đổi |
+| thoát     | Kết thúc vòng lặp ngay lập tức                                      |
+| tiếp tục  | Bỏ qua và tiếp tục vòng lặp tiếp theo                               |
 
-Wave의 반복문은 조건 또는 횟수 기반의 반복 작업을 모두 유연하게 처리할 수 있도록 설계되었습니다.
+Vòng lặp trong Wave được thiết kế để xử lý linh hoạt cả lặp dựa trên điều kiện và số lần.
 
-`break`, `continue` 문을 함께 사용하면 더 정교한 반복 흐름 제어도 가능합니다.
+Sử dụng cả câu lệnh `break`, `continue` có thể cho phép kiểm soát luồng lặp tinh vi hơn.
