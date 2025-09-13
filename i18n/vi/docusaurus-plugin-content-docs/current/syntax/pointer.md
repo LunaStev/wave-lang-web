@@ -2,19 +2,19 @@
 sidebar_position: 6
 ---
 
-# 포인터
+# Con trỏ
 
-## 소개
+## Giới thiệu
 
-이 문서는 Wave의 포인터 활용 방식에 관하여 설명하는 문서입니다.
-Wave는 저수준 시스템 프로그래밍을 지원하는 언어로서, 명시적인 메모리 주소 조작을 가능하게 하기 위해 포인터 기능을 제공합니다.
-포인터는 특정 타입의 메모리 주소를 가리키는 변수이며, 이를 통해 값에 대한 직접적인 접근 및 수정이 가능합니다.
+Tài liệu này giải thích cách sử dụng con trỏ trong Wave.
+Wave là một ngôn ngữ hỗ trợ lập trình hệ thống cấp thấp, cung cấp tính năng con trỏ để thao tác địa chỉ bộ nhớ rõ ràng.
+Con trỏ là biến chỉ đến địa chỉ bộ nhớ của một kiểu cụ thể, cho phép truy cập và chỉnh sửa giá trị trực tiếp.
 
 ---
 
-## 포인터 선언
+## Khai báo con trỏ
 
-Wave에서 포인터는 `ptr<타입>` 형식으로 선언합니다. 예를 들어, 정수형 포인터는 다음과 같이 선언할 수 있습니다:
+Trong Wave, con trỏ được khai báo với định dạng `ptr<kiểu>`. Ví dụ, con trỏ kiểu số nguyên có thể được khai báo như sau:
 
 ```wave
 var p: ptr<i32>;
