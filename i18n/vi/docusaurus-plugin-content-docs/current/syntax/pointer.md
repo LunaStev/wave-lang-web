@@ -20,55 +20,55 @@ Trong Wave, con trỏ được khai báo với định dạng `ptr<kiểu>`. Ví
 var p: ptr<i32>;
 ```
 
-이 선언은 `i32` 타입 값을 가리키는 포인터 `p`를 생성합니다.
+Lệnh này tạo ra một con trỏ `p` chỉ đến giá trị kiểu `i32`.
 
 ---
 
-## 포인터 초기화
+## Khởi tạo con trỏ
 
-포인터는 변수의 주소를 `&` 연산자를 사용하여 초기화할 수 있습니다:
+Con trỏ có thể được khởi tạo bằng cách sử dụng toán tử `&` để chỉ định địa chỉ của biến:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 ```
 
-여기서 `&a`는 변수 `a`의 메모리 주소를 의미하며, `p`는 해당 주소를 가리키는 포인터가 됩니다.
+Ở đây, `&a` nghĩa là địa chỉ bộ nhớ của biến `a`, và `p` là con trỏ trỏ đến địa chỉ đó.
 
 ---
 
-## 포인터 역참조
+## Tham chiếu ngược con trỏ
 
-포인터가 가리키는 값을 읽거나 수정하려면 `deref` 키워드를 사용합니다. 이를 역참조라고 합니다:
+Sử dụng từ khóa `deref` để đọc hoặc thay đổi giá trị mà con trỏ trỏ tới. Đó là quá trình tham chiếu ngược:
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 
-println("{}", deref p); // 10 출력
+println("{}", deref p); // In ra 10
 
 deref p = 20;
-println("{}", a); // 20 출력
+println("{}", a); // In ra 20
 ```
 
 ---
 
-## NULL 포인터
+## Con trỏ NULL
 
-Wave에서는 널 포인터를 `null` 키워드를 통해 표현합니다.
-포인터 변수는 `null`로 초기화될 수 있스며, 이 경우 어떤 유효한 메모리도 가리키지 않습니다:
+Trong Wave, con trỏ null được biểu diễn bằng từ khóa `null`.
+Biến con trỏ có thể được khởi tạo là `null`, và trong trường hợp này nó không trỏ đến bất kỳ vùng nhớ hợp lệ nào:
 
 ```wave
 var p: ptr<i32> = null;
 ```
 
-널 포인터를 역참조할 경우 컴파일러는 오류를 발생시킵니다.
+Khi tham chiếu ngược một con trỏ null, trình biên dịch sẽ tạo ra lỗi.
 
 ---
 
-## 다중 포인터
+## Con trỏ đa cấp
 
-Wave는 다중 포인터를 지원합니다. 포인터를 여러 단계로 중첩하여 선언하고 사용할 수 있습니다:
+Wave hỗ trợ con trỏ đa cấp. Con trỏ có thể được khai báo và sử dụng trong nhiều cấp lồng nhau:
 
 ```wave
 var x: i32 = 1;
@@ -83,11 +83,11 @@ println("{}", deref deref deref p3);   // 1
 
 ---
 
-## 배열과 포인터
+## Mảng và con trỏ
 
-포인터는 배열 요소 또는 배열 자체를 가리킬 수도 있습니다.
+Con trỏ có thể trỏ đến một phần tử mảng hoặc chính bản thân mảng.
 
-### 배열 요소를 가리키는 포인터
+### Con trỏ chỉ đến phần tử mảng
 
 ```wave
 var a: i32 = 10;
@@ -97,19 +97,19 @@ var arr: array<ptr<i32>, 2> = [&a, &b];
 println("deref arr[0] = {}, deref arr[1] = {}", deref arr[0], deref arr[1]); // 10, 20
 ```
 
-### 배열 전체를 가리키는 포인터
+### Con trỏ chỉ đến toàn bộ mảng
 
 ```wave
 var arr: ptr<array<i32, 3>> = &[1, 2, 3];
-println("{}", arr); // 메모리 주소 출력
+println("{}", arr); // Xuất địa chỉ bộ nhớ
 ```
 
 ---
 
-## 안전성과 소유권
+## An toàn và quyền sở hữu
 
-Wave는 Rust와 유사한 방식으 소유권 및 수명 시스템을 도입하여 포인터 사용시 메모리 안정성을 보장하려고 합니다.
-따라서 유효하지 않은 포인터 역참조, 이중 해제, 댕글링 포인터 등의 문제가 발생하지 않도록 철저히 검사합니다.
+Wave áp dụng hệ thống quyền sở hữu và thời gian sống tương tự như Rust để đảm bảo tính ổn định bộ nhớ khi sử dụng con trỏ.
+Do đó, hệ thống kiểm tra kỹ lưỡng để tránh việc sử dụng con trỏ không hợp lệ, giải phóng bộ nhớ hai lần, hay con trỏ trôi.
 
 ```wave
 fun main() {
@@ -123,7 +123,7 @@ fun main() {
 }
 ```
 
-출력:
+Xuất:
 
 ```text
 x = 42
@@ -132,8 +132,7 @@ x = 99
 
 ---
 
-## 결론
+## Kết luận
 
-포인터는 Wave에서 고성능 저수준 프로그래밍을 가능하게 하는 핵심 기능 중 하나입니다.
-직접적인 메모리 제어가 필요한 시스템 개발, 네이티브 라이브러리, 하드웨어 제어 등에 매우 유용하며,
-Wave의 안전한 컴파일러 구조 덕분에 포인터 사용 중 발생할 수 있는 위험 요소들을 효과적으로 방지할 수 있습니다.
+Con trỏ là một trong những tính năng cốt lõi cho phép lập trình cấp thấp hiệu năng cao trên Wave.
+Nó rất hữu ích trong phát triển hệ thống cần điều khiển bộ nhớ trực tiếp, thư viện gốc, điều khiển phần cứng, và nhờ cấu trúc trình biên dịch an toàn của Wave, có thể phòng tránh hiệu quả các yếu tố nguy hiểm khi sử dụng con trỏ.
