@@ -111,5 +111,5 @@ let is_active :bool = true;         // biến logic immutable
 
 Trong Wave, `var` được sử dụng để khai báo biến mutable, trong khi `let` được sử dụng để khai báo biến immutable không thể thay đổi sau khi gán ban đầu.
 
-가변 변수와 불변 변수를 구분함으로써, Wave는 데이터 일관성과 프로그램 상태를 더욱 효과적으로 제어할 수 있게 합니다.
-이로써 더욱 견고하고 예측 가능한 코드를 작성할 수 있습니다.
+Bằng cách phân biệt biến có thể thay đổi và biến bất biến, Wave có thể kiểm soát nhất quán dữ liệu và trạng thái chương trình hiệu quả hơn.
+Điều này cho phép viết mã vững chắc hơn và có thể dự đoán được.
