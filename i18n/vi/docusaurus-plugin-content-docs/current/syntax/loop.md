@@ -150,13 +150,13 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 
 ## Tóm tắt
 
-| Ngữ pháp | 설명                     |
-| -------- | ---------------------- |
-| while    | 조건이 참일 동안 반복           |
-| for      | 초기값, 조건, 증감식을 통한 반복 수행 |
-| break    | 반복문 즉시 종료              |
-| continue | 다음 반복으로 건너뜀            |
+| Ngữ pháp  | Mô tả                                                               |
+| --------- | ------------------------------------------------------------------- |
+| trong khi | Lặp lại trong khi điều kiện đúng                                    |
+| đối với   | Thực hiện lặp với giá trị ban đầu, điều kiện, và biểu thức thay đổi |
+| thoát     | Kết thúc vòng lặp ngay lập tức                                      |
+| tiếp tục  | Bỏ qua và tiếp tục vòng lặp tiếp theo                               |
 
-Wave의 반복문은 조건 또는 횟수 기반의 반복 작업을 모두 유연하게 처리할 수 있도록 설계되었습니다.
+Vòng lặp trong Wave được thiết kế để xử lý linh hoạt cả lặp dựa trên điều kiện và số lần.
 
-`break`, `continue` 문을 함께 사용하면 더 정교한 반복 흐름 제어도 가능합니다.
+Sử dụng cả câu lệnh `break`, `continue` có thể cho phép kiểm soát luồng lặp tinh vi hơn.
