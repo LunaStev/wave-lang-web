@@ -22,15 +22,15 @@ fun main() {
 
 - `fun main()`
 
-    Es la función de entrada del programa Wave. Se llama primero en ejecución.
+  Es la función de entrada del programa Wave. Se llama primero en ejecución.
 
 - `println()`
 
-    Es una función de salida temporal que imprime una cadena de texto, y añade un salto de línea (`\n`) después de la salida.
+  Es una función de salida temporal que imprime una cadena de texto, y añade un salto de línea (`\n`) después de la salida.
 
 - `;` (punto y coma)
 
-    Todas las sentencias en Wave terminan con un punto y coma.
+  Todas las sentencias en Wave terminan con un punto y coma.
 
 ---
 
