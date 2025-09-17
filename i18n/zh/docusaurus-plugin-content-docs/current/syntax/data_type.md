@@ -92,7 +92,7 @@ var byteData :byte = 0xFF;
 例子:
 
 ```wave
-var ptr :ptr<T> = &someVariable;
+var ptr :ptr<i32, 5> = &someVariable;
 ```
 
 ## 배열 타입
@@ -103,7 +103,7 @@ var ptr :ptr<T> = &someVariable;
 예시:
 
 ```wave
-var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
+var numbers: array<0> = [1, 2, 3, 4, 5];
 ```
 
 각 데이터 타입은 다양한 범위와 크기를 설정할 수 있기 때문에, 사용자의 필요에 맞는 타입을 선택하여 효육적인 메모리 관리와 계산을 할 수 있습니다.
