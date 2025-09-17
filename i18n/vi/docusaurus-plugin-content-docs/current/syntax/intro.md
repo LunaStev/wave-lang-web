@@ -2,38 +2,38 @@
 sidebar_position: 1
 ---
 
-# 함수와 변수
+# Hàm số và biến số
 
-## 소개
+## Giới thiệu
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화의 균형을 이루어 소프트웨어 개발에 효율적이고 유연한 환경을 제공하는 것입니다.
-이 섹션에서는 Wave 프로그램의 기본 구성 요소인 함수와 변수를 소개합니다. 이러한 구성 요소는 프로그램 내에서 논리를 구성하고 데이터를 관리하는 데 필수적입니다.
-함수와 변수를 정의하고 다루는 방법을 이해하면 Wave의 잠재력을 최대한 활용할 수 있습니다.
+Triết lý thiết kế cốt lõi của ngôn ngữ lập trình Wave là cung cấp một môi trường phát triển phần mềm hiệu quả và linh hoạt bằng cách cân bằng giữa hiệu suất cấp thấp và trừu tượng hóa cấp cao.
+Ở phần này, chúng tôi giới thiệu các thành phần cơ bản của chương trình Wave, đó là hàm số và biến số. Các thành phần này là thiết yếu để cấu trúc logic và quản lý dữ liệu trong chương trình.
+Hiểu cách định nghĩa và xử lý hàm số và biến số sẽ cho phép bạn khai thác tối đa tiềm năng của Wave.
 
 ---
 
-## 함수
+## Hàm số
 
-Wave에서 함수는 독립적으로 실행할 수 있는 **재사용 가능한 코드 블록** 역할을 합니다.
-함수는 특정 동작을 캡슐화하고 프로그램 전반에서 필요할 때 호출할 수 있도록 해줍니다.
-이를 통해 계산을 수행하거나, I/O 작업을 관리하거나, 코드를 관리 가능한 단위로 분리할 수 있습니다.
+Trong Wave, hàm số đóng vai trò như một khối mã có thể tái sử dụng được thực thi độc lập.
+Hàm số giúp đóng gói một hành động cụ thể và có thể được gọi khi cần thiết trong toàn bộ chương trình.
+Điều này cho phép thực hiện các phép toán, quản lý tác vụ I/O hoặc tách mã thành các đơn vị dễ quản lý.
 
-Wave에서 함수의 시그니처는 `fun` 키워드로 시작하며, 함수 이름, 매개변수(있을 경우), 그리고 중괄호 `{}`로 감싸인 함수 본체로 구성됩니다.
+Trong Wave, chữ ký của một hàm bắt đầu với từ khóa `fun`, bao gồm tên hàm, các tham số (nếu có) và thân hàm được bao quanh bởi dấu ngoặc `{}`.
 
-### 함수 정의하기
+### Định nghĩa hàm số
 
-Wave에서 기본적인 함수는 다음과 같이 정의됩니다:
+Một hàm cơ bản trong Wave được định nghĩa như sau:
 
 ```wave
 fun main() {
-    // 여기에 코드를 작성하세요
+    // Viết mã vào đây
 }
 ```
 
-- `main` 함수는 프로그램 실행을 위한 진입점으로 항상 필요합니다.
-- 함수는 매개변수를 가질 수 있으며, 값을 반환할 수 있습니다. 반환 타입은 함수 이름 뒤에 명시합니다.
+- Hàm `main` luôn cần thiết như một điểm khởi đầu để thực thi chương trình.
+- Hàm có thể nhận tham số và trả về giá trị. Kiểu trả về được khai báo sau tên hàm.
 
-### 예제: 간단한 함수
+### Ví dụ: hàm đơn giản
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -41,75 +41,75 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // add 함수 호출
-    println(result);            // 출력: 12
+    var result = add(5, 7);     // gọi hàm add
+    println(result);            // xuất: 12
 }
 ```
 
-위 예제에서:
+Trong ví dụ trên:
 
-- `add` 함수는 두 정수 `a`와 `b`를 받아 합계를 반환합니다.
-- `main` 함수는 `add`를 호출하여 결과를 출력합니다.
+- Hàm `add` nhận hai số nguyên `a` và `b`, trả về tổng của chúng.
+- Hàm `main` gọi `add` để xuất kết quả.
 
-## 변수
+## Biến số
 
-변수는 프로그램 내에서 데이터를 저장하고 조작하는 데 사용됩니다.
-Wave는 변수 선언에서 **가변 변수**와 **불변 변수**를 모두 지원하여 데이터 관리에 대한 개발자의 제어권을 제공합니다.
+Biến được dùng để lưu trữ và thao tác dữ liệu trong chương trình.
+Wave hỗ trợ cả **biến mutable** và **biến immutable** trong khai báo, cung cấp sự kiểm soát cho lập trình viên trong quản lý dữ liệu.
 
-### 가변 변수
+### Biến mutable
 
-Wave에서 변수는 기본적으로 **가변(mutable)** 입니다. 즉, 프로그램 실행 중에 값을 변경할 수 있습니다.
+Trong Wave, mặc định biến là **mutable**. Điều đó có nghĩa là giá trị có thể thay đổi trong khi chương trình chạy.
 
-가변 변수는 var 키워드를 사용해 선언합니다.
+Biến mutable được khai báo bằng từ khóa var.
 
 ```wave
-var x :i32 = 10; // 가변 변수
+var x :i32 = 10; // biến mutable
 x = 20;
 ```
 
-위 예제에서:
+Trong ví dụ trên:
 
-- `x`는 가변 변수로, 초기값 `10`을 가지며 이후에 `20`으로 값을 변경할 수 있습니다.
+- `x` là một biến mutable, có giá trị khởi tạo là `10`, và có thể thay đổi thành `20` sau đó.
 
-### 불변 변수
+### Biến immutable
 
-변수를 **불변(immutable)** 으로 선언하면, 한 번 값이 할당된 후에는 변경할 수 없습니다.
+Khi biến được khai báo là **immutable**, giá trị sau khi gán một lần không thể thay đổi.
 
-불변 변수는 `let` 키워드를 사용해 선언합니다.
+Biến immutable được khai báo bằng từ khóa `let`.
 
 ```wave
-let y :i32 = 5;         // 불변 변수
-// y = 10;              // 오류: 불변 변수는 값을 변경할 수 없습니다.
+let y :i32 = 5;         // biến immutable
+// y = 10;              // lỗi: biến immutable không thể thay đổi giá trị.
 ```
 
-여기서:
+Ở đây:
 
-- `y`는 불변 변수로, 값을 변경하려고 하면 컴파일 오류가 발생합니다.
+- `y` là một biến immutable, và khi cố gắng thay đổi giá trị sẽ dẫn đến lỗi biên dịch.
 
-하지만 `let` 키워드에서 가변 변수로 사용하고 싶다면 `mut`를 사용해서 일시적 가변 변수로 사용할 수 있습니다.
+Tuy nhiên, nếu muốn sử dụng từ khóa `let` cho một biến mutable tạm thời thì có thể dùng `mut`.
 
 ```wave
 let mut y :i32 = 5;
-y = 10; 
+y = 10;
 ```
 
-### 변수 선언 예제
+### Ví dụ khai báo biến
 
-다양한 타입의 가변 및 불변 변수를 선언하는 예제는 다음과 같습니다:
+Ví dụ về khai báo các biến mutable và immutable khác nhau như sau:
 
 ```wave
-var x :i32 = 10;                    // 가변 정수 변수
-let y :f64 = 3.14159;               // 불변 부동소수점 변수
-var name :str = "Wave";             // 가변 문자열 변수
-let is_active :bool = true;         // 불변 논리 변수
+var x :i32 = 10;                    // biến số nguyên mutable
+let y :f64 = 3.14159;               // biến số thực immutable
+var name :str = "Wave";             // biến chuỗi mutable
+let is_active :bool = true;         // biến logic immutable
 ```
 
-- `x`는 가변 정수입니다.
-- `y`는 불변 부동소수점 숫자입니다..
-- `name`은 가변 문자열입니다.
-- `is_active`는 불변 논리값입니다.
+- `x` là một số nguyên mutable.
+- `y` là một số thực immutable.
+- `name` là một chuỗi mutable.
+- `is_active` là một giá trị logic immutable.
 
-Wave에서는 `var` 키워드를 사용해 가변 변수를 선언하며, `let` 키워드를 사용해 초기 할당 후 변경할 수 없는 불변 변수를 선언합니다.
+Trong Wave, `var` được sử dụng để khai báo biến mutable, trong khi `let` được sử dụng để khai báo biến immutable không thể thay đổi sau khi gán ban đầu.
 
-가변 변수와 불변 변수를 구분함으로써, Wave는 데이터 일관성과 프로그램 상태를 더욱 효과적으로 제어할 수 있게 합니다.
-이로써 더욱 견고하고 예측 가능한 코드를 작성할 수 있습니다.
+Bằng cách phân biệt biến có thể thay đổi và biến bất biến, Wave có thể kiểm soát nhất quán dữ liệu và trạng thái chương trình hiệu quả hơn.
+Điều này cho phép viết mã vững chắc hơn và có thể dự đoán được.

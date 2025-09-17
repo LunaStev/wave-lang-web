@@ -26,15 +26,15 @@ The main design goals of Whale are as follows:
 Whale aims to support the following target environments:
 
 - Operating Systems:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (excluding BIOS)
-    - WaveOS (proprietary OS)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (excluding BIOS)
+  - WaveOS (proprietary OS)
 - Architectures:
-    - x86_64 (AMD64)
-    - ARM64
-    - Others can be expanded through module addition.
+  - x86_64 (AMD64)
+  - ARM64
+  - Others can be expanded through module addition.
 
 ## External Integration (FFI)
 

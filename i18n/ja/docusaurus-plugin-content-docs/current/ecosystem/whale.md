@@ -26,15 +26,15 @@ Whaleの主な設計目標は次の通りです。
 Whaleは次のような対象環境をサポートすることを目指します。
 
 - オペレーティングシステム:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (BIOS除く)
-    - WaveOS (自社OS)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (BIOS除く)
+  - WaveOS (自社OS)
 - アーキテクチャ:
-    - x86_64 (AMD64)
-    - ARM64
-    - その他はモジュール追加を通じて拡張可能
+  - x86_64 (AMD64)
+  - ARM64
+  - その他はモジュール追加を通じて拡張可能
 
 ## 外部連動(FFI)
 

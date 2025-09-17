@@ -26,15 +26,15 @@ Malengo makuu ya muundo wa Whale ni kama yafuatayo:
 Whale inalenga kutoa msaada wa mazingira yafuatayo ya lengwa:
 
 - Mfumo wa uendeshaji:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (isipokuwa BIOS)
-    - WaveOS (mfumo wa uendeshaji wa pekee)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (isipokuwa BIOS)
+  - WaveOS (mfumo wa uendeshaji wa pekee)
 - Muundo:
-    - x86_64 (AMD64)
-    - ARM64
-    - Nyingine zinaweza kupanuliwa kupitia kuongeza moduli
+  - x86_64 (AMD64)
+  - ARM64
+  - Nyingine zinaweza kupanuliwa kupitia kuongeza moduli
 
 ## Muunganiko wa Nje (FFI)
 

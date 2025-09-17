@@ -22,15 +22,15 @@ fun main() {
 
 - `fun main()`
 
-    This is the entry point function of a Wave program. It is called first when executed.
+  This is the entry point function of a Wave program. It is called first when executed.
 
 - `println()`
 
-    A temporary output function that prints a string and adds a newline (`\n`) after output.
+  A temporary output function that prints a string and adds a newline (`\n`) after output.
 
 - `;` (semicolon)
 
-    All statements in Wave end with a semicolon.
+  All statements in Wave end with a semicolon.
 
 ---
 

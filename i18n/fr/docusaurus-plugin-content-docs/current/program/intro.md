@@ -22,15 +22,15 @@ fun main() {
 
 - `fun main()`
 
-    C'est la fonction d'entrée d'un programme Wave. Elle est appelée en premier lors de l'exécution.
+  C'est la fonction d'entrée d'un programme Wave. Elle est appelée en premier lors de l'exécution.
 
 - `println()`
 
-    C'est une fonction de sortie temporaire qui affiche une chaîne, suivie d'un saut de ligne (`\n`).
+  C'est une fonction de sortie temporaire qui affiche une chaîne, suivie d'un saut de ligne (`\n`).
 
 - `;` (point-virgule)
 
-    Toutes les instructions en Wave se terminent par un point-virgule.
+  Toutes les instructions en Wave se terminent par un point-virgule.
 
 ---
 

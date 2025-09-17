@@ -27,29 +27,29 @@ asm {
 ### Syntaxelemente
 
 1. Assembly-Befehle
-    - Wird in Form eines `"..."`-Strings geschrieben und ist ein Low-Level-Assembly-Befehl, der auf der tatsächlichen CPU ausgeführt wird.
-    - Es können mehrere Zeilen geschrieben werden, wobei jede Zeile einen Befehl enthält.
-    - Beispiel:
-           ```wave
-           "mov rax, 1"
-           "syscall"
-           ```
+   - Wird in Form eines `"..."`-Strings geschrieben und ist ein Low-Level-Assembly-Befehl, der auf der tatsächlichen CPU ausgeführt wird.
+   - Es können mehrere Zeilen geschrieben werden, wobei jede Zeile einen Befehl enthält.
+   - Beispiel:
+        ```wave
+        "mov rax, 1"
+        "syscall"
+        ```
 
 2. `in("Register") Wert`
-    - Lädt den Wert einer Variable (oder eines Ausdrucks) in das angegebene Register.
-    - Beispiel:
-           ```wave
-           in("rdi") s
-           ```
-        -> Setzt den Wert der Variable `s` in das `rdi`-Register, das gemäß der x86-64-Konvention das erste Argumentregister für syscalls ist.
+   - Lädt den Wert einer Variable (oder eines Ausdrucks) in das angegebene Register.
+   - Beispiel:
+        ```wave
+        in("rdi") s
+        ```
+     -> Setzt den Wert der Variable `s` in das `rdi`-Register, das gemäß der x86-64-Konvention das erste Argumentregister für syscalls ist.
 
 3. `out("Register") Variable`
-    - Holt den Wert des angegebenen Registers in eine Wave-Variable.
-    - Beispiel:
-           ```wave
-           out("rax") ret
-           ```
-        -> Speichert den Wert des `rax`-Registers, in dem der Rückgabewert des `syscall` gespeichert ist, in der Variable `ret`.
+   - Holt den Wert des angegebenen Registers in eine Wave-Variable.
+   - Beispiel:
+        ```wave
+        out("rax") ret
+        ```
+     -> Speichert den Wert des `rax`-Registers, in dem der Rückgabewert des `syscall` gespeichert ist, in der Variable `ret`.
 
 ---
 

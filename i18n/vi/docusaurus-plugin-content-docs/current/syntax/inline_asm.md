@@ -2,62 +2,62 @@
 sidebar_position: 7
 ---
 
-# 인라인 어셈블리
+# Hợp ngữ nội tuyến
 
-## 소개
+## Giới thiệu
 
-이 문서는 Wave 언어의 인라인 어셈블리에 대해 다룹니다.
-인라인 어셈블리는 Wave가 제공하는 기능 중 하나로, 고수준 언어의 편의성을 유지하면서도 저수준 하드웨어 제어에 직접 접근할 수 있는 극단적인 수준의 문법입니다.
+Tài liệu này nói về hợp ngữ nội tuyến của ngôn ngữ Wave.
+Inline assembly là một trong những tính năng do Wave cung cấp, cho phép tiếp cận trực tiếp đến điều khiển phần cứng cấp thấp, trong khi vẫn duy trì sự tiện lợi của ngôn ngữ cấp cao.
 
-즉, 일반적인 Wave 코드로는 다루기 어려운 레지스터 조작, 메모리 직접 접근, 특수 명령어 실행 등을 가능하게 하며, 성능 최적화나 하드웨어 종속적인 작업이 필요할 때 활용됩니다.
+Nói cách khác, nó cho phép thao tác thanh ghi, truy cập bộ nhớ trực tiếp, thực hiện lệnh đặc biệt mà mã Wave thông thường khó xử lý, và được sử dụng khi cần tối ưu hóa hiệu năng hoặc thực hiện công việc phụ thuộc phần cứng.
 
 ---
 
-## 기본 문법
+## Cú pháp cơ bản
 
 ```wave
 asm {
-    "어셈블리 명령어"          // 실제 어셈블리 코드 (한 줄에 한 명령어)
+    "Lệnh Assembly"          // Mã lệnh Assembly thực tế (một lệnh trên một dòng)
     ...
-    in("레지스터") 값         // 입력 레지스터 매핑
-    out("레지스터") 변수      // 출력 레지스터 매핑
+    in("Thanh ghi") giá trị         // Ánh xạ thanh ghi đầu vào
+    out("Thanh ghi") biến      // Ánh xạ thanh ghi đầu ra
 }
 ```
 
-### 문법 요소
+### Thành phần cú pháp
 
-1. 어셈블리 명령어
-    - `"..."` 문자열 형태로 작성하며, 실제 CPU에서 실행되는 저수준 어셈블리 명령어 입니다.
-    - 여러 줄 작성 가능하며, 한 줄에 한 개의 명령어를 작성합니다.
-    - 예시:
-           ```wave
-           "mov rax, 1"
-           "syscall"
-           ```
+1. Lệnh Assembly
+   - Được viết dưới dạng chuỗi `"..."`, là lệnh Assembly cấp thấp thực thi trên CPU thực tế.
+   - Có thể viết nhiều dòng, và mỗi dòng một lệnh.
+   - Ví dụ:
+        ```wave
+        "mov rax, 1"
+        "syscall"
+        ```
 
-2. `in("레지스터") 값`
-    - 변수(또는 표현식)의 값을 지정한 레지스터에 로드합니다.
-    - 예시:
-           ```wave
-           in("rdi") s
-           ```
-        -> 변수 `s`의 값을 x86-64 규약에서 첫 번째 syscall 인자 레지스터인 `rdi`에 넣음.
+2. `in("Thanh ghi") giá trị`
+   - Nạp giá trị của biến (hoặc biểu thức) vào thanh ghi chỉ định.
+   - Ví dụ:
+        ```wave
+        in("rdi") s
+        ```
+     -> Đặt giá trị của biến `s` vào thanh ghi đối số syscall đầu tiên `rdi` theo quy ước x86-64.
 
-3. `out("레지스터") 변수`
-    - 지정한 레지스터의 값을 Wave 변수로 가져옵니다.
-    - 예시:
-           ```wave
-           out("rax") ret
-           ```
-        -> `syscall`의 반환값이 저장된 `rax` 레지스터 값을 변수 `ret`에 저장.
+3. `out("Thanh ghi") biến`
+   - Lấy giá trị từ thanh ghi chỉ định vào biến Wave.
+   - Ví dụ:
+        ```wave
+        out("rax") ret
+        ```
+     -> Lưu giá trị của thanh ghi `rax`, nơi lưu trữ giá trị trả về của `syscall`, vào biến `ret`.
 
 ---
 
-## 간단한 예제
+## Ví dụ đơn giản
 
 ```wave
 fun main() {
-    var msg_ptr: ptr<i8> = "Hello from syscall!\n";
+    var msg_ptr: ptr<i8> = "Xin chào từ syscall!\n";
     var ret_val: i64;
 
     asm {
@@ -73,7 +73,7 @@ fun main() {
 
 ---
 
-## 주의사항
+## Lưu ý.
 
-- 인라인 어셈블리는 Wave의 타입 안정성을 우회하므로, 잘못된 멸영어 사용 시 프로그래밍이 비정상 종료되거나 undefined behavior가 발생할 수 있습니다.
-- `in`, `out` 매핑은 컴파일 타임에 검증되지만, 명령어 자체의 유효성은 보장하지 않습니다.
+- Inline assembly bỏ qua tính ổn định kiểu của Wave, do đó khi sử dụng ngôn ngữ lắp ráp sai, có thể dẫn đến việc chương trình bị dừng bất thường hoặc có hành vi không xác định.
+- Ánh xạ `in`, `out` được kiểm tra tại thời gian biên dịch, nhưng không đảm bảo tính hợp lệ của bản thân lệnh.

@@ -26,15 +26,15 @@ Les principaux objectifs de conception de Whale sont les suivants :
 Whale vise à prendre en charge les environnements cibles suivants :
 
 - Systèmes d'exploitation :
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (sauf BIOS)
-    - WaveOS (propre OS)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (sauf BIOS)
+  - WaveOS (propre OS)
 - Architectures :
-    - x86_64 (AMD64)
-    - ARM64
-    - Les autres peuvent être étendues par l'ajout de modules
+  - x86_64 (AMD64)
+  - ARM64
+  - Les autres peuvent être étendues par l'ajout de modules
 
 ## Interopérabilité externe (FFI)
 

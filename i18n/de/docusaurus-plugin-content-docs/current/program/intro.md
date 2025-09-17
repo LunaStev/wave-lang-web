@@ -22,15 +22,15 @@ fun main() {
 
 - `fun main()`
 
-    Dies ist die Einstiegspunktfunktion eines Wave-Programms. Es wird beim Ausführen als erstes aufgerufen.
+  Dies ist die Einstiegspunktfunktion eines Wave-Programms. Es wird beim Ausführen als erstes aufgerufen.
 
 - `println()`
 
-    Eine temporäre Ausgabe-Funktion, die eine Zeichenkette ausgibt und nach der Ausgabe einen Zeilenumbruch (`\n`) hinzufügt.
+  Eine temporäre Ausgabe-Funktion, die eine Zeichenkette ausgibt und nach der Ausgabe einen Zeilenumbruch (`\n`) hinzufügt.
 
 - `;` (Semikolon)
 
-    Alle Anweisungen in Wave enden mit einem Semikolon.
+  Alle Anweisungen in Wave enden mit einem Semikolon.
 
 ---
 

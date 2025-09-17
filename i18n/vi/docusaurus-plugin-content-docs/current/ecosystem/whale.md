@@ -26,15 +26,15 @@ Các mục tiêu thiết kế chính của Whale là:
 Whale đặt mục tiêu hỗ trợ các môi trường mục tiêu như sau:
 
 - Hệ điều hành:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (không bao gồm BIOS)
-    - WaveOS (Hệ điều hành riêng)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (không bao gồm BIOS)
+  - WaveOS (Hệ điều hành riêng)
 - Kiến trúc:
-    - x86_64 (AMD64)
-    - ARM64
-    - Khác có thể mở rộng thông qua việc thêm mô-đun
+  - x86_64 (AMD64)
+  - ARM64
+  - Khác có thể mở rộng thông qua việc thêm mô-đun
 
 ## Liên kết bên ngoài (FFI)
 
@@ -46,7 +46,7 @@ Wave được thiết kế để có thể thực hiện mọi chức năng tron
 
 Whale có thể mở rộng theo các phương thức sau:
 
-- 새로운 운영체제 또는 아키텍처에 대한 모듈 추가
-- 사용자 정의 최적화 알고리즘 삽입
-- 빌드 프로필 및 링커 설정의 커스터마이징
-- 자체 실행 포맷 정의
+- Thêm mô-đun cho hệ điều hành mới hoặc kiến trúc mới
+- Chèn thuật toán tối ưu hóa tùy chỉnh
+- Tùy chỉnh hồ sơ xây dựng và cài đặt trình liên kết
+- Định nghĩa định dạng thực thi riêng

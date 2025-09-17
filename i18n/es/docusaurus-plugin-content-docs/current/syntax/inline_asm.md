@@ -27,29 +27,29 @@ asm {
 ### Elementos gramaticales
 
 1. Instrucción ensambladora
-    - Se escribe en forma de cadena de caracteres `"..."`, y es una instrucción de ensamblado de bajo nivel que se ejecuta en la CPU real.
-    - Puede escribirse en varias líneas, con una instrucción por línea.
-    - Ejemplo:
-           ```wave
-           "mov rax, 1"
-           "syscall"
-           ```
+   - Se escribe en forma de cadena de caracteres `"..."`, y es una instrucción de ensamblado de bajo nivel que se ejecuta en la CPU real.
+   - Puede escribirse en varias líneas, con una instrucción por línea.
+   - Ejemplo:
+        ```wave
+        "mov rax, 1"
+        "syscall"
+        ```
 
 2. `in("registro") valor`
-    - Carga el valor de una variable (o expresión) en el registro especificado.
-    - Ejemplo:
-           ```wave
-           in("rdi") s
-           ```
-        -> Coloca el valor de la variable `s` en el registro `rdi`, que es el primer registro de argumento de syscall según la convención x86-64.
+   - Carga el valor de una variable (o expresión) en el registro especificado.
+   - Ejemplo:
+        ```wave
+        in("rdi") s
+        ```
+     -> Coloca el valor de la variable `s` en el registro `rdi`, que es el primer registro de argumento de syscall según la convención x86-64.
 
 3. `out("registro") variable`
-    - Obtiene el valor del registro especificado como una variable Wave.
-    - Ejemplo:
-           ```wave
-           out("rax") ret
-           ```
-        -> Almacena el valor del registro `rax`, donde se guarda el valor de retorno del `syscall`, en la variable `ret`.
+   - Obtiene el valor del registro especificado como una variable Wave.
+   - Ejemplo:
+        ```wave
+        out("rax") ret
+        ```
+     -> Almacena el valor del registro `rax`, donde se guarda el valor de retorno del `syscall`, en la variable `ret`.
 
 ---
 

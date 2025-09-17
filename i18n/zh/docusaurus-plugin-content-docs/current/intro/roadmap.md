@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Wave + Whale 集成开发路线图 v2
 
-## 전체 단계
+## 全阶段
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → release
@@ -12,175 +12,175 @@ pre-alpha → pre-beta → alpha → beta → rc → release
 
 ---
 
-## Pre-Beta 단계
+## Pre-Beta阶段
 
-> 목표: Wave 언어의 프론트엔드 완성 + LLVM 백엔드를 이용한 전체 기능 구현
+> 目标：完成Wave语言的前端 + 利用LLVM后端实现所有功能
 
-### 주요 특징
+### 主要特点
 
-- LLVM만 사용 (Whale 없음)
+- 仅使用LLVM（无Whale）
 
-- 문법 추가는 없음, 기존 사양만 구현
+- 不添加语法，仅实现现有规范
 
-- 에러 메시지, 타입 검사, 변수 스코프 등 프론트 중심 구조 안정화
+- 错误消息、类型检查、变量作用域等前端中心结构稳定
 
-### 구현 범위
+### 实现范围
 
-- 변수 선언, 출력, 연산
+- 变量声明、输出、运算
 
-- 함수 정의 및 호출
+- 函数定义和调用
 
 - if / else if / else
 
 - while / break / continue
 
-- 포맷 출력, 타입 지정
+- 格式输出、类型指定
 
-- 포인터 설계 (`ptr<T>` 형태)
+- 指针设计（`ptr<T>`形式）
 
-- 배열 설계 (`array<T, N>`)
+- 数组设计（`array<T, N>`）
 
-- 타입 검사 및 구조적 AST
+- 类型检查及结构性AST
 
-### 사용 기술
+### 使用技术
 
-- Rust (Wave 컴파일러 전부)
+- Rust（全部为Wave编译器）
 
-- LLVM (IR 생성, AOT 실행)
+- LLVM（IR生成，AOT执行）
 
 - inkwell / llvm-sys
 
 ---
 
-## Alpha 단계
+## Alpha阶段
 
-> 목표: Wahle 도입 시작, LLVM과 병행 사용 / Whale 기반 백엔드 시작 구현
+> 目标：开始引入Whale，LLVM与Whale并行使用/实现Whale基础后端
 
-### 주요 특징
+### 主要特点
 
-- LLVM은 디폴트 백엔드
+- LLVM为默认后端
 
-- Whale은 선택적 백엔드
+- Whale为可选后端
 
-- Wave 코드 실행 시 `--backend` 옵션으로 분기 가능
+- 运行Wave代码时可用`--backend`选项进行分支
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Whale 관련 작업
+### Whale相关工作
 
-- Whale IR 구조 설계 및 정의 (Instruction, Value, Block 등)
+- 设计并定义Whale IR结构（指令、值、块等）
 
-- Whale용 IR Generator 구현
+- 实现Whale用IR生成器
 
-- Whale 코드 생성기 (어셈블리 or 바이너리)
+- Whale代码生成器（汇编或二进制）
 
-- Whale로만 가능한 타입 구현 (`i1024`, 고급 포인터 등)
+- 仅通过Whale实现的类型 (`i1024`, 高级指针等)
 
-### 체크포인트
+### 检查点
 
-- Whale로 Hello World 출력
+- 通过Whale输出Hello World
 
-- Whale에서 변수 선언/할당
+- 在Whale中进行变量声明/分配
 
-- Whale IR 디버깅 도구 구현
+- 实现Whale IR调试工具
 
-- Whale에서 포인터 타입 처리
+- 在Whale中处理指针类型
 
-- Wave → Whale IR 변환 진행
-
----
-
-## Beta 단계
-
-> 목표: Whale로 완전 전환, LLVM 제거. Whale + Wave 조합 최적화
-
-### 주요 특징
-
-- Whale만 사용
-
-- LLVM 전체 제거 (디펜던시 및 모듈)
-
-- 코드 최적화 중심
-
-- IR → 실행까지 빠르고 효율적으로
-
-### 최적화 범위
-
-- Whale IR 최적화 Pass 설계
-
-- Whale 코드 생성 속도 개선
-
-- Wave의 모든 문법이 Whale에서 완벽 지원
-
-### 테스트
-
-- 단위 테스트 + 전체 테스트 스위트
-
-- WSON, 표준 라이브러리 호환성 테스트
-
-- 크로스 플랫폼 Whale 빌드 확인
+- 进行Wave → Whale IR转换
 
 ---
 
-## RC (Release Candidate) 단계
+## Beta阶段
 
-> 목표: Wave 부트스트랩 시작 — Rust 코드 전면 제거
+> 目标：全面转向Whale，移除LLVM。 Whale + Wave组合优化
 
-### 주요 특징
+### 主要特点
 
-- Wave로 Wave 컴파일러를 재작성 시작
+- 仅使用Whale
 
-- Whale 기반으로 Wave 코드 자체 실행
+- 全面移除LLVM（依赖和模块）
 
-- Whale은 self-hosting 단계 진입
+- 以代码优化为中心
 
-### 작업 범위
+- 从IR到执行快速且高效
 
-- Whale 기반으로 Wave IR 생성기 재작성
+### 优化范围
 
-- Rust 제거 + Wave 코드로 대체
+- 设计Whale IR优化Pass
 
-- std 및 core 라이브러리 Wave로 작성
+- 改进Whale代码生成速度
 
-- 부트스트랩 성공 시 첫 Wave-native 컴파일러 탄생
+- Wave的所有语法在Whale中完美支持
 
----
+### 测试
 
-## Release 단계 (v0.0.1)
+- 单元测试 + 全测试套件
 
-> 목표: 공식 출시 / 완전한 Whale 기반 독립 언어 생태계 제공
+- WSON，标准库兼容性测试
 
-### 구성 요소
-
-- Wave (언어 및 표준 라이브러리)
-
-- Whale (컴파일러 툴체인)
-
-- Vex (패키지 매니저)
-
-- WSON (데이터 포맷)
-
-### 특징
-
-- 완전한 Wave-only 컴파일러 (부트스트랩 성공)
-
-- Whale 최적화 완료
-
-- Vex 빌드 및 배포 시스템 정착
-
-- WSON 파서 + 직렬화 포함
-
-- 크로스 OS 빌드 가능 (`vex build --windows` 등)
+- 跨平台Whale构建确认
 
 ---
 
-## 개발 메타 전략
+## RC（Release Candidate）阶段
 
-| 전략        | 설명                                             |
-| --------- | ---------------------------------------------- |
-| 열차+레일 전략  | Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 병행 진행       |
-| 백엔드 분기 전략 | `--backend` 옵션으로 LLVM/Whale 선택, alpha에서 중요한 구조 |
-| 구조 역전 계획  | rc 이후부터 Wave 코드가 Whale을 통해 Wave 자신을 컴파일        |
+> 目标：启动Wave引导—全面移除Rust代码
+
+### 主要特点
+
+- 重新用Wave编写Wave编译器
+
+- 基于Whale自身执行Wave代码
+
+- Whale进入self-hosting阶段
+
+### 工作范围
+
+- 基于Whale重新编写Wave IR生成器
+
+- 移除Rust并用Wave代码替代
+
+- 用Wave编写std和core库
+
+- 引导成功则诞生首个Wave-native编译器
+
+---
+
+## Release阶段（v0.0.1）
+
+> 目标：正式发布/提供完整的基于Whale的独立语言生态系统
+
+### 组成要素
+
+- Wave（语言及标准库）
+
+- Whale（编译器工具链）
+
+- Vex（包管理器）
+
+- WSON（数据格式）
+
+### 特点
+
+- 完整的Wave-only编译器（引导成功）
+
+- Whale优化完成
+
+- Vex构建及发布系统定型
+
+- 包括WSON解析器和序列化
+
+- 支持跨OS构建（例如`vex build --windows`等）
+
+---
+
+## 开发元战略
+
+| 战略      | 说明                                       |
+| ------- | ---------------------------------------- |
+| 列车+轨道战略 | 一边开发Whale，一边构建Wave后端的并行推进                |
+| 后端分支战略  | 通过`--backend`选项选择LLVM/Whale，alpha阶段的重要架构 |
+| 结构逆转计划  | 从rc开始，Wave代码通过Whale自我编译                  |

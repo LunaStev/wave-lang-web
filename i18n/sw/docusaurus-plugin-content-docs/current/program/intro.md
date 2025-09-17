@@ -22,15 +22,15 @@ fun main() {
 
 - `fun main()`
 
-    Ni kazi ya kuingia kwa mpango wa Wave. Huita kwanza wakati wa utekelezaji.
+  Ni kazi ya kuingia kwa mpango wa Wave. Huita kwanza wakati wa utekelezaji.
 
 - `println()`
 
-    Ni kazi ya utoaji ya mpito ambayo inatoa maandishi, na inaongeza mbadala (`\n`) baada ya utoaji.
+  Ni kazi ya utoaji ya mpito ambayo inatoa maandishi, na inaongeza mbadala (`\n`) baada ya utoaji.
 
 - `;` (Sehemu ya Kununulia)
 
-    Kila sentensi ya Wave inaishia na semikoli.
+  Kila sentensi ya Wave inaishia na semikoli.
 
 ---
 
