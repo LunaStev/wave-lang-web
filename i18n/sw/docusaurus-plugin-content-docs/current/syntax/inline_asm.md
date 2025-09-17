@@ -27,29 +27,29 @@ pta {
 ### Vipengele vya Sarufi
 
 1. Maagizo ya Mkusanyiko
-    - Yameandikwa kwa umbo la kamba ya `"..."`, maagizo ya mkusanyiko wa kiwango cha chini yanayotawala CPU halisi.
-    - Inaruhusu maandishi ya mistari mingi, na agizo moja tu huandikwa kwa kila mstari.
-    - Mfano:
-           ```wave
-           "hamisha rax, 1"
-           "kiitisha mfumo"
-           ```
+   - Yameandikwa kwa umbo la kamba ya `"..."`, maagizo ya mkusanyiko wa kiwango cha chini yanayotawala CPU halisi.
+   - Inaruhusu maandishi ya mistari mingi, na agizo moja tu huandikwa kwa kila mstari.
+   - Mfano:
+        ```wave
+        "hamisha rax, 1"
+        "kiitisha mfumo"
+        ```
 
 2. `in("rejista") thamani`
-    - Inapakia thamani ya kutofautisha (au usemi) katika rejista maalum.
-    - Mfano:
-           ```wave
-           in("rdi") s
-           ```
-        -> Inajaza thamani ya kutofautisha `s` katika `rdi`, rejista ya kwanza ya kiitisho cha mfumo kulingana na mkataba wa ngamizi x86-64.
+   - Inapakia thamani ya kutofautisha (au usemi) katika rejista maalum.
+   - Mfano:
+        ```wave
+        in("rdi") s
+        ```
+     -> Inajaza thamani ya kutofautisha `s` katika `rdi`, rejista ya kwanza ya kiitisho cha mfumo kulingana na mkataba wa ngamizi x86-64.
 
 3. `out("rejista") kutofautisha`
-    - Inaondoka na kuleta thamani kwenye rejista maalum kwa kutofautisha kwa Wave.
-    - Mfano:
-           ```wave
-           out("rax") ret
-           ```
-        -> Inawakilisha thamani ya rejista `rax` ya thamani rudishwa ya `syscall` kwa kutofautisha `ret`.
+   - Inaondoka na kuleta thamani kwenye rejista maalum kwa kutofautisha kwa Wave.
+   - Mfano:
+        ```wave
+        out("rax") ret
+        ```
+     -> Inawakilisha thamani ya rejista `rax` ya thamani rudishwa ya `syscall` kwa kutofautisha `ret`.
 
 ---
 
