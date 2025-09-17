@@ -26,15 +26,15 @@ Die Hauptziele der Gestaltung von Whale sind:
 Whale zielt darauf ab, die folgenden Zielumgebungen zu unterstützen:
 
 - Betriebssysteme:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (BIOS ausgeschlossen)
-    - WaveOS (eigenes OS)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (BIOS ausgeschlossen)
+  - WaveOS (eigenes OS)
 - Architekturen:
-    - x86_64 (AMD64)
-    - ARM64
-    - Andere können durch Hinzufügen von Modulen erweitert werden
+  - x86_64 (AMD64)
+  - ARM64
+  - Andere können durch Hinzufügen von Modulen erweitert werden
 
 ## Externe Integration (FFI)
 
