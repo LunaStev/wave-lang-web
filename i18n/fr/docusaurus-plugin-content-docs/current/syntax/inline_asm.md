@@ -27,29 +27,29 @@ asm {
 ### Éléments de syntaxe
 
 1. Instructions d'assemblage
-    - Écrit sous la forme d'une chaîne `"..."`, c'est une instruction d'assemblage bas niveau exécutée par le CPU réel.
-    - Il est possible d'écrire plusieurs lignes, avec une instruction par ligne.
-    - Exemple:
-           ```wave
-           "mov rax, 1"
-           "syscall"
-           ```
+   - Écrit sous la forme d'une chaîne `"..."`, c'est une instruction d'assemblage bas niveau exécutée par le CPU réel.
+   - Il est possible d'écrire plusieurs lignes, avec une instruction par ligne.
+   - Exemple:
+        ```wave
+        "mov rax, 1"
+        "syscall"
+        ```
 
 2. `in("registre") valeur`
-    - Charge la valeur d'une variable (ou d'une expression) dans le registre spécifié.
-    - Exemple:
-           ```wave
-           in("rdi") s
-           ```
-        -> Inserer la valeur de la variable `s` dans le registre d'argument syscall premier, `rdi`, selon la convention x86-64.
+   - Charge la valeur d'une variable (ou d'une expression) dans le registre spécifié.
+   - Exemple:
+        ```wave
+        in("rdi") s
+        ```
+     -> Inserer la valeur de la variable `s` dans le registre d'argument syscall premier, `rdi`, selon la convention x86-64.
 
 3. `out("registre") variable`
-    - Récupère la valeur du registre spécifié dans la variable Wave.
-    - Exemple:
-           ```wave
-           out("rax") ret
-           ```
-        -> Stocke dans la variable `ret` la valeur du registre `rax` où est enregistrée la valeur de retour de `syscall`.
+   - Récupère la valeur du registre spécifié dans la variable Wave.
+   - Exemple:
+        ```wave
+        out("rax") ret
+        ```
+     -> Stocke dans la variable `ret` la valeur du registre `rax` où est enregistrée la valeur de retour de `syscall`.
 
 ---
 
