@@ -27,29 +27,29 @@ asm {
 ### Grammar Components
 
 1. Assembly Command
-    - Written in `"..."` string format, it is a low-level assembly command executed on the actual CPU.
-    - Multiple lines can be written, with one command per line.
-    - Example:
-           ```wave
-           "mov rax, 1"
-           "syscall"
-           ```
+   - Written in `"..."` string format, it is a low-level assembly command executed on the actual CPU.
+   - Multiple lines can be written, with one command per line.
+   - Example:
+        ```wave
+        "mov rax, 1"
+        "syscall"
+        ```
 
 2. `in("register") value`
-    - Loads the value of a variable (or expression) into the specified register.
-    - Example:
-           ```wave
-           in("rdi") s
-           ```
-        -> Puts the value of the variable `s` into `rdi`, the first syscall argument register in the x86-64 convention.
+   - Loads the value of a variable (or expression) into the specified register.
+   - Example:
+        ```wave
+        in("rdi") s
+        ```
+     -> Puts the value of the variable `s` into `rdi`, the first syscall argument register in the x86-64 convention.
 
 3. `out("register") variable`
-    - Fetches the value of the specified register into a Wave variable.
-    - Example:
-           ```wave
-           out("rax") ret
-           ```
-        -> Stores the value of the `rax` register, where the return value of the `syscall` is stored, into the variable `ret`.
+   - Fetches the value of the specified register into a Wave variable.
+   - Example:
+        ```wave
+        out("rax") ret
+        ```
+     -> Stores the value of the `rax` register, where the return value of the `syscall` is stored, into the variable `ret`.
 
 ---
 
