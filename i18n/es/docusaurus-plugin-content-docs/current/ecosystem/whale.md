@@ -26,15 +26,15 @@ Los principales objetivos de diseño de Whale son los siguientes:
 Whale tiene como objetivo apoyar los siguientes entornos destino:
 
 - Sistemas operativos:
-    - Linux
-    - Windows
-    - macOS
-    - UEFI (excluyendo BIOS)
-    - WaveOS (sistema operativo propio)
+  - Linux
+  - Windows
+  - macOS
+  - UEFI (excluyendo BIOS)
+  - WaveOS (sistema operativo propio)
 - Arquitecturas:
-    - x86_64 (AMD64)
-    - ARM64
-    - Otros se pueden ampliar mediante la adición de módulos
+  - x86_64 (AMD64)
+  - ARM64
+  - Otros se pueden ampliar mediante la adición de módulos
 
 ## Integración externa (FFI)
 
