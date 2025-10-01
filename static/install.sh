@@ -101,7 +101,7 @@ elif [[ "$DISTRO" == "fedora" ]]; then
   else
     echo "Warning: LLVM lib path not found at $LLVM_LIB_PATH"
   fi
-
+fi
 
 # Step 2: Download wavec
 FILENAME="wave-${VERSION}-${ARCH}-${OS}-gnu.tar.gz"
