@@ -2,15 +2,15 @@
 sidebar_position: 8
 ---
 
-# 구조체
+# Struct
 
-Wave 언어의 구조체는 사용자 정의 데이터 타입을 선언하기 위한 문법 요소이며, 서로 다른 타입의 값을 하나의 집합으로 묶어 표현할 수 있도록 설계되어 있습니다. 구조체는 값 타입(value type)으로 동작하며, 모든 필드는 명시적으로 타입을 가져야 하고, 모든 필드의 초기값은 구조체 생성 시 반드시 제공되어야 합니다.
+In the Wave language, a struct is a syntactic element for declaring user-defined data types, designed to group values of different types into a single collection. A struct operates as a value type, and all fields must have explicitly defined types, with initial values provided for all fields at the time of struct creation.
 
 ---
 
-## 구조체 선언 문법
+## Struct Declaration Syntax
 
-구조체는 `struct` 키워드를 사용하여 선언합니다. 구조체의 이름은 파스칼 표기법(PascalCase)을 사용하며, 구조체 본문에는 하나 이상의 필드를 선언할 수 있습니다. 필드는 `이름: 타입;` 형식으로 작성합니다. 모든 필드 선언 뒤에는 세미콜론이 필요합니다.
+A struct is declared using the `struct` keyword. The name of a struct uses PascalCase, and within the struct body, one or more fields can be declared. Fields are written in the format `name: type;`. A semicolon is required after each field declaration.
 
 ```wave
 struct Box {
@@ -19,13 +19,13 @@ struct Box {
 }
 ```
 
-구조체 선언 시 필드의 순서는 메모리 배치 순서와 동일하게 사용됩니다. 구조체 내부에는 필드 선언만 허용되며, 함수나 메서드는 포함될 수 없습니다.
+When declaring a struct, the order of fields is used identically to the memory layout order. Within a struct, only field declarations are allowed; functions or methods cannot be included.
 
 ---
 
-## 구조체 생성 문법
+## Struct Instantiation Syntax
 
-구조체는 구조체 이름을 이용한 리터럴 형식으로 생성합니다. 구조체 리터럴은 `StructName { 필드명: 값; ... }` 형식을 사용하며, 정의된 모든 필드는 반드시 초기화해야 합니다. 초기화 시 필드의 순서는 선언 순서와 동일할 필요는 없습니다.
+A struct is instantiated using a literal format with the struct name. A struct literal uses the format `StructName { fieldName: value; ... }` format, and all defined fields must be initialized. During initialization, the order of fields does not have to match the declaration order.
 
 ```wave
 var b: Box = Box {
@@ -34,26 +34,26 @@ var b: Box = Box {
 };
 ```
 
-초기화 시 누락된 필드가 존재하면 컴파일 오류가 발생합니다. 초기화 시 제공하는 값의 타입은 구조체에서 정의한 타입과 정확히 일치해야 하며, 암묵적 변환은 허용되지 않습니다.
+A compile error occurs if any fields are missing during initialization. The type of values provided during initialization must exactly match the types defined in the struct, and implicit conversion is not allowed.
 
 ---
 
-## 구조체 필드 접근 문법
+## Struct Field Access Syntax
 
-구조체의 필드는 점 표기법(dot notation)을 통해 접근합니다. 필드 접근은 읽기 연산과 쓰기 연산 모두에 동일하게 사용되며, 존재하지 않는 필드 이름을 사용하면 컴파일 오류가 발생합니다.
+Fields of a struct are accessed using dot notation. Field access is used the same way for both read and write operations, and using a nonexistent field name will result in a compile error.
 
 ```wave
 println("Size: {}", b.size);
 println("Weight: {}", b.weight);
 ```
 
-구조체 변수는 값 타입으로 동작하기 때문에 구조체 전체를 대입하거나 함수 인자로 전달할 때 구조체의 모든 필드가 복사됩니다.
+Struct variables operate as value types, so when assigning the entire struct or passing it as a function argument, all the fields of the struct are copied.
 
 ---
 
-## 구조체 메서드 정의 문법
+## Struct Method Definition Syntax
 
-Wave 언어는 구조체 자체 안에 메서드를 포함하지 않으며, `proto` 키워드를 사용하여 구조체에 메서드를 연결합니다. proto 블록은 특정 구조체에 속한 함수 집합을 선언하는 영역입니다. `proto` 내부의 함수는 구조체 인스턴스를 가리키기 위해 첫 번째 매개변수로 `self`를 사용합니다. `self`는 구조체 전체 값을 전달받으며, 이는 값 복사 방식으로 처리됩니다.
+The Wave language does not include methods within the struct itself; instead, methods are associated with a struct using the `proto` keyword. A proto block declares a set of functions belonging to a specific struct. Functions within a `proto` use `self` as the first parameter to refer to the struct instance. `self` receives the entire struct value, processed via value copying.
 
 ```wave
 proto Box {
@@ -67,7 +67,7 @@ proto Box {
 }
 ```
 
-proto 블록은 구조체 선언과 같은 파일에 위치할 필요는 없으며, 여러 proto 블록을 통해 동일한 구조체에 추가적인 메서드를 정의할 수 있습니다. 메서드 호출은 일반적인 함수 호출과 동일하며, 구조체 인스턴스를 대상으로 점 표기법을 이용하여 호출합니다.
+Proto blocks do not need to be in the same file as the struct declaration, and multiple proto blocks can be used to define additional methods for the same struct. Method calls are similar to regular function calls, using dot notation to call methods on a struct instance.
 
 ```wave
 b.print();
@@ -76,9 +76,9 @@ var n: i32 = b.added_size(5);
 
 ---
 
-## 함수 인자로서의 구조체 사용
+## Using Struct as Function Argument
 
-구조체는 함수 인자로 전달될 때 값 복사 방식으로 처리됩니다. 구조체 내부의 필드를 수정하더라도 호출한 쪽의 구조체 인스턴스에는 영향을 미치지 않습니다.
+When a struct is passed as a function argument, it is handled by value copying. Modifying fields inside the struct does not affect the struct instance on the calling side.
 
 ```wave
 fun calc(box: Box) -> i32 {
@@ -86,13 +86,13 @@ fun calc(box: Box) -> i32 {
 }
 ```
 
-함수에서 구조체를 반환할 경우에도 동일하게 값 복사가 발생합니다.
+Returning a struct from a function also results in value copying.
 
 ---
 
-## 중첩 구조체(Nested Struct)
+## Nested Struct
 
-Wave에서는 구조체 내부의 필드 타입으로 다른 구조체를 사용할 수 있습니다. 구조체는 완전한 타입이기 때문에 하나의 구조체가 다른 구조체를 포함하는 형태로 중첩하여 사용할 수 있습니다.
+In Wave, you can use another struct as a field type within a struct. As a complete type, a struct can be used nested by having one struct include another.
 
 ```wave
 struct Position {
@@ -106,7 +106,7 @@ struct Player {
 }
 ```
 
-중첩된 구조체는 점 표기법을 연속으로 사용하여 내부 필드를 접근할 수 있습니다.
+Nested structs are accessed using continuous dot notation to reach internal fields.
 
 ```wave
 var p: Player = Player {
@@ -118,13 +118,13 @@ println("Player X: {}", p.pos.x);
 println("Player Y: {}", p.pos.y);
 ```
 
-구조체 리터럴 내부에서 또 다른 구조체 리터럴을 중첩하여 작성할 수 있으며, 이 경우에도 모든 필드 초기화 규칙이 동일하게 적용됩니다.
+Within a struct literal, you can nest another struct literal, with all field initialization rules still applicable.
 
 ---
 
-## 구조체 배열
+## Struct Arrays
 
-구조체는 배열의 원소 타입으로도 사용할 수 있습니다. 배열의 문법은 `array<타입, 길이>` 형식을 사용하며, 구조체 타입을 그대로 배열의 요소로 지정할 수 있습니다.
+Structs can also be used as element types in arrays. Array syntax uses the `array<type, length>` format, and a struct type can be directly specified as an element in the array.
 
 ```wave
 var players: array<Player, 3> = [
@@ -134,7 +134,7 @@ var players: array<Player, 3> = [
 ];
 ```
 
-구조체 배열의 각 원소에 접근할 때는 먼저 배열 인덱스를 사용하고, 이후 점 표기법으로 구조체 필드를 접근합니다.
+When accessing elements of a struct array, first use the array index, then use dot notation to access the struct fields.
 
 ```wave
 println("Second Player X: {}", players[1].pos.x);
@@ -142,6 +142,6 @@ println("Second Player X: {}", players[1].pos.x);
 
 ---
 
-## 구조체의 기본 연산 가능 여부
+## Basic Operability of Structs
 
-Wave의 구조체는 사용자 정의 타입이기 때문에 산술 연산이나 비교 연산 등에 자동으로 참여할 수 없습니다. 구조체의 동등성 비교나 해싱, 정렬 등을 수행하려면 proto 블록을 통해 관련 기능을 직접 구현해야 합니다. 구조체끼리의 연산자는 Wave 언어에서 자동 제공되지 않으며, 연산이 필요한 경우 반드시 함수나 메서드로 정의해야 합니다.
+In Wave, structs are user-defined types, so they cannot automatically participate in arithmetic or comparison operations. For operations like equality comparison, hashing, or sorting of structs, related functionality must be directly implemented using proto blocks. Operators for struct-to-struct operations are not automatically provided in the Wave language; if needed, they must be defined via functions or methods.
