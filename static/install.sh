@@ -114,21 +114,28 @@ fi
 
 echo "[2/4] Downloading Wave binary..."
 
-FILE_SUFFIX="${OS}-${ARCH}"
+if [[ "$ARCH" == "x86_64" ]]; then
+  ARCH_SUFFIX="x86_64"
+elif [[ "$ARCH" == "arm64" ]]; then
+  ARCH_SUFFIX="aarch64"
+else
+  echo "[error] Unsupported architecture: $ARCH"
+  exit 1
+fi
+
+# Map OS to release naming
+if [[ "$OS" == "linux" ]]; then
+  OS_SUFFIX="linux-gnu"
+elif [[ "$OS" == "macos" ]]; then
+  OS_SUFFIX="apple-darwin"
+else
+  echo "[error] Unsupported OS: $OS"
+  exit 1
+fi
+
+FILE_SUFFIX="${ARCH_SUFFIX}-${OS_SUFFIX}"
 FILE_NAME="wave-${VERSION}-${FILE_SUFFIX}.tar.gz"
 URL="https://github.com/${REPO}/releases/download/${VERSION}/${FILE_NAME}"
 
 echo "[info] Download: $URL"
 curl -LO "$URL"
-
-echo "[3/4] Extracting to /usr/local/bin"
-sudo tar -xvzf "$FILE_NAME" -C /usr/local/bin
-
-echo "[4/4] Verifying installation..."
-if command -v wavec &> /dev/null; then
-  wavec --version
-  echo "Installation completed successfully."
-else
-  echo "[error] Installation failed. 'wavec' not found."
-  exit 1
-fi
