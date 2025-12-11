@@ -70,10 +70,6 @@ if [[ "$OS" == "linux" ]]; then
     sudo apt-get update
     sudo apt-get install -y llvm-${LLVM_VERSION} llvm-${LLVM_VERSION}-dev clang-${LLVM_VERSION} libclang-${LLVM_VERSION}-dev lld-${LLVM_VERSION} clang
 
-    if [ ! -f /usr/lib/libllvm-${LLVM_VERSION}.so ]; then
-      sudo ln -s /usr/lib/llvm-${LLVM_VERSION}/lib/libLLVM-${LLVM_VERSION}.so /usr/lib/libllvm-${LLVM_VERSION}.so
-    fi
-
     export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}
     echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}" >> ~/.bashrc
 
@@ -87,10 +83,6 @@ if [[ "$OS" == "linux" ]]; then
     if [ -d "$LLVM_LIB" ]; then
       export LD_LIBRARY_PATH="$LLVM_LIB:$LD_LIBRARY_PATH"
       echo "export LD_LIBRARY_PATH=$LLVM_LIB:\$LD_LIBRARY_PATH" >> ~/.bashrc
-
-      if [ -f "$LLVM_LIB/libLLVM-${LLVM_VERSION}.so" ] && [ ! -f "$LLVM_LIB/libLLVM-${LLVM_VERSION}.so.1" ]; then
-        sudo ln -s "$LLVM_LIB/libLLVM-${LLVM_VERSION}.so" "$LLVM_LIB/libLLVM-${LLVM_VERSION}.so.1"
-      fi
     fi
   else
     echo "[error] Unsupported Linux distro: $DISTRO"
@@ -100,6 +92,7 @@ fi
 
 if [[ "$OS" == "macos" ]]; then
   echo "[info] Installing LLVM via Homebrew..."
+
   if ! command -v brew &> /dev/null; then
     echo "[error] Homebrew is required on macOS."
     exit 1
@@ -112,25 +105,21 @@ if [[ "$OS" == "macos" ]]; then
   echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=$LLVM_PREFIX" >> ~/.zshrc
 fi
 
+
 echo "[2/4] Downloading Wave binary..."
 
+# Map architecture
 if [[ "$ARCH" == "x86_64" ]]; then
   ARCH_SUFFIX="x86_64"
 elif [[ "$ARCH" == "arm64" ]]; then
   ARCH_SUFFIX="aarch64"
-else
-  echo "[error] Unsupported architecture: $ARCH"
-  exit 1
 fi
 
-# Map OS to release naming
+# OS mapping
 if [[ "$OS" == "linux" ]]; then
   OS_SUFFIX="linux-gnu"
 elif [[ "$OS" == "macos" ]]; then
   OS_SUFFIX="apple-darwin"
-else
-  echo "[error] Unsupported OS: $OS"
-  exit 1
 fi
 
 FILE_SUFFIX="${ARCH_SUFFIX}-${OS_SUFFIX}"
@@ -139,3 +128,31 @@ URL="https://github.com/${REPO}/releases/download/${VERSION}/${FILE_NAME}"
 
 echo "[info] Download: $URL"
 curl -LO "$URL"
+
+
+echo "[3/4] Installing Wave..."
+
+if [[ "$OS" == "linux" ]]; then
+  INSTALL_DIR="/usr/local/bin"
+elif [[ "$OS" == "macos" ]]; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  INSTALL_DIR="${HOMEBREW_PREFIX}/bin"
+fi
+
+sudo mkdir -p "$INSTALL_DIR"
+sudo tar -xzf "$FILE_NAME" -C "$INSTALL_DIR"
+sudo chmod +x "$INSTALL_DIR/wavec"
+
+
+echo "[4/4] Verifying installation..."
+export PATH="$INSTALL_DIR:$PATH"
+hash -r || true
+
+if command -v wavec &> /dev/null; then
+  wavec --version
+  echo "Installation completed successfully."
+else
+  echo "[error] Installation failed. 'wavec' not found in PATH."
+  echo "Try restarting your terminal."
+  exit 1
+fi
