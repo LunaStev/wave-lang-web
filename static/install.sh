@@ -25,6 +25,7 @@ if [[ "$UNAME_OUT" == "Linux" ]]; then
     echo "[error] Unable to detect Linux distribution."
     exit 1
   fi
+  ID_LIKE="${ID_LIKE:-$DISTRO}"
 elif [[ "$UNAME_OUT" == "Darwin" ]]; then
   OS="macos"
   DISTRO="darwin"
@@ -66,24 +67,38 @@ fi
 echo "[1/4] Installing LLVM ${LLVM_VERSION}..."
 
 if [[ "$OS" == "linux" ]]; then
-  if [[ "$DISTRO" == "ubuntu" || "$DISTRO" == "debian" ]]; then
+
+  if echo "$ID_LIKE" | grep -qi "debian"; then
     sudo apt-get update
     sudo apt-get install -y llvm-${LLVM_VERSION} llvm-${LLVM_VERSION}-dev clang-${LLVM_VERSION} libclang-${LLVM_VERSION}-dev lld-${LLVM_VERSION} clang
-
-    export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}
+    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib/llvm-${LLVM_VERSION}"
     echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}" >> ~/.bashrc
 
-  elif [[ "$DISTRO" == "fedora" ]]; then
+  elif echo "$ID_LIKE" | grep -qi "fedora"; then
     sudo dnf install -y llvm14 llvm14-devel clang clang-libs
     LLVM_LIB="/usr/lib64/llvm${LLVM_VERSION}/lib"
-
     export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib64/llvm${LLVM_VERSION}"
     echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm${LLVM_VERSION}" >> ~/.bashrc
-
     if [ -d "$LLVM_LIB" ]; then
       export LD_LIBRARY_PATH="$LLVM_LIB:$LD_LIBRARY_PATH"
       echo "export LD_LIBRARY_PATH=$LLVM_LIB:\$LD_LIBRARY_PATH" >> ~/.bashrc
     fi
+
+  elif echo "$ID_LIKE" | grep -qi "arch"; then
+    sudo pacman -S --noconfirm llvm14 clang14 lld14
+    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib/llvm${LLVM_VERSION}"
+    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm${LLVM_VERSION}" >> ~/.bashrc
+
+  elif echo "$ID_LIKE" | grep -qi "suse"; then
+    sudo zypper install -y llvm14 clang14 lld14
+    if [ -d "/usr/lib64/llvm${LLVM_VERSION}" ]; then
+      LLVM_PREFIX="/usr/lib64/llvm${LLVM_VERSION}"
+    else
+      LLVM_PREFIX="/usr/lib/llvm${LLVM_VERSION}"
+    fi
+    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="$LLVM_PREFIX"
+    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=$LLVM_PREFIX" >> ~/.bashrc
+
   else
     echo "[error] Unsupported Linux distro: $DISTRO"
     exit 1
@@ -142,7 +157,6 @@ fi
 sudo mkdir -p "$INSTALL_DIR"
 sudo tar -xzf "$FILE_NAME" -C "$INSTALL_DIR"
 sudo chmod +x "$INSTALL_DIR/wavec"
-
 
 echo "[4/4] Verifying installation..."
 export PATH="$INSTALL_DIR:$PATH"
