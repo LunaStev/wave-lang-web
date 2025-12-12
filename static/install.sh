@@ -85,18 +85,39 @@ if [[ "$OS" == "linux" ]]; then
     fi
 
   elif echo "$ID_LIKE" | grep -qi "arch"; then
-    sudo pacman -S --noconfirm llvm14 clang14 lld14
-    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib/llvm${LLVM_VERSION}"
-    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm${LLVM_VERSION}" >> ~/.bashrc
+    echo "[error] Arch Linux and Arch-based distributions are not supported yet."
+    echo "Supported: Debian/Ubuntu, Fedora, macOS."
+    exit 1
 
   elif echo "$ID_LIKE" | grep -qi "suse"; then
-    echo "[error] openSUSE does not provide LLVM ${LLVM_VERSION}, which Wave requires."
-    echo "Wave cannot be installed on openSUSE at this time."
-    echo "Supported distributions: Debian/Ubuntu, Fedora, Arch-based, macOS."
+    echo "[error] openSUSE and SUSE-based distributions are not supported yet."
+    echo "Supported: Debian/Ubuntu, Fedora, macOS."
+    exit 1
+
+  elif echo "$ID_LIKE" | grep -qi "gentoo"; then
+    echo "[error] Gentoo-based distributions are not supported yet."
+    echo "Supported: Debian/Ubuntu, Fedora, macOS."
+    exit 1
+
+  elif [[ "$DISTRO" == "alpine" ]]; then
+    echo "[error] Alpine Linux is not supported because musl libc is incompatible with LLVM ${LLVM_VERSION}."
+    exit 1
+
+  elif [[ "$DISTRO" == "nixos" ]]; then
+    echo "[error] NixOS is not supported due to its non-standard filesystem layout."
+    exit 1
+
+  elif [[ "$DISTRO" == "void" ]]; then
+    echo "[error] Void Linux is not supported yet."
+    exit 1
+
+  elif [[ "$DISTRO" == "clear-linux-os" ]]; then
+    echo "[error] Clear Linux is not supported yet."
     exit 1
 
   else
-    echo "[error] Unsupported Linux distro: $DISTRO"
+    echo "[error] Unsupported Linux distribution: $DISTRO"
+    echo "Supported: Debian/Ubuntu, Fedora, macOS."
     exit 1
   fi
 fi
