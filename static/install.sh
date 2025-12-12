@@ -90,21 +90,10 @@ if [[ "$OS" == "linux" ]]; then
     echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm${LLVM_VERSION}" >> ~/.bashrc
 
   elif echo "$ID_LIKE" | grep -qi "suse"; then
-    sudo zypper install -y llvm15 llvm15-devel clang15 lld15
-    LLVM_PREFIX=$(llvm-config --prefix)
-
-    if [ -d "$LLVM_PREFIX/lib64" ]; then
-      LLVM_LIB_DIR="$LLVM_PREFIX/lib64"
-    else
-      LLVM_LIB_DIR="$LLVM_PREFIX/lib"
-    fi
-
-    if [ -f "$LLVM_LIB_DIR/libLLVM-15.so" ] && [ ! -f "$LLVM_LIB_DIR/libLLVM-14.so" ]; then
-      sudo ln -s "$LLVM_LIB_DIR/libLLVM-15.so" "$LLVM_LIB_DIR/libLLVM-14.so"
-    fi
-
-    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="$LLVM_PREFIX"
-    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=$LLVM_PREFIX" >> ~/.bashrc
+    echo "[error] openSUSE does not provide LLVM ${LLVM_VERSION}, which Wave requires."
+    echo "Wave cannot be installed on openSUSE at this time."
+    echo "Supported distributions: Debian/Ubuntu, Fedora, Arch-based, macOS."
+    exit 1
 
   else
     echo "[error] Unsupported Linux distro: $DISTRO"
