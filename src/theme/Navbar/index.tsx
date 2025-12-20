@@ -6,8 +6,8 @@ import { useThemeConfig, useColorMode } from '@docusaurus/theme-common';
 import {
     useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import NavbarItem from '@theme/NavbarItem';
+import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 
 import styles from './styles.module.css';
 import { MoonIcon, SunIcon } from './icons';
@@ -29,60 +29,60 @@ function Navbar(): JSX.Element {
     const rightItems = navbar.items.filter((i) => i.position === 'right');
 
     return (
-        <nav
-            className={`navbar navbar--fixed-top ${styles.navbar} ${
-                isScrolled ? styles.navbarScrolled : ''
-            }`}
-        >
-            {/* 왼쪽 영역 */}
-            <div className={styles.navbarContent}>
-                {/* 모바일 햄버거 버튼 */}
-                <button
-                    className={`navbar__toggle clean-btn ${styles.mobileToggle}`}
-                    aria-label="Toggle navigation bar"
-                    onClick={mobileSidebar.toggle}
-                >
-                    ☰
-                </button>
+        <>
+            <NavbarMobileSidebar />
 
-                {/* 로고 */}
-                <Link to="/" className={styles.navbarLogo}>
-                    {navbar.logo && (
-                        <img
-                            src={navbar.logo.src}
-                            alt={navbar.logo.alt}
-                            width={28}
-                            height={28}
-                        />
-                    )}
-                    <span>{navbar.title}</span>
-                </Link>
+            <nav
+                className={`navbar navbar--fixed-top ${styles.navbar} ${
+                    isScrolled ? styles.navbarScrolled : ''
+                }`}
+            >
+                <div className={styles.navbarContent}>
+                    <button
+                        className={`navbar__toggle clean-btn ${styles.mobileToggle}`}
+                        aria-label="Toggle navigation bar"
+                        onClick={mobileSidebar.toggle}
+                    >
+                        ☰
+                    </button>
 
-                {/* 데스크톱 왼쪽 메뉴 */}
-                <div className={styles.navbarItems}>
-                    {leftItems.map((item, i) => (
+                    {/* 로고 */}
+                    <Link to="/" className={styles.navbarLogo}>
+                        {navbar.logo && (
+                            <img
+                                src={navbar.logo.src}
+                                alt={navbar.logo.alt}
+                                width={28}
+                                height={28}
+                            />
+                        )}
+                        <span>{navbar.title}</span>
+                    </Link>
+
+                    <div className={styles.navbarItems}>
+                        {leftItems.map((item, i) => (
+                            <NavbarItem {...item} key={i} />
+                        ))}
+                    </div>
+                </div>
+
+                <div className={styles.navbarItemsEnd}>
+                    {rightItems.map((item, i) => (
                         <NavbarItem {...item} key={i} />
                     ))}
+
+                    <button
+                        onClick={() =>
+                            setColorMode(colorMode === 'dark' ? 'light' : 'dark')
+                        }
+                        aria-label="Toggle theme"
+                        className="clean-btn"
+                    >
+                        {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+                    </button>
                 </div>
-            </div>
-
-            {/* 데스크톱 오른쪽 메뉴 */}
-            <div className={styles.navbarItemsEnd}>
-                {rightItems.map((item, i) => (
-                    <NavbarItem {...item} key={i} />
-                ))}
-
-                <button
-                    onClick={() =>
-                        setColorMode(colorMode === 'dark' ? 'light' : 'dark')
-                    }
-                    aria-label="Toggle theme"
-                    className="clean-btn"
-                >
-                    {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
-                </button>
-            </div>
-        </nav>
+            </nav>
+        </>
     );
 }
 
