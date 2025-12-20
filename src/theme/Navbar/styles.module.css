@@ -1,12 +1,5 @@
 /* src/theme/Navbar/styles.module.css */
 
-/* 모바일에서는 navbar가 사이드바 위에 올라오지 않게 */
-@media (max-width: 996px) {
-    .navbar {
-        z-index: auto;
-    }
-}
-
 .navbar {
     position: fixed;
     top: 1rem;
@@ -17,8 +10,6 @@
     height: 60px;
     padding: 0 1.5rem;
     border-radius: 12px;
-    z-index: var(--ifm-z-index-fixed);
-    transition: all 0.3s ease;
 
     background: rgba(47, 59, 82, 0.5);
     backdrop-filter: blur(10px);
@@ -28,27 +19,20 @@
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    z-index: var(--ifm-z-index-fixed);
+    transition: all 0.25s ease;
 }
 
 [data-theme='light'] .navbar {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.navbarScrolled {
-    top: 0;
-    width: 100%;
-    max-width: none;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .navbarContent {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .navbarLogo {
@@ -56,36 +40,35 @@
     align-items: center;
     gap: 0.75rem;
     font-weight: 600;
-    font-size: 1.1rem;
     text-decoration: none;
     color: var(--ifm-font-color-base);
 }
 
-.navbarItems {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
+.navbarItems,
 .navbarItemsEnd {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-left: auto;
+    gap: 1.25rem;
 }
 
-/* 모바일 햄버거 버튼 */
 .mobileToggle {
     display: none;
     font-size: 1.4rem;
 }
 
-/* 🔥 모바일 대응 핵심 */
+/* 🔥 모바일 전용 */
 @media (max-width: 996px) {
-    .navbarItems {
-        display: none;
+    .navbar {
+        position: relative;        /* ⭐ fixed 해제 */
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        border-radius: 0;
     }
 
+    .navbarItems,
     .navbarItemsEnd {
         display: none;
     }
@@ -93,38 +76,4 @@
     .mobileToggle {
         display: block;
     }
-}
-
-/* 전체 네비게이션 바를 양쪽 정렬 */
-.navbar {
-    /* ... 기존 스타일 ... */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbarLogo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    color: var(--ifm-font-color-base); /* Docusaurus 변수 사용 */
-}
-
-.navbarItems {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-/* Docusaurus의 기본 NavbarItem 스타일을 우리 테마에 맞게 약간 조정 */
-.navbarItemsEnd .navbar__item, .navbarItems .navbar__item {
-    color: var(--ifm-navbar-link-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.navbarItemsEnd .navbar__item:hover, .navbarItems .navbar__item:hover {
-    color: var(--ifm-navbar-link-hover-color);
 }

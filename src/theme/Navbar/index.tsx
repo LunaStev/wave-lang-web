@@ -1,6 +1,6 @@
 // src/theme/Navbar/index.tsx
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from '@docusaurus/Link';
 import { useThemeConfig, useColorMode } from '@docusaurus/theme-common';
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
@@ -15,34 +15,17 @@ export default function Navbar(): JSX.Element {
     const { colorMode, setColorMode } = useColorMode();
     const mobileSidebar = useNavbarMobileSidebar();
 
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const onScroll = () => setIsScrolled(window.scrollY > 16);
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
-
-    const leftItems = navbar.items.filter(
-        (item) => item.position === 'left',
-    );
-    const rightItems = navbar.items.filter(
-        (item) => item.position === 'right',
-    );
+    const leftItems = navbar.items.filter(i => i.position === 'left');
+    const rightItems = navbar.items.filter(i => i.position === 'right');
 
     return (
         <>
-            {/* 모바일 사이드바 (Docusaurus 기본) */}
+            {/* Docusaurus 기본 모바일 사이드바 */}
             <NavbarMobileSidebar />
 
-            <nav
-                className={`navbar navbar--fixed-top ${styles.navbar} ${
-                    isScrolled ? styles.navbarScrolled : ''
-                }`}
-            >
-                {/* 왼쪽 영역 */}
+            <nav className={`navbar navbar--fixed-top ${styles.navbar}`}>
                 <div className={styles.navbarContent}>
-                    {/* 모바일 햄버거 버튼 */}
+                    {/* 모바일 햄버거 */}
                     <button
                         type="button"
                         className={`navbar__toggle clean-btn ${styles.mobileToggle}`}
@@ -65,7 +48,7 @@ export default function Navbar(): JSX.Element {
                         <span>{navbar.title}</span>
                     </Link>
 
-                    {/* 데스크톱 왼쪽 메뉴 */}
+                    {/* 데스크톱 왼쪽 */}
                     <div className={styles.navbarItems}>
                         {leftItems.map((item, i) => (
                             <NavbarItem key={i} {...item} />
@@ -73,7 +56,7 @@ export default function Navbar(): JSX.Element {
                     </div>
                 </div>
 
-                {/* 오른쪽 영역 (데스크톱 전용) */}
+                {/* 데스크톱 오른쪽 */}
                 <div className={styles.navbarItemsEnd}>
                     {rightItems.map((item, i) => (
                         <NavbarItem key={i} {...item} />
@@ -81,8 +64,8 @@ export default function Navbar(): JSX.Element {
 
                     <button
                         type="button"
-                        aria-label="Toggle theme"
                         className="clean-btn"
+                        aria-label="Toggle theme"
                         onClick={() =>
                             setColorMode(colorMode === 'dark' ? 'light' : 'dark')
                         }
