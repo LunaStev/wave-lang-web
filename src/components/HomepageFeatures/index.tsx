@@ -2,21 +2,15 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
-import {
-    NavbarProvider,
-    NavbarLayout,
-    NavbarContent,
-} from '@docusaurus/theme-common/internal';
 import { useThemeConfig, useColorMode } from '@docusaurus/theme-common';
-import {
-    useNavbarMobileSidebar,
-} from '@docusaurus/theme-common/internal';
+import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import NavbarItem from '@theme/NavbarItem';
 import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 
 import styles from './styles.module.css';
+import { MoonIcon, SunIcon } from './icons';
 
-function NavbarInner(): JSX.Element {
+export default function Navbar(): JSX.Element {
     const { navbar } = useThemeConfig();
     const { colorMode, setColorMode } = useColorMode();
     const mobileSidebar = useNavbarMobileSidebar();
@@ -34,7 +28,7 @@ function NavbarInner(): JSX.Element {
 
     return (
         <>
-            {/* ✅ 반드시 필요 */}
+            {/* ✅ 이건 OK (이미 Provider 안에 있음) */}
             <NavbarMobileSidebar />
 
             <nav
@@ -43,7 +37,7 @@ function NavbarInner(): JSX.Element {
                 }`}
             >
                 <div className={styles.navbarContent}>
-                    {/* 햄버거 버튼 */}
+                    {/* 모바일 햄버거 */}
                     <button
                         className={`navbar__toggle clean-btn ${styles.mobileToggle}`}
                         aria-label="Toggle navigation bar"
@@ -91,17 +85,5 @@ function NavbarInner(): JSX.Element {
                 </div>
             </nav>
         </>
-    );
-}
-
-export default function Navbar(): JSX.Element {
-    return (
-        <NavbarProvider>
-            <NavbarLayout>
-                <NavbarContent>
-                    <NavbarInner />
-                </NavbarContent>
-            </NavbarLayout>
-        </NavbarProvider>
     );
 }
