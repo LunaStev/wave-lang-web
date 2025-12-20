@@ -1,29 +1,25 @@
 /* src/theme/Navbar/styles.module.css */
 
 .navbar {
-    /* 기본 Docusaurus 스타일 초기화 및 재정의 */
     position: fixed;
-    top: 1rem; /* 위에서 살짝 띄우기 */
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 2rem);
-    max-width: 1280px; /* 최대 너비 제한 */
+    max-width: 1280px;
     height: 60px;
     padding: 0 1.5rem;
     border-radius: 12px;
     z-index: var(--ifm-z-index-fixed);
     transition: all 0.3s ease;
 
-    /* Glassmorphism (유리 효과) */
-    background: rgba(47, 59, 82, 0.5); /* 반투명 배경 */
+    background: rgba(47, 59, 82, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
-    /* 내부 요소 정렬 */
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -32,37 +28,64 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* 스크롤 시 상단에 붙었을 때 디자인 (선택사항) */
 .navbarScrolled {
     top: 0;
-    border-radius: 0;
     width: 100%;
     max-width: none;
+    border-radius: 0;
     border-left: none;
     border-right: none;
     border-top: none;
 }
 
-/* Navbar 로고 커스텀 */
+.navbarContent {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .navbarLogo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     font-weight: 600;
+    font-size: 1.1rem;
     text-decoration: none;
+    color: var(--ifm-font-color-base);
 }
 
-/* Navbar 아이템(메뉴, GitHub 아이콘 등) */
+.navbarItems {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .navbarItemsEnd {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-left: auto;
 }
 
-.navbarContent, .navbarItemsEnd {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; /* 아이템 간 간격 */
+/* 모바일 햄버거 버튼 */
+.mobileToggle {
+    display: none;
+    font-size: 1.4rem;
+}
+
+/* 🔥 모바일 대응 핵심 */
+@media (max-width: 996px) {
+    .navbarItems {
+        display: none;
+    }
+
+    .navbarItemsEnd {
+        display: none;
+    }
+
+    .mobileToggle {
+        display: block;
+    }
 }
 
 /* 전체 네비게이션 바를 양쪽 정렬 */
