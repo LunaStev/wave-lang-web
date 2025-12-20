@@ -20,9 +20,7 @@ export default function Navbar(): JSX.Element {
 
     return (
         <>
-            {/* Docusaurus 기본 모바일 사이드바 */}
-            <NavbarMobileSidebar />
-
+            {/* ===== NAVBAR ===== */}
             <header className={styles.navbar}>
                 <div className={styles.inner}>
                     {/* 왼쪽 */}
@@ -79,6 +77,9 @@ export default function Navbar(): JSX.Element {
                     </div>
                 </div>
             </header>
+
+            {/* ✅ 반드시 Navbar 다음에 와야 함 */}
+            <NavbarMobileSidebar />
         </>
     );
 }
