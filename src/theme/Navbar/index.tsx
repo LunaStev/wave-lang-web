@@ -23,57 +23,62 @@ export default function Navbar(): JSX.Element {
             {/* Docusaurus 기본 모바일 사이드바 */}
             <NavbarMobileSidebar />
 
-            <nav className={`navbar navbar--fixed-top ${styles.navbar}`}>
-                <div className={styles.navbarContent}>
-                    {/* 모바일 햄버거 */}
-                    <button
-                        type="button"
-                        className={`navbar__toggle clean-btn ${styles.mobileToggle}`}
-                        aria-label="Toggle navigation bar"
-                        onClick={mobileSidebar.toggle}
-                    >
-                        ☰
-                    </button>
+            <header className={styles.navbar}>
+                <div className={styles.inner}>
+                    {/* 왼쪽 */}
+                    <div className={styles.left}>
+                        {/* 모바일 햄버거 */}
+                        <button
+                            type="button"
+                            className={`navbar__toggle clean-btn ${styles.toggle}`}
+                            aria-label="Toggle navigation bar"
+                            onClick={mobileSidebar.toggle}
+                        >
+                            ☰
+                        </button>
 
-                    {/* 로고 */}
-                    <Link to="/" className={styles.navbarLogo}>
-                        {navbar.logo && (
-                            <img
-                                src={navbar.logo.src}
-                                alt={navbar.logo.alt}
-                                width={28}
-                                height={28}
-                            />
-                        )}
-                        <span>{navbar.title}</span>
-                    </Link>
+                        {/* 로고 */}
+                        <Link to="/" className={styles.logo}>
+                            {navbar.logo && (
+                                <img
+                                    src={navbar.logo.src}
+                                    alt={navbar.logo.alt}
+                                    width={28}
+                                    height={28}
+                                />
+                            )}
+                            <span>{navbar.title}</span>
+                        </Link>
 
-                    {/* 데스크톱 왼쪽 */}
-                    <div className={styles.navbarItems}>
-                        {leftItems.map((item, i) => (
-                            <NavbarItem key={i} {...item} />
-                        ))}
+                        {/* 데스크톱 왼쪽 메뉴 */}
+                        <nav className={styles.menu}>
+                            {leftItems.map((item, i) => (
+                                <NavbarItem key={i} {...item} />
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* 오른쪽 */}
+                    <div className={styles.right}>
+                        <nav className={styles.menu}>
+                            {rightItems.map((item, i) => (
+                                <NavbarItem key={i} {...item} />
+                            ))}
+                        </nav>
+
+                        <button
+                            type="button"
+                            className="clean-btn"
+                            aria-label="Toggle theme"
+                            onClick={() =>
+                                setColorMode(colorMode === 'dark' ? 'light' : 'dark')
+                            }
+                        >
+                            {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+                        </button>
                     </div>
                 </div>
-
-                {/* 데스크톱 오른쪽 */}
-                <div className={styles.navbarItemsEnd}>
-                    {rightItems.map((item, i) => (
-                        <NavbarItem key={i} {...item} />
-                    ))}
-
-                    <button
-                        type="button"
-                        className="clean-btn"
-                        aria-label="Toggle theme"
-                        onClick={() =>
-                            setColorMode(colorMode === 'dark' ? 'light' : 'dark')
-                        }
-                    >
-                        {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
-                    </button>
-                </div>
-            </nav>
+            </header>
         </>
     );
 }
