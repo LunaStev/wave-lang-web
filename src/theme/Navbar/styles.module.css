@@ -3,10 +3,9 @@
 /* 모바일에서는 navbar가 사이드바 위에 올라오지 않게 */
 @media (max-width: 996px) {
     .navbar {
-        z-index: 1;
+        z-index: auto;
     }
 }
-
 
 .navbar {
     position: fixed;
