@@ -15,7 +15,6 @@ import NavbarItem from '@theme/NavbarItem';
 import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 
 import styles from './styles.module.css';
-import { MoonIcon, SunIcon } from './icons';
 
 function NavbarInner(): JSX.Element {
     const { navbar } = useThemeConfig();
