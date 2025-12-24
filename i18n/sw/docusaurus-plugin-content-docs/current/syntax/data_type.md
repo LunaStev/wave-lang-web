@@ -30,7 +30,7 @@ Aina ya nambari isiyo kamili hutumika kuhifadhi thamani za nambari halisi.
 Kimsingi, nambari isiyo kamili hutangazwa kama `f32`.
 Pia, hutoa chaguo mbalimbali za ukubwa ili kufafanua kwa usahihi ukubwa wa nambari isiyo kamili.
 
-- `f32` ~ `f1024`: Aina ya nambari isiyo kamili, ukubwa unaweza kuwekwa kuwa biti 32 hadi biti 1024. Hii inaruhusu mahesabu ya nambari halisi yenye usahihi wa juu zaidi.
+- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Hii inaruhusu mahesabu ya nambari halisi yenye usahihi wa juu zaidi.
 
 mfano:
 

@@ -30,7 +30,7 @@ Gleitkomma-Typen werden verwendet, um reelle Werte zu speichern.
 Standardmäßig werden Gleitkommazahlen mit `f32` deklariert.
 Er bietet auch verschiedene Größenoptionen, um die Größe von Gleitkommazahlen präzise zu definieren.
 
-- `f32` bis `f1024`: Gleitkomma-Typen können von 32 Bit bis 1024 Bit skaliert werden. Dies ermöglicht eine höhere Genauigkeit bei Berechnungen mit reellen Zahlen.
+- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Dies ermöglicht eine höhere Genauigkeit bei Berechnungen mit reellen Zahlen.
 
 Beispiel:
 
