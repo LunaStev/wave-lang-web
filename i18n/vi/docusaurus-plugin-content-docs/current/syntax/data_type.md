@@ -30,7 +30,7 @@ Kiểu số thực dấu phẩy động được dùng để lưu trữ giá tr�
 Theo mặc định, số thực dấu phẩy động được khai báo là `f32`.
 Ngoài ra, có nhiều tùy chọn kích thước để xác định chi tiết kích thước của số thực dấu phẩy động.
 
-- `f32` ~ `f1024`: Kiểu số thực dấu phẩy động cho phép thiết lập kích thước từ 32 bit đến 1024 bit. Điều này cho phép thực hiện các phép tính số thực có độ chính xác cao hơn.
+- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Điều này cho phép thực hiện các phép tính số thực có độ chính xác cao hơn.
 
 Ví dụ:
 
