@@ -4,183 +4,120 @@ sidebar_position: 4
 
 # Ramani ya Maendeleo ya Ujumuishaji wa Wave + Whale v2
 
-## Hatua Zote
+이 문서는 Wave 언어와 Whale 컴파일러 툴체인의 통합 개발 과정을 단계별로 정리한 로드맵입니다.
+Wave와 Whale은 초기에는 분리된 구성 요소로 시작하지만, 최종적으로는 하나의 독립적인 언어 생태계로 완전히 통합되는 것을 목표로 합니다.
+
+전체 개발 단계는 다음과 같은 흐름을 따릅니다.
 
 ```matlab
 pre-alpha → pre-beta → alfa → beta → rc → kutolewa
 ```
 
+각 단계는 이전 단계의 결과를 기반으로 진행되며, 한 단계가 완료되면 이전 구조로 되돌아가지 않는 단방향 개발을 전제로 합니다.
+
 ---
 
 ## Hatua ya Pre-Beta
 
-> Lengo: Kukamilisha frontend ya lugha ya Wave + utekelezaji wa kipengele kamili kwa kutumia backend ya LLVM
+Pre-Beta 단계의 목표는 Wave 언어 프론트엔드를 완성하고, LLVM 백엔드를 기반으로 언어의 전체 기능을 구현하는 것입니다.
+이 단계에서는 Whale을 사용하지 않으며, 컴파일과 실행은 전적으로 LLVM을 통해 이루어집니다.
 
-### Sifa Kuu
+문법 자체를 확장하는 작업은 이 단계에서 진행하지 않습니다.
+이미 정의된 사양을 기준으로 모든 문법 요소를 실제로 동작하게 만드는 것이 핵심 목표입니다.
+에러 메시지 품질, 타입 검사, 변수 스코프 처리 등 프론트엔드 구조의 안정화에 집중합니다.
 
-- Kutumia LLVM pekee (Hakuna Whale)
+구현 범위에는 변수 선언과 출력, 기본 연산이 포함되며, 함수 정의와 호출,
+조건문(`if` / `else if` / `else`), 반복문(`while` / `break` / `continue`) 역시 모두 이 단계에서 완성됩니다.
+또한 포맷 출력, 명시적 타입 지정, `ptr<T>` 형태의 포인터 설계,
+`array<T, N>` 형태의 배열 설계가 포함됩니다.
 
-- Hakuna nyongeza ya sarufi, utekelezaji wa maelezo yaliyopo tu
-
-- Uthabiti wa muundo wa mbele, kama vile ujumbe wa hitilafu, ukaguzi wa aina, na wigo wa tofauti
-
-### Upeo wa Utekelezaji
-
-- Tamko la kubadilika, pato, operesheni
-
-- Ufafanuzi wa kazi na mwito
-
-- ikiwa / vinginevyo ikiwa / vinginevyo
-
-- wakati / pumzika / endelea
-
-- Pato la umbizo, uteuzi wa aina
-
-- Ubunifu wa kielekezi (`ptr<T>` muundo)
-
-- Ubunifu wa safu (`array<T, N>`)
-
-- Uhakiki wa aina na AST ya kimuundo
-
-### Teknolojia iliyotumika
-
-- Rust (Kompyuta yote ya Wave)
-
-- LLVM (Uundaji wa IR, Utekelezaji wa AOT)
-
-- inkwell / llvm-sys
+이 단계에서 Wave 컴파일러는 전부 Rust로 작성되며,
+LLVM IR 생성과 AOT 실행을 위해 inkwell 및 llvm-sys를 사용합니다.
 
 ---
 
 ## Hatua ya Alpha
 
-> Lengo: Kuanza utangulizi wa Whale, kutumia LLVM sambamba / Kuanzisha utekelezaji wa Whale inayotegemea nyuma
+Alpha 단계의 목표는 Whale 백엔드를 도입하고, LLVM과 Whale을 병행 사용하는 구조를 확립하는 것입니다.
+LLVM은 여전히 기본 백엔드로 유지되며, Whale은 선택적으로 사용할 수 있는 백엔드로 추가됩니다.
 
-### Sifa Kuu
-
-- LLVM ni mkondo wa nyuma chaguo-msingi
-
-- Whale ni mkondo wa nyuma wa hiari
-
-- Wakati wa kutekeleza msimbo wa Wave, inawezekana kugawana kwa kutumia chaguo `--backend`
+Wave 코드를 실행할 때 `--backend` 옵션을 통해 LLVM과 Whale 중 어떤 백엔드를 사용할지 선택할 수 있습니다.
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Kazi zinazohusiana na Whale
+이 단계에서는 Whale 자체의 IR 구조를 설계하고 정의합니다.
+Instruction, Value, Block과 같은 핵심 구성 요소를 정리하고,
+Wave AST를 Whale IR로 변환하는 IR Generator를 구현합니다.
 
-- Uundaji na ufafanuzi wa muundo wa Whale IR (Maagizo, Thamani, Kizuizi nk)
+또한 Whale용 코드 생성기를 구현하여, 어셈블리 또는 바이너리 형태로 실행 가능하도록 만듭니다.
+LLVM에서는 구현하기 어렵거나 비효율적인 타입들, 예를 들어 `i1024`와 같은 초대형 정수 타입이나
+고급 포인터 구조는 Whale 전용 기능으로 이 단계에서 도입됩니다.
 
-- Utekelezaji wa Kianzilishi cha IR kwa Whale
-
-- Kianzilishi cha msimbo kwa Whale (Assembly au Binary)
-
-- Utekelezaji wa aina zinazowezekana kwa Whale tu (`i1024`, pointer za hali ya juu nk.)
-
-### Kipengele cha kuangalia
-
-- Hello World yaonyesha kwa Whale
-
-- Tamko/ugawaji wa mabadiliko katika Whale
-
-- Utekelezaji wa chombo cha kuuondoa makosa katika Whale IR
-
-- Ushughulikiaji wa aina za pointers katika Whale
-
-- Mabadiliko ya Wave → Whale IR yanaendelea
+체크포인트로는 Whale 백엔드에서 Hello World 출력이 가능해야 하며,
+변수 선언과 할당, 포인터 처리, IR 디버깅 도구가 정상적으로 동작해야 합니다.
+Wave → Whale IR 변환이 실질적으로 진행되는 단계입니다.
 
 ---
 
 ## Hatua ya Beta
 
-> Lengo: Kubadilisha kabisa kwa Whale, kuondoa LLVM. Uboreshaji wa mchanganyiko wa Whale + Wave
+Beta 단계의 목표는 Whale로 완전히 전환하고, LLVM 의존성을 제거하는 것입니다.
+이 단계부터 Wave 컴파일과 실행은 Whale만을 사용합니다.
 
-### Sifa Kuu
+LLVM 관련 디펜던시와 모듈은 전부 제거되며,
+코드 생성과 실행 경로는 Whale 기준으로 최적화됩니다.
+IR 생성부터 실행까지의 흐름을 단순하고 빠르게 만드는 것이 핵심 과제입니다.
 
-- Matumizi ya Whale pekee
+Whale IR에 대한 최적화 패스를 설계하고,
+코드 생성 속도와 실행 효율을 개선합니다.
+Wave의 모든 문법은 이 단계에서 Whale 백엔드 기준으로 완벽하게 지원되어야 합니다.
 
-- Kuondoa kabisa LLVM (utaratibu na moduli)
-
-- Msingi wa uboreshaji wa msimbo
-
-- Kutoka IR hadi utekelezaji kwa haraka na ufanisi
-
-### Upeo wa Uboreshaji
-
-- Uundaji wa Mchakato wa Uboreshaji wa Whale IR
-
-- Uboreshaji wa kasi ya uundaji wa msimbo wa Whale
-
-- Syntaksi yote ya Wave inasaidiwa kikamilifu katika Whale
-
-### Jaribio
-
-- Jaribio la kitengo + suite kamili ya majaribio
-
-- Jaribio la utangamano la WSON, maktaba ya kiwango
-
-- Uthibitishaji wa ujenzi wa Whale wa jukwaa kubwa
+테스트 측면에서는 단위 테스트와 전체 테스트 스위트를 모두 수행하며,
+WSON과 표준 라이브러리 호환성, 크로스 플랫폼 Whale 빌드 여부를 함께 검증합니다.
 
 ---
 
 ## Hatua ya RC (Mgombea wa Kutolewa)
 
-> Lengo: Kuanza kubunifu upya Wave — Kuondoa kabisa msimbo wa Rust
+RC 단계의 목표는 Wave의 부트스트랩을 시작하는 것입니다.
+이 단계부터 Wave 컴파일러의 Rust 구현을 점진적으로 제거하고,
+Wave 언어 자체로 Wave 컴파일러를 재작성하기 시작합니다.
 
-### Sifa Kuu
+Whale을 기반으로 Wave IR 생성기를 다시 작성하며,
+컴파일러 핵심 로직과 std / core 라이브러리를 Wave 코드로 대체합니다.
+이 과정을 통해 Whale은 self-hosting 단계에 진입하게 됩니다.
 
-- Kuanza kuandika upya kompyuta ya Wave kwa Wave
-
-- Utekelezaji wa msimbo wa Wave yenyewe kwa msingi wa Whale
-
-- Whale inaingia hatua ya kujihostisha
-
-### Upeo wa kazi
-
-- Kuandika upya Kianzilishi cha IR ya Wave kwa msingi wa Whale
-
-- Kuondoa Rust + Kubadilisha na msimbo wa Wave
-
-- Kuandika maktaba ya std na core kwa Wave
-
-- Kuzaliwa kwa mkusanyaji wa kwanza wa asili wa Wave baada ya kufanikiwa kwa bootstrap
+부트스트랩이 성공하면, 최초의 Wave-native 컴파일러가 탄생하게 됩니다.
 
 ---
 
 ## Hatua ya Kutolewa (v0.0.1)
 
-> Lengo: Kuzindua rasmi / Kutoa mfumo wa ikolojia wa lugha huru wa msingi wa Whale
+Release 단계는 Wave의 공식 첫 릴리스를 의미합니다.
+이 시점에서 Wave와 Whale은 완전히 통합된 독립 언어 생태계를 구성합니다.
 
-### Vipengele
+릴리스 구성 요소에는 Wave 언어와 표준 라이브러리,
+Whale 컴파일러 툴체인, Vex 패키지 매니저,
+그리고 WSON 데이터 포맷이 포함됩니다.
 
-- Wave (lugha na maktaba ya kawaida)
-
-- Whale (zana ya muundo ya Whale)
-
-- Vex (meneja wa kifurushi cha Vex)
-
-- WSON (muundo wa data)
-
-### Vipengele
-
-- Mkusanyaji kamili wa Wave pekee (siku ya kwanza ya bootstrap)
-
-- Uboreshaji wa Whale umekamilika
-
-- Mfumo wa ujenzi na usambazaji wa Vex umekamilika
-
-- Ikiwa ni pamoja na parser ya WSON na serialization
-
-- Inaweza kujenga OS-msalaba (`vex build --windows`, nk)
+이 단계의 Wave는 완전히 Wave 코드로 작성된 컴파일러를 가지며,
+Whale의 최적화는 완료된 상태여야 합니다.
+Vex를 통한 빌드 및 배포 흐름이 정착되고,
+`vex build --windows`와 같은 크로스 OS 빌드도 가능해야 합니다.
 
 ---
 
 ## Mkakati wa Meta wa Maendeleo
 
-| Mkakati                    | Maelezo                                                                           |
-| -------------------------- | --------------------------------------------------------------------------------- |
-| Mkakati wa Reli na Treni   | Kujenga na kuendeleza backend ya Wave wakati wa kuendeleza Whale kwa wakati mmoja |
-| Mkakati wa Tawi la Backend | Chagua LLVM/Whale kwa chaguo la `--backend`, kwa muundo muhimu katika alpha       |
-| Mpango wa Kugeuza Muundo   | Baada ya rc, msimbo wa Wave unajikusanya kupitia Whale                            |
+Wave + Whale 개발은 단순한 단계 진행이 아니라, 명확한 전략을 기반으로 이루어집니다.
+Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 열차+레일 전략을 채택하여,
+백엔드 구조와 언어 설계를 병행해서 발전시킵니다.
+
+Alpha 단계에서는 `--backend` 옵션을 통한 백엔드 분기 전략이 중요한 역할을 하며,
+LLVM과 Whale을 직접 비교하고 검증할 수 있는 기반을 제공합니다.
+
+RC 이후에는 구조가 역전되어,
+Wave 코드가 Whale을 통해 Wave 자신을 컴파일하는 구조 역전 계획이 본격적으로 진행됩니다.
