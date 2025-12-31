@@ -30,7 +30,7 @@ Le type de point flottant est utilisé pour stocker des valeurs réelles.
 Par défaut, les nombres à point flottant sont déclarés en tant que `f32`.
 De plus, il offre diverses options de taille pour définir précisément la taille des nombres en virgule flottante.
 
-- `f32` à `f1024`: Type de point flottant avec des tailles définissables de 32 à 1024 bits. Cela permet des calculs de nombres réels avec une précision accrue.
+- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Cela permet des calculs de nombres réels avec une précision accrue.
 
 Exemple:
 

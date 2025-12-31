@@ -30,7 +30,7 @@ The floating-point type is used to store real-number values.
 By default, floating-point numbers are declared as `f32`.
 Additionally, it offers various size options for precise definition of floating-point numbers.
 
-- `f32` ~ `f1024`: The floating-point type can be set from 32-bit to 1024-bit. This allows for higher precision in real-number calculations.
+- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. This allows for higher precision in real-number calculations.
 
 Example:
 
