@@ -5,105 +5,119 @@ sidebar_position: 2
 # Aina za Data
 
 Hati hii inaeleza kuhusu aina mbali mbali za data zinazotolewa na lugha ya programu ya Wave.
-Lugha ya programu ya Wave inaweza kutumia aina mbali mbali za data kuhifadhi na kurekebisha thamani.
-Aina kuu za data ni pamoja na nambari kamili, nambari za desimali, mistari ya maandishi, nk. Kila aina ya data inaeleza kuhusu sifa na jinsi ya kuchakatwa kwa kumbukumbu ya data hiyo.
+Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
 
-## Aina ya Nambari Kamili
+데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
+이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
 
-Aina ya Nambari Kamili hutumika kuhifadhi **thamani za nambari kamili**.
-Kimsingi, nambari kamili hutangazwa kama `i32` (nambari kamili ya biti 32 yenye ishara) na `u32` (nambari kamili ya biti 32 isiyo na ishara).
-Katika lugha ya programu ya Wave, hutoa chaguo za ukubwa mbalimbali ili kuweka kwa usahihi kigezo cha nambari kamili.
+---
 
-- `i8` ~ `i1024`: Aina ya nambari kamili yenye ishara, na ukubwa unaweza kuwekwa kuwa biti 8 hadi biti 1024.
-- `u8` ~ `u1024`: Ni aina ya nambari kamili isiyo na ishara, na ukubwa unaweza kuwekwa kuwa biti 8 hadi biti 1024.
+## 정수 타입
 
-mfano:
+정수 타입은 정수 값을 저장하는 데 사용됩니다.
+Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+
+부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
+이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+
+다음은 정수 타입을 사용하는 간단한 예제입니다.
 
 ```wave
-var a :i32 = 100;
-var b :u32 = 200;
+var a: i32 = 100;
+var b: u32 = 200;
 ```
+
+---
 
 ## Aina ya Nambari Isiyo Kamili
 
 Aina ya nambari isiyo kamili hutumika kuhifadhi thamani za nambari halisi.
-Kimsingi, nambari isiyo kamili hutangazwa kama `f32`.
-Pia, hutoa chaguo mbalimbali za ukubwa ili kufafanua kwa usahihi ukubwa wa nambari isiyo kamili.
+Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
 
-- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Hii inaruhusu mahesabu ya nambari halisi yenye usahihi wa juu zaidi.
+Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
+이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
 
-mfano:
+아래는 부동소수점 타입을 사용하는 예제입니다.
 
 ```wave
-var pi :f32 = 3.14;
-var e :f64 = 2.71828;
+var pi: f32 = 3.14;
+var e: f64 = 2.71828;
 ```
+
+---
 
 ## Aina ya Uzi wa Herufi
 
-Aina ya uzi wa herufi hutumika kushughulikia data ya maandishi. Keyword ya `str` hutumika kutangaza uzi wa herufi.
-Uzi wa herufi kwa kawaida hufafanuliwa kwa kufungwa kwenye alama za kunukuu kubwa (`"`), na unaweza kutanga thamani ya uzi kwa mabadiliko.
+문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
+Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
 
-mfano:
+문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+
+다음은 문자열 타입의 기본적인 사용 예제입니다.
 
 ```wave
-var text :str = "Hello Wave";
+var text: str = "Hello Wave";
 ```
+
+---
 
 ## Aina ya Boolean
 
-Aina ya Boolean ni aina ya data inayowakilisha thamani ya **kweli (True)** au **uongo (False)**.
-Inatumika sana katika sentensi za masharti, na thamani huwekwa kuwa `true` au `false`.
+불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
+Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
 
-mfano:
+불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
 
 ```wave
-var isActive :bool = true;
-var isAvailable :bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
+
+---
 
 ## Aina ya Herufi
 
 Aina ya herufi hutumika kuhifadhi herufi moja pekee.
-Hutangazwa kwa kutumia keyword ya `char`, na inaweza tu kushikilia thamani moja ya herufi.
+`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
 
-mfano:
+문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
 
 ```wave
-var letter :char = 'A';
+var letter: char = 'A';
 ```
 
 ## Aina ya Byte
 
-Aina ya Byte hutumika kuhifadhi data yenye ukubwa wa **baithi moja**.
-Inafaa sana wakati wa kushughulikia data za binary. Hutangazwa kwa kutumia keyword ya `byte`.
+바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
+이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
 
-mfano:
+Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
 
 ```wave
-var byteData :byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Aina ya Kielekezi
 
-Aina ya Kielekezi hutumika kurejelea **anwani ya kumbukumbu**.
-Hutangazwa kwa kutumia keyword ya `ptr`, na hutumika kuhifadhi anwani ya kumbukumbu.
+포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언하며, 특정 타입의 메모리 주소를 안전하게 표현할 수 있습니다.
 
-mfano:
+포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
 
 ```wave
-var ptr :ptr<T> = &someVariable;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Aina ya Array
 
-Aina ya Array hutumika kuhifadhi **aina moja ya data kwa utaratibu**.
-Hutumia keyword ya `array`, na unaweza kutaja ukubwa au aina ya array.
+배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
+Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
 
-mfano:
+이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Kila aina ya data ina uwezo wa kuweka tofauti na ukubwa mbalimbali, kuruhusu kuchagua aina inayokidhi mahitaji ya mtumiaji kwa usimamizi wa kumbukumbu na mahesabu yenye ufanisi zaidi.
+각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
+적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
