@@ -5,105 +5,119 @@ sidebar_position: 2
 # Kiểu dữ liệu
 
 Tài liệu này giải thích về các kiểu dữ liệu khác nhau được cung cấp trong ngôn ngữ lập trình Wave.
-Ngôn ngữ lập trình Wave sử dụng nhiều kiểu dữ liệu khác nhau để lưu trữ và xử lý giá trị.
-Các kiểu dữ liệu chính bao gồm số nguyên, số thực dấu phẩy động, chuỗi ký tự, v.v. Mỗi kiểu dữ liệu định nghĩa đặc điểm của dữ liệu và cách xử lý bộ nhớ liên quan.
+Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
 
-## Kiểu số nguyên
+데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
+이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
 
-Kiểu số nguyên được dùng để lưu trữ **giá trị số nguyên**.
-Theo mặc định, số nguyên được khai báo là `i32` (số nguyên có dấu 32 bit) và `u32` (số nguyên không dấu 32 bit).
-Ngôn ngữ lập trình Wave cung cấp nhiều tùy chọn kích thước để thiết lập chi tiết phạm vi của số nguyên.
+---
 
-- `i8` ~ `i1024`: Kiểu số nguyên có dấu cho phép thiết lập kích thước từ 8 bit đến 1024 bit.
-- `u8` ~ `u1024`: Kiểu số nguyên không dấu cho phép thiết lập kích thước từ 8 bit đến 1024 bit.
+## 정수 타입
 
-Ví dụ:
+정수 타입은 정수 값을 저장하는 데 사용됩니다.
+Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+
+부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
+이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+
+다음은 정수 타입을 사용하는 간단한 예제입니다.
 
 ```wave
-var a :i32 = 100;
-var b :u32 = 200;
+var a: i32 = 100;
+var b: u32 = 200;
 ```
+
+---
 
 ## Kiểu số thực dấu phẩy động
 
 Kiểu số thực dấu phẩy động được dùng để lưu trữ giá trị số thực.
-Theo mặc định, số thực dấu phẩy động được khai báo là `f32`.
-Ngoài ra, có nhiều tùy chọn kích thước để xác định chi tiết kích thước của số thực dấu phẩy động.
+Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
 
-- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Điều này cho phép thực hiện các phép tính số thực có độ chính xác cao hơn.
+Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
+이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
 
-Ví dụ:
+아래는 부동소수점 타입을 사용하는 예제입니다.
 
 ```wave
-var pi :f32 = 3.14;
-var e :f64 = 2.71828;
+var pi: f32 = 3.14;
+var e: f64 = 2.71828;
 ```
+
+---
 
 ## Kiểu chuỗi ký tự
 
-Kiểu chuỗi ký tự được dùng để xử lý dữ liệu văn bản. Dùng từ khóa `str` để khai báo chuỗi ký tự.
-Chuỗi ký tự thường được định nghĩa dùng dấu ngoặc kép (`"`) và có thể gán giá trị chuỗi cho biến.
+문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
+Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
 
-Ví dụ:
+문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+
+다음은 문자열 타입의 기본적인 사용 예제입니다.
 
 ```wave
-var text :str = "Xin chào Wave";
+var text: str = "Hello Wave";
 ```
+
+---
 
 ## Kiểu boolean
 
-Kiểu boolean là kiểu dữ liệu biểu diễn giá trị **đúng (True)** hoặc **sai (False)**.
-Chủ yếu được sử dụng trong câu lệnh điều kiện, giá trị được thiết lập là `true` hoặc `false`.
+불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
+Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
 
-Ví dụ:
+불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
 
 ```wave
-var isActive :bool = true;
-var isAvailable :bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
+
+---
 
 ## Kiểu ký tự
 
 Kiểu ký tự được sử dụng để lưu trữ một ký tự đơn.
-Khai báo với từ khóa `char` và chỉ chứa được một giá trị ký tự.
+`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
 
-Ví dụ:
+문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
 
 ```wave
-var chữ cái :char = 'A';
+var letter: char = 'A';
 ```
 
 ## Kiểu byte
 
-Kiểu byte được dùng để lưu trữ dữ liệu có kích thước **1 byte**.
-Thường hữu ích khi xử lý dữ liệu nhị phân. Dùng từ khóa `byte` để khai báo.
+바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
+이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
 
-Ví dụ:
+Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
 
 ```wave
-var dữ liệuByte :byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Kiểu con trỏ
 
-Kiểu con trỏ được dùng để tham chiếu **địa chỉ bộ nhớ**.
-Dùng từ khóa `ptr` để khai báo con trỏ và lưu trữ địa chỉ bộ nhớ.
+포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언하며, 특정 타입의 메모리 주소를 안전하게 표현할 수 있습니다.
 
-Ví dụ:
+포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
 
 ```wave
-var conTrỏ :ptr<T> = &mộtBiến;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Kiểu mảng
 
-Kiểu mảng được dùng để lưu trữ **nhiều kiểu dữ liệu giống nhau** theo thứ tự.
-Dùng từ khóa `array` và có thể xác định kích thước hoặc kiểu của mảng.
+배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
+Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
 
-Ví dụ:
+이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
 
 ```wave
 var cácSố: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Mỗi kiểu dữ liệu có thể thiết lập phạm vi và kích thước khác nhau, do đó có thể chọn kiểu phù hợp với nhu cầu của người dùng để quản lý bộ nhớ và tính toán hiệu quả.
+각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
+적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
