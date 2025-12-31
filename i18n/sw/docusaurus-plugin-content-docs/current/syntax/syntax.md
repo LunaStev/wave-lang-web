@@ -4,11 +4,23 @@ sidebar_position: 1
 
 # Sarufi
 
-Hati hii inaelezea sarufi ya lugha ya programu ya Wave. Kwa kuwa uundaji wa Wave bado uko katika ukuaji, baadhi ya sarufi na vipengele vinaweza kuwa havijakamilika au vinaweza kubadilishwa.
-Hata hivyo, hati hii husaidia kuelewa hali ilivyo sasa na dhana kuu, na inatoa maarifa kuhusu mwelekeo wa maendeleo ya baadaye.
+이 문서는 Wave 프로그래밍 언어의 문법 전반에 대해 설명합니다.
+Wave는 현재 개발이 진행 중인 언어이기 때문에, 일부 문법과 기능은 아직 완전히 구현되지 않았거나 향후 변경될 가능성이 있습니다.
+그럼에도 불구하고 이 문서는 현재 시점에서 Wave가 지향하는 문법 구조와 핵심 개념을 이해하는 데 목적을 두고 작성되었습니다.
 
-Wave imesanifiwa kuwa lugha inayounganisha udhibiti wa kiwango cha chini na ufafanusi wa kiwango cha juu, inayofaa kwa ajili ya programu za mfumo, ukuzaji wa wavuti, akili ya bandia, blockchain, na nyanja mbalimbali.
-Lugha hii haitoi tu utendaji bora na kubadilika, lakini pia inasaidia waendelezaji kufanya kazi kwa ufanisi kupitia maktaba thabiti ya kawaida na mfumo wa kujenga unaounganishwa.
+이 문서를 통해 독자는 Wave의 현재 상태를 파악할 수 있을 뿐만 아니라,
+언어가 어떤 방향으로 설계되고 확장되고 있는지에 대한 전반적인 그림을 얻을 수 있습니다.
 
-Sarufi ya Wave inalingana na lugha kama C na Rust, lakini imeundwa ili waendelezaji waweze kujifunza haraka lugha hiyo na kuongeza uzalishaji.
-Hati hii inatambulisha sarufi na vipengele vya msingi vya Wave pamoja na mifano halisi.
+Wave는 저수준 제어와 고수준 추상화를 결합한 언어로 설계되었습니다.
+시스템 프로그래밍과 같은 저수준 영역부터, 웹 개발, 인공지능, 블록체인과 같은 고수준 응용 분야까지 폭넓게 활용할 수 있도록 설계 목표를 두고 있습니다.
+이를 위해 Wave는 성능과 제어력을 중시하면서도, 생산성을 해치지 않는 문법과 구조를 채택하고 있습니다.
+
+또한 Wave는 강력한 표준 라이브러리와 통합된 빌드 및 도구 체계를 염두에 두고 설계되고 있으며,
+이를 통해 개발자가 복잡한 설정에 시간을 소모하지 않고 핵심 로직 구현에 집중할 수 있도록 하는 것을 목표로 합니다.
+
+Wave의 문법은 C나 Rust와 유사한 부분이 존재하지만, 단순한 모방을 목표로 하지 않습니다.
+익숙한 문법 요소를 바탕으로 하되, 언어를 빠르게 학습하고 실제 개발에서 효율적으로 사용할 수 있도록 재구성되었습니다.
+명시적인 타입 시스템, 예측 가능한 동작, 그리고 코드의 의도를 드러내는 문법을 중요한 설계 기준으로 삼고 있습니다.
+
+이 문서에서는 Wave의 기본 문법과 주요 언어 기능을 실제 예제와 함께 소개합니다.
+각 섹션은 개별 문법 요소를 설명하며, 전체적으로는 Wave 언어의 구조와 설계 철학을 이해할 수 있도록 구성되어 있습니다.

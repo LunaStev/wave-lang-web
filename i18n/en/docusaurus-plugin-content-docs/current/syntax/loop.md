@@ -6,28 +6,26 @@ sidebar_position: 4
 
 ## Introduction
 
-In the Wave language, loops are provided to allow repeated execution of code.
-Loops are used to repeatedly execute code while a certain condition is met or a specific number of times.
+Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
+반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
 
-The following loops are supported in Wave:
+이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
+Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
 
-- while loop: condition-based repetition
-
-- for loop: count-based repetition
-
-In addition, keywords such as break and continue are provided to control the flow in the middle of loops.
-This section explains how to use loops and flow control keywords.
+이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
 
 ---
 
 ## while loop
 
-The `while` loop repeatedly executes a block of code as long as the given condition evaluates to `true`.
-The loop terminates when the condition becomes `false`.
+`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
+조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+
+이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
 
 ### Basic Structure
 
-Here is the basic syntax for a `while` loop:
+Wave에서 while 문의 기본 구조는 다음과 같습니다.
 
 ```wave
 while (condition) {
@@ -35,9 +33,8 @@ while (condition) {
 }
 ```
 
-- The condition must be of boolean type.
-
-- The code block is enclosed in `{}` and can contain one or more statements.
+조건식은 반드시 `bool` 타입으로 평가되어야 하며,
+중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
 
 ### Example: Print numbers from 0 to 4
 
@@ -50,28 +47,28 @@ while (i < 5) {
 }
 ```
 
-In this example, the loop repeats until `i` is less than 5, prints the value each time, and increments by 1.
+이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
+매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
 
 ---
 
 ## for loop
 
-The `for` loop is useful when the number of iterations is predetermined.
-The loop is constructed by specifying the initial value, termination condition, and increment/decrement expression.
+`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
+초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
 
-### Basic Structure
+반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+
+### 기본 구조
 
 ```wave
-for (var variableName: type = initialValue; condition; increment/decrement) {
-    // code to repeat
+for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
+    // 반복할 코드
 }
 ```
 
-- Variable name: the variable used for loop control
-
-- Condition: the loop executes as long as it is `true`
-
-- Increment/Decrement: changes the value of the loop variable
+여기서 반복 변수는 초기값으로 시작하며, 조건식이 참인 동안 반복이 실행됩니다.
+각 반복이 끝날 때마다 증감식이 실행되어 반복 변수의 값이 변경됩니다.
 
 ### Example: Print numbers from 1 to 5
 
@@ -81,12 +78,15 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 }
 ```
 
+이 예제에서는 `i`가 1부터 시작하여 5 이하인 동안 반복이 수행됩니다.
+각 반복마다 `i`의 값을 출력한 후 1씩 증가시킵니다.
+
 ---
 
 ## Nested Loops
 
-You can write another loop inside a loop, which is called nested loops.
-This is useful for iterating over structures like 2D arrays or combinations.
+반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
+중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
 
 ### Example: Double while loop
 
@@ -105,12 +105,15 @@ while (i < 3) {
 }
 ```
 
+이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
+이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+
 ---
 
 ## break Statement
 
-The `break` statement immediately exits the loop and jumps outside.
-It is useful for halting a loop when a specific condition is met.
+`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
+반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
 
 ### Example: Exit loop at a specific value
 
@@ -127,12 +130,15 @@ while (true) {
 }
 ```
 
+이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
+이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+
 ---
 
 ## continue Statement
 
-The `continue` statement skips the rest of the current loop iteration and begins the next one.
-It is used when you want to execute only part of the loop block under certain conditions.
+`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
+특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
 
 ### Example: Print only even numbers
 
@@ -146,17 +152,15 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
+이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
+그 결과 짝수 값만 출력됩니다.
+
 ---
 
 ## Summary
 
-| Syntax   | Description                                                                             |
-| -------- | --------------------------------------------------------------------------------------- |
-| while    | Loops while a condition is true.                                        |
-| for      | Executes loops with initial value, condition, and increment expression. |
-| break    | Immediately exits loop.                                                 |
-| continue | Skips to the next loop.                                                 |
+Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
+`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
 
-Loops in Wave are designed for coherent handling of condition-based or count-based repeat operations.
-
-Using `break` and `continue` statements allows for more precise loop flow control.
+`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
+보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.

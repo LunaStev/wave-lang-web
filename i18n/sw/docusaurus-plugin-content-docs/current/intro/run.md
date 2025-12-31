@@ -4,15 +4,17 @@ sidebar_position: 3
 
 # Kuendesha Programu ya Kwanza
 
-Ikiwa umeshaweka Wave kutoka kwa hati ya ufungaji iliyopita, sasa hebu tuendeshe programu ya kwanza!
+이전 설치 문서에서 Wave를 이미 설치했다면, 이제 첫 번째 Wave 프로그램을 직접 실행해볼 차례입니다.
+이 섹션에서는 간단한 예제를 통해 Wave 프로그램을 작성하고 실행하는 전체 과정을 단계별로 살펴봅니다.
 
-## Kujenga faili ya `hello.wave`.
+## `hello.wave` 파일 만들기
 
-Kwanza, unda faili mpya ambayo ina jina `hello.wave`.
+먼저 작업할 디렉터리에서 `hello.wave`라는 이름의 새 파일을 생성합니다.
+파일 이름과 확장자는 자유롭게 지정할 수 있지만, 여기서는 예제로 `hello.wave`를 사용합니다.
 
 ## Kuandika Msimbo
 
-Andika msimbo ufuatao katika faili `hello.wave`:
+생성한 `hello.wave` 파일에 아래 코드를 작성합니다.
 
 ```wave
 fun main() {
@@ -20,22 +22,33 @@ fun main() {
 }
 ```
 
-`fun main()` hapa inamaanisha sehemu ya kuanzia ya programu, na `println` ni kazi inayochapisha maandishi kwenye skrini.
+이 코드에서 `fun main()`은 Wave 프로그램의 실행 시작 지점을 의미합니다.
+Wave 프로그램은 항상 `main` 함수부터 실행됩니다.
+
+`println` 함수는 문자열을 표준 출력으로 출력하는 함수로,
+화면에 텍스트를 표시할 때 가장 기본적으로 사용됩니다.
 
 ## Kuendesha Programu
 
-Sasa hebu tuendeshe programu ya Wave. Fungua terminal na uingize amri ifuatayo:
+코드 작성을 마쳤다면, 터미널을 열고 파일이 위치한 디렉터리에서 다음 명령어를 실행합니다.
 
 ```bash
 wavec run hello.wave
 ```
 
+이 명령어는 Wave 컴파일러가 소스 파일을 컴파일한 뒤,
+즉시 실행까지 수행하도록 지시합니다.
+
 ## Kuangalia Matokeo
 
-Unapoendesha programu, matokeo yafuatayo yataonekana:
+프로그램이 정상적으로 실행되면, 터미널에 다음과 같은 출력이 표시됩니다.
 
 ```
 Hello Wave
 ```
 
-Sasa unaweza kuthibitisha kuwa Wave imewekwa na inafanya kazi vizuri. Hongera! Umefanikiwa kuendesha programu yako ya kwanza.
+이 출력이 보인다면 Wave가 정상적으로 설치되어 있으며,
+프로그램 작성과 실행이 올바르게 이루어졌다는 의미입니다.
+
+이제 첫 번째 Wave 프로그램을 성공적으로 실행했습니다.
+이제부터는 Wave의 문법과 기능을 하나씩 살펴보며, 더 복잡한 프로그램을 작성해볼 수 있습니다.
