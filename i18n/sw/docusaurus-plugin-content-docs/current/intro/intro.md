@@ -6,66 +6,79 @@ sidebar_position: 0
 
 ## Falsafa na Malengo ya Wave
 
-Wave inalenga kusaidia na kurahisisha lugha za programu za kiwango cha chini, ikitoa lugha inayofaa na iliyojumuishwa kwa nyanja tofauti za maendeleo. Badala ya kubadili lugha za kiwango cha chini, Wave inazingatia kujenga mfumo thabiti na wa kiwekwe wa maendeleo unaoweka pamoja maeneo mbalimbali kama vile maendeleo ya wavuti, mifumo ya uendeshaji, akili ya bandia, blockchain, vifaa, wakusanyaji, mitandao, na usimbaji.
+Wave는 기존의 저수준 프로그래밍 언어를 단순히 대체하는 것을 목표로 하지 않습니다.
+대신, 저수준 언어가 가진 제어력과 성능을 유지하면서도 이를 보완하고 단순화하여,
+다양한 개발 분야를 하나의 일관된 언어와 생태계 안에서 다룰 수 있도록 설계된 언어입니다.
 
-Falsafa kuu ya Wave ni kutoa uondoaji wa kiwango cha juu kupitia maktaba imara ya kawaida huku ikihifadhi uwezo wa kudhibiti wa kiwango cha chini kwa usahihi. Hii inamwezesha mtumiaji kutekeleza kazi ngumu kwa njia ya kidhana na kuruhusu utekelezaji wa kazi za kina inapohitajika.
+Wave는 웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어 제어, 컴파일러, 네트워킹, 암호화와 같은
+서로 성격이 크게 다른 영역들을 각각 다른 언어로 나누어 다루는 방식에서 벗어나고자 합니다.
+하나의 언어, 하나의 도구 체계, 하나의 표준 라이브러리를 통해
+넓은 영역을 자연스럽게 아우르는 통합된 개발 경험을 제공하는 것이 Wave의 핵심 목표입니다.
 
-Moja ya sifa kuu za Wave ni maktaba ya vifaa, ambayo imeundwa kuruhusu watengenezaji bila ujuzi wa kitaalamu juu ya vifaa kutumia kwa urahisi. Pia, inapohitajika udhibiti wa kina wa vifaa, inatoa unyumbufu wa kudhibiti moja kwa moja. Mchanganyiko huu unasaidia watengenezaji kutumia vipengele vya vifaa kwa njia ya kidhana bila kuathiri utendaji kazi.
+Wave의 철학은 강력한 고수준 추상화와 정밀한 저수준 제어의 공존에 있습니다.
+표준 라이브러리를 통해 복잡한 작업은 직관적으로 처리할 수 있도록 하면서도,
+필요한 경우에는 메모리, 레지스터, 하드웨어 자원에 직접 접근할 수 있는 길을 열어 둡니다.
+이를 통해 개발자는 편의성과 성능 사이에서 타협하지 않고, 상황에 맞는 선택을 할 수 있습니다.
 
-Wave inalenga kuvunja mipaka kati ya programu za kiwango cha juu na cha chini, ikitoa mazingira ya lugha yenye uondoaji wa hali ya juu na yaliyo jumuishwa, na kurahisisha uzoefu wa maendeleo.
+특히 Wave의 하드웨어 라이브러리는 중요한 설계 요소 중 하나입니다.
+하드웨어에 대한 깊은 전문 지식이 없는 개발자도 쉽게 사용할 수 있도록 설계되었으며,
+동시에 정밀한 제어가 필요한 경우에는 저수준 인터페이스를 통해 직접 제어할 수 있는 유연성을 제공합니다.
+이러한 접근은 성능을 희생하지 않으면서도 하드웨어 기능을 보다 직관적으로 활용할 수 있게 합니다.
+
+Wave는 고수준과 저수준 프로그래밍 사이에 존재하던 경계를 허물고,
+하나의 일관된 언어 환경 안에서 개발 경험을 단순화하는 것을 지향합니다.
 
 ## Sifa na Vipengele Vikuu vya Wave
 
-1. Muundo wa Lugha Uliojiunga
+Wave는 다양한 개발 분야를 하나의 언어 구조 안에 통합하는 것을 중요한 특징으로 삼고 있습니다.
+이를 통해 개발자는 프로젝트마다 새로운 언어를 학습할 필요 없이,
+Wave 하나로 여러 영역의 문제를 해결할 수 있습니다.
 
-Wave inaunganisha nyanja mbalimbali za maendeleo katika lugha moja, ikiondoa hitaji la mtengenezaji kujifunza lugha nyingi.
+강력한 표준 라이브러리는 Wave의 생산성을 뒷받침하는 핵심 요소입니다.
+복잡한 작업을 간결한 코드로 표현할 수 있도록 설계되어 있으며,
+이를 통해 개발자는 반복적인 구현보다 문제 해결 자체에 집중할 수 있습니다.
 
-2. Uondoaji wa Kiwango cha Juu
+하드웨어 접근성 또한 Wave의 중요한 특징입니다.
+Wave는 하드웨어를 쉽게 다룰 수 있는 고수준 인터페이스를 제공하는 동시에,
+필요한 경우 저수준 제어를 직접 수행할 수 있도록 설계되었습니다.
+이로 인해 초보자부터 숙련된 시스템 개발자까지 모두를 포용할 수 있습니다.
 
-Wave huongeza sana ufanisi kwa kuwezesha utekelezaji rahisi wa kazi ngumu kupitia maktaba yake imara ya kawaida.
+성능은 Wave 설계에서 타협하지 않는 요소입니다.
+효율적인 컴파일러 구조와 명확한 메모리 모델을 기반으로,
+성능이 중요한 응용 프로그램에서도 안정적으로 동작하도록 설계되었습니다.
 
-3. Urani wa Kufikia Vifaa
+Wave는 모듈화와 재사용성을 중시합니다.
+코드를 명확한 단위로 분리하고 재사용할 수 있도록 지원하여,
+프로젝트 규모가 커지더라도 복잡성을 효과적으로 관리할 수 있게 합니다.
 
-Maktaba ya vifaa ya Wave imeundwa kuwa rafiki kwa mtumiaji ili kuruhusu watu wasio wataalamu kuingiliana na vifaa, huku ikitoa chaguo la udhibiti wa moja kwa moja inapohitajika udhibiti wa usahihi.
-
-4. Uboreshaji wa Utendaji
-
-Wave hutoa wakusanyaji wenye ufanisi na mfumo wa kusimamia kumbukumbu ili kuhakikisha utendaji bora unapohitajika, na kufanya kazi vizuri hata katika programu za matumizi ambapo utendaji ni muhimu.
-
-5. Umoduli na Urejelezaji
-
-Wave inasaidia programu ya kiumbo kufanya watengenezaji waweze kutumia tena kwa ufanisi na kupunguza ugumu wa mradi.
-
-6. Ushughulikiaji wa Makosa na Kuboresho Imara
-
-Wave hutoa ujumbe wa makosa unaoeleweka na zana za kuboresha ili kusaidia watengenezaji kutatua matatizo kwa haraka.
+또한 Wave는 명확하고 직관적인 에러 메시지와 디버깅 환경을 제공하는 것을 목표로 합니다.
+이를 통해 개발자는 문제의 원인을 빠르게 파악하고 수정할 수 있으며,
+학습 과정에서도 불필요한 시행착오를 줄일 수 있습니다.
 
 ## Ramani ya Mipango ya Wave
 
-1. Upanuzi wa Vipengele vya Lugha ya Msingi
+Wave는 단계적인 발전을 전제로 설계되고 있습니다.
+초기 단계에서는 핵심 언어 문법과 기본 기능에 집중하며,
+점진적으로 패턴 매칭, 비동기 프로그래밍, 고급 데이터 구조와 같은 기능을 확장해 나갈 계획입니다.
 
-Baada ya kutolewa kwa toleo la awali la Wave linalolenga misingi na vipengele, kuna mpango wa kusasisha na kujumuisha vipengele kama vile ulinganishaji wa mifumo, programu za kukabiliana na kutolingana, na miundo ya data ya hali ya juu.
+표준 라이브러리는 사용자 요구와 실제 사용 사례를 바탕으로 지속적으로 확장될 예정입니다.
+이를 통해 개발자는 점점 더 많은 기능을 라이브러리 수준에서 해결할 수 있게 될 것입니다.
 
-2. Kuimarisha Maktaba ya Kawaida
+하드웨어 라이브러리 역시 Wave의 핵심 요소로서 지속적인 개선 대상입니다.
+더 다양한 장치와의 호환성을 확보하고, 새로운 제어 기능을 추가하여
+실제 하드웨어 환경에서의 활용 범위를 넓혀갈 계획입니다.
 
-Maktaba ya kawaida itaendelea kupanuliwa mara kwa mara ili kukidhi mahitaji ya watumiaji, huku ikiongeza vipengele mbalimbali ili kuwezesha watengenezaji kufanya kazi kwa urahisi na ufanisi zaidi.
+Wave는 커뮤니티 피드백을 매우 중요하게 다룹니다.
+포럼과 다양한 피드백 채널을 통해 사용자 의견을 적극적으로 수렴하고,
+이를 언어와 도구의 발전에 반영할 예정입니다.
 
-3. Kuboresha Maktaba ya Vifaa
+문서화와 교육 자료 또한 Wave의 중요한 발전 방향 중 하나입니다.
+완성도 높은 공식 문서와 튜토리얼을 제공하여,
+초보 사용자도 Wave를 쉽게 배우고 실무에 활용할 수 있도록 지원할 계획입니다.
 
-Maktaba ya vifaa, moja ya vipengele muhimu vya Wave, itaboreshwa ili kuongeza ulinganifu na vifaa mbalimbali na kuongeza vipengele vya kudhibiti vipya, huku ikiendelea kuboreshwa.
+플랫폼 측면에서는 Windows, macOS, Linux를 포함한 주요 운영 체제에서
+일관된 성능과 개발 경험을 제공하는 것을 목표로 합니다.
 
-4. Kujumuisha Maoni ya Jamii
-
-Maoni ya watengenezaji ni muhimu kwa ukuaji wa Wave, na kwa ajili hii, kuna mpango wa kukusanya maoni ya watumiaji kwa kutumia mabaraza na njia za maoni.
-
-5. Utoaji wa Nyaraka na Vifaa vya Elimu
-
-Wave inapanga kutoa nyaraka kamilifu pamoja na vifaa mbalimbali vya elimu na mafunzo kusaidia kujifunza. Hii itamruhusu hata mtumiaji wa awali kujifunza na kutumia Wave kwa urahisi.
-
-6. Msaada wa Mijukwaa Mbalimbali
-
-Wave itaboreshwa ili kutoa utendaji kazi unaoendelea na urahisi wa kufikiwa kwenye mifumo mikuu ya uendeshaji ikiwa ni pamoja na Windows, macOS, na Linux.
-
-7. Kuimarisha Ushirikiano na Jamii ya Programu Huria
-
-Wave itaimarisha ushirikiano na jamii ya programu huria ili kuongoza ubunifu na kuhamasisha michango inayosaidia ukuaji wa Wave.
+마지막으로 Wave는 오픈소스 커뮤니티와의 협력을 통해 성장하는 프로젝트입니다.
+기여와 참여를 적극적으로 장려하며,
+개방적인 개발 과정을 통해 Wave의 방향성과 완성도를 함께 만들어 나갈 것입니다.
