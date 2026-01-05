@@ -6,18 +6,18 @@ sidebar_position: 7
 
 ## Introduction
 
-이 문서는 Wave 언어에서 제공하는 인라인 어셈블리 기능에 대해 설명합니다.
-인라인 어셈블리는 Wave가 제공하는 기능 중 하나로, 고수준 언어가 갖는 편의성과 구조를 유지하면서도 저수준 하드웨어 제어에 직접 접근할 수 있도록 설계된 문법입니다.
+This document describes the inline assembly feature provided by the Wave language.
+Inline assembly is one of the features provided by Wave. It is a syntax designed to directly access low-level hardware control while maintaining the convenience and structure of high-level languages.
 
-일반적인 Wave 코드로는 표현하기 어려운 레지스터 조작, 메모리 주소 단위 접근, 특정 CPU 명령어 실행과 같은 작업을 가능하게 하며, 성능 최적화가 중요하거나 하드웨어 및 아키텍처에 강하게 의존하는 코드가 필요한 상황에서 활용됩니다.
-이 기능을 통해 Wave는 단순한 고수준 언어를 넘어, 시스템 프로그래밍 영역까지 포괄할 수 있습니다.
+It enables tasks such as register manipulation, memory address unit access, and execution of specific CPU instructions that are difficult to express with general Wave code. It is used when performance optimization or hardware and architecture-dependent code is required.
+Through this feature, Wave can encompass system programming areas beyond just being a high-level language.
 
 ---
 
 ## Basic Syntax
 
-인라인 어셈블리는 `asm { ... }` 블록을 통해 작성합니다.
-이 블록 안에는 실제로 실행될 어셈블리 명령어와, Wave 변수와 CPU 레지스터를 연결하기 위한 입력·출력 매핑이 함께 정의됩니다.
+Inline assembly is written with `asm { ... } ` block.
+Within this block, the assembly instructions that will be executed and the input/output mappings to connect Wave variables with CPU registers are defined.
 
 ```wave
 asm {
@@ -28,29 +28,29 @@ asm {
 }
 ```
 
-어셈블리 명령어는 문자열 형태로 작성되며, 실제 CPU에서 실행되는 저수준 명령어를 그대로 기술합니다.
-여러 줄로 작성할 수 있으며, 각 줄에는 하나의 명령어만 작성하는 것을 원칙으로 합니다.
+The assembly instructions are written in string form, detailing the low-level commands executed on the actual CPU.
+It can be written in multiple lines, with the principle of writing only one command per line.
 
-예를 들어 다음과 같은 형태로 사용할 수 있습니다.
+For example, it can be used in the following form.
 
 ```wave
 "mov rax, 1"
 "syscall"
 ```
 
-`in("레지스터")` 값 구문은 Wave 변수나 표현식의 값을 지정한 CPU 레지스터에 로드하기 위해 사용됩니다.
-이를 통해 어셈블리 코드에서 해당 레지스터를 입력값으로 사용할 수 있습니다.
+The `in("register")` value syntax is used to load the value of a Wave variable or expression into the specified CPU register.
+Through this, the register can be used as an input value in assembly code.
 
-아래 예시는 변수 s의 값을 x86-64 규약에서 첫 번째 syscall 인자 레지스터인 rdi에 전달하는 경우입니다.
+The example below shows the case of transferring the value of variable s to rdi, the first syscall argument register in the x86-64 convention.
 
 ```wave
 in("rdi") s
 ```
 
-반대로 `out("레지스터")` 변수 구문은 지정한 레지스터에 들어 있는 값을 Wave 변수로 가져오는 역할을 합니다.
-어셈블리 실행 결과를 Wave 코드에서 사용해야 할 때 이 방식을 사용합니다.
+Conversely, the `out("register")` variable syntax is used to bring the value in the specified register into a Wave variable.
+This method is used when the result of the assembly execution needs to be used in Wave code.
 
-다음 예시는 `syscall` 호출 이후 반환값이 저장되는 `rax` 레지스터의 값을 변수 `ret`에 저장하는 경우입니다
+The following example shows the case of storing the value of the `rax` register, where the return value of the `syscall` is stored, into the variable `ret`.
 
 ```wave
 out("rax") ret
@@ -58,9 +58,9 @@ out("rax") ret
 
 ---
 
-## 간단한 예제
+## Simple Example
 
-아래 예제는 Linux x86-64 환경에서 `syscall`을 이용해 문자열을 표준 출력으로 출력하는 간단한 코드입니다.
+The example below is a simple code that prints a string to standard output using `syscall` in a Linux x86-64 environment.
 
 ```wave
 fun main() {
@@ -78,15 +78,15 @@ fun main() {
 }
 ```
 
-이 예제에서 Wave 코드는 문자열의 포인터와 길이를 레지스터에 직접 설정하고, 시스템 콜을 호출하여 출력 작업을 수행합니다.
-시스템 콜의 반환값은 `rax` 레지스터를 통해 전달되며, `out` 구문을 통해 Wave 변수로 다시 가져옵니다.
+In this example, Wave code directly sets the pointer and length of the string to the register and calls the system call to perform the output operation.
+The return value of the system call is delivered via the `rax` register and is brought back into a Wave variable through the `out` syntax.
 
 ---
 
 ## Precautions
 
-인라인 어셈블리는 Wave의 타입 안정성과 추상화를 의도적으로 우회하는 기능입니다.
-잘못된 명령어 사용이나 레지스터 설정 오류가 발생할 경우, 프로그램이 비정상 종료되거나 undefined behavior가 발생할 수 있습니다.
+Inline assembly is a feature that intentionally circumvents Wave's type safety and abstraction.
+If incorrect commands are used or register setting errors occur, the program may terminate abnormally or undefined behavior may occur.
 
-`in`과 `out`을 통한 레지스터 매핑 자체는 컴파일 타임에 검증되지만, 어셈블리 명령어의 의미적 유효성이나 실행 결과까지 보장되지는 않습니다.
-따라서 인라인 어셈블리를 사용할 때에는 대상 아키텍처와 호출 규약, 그리고 명령어의 동작을 정확히 이해하고 있어야 합니다.
+The mapping of registers through `in` and `out` is verified at compile time, but the semantic validity or execution results of assembly instructions are not guaranteed.
+Therefore, when using inline assembly, you must accurately understand the target architecture, calling conventions, and the behavior of the instructions.
