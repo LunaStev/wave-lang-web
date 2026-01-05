@@ -4,62 +4,62 @@ sidebar_position: 9
 
 # FFI
 
-이 문서는 Wave 언어에서 외부에 구현된 함수를 호출하기 위한 FFI(외부 함수 인터페이스) 규격을 설명합니다.
-FFI를 통해 Wave 프로그램은 다른 언어로 작성된 네이티브 라이브러리와 직접 연동할 수 있습니다.
+This document describes the FFI (Foreign Function Interface) specification for calling functions implemented externally in the Wave language.
+Through FFI, Wave programs can directly interface with native libraries written in other languages.
 
 ---
 
-## 개요
+## Overview
 
-Wave의 FFI는 선언 기반으로 동작합니다.
-외부 함수는 Wave 코드에서 구현하지 않으며, 해당 함수가 어떤 ABI(Application Binary Interface)를 따르는지만 명시합니다.
-실제 구현은 링크 단계에서 외부 라이브러리로부터 해결됩니다.
+Wave's FFI works on a declaration basis.
+External functions are not implemented in Wave code, and only specify which ABI (Application Binary Interface) they adhere to.
+The actual implementation is resolved from an external library at the linking stage.
 
-FFI는 컴파일 타임에 함수의 존재만을 선언하고, 실행 파일 생성 시 링커가 실제 심볼을 연결하는 방식으로 동작합니다.
+FFI operates by declaring only the existence of functions at compile time, and the linker connects the actual symbols when creating the executable.
 
 ---
 
-## extern 선언
+## extern Declaration
 
-외부 함수는 extern 키워드를 사용하여 선언합니다.
-모든 외부 함수 선언에는 ABI 지정이 반드시 필요합니다.
+External functions are declared using the extern keyword.
+All external function declarations require ABI specification.
 
 ```wave
-extern(abi) fun 함수명(인자들...) -> 반환타입;
+extern(abi) fun functionName(arguments...) -> returnType;
 ```
 
 ---
 
-## ABI 지정
+## ABI Specification
 
-`extern` 선언에는 반드시 ABI를 명시해야 합니다.
-ABI는 외부 함수가 어떤 호출 규약과 심볼 규칙을 따르는지를 나타냅니다.
+ABI must be specified in an `extern` declaration.
+ABI indicates which calling convention and symbol rules an external function follows.
 
 ```wave
 extern(c) fun printf(fmt: ptr<u8>);
 extern(rust) fun rust_func(i32);
 ```
 
-ABI는 식별자로 취급되며, 언어 차원에서 특정 ABI를 기본값으로 제공하지 않습니다.
-모든 외부 함수는 명시적으로 ABI를 지정해야 합니다.
+ABI is treated as an identifier, and no specific ABI is provided as a default at the language level.
+All external functions must explicitly specify an ABI.
 
 ---
 
-## 함수 단위 extern 선언
+## Function-level extern declaration
 
-외부 함수 하나를 선언할 경우 다음과 같이 작성합니다.
+To declare a single external function, write as follows.
 
 ```wave
 extern(c) fun InitWindow(width: i32, height: i32, title: ptr<u8>);
 ```
 
-이 선언은 C ABI를 따르는 `InitWindow` 심볼이 외부 라이브러리에 존재함을 의미합니다.
+This declaration means that the `InitWindow` symbol following the C ABI exists in an external library.
 
 ---
 
-## 블록 단위 extern 선언
+## Block-level extern declaration
 
-동일한 ABI를 사용하는 외부 함수가 여러 개일 경우, 블록 형태로 묶어 선언할 수 있습니다.
+If there are multiple external functions using the same ABI, they can be declared together in a block form.
 
 ```wave
 extern(c) {
@@ -70,29 +70,29 @@ extern(c) {
 }
 ```
 
-블록 단위 선언은 함수 단위 선언과 의미적으로 완전히 동일하며, 단순히 가독성과 구조화를 위한 문법입니다.
+Block-level declarations are semantically identical to function-level declarations, serving merely as syntax for readability and structuring.
 
 ---
 
-## 심볼 이름 지정
+## Symbol naming
 
-일부 ABI에서는 Wave 함수 이름과 실제 링커 심볼 이름이 일치하지 않을 수 있습니다.
-이 경우, 외부 함수가 연결될 실제 심볼 이름을 문자열로 명시할 수 있습니다.
+In some ABIs, the function name in Wave might not match the actual linker symbol name.
+In this case, you can specify the actual symbol name to be linked for an external function in a string.
 
-### 함수 단위 심볼 지정
+### Function-level symbol specification
 
 ```wave
 extern(rust, "_ZN4test10rust_func117h123abcE")
 fun rust_func(i32);
 ```
 
-이 선언은 `rust_func` 호출 시 `_ZN4test10rust_func117h123abcE` 심볼을 사용하도록 지정합니다.
+This declaration specifies that the `_ZN4test10rust_func117h123abcE` symbol should be used when calling `rust_func`.
 
 ---
 
-### 블록 단위 심볼 지정
+### Block-level symbol specification
 
-블록 단위 선언에서는 각 함수 뒤에 심볼 이름을 개별적으로 지정할 수 있습니다.
+In block-level declarations, symbol names can be individually specified after each function.
 
 ```wave
 extern(rust) {
@@ -103,22 +103,22 @@ extern(rust) {
 
 ---
 
-## 포인터 타입
+## Pointer Type
 
-포인터는 `ptr<T>` 형태로 표현합니다.
+Pointers are represented in the form `ptr<T>`.
 
 ```wave
 ptr<u8>
 ptr<MyStruct>
 ```
 
-`ptr<T>`는 외부 언어의 포인터와 직접 대응되며, 메모리 소유권이나 생명주기는 Wave에서 관리하지 않습니다.
+`ptr<T>` directly corresponds to pointers in external languages, and memory ownership or lifecycle is not managed by Wave.
 
 ---
 
-## 구조체 사용
+## Struct Usage
 
-구조체는 외부 함수의 인자 또는 반환값으로 사용할 수 있습니다.
+Structs can be used as arguments or return values of external functions.
 
 ```wave
 struct Color {
@@ -129,13 +129,13 @@ struct Color {
 }
 ```
 
-FFI에서 구조체를 사용할 경우, 필드 순서는 선언된 순서를 유지하며 ABI에서 요구하는 메모리 레이아웃을 따릅니다.
+When using structs in FFI, the field order is preserved as declared, following the memory layout required by the ABI.
 
 ---
 
-## 외부 함수 호출
+## External Function Call
 
-`extern`으로 선언된 함수는 일반 함수와 동일한 방식으로 호출합니다.
+Functions declared as `extern` are called in the same manner as regular functions.
 
 ```wave
 fun main() -> i32 {
@@ -147,26 +147,26 @@ fun main() -> i32 {
 }
 ```
 
-호출 시 문법적 차이는 없으며, 호출 규약과 심볼 연결은 전적으로 ABI와 링커에 의해 처리됩니다.
+There is no syntactical difference in calls, and calling conventions and symbol linking are entirely handled by the ABI and linker.
 
 ---
 
-## 링킹
+## Linking
 
-외부 함수의 실제 구현은 링크 단계에서 외부 라이브러리로부터 제공됩니다.
-Wave 컴파일러는 외부 함수 호출을 포함한 오브젝트 파일을 생성하며, 링커가 지정된 라이브러리를 통해 심볼을 해결합니다.
+The actual implementation of external functions is provided by external libraries at the linking stage.
+The Wave compiler generates object files including external function calls, and the linker resolves symbols through the specified libraries.
 
-라이브러리 지정 방식은 빌드 도구 및 CLI 옵션을 통해 이루어집니다.
+The method of specifying libraries is done through build tools and CLI options.
 
 ---
 
-## 제한 사항
+## Limitations
 
-Wave에서는 다음 기능을 제공하지 않습니다.
+Wave does not provide the following features.
 
-- 함수 포인터
-- 콜백 함수
-- 자동 메모리 관리
-- 언어 간 예외 처리 연동
+- Function Pointers
+- Callback Functions
+- Automatic Memory Management
+- Inter-language Exception Handling Integration
 
-이러한 기능은 이후 버전에서 별도로 다루어질 수 있습니다.
+These features may be addressed separately in future versions.
