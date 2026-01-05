@@ -4,17 +4,17 @@ sidebar_position: 3
 
 # Run the first program
 
-이전 설치 문서에서 Wave를 이미 설치했다면, 이제 첫 번째 Wave 프로그램을 직접 실행해볼 차례입니다.
-이 섹션에서는 간단한 예제를 통해 Wave 프로그램을 작성하고 실행하는 전체 과정을 단계별로 살펴봅니다.
+If you've already installed Wave from the previous installation document, it's time to run your first Wave program.
+In this section, we will look over the entire process of writing and running a Wave program step by step using a simple example.
 
-## `hello.wave` 파일 만들기
+## Create `hello.wave` file
 
-먼저 작업할 디렉터리에서 `hello.wave`라는 이름의 새 파일을 생성합니다.
-파일 이름과 확장자는 자유롭게 지정할 수 있지만, 여기서는 예제로 `hello.wave`를 사용합니다.
+First, create a new file named `hello.wave` in the directory you will be working in.
+You can freely specify the file name and extension, but in this example, we use `hello.wave`.
 
 ## Write the code
 
-생성한 `hello.wave` 파일에 아래 코드를 작성합니다.
+Write the following code in the `hello.wave` file you created.
 
 ```wave
 fun main() {
@@ -22,33 +22,30 @@ fun main() {
 }
 ```
 
-이 코드에서 `fun main()`은 Wave 프로그램의 실행 시작 지점을 의미합니다.
-Wave 프로그램은 항상 `main` 함수부터 실행됩니다.
+In this code, `fun main()` indicates the starting point of execution for a Wave program.
+Wave programs always execute from the `main` function.
 
-`println` 함수는 문자열을 표준 출력으로 출력하는 함수로,
-화면에 텍스트를 표시할 때 가장 기본적으로 사용됩니다.
+The `println` function is used to output strings to the standard output and is the most basic function used to display text on the screen.
 
 ## Run the program
 
-코드 작성을 마쳤다면, 터미널을 열고 파일이 위치한 디렉터리에서 다음 명령어를 실행합니다.
+Once you've finished writing the code, open a terminal and run the following command from the directory where the file is located.
 
 ```bash
 wavec run hello.wave
 ```
 
-이 명령어는 Wave 컴파일러가 소스 파일을 컴파일한 뒤,
-즉시 실행까지 수행하도록 지시합니다.
+This command instructs the Wave compiler to compile the source file and immediately execute it.
 
 ## Check the output
 
-프로그램이 정상적으로 실행되면, 터미널에 다음과 같은 출력이 표시됩니다.
+If the program runs successfully, the following output will appear in the terminal.
 
 ```
 Hello Wave
 ```
 
-이 출력이 보인다면 Wave가 정상적으로 설치되어 있으며,
-프로그램 작성과 실행이 올바르게 이루어졌다는 의미입니다.
+If you see this output, it means Wave is installed correctly and the program has been written and executed properly.
 
-이제 첫 번째 Wave 프로그램을 성공적으로 실행했습니다.
-이제부터는 Wave의 문법과 기능을 하나씩 살펴보며, 더 복잡한 프로그램을 작성해볼 수 있습니다.
+You have successfully run your first Wave program.
+From now on, you can explore Wave's syntax and features one by one to try writing more complex programs.

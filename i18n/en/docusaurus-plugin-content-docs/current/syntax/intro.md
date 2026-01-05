@@ -6,27 +6,27 @@ sidebar_position: 1
 
 ## Introduction
 
-Wave 프로그래밍 언어의 핵심 설계 철학은 저수준 성능과 고수준 추상화 사이의 균형을 유지하면서, 효율적이고 유연한 소프트웨어 개발 환경을 제공하는 데 있습니다.
-이 섹션에서는 Wave 프로그램을 구성하는 가장 기본적인 요소인 함수와 변수를 소개합니다.
+The core design philosophy of the Wave programming language is to maintain a balance between low-level performance and high-level abstraction, thereby providing an efficient and flexible software development environment.
+In this section, we introduce the most fundamental elements of a Wave program: functions and variables.
 
-함수는 프로그램의 동작과 논리를 구성하는 핵심 단위이며, 변수는 그 과정에서 필요한 데이터를 저장하고 관리하는 역할을 합니다.
-함수와 변수를 정의하고 사용하는 방법을 정확히 이해하면, Wave 언어의 구조와 설계 의도를 보다 깊이 있게 활용할 수 있습니다.
+A function is a core unit structuring a program's behavior and logic, while a variable stores and manages the data needed in this process.
+By accurately understanding how to define and use functions and variables, one can deeply utilize the structure and design intent of the Wave language.
 
 ---
 
-## 함수
+## Function
 
-Wave에서 함수는 독립적으로 실행할 수 있는 재사용 가능한 코드 블록입니다.
-특정 동작이나 계산을 하나의 단위로 묶어 표현할 수 있으며, 프로그램 전반에서 필요할 때마다 호출할 수 있습니다.
+In Wave, a function is a reusable block of code that can be executed independently.
+It can group specific actions or calculations as one unit and can be called whenever needed throughout the program.
 
-함수를 사용하면 반복되는 코드를 줄일 수 있고, 프로그램을 논리적으로 분리하여 가독성과 유지보수성을 높일 수 있습니다.
-또한 계산 처리, 입출력 관리, 로직 분리와 같은 다양한 목적에 활용됩니다.
+Using functions can reduce repetitive code and logically separate the program to enhance readability and maintainability.
+They are also utilized for various purposes such as computation processing, input-output management, and logic separation.
 
-Wave에서 함수는 `fun` 키워드로 정의되며, 함수 이름과 매개변수 목록, 그리고 중괄호 `{}`로 감싸진 함수 본체로 구성됩니다.
+In Wave, functions are defined with the `fun` keyword, consisting of a function name, parameter list, and a body enclosed in braces `{}`.
 
 ### Defining Functions
 
-Wave에서 가장 기본적인 함수 정의 형태는 다음과 같습니다.
+The most basic form of function definition in Wave is as follows.
 
 ```wave
 fun main() {
@@ -34,15 +34,15 @@ fun main() {
 }
 ```
 
-`main` 함수는 프로그램의 실행 진입점으로, Wave 프로그램에는 반드시 하나의 `main` 함수가 존재해야 합니다.
-프로그램은 이 함수부터 실행을 시작합니다.
+The `main` function is the entry point for program execution, and every Wave program must have one `main` function.
+The program starts execution from this function.
 
-함수는 필요에 따라 매개변수를 가질 수 있으며, 계산 결과나 값을 호출한 곳으로 반환할 수도 있습니다.
-반환값이 있는 경우에는 함수 선언부에서 반환 타입을 명시합니다.
+Functions can have parameters as needed and can return a computation result or value to the caller.
+If there is a return value, the return type is specified in the function declaration.
 
 ### Example: Simple Function
 
-다음 예제는 두 개의 정수를 받아 그 합을 반환하는 간단한 함수입니다.
+The following example is a simple function that takes two integers and returns their sum.
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -55,58 +55,58 @@ fun main() {
 }
 ```
 
-이 예제에서 `add` 함수는 두 개의 정수형 매개변수 `a`와 `b`를 받아 더한 뒤, 그 결과를 반환합니다.
-`main` 함수에서는 `add` 함수를 호출하고, 반환된 값을 변수에 저장한 후 출력합니다.
+In this example, the `add` function takes two integer parameters `a` and `b`, sums them, and returns the result.
+In the `main` function, the `add` function is called, the returned value is stored in a variable, and then it is printed.
 
-이처럼 함수는 특정 동작을 캡슐화하고, 프로그램의 여러 부분에서 재사용할 수 있도록 해줍니다.
+In this way, functions encapsulate specific actions, allowing them to be reused in various parts of the program.
 
 ## Variable
 
 Variables are used to store and manipulate data within a program.
-Wave는 변수 선언 시 가변 변수와 불변 변수를 명확히 구분하여, 데이터 변경에 대한 의도를 코드 수준에서 드러낼 수 있도록 설계되어 있습니다.
+Wave is designed to clearly distinguish between mutable and immutable variables at the time of declaration, revealing the intention of data modification at the code level.
 
-이를 통해 프로그램의 상태 변화가 보다 명확해지고, 의도하지 않은 값 변경으로 인한 오류를 줄일 수 있습니다.
+This way, changes in the program's state become clearer, reducing errors from unintended value changes.
 
 ### Mutable Variable
 
-Wave에서 변수는 기본적으로 가변(mutable)입니다.
-즉, 한 번 선언된 이후에도 프로그램 실행 중에 값을 변경할 수 있습니다.
+In Wave, variables are mutable by default.
+This means that once declared, their values can be changed during program execution.
 
-가변 변수는 var 키워드를 사용하여 선언합니다.
+Mutable variables are declared using the var keyword.
 
 ```wave
 var x :i32 = 10;
 x = 20;
 ```
 
-위 코드에서 `x`는 초기값으로 `10`을 가지며, 이후에 `20`으로 값을 변경할 수 있습니다.
-이처럼 상태가 변해야 하는 데이터에는 가변 변수를 사용합니다.
+In the code above, `x` is initialized to `10` and can later be changed to `20`.
+Mutable variables are used for data where the state needs to change.
 
 ### Immutable Variable
 
-변수를 불변(immutable)으로 선언하면, 초기 값이 할당된 이후에는 해당 값을 변경할 수 없습니다.
-불변 변수는 let 키워드를 사용하여 선언합니다.
+When a variable is declared as immutable, its value cannot be changed once an initial value is assigned.
+Immutable variables are declared using the let keyword.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // 오류: 불변 변수는 값을 변경할 수 없습니다.
+// y = 10;   // Error: Cannot change value of an immutable variable.
 ```
 
-불변 변수는 값이 변경되지 않음을 보장하기 때문에, 프로그램의 안정성과 예측 가능성을 높이는 데 도움이 됩니다.
-값 변경이 필요 없는 상수성 데이터에는 불변 변수를 사용하는 것이 권장됩니다.
+Immutable variables guarantee that values are not changed, thus helping to increase the stability and predictability of the program.
+It is recommended to use immutable variables for constant data that does not require changes.
 
-Wave에서는 `let` 키워드와 함께 `mut`를 사용하여, 명시적으로 가변성을 허용할 수도 있습니다.
+In Wave, you can explicitly allow mutability by using `mut` with the `let` keyword.
 
 ```wave
 let mut y :i32 = 5;
 y = 10;
 ```
 
-경우 변수는 `let`으로 선언되었지만, `mut` 키워드를 통해 값 변경이 허용됩니다.
+Here, the variable is declared with `let`, but value changes are allowed through the `mut` keyword.
 
 ### Variable Declaration Example
 
-다음은 다양한 타입의 가변 및 불변 변수를 선언하는 예제입니다.
+Below are examples of declaring mutable and immutable variables of various types.
 
 ```wave
 var x :i32 = 10;
@@ -115,7 +115,7 @@ var name :str = "Wave";
 let is_active :bool = true;
 ```
 
-이 예제에서 `x`와 `name`은 가변 변수이며, `y`와 `is_active`는 불변 변수입니다.
-Wave에서는 `var`와 `let`을 명확히 구분함으로써, 데이터 변경 가능 여부를 코드 차원에서 드러냅니다.
+In this example, `x` and `name` are mutable variables, while `y` and `is_active` are immutable variables.
+Wave clearly distinguishes between `var` and `let`, revealing the mutability of data at the code level.
 
-가변 변수와 불변 변수를 적절히 구분하여 사용하면, 데이터의 일관성을 유지하면서도 보다 견고하고 예측 가능한 프로그램을 작성할 수 있습니다.
+Using mutable and immutable variables appropriately helps maintain data consistency and build a more robust and predictable program.
