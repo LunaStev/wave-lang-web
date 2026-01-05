@@ -6,26 +6,26 @@ sidebar_position: 4
 
 ## Introduction
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+The Wave language provides loops to handle situations where the same code needs to be executed multiple times.
+Loops are used to continually execute code while a specific condition is met or for a set number of repetitions.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+This allows for expressing repetitive tasks with concise and clear code without the need to repeatedly write the same logic.
+Wave supports both condition-based and count-based looping, along with keywords to control flow during the loop.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+This section explains how to use `while` and `for` loops, as well as the `break` and `continue` keywords, which control loop flow.
 
 ---
 
 ## while loop
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+The `while` loop repeatedly executes a block of code as long as the given condition evaluates to `true`.
+The loop terminates as soon as the condition becomes `false`.
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+This method is suitable for situations where the number of repetitions is unclear and you need to repeat until a specific condition is met.
 
 ### Basic Structure
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+The basic structure of the `while` loop in Wave is as follows.
 
 ```wave
 while (condition) {
@@ -33,8 +33,7 @@ while (condition) {
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+The condition must evaluate to a `bool`, and you can write one or more statements inside the code block enclosed in braces `{}`.
 
 ### Example: Print numbers from 0 to 4
 
