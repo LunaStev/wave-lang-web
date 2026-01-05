@@ -4,22 +4,22 @@ sidebar_position: 8
 
 # Struct
 
-## 개요
+## Introduction
 
-Wave 언어의 구조체는 사용자 정의 데이터 타입을 선언하기 위한 핵심 문법 요소입니다.
-구조체를 사용하면 서로 다른 타입의 값을 하나의 논리적인 단위로 묶어 표현할 수 있으며, 이를 통해 복잡한 데이터 구조를 명확하고 안전하게 모델링할 수 있습니다.
+The struct in the Wave language is a key syntax element for declaring user-defined data types.
+Using structures allows for different types of values to be grouped and represented as a single logical unit, which enables modeling of complex data structures clearly and safely.
 
-Wave의 구조체는 값 타입(value type) 으로 동작합니다.
-모든 필드는 반드시 명시적인 타입을 가져야 하며, 구조체 인스턴스를 생성할 때 모든 필드는 초기화되어야 합니다.
-이러한 규칙을 통해 구조체의 상태는 항상 완전하고 예측 가능한 형태를 유지합니다.
--------------------------------------------------------------
+Wave structures operate as value types.
+All fields must have explicit types and must be initialized when a struct instance is created.
+Through these rules, the state of the structure always maintains a complete and predictable form.
+-----------------------------------------------------------------------------------------------------------------
 
 ## Struct Declaration Syntax
 
 A struct is declared using the `struct` keyword.
-구조체의 이름은 파스칼 표기법(PascalCase)을 사용하며, 구조체 본문에는 하나 이상의 필드를 정의할 수 있습니다.
+The name of a structure uses PascalCase, and one or more fields can be defined in the structure body.
 
-필드는 `이름: 타입;` 형식으로 선언되며, 각 필드 선언 뒤에는 반드시 세미콜론이 필요합니다.
+Fields are declared in the form `name: type;`, and a semicolon is required after each field declaration.
 
 ```wave
 struct Box {
