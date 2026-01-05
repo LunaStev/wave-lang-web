@@ -46,28 +46,28 @@ while (i < 5) {
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+In this example, the loop runs as long as the variable `i` is less than 5.
+In each iteration, the current value is printed, and the value of `i` is incremented by 1 so that the condition eventually becomes false.
 
 ---
 
 ## for loop
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+The `for` loop is a type of loop suitable for use when the number of iterations is relatively clear.
+By defining the initial value, condition expression, and increment/decrement in one go, the flow of the loop can be clearly expressed.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Because all the elements needed to control the loop are gathered in one place, it is easy to understand the loop structure at a glance.
 
-### 기본 구조
+### Basic Structure
 
 ```wave
-for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
-    // 반복할 코드
+for (var variableName: type = initialValue; condition; increment/decrement) {
+    // code to repeat
 }
 ```
 
-여기서 반복 변수는 초기값으로 시작하며, 조건식이 참인 동안 반복이 실행됩니다.
-각 반복이 끝날 때마다 증감식이 실행되어 반복 변수의 값이 변경됩니다.
+Here, the loop variable starts with an initial value, and the loop executes as long as the condition is true.
+At the end of each iteration, the increment/decrement expression is executed, changing the value of the loop variable.
 
 ### Example: Print numbers from 1 to 5
 
@@ -77,15 +77,15 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 }
 ```
 
-이 예제에서는 `i`가 1부터 시작하여 5 이하인 동안 반복이 수행됩니다.
-각 반복마다 `i`의 값을 출력한 후 1씩 증가시킵니다.
+In this example, the loop runs while `i` starts from 1 up to 5 inclusively.
+In each iteration, the value of `i` is printed and then incremented by 1.
 
 ---
 
 ## Nested Loops
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+You can write a loop inside another loop, and this is called a nested loop.
+Nested loops are useful for iterating over two-dimensional data structures or handling combinations of multiple conditions.
 
 ### Example: Double while loop
 
@@ -104,15 +104,15 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+In this example, each time the outer `while` loop runs, the inner `while` loop runs completely.
+This allows sequential processing of combinations in the form of (`i`, `j`).
 
 ---
 
 ## break Statement
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+The `break` statement immediately terminates the loop and transfers control outside the loop.
+It is used when there is no need to continue the loop further.
 
 ### Example: Exit loop at a specific value
 
@@ -129,15 +129,15 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+In this example, within an infinite loop, when `i` becomes 5, `break` is executed, terminating the loop.
+In this way, the `break` statement is useful when you want to control the loop independently of its condition.
 
 ---
 
 ## continue Statement
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+The `continue` statement skips the remaining code in the current iteration and starts the next iteration immediately.
+It is used when you want to skip certain logic under specific conditions.
 
 ### Example: Print only even numbers
 
@@ -151,15 +151,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+In this code, if `i` is odd, `continue` is executed, skipping the print section.
+As a result, only even values are printed.
 
 ---
 
 ## Summary
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Loops in Wave are designed to naturally express both condition-based and count-based iterations.
+The `while` loop is suitable for condition-centric repetition, while the `for` loop is useful when the iteration count and flow are clear.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+By using `break` and `continue` together, you can finely control the execution flow even during iteration, allowing you to construct more sophisticated and flexible loop logic.
