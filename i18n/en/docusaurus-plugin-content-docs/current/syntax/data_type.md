@@ -5,22 +5,22 @@ sidebar_position: 2
 # Data Type
 
 This document describes the various data types provided by the Wave programming language.
-Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
+In Wave, you can store and operate on values using various data types, each clearly defining the way of representing and handling the data in memory.
 
-데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
-이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
+Clearly specifying data types is one of the core design philosophies of Wave.
+This allows you to clearly express the intent of your code, catch errors early at compile time, and ensure efficient memory use and stable execution.
 
 ---
 
-## 정수 타입
+## Integer Type
 
-정수 타입은 정수 값을 저장하는 데 사용됩니다.
-Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+The integer type is used to store integer values.
+Wave commonly uses `i32` (signed 32-bit integer) and `u32` (unsigned 32-bit integer) by default, but allows for very fine-grained specification of integer bit sizes as needed.
 
-부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
-이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+Signed integer types are available from `i8` to `i1024`, while unsigned integer types can be used from `u8` to `u1024`.
+This allows for a wide range of requirements to be met, from simple calculations to large integer operations, cryptographic processing, and low-level system programming.
 
-다음은 정수 타입을 사용하는 간단한 예제입니다.
+The following is a simple example using integer types.
 
 ```wave
 var a: i32 = 100;
@@ -32,12 +32,12 @@ var b: u32 = 200;
 ## Floating-Point Type
 
 The floating-point type is used to store real-number values.
-Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
+The default floating-point type used in Wave is `f32`, but larger sizes can be selected for higher precision.
 
-Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
-이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
+Wave provides floating-point types from `f32` to `f128`, allowing users to choose between precision and performance.
+This allows for real number operations to be used in various applications, from general numerical calculations to precise scientific computations.
 
-아래는 부동소수점 타입을 사용하는 예제입니다.
+Below is an example using floating-point types.
 
 ```wave
 var pi: f32 = 3.14;
@@ -48,12 +48,12 @@ var e: f64 = 2.71828;
 
 ## String Type
 
-문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
-Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
+The string type is used to handle text data.
+In Wave, strings are declared using the `str` keyword and string literals are expressed with double quotes (`"`).
 
-문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+Strings are widely used for message output, handling user inputs, and processing text-based data in programs.
 
-다음은 문자열 타입의 기본적인 사용 예제입니다.
+Here is a basic example of using the string type.
 
 ```wave
 var text: str = "Hello Wave";
@@ -63,10 +63,10 @@ var text: str = "Hello Wave";
 
 ## Boolean Type
 
-불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
-Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
+The boolean type represents True or False values.
+Wave uses the `bool` type, with values designated as `true` or `false`.
 
-불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
+The boolean type plays a key role in conditionals and loops, used to control the flow of the program.
 
 ```wave
 var isActive: bool = true;
@@ -78,9 +78,9 @@ var isAvailable: bool = true;
 ## Character Type
 
 The character type is used to store a single character.
-`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
+Declared using the `char` keyword, it can hold only a single character.
 
-문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
+Character literals are expressed using single quotes (`'`).
 
 ```wave
 var letter: char = 'A';
@@ -88,10 +88,10 @@ var letter: char = 'A';
 
 ## Byte Type
 
-바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
-이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
+The byte type is used to store data of 1-byte size.
+This type is useful for low-level data processing such as binary data handling, file I/O, and network programming.
 
-Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
+In Wave, byte types are declared using the `byte` keyword.
 
 ```wave
 var byteData: byte = 0xFF;
@@ -99,10 +99,10 @@ var byteData: byte = 0xFF;
 
 ## Pointer Type
 
-포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언하며, 특정 타입의 메모리 주소를 안전하게 표현할 수 있습니다.
+Pointer types are used to directly reference memory addresses.
+In Wave, pointer types are declared in the form `ptr<T>`, allowing safe expression of memory addresses of specific types.
 
-포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
+Pointers are used for low-level memory access, often utilized in system programming or performance-critical code.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
@@ -110,14 +110,14 @@ var ptr: ptr<T> = &someVariable;
 
 ## Array Type
 
-배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
-Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
+Array types are used to sequentially store multiple values of the same data type.
+In Wave, arrays are declared in the form `array<type, size>`, and the size is explicitly specified at compile time.
 
-이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
+This clarifies the memory structure and allows stable access.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
-적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
+Each data type is designed to allow selection of appropriate range and size for their purpose and characteristics.
+Choosing the proper data type results in efficient memory management as well as significantly improved code stability and readability.
