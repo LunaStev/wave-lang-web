@@ -6,49 +6,48 @@ sidebar_position: 6
 
 ## Introduction
 
-이 문서는 Wave 언어에서 제공하는 포인터 기능과 그 활용 방식에 대해 설명합니다.
-Wave는 저수준 시스템 프로그래밍을 지원하는 언어로서, 명시적인 메모리 주소 조작이 필요한 상황을 고려하여 포인터 기능을 제공합니다.
+This document explains the pointer features offered by the Wave language and how to utilize them.
+Wave is a language that supports low-level system programming and provides pointer functionality, considering situations where explicit memory address manipulation is necessary.
 
-포인터는 특정 타입의 메모리 주소를 가리키는 변수이며, 이를 통해 메모리에 저장된 값에 직접 접근하거나 해당 값을 수정할 수 있습니다.
-이 기능은 시스템 소프트웨어, 네이티브 라이브러리, 성능이 중요한 코드, 하드웨어 제어와 같은 영역에서 핵심적인 역할을 합니다.
+A pointer is a variable that points to a memory address of a specific type, allowing direct access to or modification of the value stored in memory.
+This feature plays a crucial role in areas like system software, native libraries, performance-critical code, and hardware control.
 
 ---
 
 ## Pointer Declaration
 
-Wave에서 포인터는 `ptr<타입>` 형태로 선언합니다.
-이는 해당 타입의 값을 저장하고 있는 메모리 주소를 가리키는 포인터임을 명확하게 표현합니다.
+In Wave, pointers are declared in the form `ptr<type>`.
+This clearly expresses that it is a pointer pointing to the memory address that stores a value of that type.
 
-예를 들어, `i32` 타입의 값을 가리키는 포인터는 다음과 같이 선언할 수 있습니다.
+For example, a pointer to a value of type `i32` can be declared as follows.
 
 ```wave
 var p: ptr<i32>;
 ```
 
-이 선언은 아직 어떤 메모리도 가리키지 않는 포인터 변수를 생성하며, 이후에 실제 주소로 초기화할 수 있습니다.
+This declaration creates a pointer variable that does not point to any memory yet, which can be later initialized with an actual address.
 
 ---
 
 ## Pointer Initialization
 
-포인터는 변수의 주소를 참조함으로써 초기화할 수 있습니다.
-Wave에서는 주소 연산자 `&`를 사용하여 변수의 메모리 주소를 얻습니다.
+Pointers can be initialized by referencing the address of a variable.
+In Wave, the address operator `&` is used to obtain the memory address of a variable.
 
 ```wave
 var a: i32 = 10;
 var p: ptr<i32> = &a;
 ```
 
-위 코드에서 `&a`는 변수 `a`가 저장된 메모리 주소를 의미하며,
-포인터 `p`는 해당 주소를 가리키게 됩니다.
-이 시점부터 `p`를 통해 `a`의 값에 직접 접근할 수 있습니다.
+In the code above, `&a` represents the memory address where variable `a` is stored, and pointer `p` points to that address.
+From this point, you can directly access the value of `a` through `p`.
 
 ---
 
 ## Pointer Dereferencing
 
-포인터가 가리키는 실제 값을 읽거나 수정하려면 역참조가 필요합니다.
-Wave에서는 `deref` 키워드를 사용하여 포인터를 역참조합니다.
+To read or modify the actual value pointed to by a pointer, dereferencing is necessary.
+In Wave, pointers are dereferenced using the `deref` keyword.
 
 ```wave
 var a: i32 = 10;
@@ -60,30 +59,29 @@ deref p = 20;
 println("{}", a); // Outputs 20
 ```
 
-이 예제에서 `deref p`는 포인터 `p`가 가리키는 메모리 위치의 값을 의미합니다.
-값을 읽을 수도 있고, 새로운 값을 대입하여 원본 변수의 내용을 변경할 수도 있습니다.
+In this example, `deref p` refers to the value at the memory location pointed to by pointer `p`.
+You can read the value or assign a new value to change the contents of the original variable.
 
 ---
 
 ## NULL Pointer
 
-Wave에서는 유효한 메모리를 가리키지 않는 포인터를 `null` 키워드로 표현합니다.
-포인터 변수는 명시적으로 `null`로 초기화할 수 있으며, 이 경우 어떤 메모리 주소도 참조하지 않습니다.
+In Wave, pointers that do not point to valid memory are represented with the `null` keyword.
+Pointer variables can be explicitly initialized with `null`, in which case they do not reference any memory address.
 
 ```wave
 var p: ptr<i32> = null;
 ```
 
-널 포인터는 의도적으로 아직 초기화되지 않은 상태를 표현할 때 사용됩니다.
-Wave에서는 널 포인터를 역참조하려는 시도를 컴파일 단계에서 감지하여 오류로 처리함으로써,
-런타임 오류나 정의되지 않은 동작을 방지합니다.
+A null pointer is used to deliberately express an uninitialized state.
+In Wave, attempts to dereference a null pointer are detected at compile time and treated as errors, preventing runtime errors or undefined behavior.
 
 ---
 
 ## Multiple Pointers
 
-Wave는 포인터를 여러 단계로 중첩하여 사용하는 다중 포인터를 지원합니다.
-포인터 자체도 하나의 값이므로, 포인터를 가리키는 포인터를 선언하는 것이 가능합니다.
+Wave supports multilayer pointers that use pointers in several stages.
+Pointers themselves are also values, so it is possible to declare a pointer to a pointer.
 
 ```wave
 var x: i32 = 1;
@@ -96,16 +94,15 @@ println("{}", deref deref p2);         // 1
 println("{}", deref deref deref p3);   // 1
 ```
 
-이처럼 다중 포인터를 사용하면 간접 참조 구조를 표현할 수 있으며,
-복잡한 메모리 구조나 저수준 데이터 표현이 필요한 경우에 활용할 수 있습니다.
+Using multilayer pointers allows you to express indirect reference structures, which can be useful in cases requiring complex memory structures or low-level data representation.
 
 ---
 
 ## Arrays and Pointers
 
-포인터는 단일 변수뿐만 아니라 배열 요소나 배열 전체를 가리키는 데에도 사용할 수 있습니다.
+Pointers can be used to point not only to a single variable but also to array elements or an entire array.
 
-배열의 각 요소가 포인터인 경우, 포인터 배열을 통해 여러 메모리 위치를 간접적으로 참조할 수 있습니다.
+If each element of an array is a pointer, multiple memory locations can be indirectly referenced through a pointer array.
 
 ```wave
 var a: i32 = 10;
@@ -119,24 +116,23 @@ println(
 ); // 10, 20
 ```
 
-또한 배열 전체를 하나의 포인터로 가리키는 것도 가능합니다.
+It is also possible to point to the entire array as a single pointer.
 
 ```wave
 var arr: ptr<array<i32, 3>> = &[1, 2, 3];
 println("{}", arr); // Outputs memory address
 ```
 
-이 방식은 배열을 함수로 전달하거나, 저수준 메모리 처리 시 유용하게 사용됩니다.
+This method is useful when passing arrays to functions or when handling low-level memory processing.
 
 ---
 
 ## Safety and Ownership
 
-Wave는 포인터 사용 시 발생할 수 있는 위험을 줄이기 위해,
-Rust와 유사한 개념의 소유권과 수명 시스템을 도입하는 것을 목표로 설계되었습니다.
+Wave is designed with the goal of introducing an ownership and lifetime system similar to Rust to reduce risks associated with using pointers.
 
-이를 통해 유효하지 않은 포인터 역참조, 댕글링 포인터, 이중 해제와 같은 문제를 컴파일 단계에서 최대한 방지하려고 합니다.
-포인터는 강력한 도구이지만, Wave에서는 가능한 한 명확하고 안전한 방식으로 사용되도록 제한과 검사를 적용합니다.
+This aims to prevent issues like invalid pointer dereferencing, dangling pointers, and double frees as much as possible at the compile stage.
+Pointers are powerful tools, but Wave applies restrictions and checks to ensure they are used in a clear and safe manner as much as possible.
 
 ```wave
 fun main() {
@@ -150,22 +146,21 @@ fun main() {
 }
 ```
 
-출력 결과는 다음과 같습니다.
+The output result is as follows.
 
 ```text
 x = 42
 x = 99
 ```
 
-이 예제에서 포인터를 통해 변수의 값을 안전하게 읽고 수정할 수 있음을 보여줍니다.
+This example shows that you can safely read and modify the value of a variable through a pointer.
 
 ---
 
 ## Conclusion
 
 Pointers are one of the key features in Wave enabling high-performance low-level programming.
-직접적인 메모리 제어가 필요한 시스템 개발, 네이티브 라이브러리 구현, 하드웨어 제어와 같은 영역에서 특히 중요한 역할을 합니다.
+It plays a particularly important role in areas like system development requiring direct memory control, native library implementation, and hardware control.
 
-Wave는 포인터의 강력함을 유지하면서도, 컴파일러 차원의 검사와 언어 설계를 통해
-가능한 한 안전하고 예측 가능한 포인터 사용을 지향합니다.
-이를 통해 개발자는 성능과 안정성 사이에서 균형 잡힌 선택을 할 수 있습니다.
+Wave aims for safe and predictable pointer use as much as possible by maintaining the power of pointers, while implementing compiler-level checks and language design.
+This allows developers to make balanced choices between performance and stability.
