@@ -4,42 +4,39 @@ sidebar_position: 4
 
 # Wave + Whale Integrated Development Roadmap v2
 
-이 문서는 Wave 언어와 Whale 컴파일러 툴체인의 통합 개발 과정을 단계별로 정리한 로드맵입니다.
-Wave와 Whale은 초기에는 분리된 구성 요소로 시작하지만, 최종적으로는 하나의 독립적인 언어 생태계로 완전히 통합되는 것을 목표로 합니다.
+This document is a roadmap outlining the step-by-step integration development process of the Wave language and Whale compiler toolchain.
+Wave and Whale initially start as separate components, but ultimately aim to be fully integrated into one independent language ecosystem.
 
-전체 개발 단계는 다음과 같은 흐름을 따릅니다.
+The entire development stages follow the flow as below.
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
-각 단계는 이전 단계의 결과를 기반으로 진행되며, 한 단계가 완료되면 이전 구조로 되돌아가지 않는 단방향 개발을 전제로 합니다.
+Each stage proceeds based on the results of the previous stage, assuming unidirectional development where you do not revert to a previous structure once a stage is completed.
 
 ---
 
 ## Pre-Beta Stage
 
-Pre-Beta 단계의 목표는 Wave 언어 프론트엔드를 완성하고, LLVM 백엔드를 기반으로 언어의 전체 기능을 구현하는 것입니다.
-이 단계에서는 Whale을 사용하지 않으며, 컴파일과 실행은 전적으로 LLVM을 통해 이루어집니다.
+The goal of the Pre-Beta stage is to complete the front end of the Wave language and implement the full functionality of the language based on the LLVM backend.
+In this stage, Whale is not used; compilation and execution are entirely done through LLVM.
 
-문법 자체를 확장하는 작업은 이 단계에서 진행하지 않습니다.
-이미 정의된 사양을 기준으로 모든 문법 요소를 실제로 동작하게 만드는 것이 핵심 목표입니다.
-에러 메시지 품질, 타입 검사, 변수 스코프 처리 등 프론트엔드 구조의 안정화에 집중합니다.
+Extending the syntax itself is not addressed at this stage.
+The key goal is to make every grammatical element work based on the defined specifications.
+Focus on stabilizing frontend architecture like error message quality, type checking, variable scope handling, etc.
 
-구현 범위에는 변수 선언과 출력, 기본 연산이 포함되며, 함수 정의와 호출,
-조건문(`if` / `else if` / `else`), 반복문(`while` / `break` / `continue`) 역시 모두 이 단계에서 완성됩니다.
-또한 포맷 출력, 명시적 타입 지정, `ptr<T>` 형태의 포인터 설계,
-`array<T, N>` 형태의 배열 설계가 포함됩니다.
+The scope of implementation includes variable declaration, output, and basic operations, as well as the completion of function definition and calls, conditions (`if` / `else if` / `else`), loops (`while` / `break` / `continue`).
+It also includes format output, explicit type specification, `ptr<T>` type pointer design, `array<T, N>` type array design.
 
-이 단계에서 Wave 컴파일러는 전부 Rust로 작성되며,
-LLVM IR 생성과 AOT 실행을 위해 inkwell 및 llvm-sys를 사용합니다.
+In this stage, the Wave compiler is entirely written in Rust and uses inkwell and llvm-sys for LLVM IR generation and AOT execution.
 
 ---
 
 ## Alpha Stage
 
-Alpha 단계의 목표는 Whale 백엔드를 도입하고, LLVM과 Whale을 병행 사용하는 구조를 확립하는 것입니다.
-LLVM은 여전히 기본 백엔드로 유지되며, Whale은 선택적으로 사용할 수 있는 백엔드로 추가됩니다.
+The goal for the Alpha stage is to introduce the Whale backend and establish a structure where LLVM and Whale are used concurrently.
+LLVM remains the primary backend, and Whale is added as an optionally usable backend.
 
 Wave 코드를 실행할 때 `--backend` 옵션을 통해 LLVM과 Whale 중 어떤 백엔드를 사용할지 선택할 수 있습니다.
 
