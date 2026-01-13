@@ -6,31 +6,31 @@ sidebar_position: 1
 
 ## Método de instalación
 
-Wave는 제공되는 설치 스크립트를 통해 간단하게 설치할 수 있습니다.
-터미널에서 아래 명령어를 실행하면 지정한 버전의 Wave 컴파일러(`wavec`)가 자동으로 설치됩니다.
+Wave se puede instalar fácilmente a través del script de instalación proporcionado.
+Ejecutando el siguiente comando en la terminal, se instalará automáticamente la versión especificada del compilador Wave (`wavec`).
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-설치 스크립트는 시스템 환경을 확인한 뒤, Wave 실행에 필요한 의존성과 컴파일러를 자동으로 설정합니다.
-버전을 명시하지 않을 경우에는 최신 안정 버전 또는 지정한 기준에 따른 기본 버전이 설치됩니다.
+El script de instalación verifica el entorno del sistema y configura automáticamente las dependencias y el compilador necesarios para ejecutar Wave.
+Si no se especifica una versión, se instalará la última versión estable o la versión predeterminada basada en un criterio específico.
 
-## 설치 예시
+## Ejemplo de instalación
 
-최신 버전을 설치하려면 다음과 같이 실행합니다.
+Para instalar la última versión, ejecute lo siguiente.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
 ```
 
-특정 버전을 설치하고 싶은 경우에는 `--version` 옵션을 사용합니다.
+Para instalar una versión específica, utilice la opción `--version`.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-나이틀리 빌드와 같이 더 세부적인 버전을 지정하는 것도 가능합니다.
+También es posible especificar versiones más detalladas como las nightly builds.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
@@ -38,43 +38,40 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 
 ## Tareas realizadas durante la instalación
 
-설치 스크립트는 Wave를 정상적으로 실행할 수 있도록 여러 단계를 자동으로 처리합니다.
-먼저 LLVM 14와 관련된 필수 패키지를 `apt-get`을 통해 설치합니다.
-이후 시스템에서 LLVM을 안정적으로 참조할 수 있도록 `/usr/lib/libllvm-14.so`에 대한 심볼릭 링크를 생성합니다.
+El script de instalación realiza automáticamente varios pasos para que Wave se ejecute correctamente.
+Primero instala los paquetes esenciales relacionados con LLVM 14 a través de `apt-get`.
+Luego, crea un enlace simbólico para `/usr/lib/libllvm-14.so` para que el sistema pueda referenciar LLVM de manera estable.
 
-Wave 컴파일러가 LLVM을 올바르게 찾을 수 있도록 `LLVM_SYS_140_PREFIX` 환경 변수를 설정하며,
-이 설정은 `~/.bashrc`에 추가되어 이후 터미널 세션에서도 유지됩니다.
+Configura la variable de entorno `LLVM_SYS_140_PREFIX` para que el compilador Wave pueda encontrar LLVM correctamente, y esta configuración se añade a `~/.bashrc` para que persista en sesiones de terminal futuras.
 
-그 다음 사용자가 지정한 버전의 Wave 패키지(`.tar.gz`)를 다운로드하고 압축을 해제합니다.
-압축 해제 후에는 `wavec` 실행 파일을 `/usr/local/bin`에 설치하여,
-시스템 어디에서든 `wavec` 명령어를 사용할 수 있도록 구성합니다.
+Luego descarga y descomprime el paquete Wave (`.tar.gz`) de la versión especificada por el usuario.
+Después de descomprimir, instala el ejecutable `wavec` en `/usr/local/bin`, configurándolo para que el comando `wavec` se pueda usar desde cualquier parte del sistema.
 
-설치가 완료되면 `wavec --version` 명령어를 통해 정상적으로 설치되었는지 확인합니다.
+Una vez completada la instalación, verifica que se haya instalado correctamente con el comando `wavec --version`.
 
 ## Confirmación de instalación
 
-설치가 끝난 후, 아래 명령어를 실행하여 Wave 컴파일러가 정상적으로 설치되었는지 확인할 수 있습니다.
+Después de la instalación, puede ejecutar el siguiente comando para comprobar si el compilador Wave se instaló correctamente.
 
 ```bash
 wavec --version
 ```
 
-명령어 실행 시 설치된 Wave의 버전 정보가 출력되면 정상적으로 설치된 상태입니다.
+Si al ejecutar el comando se muestra la información de la versión de Wave instalada, entonces está instalado correctamente.
 
 ---
 
 ## Guía para eliminar Wave (`uninstall.sh`)
 
-Wave를 시스템에서 제거하고 싶을 경우, 제공되는 제거 스크립트를 사용할 수 있습니다.
-이 스크립트는 설치 과정에서 추가된 파일과 설정을 정리하는 역할을 합니다.
+Si desea eliminar Wave del sistema, puede usar el script de desinstalación proporcionado.
+Este script sirve para limpiar los archivos y configuraciones añadidos durante la instalación.
 
 ### Método de eliminación
 
-터미널에서 다음 명령어를 실행합니다.
+Ejecute el siguiente comando en la terminal.
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
 ```
 
-제거가 완료되면 wavec 명령어는 더 이상 사용되지 않으며,
-Wave와 관련된 실행 파일과 설정이 시스템에서 삭제됩니다.
+Una vez completada la desinstalación, el comando wavec ya no estará disponible, y los archivos ejecutables y configuraciones relacionadas con Wave se eliminarán del sistema.
