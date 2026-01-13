@@ -6,18 +6,18 @@ sidebar_position: 7
 
 ## Introducción
 
-이 문서는 Wave 언어에서 제공하는 인라인 어셈블리 기능에 대해 설명합니다.
-인라인 어셈블리는 Wave가 제공하는 기능 중 하나로, 고수준 언어가 갖는 편의성과 구조를 유지하면서도 저수준 하드웨어 제어에 직접 접근할 수 있도록 설계된 문법입니다.
+Este documento explica la funcionalidad de ensamblaje en línea proporcionada por el lenguaje Wave.
+El ensamblaje en línea es una de las características proporcionadas por Wave, diseñada para permitir el acceso directo al control de hardware de bajo nivel mientras se mantiene la conveniencia y la estructura de un lenguaje de alto nivel.
 
-일반적인 Wave 코드로는 표현하기 어려운 레지스터 조작, 메모리 주소 단위 접근, 특정 CPU 명령어 실행과 같은 작업을 가능하게 하며, 성능 최적화가 중요하거나 하드웨어 및 아키텍처에 강하게 의존하는 코드가 필요한 상황에서 활용됩니다.
-이 기능을 통해 Wave는 단순한 고수준 언어를 넘어, 시스템 프로그래밍 영역까지 포괄할 수 있습니다.
+Permite realizar operaciones como la manipulación de registros, el acceso a direcciones de memoria y la ejecución de instrucciones específicas de la CPU que son difíciles de expresar en código Wave ordinario, y se utiliza en situaciones donde la optimización del rendimiento es importante o se necesita código fuertemente dependiente del hardware y la arquitectura.
+Con esta funcionalidad, Wave puede abarcar desde un simple lenguaje de alto nivel hasta el ámbito de la programación de sistemas.
 
 ---
 
 ## Gramática básica
 
-인라인 어셈블리는 `asm { ... }` 블록을 통해 작성합니다.
-이 블록 안에는 실제로 실행될 어셈블리 명령어와, Wave 변수와 CPU 레지스터를 연결하기 위한 입력·출력 매핑이 함께 정의됩니다.
+El ensamblaje en línea se escribe usando \`asm { ... } como bloque.
+Dentro de este bloque se definen tanto las instrucciones de ensamblaje que se van a ejecutar realmente como el mapeo de entrada y salida para conectar las variables Wave con los registros de la CPU.
 
 ```wave
 asm {
@@ -28,29 +28,29 @@ asm {
 }
 ```
 
-어셈블리 명령어는 문자열 형태로 작성되며, 실제 CPU에서 실행되는 저수준 명령어를 그대로 기술합니다.
-여러 줄로 작성할 수 있으며, 각 줄에는 하나의 명령어만 작성하는 것을 원칙으로 합니다.
+Las instrucciones de ensamblaje se escriben en forma de cadena de caracteres, describiendo las instrucciones de bajo nivel que realmente se ejecutan en la CPU.
+Puede escribirse en múltiples líneas y, en principio, solo debe haber un comando por línea.
 
-예를 들어 다음과 같은 형태로 사용할 수 있습니다.
+Por ejemplo, se puede utilizar de la siguiente manera.
 
 ```wave
 "mov rax, 1"
 "syscall"
 ```
 
-`in("레지스터")` 값 구문은 Wave 변수나 표현식의 값을 지정한 CPU 레지스터에 로드하기 위해 사용됩니다.
-이를 통해 어셈블리 코드에서 해당 레지스터를 입력값으로 사용할 수 있습니다.
+La sintaxis `in("registro")` se utiliza para cargar el valor de una variable o expresión de Wave en un registro de CPU especificado.
+De este modo, en el código ensamblador, se puede utilizar el registro como un valor de entrada.
 
-아래 예시는 변수 s의 값을 x86-64 규약에서 첫 번째 syscall 인자 레지스터인 rdi에 전달하는 경우입니다.
+El siguiente ejemplo ilustra el caso de pasar el valor de la variable s al registro rdi, que es el primer registro de argumento de syscall según la convención x86-64.
 
 ```wave
 in("rdi") s
 ```
 
-반대로 `out("레지스터")` 변수 구문은 지정한 레지스터에 들어 있는 값을 Wave 변수로 가져오는 역할을 합니다.
-어셈블리 실행 결과를 Wave 코드에서 사용해야 할 때 이 방식을 사용합니다.
+Por el contrario, la sintaxis de variable `out("registro")` se usa para traer a una variable Wave el valor contenido en el registro especificado.
+Esta técnica se utiliza cuando se necesita usar el resultado de la ejecución en ensamblador en el código Wave.
 
-다음 예시는 `syscall` 호출 이후 반환값이 저장되는 `rax` 레지스터의 값을 변수 `ret`에 저장하는 경우입니다
+El siguiente ejemplo describe el caso de almacenar en la variable `ret` el valor del registro `rax` donde se guarda el valor de retorno de la llamada a `syscall`.
 
 ```wave
 out("rax") ret
@@ -58,9 +58,9 @@ out("rax") ret
 
 ---
 
-## 간단한 예제
+## Ejemplo simple
 
-아래 예제는 Linux x86-64 환경에서 `syscall`을 이용해 문자열을 표준 출력으로 출력하는 간단한 코드입니다.
+El siguiente ejemplo es un código sencillo que utiliza `syscall` en un entorno Linux x86-64 para imprimir una cadena a la salida estándar.
 
 ```wave
 fun main() {
@@ -78,15 +78,15 @@ fun main() {
 }
 ```
 
-이 예제에서 Wave 코드는 문자열의 포인터와 길이를 레지스터에 직접 설정하고, 시스템 콜을 호출하여 출력 작업을 수행합니다.
-시스템 콜의 반환값은 `rax` 레지스터를 통해 전달되며, `out` 구문을 통해 Wave 변수로 다시 가져옵니다.
+En este ejemplo, el código Wave establece directamente en los registros el puntero y la longitud de la cadena, y realiza la operación de llamada al sistema para imprimir.
+El valor de retorno de la llamada al sistema se transmite a través del registro `rax`, y se recupera como variable Wave mediante la sintaxis `out`.
 
 ---
 
 ## Advertencias
 
-인라인 어셈블리는 Wave의 타입 안정성과 추상화를 의도적으로 우회하는 기능입니다.
-잘못된 명령어 사용이나 레지스터 설정 오류가 발생할 경우, 프로그램이 비정상 종료되거나 undefined behavior가 발생할 수 있습니다.
+El ensamblaje en línea es una función que deliberadamente elude la seguridad de tipos y la abstracción de Wave.
+Si se utilizan instrucciones incorrectas o hay errores en la configuración del registro, el programa puede terminar de manera anormal o presentar comportamiento indefinido.
 
-`in`과 `out`을 통한 레지스터 매핑 자체는 컴파일 타임에 검증되지만, 어셈블리 명령어의 의미적 유효성이나 실행 결과까지 보장되지는 않습니다.
-따라서 인라인 어셈블리를 사용할 때에는 대상 아키텍처와 호출 규약, 그리고 명령어의 동작을 정확히 이해하고 있어야 합니다.
+El mapeo de registros mediante `in` y `out` se valida en tiempo de compilación, pero no se garantiza la validez semántica ni el resultado de ejecución de las instrucciones de ensamblado.
+Por lo tanto, al usar ensamblado en línea, se debe comprender completamente la arquitectura objetivo, la convención de llamadas y el funcionamiento de las instrucciones.
