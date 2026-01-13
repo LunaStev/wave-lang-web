@@ -4,84 +4,60 @@ sidebar_position: 2
 
 # Filosofía y objetivos de Wave
 
-Wave는 기존 저수준 언어가 가진 한계를 보완하면서,
-하나의 언어로 다양한 개발 영역을 아우를 수 있는 통합된 개발 생태계를 구축하는 것을 목표로 합니다.
+Wave tiene como objetivo complementar las limitaciones de los lenguajes de bajo nivel existentes y construir un ecosistema de desarrollo integrado que abarque diversas áreas de desarrollo con un solo lenguaje.
 
-웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어 제어, 컴파일러, 네트워킹, 암호화와 같이
-서로 성격이 크게 다른 분야를 각각 다른 언어로 나누어 다루는 대신,
-Wave는 하나의 언어와 하나의 도구 체계 안에서 이 모든 영역을 자연스럽게 연결하고자 합니다.
+En lugar de tratar áreas de carácter tan diferente como el desarrollo web, sistemas operativos, inteligencia artificial, blockchain, control de hardware, compiladores, redes y encriptación con diferentes lenguajes, Wave busca conectar naturalmente todas estas áreas dentro de un lenguaje y conjunto de herramientas unificados.
 
-Wave는 범용성을 단순히 “많은 곳에 쓸 수 있다”는 의미로 보지 않습니다.
-각 영역이 요구하는 성능, 제어력, 안정성을 동시에 충족시키는 것을 목표로 하며,
-이를 위해 언어 차원에서 일관된 설계와 명확한 규칙을 유지합니다.
+Wave no ve la universalidad simplemente como la capacidad de usarse en muchos lugares.
+Su objetivo es satisfacer simultáneamente el rendimiento, control y estabilidad que cada área exige, manteniendo un diseño coherente y reglas claras a nivel de lenguaje.
 
-특히 Wave는 하드웨어에 대한 깊은 전문 지식이 없는 개발자도
-하드웨어 기능을 활용할 수 있도록 설계되었습니다.
-표준 하드웨어 라이브러리는 복잡한 하드웨어 개념을 추상화하여,
-직관적인 방식으로 사용할 수 있도록 돕습니다.
+En particular, Wave está diseñado para que los desarrolladores que no tengan un profundo conocimiento del hardware puedan aprovechar sus funciones.
+La biblioteca estándar de hardware abstrae conceptos complejos de hardware para que puedan utilizarse de forma intuitiva.
 
-동시에 Wave는 필요한 경우 하드웨어를 직접 제어할 수 있는 저수준 접근도 제공합니다.
-이를 통해 개발자는 추상화된 인터페이스와 직접 제어 사이를 자유롭게 오갈 수 있으며,
-성능을 희생하지 않으면서도 코드의 복잡성을 최소화할 수 있습니다.
+Al mismo tiempo, Wave ofrece acceso de bajo nivel para controlar directamente el hardware cuando sea necesario.
+Esto permite a los desarrolladores moverse libremente entre interfaces abstractas y control directo, minimizando la complejidad del código sin sacrificar el rendimiento.
 
-궁극적으로 Wave는 하나의 언어로 다양한 작업을 처리하고,
-효율적인 성능과 일관된 개발 경험을 제공하는 통합 환경을 지향합니다.
+En última instancia, Wave aspira a ser un entorno integrado que maneje diversas tareas con un solo lenguaje, brindando un rendimiento eficiente y una experiencia de desarrollo consistente.
 
 ## Rendimiento y eficiencia
 
-Wave는 고성능을 전제로 설계된 언어입니다.
-컴파일러와 실행 모델은 최적화된 코드 생성을 목표로 하며,
-다양한 플랫폼에서 안정적인 성능을 유지할 수 있도록 구성됩니다.
+Wave es un lenguaje diseñado con el rendimiento en mente.
+El compilador y el modelo de ejecución están orientados a la generación de código optimizado y están configurados para mantener un rendimiento estable en diversas plataformas.
 
-이를 통해 웹 애플리케이션과 같은 고수준 영역부터,
-운영 체제나 시스템 소프트웨어처럼 성능이 중요한 영역까지
-하나의 언어로 일관된 성능 특성을 제공하는 것을 목표로 합니다.
+Esto pretende proporcionar características de rendimiento consistentes con un solo lenguaje, desde áreas de alto nivel como aplicaciones web hasta áreas en las que el rendimiento es crítico, como sistemas operativos o software de sistema.
 
 ## Seguridad y manejo de errores
 
-Wave는 안전한 프로그래밍을 중요한 설계 기준으로 삼고 있습니다.
-컴파일 타임 단계에서 가능한 오류를 최대한 검출하여,
-런타임에서 발생할 수 있는 문제를 최소화하는 방향으로 설계되었습니다.
+Wave considera la programación segura como un criterio clave de diseño.
+Está diseñado para detectar tantos errores como sea posible durante el tiempo de compilación, minimizando los problemas que pueden surgir en tiempo de ejecución.
 
-메모리 안전성, 타입 안전성과 같은 기본적인 안정성을 보장하면서도,
-이를 위해 성능을 희생하지 않는 것을 목표로 합니다.
-Wave는 안전성과 성능이 상충되는 개념이 아니라,
-언어 설계를 통해 함께 달성할 수 있는 요소라고 봅니다.
+Su objetivo es garantizar fundamentos de seguridad como la seguridad de memoria y de tipos, sin sacrificar el rendimiento para lograrlo.
+Wave cree que la seguridad y el rendimiento no son conceptos contradictorios, sino que pueden lograrse conjuntamente a través del diseño del lenguaje.
 
 ## Mejora de la productividad del desarrollador
 
-Wave는 직관적이고 일관된 문법을 통해
-개발자가 언어를 빠르게 익히고 효율적으로 사용할 수 있도록 설계되었습니다.
+Wave está diseñado con una sintaxis intuitiva y consistente para que los desarrolladores puedan aprender y usar el lenguaje rápidamente y de manera eficiente.
 
-또한 풍부한 표준 라이브러리와 도구 체계(Vex, WSON 등)를 통해
-복잡한 작업을 반복 구현하지 않고도 해결할 수 있도록 지원합니다.
-이를 통해 개발자는 환경 설정이나 보일러플레이트 코드보다
-문제 해결 자체에 집중할 수 있습니다.
+Además, mediante un rico conjunto de bibliotecas estándar y herramientas (Vex, WSON, etc.), permite resolver tareas complejas sin necesidad de implementar repetidamente.
+Esto permite a los desarrolladores centrarse en la resolución de problemas en lugar de en la configuración del entorno o el código repetitivo innecesario.
 
 ## Independencia de plataforma
 
-Wave는 특정 운영 체제나 환경에 종속되지 않는 언어를 지향합니다.
-동일한 코드가 다양한 운영 체제에서 일관되게 동작할 수 있도록 설계되어 있으며,
-개발자는 한 번 작성한 코드를 여러 환경에서 재사용할 수 있습니다.
+Wave se orienta a ser un lenguaje independiente de cualquier sistema operativo o entorno específico.
+Está diseñado para que el mismo código funcione consistentemente en varios sistemas operativos, permitiendo a los desarrolladores reutilizar el código escrito una vez en muchos entornos.
 
-이러한 플랫폼 독립성은 Wave가 범용 언어로서 기능하기 위한
-중요한 기반 요소 중 하나입니다.
+Esta independencia de plataforma es uno de los elementos fundamentales para que Wave funcione como un lenguaje universal.
 
 ## Comunidad y escalabilidad
 
-Wave는 오픈 소스 커뮤니티와의 협력을 통해 성장하는 언어입니다.
-사용자와 개발자는 Wave의 기능을 확장하고 개선하는 데 자유롭게 참여할 수 있으며,
-이 과정은 언어의 방향성과 완성도를 함께 만들어가는 과정이기도 합니다.
+Wave es un lenguaje que crece a través de la colaboración con la comunidad de código abierto.
+Los usuarios y desarrolladores pueden participar libremente en la ampliación y mejora de las características de Wave, en un proceso que también da forma a la dirección y calidad del lenguaje.
 
-Wave는 커스터마이징과 확장을 전제로 설계되어,
-특정 분야나 요구사항에 맞게 언어와 생태계를 유연하게 활용할 수 있도록 합니다.
+Wave está diseñado para la personalización y expansión, permitiendo un uso flexible del lenguaje y el ecosistema para adaptarse a áreas específicas o requisitos.
 
 ## Objetivos orientados al futuro
 
-Wave는 현재의 기술 환경에 머무르지 않고,
-앞으로 등장할 새로운 기술 흐름을 수용할 수 있는 언어를 목표로 합니다.
+Wave no se queda en el entorno tecnológico actual sino que aspira a ser un lenguaje capaz de adoptar nuevos flujos tecnológicos que puedan surgir.
 
-인공지능, 분산 시스템, 양자 컴퓨팅과 같은 미래 기술을 염두에 두고,
-언어와 도구 체계를 지속적으로 확장해 나갈 계획입니다.
-이러한 방향성은 Wave가 단기적인 도구가 아닌,
-장기적으로 발전 가능한 언어로 자리 잡기 위한 기반이 됩니다.
+Con la mira puesta en futuras tecnologías como la inteligencia artificial, sistemas distribuidos y computación cuántica, planeamos expandir continuamente el lenguaje y el sistema de herramientas.
+Esta dirección es la base para que Wave se establezca no solo como una herramienta a corto plazo sino como un lenguaje capaz de evolucionar a largo plazo.
