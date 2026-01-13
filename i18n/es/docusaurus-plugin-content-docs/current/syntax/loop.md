@@ -6,26 +6,26 @@ sidebar_position: 4
 
 ## Introducción
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+En el lenguaje Wave se proporcionan bucles para manejar situaciones en las que el mismo código debe ejecutarse varias veces.
+Los bucles se utilizan para seguir ejecutando el código mientras se cumpla una condición o para repetirlo un número determinado de veces.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+Esto permite expresar tareas repetitivas con un código claro y conciso, sin necesidad de escribir nuevamente la misma lógica.
+Wave admite tanto bucles basados en condiciones como basados en conteo, y ofrece palabras clave para controlar el flujo de ejecución dentro de los bucles.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+Esta sección explica cómo usar las sentencias `while` y `for`, así como las palabras clave `break` y `continue` para controlar el flujo de repeticiones.
 
 ---
 
 ## while loop
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+La sentencia `while` ejecuta repetidamente un bloque de código mientras la condición dada se evalúe como verdadera (`true`).
+En el momento en que la condición se evalúa como falsa (`false`), la repetición se termina de inmediato.
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+Este método es adecuado cuando el número de repeticiones no es claro y se debe repetir hasta que se satisfaga una condición específica.
 
 ### Estructura básica
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+La estructura básica de la sentencia while en Wave es la siguiente.
 
 ```wave
 while (condición) {
@@ -33,8 +33,7 @@ while (condición) {
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+La condición debe evaluarse a tipo `bool`, y dentro del bloque de código entre llaves `{}` se pueden escribir una o más sentencias.
 
 ### Ejemplo: Imprimir desde 0 hasta 4
 
@@ -47,28 +46,28 @@ while (i < 5) {
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+En este ejemplo, la repetición se realiza mientras la variable `i` sea menor que 5.
+En cada repetición se imprime el valor actual y se incrementa el valor de `i` en uno para que la condición eventualmente sea falsa.
 
 ---
 
 ## Bucle for
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+La sentencia `for` es adecuada para su uso cuando el número de repeticiones es relativamente claro.
+Permite definir al mismo tiempo el valor inicial, la condición y la expresión de incremento para expresar claramente el flujo del ciclo.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Una ventaja es que los elementos necesarios para controlar la repetición están reunidos en un solo lugar, lo que facilita entender la estructura del ciclo de un vistazo.
 
-### 기본 구조
+### Estructura básica
 
 ```wave
-for (var 변수명: 타입 = 초기값; 조건식; 증감식) {
-    // 반복할 코드
+for (var nombreVariable: tipo = valorInicial; condición; expresiónIncremento) {
+    // Código para repetir
 }
 ```
 
-여기서 반복 변수는 초기값으로 시작하며, 조건식이 참인 동안 반복이 실행됩니다.
-각 반복이 끝날 때마다 증감식이 실행되어 반복 변수의 값이 변경됩니다.
+Aquí, la variable de control comienza con el valor inicial y la repetición se ejecuta mientras la condición sea verdadera.
+Al final de cada repetición, se ejecuta la expresión de incremento, cambiando el valor de la variable de control.
 
 ### Ejemplo: Imprimir de 1 a 5
 
@@ -78,15 +77,15 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 }
 ```
 
-이 예제에서는 `i`가 1부터 시작하여 5 이하인 동안 반복이 수행됩니다.
-각 반복마다 `i`의 값을 출력한 후 1씩 증가시킵니다.
+En este ejemplo, la repetición se realiza mientras `i` comienza en 1 y es menor o igual a 5.
+En cada repetición, se imprime el valor de `i` y luego se incrementa en uno.
 
 ---
 
 ## Bucle anidado
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+Los ciclos pueden escribirse dentro de otros ciclos, lo que se llama ciclos anidados.
+Los ciclos anidados son útiles para recorrer estructuras de datos bidimensionales o manejar combinaciones de varias condiciones.
 
 ### Ejemplo: Bucle while doble
 
@@ -105,15 +104,15 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+En este ejemplo, cada vez que se ejecuta el ciclo `while` externo, se ejecuta completamente el ciclo `while` interno.
+Esto permite manejar secuencialmente combinaciones de tipo (`i`, `j`).
 
 ---
 
 ## Bucle break
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+La sentencia `break` termina inmediatamente el ciclo y mueve el flujo de ejecución fuera de ese ciclo.
+Se utiliza cuando no es necesario continuar la repetición durante el ciclo.
 
 ### Ejemplo: Finalización de la repetición en un valor específico
 
@@ -130,15 +129,15 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+En este ejemplo, dentro de un ciclo infinito, cuando `i` llega a 5, se ejecuta `break` y se termina el ciclo.
+Así, la sentencia `break` es útil para controlar el ciclo independientemente de la condición de repetición.
 
 ---
 
 ## Bucle continue
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+La sentencia `continue` omite el resto del código en la repetición actual y comienza la siguiente repetición.
+Se utiliza cuando deseas omitir solo cierta lógica bajo una condición específica.
 
 ### Ejemplo: Imprimir solo números pares
 
@@ -152,15 +151,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+En este código, cuando `i` es impar, se ejecuta `continue`, omitiendo la parte de impresión.
+Como resultado, solo se imprimen los valores pares.
 
 ---
 
 ## Resumen
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Los ciclos de Wave están diseñados para expresar de manera natural tanto bucles basados en condiciones como en número de repeticiones.
+La sentencia `while` es adecuada para ciclos basados en condiciones, mientras que la sentencia `for` es útil cuando el número de veces y el flujo del ciclo son claros.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+El uso combinado de `break` y `continue` permite controlar finamente el flujo de ejecución durante los ciclos, creando lógicas de repetición más sofisticadas y flexibles.
