@@ -5,105 +5,119 @@ sidebar_position: 2
 # Tipo de datos
 
 Este documento explica los diversos tipos de datos proporcionados por el lenguaje de programación Wave.
-El lenguaje de programación Wave puede almacenar y operar valores utilizando diversos tipos de datos.
-Los principales tipos de datos incluyen enteros, puntos flotantes y cadenas de caracteres. Cada tipo de datos define las características de los datos respectivos y la manera de manejar la memoria.
+En Wave, se pueden almacenar y operar valores a través de varios tipos de datos, y cada tipo de dato define claramente la forma de representar esos datos y cómo se manejan en memoria.
+
+Designar claramente los tipos de datos es una de las filosofías de diseño central de Wave.
+Esto permite expresar claramente la intención del código, detectar errores temprano durante la compilación, y garantizar un uso eficiente de la memoria y una ejecución estable.
+
+---
 
 ## Tipo entero
 
-El tipo entero se utiliza para almacenar **valores enteros**.
-Por defecto, los enteros se declaran como `i32` (entero de 32 bits con signo) y `u32` (entero de 32 bits sin signo).
-El lenguaje de programación Wave ofrece diversas opciones de tamaño que permiten configurar con precisión el rango de enteros.
+El tipo entero se utiliza para almacenar valores enteros.
+En Wave, generalmente se utilizan `i32` (entero con signo de 32 bits) y `u32` (entero sin signo de 32 bits), pero se puede especificar el tamaño en bits de los enteros de manera muy detallada si es necesario.
 
-- `i8` ~ `i1024`: Tipo entero con signo, se puede configurar de 8 bits a 1024 bits.
-- `u8` ~ `u1024`: Tipo entero sin signo, configurable de 8 bits a 1024 bits.
+Los tipos enteros con signo se ofrecen desde `i8` hasta `i1024`, y los tipos enteros sin signo están disponibles desde `u8` hasta `u1024`.
+Esto permite satisfacer una amplia gama de necesidades, desde cálculos simples hasta operaciones de enteros de gran tamaño, procesamiento criptográfico y programación de sistemas de bajo nivel.
 
-Ejemplo:
+A continuación, se presenta un ejemplo simple que utiliza tipos de enteros.
 
 ```wave
-var a :i32 = 100;
-var b :u32 = 200;
+var a: i32 = 100;
+var b: u32 = 200;
 ```
+
+---
 
 ## Tipo de punto flotante
 
 El tipo de punto flotante se utiliza para almacenar valores reales.
-Por defecto, los números de punto flotante se declaran como `f32`.
-Además, ofrece diversas opciones de tamaño para definir con precisión el tamaño de los números de punto flotante.
+El tipo de punto flotante que Wave utiliza por defecto es `f32`, y si se necesita una mayor precisión, se puede elegir un tipo de tamaño mayor.
 
-- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Esto permite realizar cálculos de números reales con mayor precisión.
+Wave ofrece tipos de punto flotante desde `f32` hasta `f128`, permitiendo al usuario escoger entre precisión de cálculo y rendimiento.
+Esto permite gestionar operaciones de números reales para diversos propósitos, desde cálculos numéricos generales hasta cálculos científicos precisos.
 
-Ejemplo:
+A continuación, se presenta un ejemplo que utiliza tipos de punto flotante.
 
 ```wave
-var pi :f32 = 3.14;
-var e :f64 = 2.71828;
+var pi: f32 = 3.14;
+var e: f64 = 2.71828;
 ```
+
+---
 
 ## Tipo cadena de caracteres
 
-El tipo de cadena de caracteres se utiliza para manejar datos de texto. Las cadenas de caracteres se declaran usando la palabra clave `str`.
-Las cadenas de caracteres se definen generalmente entre comillas dobles (`"`) y se pueden asignar como valores de variables.
+El tipo de cadena se utiliza para manejar datos de texto.
+En Wave, las cadenas se declaran usando la palabra clave `str`, y los literales de cadena se expresan entre comillas dobles (`"`).
 
-Ejemplo:
+Las cadenas se utilizan ampliamente en programas para la salida de mensajes, el manejo de entradas de usuario y el procesamiento de datos basados en texto, entre otros.
+
+A continuación, se presenta un ejemplo básico del uso de tipos de cadena.
 
 ```wave
-var text :str = "Hola Wave";
+var text: str = "Hola Wave";
 ```
+
+---
 
 ## Tipo booleano
 
-El tipo booleano es un tipo de datos que representa valores de **verdadero (True)** o **falso (False)**.
-Se utiliza principalmente en declaraciones condicionales y se establecen como `true` o `false`.
+El tipo booleano es un tipo de datos que representa valores de verdadero (True) o falso (False).
+En Wave se utiliza el tipo `bool`, y los valores se asignan como `true` o `false`.
 
-Ejemplo:
+El tipo booleano desempeña un papel clave en sentencias condicionales y bucles, y se utiliza para controlar el flujo del programa.
 
 ```wave
-var isActive :bool = true;
-var isAvailable :bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
+
+---
 
 ## Tipo carácter
 
 El tipo carácter se utiliza para almacenar un solo carácter.
-Se declara usando la palabra clave `char` y solo puede contener un valor de carácter.
+Se declara utilizando la palabra clave `char` y sólo puede contener un carácter.
 
-Ejemplo:
+Los literales de carácter se expresan entre comillas simples (`'`).
 
 ```wave
-var letter :char = 'A';
+var letter: char = 'A';
 ```
 
 ## Tipo byte
 
-El tipo byte se utiliza para almacenar datos de tamaño de **1 byte**.
-Es especialmente útil para manejar datos binarios. Se declara utilizando la palabra clave `byte`.
+El tipo byte se utiliza para almacenar datos de tamaño de 1 byte.
+Este tipo es útil principalmente cuando se requiere procesamiento de datos de bajo nivel, como en el manejo de datos binarios, entrada/salida de archivos y programación de redes.
 
-Ejemplo:
+En Wave, el tipo byte se declara utilizando la palabra clave `byte`.
 
 ```wave
-var byteData :byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Tipo puntero
 
-El tipo puntero se utiliza para hacer referencia a **direcciones de memoria**.
-Se declara utilizando la palabra clave `ptr` y se utiliza para almacenar direcciones de memoria.
+El tipo puntero se utiliza para referenciar directamente direcciones de memoria.
+En Wave, el tipo de puntero se declara en la forma `ptr<T>` y permite expresar de manera segura direcciones de memoria de un tipo específico.
 
-Ejemplo:
+Los punteros se utilizan cuando se requiere acceso a memoria de bajo nivel, y se emplean principalmente en la programación de sistemas o en códigos donde el rendimiento es crítico.
 
 ```wave
-var ptr :ptr<T> = &someVariable;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Tipo arreglo
 
-El tipo de arreglo se utiliza para almacenar **múltiples elementos del mismo tipo de datos** de forma secuencial.
-Se utiliza la palabra clave `array` y se puede especificar el tamaño o tipo del arreglo.
+El tipo de arreglo se utiliza para almacenar múltiples valores del mismo tipo de datos de manera secuencial.
+En Wave, los arreglos se declaran en la forma `array<tipo, tamaño>`, y el tamaño del arreglo se especifica claramente en tiempo de compilación.
 
-Ejemplo:
+Esto permite que la estructura de la memoria sea clara y que el acceso a los datos sea estable.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Cada tipo de datos se puede configurar con varios rangos y tamaños, lo que permite elegir el tipo que se ajuste a las necesidades del usuario para una gestión eficiente de la memoria y el cálculo.
+Cada tipo de datos está diseñado para permitir la selección de un alcance y tamaño adecuadas a su uso y características.
+Seleccionar el tipo de datos adecuado permite gestionar la memoria de manera eficiente, mejorando significativamente la estabilidad y legibilidad del código.

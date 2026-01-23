@@ -6,21 +6,31 @@ sidebar_position: 1
 
 ## インストール方法
 
-ターミナルで次のコマンドを実行します:
+Waveは提供されるインストールスクリプトによって簡単にインストールできます。
+ターミナルで以下のコマンドを実行すると、指定したバージョンのWaveコンパイラ(`wavec`)が自動的にインストールされます。
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-### 例
+インストールスクリプトはシステム環境を確認した後、Waveの実行に必要な依存関係とコンパイラを自動的に設定します。
+バージョンを明示しない場合は、最新の安定バージョンまたは指定された基準に基づくデフォルトバージョンがインストールされます。
+
+## インストール例
+
+最新バージョンをインストールするには次のように実行します。
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
 ```
 
+特定のバージョンをインストールしたい場合は、`--version`オプションを使用します。
+
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
+
+ナイトリービルドのように、より詳細なバージョンを指定することも可能です。
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
@@ -28,30 +38,40 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 
 ## インストール中に実行される作業
 
-- LLVM 14および関連パッケージのインストール（`apt-get`）
+インストールスクリプトはWaveを正常に実行できるように、いくつかのステップを自動的に処理します。
+まず、LLVM 14に関連する必須パッケージを`apt-get`でインストールします。
+その後、システムでLLVMを安定して参照できるように、`/usr/lib/libllvm-14.so`へのシンボリックリンクを作成します。
 
-- `/usr/lib/libllvm-14.so` シンボリックリンクの作成
+WaveコンパイラがLLVMを正しく見つけられるように、`LLVM_SYS_140_PREFIX`環境変数を設定し、この設定は`~/.bashrc`に追加され、以降のターミナルセッションでも維持されます。
 
-- `LLVM_SYS_140_PREFIX` 環境変数の設定（`~/.bashrc`）
+次に、ユーザーが指定したバージョンのWaveパッケージ(`.tar.gz`)をダウンロードして解凍します。
+解凍後は`wavec`実行ファイルを`/usr/local/bin`にインストールし、システムのどこからでも`wavec`コマンドを使用できるように構成します。
 
-- 指定されたバージョンのWave `.tar.gz` のダウンロード
-
-- 解凍後、`wavec`を`/usr/local/bin`にインストール
-
-- `wavec --version` でインストールを確認
+インストールが完了したら、`wavec --version`コマンドで正常にインストールされたか確認します。
 
 ## インストールの確認
+
+インストールが終了した後、以下のコマンドを実行して、Waveコンパイラが正常にインストールされたか確認できます。
 
 ```bash
 wavec --version
 ```
 
+コマンド実行時にインストールされたWaveのバージョン情報が出力されれば、正常にインストールされた状態です。
+
+---
+
 ## Wave削除ガイド（`uninstall.sh`）
+
+Waveをシステムから削除したい場合は、提供される削除スクリプトを使用できます。
+このスクリプトはインストールプロセスで追加されたファイルと設定を整理する役割を果たします。
 
 ### 削除方法
 
-ターミナルで次のコマンドを実行します:
+ターミナルで次のコマンドを実行します。
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
 ```
+
+削除が完了するとwavecコマンドはもう使用されず、Waveに関連する実行ファイルと設定がシステムから削除されます。

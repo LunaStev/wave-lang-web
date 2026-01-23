@@ -4,183 +4,102 @@ sidebar_position: 4
 
 # Hoja de ruta de desarrollo unificado de Wave + Whale v2
 
-## Todas las fases
+Este documento es una hoja de ruta que resume el proceso de desarrollo integrado del lenguaje Wave y la cadena de herramientas del compilador Whale, paso a paso.
+Wave y Whale comienzan como componentes separados inicialmente, pero finalmente se integrarán completamente en un ecosistema lingüístico independiente.
+
+Todas las etapas de desarrollo siguen el flujo siguiente.
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → lanzamiento
 ```
 
+Cada etapa progresa sobre los resultados de la anterior y se basa en un desarrollo unidireccional que no permite volver a la estructura anterior una vez que la etapa se completa.
+
 ---
 
 ## Fase Pre-Beta
 
-> Objetivo: Completar el frontend del lenguaje Wave + Implementar todas las funciones usando el backend LLVM
+El objetivo de la fase Pre-Beta es completar el frontend del lenguaje Wave e implementar todas las funciones del lenguaje basado en el backend de LLVM.
+En esta etapa no se utiliza Whale; la compilación y ejecución se realizan enteramente a través de LLVM.
 
-### Características principales
+La tarea de ampliar la gramática en sí no se lleva a cabo en esta etapa.
+El objetivo clave es hacer que todos los elementos gramaticales funcionen realmente basándose en las especificaciones ya definidas.
+Se centra en estabilizar la estructura del frontend, como la calidad de los mensajes de error, la verificación de tipos y el manejo del alcance de variables.
 
-- Solo se usa LLVM (sin Whale)
+El alcance de implementación incluye la declaración de variables, salida, operaciones básicas, así como la definición y llamada de funciones; las estructuras condicionales (`if` / `else if` / `else`) y los ciclos (`while` / `break` / `continue`) también se completan en esta etapa.
+También incluye la salida formateada, la especificación de tipos explícitos, el diseño de punteros en la forma `ptr<T>`, y el diseño de matrices en la forma `array<T, N>`.
 
-- No hay adiciones de sintaxis, solo implementación de las especificaciones existentes
-
-- Estabilización de la estructura enfocada en el frontend, como mensajes de error, verificación de tipos, y alcance de variables
-
-### Alcance de implementación
-
-- Declaración de variables, salida, operación
-
-- Definición y llamada de funciones
-
-- if / else if / else
-
-- while / break / continue
-
-- Formato de salida, especificación de tipos
-
-- Diseño de punteros (forma `ptr<T>`)
-
-- Diseño de arreglos (`array<T, N>`)
-
-- Verificación de tipos y AST estructurado
-
-### Tecnologías utilizadas
-
-- Rust (todo el compilador Wave)
-
-- LLVM (generación IR, ejecución AOT)
-
-- inkwell / llvm-sys
+En esta etapa, el compilador Wave se escribe completamente en Rust, utilizando inkwell y llvm-sys para la generación de LLVM IR y la ejecución AOT.
 
 ---
 
 ## Fase Alpha
 
-> Objetivo: Iniciar la adopción de Whale, uso conjunto con LLVM / Comenzar la implementación del backend basado en Whale
+El objetivo de la fase Alpha es introducir el backend de Whale y establecer una estructura que use LLVM y Whale conjuntamente.
+LLVM se mantiene como el backend principal, y Whale se añade como un backend opcional.
 
-### Características principales
-
-- LLVM es el backend predeterminado
-
-- Whale es el backend opcional
-
-- Es posible bifurcar mediante la opción `--backend` al ejecutar el código Wave
+Al ejecutar el código de Wave, se puede elegir qué backend usar entre LLVM y Whale mediante la opción `--backend`.
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Trabajos relacionados con Whale
+En esta etapa, se diseña y se define la estructura IR del propio Whale.
+Se organizan los componentes clave como Instruction, Value, Block, y se implementa un generador IR que convierte el AST de Wave en IR de Whale.
 
-- Diseño y definición de la estructura IR de Whale (Instrucción, Valor, Bloque, etc.)
+Además, se implementa un generador de código para Whale que permite la ejecución en forma de ensamblaje o binario.
+Los tipos difíciles de implementar o ineficientes en LLVM, como tipos enteros enormes como `i1024` o estructuras avanzadas de punteros, se introducen como funciones exclusivas de Whale en esta etapa.
 
-- Implementación de un generador IR para Whale
-
-- Generador de código para Whale (ensamblaje o binario)
-
-- Implementación de tipos posibles solo con Whale (`i1024`, punteros avanzados, etc.)
-
-### Punto de control
-
-- Salida de Hello World con Whale
-
-- Declaración/asignación de variables en Whale
-
-- Implementación de herramientas de depuración IR para Whale
-
-- Manejo de tipos de puntero en Whale
-
-- Proceso de conversión de Wave a Whale IR
+Como checkpoint, el backend de Whale debe ser capaz de mostrar Hello World, y las declaraciones de variables, asignaciones, manejo de punteros y herramientas de depuración IR deben funcionar correctamente.
+Es la etapa en la que se realiza de manera sustancial la conversión de Wave a Whale IR.
 
 ---
 
 ## Fase Beta
 
-> Objetivo: Cambio completo a Whale, eliminación de LLVM. Optimización de la combinación Whale + Wave
+El objetivo de la etapa beta es cambiar completamente a Whale y eliminar la dependencia de LLVM.
+Desde esta etapa, la compilación y ejecución de Wave utilizan únicamente Whale.
 
-### Características principales
+Todas las dependencias y módulos relacionados con LLVM se eliminan, y la generación y ejecución de código se optimizan en base a Whale.
+La tarea principal es simplificar y acelerar el flujo desde la generación de IR hasta la ejecución.
 
-- Solo se usa Whale
+Se diseña un pase de optimización para el IR de Whale y se mejora la velocidad de generación de código y la eficiencia de ejecución.
+Toda la gramática de Wave debe ser completamente compatible con el backend de Whale en esta etapa.
 
-- Eliminación completa de LLVM (dependencias y módulos)
-
-- Enfoque en la optimización del código
-
-- Desde IR hasta ejecución de manera rápida y eficiente
-
-### Alcance de la optimización
-
-- Diseño de optimización de Whale IR Pass
-
-- Mejora de la velocidad de generación de código de Whale
-
-- Soporte completo de todas las gramáticas de Wave en Whale
-
-### Prueba
-
-- Prueba unitaria + suite de pruebas completa
-
-- Prueba de compatibilidad del estándar de la biblioteca WSON
-
-- Verificación de la construcción de Whale multiplataforma
+En cuanto a las pruebas, se realizan tanto pruebas unitarias como suites de pruebas completas, y se verifica la compatibilidad con WSON y la biblioteca estándar, así como la capacidad de compilación cruzada de Whale.
 
 ---
 
 ## Etapa de RC (Release Candidate)
 
-> Objetivo: Iniciar bootstrap de Wave — Eliminar código Rust por completo
+El objetivo de la etapa RC es iniciar el bootstrap de Wave.
+A partir de esta etapa, se comienza a eliminar gradualmente la implementación en Rust del compilador Wave y a reescribir el compilador Wave con el propio lenguaje Wave.
 
-### Características principales
+Se reescribe el generador de IR de Wave basado en Whale y se reemplaza la lógica central del compilador y las bibliotecas std / core con código Wave.
+A través de este proceso, Whale ingresa a la etapa de autoalojamiento.
 
-- Iniciar reescritura del compilador de Wave con Wave
-
-- Ejecución del código de Wave basado en Whale
-
-- Whale ingresa a la etapa de autoalojamiento
-
-### Alcance del trabajo
-
-- Reescribir el generador de Wave IR basado en Whale
-
-- Eliminación de Rust + sustitución por código Wave
-
-- Escritura de las bibliotecas std y core en Wave
-
-- Al nacer el primer compilador nativo de Wave cuando el bootstrap sea exitoso
+Al lograrse el bootstrap, nacerá el primer compilador nativo de Wave.
 
 ---
 
 ## Etapa de lanzamiento (v0.0.1)
 
-> Objetivo: Lanzamiento oficial / Provisión de un ecosistema de lenguaje independiente completamente basado en Whale
+La etapa de lanzamiento significa el primer lanzamiento oficial de Wave.
+En este punto, Wave y Whale componen un ecosistema de lenguajes independiente completamente integrado.
 
-### Componentes
+Los componentes de la release incluyen el lenguaje Wave y la biblioteca estándar, la cadena de herramientas del compilador Whale, el gestor de paquetes Vex y el formato de datos WSON.
 
-- Wave (idioma y biblioteca estándar)
-
-- Whale (cadena de herramientas del compilador)
-
-- Vex (gestor de paquetes)
-
-- WSON (formato de datos)
-
-### Características
-
-- Compilador exclusivo de Wave completo (bootstrap exitoso)
-
-- Optimización de Whale completada
-
-- Establecimiento del sistema de construcción y despliegue de Vex
-
-- Incluye parser WSON + serialización
-
-- Capacidad de construcción entre sistemas operativos (`vex build --windows`, etc.)
+El Wave de esta etapa debe tener un compilador completamente escrito en código Wave y la optimización de Whale debe estar completa.
+El flujo de compilación y despliegue a través de Vex se establece y debe ser posible una compilación cruzada de OS, como `vex build --windows`.
 
 ---
 
 ## Estrategia de meta-desarrollo
 
-| Estrategia                             | Descripción                                                                              |
-| -------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Estrategia de tren+riel                | Desarrollo concurrente de Whale mientras se configura simultáneamente el backend de Wave |
-| Estrategia de ramificación del backend | Selección de LLVM/Whale con la opción `--backend`, estructura crucial en la alpha        |
-| Plan de inversión de estructura        | A partir de rc, el código de Wave se compila a sí mismo a través de Whale                |
+El desarrollo de Wave + Whale no es simplemente una progresión de etapas, sino que se basa en una estrategia clara.
+Al desarrollar Whale al mismo tiempo que se compone el backend de Wave, se adopta la estrategia de tren+raíl, desarrollando conjuntamente la estructura del backend y el diseño del lenguaje.
+
+En la etapa Alpha, la estrategia de bifurcación del backend mediante la opción `--backend` juega un papel crucial y proporciona una base para comparar y verificar directamente LLVM y Whale.
+
+Después de RC, la estructura se invierte y se lleva a cabo el plan de inversión estructural donde el código Wave se compila a sí mismo a través de Whale.

@@ -4,42 +4,60 @@ sidebar_position: 2
 
 # Philosophy and Goals of Wave
 
-Wave aims to overcome the limitations of low-level languages and build an integrated ecosystem where development can be done in a single language across various fields.
-This language has the versatility to cover multiple fields such as web development, operating systems, artificial intelligence, blockchain, hardware, compilers, networking, and encryption.
+Wave aims to complement the limitations of existing low-level languages and build an integrated development ecosystem that can encompass various development areas with a single language.
 
-Especially, Wave is designed to be easily used by developers without deep knowledge of hardware.
-To this end, Wave’s standard hardware library helps users utilize it intuitively without needing complex hardware-related knowledge. Additionally, it provides functions for direct hardware control, offering flexibility for deeper levels of control as needed.
+Instead of handling vastly different fields such as web development, operating systems, artificial intelligence, blockchain, hardware control, compilers, networking, and encryption with different languages, Wave intends to naturally connect all these areas within one language and one tool system.
 
-These features of Wave help users maximize hardware capabilities while minimizing code complexity.
-Ultimately, developers can handle diverse tasks with a single language and experience an integrated development environment that implements efficient performance.
+Wave does not view universality as simply "being usable in many places."
+Wave aims to simultaneously meet the performance, control, and stability required by each area, maintaining consistent design and clear rules at the language level.
+
+In particular, Wave is designed to enable developers without deep expertise in hardware to utilize hardware functions.
+The standard hardware library abstracts complex hardware concepts to enable intuitive use.
+
+At the same time, Wave provides low-level access to directly control hardware, if necessary.
+This allows developers to freely transition between abstracted interfaces and direct control, minimizing code complexity without sacrificing performance.
+
+Ultimately, Wave aims to handle various tasks with a single language, providing an integrated environment with efficient performance and consistent development experience.
 
 ## Performance and Efficiency
 
-Wave is designed as a high-performance language, supporting optimized code execution and offering features to maximize performance across various platforms.
-This allows for stable maintenance of necessary performance in various fields like web, operating systems, and artificial intelligence.
+Wave is a language designed with high performance as a premise.
+The compiler and execution model aim to generate optimized code and are configured to maintain stable performance across various platforms.
+
+Wave aims to provide consistent performance characteristics with a single language, from high-level areas like web applications to performance-critical areas like operating systems or system software.
 
 ## Safety and Error Handling
 
-Wave prioritizes safe programming. It thoroughly checks for compile-time errors to minimize runtime errors.
-This language ensures memory safety, type safety, etc., without sacrificing performance.
+Wave considers safe programming as an important design criterion.
+It is designed to detect as many errors as possible at compile time, minimizing potential issues during runtime.
+
+Wave aims to ensure basic safety, such as memory safety and type safety, without sacrificing performance.
+Wave sees safety and performance not as conflicting concepts, but as elements that can be achieved together through language design.
 
 ## Improving Developer Productivity
 
-Wave offers intuitive and concise syntax that helps developers learn quickly and develop efficiently.
-Furthermore, with a rich standard library and tools (like Vex, WSON), developers can handle complex tasks more easily.
+Wave is designed with intuitive and consistent syntax to enable developers to quickly learn and efficiently use the language.
+
+Additionally, it supports solving complex tasks without repeated implementation through a rich standard library and tool systems (Vex, WSON, etc.).
+This allows developers to focus on solving problems themselves rather than environment settings or boilerplate code.
 
 ## Platform Independence
 
-Wave is designed to allow the same code to run across various operating systems.
-It provides a development environment independent of platforms, allowing developers to create applications that can run in various environments with a single code write-up.
+Wave aims to be a language that is not dependent on specific operating systems or environments.
+It is designed to allow the same code to operate consistently across various operating systems, enabling developers to reuse code across multiple environments.
+
+This platform independence is one of the important foundational elements for Wave to function as a universal language.
 
 ## Community and Extensibility
 
-Wave will continue to evolve through close cooperation with the open-source community.
-It provides a free environment where users and developers can expand and improve the capabilities of the Wave language.
-Customization and extension allow Wave to be modified and used according to specific fields or requirements.
+Wave is a language that grows through collaboration with the open-source community.
+Users and developers can freely participate in expanding and improving Wave's features, and this process also contributes to shaping the language's direction and completeness.
+
+Wave is designed with customization and extension in mind to flexibly utilize the language and ecosystem according to specific fields or requirements.
 
 ## Future-Oriented Goals
 
-Wave will continue to integrate functions suitable for the latest technologies like artificial intelligence, quantum computing, and distributed systems, reflecting ever-evolving tech trends.
-This vision allows Wave to establish itself as a language not only limited to today's development environments but also capable of leading future technological advancements.
+Wave aims to be a language that embraces future technological trends, rather than staying within the current technological environment.
+
+With future technologies like artificial intelligence, distributed systems, and quantum computing in mind, we plan to continuously expand the language and tool systems.
+This direction serves as a foundation for Wave to establish itself as a language that can develop long-term, rather than as a short-term tool.

@@ -6,66 +6,61 @@ sidebar_position: 0
 
 ## Filosofía y objetivos de Wave
 
-Wave tiene como objetivo complementar y simplificar los lenguajes de programación de bajo nivel, proporcionando un lenguaje versátil e integrado que abarque diversos campos de desarrollo. En lugar de reemplazar los lenguajes de bajo nivel, Wave se enfoca en crear un ecosistema de desarrollo sólido y coherente que abarque diversas áreas como desarrollo web, sistemas operativos, inteligencia artificial, blockchain, hardware, compiladores, redes y criptografía.
+Wave no tiene como objetivo simplemente reemplazar los lenguajes de programación de bajo nivel existentes.
+En cambio, está diseñado para mantener el control y el rendimiento de los lenguajes de bajo nivel mientras los complementa y simplifica, permitiendo abordar diversas áreas de desarrollo dentro de un entorno de lenguaje y ecosistema coherente.
 
-La filosofía central de Wave es proporcionar una abstracción de alto nivel a través de una biblioteca estándar poderosa, manteniendo al mismo tiempo la capacidad de control preciso de bajo nivel. Esto permite realizar tareas complejas de manera intuitiva al mismo tiempo que posibilita operaciones sofisticadas cuando sea necesario.
+Wave busca alejarse del enfoque de dividir áreas muy diferentes como desarrollo web, sistemas operativos, inteligencia artificial, blockchain, control de hardware, compiladores, redes y encriptación, tratándolas con diferentes lenguajes.
+El objetivo principal de Wave es proporcionar una experiencia de desarrollo integrada que abarque de manera natural una amplia gama de áreas a través de un solo lenguaje, un solo conjunto de herramientas y una única biblioteca estándar.
 
-Una de las características principales de Wave es su biblioteca de hardware, diseñada para que incluso los desarrolladores sin conocimientos especializados puedan usarla fácilmente. Además, ofrece también la flexibilidad de control directo cuando se necesita un control detallado del hardware. Esta combinación ayuda a los desarrolladores a utilizar las funciones de hardware de manera intuitiva sin sacrificar el rendimiento.
+La filosofía de Wave reside en la coexistencia de una fuerte abstracción de alto nivel y un control preciso de bajo nivel.
+A través de la biblioteca estándar, permite manejar intuitivamente tareas complejas, mientras que, si es necesario, abre la posibilidad de acceder directamente a la memoria, registros y recursos hardware.
+Esto permite a los desarrolladores tomar decisiones adecuadas a la situación sin tener que comprometer entre conveniencia y rendimiento.
 
-Wave tiene como objetivo romper las barreras entre la programación de alto y bajo nivel, proporcionando un entorno de lenguaje integrado e intuitivo que simplifique la experiencia de desarrollo.
+La biblioteca de hardware de Wave es particularmente uno de sus elementos de diseño clave.
+Está diseñada para que los desarrolladores sin un profundo conocimiento especializado del hardware puedan usarla fácilmente, al tiempo que proporciona la flexibilidad de un control directo a través de interfaces de bajo nivel cuando se necesita un control preciso.
+Este enfoque permite utilizar las funciones del hardware de manera más intuitiva sin sacrificar el rendimiento.
+
+Wave tiene como objetivo romper las barreras que existían entre la programación de alto y bajo nivel, simplificando la experiencia de desarrollo dentro de un entorno de lenguaje coherente.
 
 ## Características y atributos principales de Wave
 
-1. Estructura de lenguaje integrada
+Wave considera como una característica importante la integración de diversas áreas de desarrollo dentro de una sola estructura de lenguaje.
+Esto permite a los desarrolladores resolver problemas en varias áreas con Wave sin necesidad de aprender un nuevo lenguaje para cada proyecto.
 
-Wave integra diversos campos de desarrollo en un solo lenguaje, eliminando la necesidad de que los desarrolladores aprendan múltiples lenguajes.
+Una potente biblioteca estándar es un elemento clave que respalda la productividad de Wave.
+Está diseñada para expresar tareas complejas con código conciso, lo que permite a los desarrolladores centrarse en la resolución de problemas en lugar de en implementaciones repetitivas.
 
-2. Abstracción de alto nivel
+La accesibilidad al hardware también es una característica importante de Wave.
+Wave proporciona una interfaz de alto nivel que facilita el manejo del hardware, al tiempo que está diseñada para permitir un control de bajo nivel cuando sea necesario.
+Esto permite abarcar a todos, desde principiantes hasta desarrolladores de sistemas experimentados.
 
-Wave permite realizar tareas complejas de manera sencilla a través de su poderosa biblioteca estándar, incrementando significativamente la productividad.
+El rendimiento es un aspecto no negociable en el diseño de Wave.
+Está diseñado para funcionar de manera estable en aplicaciones donde el rendimiento es crucial, basado en una estructura de compilador eficiente y un modelo de memoria claro.
 
-3. Facilidad de acceso al hardware
+Wave valora la modularidad y la reutilización.
+Apoya la separación del código en unidades claras y su reutilización, permitiendo gestionar eficazmente la complejidad, incluso cuando el tamaño del proyecto crece.
 
-La biblioteca de hardware de Wave está diseñada de manera amigable para que incluso los no expertos puedan interactuar con el hardware, y ofrece opciones de control directo cuando se requiere control preciso.
-
-4. Optimización del rendimiento
-
-Wave proporciona un compilador eficiente y un sistema de gestión de memoria para asegurar el rendimiento óptimo en tareas críticas, funcionando perfectamente incluso en aplicaciones donde el rendimiento es crucial.
-
-5. Modularidad y reutilización
-
-Wave soporta la programación modular, permitiendo a los desarrolladores reutilizar el código de manera eficiente y reducir la complejidad de los proyectos.
-
-6. Manejo de errores y depuración robustos
-
-Wave ofrece mensajes de error claros e intuitivos y herramientas de depuración para ayudar a los desarrolladores a resolver problemas rápidamente.
+Wave también tiene como objetivo proporcionar mensajes de error claros e intuitivos y un entorno de depuración.
+Esto permite a los desarrolladores identificar y corregir rápidamente las causas de los problemas y reducir los errores innecesarios durante el proceso de aprendizaje.
 
 ## Hoja de ruta y plan de Wave
 
-1. Expansión de funciones del lenguaje principal
+Wave está diseñado con la premisa de un desarrollo gradual.
+En las etapas iniciales, se enfoca en la gramática central del lenguaje y sus funciones básicas, con planes de expandir gradualmente características como la coincidencia de patrones, la programación asíncrona y las estructuras de datos avanzadas.
 
-Después de lanzar una versión inicial centrada en la sintaxis y características básicas, Wave planea continuar con actualizaciones que incluyan funciones como patrones de coincidencia, programación asincrónica y estructuras de datos avanzadas.
+La biblioteca estándar se ampliará continuamente en función de las necesidades del usuario y los casos de uso reales.
+Esto permitirá a los desarrolladores resolver un número creciente de funciones a nivel de biblioteca.
 
-2. Fortalecimiento de la biblioteca estándar
+La biblioteca de hardware también es un elemento central de Wave que está sujeto a mejoras continuas.
+Planeamos asegurar la compatibilidad con más dispositivos y agregar nuevas funciones de control para ampliar el ámbito de aplicación en entornos de hardware reales.
 
-La biblioteca estándar se expandirá continuamente para satisfacer las necesidades de los usuarios, y se agregarán diversas funciones para que los desarrolladores puedan trabajar de manera más sencilla y eficiente.
+Wave valora altamente la retroalimentación de la comunidad.
+A través de foros y varios canales de retroalimentación, recopilamos activamente las opiniones de los usuarios y planeamos reflejarlas en el desarrollo del idioma y las herramientas.
 
-3. Mejora de la biblioteca de hardware
+La documentación y los materiales educativos también son una de las importantes direcciones de desarrollo de Wave.
+Planeamos proporcionar documentación oficial y tutoriales bien elaborados para que incluso los usuarios principiantes puedan aprender y aplicar Wave fácilmente en su trabajo.
 
-La biblioteca de hardware, siendo uno de los elementos clave de Wave, mejorará su compatibilidad con varios dispositivos y añadirá nuevas funciones de control, evolucionando continuamente.
+Desde la perspectiva de la plataforma, el objetivo es ofrecer un rendimiento y experiencia de desarrollo consistentes en los principales sistemas operativos, incluidos Windows, macOS y Linux.
 
-4. Incorporación de retroalimentación de la comunidad
-
-La retroalimentación de los desarrolladores desempeñará un papel importante en el desarrollo de Wave, y planeamos recopilar activamente opiniones de los usuarios a través de foros y canales de retroalimentación.
-
-5. Provisión de documentación y materiales educativos
-
-Wave proporcionará una documentación completa junto con diversos materiales educativos y tutoriales para apoyar el aprendizaje. Esto permitirá que incluso los usuarios principiantes puedan aprender y utilizar Wave fácilmente.
-
-6. Soporte para múltiples plataformas
-
-Wave será optimizado para proporcionar un rendimiento coherente y accesibilidad en los principales sistemas operativos, incluidos Windows, macOS y Linux.
-
-7. Fortalecimiento de la colaboración con la comunidad de código abierto
-
-Wave fomentará la colaboración con la comunidad de código abierto para impulsar la innovación y alentar contribuciones que promuevan el desarrollo de Wave.
+Por último, Wave es un proyecto que crece a través de la colaboración con la comunidad de código abierto.
+Alentamos activamente la contribución y participación, y juntos desarrollaremos la dirección y calidad de Wave a través de un proceso de desarrollo abierto.

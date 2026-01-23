@@ -4,15 +4,17 @@ sidebar_position: 3
 
 # Ejecutar el primer programa
 
-Si ya ha instalado Wave a partir de los documentos de instalación anteriores, ¡ejecutemos ahora el primer programa!
+Si ya has instalado Wave a partir de documentos de instalación anteriores, ahora es momento de ejecutar tu primer programa Wave.
+En esta sección, se examina todo el proceso de escritura y ejecución de un programa Wave a través de un ejemplo simple paso a paso.
 
 ## Crear archivo `hello.wave`.
 
-Primero, cree un nuevo archivo llamado `hello.wave`.
+Primero, crea un nuevo archivo llamado `hello.wave` en el directorio de trabajo.
+El nombre del archivo y la extensión pueden asignarse libremente, pero en este ejemplo se usa `hello.wave`.
 
 ## Escribir el código
 
-Escriba el siguiente código en el archivo `hello.wave`:
+Escribe el siguiente código en el archivo `hello.wave` recién creado.
 
 ```wave
 fun main() {
@@ -20,22 +22,30 @@ fun main() {
 }
 ```
 
-Aquí, `fun main()` significa el punto de inicio del programa, y la función `println` se encarga de mostrar texto en la pantalla.
+En este código, `fun main()` significa el punto de inicio de la ejecución del programa Wave.
+Un programa Wave siempre se ejecuta a partir de la función `main`.
+
+La función `println` es una función que imprime la cadena de texto en la salida estándar y se utiliza de manera básica para mostrar texto en la pantalla.
 
 ## Ejecutar el programa
 
-Ahora, ejecutemos el programa Wave. Abra el terminal e introduzca el siguiente comando:
+Una vez hayas terminado de escribir el código, abre el terminal y ejecuta el siguiente comando en el directorio donde se encuentra el archivo.
 
 ```bash
 wavec run hello.wave
 ```
 
+Este comando indica al compilador Wave que compile el archivo fuente y realice la ejecución de inmediato.
+
 ## Verificar la salida
 
-Al ejecutar el programa, aparecerá la siguiente salida:
+Si el programa se ejecuta correctamente, se mostrará la siguiente salida en el terminal.
 
 ```
 Hola Wave
 ```
 
-Ahora puede verificar que Wave está correctamente instalado y funcionando. ¡Felicidades! Has ejecutado con éxito tu primer programa.
+Si ves este resultado, significa que Wave ha sido instalado correctamente y que la escritura y ejecución del programa fueron correctas.
+
+Ahora has ejecutado con éxito tu primer programa Wave.
+A partir de ahora, puedes examinar la gramática y las funciones de Wave una por una, e intentar escribir programas más complejos.

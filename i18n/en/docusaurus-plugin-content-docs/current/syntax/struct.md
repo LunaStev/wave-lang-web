@@ -4,13 +4,22 @@ sidebar_position: 8
 
 # Struct
 
-In the Wave language, a struct is a syntactic element for declaring user-defined data types, designed to group values of different types into a single collection. A struct operates as a value type, and all fields must have explicitly defined types, with initial values provided for all fields at the time of struct creation.
+## Introduction
 
----
+The struct in the Wave language is a key syntax element for declaring user-defined data types.
+Using structures allows for different types of values to be grouped and represented as a single logical unit, which enables modeling of complex data structures clearly and safely.
+
+Wave structures operate as value types.
+All fields must have explicit types and must be initialized when a struct instance is created.
+Through these rules, the state of the structure always maintains a complete and predictable form.
+-----------------------------------------------------------------------------------------------------------------
 
 ## Struct Declaration Syntax
 
-A struct is declared using the `struct` keyword. The name of a struct uses PascalCase, and within the struct body, one or more fields can be declared. Fields are written in the format `name: type;`. A semicolon is required after each field declaration.
+A struct is declared using the `struct` keyword.
+The name of a structure uses PascalCase, and one or more fields can be defined in the structure body.
+
+Fields are declared in the form `name: type;`, and a semicolon is required after each field declaration.
 
 ```wave
 struct Box {
@@ -19,13 +28,15 @@ struct Box {
 }
 ```
 
-When declaring a struct, the order of fields is used identically to the memory layout order. Within a struct, only field declarations are allowed; functions or methods cannot be included.
-
----
+The order in which fields are written when declaring a struct is used as the memory layout order.
+Within a struct, only field declarations are allowed; functions or methods cannot be included.
+The operational logic is defined separately outside the struct.
+-------------------------------------------------------------------------------
 
 ## Struct Instantiation Syntax
 
-A struct is instantiated using a literal format with the struct name. A struct literal uses the format `StructName { fieldName: value; ... }` format, and all defined fields must be initialized. During initialization, the order of fields does not have to match the declaration order.
+A struct is created using a literal format with the struct name.
+A struct literal uses the format `StructName { fieldName: value; ... It is written in the form of `}.
 
 ```wave
 var b: Box = Box {
@@ -34,26 +45,37 @@ var b: Box = Box {
 };
 ```
 
-A compile error occurs if any fields are missing during initialization. The type of values provided during initialization must exactly match the types defined in the struct, and implicit conversion is not allowed.
+When creating a struct, all defined fields must be initialized, and a compile error will occur if even one is omitted.
+
+When initializing, the order of fields does not need to match the struct declaration order, but the type of values passed to each field must exactly match the type defined in the struct.
+Wave does not allow implicit type conversion during the initialization of struct fields.
 
 ---
 
 ## Struct Field Access Syntax
 
-Fields of a struct are accessed using dot notation. Field access is used the same way for both read and write operations, and using a nonexistent field name will result in a compile error.
+Fields of a struct are accessed using dot notation.
+Field access uses the same syntax for both reading and writing.
 
 ```wave
 println("Size: {}", b.size);
 println("Weight: {}", b.weight);
 ```
 
-Struct variables operate as value types, so when assigning the entire struct or passing it as a function argument, all the fields of the struct are copied.
+An error will occur at compile time if you attempt to use a field name that does not exist.
+Since a struct is a value type, when assigning the entire struct or passing it as a function argument, all fields contained in the struct are copied together.
 
 ---
 
 ## Struct Method Definition Syntax
 
-The Wave language does not include methods within the struct itself; instead, methods are associated with a struct using the `proto` keyword. A proto block declares a set of functions belonging to a specific struct. Functions within a `proto` use `self` as the first parameter to refer to the struct instance. `self` receives the entire struct value, processed via value copying.
+The Wave language does not define methods directly within structs.
+Instead, the `proto` keyword is used to declare a set of methods associated with the struct.
+
+A `proto` block is an area for functions belonging to a specific struct, and functions defined in this block are used like methods of that struct.
+
+Methods use `self` as the first parameter to receive the struct instance.
+`self` signifies the entire struct value and is passed by value copying.
 
 ```wave
 proto Box {
@@ -67,7 +89,9 @@ proto Box {
 }
 ```
 
-Proto blocks do not need to be in the same file as the struct declaration, and multiple proto blocks can be used to define additional methods for the same struct. Method calls are similar to regular function calls, using dot notation to call methods on a struct instance.
+`Proto` blocks do not need to be located in the same file as the struct declaration, and multiple `proto` blocks can distribute method definitions for the same struct.
+
+Method calls use dot notation and operate in the same manner as regular function calls.
 
 ```wave
 b.print();
@@ -78,7 +102,8 @@ var n: i32 = b.added_size(5);
 
 ## Using Struct as Function Argument
 
-When a struct is passed as a function argument, it is handled by value copying. Modifying fields inside the struct does not affect the struct instance on the calling side.
+When structs are passed as function arguments, they are handled by value copying.
+Even if you modify the fields of a struct within a function, it does not affect the struct instance on the calling side.
 
 ```wave
 fun calc(box: Box) -> i32 {
@@ -86,13 +111,15 @@ fun calc(box: Box) -> i32 {
 }
 ```
 
-Returning a struct from a function also results in value copying.
+The same value copying occurs when using structs as return values from functions.
+This behavior ensures the immutability of structs and predictable data flow.
 
 ---
 
 ## Nested Struct
 
-In Wave, you can use another struct as a field type within a struct. As a complete type, a struct can be used nested by having one struct include another.
+In Wave, another struct can be used as a field type within a struct.
+As structs are complete types, you can freely nest them by including one struct within another.
 
 ```wave
 struct Position {
@@ -106,7 +133,7 @@ struct Player {
 }
 ```
 
-Nested structs are accessed using continuous dot notation to reach internal fields.
+Fields of nested structs are accessed using continuous dot notation.
 
 ```wave
 var p: Player = Player {
@@ -118,13 +145,14 @@ println("Player X: {}", p.pos.x);
 println("Player Y: {}", p.pos.y);
 ```
 
-Within a struct literal, you can nest another struct literal, with all field initialization rules still applicable.
+You can nest another struct literal within a struct literal, and all field initialization rules apply in this case as well.
 
 ---
 
 ## Struct Arrays
 
-Structs can also be used as element types in arrays. Array syntax uses the `array<type, length>` format, and a struct type can be directly specified as an element in the array.
+Structs can be used as element types in arrays.
+Wave's array syntax uses the `array<type, length>` format, and struct types can also be specified as is.
 
 ```wave
 var players: array<Player, 3> = [
@@ -134,7 +162,7 @@ var players: array<Player, 3> = [
 ];
 ```
 
-When accessing elements of a struct array, first use the array index, then use dot notation to access the struct fields.
+When accessing elements of a struct array, use the array index first, then access internal struct fields via dot notation.
 
 ```wave
 println("Second Player X: {}", players[1].pos.x);
@@ -144,4 +172,7 @@ println("Second Player X: {}", players[1].pos.x);
 
 ## Basic Operability of Structs
 
-In Wave, structs are user-defined types, so they cannot automatically participate in arithmetic or comparison operations. For operations like equality comparison, hashing, or sorting of structs, related functionality must be directly implemented using proto blocks. Operators for struct-to-struct operations are not automatically provided in the Wave language; if needed, they must be defined via functions or methods.
+Wave's structs are user-defined types and do not automatically participate in arithmetic or comparison operations.
+
+If equality comparison, sorting, hashing, numeric operations, etc., for structs are needed, they must be explicitly defined through a `proto` block.
+Wave does not provide implicit operators for structs, and all operations are required to be explicitly defined as a principle.

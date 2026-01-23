@@ -4,183 +4,120 @@ sidebar_position: 4
 
 # Lộ trình phát triển tích hợp Wave + Whale v2
 
-## Toàn bộ giai đoạn
+이 문서는 Wave 언어와 Whale 컴파일러 툴체인의 통합 개발 과정을 단계별로 정리한 로드맵입니다.
+Wave와 Whale은 초기에는 분리된 구성 요소로 시작하지만, 최종적으로는 하나의 독립적인 언어 생태계로 완전히 통합되는 것을 목표로 합니다.
+
+전체 개발 단계는 다음과 같은 흐름을 따릅니다.
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → phát hành
 ```
 
+각 단계는 이전 단계의 결과를 기반으로 진행되며, 한 단계가 완료되면 이전 구조로 되돌아가지 않는 단방향 개발을 전제로 합니다.
+
 ---
 
 ## Giai đoạn Pre-Beta
 
-> Mục tiêu: Hoàn thành frontend ngôn ngữ Wave + Triển khai toàn bộ chức năng sử dụng backend LLVM
+Pre-Beta 단계의 목표는 Wave 언어 프론트엔드를 완성하고, LLVM 백엔드를 기반으로 언어의 전체 기능을 구현하는 것입니다.
+이 단계에서는 Whale을 사용하지 않으며, 컴파일과 실행은 전적으로 LLVM을 통해 이루어집니다.
 
-### Đặc điểm chính
+문법 자체를 확장하는 작업은 이 단계에서 진행하지 않습니다.
+이미 정의된 사양을 기준으로 모든 문법 요소를 실제로 동작하게 만드는 것이 핵심 목표입니다.
+에러 메시지 품질, 타입 검사, 변수 스코프 처리 등 프론트엔드 구조의 안정화에 집중합니다.
 
-- Chỉ sử dụng LLVM (không có Whale)
+구현 범위에는 변수 선언과 출력, 기본 연산이 포함되며, 함수 정의와 호출,
+조건문(`if` / `else if` / `else`), 반복문(`while` / `break` / `continue`) 역시 모두 이 단계에서 완성됩니다.
+또한 포맷 출력, 명시적 타입 지정, `ptr<T>` 형태의 포인터 설계,
+`array<T, N>` 형태의 배열 설계가 포함됩니다.
 
-- Không thêm ngữ pháp, chỉ triển khai thông số kỹ thuật hiện tại
-
-- Ổn định cấu trúc tập trung frontend như thông báo lỗi, kiểm tra kiểu, phạm vi biến
-
-### Phạm vi thực hiện
-
-- Khai báo biến, xuất, thực hiện
-
-- Định nghĩa và gọi hàm
-
-- if / else if / else
-
-- while / break / continue
-
-- Xuất định dạng, chỉ định kiểu
-
-- Thiết kế con trỏ (dạng `ptr<T>`)
-
-- Thiết kế mảng (`array<T, N>`)
-
-- Kiểm tra kiểu và AST cấu trúc
-
-### Công nghệ sử dụng
-
-- Rust (toàn bộ trình biên dịch Wave)
-
-- LLVM (Tạo IR, thực hiện AOT)
-
-- inkwell / llvm-sys
+이 단계에서 Wave 컴파일러는 전부 Rust로 작성되며,
+LLVM IR 생성과 AOT 실행을 위해 inkwell 및 llvm-sys를 사용합니다.
 
 ---
 
 ## Giai đoạn Alpha
 
-> Mục tiêu: Bắt đầu triển khai Whale, sử dụng song song với LLVM / Bắt đầu triển khai backend dựa trên Whale
+Alpha 단계의 목표는 Whale 백엔드를 도입하고, LLVM과 Whale을 병행 사용하는 구조를 확립하는 것입니다.
+LLVM은 여전히 기본 백엔드로 유지되며, Whale은 선택적으로 사용할 수 있는 백엔드로 추가됩니다.
 
-### Đặc điểm chính
-
-- LLVM là backend mặc định
-
-- Whale là backend tùy chọn
-
-- Có thể chia nhánh với tùy chọn `--backend` khi chạy mã Wave
+Wave 코드를 실행할 때 `--backend` 옵션을 통해 LLVM과 Whale 중 어떤 백엔드를 사용할지 선택할 수 있습니다.
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-### Công việc liên quan đến Whale
+이 단계에서는 Whale 자체의 IR 구조를 설계하고 정의합니다.
+Instruction, Value, Block과 같은 핵심 구성 요소를 정리하고,
+Wave AST를 Whale IR로 변환하는 IR Generator를 구현합니다.
 
-- Thiết kế và định nghĩa cấu trúc IR của Whale (Instruction, Value, Block, v.v.)
+또한 Whale용 코드 생성기를 구현하여, 어셈블리 또는 바이너리 형태로 실행 가능하도록 만듭니다.
+LLVM에서는 구현하기 어렵거나 비효율적인 타입들, 예를 들어 `i1024`와 같은 초대형 정수 타입이나
+고급 포인터 구조는 Whale 전용 기능으로 이 단계에서 도입됩니다.
 
-- Thực hiện IR Generator cho Whale
-
-- Trình tạo mã Whale (assembly hoặc nhị phân)
-
-- Thực hiện kiểu chỉ có thể với Whale (`i1024`, con trỏ nâng cao, v.v.)
-
-### Điểm kiểm tra
-
-- Xuất Hello World với Whale
-
-- Khai báo/ gán biến trong Whale
-
-- Thực hiện công cụ gỡ lỗi IR của Whale
-
-- Xử lý kiểu con trỏ trong Whale
-
-- Tiến hành chuyển đổi Wave → Whale IR
+체크포인트로는 Whale 백엔드에서 Hello World 출력이 가능해야 하며,
+변수 선언과 할당, 포인터 처리, IR 디버깅 도구가 정상적으로 동작해야 합니다.
+Wave → Whale IR 변환이 실질적으로 진행되는 단계입니다.
 
 ---
 
 ## Giai đoạn Beta
 
-> Mục tiêu: Chuyển hoàn toàn sang Whale, loại bỏ LLVM. Tối ưu hóa kết hợp Whale + Wave
+Beta 단계의 목표는 Whale로 완전히 전환하고, LLVM 의존성을 제거하는 것입니다.
+이 단계부터 Wave 컴파일과 실행은 Whale만을 사용합니다.
 
-### Đặc điểm chính
+LLVM 관련 디펜던시와 모듈은 전부 제거되며,
+코드 생성과 실행 경로는 Whale 기준으로 최적화됩니다.
+IR 생성부터 실행까지의 흐름을 단순하고 빠르게 만드는 것이 핵심 과제입니다.
 
-- Chỉ sử dụng Whale
+Whale IR에 대한 최적화 패스를 설계하고,
+코드 생성 속도와 실행 효율을 개선합니다.
+Wave의 모든 문법은 이 단계에서 Whale 백엔드 기준으로 완벽하게 지원되어야 합니다.
 
-- Loại bỏ toàn bộ LLVM (cả phụ thuộc và mô-đun)
-
-- Trung tâm tối ưu hóa mã
-
-- Từ IR → thực thi nhanh chóng và hiệu quả
-
-### Phạm vi tối ưu hóa
-
-- Thiết kế vòng tối ưu hóa Whale IR
-
-- Cải thiện tốc độ tạo mã Whale
-
-- Tất cả cú pháp của Wave được hỗ trợ hoàn toàn trong Whale
-
-### Kiểm tra
-
-- Kiểm tra đơn vị + bộ kiểm tra toàn diện
-
-- Kiểm tra khả năng tương thích WSON, thư viện tiêu chuẩn
-
-- Xác minh xây dựng Whale đa nền tảng
+테스트 측면에서는 단위 테스트와 전체 테스트 스위트를 모두 수행하며,
+WSON과 표준 라이브러리 호환성, 크로스 플랫폼 Whale 빌드 여부를 함께 검증합니다.
 
 ---
 
 ## Giai đoạn RC (Ứng cử viên phát hành)
 
-> Mục tiêu: Bắt đầu khởi động Wave — Loại bỏ hoàn toàn mã Rust
+RC 단계의 목표는 Wave의 부트스트랩을 시작하는 것입니다.
+이 단계부터 Wave 컴파일러의 Rust 구현을 점진적으로 제거하고,
+Wave 언어 자체로 Wave 컴파일러를 재작성하기 시작합니다.
 
-### Đặc điểm chính
+Whale을 기반으로 Wave IR 생성기를 다시 작성하며,
+컴파일러 핵심 로직과 std / core 라이브러리를 Wave 코드로 대체합니다.
+이 과정을 통해 Whale은 self-hosting 단계에 진입하게 됩니다.
 
-- Bắt đầu viết lại trình biên dịch Wave bằng Wave
-
-- Thực thi mã Wave tự bản thân dựa trên Whale
-
-- Whale bước vào giai đoạn tự lưu trữ
-
-### Phạm vi công việc
-
-- Viết lại trình tạo IR của Wave dựa trên Whale
-
-- Loại bỏ Rust + Thay thế bằng mã Wave
-
-- Viết thư viện std và core bằng Wave
-
-- Khi khởi động thành công, trình biên dịch Wave gốc đầu tiên ra đời
+부트스트랩이 성공하면, 최초의 Wave-native 컴파일러가 탄생하게 됩니다.
 
 ---
 
 ## Giai đoạn phát hành (v0.0.1)
 
-> Mục tiêu: Ra mắt chính thức / Cung cấp hệ sinh thái ngôn ngữ độc lập hoàn toàn dựa trên Whale
+Release 단계는 Wave의 공식 첫 릴리스를 의미합니다.
+이 시점에서 Wave와 Whale은 완전히 통합된 독립 언어 생태계를 구성합니다.
 
-### Các thành phần
+릴리스 구성 요소에는 Wave 언어와 표준 라이브러리,
+Whale 컴파일러 툴체인, Vex 패키지 매니저,
+그리고 WSON 데이터 포맷이 포함됩니다.
 
-- Wave (ngôn ngữ và thư viện tiêu chuẩn)
-
-- Whale (bộ công cụ biên dịch)
-
-- Vex (trình quản lý gói)
-
-- WSON (định dạng dữ liệu)
-
-### Đặc điểm
-
-- Trình biên dịch chỉ dành cho Wave hoàn chỉnh (Khởi động thành công)
-
-- Hoàn tất tối ưu hóa Whale
-
-- Thiết lập hệ thống xây dựng và triển khai Vex
-
-- Bao gồm trình phân tích và tuần tự hóa WSON
-
-- Có khả năng xây dựng đa hệ điều hành (`vex build --windows` etc)
+이 단계의 Wave는 완전히 Wave 코드로 작성된 컴파일러를 가지며,
+Whale의 최적화는 완료된 상태여야 합니다.
+Vex를 통한 빌드 및 배포 흐름이 정착되고,
+`vex build --windows`와 같은 크로스 OS 빌드도 가능해야 합니다.
 
 ---
 
 ## Chiến lược phát triển meta
 
-| Chiến lược                    | Mô tả                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| Chiến lược tàu + đường        | Phát triển Whale đồng thời xây dựng backend của Wave tiến hành song song  |
-| Chiến lược phân nhánh backend | Chọn LLVM/Whale với tùy chọn `--backend`, cấu trúc quan trọng trong alpha |
-| Kế hoạch đảo ngược cấu trúc   | Kể từ sau rc, mã Wave biên dịch chính nó qua Whale                        |
+Wave + Whale 개발은 단순한 단계 진행이 아니라, 명확한 전략을 기반으로 이루어집니다.
+Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 열차+레일 전략을 채택하여,
+백엔드 구조와 언어 설계를 병행해서 발전시킵니다.
+
+Alpha 단계에서는 `--backend` 옵션을 통한 백엔드 분기 전략이 중요한 역할을 하며,
+LLVM과 Whale을 직접 비교하고 검증할 수 있는 기반을 제공합니다.
+
+RC 이후에는 구조가 역전되어,
+Wave 코드가 Whale을 통해 Wave 자신을 컴파일하는 구조 역전 계획이 본격적으로 진행됩니다.

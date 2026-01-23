@@ -5,105 +5,119 @@ sidebar_position: 2
 # Data Type
 
 This document describes the various data types provided by the Wave programming language.
-The Wave programming language can store and manipulate values using various data types.
-Major data types include integers, floating-point numbers, and strings. Each data type defines the characteristics and memory handling of the data.
+In Wave, you can store and operate on values using various data types, each clearly defining the way of representing and handling the data in memory.
+
+Clearly specifying data types is one of the core design philosophies of Wave.
+This allows you to clearly express the intent of your code, catch errors early at compile time, and ensure efficient memory use and stable execution.
+
+---
 
 ## Integer Type
 
-The integer type is used to store **integer values**.
-By default, integers are declared as `i32` (signed 32-bit integer) and `u32` (unsigned 32-bit integer).
-The Wave programming language offers options for fine-grain control over the range of integers.
+The integer type is used to store integer values.
+Wave commonly uses `i32` (signed 32-bit integer) and `u32` (unsigned 32-bit integer) by default, but allows for very fine-grained specification of integer bit sizes as needed.
 
-- `i8` ~ `i1024`: Signed integer type, can be set from 8-bit to 1024-bit.
-- `u8` ~ `u1024`: Unsigned integer type, allows size setting from 8-bit to 1024-bit.
+Signed integer types are available from `i8` to `i1024`, while unsigned integer types can be used from `u8` to `u1024`.
+This allows for a wide range of requirements to be met, from simple calculations to large integer operations, cryptographic processing, and low-level system programming.
 
-Example:
+The following is a simple example using integer types.
 
 ```wave
-var a :i32 = 100;
-var b :u32 = 200;
+var a: i32 = 100;
+var b: u32 = 200;
 ```
+
+---
 
 ## Floating-Point Type
 
 The floating-point type is used to store real-number values.
-By default, floating-point numbers are declared as `f32`.
-Additionally, it offers various size options for precise definition of floating-point numbers.
+The default floating-point type used in Wave is `f32`, but larger sizes can be selected for higher precision.
 
-- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. This allows for higher precision in real-number calculations.
+Wave provides floating-point types from `f32` to `f128`, allowing users to choose between precision and performance.
+This allows for real number operations to be used in various applications, from general numerical calculations to precise scientific computations.
 
-Example:
+Below is an example using floating-point types.
 
 ```wave
-var pi :f32 = 3.14;
-var e :f64 = 2.71828;
+var pi: f32 = 3.14;
+var e: f64 = 2.71828;
 ```
+
+---
 
 ## String Type
 
-The string type is used to handle text data. Use the `str` keyword to declare a string.
-Strings are typically defined inside double quotes (`"`), allowing assignment to variables.
+The string type is used to handle text data.
+In Wave, strings are declared using the `str` keyword and string literals are expressed with double quotes (`"`).
 
-Example:
+Strings are widely used for message output, handling user inputs, and processing text-based data in programs.
+
+Here is a basic example of using the string type.
 
 ```wave
-var text :str = "Hello Wave";
+var text: str = "Hello Wave";
 ```
+
+---
 
 ## Boolean Type
 
-The boolean type represents data with **True** or **False** values.
-Primarily used in conditional statements, with values set to `true` or `false`.
+The boolean type represents True or False values.
+Wave uses the `bool` type, with values designated as `true` or `false`.
 
-Example:
+The boolean type plays a key role in conditionals and loops, used to control the flow of the program.
 
 ```wave
-var isActive :bool = true;
-var isAvailable :bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
+
+---
 
 ## Character Type
 
 The character type is used to store a single character.
-Declared using the `char` keyword, it holds only a single character value.
+Declared using the `char` keyword, it can hold only a single character.
 
-Example:
+Character literals are expressed using single quotes (`'`).
 
 ```wave
-var letter :char = 'A';
+var letter: char = 'A';
 ```
 
 ## Byte Type
 
-The byte type is used to store data of **1-byte** size.
-It is mainly useful for handling binary data. Declared using the `byte` keyword.
+The byte type is used to store data of 1-byte size.
+This type is useful for low-level data processing such as binary data handling, file I/O, and network programming.
 
-Example:
+In Wave, byte types are declared using the `byte` keyword.
 
 ```wave
-var byteData :byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Pointer Type
 
-The pointer type is used to reference **memory addresses**.
-Declared using the `ptr` keyword, it's used to store memory addresses.
+Pointer types are used to directly reference memory addresses.
+In Wave, pointer types are declared in the form `ptr<T>`, allowing safe expression of memory addresses of specific types.
 
-Example:
+Pointers are used for low-level memory access, often utilized in system programming or performance-critical code.
 
 ```wave
-var ptr :ptr<T> = &someVariable;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Array Type
 
-The array type is used to sequentially store **multiple identical data types**.
-Using the `array` keyword, you can specify the size or type of the array.
+Array types are used to sequentially store multiple values of the same data type.
+In Wave, arrays are declared in the form `array<type, size>`, and the size is explicitly specified at compile time.
 
-Example:
+This clarifies the memory structure and allows stable access.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Since each data type can be set with various ranges and sizes, users can select a type that suits their needs for efficient memory management and computation.
+Each data type is designed to allow selection of appropriate range and size for their purpose and characteristics.
+Choosing the proper data type results in efficient memory management as well as significantly improved code stability and readability.

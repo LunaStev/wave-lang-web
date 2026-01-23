@@ -6,23 +6,27 @@ sidebar_position: 1
 
 ## Introducción
 
-La filosofía central de diseño del lenguaje de programación Wave es proporcionar un entorno eficiente y flexible para el desarrollo de software, equilibrando el rendimiento de bajo nivel y la abstracción de alto nivel.
-Esta sección introduce las funciones y variables, que son los componentes básicos de un programa Wave. Estos componentes son esenciales para estructurar la lógica y gestionar los datos dentro de un programa.
-Comprender cómo definir y manejar funciones y variables permite aprovechar al máximo el potencial de Wave.
+La filosofía central del diseño del lenguaje de programación Wave es proporcionar un entorno eficiente y flexible para el desarrollo de software, equilibrando el rendimiento de bajo nivel y la abstracción de alto nivel.
+Esta sección introduce las funciones y variables, que son los componentes básicos de un programa Wave.
+
+Las funciones son la unidad básica de operación y lógica en el programa, mientras que las variables almacenan y gestionan los datos necesarios en el proceso.
+Comprender cómo definir y usar funciones y variables permite explotar más profundamente la estructura e intención de diseño del lenguaje Wave.
 
 ---
 
 ## Función
 
-En Wave, una función actúa como un **bloque de código reutilizable** que puede ejecutarse independientemente.
-Las funciones encapsulan acciones específicas y permiten que se llamen cuando sea necesario a lo largo del programa.
-Esto permite realizar cálculos, gestionar operaciones de E/S o dividir el código en unidades manejables.
+En Wave, una función es un bloque de código reutilizable que puede ejecutarse independientemente.
+Puede agrupar acciones o cálculos específicos en una sola unidad, que puede llamarse cuando sea necesario a través del programa.
 
-En Wave, la firma de una función comienza con la palabra clave `fun`, seguida del nombre de la función, los parámetros (si los hay), y el cuerpo de la función encerrado entre llaves `{}`.
+El uso de funciones permite reducir el código repetido y separar lógicamente el programa, mejorando su legibilidad y mantenibilidad.
+También se utilizan con fines variados como procesamiento de cálculos, manejo de entrada/salida, y separación de lógica.
+
+En Wave, las funciones se definen con la palabra clave `fun` y consisten en el nombre de la función, una lista de parámetros, y el cuerpo de la función encerrado entre llaves `{}`.
 
 ### Definición de Función
 
-En Wave, una función básica se define como sigue:
+La forma más básica de definir una función en Wave es la siguiente.
 
 ```wave
 fun main() {
@@ -30,10 +34,15 @@ fun main() {
 }
 ```
 
-- La función `main` es siempre necesaria como punto de entrada para la ejecución del programa.
-- Las funciones pueden tener parámetros y devolver valores. El tipo de retorno se especifica después del nombre de la función.
+La función `main` es el punto de entrada de ejecución del programa, y debe existir una función `main` en cada programa Wave.
+El programa comienza su ejecución en esta función.
+
+Las funciones pueden tener parámetros según sea necesario y también pueden devolver resultados de cálculos o valores al llamador.
+Si hay un valor de retorno, se debe especificar el tipo de retorno en la declaración de la función.
 
 ### Ejemplo: Función simple
+
+El siguiente ejemplo es una función simple que toma dos enteros y devuelve su suma.
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -46,70 +55,67 @@ fun main() {
 }
 ```
 
-En el ejemplo anterior:
+En este ejemplo, la función `add` toma dos parámetros enteros `a` y `b`, los suma y devuelve el resultado.
+En la función `main`, se llama a la función `add`, se almacena el valor devuelto en una variable y luego se imprime.
 
-- La función `add` toma dos enteros `a` y `b` y devuelve su suma.
-- La función `main` llama a `add` y muestra el resultado.
+Así, las funciones encapsulan acciones específicas y permiten su reutilización en varias partes del programa.
 
 ## Variable
 
 Las variables se utilizan para almacenar y manipular datos dentro de un programa.
-Wave admite tanto **variables mutables** como **variables inmutables** en las declaraciones de variables, proporcionando al desarrollador control sobre la gestión de datos.
+Wave está diseñado para distinguir claramente entre variables mutables e inmutables al declararlas, revelando la intención de los cambios de datos a nivel de código.
+
+Esto hace que los cambios de estado del programa sean más claros y ayuda a reducir errores por cambios de valores no intencionados.
 
 ### Variable Mutable
 
-En Wave, las variables son **mutables** por defecto. Es decir, su valor puede cambiar durante la ejecución del programa.
+En Wave, las variables son mutables por defecto.
+Es decir, se pueden cambiar los valores durante la ejecución del programa después de su declaración.
 
 Las variables mutables se declaran utilizando la palabra clave var.
 
 ```wave
-var x :i32 = 10; // Variable mutable
+var x :i32 = 10;
 x = 20;
 ```
 
-En el ejemplo anterior:
-
-- `x` es una variable mutable que comienza con el valor inicial `10` y puede cambiarse a `20` más adelante.
+En el código anterior, `x` comienza con el valor inicial `10` y puede cambiarse a `20` después.
+Para datos que necesitan cambiar de estado, se utilizan variables mutables.
 
 ### Variable Inmutable
 
-Declarar una variable como **inmutable** significa que su valor no puede cambiar después de haber sido asignado una vez.
-
-Las variables inmutables se declaran utilizando la palabra clave `let`.
+Si declaras una variable como inmutable, no puedes cambiar su valor después de que se haya asignado inicialmente.
+Las variables inmutables se declaran utilizando la palabra clave let.
 
 ```wave
-let y :i32 = 5; // Variable inmutable
-// y = 10; // Error: Las variables inmutables no pueden cambiar su valor.
+let y :i32 = 5;
+// y = 10;   // Error: las variables inmutables no pueden cambiar su valor.
 ```
 
-Aquí:
+Las variables inmutables garantizan que los valores no cambien, lo que ayuda a aumentar la estabilidad y predictibilidad del programa.
+Se recomienda usar variables inmutables para datos constantes que no necesitan cambiar de valor.
 
-- `y` es una variable inmutable, y cambiar su valor provocaría un error de compilación.
-
-Sin embargo, si se desea utilizar la palabra clave `let` para declarar una variable mutable temporalmente, se puede utilizar `mut`.
+En Wave, puede usar mut junto con la palabra clave `let` para permitir explícitamente la mutabilidad.
 
 ```wave
 let mut y :i32 = 5;
-y = 10; 
+y = 10;
 ```
+
+En el caso de las variables, se declaran con `let`, pero se permite el cambio de valor usando la palabra clave `mut`.
 
 ### Ejemplo de Declaración de Variables
 
-Aquí hay un ejemplo de declaración de variables mutables e inmutables de varios tipos:
+A continuación se muestra un ejemplo de declaración de variables mutables e inmutables de varios tipos.
 
 ```wave
-var x :i32 = 10; // Variable entera mutable
-let y :f64 = 3.14159; // Variable de punto flotante inmutable
-var name :str = "Wave"; // Variable de cadena mutable
-let is_active :bool = true; // Variable booleana inmutable
+var x :i32 = 10;
+let y :f64 = 3.14159;
+var name :str = "Wave";
+let is_active :bool = true;
 ```
 
-- `x` es un entero mutable.
-- `y` es un número de punto flotante inmutable.
-- `name` es una cadena mutable.
-- `is_active` es un valor booleano inmutable.
+En este ejemplo, `x` y `name` son variables mutables, mientras que `y` e `is_active` son variables inmutables.
+En Wave, se distingue claramente entre `var` y `let` para mostrar la mutabilidad de los datos a nivel de código.
 
-En Wave, `var` se usa para declarar variables mutables, mientras que `let` se usa para declarar variables inmutables que no se pueden cambiar después de la asignación inicial.
-
-Al diferenciar entre variables mutables e inmutables, Wave permite un control más efectivo sobre la consistencia de datos y el estado del programa.
-Esto permite escribir un código más robusto y predecible.
+Usar adecuadamente variables mutables e inmutables ayuda a mantener la consistencia de los datos y a crear programas más robustos y predecibles.

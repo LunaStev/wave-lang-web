@@ -6,28 +6,26 @@ sidebar_position: 4
 
 ## Introducción
 
-En el lenguaje Wave, se proporcionan bucles para poder ejecutar el código repetidamente.
-Los bucles se utilizan para ejecutar el código repetidamente mientras se cumple una determinada condición, o para repetirlo un número específico de veces.
+En el lenguaje Wave se proporcionan bucles para manejar situaciones en las que el mismo código debe ejecutarse varias veces.
+Los bucles se utilizan para seguir ejecutando el código mientras se cumpla una condición o para repetirlo un número determinado de veces.
 
-Los bucles admitidos en Wave incluyen:
+Esto permite expresar tareas repetitivas con un código claro y conciso, sin necesidad de escribir nuevamente la misma lógica.
+Wave admite tanto bucles basados en condiciones como basados en conteo, y ofrece palabras clave para controlar el flujo de ejecución dentro de los bucles.
 
-- while loop: repetición basada en condiciones
-
-- for loop: repetición basada en el número de veces
-
-También se proporcionan las palabras clave break y continue, que permiten controlar el flujo durante la repetición.
-Esta sección explica cómo usar los bucles y las palabras clave de control de flujo.
+Esta sección explica cómo usar las sentencias `while` y `for`, así como las palabras clave `break` y `continue` para controlar el flujo de repeticiones.
 
 ---
 
 ## while loop
 
-El bucle `while` ejecuta repetidamente un bloque de código mientras la expresión condicional dada se evalúe como `true`.
-La repetición finalizará cuando la condición sea `false`.
+La sentencia `while` ejecuta repetidamente un bloque de código mientras la condición dada se evalúe como verdadera (`true`).
+En el momento en que la condición se evalúa como falsa (`false`), la repetición se termina de inmediato.
+
+Este método es adecuado cuando el número de repeticiones no es claro y se debe repetir hasta que se satisfaga una condición específica.
 
 ### Estructura básica
 
-La siguiente es la sintaxis básica de un bucle `while`:
+La estructura básica de la sentencia while en Wave es la siguiente.
 
 ```wave
 while (condición) {
@@ -35,9 +33,7 @@ while (condición) {
 }
 ```
 
-- La condición debe ser de tipo `bool`.
-
-- El bloque de código debe estar entre `{}` y puede contener una o más declaraciones.
+La condición debe evaluarse a tipo `bool`, y dentro del bloque de código entre llaves `{}` se pueden escribir una o más sentencias.
 
 ### Ejemplo: Imprimir desde 0 hasta 4
 
@@ -50,28 +46,28 @@ while (i < 5) {
 }
 ```
 
-Este ejemplo se repite mientras `i` sea menor que 5, imprimiendo el valor en cada repetición y aumentando en 1 cada vez.
+En este ejemplo, la repetición se realiza mientras la variable `i` sea menor que 5.
+En cada repetición se imprime el valor actual y se incrementa el valor de `i` en uno para que la condición eventualmente sea falsa.
 
 ---
 
 ## Bucle for
 
-El bucle `for` se utiliza de manera útil cuando se conoce el número de repeticiones.
-Se compone especificando el valor inicial, la condición de término y la expresión de incremento.
+La sentencia `for` es adecuada para su uso cuando el número de repeticiones es relativamente claro.
+Permite definir al mismo tiempo el valor inicial, la condición y la expresión de incremento para expresar claramente el flujo del ciclo.
+
+Una ventaja es que los elementos necesarios para controlar la repetición están reunidos en un solo lugar, lo que facilita entender la estructura del ciclo de un vistazo.
 
 ### Estructura básica
 
 ```wave
-for (var nombreVariable: tipo = valorInicial; condición; incremento) {
-    // código a repetir
+for (var nombreVariable: tipo = valorInicial; condición; expresiónIncremento) {
+    // Código para repetir
 }
 ```
 
-- nombreVariable: la variable utilizada para controlar la repetición
-
-- condición: se ejecuta mientras sea `true`
-
-- incremento: cambia el valor de la variable de repetición
+Aquí, la variable de control comienza con el valor inicial y la repetición se ejecuta mientras la condición sea verdadera.
+Al final de cada repetición, se ejecuta la expresión de incremento, cambiando el valor de la variable de control.
 
 ### Ejemplo: Imprimir de 1 a 5
 
@@ -81,12 +77,15 @@ for (var i: i32 = 1; i <= 5; i = i + 1) {
 }
 ```
 
+En este ejemplo, la repetición se realiza mientras `i` comienza en 1 y es menor o igual a 5.
+En cada repetición, se imprime el valor de `i` y luego se incrementa en uno.
+
 ---
 
 ## Bucle anidado
 
-Se puede escribir otro bucle dentro de un bucle, lo que se llama bucle anidado.
-Son útiles, por ejemplo, al recorrer matrices bidimensionales o combinaciones.
+Los ciclos pueden escribirse dentro de otros ciclos, lo que se llama ciclos anidados.
+Los ciclos anidados son útiles para recorrer estructuras de datos bidimensionales o manejar combinaciones de varias condiciones.
 
 ### Ejemplo: Bucle while doble
 
@@ -105,12 +104,15 @@ while (i < 3) {
 }
 ```
 
+En este ejemplo, cada vez que se ejecuta el ciclo `while` externo, se ejecuta completamente el ciclo `while` interno.
+Esto permite manejar secuencialmente combinaciones de tipo (`i`, `j`).
+
 ---
 
 ## Bucle break
 
-El bucle `break` finaliza inmediatamente el bucle y sale.
-Es útil cuando se desea detener la repetición al cumplir una condición.
+La sentencia `break` termina inmediatamente el ciclo y mueve el flujo de ejecución fuera de ese ciclo.
+Se utiliza cuando no es necesario continuar la repetición durante el ciclo.
 
 ### Ejemplo: Finalización de la repetición en un valor específico
 
@@ -127,12 +129,15 @@ while (true) {
 }
 ```
 
+En este ejemplo, dentro de un ciclo infinito, cuando `i` llega a 5, se ejecuta `break` y se termina el ciclo.
+Así, la sentencia `break` es útil para controlar el ciclo independientemente de la condición de repetición.
+
 ---
 
 ## Bucle continue
 
-El bucle `continue` omite el resto de la repetición actual y comienza la siguiente repetición.
-Se usa cuando solo se desea ejecutar parte del bloque de repetición bajo ciertas condiciones.
+La sentencia `continue` omite el resto del código en la repetición actual y comienza la siguiente repetición.
+Se utiliza cuando deseas omitir solo cierta lógica bajo una condición específica.
 
 ### Ejemplo: Imprimir solo números pares
 
@@ -146,17 +151,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
+En este código, cuando `i` es impar, se ejecuta `continue`, omitiendo la parte de impresión.
+Como resultado, solo se imprimen los valores pares.
+
 ---
 
 ## Resumen
 
-| Gramática | Descripción                                                                       |
-| --------- | --------------------------------------------------------------------------------- |
-| while     | Repetición mientras la condición sea verdadera                                    |
-| for       | Ejecución de la repetición con valor inicial, condición y expresión de incremento |
-| break     | Finalización inmediata del bucle                                                  |
-| continue  | Saltar a la siguiente repetición                                                  |
+Los ciclos de Wave están diseñados para expresar de manera natural tanto bucles basados en condiciones como en número de repeticiones.
+La sentencia `while` es adecuada para ciclos basados en condiciones, mientras que la sentencia `for` es útil cuando el número de veces y el flujo del ciclo son claros.
 
-Los bucles de Wave están diseñados para manejar de manera flexible tanto las operaciones de repetición basadas en condiciones como en el número de veces.
-
-La combinación de `break` y `continue` permite un control más sofisticado del flujo de repetición.
+El uso combinado de `break` y `continue` permite controlar finamente el flujo de ejecución durante los ciclos, creando lógicas de repetición más sofisticadas y flexibles.

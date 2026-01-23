@@ -4,15 +4,17 @@ sidebar_position: 3
 
 # Run the first program
 
-If you've already installed Wave in the previous installation document, let's run the first program now!
+If you've already installed Wave from the previous installation document, it's time to run your first Wave program.
+In this section, we will look over the entire process of writing and running a Wave program step by step using a simple example.
 
-## Create `hello.wave` file.
+## Create `hello.wave` file
 
-First, create a new file named `hello.wave`.
+First, create a new file named `hello.wave` in the directory you will be working in.
+You can freely specify the file name and extension, but in this example, we use `hello.wave`.
 
 ## Write the code
 
-Write the following code in `hello.wave` file:
+Write the following code in the `hello.wave` file you created.
 
 ```wave
 fun main() {
@@ -20,22 +22,30 @@ fun main() {
 }
 ```
 
-Here, `fun main()` indicates the starting point of the program, and the `println` function outputs the text to the screen.
+In this code, `fun main()` indicates the starting point of execution for a Wave program.
+Wave programs always execute from the `main` function.
+
+The `println` function is used to output strings to the standard output and is the most basic function used to display text on the screen.
 
 ## Run the program
 
-Now let's run the Wave program. Open the terminal and enter the following command:
+Once you've finished writing the code, open a terminal and run the following command from the directory where the file is located.
 
 ```bash
 wavec run hello.wave
 ```
 
+This command instructs the Wave compiler to compile the source file and immediately execute it.
+
 ## Check the output
 
-When you run the program, the following output will appear:
+If the program runs successfully, the following output will appear in the terminal.
 
 ```
 Hello Wave
 ```
 
-Now you can check that Wave is installed and working correctly. Congratulations! You have successfully run your first program.
+If you see this output, it means Wave is installed correctly and the program has been written and executed properly.
+
+You have successfully run your first Wave program.
+From now on, you can explore Wave's syntax and features one by one to try writing more complex programs.

@@ -5,105 +5,119 @@ sidebar_position: 2
 # Types de données
 
 Ce document explique les différents types de données fournis par le langage de programmation Wave.
-Le langage de programmation Wave permet de stocker et de traiter des valeurs à l'aide de divers types de données.
-Les principaux types de données incluent les entiers, les points flottants et les chaînes de caractères. Chaque type de données définit les caractéristiques de ces données et la manière dont la mémoire est traitée.
+Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
 
-## Type entier
+데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
+이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
 
-Le type entier est utilisé pour stocker des **valeurs entières**.
-Par défaut, les entiers sont déclarés en tant que `i32` (entier signé sur 32 bits) et `u32` (entier non signé sur 32 bits).
-Le langage de programmation Wave propose diverses options de taille permettant de définir précisément la plage des entiers.
+---
 
-- `i8` à `i1024`: Type entier signé, avec des tailles configurables de 8 à 1024 bits.
-- `u8` à `u1024`: Type entier non signé, avec des tailles configurables de 8 à 1024 bits.
+## 정수 타입
 
-Exemple:
+정수 타입은 정수 값을 저장하는 데 사용됩니다.
+Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+
+부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
+이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+
+다음은 정수 타입을 사용하는 간단한 예제입니다.
 
 ```wave
-var a :i32 = 100;
-var b :u32 = 200;
+var a: i32 = 100;
+var b: u32 = 200;
 ```
+
+---
 
 ## Type de point flottant
 
 Le type de point flottant est utilisé pour stocker des valeurs réelles.
-Par défaut, les nombres à point flottant sont déclarés en tant que `f32`.
-De plus, il offre diverses options de taille pour définir précisément la taille des nombres en virgule flottante.
+Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
 
-- `f32` ~ `f128`: 부동소수점 타입은 32비트부터 128비트까지 크기를 설정할 수 있습니다. Cela permet des calculs de nombres réels avec une précision accrue.
+Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
+이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
 
-Exemple:
+아래는 부동소수점 타입을 사용하는 예제입니다.
 
 ```wave
-var pi :f32 = 3.14;
-var e :f64 = 2.71828;
+var pi: f32 = 3.14;
+var e: f64 = 2.71828;
 ```
+
+---
 
 ## Type de chaîne
 
-Le type de chaîne est utilisé pour manipuler des données textuelles. Les chaînes sont déclarées à l'aide du mot-clé `str`.
-Les chaînes sont généralement définies entre guillemets (`"`) et peuvent être attribuées à des variables.
+문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
+Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
 
-Exemple:
+문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+
+다음은 문자열 타입의 기본적인 사용 예제입니다.
 
 ```wave
-var text :str = "Hello Wave";
+var text: str = "Hello Wave";
 ```
+
+---
 
 ## Type booléen
 
-Le type booléen est un type de données représentant des valeurs **vraies (True)** ou **fausses (False)**.
-Il est principalement utilisé dans les instructions conditionnelles et est défini par des valeurs `true` ou `false`.
+불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
+Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
 
-Exemple:
+불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
 
 ```wave
-var estActif :bool = true;
-var estDisponible :bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
+
+---
 
 ## Type de caractère
 
 Le type de caractère est utilisé pour stocker un seul caractère.
-Il est déclaré à l'aide du mot-clé `char` et ne peut contenir qu'une seule valeur de caractère.
+`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
 
-Exemple:
+문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
 
 ```wave
-var lettre :char = 'A';
+var letter: char = 'A';
 ```
 
 ## Type d'octet
 
-Le type octet est utilisé pour stocker des données de taille **1 octet**.
-Il est principalement utile pour manipuler des données binaires. Il est déclaré à l'aide du mot-clé `byte`.
+바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
+이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
 
-Exemple:
+Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
 
 ```wave
-var donneesOctet :byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Type de pointeur
 
-Le type pointeur est utilisé pour référencer une **adresse mémoire**.
-Il est déclaré avec le mot-clé `ptr` et est utilisé pour stocker une adresse mémoire.
+포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언하며, 특정 타입의 메모리 주소를 안전하게 표현할 수 있습니다.
 
-Exemple:
+포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
 
 ```wave
-var ptr :ptr<T> = &quelqueVariable;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Type de tableau
 
-Le type tableau est utilisé pour stocker **plusieurs éléments du même type de données** en séquence.
-Il utilise le mot-clé `array` et permet de spécifier la taille ou le type du tableau.
+배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
+Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
 
-Exemple:
+이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
 
 ```wave
 var numeros: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Chaque type de données peut avoir différentes plages et tailles, permettant de choisir le type qui convient le mieux à la gestion efficace de la mémoire et au calcul selon les besoins de l'utilisateur.
+각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
+적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
