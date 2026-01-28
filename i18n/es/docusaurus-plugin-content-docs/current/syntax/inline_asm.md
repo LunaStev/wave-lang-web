@@ -16,7 +16,7 @@ Con esta funcionalidad, Wave puede abarcar desde un simple lenguaje de alto nive
 
 ## Gramática básica
 
-El ensamblaje en línea se escribe usando \`asm { ... } como bloque.
+El ensamblaje en línea se escribe usando `asm { ... }` como bloque.
 Dentro de este bloque se definen tanto las instrucciones de ensamblaje que se van a ejecutar realmente como el mapeo de entrada y salida para conectar las variables Wave con los registros de la CPU.
 
 ```wave
