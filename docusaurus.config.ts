@@ -151,7 +151,7 @@ const config: Config = {
         {name: 'twitter:description', content: 'Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware.'},
       ],
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.png',
+      image: 'img/wave-og.png',
       navbar: {
         title: 'Wave',
         logo: {
@@ -243,7 +243,7 @@ const config: Config = {
             ],
           },
         ],
-        copyright: `Copyright © 2023 - ${new Date().getFullYear()} Wave with LunaStev. Built with Docusaurus.`,
+        copyright: `Copyright © 2023 - ${new Date().getFullYear()} LunaStev & Wave Foundation`,
       },
       prism: {
         theme: prismThemes.github,
