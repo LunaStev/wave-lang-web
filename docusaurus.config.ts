@@ -229,6 +229,10 @@ const config: Config = {
             title: 'More',
             items: [
               {
+                label: 'Source',
+                href: 'https://source.wave-lang.dev',
+              },
+              {
                 label: 'GitHub',
                 href: 'https://github.com/wavefnd/Wave',
               },
