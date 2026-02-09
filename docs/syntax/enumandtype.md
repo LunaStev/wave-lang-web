@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 ---
 
 # 열거형 (enum)과 타입 별칭 (type alias)
