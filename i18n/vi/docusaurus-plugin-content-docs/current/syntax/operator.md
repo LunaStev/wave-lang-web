@@ -4,113 +4,70 @@ sidebar_position: 5
 
 # toán tử
 
-## Giới thiệu
+이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
 
-Ngôn ngữ Wave cung cấp các toán tử đa dạng để thực hiện tính toán, đánh giá logic, so sánh, và xử lý bit giữa các biến.
+## 산술
 
-Tài liệu này giải thích các toán tử chính có thể sử dụng trong Wave theo từng loại, kèm theo cách hoạt động và ví dụ cho từng loại.
+| toán tử | Mô tả     |
+| ------- | --------- |
+| `+`     | phép cộng |
+| `-`     | phép trừ  |
+| `*`     | phép nhân |
+| `/`     | phép chia |
+| `%`     | 나머지       |
 
-Các toán tử được chia thành các loại sau:
+## 비교
 
-- toán tử số học
-- toán tử so sánh
-- toán tử logic
-- toán tử bit
-- toán tử gán
-- các toán tử đặc biệt khác
+| toán tử | Mô tả             |
+| ------- | ----------------- |
+| `==`    | bằng nhau         |
+| `!=`    | khác nhau         |
+| `<`     | nhỏ hơn           |
+| `<=`    | nhỏ hơn hoặc bằng |
+| `>`     | lớn hơn           |
+| `>=`    | lớn hơn hoặc bằng |
 
----
+## 논리
 
-## toán tử số học
+| toán tử    | Mô tả     |
+| ---------- | --------- |
+| `&&`       | logic AND |
+| \\\`\\ | logic OR  |
+| `!`        | logic NOT |
 
-Toán tử số học thực hiện các phép toán cơ bản trên dữ liệu số.
+## 비트
 
-| toán tử | Mô tả        | Ví dụ (`a = 10`, `b = 3`)   |
-| ------- | ------------ | ---------------------------------------------- |
-| `+`     | phép cộng    | `a + b` → `13`                                 |
-| `-`     | phép trừ     | `a - b` → `7`                                  |
-| `*`     | phép nhân    | `a * b` → `30`                                 |
-| `/`     | phép chia    | `a / b` → `3` (chia nguyên) |
-| `%`     | phép chia dư | `a % b` → `1`                                  |
+| toán tử    | Mô tả    |
+| ---------- | -------- |
+| `&`        | bit AND  |
+| \\\`\\ | bit OR   |
+| `^`        | bit XOR  |
+| `~`        | bit NOT  |
+| `<<`       | dời trái |
+| `>>`       | dời phải |
 
----
+## 대입
 
-## toán tử so sánh
+| toán tử | Mô tả    |
+| ------- | -------- |
+| `=`     | 기본 대입    |
+| `+=`    | 덧셈 후 대입  |
+| `-=`    | 뺄셈 후 대입  |
+| `*=`    | 곱셈 후 대입  |
+| `/=`    | 나눗셈 후 대입 |
+| `%=`    | 나머지 후 대입 |
 
-Toán tử so sánh trả lại giá trị `bool` sau khi so sánh hai giá trị.
+## 단항 / 포인터 관련
 
-| toán tử | Mô tả             | Ví dụ (`a = 10`, `b = 3`) |
-| ------- | ----------------- | -------------------------------------------- |
-| `==`    | bằng nhau         | `a == b` → `false`                           |
-| `!=`    | khác nhau         | `a != b` → `true`                            |
-| `<`     | nhỏ hơn           | `a < b` → `false`                            |
-| `>`     | lớn hơn           | `a > b` → `true`                             |
-| `<=`    | nhỏ hơn hoặc bằng | `a <= 10` → `true`                           |
-| `>=`    | lớn hơn hoặc bằng | `a >= b` → `true`                            |
+| 연산자/키워드    | Mô tả    |
+| ---------- | -------- |
+| `++`, `--` | 전위/후위 증감 |
+| `&x`       | 주소 획득    |
+| `deref p`  | 포인터 역참조  |
 
----
+포인터의 경우 현재 `==`, `!=` 비교 중심으로 사용하며, 포인터 산술은 지원하지 않습니다.
 
-## toán tử logic
+## 예약 또는 미구현 항목
 
-Toán tử logic xử lý sự kết hợp của các giá trị `bool`.
-
-| toán tử    | Tên       | Mô tả                                                            | Ví dụ                     |
-| ---------- | --------- | ---------------------------------------------------------------- | ------------------------- |
-| `&&`       | logic AND | Chỉ `true` nếu cả hai giá trị đều `true`.        | `true && false` → `false` |
-| \\\`\\ | logic OR  | Chỉ cần một trong hai `true` thì kết quả `true`. | \\`true \\             |
-| `!`        | logic NOT | Đảo ngược `true` thành `false`, `false` thành `true`             | `!true` → `false`         |
-
----
-
-## toán tử bit
-
-Toán tử bit thao tác dữ liệu kiểu số nguyên theo đơn vị bit.
-
-| toán tử    | Tên      | Mô tả                                | Ví dụ           |
-| ---------- | -------- | ------------------------------------ | --------------- |
-| `&`        | bit AND  | 1 khi cả hai bit đều là 1            | `a & b` → `2`   |
-| \\\`\\ | bit OR   | 1 khi ít nhất một trong hai bit là 1 | \\`a \\      |
-| `^`        | bit XOR  | 1 khi hai bit khác nhau              | `a ^ b` → `5`   |
-| `~`        | bit NOT  | đảo ngược bit                        | `~a` → `-7`     |
-| `<<`       | dời trái | dời bit sang trái                    | `a << 1` → `12` |
-| `>>`       | dời phải | dời bit sang phải                    | `a >> 1` → `3`  |
-
----
-
-## toán tử gán
-
-Sử dụng khi lưu trữ giá trị vào biến. Phần lớn các trường hợp có thể rút gọn kết hợp với toán tử số học.
-
-| toán tử | Mô tả                       | Ví dụ (`a = 5`) |
-| ------- | --------------------------- | ---------------------------------- |
-| `=`     | Phân bổ cơ bản              | `a = 10`                           |
-| `+=`    | Phân bổ sau khi cộng thêm   | `a += 2` → `7`                     |
-| `-=`    | Phân bổ sau khi trừ đi      | `a -= 1` → `4`                     |
-| `*=`    | Phân bổ sau khi nhân        | `a *= 3` → `15`                    |
-| `/=`    | Phân bổ sau khi chia        | `a /= 5` → `1`                     |
-| `%=`    | Phân bổ sau khi chia lấy dư | `a %= 4` → `1`                     |
-
----
-
-## các toán tử đặc biệt khác
-
-Wave cung cấp các toán tử có ý nghĩa riêng hoặc đặc biệt như sau.
-
-| toán tử     | Tên                                                    | Mô tả                                                  | Ví dụ                                    |
-| ----------- | ------------------------------------------------------ | ------------------------------------------------------ | ---------------------------------------- |
-| `??`        | Toán tử hợp nhất giá trị null                          | Sử dụng giá trị bên phải nếu giá trị bên trái là null  | `a ?? b` → `nếu a null thì b`            |
-| `?:`        | Toán tử điều kiện (toán tử ba ngôi) | Lựa chọn giá trị theo điều kiện                        | `điều kiện ? giá trị đúng : giá trị sai` |
-| `in`        | Kiểm tra xem có chứa hay không                         | Kiểm tra xem giá trị có nằm trong bộ sưu tập hay không | `"a" trong danh sách`                    |
-| `is`        | Toán tử so sánh kiểu                                   | Kiểm tra kiểu của giá trị                              | `x là i32`                               |
-| `!&`        | NAND                                                   | Toán tử Logic NAND                                     | Phép toán logic nâng cao                 |
-| \\\`!\\ | NOR                                                    | Toán tử Logic NOR                                      | Phép toán logic nâng cao                 |
-| `~^`        | XNOR                                                   | Toán tử Logic XNOR                                     | Phép toán logic nâng cao                 |
-
----
-
-## Tóm tắt
-
-Wave cung cấp các toán tử đa dạng từ toán học đến phán đoán logic, thao tác bit và chia nhánh điều kiện.
-Những toán tử này là công cụ cần thiết để tương tác với biến, cấu thành điều kiện, và thực hiện các phép toán phức tạp hoặc kiểm soát luồng.
-
-Sẽ xem xét thứ tự ưu tiên và hướng kết hợp của mỗi toán tử trong phần "Thứ tự ưu tiên và trình tự đánh giá" tiếp theo.
+문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.  
+예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
