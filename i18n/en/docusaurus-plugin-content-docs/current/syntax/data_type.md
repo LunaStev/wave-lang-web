@@ -100,12 +100,26 @@ var byteData: byte = 0xFF;
 ## Pointer Type
 
 Pointer types are used to directly reference memory addresses.
-In Wave, pointer types are declared in the form `ptr<T>`, allowing safe expression of memory addresses of specific types.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
 
 Pointers are used for low-level memory access, often utilized in system programming or performance-critical code.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
+```
+
+## `null` 리터럴
+
+Wave에서 `null`은 정식 리터럴입니다.
+
+- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
+- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+
+```wave
+var p: ptr<i32> = null;  // OK
+
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Array Type
