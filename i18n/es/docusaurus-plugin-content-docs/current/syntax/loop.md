@@ -61,24 +61,51 @@ Una ventaja es que los elementos necesarios para controlar la repetición están
 ### Estructura básica
 
 ```wave
-for (var nombreVariable: tipo = valorInicial; condición; expresiónIncremento) {
-    // Código para repetir
+for (초기화; 조건식; 증감식) {
+    // 반복할 코드
 }
 ```
 
-Aquí, la variable de control comienza con el valor inicial y la repetición se ejecuta mientras la condición sea verdadera.
-Al final de cada repetición, se ejecuta la expresión de incremento, cambiando el valor de la variable de control.
+Wave의 for 초기화는 여러 형태를 지원합니다.
 
-### Ejemplo: Imprimir de 1 a 5
+- 암시적 `var` 타입 초기화
+- `var` / `let mut` / `const` 선언 초기화
+- 일반 식 초기화 (기존 변수 재사용)
+
+### 예제 1: 암시적 타입 초기화
 
 ```wave
-for (var i: i32 = 1; i <= 5; i = i + 1) {
+for (i :i32 = 1; i <= 5; i += 1) {
     println("i = {}", i);
 }
 ```
 
-En este ejemplo, la repetición se realiza mientras `i` comienza en 1 y es menor o igual a 5.
-En cada repetición, se imprime el valor de `i` y luego se incrementa en uno.
+### 예제 2: `var` / `let mut` 초기화
+
+```wave
+for (var i: i32 = 0; i < 3; i += 1) {
+    println("var i = {}", i);
+}
+
+for (let mut j: i32 = 0; j < 3; j += 1) {
+    println("let mut j = {}", j);
+}
+```
+
+### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+
+```wave
+var i: i32 = 99;
+
+for (i = 3; i <= 5; i += 1) {
+    println("i = {}", i);
+}
+
+println("after loop: {}", i); // 6
+```
+
+선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
+식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
 
 ---
 
