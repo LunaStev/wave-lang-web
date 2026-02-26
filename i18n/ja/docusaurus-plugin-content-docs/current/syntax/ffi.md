@@ -22,26 +22,24 @@ FFIはコンパイル時に関数の存在のみを宣言し、実行ファイ�
 ## extern宣言
 
 外部関数はexternキーワードを使用して宣言します。
-すべての外部関数宣言にはABI指定が必須です。
+현재 Wave에서는 ABI 지정이 반드시 필요하며, **`extern(c)`만 지원**합니다.
 
 ```wave
-extern(abi) fun 関数名(引数...) -> 返却型;
+extern(c) fun 함수명(인자들...) -> 반환타입;
 ```
 
 ---
 
 ## ABI指定
 
-`extern`宣言には必ずABIを明示しなければなりません。
-ABIは外部関数がどの呼び出し規約とシンボル規則に従うかを示します。
+`extern` 선언에는 ABI를 명시해야 합니다.
+현재 지원되는 ABI는 `c` 하나입니다.
 
 ```wave
 extern(c) fun printf(fmt: ptr<u8>);
-extern(rust) fun rust_func(i32);
 ```
 
-ABIは識別子として扱われ、言語の観点で特定のABIをデフォルトとして提供しません。
-すべての外部関数は明示的にABIを指定しなければなりません。
+`extern(rust)` 같은 선언은 파싱될 수 있어도 의미 분석 단계에서 에러가 발생합니다.
 
 ---
 
@@ -82,11 +80,11 @@ extern(c) {
 ### 関数単位のシンボル指定
 
 ```wave
-extern(rust, "_ZN4test10rust_func117h123abcE")
+extern(c, "puts")
 fun rust_func(i32);
 ```
 
-この宣言は、`rust_func`を呼び出す際に`_ZN4test10rust_func117h123abcE`シンボルを使用するように指定します。
+이 선언은 `rust_func` 호출 시 실제 링크 심볼로 `puts`를 사용하도록 지정합니다.
 
 ---
 
@@ -95,9 +93,9 @@ fun rust_func(i32);
 ブロック単位の宣言では、各関数の後にシンボル名を個別に指定することができます。
 
 ```wave
-extern(rust) {
-    fun rust_func1(i32) "_ZN4test10rust_func117h123abcE";
-    fun rust_func2(i32) "_ZN4test10rust_func217h456defE";
+extern(c) {
+    fun my_puts(ptr<i8>) "puts";
+    fun my_strlen(ptr<i8>) "strlen";
 }
 ```
 
