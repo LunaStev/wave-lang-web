@@ -100,12 +100,26 @@ var byteData: byte = 0xFF;
 ## 포인터 타입
 
 포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언하며, 특정 타입의 메모리 주소를 안전하게 표현할 수 있습니다.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
 
 포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
+```
+
+## `null` 리터럴
+
+Wave에서 `null`은 정식 리터럴입니다.
+
+- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
+- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+
+```wave
+var p: ptr<i32> = null;  // OK
+
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## 배열 타입
