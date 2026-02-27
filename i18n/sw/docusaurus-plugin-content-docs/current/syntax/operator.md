@@ -4,113 +4,70 @@ sidebar_position: 5
 
 # Wendeshaji
 
-## Utangulizi
+이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
 
-Lugha ya Wave inatoa wendeshaji mbalimbali ili kutekeleza hesabu kati ya vigezo, uamuzi wa mantiki, kulinganisha, na operesheni za biti.
+## 산술
 
-Hati hii inaelezea aina kuu za wendeshaji ambazo zinaweza kutumika katika Wave, inaelezea jinsi kila moja inavyofanya kazi, na inatoa mifano pia.
+| Wendeshaji | Maelezo    |
+| ---------- | ---------- |
+| `+`        | Penambahan |
+| `-`        | Utoaji     |
+| `*`        | Kuzidisha  |
+| `/`        | Mgawanyiko |
+| `%`        | 나머지        |
 
-Wendeshaji zimegawanywa katika makundi yafuatayo:
+## 비교
 
-- Wendeshaji wa hesabu
-- Wendeshaji wa kulinganisha
-- Wendeshaji wa mantiki
-- Wendeshaji wa biti
-- Wendeshaji wa usambazaji
-- Wendeshaji maalum wengine
+| Wendeshaji | Maelezo       |
+| ---------- | ------------- |
+| `==`       | sawa          |
+| `!=`       | tofauti       |
+| `<`        | ndogo         |
+| `<=`       | ndogo au sawa |
+| `>`        | kubwa         |
+| `>=`       | kubwa au sawa |
 
----
+## 논리
 
-## Wendeshaji wa hesabu
+| Wendeshaji | Maelezo     |
+| ---------- | ----------- |
+| `&&`       | Mantiki AND |
+| \\`\\   | Mantiki OR  |
+| `!`        | Mantiki NOT |
 
-Wendeshaji wa hesabu hufanya shughuli za msingi za hesabu kwa data ya nambari.
+## 비트
 
-| Wendeshaji | Maelezo              | Mfano (`a = 10`, `b = 3`)                    |
-| ---------- | -------------------- | --------------------------------------------------------------- |
-| `+`        | Penambahan           | `a + b` → `13`                                                  |
-| `-`        | Utoaji               | `a - b` → `7`                                                   |
-| `*`        | Kuzidisha            | `a * b` → `30`                                                  |
-| `/`        | Mgawanyiko           | `a / b` → `3` (mgawanyiko wa nambari kamili) |
-| `%`        | Operesheni ya mabaki | `a % b` → `1`                                                   |
+| Wendeshaji | Maelezo         |
+| ---------- | --------------- |
+| `&`        | Biti AND        |
+| \\`\\   | Biti OR         |
+| `^`        | Biti XOR        |
+| `~`        | Biti SIO        |
+| `<<`       | Hamisha kushoto |
+| `>>`       | Hamisha kulia   |
 
----
+## 대입
 
-## Wendeshaji wa kulinganisha
+| Wendeshaji | Maelezo  |
+| ---------- | -------- |
+| `=`        | 기본 대입    |
+| `+=`       | 덧셈 후 대입  |
+| `-=`       | 뺄셈 후 대입  |
+| `*=`       | 곱셈 후 대입  |
+| `/=`       | 나눗셈 후 대입 |
+| `%=`       | 나머지 후 대입 |
 
-Wendeshaji wa kulinganisha hurejesha thamani ya `bool` kama matokeo ya kulinganisha maadili mawili.
+## 단항 / 포인터 관련
 
-| Wendeshaji | Maelezo       | Mfano (`a = 10`, `b = 3`) |
-| ---------- | ------------- | -------------------------------------------- |
-| `==`       | sawa          | `a == b` → `uongo`                           |
-| `!=`       | tofauti       | `a != b` → `kweli`                           |
-| `<`        | ndogo         | `a < b` → `uongo`                            |
-| `>`        | kubwa         | `a > b` → `kweli`                            |
-| `<=`       | ndogo au sawa | `a <= 10` → `kweli`                          |
-| `>=`       | kubwa au sawa | `a >= b` → `kweli`                           |
+| 연산자/키워드    | Maelezo  |
+| ---------- | -------- |
+| `++`, `--` | 전위/후위 증감 |
+| `&x`       | 주소 획득    |
+| `deref p`  | 포인터 역참조  |
 
----
+포인터의 경우 현재 `==`, `!=` 비교 중심으로 사용하며, 포인터 산술은 지원하지 않습니다.
 
-## Wendeshaji wa mantiki
+## 예약 또는 미구현 항목
 
-Wendeshaji wa mantiki hushughulikia mchanganyiko wa kweli/uongo kwa thamani za `bool`.
-
-| Wendeshaji | Jina        | Maelezo                                            | mfano                      |
-| ---------- | ----------- | -------------------------------------------------- | -------------------------- |
-| `&&`       | Mantiki AND | Ni `kweli` tu wakati thamani zote mbili ni `kweli` | `kweli && uongo` → `uongo` |
-| \\`\\   | Mantiki OR  | `kweli` ikiwa hata moja ni `kweli`                 | \`true \\                |
-| `!`        | Mantiki NOT | Pindua `kweli` kuwa `uongo`, `uongo` kuwa `kweli`  | `!kweli` → `uongo`         |
-
----
-
-## Wendeshaji wa biti
-
-Wendeshaji wa biti hubadilisha data ya aina ya nambari kwa vitengo vya biti.
-
-| Wendeshaji | Jina            | Maelezo                           | mfano           |
-| ---------- | --------------- | --------------------------------- | --------------- |
-| `&`        | Biti AND        | Moja ikiwa biti zote mbili ni 1   | `a & b` → `2`   |
-| \\`\\   | Biti OR         | Moja ikiwa hata moja ya biti ni 1 | \`a \\        |
-| `^`        | Biti XOR        | Moja ikiwa biti tofauti           | `a ^ b` → `5`   |
-| `~`        | Biti SIO        | Geuza biti                        | `~a` → `-7`     |
-| `<<`       | Hamisha kushoto | Hamisha biti kushoto              | `a << 1` → `12` |
-| `>>`       | Hamisha kulia   | Hamisha biti kulia                | `a >> 1` → `3`  |
-
----
-
-## Wendeshaji wa usambazaji
-
-Inatumika kuhifadhi thamani kwa kigezo. Katika hali nyingi, inaweza kuunganishwa na wendeshaji wa hesabu ili kufupishwa.
-
-| Wendeshaji | Maelezo                    | Mfano (`a = 5`) |
-| ---------- | -------------------------- | ---------------------------------- |
-| `=`        | Ugawaji wa Msingi          | `a = 10`                           |
-| `+=`       | Ugawaji baada ya Kuongeza  | `a += 2` → `7`                     |
-| `-=`       | Ugawaji baada ya Kuondoa   | `a -= 1` → `4`                     |
-| `*=`       | Ugawaji baada ya Kuzidisha | `a *= 3` → `15`                    |
-| `/=`       | Ugawaji baada ya Kugawa    | `a /= 5` → `1`                     |
-| `%=`       | Ugawaji baada ya Mabaki    | `a %= 4` → `1`                     |
-
----
-
-## Wendeshaji maalum wengine
-
-Wave pia hutoa waendeshaji wenye maana ya kipekee au maalum kama ifuatavyo.
-
-| Wendeshaji | Jina                                                       | Maelezo                                                 | mfano                                           |
-| ---------- | ---------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------- |
-| `??`       | Wendeshaji wa kuunganisha null                             | Tumia thamani ya kulia ikiwa thamani ya kushoto ni null | `a ?? b` → `a ikiwa ni null basi b`             |
-| `?:`       | Wendeshaji wa hali (Ternari Wendeshaji) | Chagua thamani kulingana na hali                        | `Sharti ? Thamani ya ukweli : Thamani ya uongo` |
-| `ndani`    | Kukagua ikiwa inajumuishwa                                 | Kukagua ikiwa thamani ipo katika mkusanyiko             | `"a" katika orodha`                             |
-| `ni`       | Wendeshaji wa kulinganisha aina                            | Kukagua aina ya thamani                                 | `x ni i32`                                      |
-| `!&`       | NAND                                                       | Mantiki ya NAND                                         | Wendeshaji wa mantiki ya juu                    |
-| \\`!\\  | NOR                                                        | Mantiki ya NOR                                          | Wendeshaji wa mantiki ya juu                    |
-| `~^`       | XNOR                                                       | Mantiki ya XNOR                                         | Wendeshaji wa mantiki ya juu                    |
-
----
-
-## Muhtasari
-
-Wave inatoa wendeshaji mbalimbali kutoka kwa hesabu za kihisabati hadi hukumu za kimantiki, udhibiti wa biti, na tawala za masharti.
-Wendeshaji hawa ni zana muhimu kwa kuwasiliana na mabadiliko au kuunda hali na udhibiti wa mtiririko au mahesabu magumu.
-
-Kipaumbele cha kila wendeshaji na mwelekeo wa kuunganisha vinaweza kushughulikiwa katika sehemu za baadaye za "Kipaumbele na mpangilio wa utathmini."
+문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.  
+예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.

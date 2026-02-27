@@ -22,26 +22,24 @@ La FFI declara únicamente la existencia de la función en tiempo de compilació
 ## Declaración extern
 
 Las funciones externas se declaran utilizando la palabra clave extern.
-Todas las declaraciones de funciones externas requieren especificar un ABI.
+현재 Wave에서는 ABI 지정이 반드시 필요하며, **`extern(c)`만 지원**합니다.
 
 ```wave
-extern(abi) fun nombrefunción(argumentos...) -> tipoderetorno;
+extern(c) fun 함수명(인자들...) -> 반환타입;
 ```
 
 ---
 
 ## Especificación de ABI
 
-Debe especificarse expresamente un ABI en las declaraciones `extern`.
-El ABI indica qué convención de llamada y reglas de símbolo sigue la función externa.
+`extern` 선언에는 ABI를 명시해야 합니다.
+현재 지원되는 ABI는 `c` 하나입니다.
 
 ```wave
 extern(c) fun printf(fmt: ptr<u8>);
-extern(rust) fun rust_func(i32);
 ```
 
-El ABI se trata como un identificador y no se proporcionan valores predeterminados para ABIs específicos a nivel de lenguaje.
-Todas las funciones externas deben especificar un ABI expresamente.
+`extern(rust)` 같은 선언은 파싱될 수 있어도 의미 분석 단계에서 에러가 발생합니다.
 
 ---
 
@@ -82,11 +80,11 @@ En este caso, se puede especificar el nombre real del símbolo al que se enlazar
 ### Especificación de símbolos a nivel de función
 
 ```wave
-extern(rust, "_ZN4test10rust_func117h123abcE")
+extern(c, "puts")
 fun rust_func(i32);
 ```
 
-Esta declaración especifica que al llamar a `rust_func` se debería usar el símbolo `_ZN4test10rust_func117h123abcE`.
+이 선언은 `rust_func` 호출 시 실제 링크 심볼로 `puts`를 사용하도록 지정합니다.
 
 ---
 
@@ -95,9 +93,9 @@ Esta declaración especifica que al llamar a `rust_func` se debería usar el sí
 En la declaración a nivel de bloque, se puede especificar el nombre del símbolo individualmente después de cada función.
 
 ```wave
-extern(rust) {
-    fun rust_func1(i32) "_ZN4test10rust_func117h123abcE";
-    fun rust_func2(i32) "_ZN4test10rust_func217h456defE";
+extern(c) {
+    fun my_puts(ptr<i8>) "puts";
+    fun my_strlen(ptr<i8>) "strlen";
 }
 ```
 

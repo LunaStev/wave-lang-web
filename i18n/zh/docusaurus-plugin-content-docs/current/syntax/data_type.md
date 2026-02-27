@@ -100,12 +100,26 @@ var byteData: byte = 0xFF;
 ## 指针类型
 
 指针类型用于直接引用内存地址。
-在Wave中以`ptr<T>`形式声明指针类型，可以安全地表示特定类型的内存地址。
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
 
 指针在需要低级内存访问的情况下使用，主要用于系统编程或对性能要求高的代码中。
 
 ```wave
 var ptr: ptr<T> = &someVariable;
+```
+
+## `null` 리터럴
+
+Wave에서 `null`은 정식 리터럴입니다.
+
+- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
+- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+
+```wave
+var p: ptr<i32> = null;  // OK
+
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## 数组类型

@@ -4,113 +4,70 @@ sidebar_position: 5
 
 # Opérateurs
 
-## Introduction
+이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
 
-Le langage Wave propose divers opérateurs permettant d'effectuer des calculs, des jugements logiques, des comparaisons, des opérations binaires, etc. entre les variables.
+## 산술
 
-Ce document explique les principaux opérateurs utilisables dans Wave, classés par type, et fournit des exemples de leur fonctionnement.
+| Opérateur | Description    |
+| --------- | -------------- |
+| `+`       | Addition       |
+| `-`       | Soustraction   |
+| `*`       | Multiplication |
+| `/`       | Division       |
+| `%`       | 나머지            |
 
-Les opérateurs sont répartis dans les catégories suivantes :
+## 비교
 
-- Opérateurs arithmétiques
-- Opérateurs de comparaison
-- Opérateurs logiques
-- Opérateurs de bits
-- Opérateurs d'affectation
-- Autres opérateurs spéciaux
+| Opérateurs | Description        |
+| ---------- | ------------------ |
+| `==`       | Égal               |
+| `!=`       | Différent          |
+| `<`        | Plus petit         |
+| `<=`       | Plus petit ou égal |
+| `>`        | Plus grand         |
+| `>=`       | Plus grand ou égal |
 
----
+## 논리
 
-## Opérateurs arithmétiques
+| Opérateurs | Description |
+| ---------- | ----------- |
+| `&&`       | ET logique  |
+| \\\`\\ | OU logique  |
+| `!`        | NON logique |
 
-Les opérateurs arithmétiques effectuent des opérations mathématiques de base sur les données numériques.
+## 비트
 
-| Opérateur | Description    | Exemple (`a = 10`, `b = 3`)      |
-| --------- | -------------- | --------------------------------------------------- |
-| `+`       | Addition       | `a + b` → `13`                                      |
-| `-`       | Soustraction   | `a - b` → `7`                                       |
-| `*`       | Multiplication | `a * b` → `30`                                      |
-| `/`       | Division       | `a / b` → `3` (division entière) |
-| `%`       | Modulo         | `a % b` → `1`                                       |
+| Opérateurs | Description       |
+| ---------- | ----------------- |
+| `&`        | ET bit à bit      |
+| \\\`\\ | OU bit à bit      |
+| `^`        | XOR bit à bit     |
+| `~`        | NON bit à bit     |
+| `<<`       | Décalage à gauche |
+| `>>`       | Décalage à droite |
 
----
+## 대입
 
-## Opérateurs de comparaison
+| Opérateurs | Description |
+| ---------- | ----------- |
+| `=`        | 기본 대입       |
+| `+=`       | 덧셈 후 대입     |
+| `-=`       | 뺄셈 후 대입     |
+| `*=`       | 곱셈 후 대입     |
+| `/=`       | 나눗셈 후 대입    |
+| `%=`       | 나머지 후 대입    |
 
-Les opérateurs de comparaison renvoient une valeur `bool` basée sur la comparaison de deux valeurs.
+## 단항 / 포인터 관련
 
-| Opérateurs | Description        | Exemple (`a = 10`, `b = 3`) |
-| ---------- | ------------------ | ---------------------------------------------- |
-| `==`       | Égal               | `a == b` → `false`                             |
-| `!=`       | Différent          | `a != b` → `true`                              |
-| `<`        | Plus petit         | `a < b` → `false`                              |
-| `>`        | Plus grand         | `a > b` → `true`                               |
-| `<=`       | Plus petit ou égal | `a <= 10` → `true`                             |
-| `>=`       | Plus grand ou égal | `a >= b` → `true`                              |
+| 연산자/키워드    | Description |
+| ---------- | ----------- |
+| `++`, `--` | 전위/후위 증감    |
+| `&x`       | 주소 획득       |
+| `deref p`  | 포인터 역참조     |
 
----
+포인터의 경우 현재 `==`, `!=` 비교 중심으로 사용하며, 포인터 산술은 지원하지 않습니다.
 
-## Opérateurs logiques
+## 예약 또는 미구현 항목
 
-Les opérateurs logiques traitent les combinaisons de valeurs `bool` vraies/faux.
-
-| Opérateurs | Nom         | Description                                           | Exemple                   |
-| ---------- | ----------- | ----------------------------------------------------- | ------------------------- |
-| `&&`       | ET logique  | Seulement `true` lorsque les deux valeurs sont `true` | `true && false` → `false` |
-| \\\`\\ | OU logique  | `true` si l'un des deux est `true`                    | \\\`true \\           |
-| `!`        | NON logique | Inverse `true` à `false` et `false` à `true`          | `!true` → `false`         |
-
----
-
-## Opérateurs de bits
-
-Les opérateurs de bits manipulent les données entières au niveau du bit.
-
-| Opérateurs | Nom               | Description                             | Exemple         |
-| ---------- | ----------------- | --------------------------------------- | --------------- |
-| `&`        | ET bit à bit      | 1 lorsque les deux bits sont 1          | `a & b` → `2`   |
-| \\\`\\ | OU bit à bit      | 1 si l'un des deux bits est 1           | b`→`7\\\`     |
-| `^`        | XOR bit à bit     | 1 lorsque les deux bits sont différents | `a ^ b` → `5`   |
-| `~`        | NON bit à bit     | Inverser les bits                       | `~a` → `-7`     |
-| `<<`       | Décalage à gauche | Déplacer les bits à gauche              | `a << 1` → `12` |
-| `>>`       | Décalage à droite | Déplacer les bits à droite              | `a >> 1` → `3`  |
-
----
-
-## Opérateurs d'affectation
-
-Utilisé pour affecter une valeur à une variable. La plupart du temps, il peut être combiné avec des opérateurs arithmétiques pour être condensé.
-
-| Opérateurs | Description                      | Exemple (`a = 5`) |
-| ---------- | -------------------------------- | ------------------------------------ |
-| `=`        | Affectation de base              | `a = 10`                             |
-| `+=`       | Affectation après addition       | `a += 2` → `7`                       |
-| `-=`       | Affectation après soustraction   | `a -= 1` → `4`                       |
-| `*=`       | Affectation après multiplication | `a *= 3` → `15`                      |
-| `/=`       | Affectation après division       | `a /= 5` → `1`                       |
-| `%=`       | Affectation du reste             | `a %= 4` → `1`                       |
-
----
-
-## Autres opérateurs spéciaux
-
-Wave fournit également des opérateurs avec une signification unique ou spéciale.
-
-| Opérateurs  | Nom                                                            | Description                                           | Exemple                                   |
-| ----------- | -------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------- |
-| `??`        | Opérateur de fusion de null                                    | Utilise la valeur de droite si la gauche est null     | `a ?? b` → `si a est null alors b`        |
-| `?:`        | Opérateur conditionnel (opérateur ternaire) | Sélectionne une valeur selon une condition            | `condition ? valeur vrai : valeur fausse` |
-| `in`        | Vérifie l'inclusion                                            | Vérifie si une valeur est incluse dans une collection | `"a" dans liste`                          |
-| `is`        | Opérateur de comparaison de type                               | Vérifie le type d'une valeur                          | `x est i32`                               |
-| `!&`        | NAND                                                           | Opération logique NAND                                | Opération logique avancée                 |
-| \\\`!\\ | NOR                                                            | Opération logique NOR                                 | Opération logique avancée                 |
-| `~^`        | XNOR                                                           | Opération logique XNOR                                | Opération logique avancée                 |
-
----
-
-## Résumé
-
-Wave fournit une variété d'opérateurs allant des opérations mathématiques aux évaluations logiques, en passant par les manipulations de bits et la branche conditionnelle.
-Ces opérateurs interagissent avec des variables ou formulent des conditions, et sont des outils essentiels pour des calculs complexes ou le contrôle de flux.
-
-La priorité et la direction d'association de chaque opérateur seront abordées dans la section "Priorité et ordre d'évaluation" plus tard.
+문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.  
+예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
