@@ -8,6 +8,7 @@ Este documento explica los diversos tipos de datos proporcionados por el lenguaj
 En Wave, se pueden almacenar y operar valores a través de varios tipos de datos, y cada tipo de dato define claramente la forma de representar esos datos y cómo se manejan en memoria.
 
 Designar claramente los tipos de datos es una de las filosofías de diseño central de Wave.
+Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
 Esto permite expresar claramente la intención del código, detectar errores temprano durante la compilación, y garantizar un uso eficiente de la memoria y una ejecución estable.
 
 ---

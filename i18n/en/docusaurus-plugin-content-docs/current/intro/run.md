@@ -49,3 +49,6 @@ If you see this output, it means Wave is installed correctly and the program has
 
 You have successfully run your first Wave program.
 From now on, you can explore Wave's syntax and features one by one to try writing more complex programs.
+
+정밀한 명령어 옵션(`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)은
+`wavec` CLI 문서에서 확인할 수 있습니다.

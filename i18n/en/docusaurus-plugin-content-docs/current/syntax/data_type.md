@@ -8,6 +8,7 @@ This document describes the various data types provided by the Wave programming 
 In Wave, you can store and operate on values using various data types, each clearly defining the way of representing and handling the data in memory.
 
 Clearly specifying data types is one of the core design philosophies of Wave.
+Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
 This allows you to clearly express the intent of your code, catch errors early at compile time, and ensure efficient memory use and stable execution.
 
 ---
