@@ -61,24 +61,51 @@ Because all the elements needed to control the loop are gathered in one place, i
 ### Basic Structure
 
 ```wave
-for (var variableName: type = initialValue; condition; increment/decrement) {
-    // code to repeat
+for (초기화; 조건식; 증감식) {
+    // 반복할 코드
 }
 ```
 
-Here, the loop variable starts with an initial value, and the loop executes as long as the condition is true.
-At the end of each iteration, the increment/decrement expression is executed, changing the value of the loop variable.
+Wave의 for 초기화는 여러 형태를 지원합니다.
 
-### Example: Print numbers from 1 to 5
+- 암시적 `var` 타입 초기화
+- `var` / `let mut` / `const` 선언 초기화
+- 일반 식 초기화 (기존 변수 재사용)
+
+### 예제 1: 암시적 타입 초기화
 
 ```wave
-for (var i: i32 = 1; i <= 5; i = i + 1) {
+for (i :i32 = 1; i <= 5; i += 1) {
     println("i = {}", i);
 }
 ```
 
-In this example, the loop runs while `i` starts from 1 up to 5 inclusively.
-In each iteration, the value of `i` is printed and then incremented by 1.
+### 예제 2: `var` / `let mut` 초기화
+
+```wave
+for (var i: i32 = 0; i < 3; i += 1) {
+    println("var i = {}", i);
+}
+
+for (let mut j: i32 = 0; j < 3; j += 1) {
+    println("let mut j = {}", j);
+}
+```
+
+### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+
+```wave
+var i: i32 = 99;
+
+for (i = 3; i <= 5; i += 1) {
+    println("i = {}", i);
+}
+
+println("after loop: {}", i); // 6
+```
+
+선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
+식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
 
 ---
 

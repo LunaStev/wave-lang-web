@@ -100,12 +100,26 @@ var byteData: byte = 0xFF;
 ## Tipo puntero
 
 El tipo puntero se utiliza para referenciar directamente direcciones de memoria.
-En Wave, el tipo de puntero se declara en la forma `ptr<T>` y permite expresar de manera segura direcciones de memoria de un tipo específico.
+Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
 
 Los punteros se utilizan cuando se requiere acceso a memoria de bajo nivel, y se emplean principalmente en la programación de sistemas o en códigos donde el rendimiento es crítico.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
+```
+
+## `null` 리터럴
+
+Wave에서 `null`은 정식 리터럴입니다.
+
+- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
+- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+
+```wave
+var p: ptr<i32> = null;  // OK
+
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Tipo arreglo
