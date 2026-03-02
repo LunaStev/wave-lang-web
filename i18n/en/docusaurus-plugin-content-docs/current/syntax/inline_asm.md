@@ -6,87 +6,166 @@ sidebar_position: 7
 
 ## Introduction
 
-This document describes the inline assembly feature provided by the Wave language.
-Inline assembly is one of the features provided by Wave. It is a syntax designed to directly access low-level hardware control while maintaining the convenience and structure of high-level languages.
+Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
+Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
 
-It enables tasks such as register manipulation, memory address unit access, and execution of specific CPU instructions that are difficult to express with general Wave code. It is used when performance optimization or hardware and architecture-dependent code is required.
-Through this feature, Wave can encompass system programming areas beyond just being a high-level language.
+현재 지원 타깃:
+
+- Linux `x86_64`
+- macOS (Darwin) `arm64`
+
+Windows는 아직 지원하지 않습니다.
 
 ---
 
-## Basic Syntax
+## 기본 형태
 
-Inline assembly is written with `asm { ... } ` block.
-Within this block, the assembly instructions that will be executed and the input/output mappings to connect Wave variables with CPU registers are defined.
+`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
 
 ```wave
 asm {
-    "assembly command"          // actual assembly code (one command per line)
-    ...
-    in("register") value         // input register mapping
-    out("register") variable      // output register mapping
+    "instruction"
+    in("constraint_or_reg") value
+    out("constraint_or_reg") target
+    clobber("item")
 }
 ```
 
-The assembly instructions are written in string form, detailing the low-level commands executed on the actual CPU.
-It can be written in multiple lines, with the principle of writing only one command per line.
+구성 요소:
 
-For example, it can be used in the following form.
-
-```wave
-"mov rax, 1"
-"syscall"
-```
-
-The `in("register")` value syntax is used to load the value of a Wave variable or expression into the specified CPU register.
-Through this, the register can be used as an input value in assembly code.
-
-The example below shows the case of transferring the value of variable s to rdi, the first syscall argument register in the x86-64 convention.
-
-```wave
-in("rdi") s
-```
-
-Conversely, the `out("register")` variable syntax is used to bring the value in the specified register into a Wave variable.
-This method is used when the result of the assembly execution needs to be used in Wave code.
-
-The following example shows the case of storing the value of the `rax` register, where the return value of the `syscall` is stored, into the variable `ret`.
-
-```wave
-out("rax") ret
-```
+- 문자열 줄: 실제 어셈블리 명령어
+- `in(...)`: 입력 오퍼랜드
+- `out(...)`: 출력 오퍼랜드
+- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
 
 ---
 
-## Simple Example
+## `asm` 문 (Statement)
 
-The example below is a simple code that prints a string to standard output using `syscall` in a Linux x86-64 environment.
+반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
 
 ```wave
-fun main() {
-    var msg_ptr: ptr<I8> = "Hello from syscall!\n";
-    var ret_val: i64;
-
-    asm {
-        "mov rax, 1"
-        "syscall"
-        in("rdi") 1
-        in("rsi") msg_ptr
-        in("rdx") 20
-        out("rax") ret_val
-    }
+var ret: i64 = 0;
+asm {
+    "mov rax, 1"
+    "syscall"
+    in("rdi") 1
+    in("rsi") msg_ptr
+    in("rdx") 20
+    out("rax") ret
 }
 ```
 
-In this example, Wave code directly sets the pointer and length of the string to the register and calls the system call to perform the output operation.
-The return value of the system call is delivered via the `rax` register and is brought back into a Wave variable through the `out` syntax.
+`out(...)`은 여러 개를 둘 수 있습니다.
+
+---
+
+## `asm` 식 (Expression)
+
+값을 직접 생성하는 식으로 사용할 수 있습니다.
+
+```wave
+var result: i64 = asm {
+    "mov rax, 123"
+    out("rax") result
+};
+```
+
+주의:
+
+- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+
+---
+
+## `in(...)` / `out(...)` 제약식
+
+`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+
+1. 구체 레지스터
+
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+
+2. 제약 클래스(constraint class)
+
+- 예: `"r"`, `"m"`, `"rm"`
+
+예시:
+
+```wave
+in("r") &buf
+out("rax") ret
+```
+
+출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+
+- 변수: `out("rax") ret`
+- 포인터 역참조: `out("rax") deref p`
+
+---
+
+## `clobber(...)`
+
+`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+
+```wave
+asm {
+    "xor rax, rax"
+    clobber("rax")
+    clobber("rcx", "rdx")
+    clobber("memory")
+}
+```
+
+주요 항목:
+
+- 레지스터: `"rax"`, `"x0"` 등
+- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+
+컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
+(`memory`, flags/cc 계열 등)
+
+---
+
+## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+
+명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+
+```wave
+asm {
+    "mov QWORD PTR [$0], 777"
+    in("r") &buf
+    clobber("memory")
+}
+```
+
+참고:
+
+- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+
+---
+
+## 입력 오퍼랜드 현재 지원 범위
+
+`in(...)` 값은 현재 다음 형태를 지원합니다.
+
+- 변수 식별자
+- 정수 리터럴
+- 문자열 리터럴
+- `&identifier`
+- `deref identifier`
+- 음수 정수/실수 리터럴
+
+복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
 
 ---
 
 ## Precautions
 
-Inline assembly is a feature that intentionally circumvents Wave's type safety and abstraction.
-If incorrect commands are used or register setting errors occur, the program may terminate abnormally or undefined behavior may occur.
+인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
+잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
 
-The mapping of registers through `in` and `out` is verified at compile time, but the semantic validity or execution results of assembly instructions are not guaranteed.
-Therefore, when using inline assembly, you must accurately understand the target architecture, calling conventions, and the behavior of the instructions.
+권장 사항:
+
+- 타깃 ABI와 호출 규약을 먼저 확정
+- 입력/출력 레지스터와 clobber를 명시적으로 관리
+- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
