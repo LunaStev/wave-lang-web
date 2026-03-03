@@ -72,25 +72,10 @@ wavec run hello.wave
 특징:
 
 - 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
-- `run` 명령에서는 legacy 옵션으로 `--img`만 허용됩니다.
-
-```bash
-wavec run --img boot.wave
-```
 
 ---
 
-## 3.2 `img <file>`
-
-부트 이미지 빌드 + QEMU 실행 경로입니다.
-
-```bash
-wavec img boot.wave
-```
-
----
-
-## 3.3 `build <file>`
+## 3.2 `build <file>`
 
 실행 파일(exe)을 생성합니다.
 
@@ -102,25 +87,30 @@ wavec build app.wave
 
 - `target/<file_stem>`
 
----
+## 3.3 `build` 옵션 (`-o`, `-c`)
 
-## 3.4 `build -o <file>` / `build --obj <file>`
-
-오브젝트 파일만 생성합니다.
+`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
 
 ```bash
-wavec build -o app.wave
-wavec build --obj app.wave
+wavec build app.wave -o ./bin/app
+wavec build app.wave -c
+wavec build app.wave -c -o ./build/app.o
 ```
 
-출력:
+- `-o <file>`: 출력 파일명을 지정합니다.
+  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
+  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
+- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
+- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
 
-- `target/<file_stem>.o`
-- 경로를 stdout으로 출력
+기본 동작:
+
+- `wavec build app.wave` -> `target/app`
+- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
 
 ---
 
-## 3.5 `install std`, `update std`
+## 3.4 `install std`, `update std`
 
 표준 라이브러리 설치/업데이트 명령입니다.
 
@@ -131,7 +121,7 @@ wavec update std
 
 ---
 
-## 3.6 `--help`, `--version`
+## 3.5 `--help`, `--version`
 
 ```bash
 wavec --help
@@ -362,10 +352,11 @@ wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```bash
 wavec run main.wave
 wavec build app.wave
-wavec build -o app.wave
+wavec build app.wave -o ./bin/app
+wavec build app.wave -c
+wavec build app.wave -c -o ./build/app.o
 wavec run main.wave --debug-wave=tokens,ast
 wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 ```
-
