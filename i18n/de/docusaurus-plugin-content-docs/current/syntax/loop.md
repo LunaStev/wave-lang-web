@@ -6,26 +6,26 @@ sidebar_position: 4
 
 ## Einführung
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+Die Wave-Sprache bietet Schleifen, um Situationen zu bewältigen, in denen derselbe Code mehrmals ausgeführt werden muss.
+Schleifen werden verwendet, um Code entweder so lange auszuführen, bis eine bestimmte Bedingung erfüllt ist, oder für eine bestimmte Anzahl von Wiederholungen.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+Dadurch kann man sich das wiederholte Schreiben derselben Logik ersparen und die Wiederholung mit klarem und prägnantem Code ausdrücken.
+Wave unterstützt sowohl bedingungsbasierte als auch anzahlbasierte Wiederholungen und bietet auch Schlüsselwörter zur Steuerung des Ausführungsflusses während der Wiederholung.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+In diesem Abschnitt wird erklärt, wie die `while` Schleife, die `for` Schleife und die Schlüsselwörter `break` und `continue` zur Steuerung des Schleifenflusses verwendet werden.
 
 ---
 
 ## while Schleife
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+Eine `while` Schleife führt einen Codeblock aus, solange der Ausdruck als `true` bewertet wird.
+Wenn die Bedingung `false` wird, endet die Schleife sofort.
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+Dieses Verfahren eignet sich für Situationen, in denen die Anzahl der Wiederholungen nicht klar ist und die Schleife ausgeführt werden muss, bis eine bestimmte Bedingung erfüllt ist.
 
 ### Grundstruktur
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+Die Grundstruktur einer while-Schleife in Wave sieht wie folgt aus.
 
 ```wave
 while (Bedingung) {
@@ -33,8 +33,8 @@ while (Bedingung) {
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+Der Bedingungsausdruck muss auf den Typ `bool` auswerten,
+und innerhalb des von `{}` umschlossenen Codeblocks können eine oder mehrere Anweisungen platziert werden.
 
 ### Beispiel: Ausgabe von 0 bis 4
 
@@ -47,33 +47,33 @@ while (i < 5) {
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+In diesem Beispiel wird die Schleife ausgeführt, solange die Variable `i` kleiner als 5 ist.
+Bei jeder Wiederholung wird der aktuelle Wert ausgegeben und der Wert von `i` um 1 erhöht, sodass die Bedingung schließlich `false` wird.
 
 ---
 
 ## for Schleife
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+Die `for` Schleife ist für Fälle geeignet, in denen die Anzahl der Wiederholungen relativ klar ist.
+Durch die gleichzeitige Definition von Anfangswert, Bedingungsausdruck und Inkrement kann der Fluss der Wiederholung klar ausgedrückt werden.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Da alle für die Wiederholung erforderlichen Steuerungselemente an einem Ort zusammengefasst sind, ist die Schleifenstruktur leicht zu erkennen.
 
-### 기본 구조
+### Grundstruktur
 
 ```wave
-for (초기화; 조건식; 증감식) {
-    // 반복할 코드
+for (Initialisierung; Bedingungsausdruck; Inkrement) {
+    // zu wiederholender Code
 }
 ```
 
-Wave의 for 초기화는 여러 형태를 지원합니다.
+Die for-Initialisierung in Wave unterstützt verschiedene Formen.
 
-- 암시적 `var` 타입 초기화
-- `var` / `let mut` / `const` 선언 초기화
-- 일반 식 초기화 (기존 변수 재사용)
+- Implizite `var` Typinitialisierung
+- `var` / `let mut` / `const` Deklarationsinitialisierung
+- Allgemeine Ausdrucksinitialisierung (Wiederverwendung bestehender Variablen)
 
-### 예제 1: 암시적 타입 초기화
+### Beispiel 1: Implizite Typinitialisierung
 
 ```wave
 for (i :i32 = 1; i <= 5; i += 1) {
@@ -81,7 +81,7 @@ for (i :i32 = 1; i <= 5; i += 1) {
 }
 ```
 
-### 예제 2: `var` / `let mut` 초기화
+### Beispiel 2: `var` / `let mut` Initialisierung
 
 ```wave
 for (var i: i32 = 0; i < 3; i += 1) {
@@ -93,7 +93,7 @@ for (let mut j: i32 = 0; j < 3; j += 1) {
 }
 ```
 
-### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+### Beispiel 3: Ausdrucksbasierte Initialisierung (Wiederverwendung bestehender Variablen)
 
 ```wave
 var i: i32 = 99;
@@ -105,15 +105,15 @@ for (i = 3; i <= 5; i += 1) {
 println("after loop: {}", i); // 6
 ```
 
-선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
-식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
+Deklarative Initialisierungen (`var`, `let mut`, `i :i32 = ...`) funktionieren als Schleifenbereichsvariablen,
+Ausdrucksbasierte Initialisierung (`i = ...`) aktualisiert die äußere Variable selbst.
 
 ---
 
 ## Verschachtelte Schleifen
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+Schleifen können innerhalb anderer Schleifen geschrieben werden und werden dann als verschachtelte Schleifen bezeichnet.
+Verschachtelte Schleifen sind nützlich, um zweidimensionale Datenstrukturen zu durchlaufen oder Kombinationen mehrerer Bedingungen zu bearbeiten.
 
 ### Beispiel: doppelte while Schleife
 
@@ -132,15 +132,15 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+In diesem Beispiel wird jedes Mal, wenn die äußere `while` Schleife ausgeführt wird, die innere `while` Schleife vollständig ausgeführt.
+Dadurch können Kombinationen der Form (`i`, `j`) sequenziell bearbeitet werden.
 
 ---
 
 ## break Anweisung
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+Ein `break` Befehl beendet sofort die Schleife und leitet die Ausführung aus der Schleife heraus.
+Es wird verwendet, wenn während der Wiederholung keine weitere Ausführung der Schleife erforderlich ist.
 
 ### Beispiel: Schleifenende bei einem bestimmten Wert
 
