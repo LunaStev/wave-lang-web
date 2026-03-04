@@ -2,41 +2,41 @@
 sidebar_position: 12
 ---
 
-# 전역/지역 저장 규칙
+# Global/Local Storage Rules
 
-Wave는 저장 수명(storage)과 변경 가능성(mutability)을 키워드 레벨에서 명확히 구분합니다.
+Wave clearly differentiates storage lifetime and mutability at the keyword level.
 
-## 요약
+## Summary
 
-- 전역 상수: `const`
-- 전역 저장 변수: `static`
-- 지역 변수: `var`, `let`, `let mut`
+- Global Constant: `const`
+- Global Storage Variable: `static`
+- Local Variable: `var`, `let`, `let mut`
 
-즉, **top-level에는 `const`와 `static`만 선언**하고,
-**함수/블록 내부 지역에는 `var`와 `let` 계열만 선언**합니다.
+Thus, **only `const` and `static` are declared at the top-level**,
+**while only the `var` and `let` family are declared inside functions/blocks**.
 
-## 전역 상수: `const`
+## Global Constant: `const`
 
-`const`는 컴파일 시점 상수로 취급되며 재할당할 수 없습니다.
+`const` is treated as a compile-time constant and cannot be reassigned.
 
 ```wave
 const PAGE_SIZE: i32 = 4096;
 const MAGIC: i32 = 0x1BADB002;
 ```
 
-## 전역 저장 변수: `static`
+## Global Storage Variable: `static`
 
-`static`은 전역 저장 공간을 가지는 변수입니다.
-재할당이 가능하며, 초기값을 주지 않으면 타입의 0 값으로 초기화됩니다.
+`static` is a variable with global storage.
+It can be reassigned and is initialized to the zero value of the type if no initial value is provided.
 
 ```wave
 static COUNTER: i32 = 0;
 static VGA_BUFFER: ptr<char> = 0xb8000 as ptr<char>;
 ```
 
-## 지역 변수: `var` / `let`
+## Local Variable: `var` / `let`
 
-함수나 블록 내부에서는 지역 변수 키워드만 사용합니다.
+Only local variable keywords are used inside functions or blocks.
 
 ```wave
 fun main() -> i32 {
@@ -50,8 +50,8 @@ fun main() -> i32 {
 }
 ```
 
-## 제약 사항
+## Constraints
 
-- `var`, `let`은 top-level에서 사용할 수 없습니다.
-- `const`, `static`은 함수/블록 내부에서 사용할 수 없습니다.
-- `let`은 불변이며 재할당할 수 없습니다.
+- `var`, `let` cannot be used at the top-level.
+- `const`, `static` cannot be used inside functions/blocks.
+- `let` is immutable and cannot be reassigned.
