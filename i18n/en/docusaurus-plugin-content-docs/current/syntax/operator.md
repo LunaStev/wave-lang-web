@@ -68,15 +68,15 @@ This document organizes the operators currently usable based on the compiler.
 
 ## Pointer Operations
 
-| Expression                 | Result                               |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Expression                 | Result                                     |
+| -------------------------- | ------------------------------------------ |
+| `ptr<T> + int`             | `ptr<T>` (GEP Move)     |
+| `int + ptr<T>`             | `ptr<T>` (GEP Move)     |
+| `ptr<T> - int`             | `ptr<T>` (GEP Move)     |
+| `ptr<T> - ptr<T>`          | `i64` (Byte Difference) |
+| `ptr == ptr`, `ptr != ptr` | Pointer Comparison                         |
 
-## 예약 또는 미구현 항목
+## Reserved or unimplemented items
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+There are grammar tokens that exist but are not currently supported by expression operations.
+For example: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
