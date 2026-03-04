@@ -2,54 +2,54 @@
 sidebar_position: 5
 ---
 
-# 오류 진단
+# Error diagnosis
 
-Wave 컴파일러는 오류를 코드(`E####`)와 함께, 소스 위치/맥락/해결 힌트까지 한 번에 보여줍니다.
+The Wave compiler displays errors along with the code (`E####`), source location/context, and resolution hints all at once.
 
-## 출력 형식
+## Output format
 
-기본 형식은 다음과 같습니다.
+The basic format is as follows.
 
 ```text
 error[E3001]: semantic validation failed: use of undeclared identifier `x`
-  --> file.wave:2:18
+ --> file.wave:2:18
  1 | fun main() {
- 2 |     println("{}", x);
-   |                  ^ not found in this scope
-   = context: semantic validation
-   = help: fix mutability, scope, and expression validity issues
+ 2 | println("{}", x);
+ | ^ not found in this scope
+ = context: semantic validation
+ = help: fix mutability, scope, and expression validity issues
 ```
 
-출력 항목:
+Output items:
 
-- `error[E....]`: 에러 코드와 요약
-- `--> file:line:column`: 문제 위치
-- 소스 블록 + caret(`^`) 하이라이트
+- `error[E....]`: Error code and summary
+- `--> file:line:column`: Location of the issue
+- Source block + caret(`^`) highlight
 - `context`, `expected`, `found`, `note`, `help`, `suggestion`
 
-## 대표 에러 코드
+## Representative error codes
 
-- `E1001` 예상하지 못한 문자
-- `E1002` 닫히지 않은 블록 주석
-- `E1003` 닫히지 않은 문자열
-- `E1004` 잘못된 문자열 escape
-- `E1005` 잘못된 문자 리터럴
-- `E1006` 잘못된 숫자 리터럴 형식
-- `E2001` 파서 구문 오류
-- `E3001` 의미 분석(semantic validation) 오류
-- `E3102` `null`을 비포인터에 대입
-- `E3201` 암시적 정수 축소 금지
-- `E9001` 백엔드 코드생성 내부 오류
+- `E1001` Unexpected character
+- `E1002` Unclosed block comment
+- `E1003` Unclosed string
+- `E1004` Invalid string escape
+- `E1005` Invalid character literal
+- `E1006` Invalid numeric literal format
+- `E2001` Parser syntax error
+- `E3001` Semantic validation error
+- `E3102` Assignment of `null` to non-pointer
+- `E3201` Prohibition of implicit integer narrowing
+- `E9001` Backend code generation internal error
 
-## 백엔드 오류도 소스 위치 표시
+## Backend errors also show source location
 
-코드 생성(LLVM) 단계에서 내부 panic이 발생해도, 가능한 경우 실제 호출/선언 위치를 추론해 표시합니다.
+Even if an internal panic occurs during the code generation (LLVM) phase, the actual call/declaration location is inferred and displayed if possible.
 
 ```text
 error[E9001]: compiler internal error during code generation (llvm-ir-generation)
-  --> test.wave:12:9
-   = found: Function 'foo' not found
-   = note: source position inferred from unresolved function name in backend panic
+ --> test.wave:12:9
+ = found: Function 'foo' not found
+ = note: source position inferred from unresolved function name in backend panic
 ```
 
-위치 추론이 불가능한 경우에는 fallback 위치가 사용되며, 해당 사실이 `note`에 함께 표시됩니다.
+If location inference is not possible, a fallback location is used, and this fact is indicated in the `note`.
