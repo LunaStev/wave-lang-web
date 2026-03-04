@@ -8,7 +8,7 @@ This document describes the various data types provided by the Wave programming 
 In Wave, you can store and operate on values using various data types, each clearly defining the way of representing and handling the data in memory.
 
 Clearly specifying data types is one of the core design philosophies of Wave.
-Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
+Wave is a **fully strong-typed** system. All `var`/`fun` declarations and variable initializations require explicit types; context-based type inference is not supported. Therefore, declarations like `var x = 1;` without types will fail to compile.
 This allows you to clearly express the intent of your code, catch errors early at compile time, and ensure efficient memory use and stable execution.
 
 ---
@@ -101,7 +101,7 @@ var byteData: byte = 0xFF;
 ## Pointer Type
 
 Pointer types are used to directly reference memory addresses.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+In Wave, pointer types are declared in the form `ptr<T>`.
 
 Pointers are used for low-level memory access, often utilized in system programming or performance-critical code.
 
@@ -109,12 +109,12 @@ Pointers are used for low-level memory access, often utilized in system programm
 var ptr: ptr<T> = &someVariable;
 ```
 
-## `null` 리터럴
+## `null` literal
 
-Wave에서 `null`은 정식 리터럴입니다.
+In Wave, `null` is a formal literal.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` is not an identifier. (`var null = ...` form not allowed)
+- `null` can only be assigned to `ptr<T>` type.
 
 ```wave
 var p: ptr<i32> = null;  // OK
