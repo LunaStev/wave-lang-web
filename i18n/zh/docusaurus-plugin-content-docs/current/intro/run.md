@@ -50,5 +50,4 @@ Hello Wave
 第一个Wave程序已成功执行。
 现在可以逐一了解Wave的语法和功能，尝试编写更复杂的程序。
 
-정밀한 명령어 옵션(`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)은
-`wavec` CLI 문서에서 확인할 수 있습니다.
+详细的命令选项（`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`）可以在 `wavec` CLI 文档中找到。
