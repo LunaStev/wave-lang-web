@@ -4,9 +4,9 @@ sidebar_position: 5
 
 # Operatoren
 
-이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
+Dieses Dokument fasst die tatsächlich verwendbaren Operatoren basierend auf dem aktuellen Compiler zusammen.
 
-## 산술
+## Arithmetik
 
 | Operator | Beschreibung   |
 | -------- | -------------- |
@@ -14,9 +14,9 @@ sidebar_position: 5
 | `-`      | Subtraktion    |
 | `*`      | Multiplikation |
 | `/`      | Division       |
-| `%`      | 나머지            |
+| `%`      | Rest           |
 
-## 비교
+## Vergleich
 
 | Operator | Beschreibung        |
 | -------- | ------------------- |
@@ -27,7 +27,7 @@ sidebar_position: 5
 | `>`      | größer              |
 | `>=`     | größer oder gleich  |
 
-## 논리
+## Logik
 
 | Operator   | Beschreibung    |
 | ---------- | --------------- |
@@ -35,7 +35,7 @@ sidebar_position: 5
 | \\\`\\ | Logisches ODER  |
 | `!`        | Logisches NICHT |
 
-## 비트
+## Bit
 
 | Operator   | Beschreibung    |
 | ---------- | --------------- |
@@ -46,37 +46,37 @@ sidebar_position: 5
 | `<<`       | Linksshift      |
 | `>>`       | Rechtsshift     |
 
-## 대입
+## Zuweisung
 
-| Operator | Beschreibung |
-| -------- | ------------ |
-| `=`      | 기본 대입        |
-| `+=`     | 덧셈 후 대입      |
-| `-=`     | 뺄셈 후 대입      |
-| `*=`     | 곱셈 후 대입      |
-| `/=`     | 나눗셈 후 대입     |
-| `%=`     | 나머지 후 대입     |
+| Operator | Beschreibung                 |
+| -------- | ---------------------------- |
+| `=`      | Grundzuweisung               |
+| `+=`     | Addition und Zuweisung       |
+| `-=`     | Subtraktion und Zuweisung    |
+| `*=`     | Multiplikation und Zuweisung |
+| `/=`     | Division und Zuweisung       |
+| `%=`     | Modulo und Zuweisung         |
 
-## 단항 / 포인터 / 캐스트
+## Unär/Zeiger/Cast
 
-| 연산자/키워드     | Beschreibung |
-| ----------- | ------------ |
-| `++`, `--`  | 전위/후위 증감     |
-| `&x`        | 주소 획득        |
-| `deref p`   | 포인터 역참조      |
-| `expr as T` | 명시적 캐스트      |
+| Operator/Schlüsselwort | Beschreibung            |
+| ---------------------- | ----------------------- |
+| `++`, `--`             | Inkrement/Dekrement     |
+| `&x`                   | Adressgewinnung         |
+| `deref p`              | Zeiger-Dereferenzierung |
+| `expr as T`            | Explizites Casting      |
 
-## 포인터 연산
+## Zeigeroperation
 
-| 표현식                        | 결과                                   |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Ausdruck                   | Ergebnis                                       |
+| -------------------------- | ---------------------------------------------- |
+| `ptr<T> + int`             | `ptr<T>` (GEP-Verschiebung) |
+| `int + ptr<T>`             | `ptr<T>` (GEP-Verschiebung) |
+| `ptr<T> - int`             | `ptr<T>` (GEP-Verschiebung) |
+| `ptr<T> - ptr<T>`          | `i64` (Byte-Differenz)      |
+| `ptr == ptr`, `ptr != ptr` | Zeigervergleich                                |
 
-## 예약 또는 미구현 항목
+## Reservierte oder nicht implementierte Elemente
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+Es gibt Syntax-Token, die existieren, aber derzeit nicht von Ausdrucksoperationen unterstützt werden.
+Beispiele: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
