@@ -157,15 +157,15 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+In diesem Beispiel wird die Schleife abgebrochen, sobald `i` den Wert 5 erreicht, indem `break` innerhalb der Endlosschleife ausgeführt wird.
+Eine `break` Anweisung ist nützlich, wenn man die Schleife unabhängig von den Schleifenbedingungen kontrollieren möchte.
 
 ---
 
 ## continue Anweisung
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+Eine `continue` Anweisung überspringt den Rest des aktuellen Durchlaufs und startet sofort den nächsten.
+Diese wird verwendet, wenn man unter bestimmten Bedingungen nur Teile der Logik überspringen möchte.
 
 ### Beispiel: nur gerade Zahlen ausgeben
 
@@ -179,15 +179,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+In diesem Code wird `continue` ausgeführt, wenn `i` ungerade ist, und der Ausgabeteil wird übersprungen.
+Als Ergebnis werden nur gerade Zahlen ausgegeben.
 
 ---
 
 ## Zusammenfassung
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Die Schleifen in Wave sind so konzipiert, dass sie sowohl bedingungsbasierte als auch anzahlbasierte Wiederholungen natürlich ausdrücken können.
+Eine `while` Schleife eignet sich für bedingungszentrierte Wiederholungen, während eine `for` Schleife nützlich ist, wenn Anzahl und Ablauf der Wiederholungen klar sind.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+Durch die Kombination von `break` und `continue` kann der Ausführungsfluss auch während der Wiederholung fein gesteuert werden, wodurch raffiniertere und flexiblere Schleifenlogiken erstellt werden können.
