@@ -2,54 +2,54 @@
 sidebar_position: 5
 ---
 
-# 오류 진단
+# 错误诊断
 
-Wave 컴파일러는 오류를 코드(`E####`)와 함께, 소스 위치/맥락/해결 힌트까지 한 번에 보여줍니다.
+Wave编译器显示代码错误(`E####`)及其来源位置/上下文/解决提示。
 
-## 출력 형식
+## 输出格式
 
-기본 형식은 다음과 같습니다.
+基本格式如下。
 
 ```text
-error[E3001]: semantic validation failed: use of undeclared identifier `x`
+error[E3001]: 语义验证失败: 使用未声明的标识符 `x`
   --> file.wave:2:18
  1 | fun main() {
  2 |     println("{}", x);
-   |                  ^ not found in this scope
-   = context: semantic validation
-   = help: fix mutability, scope, and expression validity issues
+   |                  ^ 未在该范围内找到
+   = 语境: 语义验证
+   = 帮助: 修复可变性、作用域和表达式有效性问题
 ```
 
-출력 항목:
+输出项目:
 
-- `error[E....]`: 에러 코드와 요약
-- `--> file:line:column`: 문제 위치
-- 소스 블록 + caret(`^`) 하이라이트
-- `context`, `expected`, `found`, `note`, `help`, `suggestion`
+- `error[E....]`: 错误代码及摘要
+- `--> 文件:行:列`: 问题位置
+- 源代码块 + 插入符(`^`)高亮
+- `上下文`, `预期`, `找到`, `注释`, `帮助`, `建议`
 
-## 대표 에러 코드
+## 代表错误代码
 
-- `E1001` 예상하지 못한 문자
-- `E1002` 닫히지 않은 블록 주석
-- `E1003` 닫히지 않은 문자열
-- `E1004` 잘못된 문자열 escape
-- `E1005` 잘못된 문자 리터럴
-- `E1006` 잘못된 숫자 리터럴 형식
-- `E2001` 파서 구문 오류
-- `E3001` 의미 분석(semantic validation) 오류
-- `E3102` `null`을 비포인터에 대입
-- `E3201` 암시적 정수 축소 금지
-- `E9001` 백엔드 코드생성 내부 오류
+- `E1001` 未预期的字符
+- `E1002` 未关闭的块注释
+- `E1003` 未关闭的字符串
+- `E1004` 错误的字符串转义
+- `E1005` 错误的字符字面量
+- `E1006` 错误的数字字面量格式
+- `E2001` 解析器语法错误
+- `E3001` 语义分析错误
+- `E3102` 将`null`赋值为非指针
+- `E3201` 禁止隐式整数缩减
+- `E9001` 后端代码生成内部错误
 
-## 백엔드 오류도 소스 위치 표시
+## 后端错误也可指示源位置
 
-코드 생성(LLVM) 단계에서 내부 panic이 발생해도, 가능한 경우 실제 호출/선언 위치를 추론해 표시합니다.
+即使代码生成（LLVM）阶段出现内部故障，如果可能的话，也会推断并显示具体调用/声明位置。
 
 ```text
-error[E9001]: compiler internal error during code generation (llvm-ir-generation)
+error[E9001]: 编译器在代码生成（llvm-ir-generation）期间内部错误
   --> test.wave:12:9
-   = found: Function 'foo' not found
-   = note: source position inferred from unresolved function name in backend panic
+   = 找到: 找不到函数 'foo'
+   = 注意: 从后端故障中的未解决函数名称推断源位置
 ```
 
-위치 추론이 불가능한 경우에는 fallback 위치가 사용되며, 해당 사실이 `note`에 함께 표시됩니다.
+如果无法推断位置，将使用备用位置，并在`注释`中显示此情况。
