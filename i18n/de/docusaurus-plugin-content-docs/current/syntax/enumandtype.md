@@ -2,52 +2,52 @@
 sidebar_position: 10
 ---
 
-# 열거형 (enum)과 타입 별칭 (type alias)
+# Aufzählungstypen (enum) und Typ-Aliase (type alias)
 
-Wave는 C와 유사한 명시적 타입 시스템을 유지하면서도,
-가독성과 ABI 안정성을 위해 타입 별칭(type alias) 과
-정수 기반 열거형(enum) 을 지원한다.
+Wave beibehält ein explizites Typsystem, ähnlich wie C,
+unterstützt jedoch zur Lesbarkeit und ABI-Stabilität Typ-Aliase (type alias) und
+integerbasierte Aufzählungen (enum).
 
 ---
 
-## 타입 별칭 (Type Alias)
+## Typ-Alias (Type Alias)
 
-### 개요
+### Übersicht
 
-type 키워드는 기존 타입에 새로운 이름을 부여한다.
-이는 새로운 타입을 만드는 것이 아니라, 완전한 동치(alias) 이다.
+Das Schlüsselwort `type` verleiht einem bestehenden Typ einen neuen Namen.
+Es erstellt keinen neuen Typ, sondern ist eine vollständige Entsprechung (Alias).
 
 ```wave
 type MyInt = i32;
 ```
 
-위 선언에서 MyInt는 i32와 완전히 동일한 타입이다.
+In der obigen Deklaration ist MyInt genau derselbe Typ wie i32.
 
 ---
 
-### 특징
+### Merkmale
 
-- 런타임 오버헤드 없음
-- ABI 상 완전히 동일
-- 컴파일 타임에만 존재
-- enum의 repr 타입으로 사용 가능
+- Keine Laufzeit-Overhead
+- Völlig identisch mit ABI
+- Nur zur Kompilierzeit vorhanden
+- Kann als repr-Typ von enum verwendet werden
 
 ---
 
-### 사용 예시
+### Beispielverwendung
 
 ```wave
-type Size = i64;
+type Größe = i64;
 type Index = u32;
 
-fun add(a: Size, b: Size) -> Size {
+fun add(a: Größe, b: Größe) -> Größe {
     return a + b;
 }
 ```
 
 ---
 
-### 타입 동치성
+### Typ-Gleichheit
 
 ```wave
 type A = i32;
@@ -61,16 +61,16 @@ fun main() {
 }
 ```
 
-type은 새 타입이 아니라 이름만 다른 타입이다.
+Der Typ ist kein neuer Typ, sondern nur ein umbenannter Typ.
 
 ---
 
-## 열거형 (enum)
+## Aufzählungstyp (enum)
 
-### 개요
+### Übersicht
 
-Wave의 enum은 정수 기반 열거형이다.
-모든 열거형은 반드시 repr 타입을 가져야 한다.
+Das enum von Wave ist eine ganzzahlbasierte Aufzählung.
+Jede Aufzählung muss einen repr-Typ haben.
 
 ```wave
 enum ShaderUniformType -> i32 {
@@ -83,20 +83,20 @@ enum ShaderUniformType -> i32 {
 
 ---
 
-### repr 타입
+### repr-Typ
 
--> i32 는 이 enum이 어떤 정수 타입으로 표현되는지를 나타낸다.
+-> i32 gibt an, in welchem ganzzahligen Typ dieses enum dargestellt wird.
 
-허용되는 repr 타입:
+Zulässige repr-Typen:
 
 - `i8`, `i16`, `i32`, `i64`
 - `u8`, `u16`, `u32`, `u64`
-- 해당 타입의 `type alias`
+- `type alias` des entsprechenden Typs
 
 ```wave
 type MyInt = i32;
 
-enum Example -> MyInt {
+enum Beispiel -> MyInt {
     X,
     Y
 }
@@ -104,11 +104,11 @@ enum Example -> MyInt {
 
 ---
 
-### 값 할당 규칙
+### Regeln zur Wertzuweisung
 
-- 명시적 값이 있으면 해당 값 사용
-- 없으면 이전 값 + 1
-- 첫 값이 없으면 0부터 시작
+- Explizite Werte werden verwendet, wenn vorhanden
+- Andernfalls vorheriger Wert + 1
+- Wenn kein Startwert vorhanden ist, beginnt es bei 0
 
 ```wave
 enum E -> i32 {
@@ -121,9 +121,9 @@ enum E -> i32 {
 
 ---
 
-### enum은 값 타입이다
+### enum ist ein Werttyp
 
-enum은 정수 값이며, 함수 인자·리턴값으로 자유롭게 사용 가능하다.
+Ein enum ist ein ganzzahliger Wert und kann frei als Funktionsargument oder Rückgabewert verwendet werden.
 
 ```wave
 fun f(t: ShaderUniformType) -> i32 {
@@ -133,9 +133,9 @@ fun f(t: ShaderUniformType) -> i32 {
 
 ---
 
-### 상수로 사용
+### Als Konstante verwendet
 
-enum variant는 컴파일 타임 상수다.
+Eine enum-Variante ist eine Kompilierzeitkonstante.
 
 ```wave
 const X: i32 = B;
@@ -144,27 +144,27 @@ const Y: ShaderUniformType = D;
 
 ---
 
-## 실제 예제
+## Konkretes Beispiel
 
 ```wave
-type MyInt = i32;
+type MeineInt = i32;
 
-enum ShaderUniformType -> MyInt {
+enum ShaderUniformType -> MeineInt {
     A = 0,
     B,
     C = 10,
     D
 }
 
-const X: MyInt = 123;
-const Y: MyInt = B;
+const X: MeineInt = 123;
+const Y: MeineInt = B;
 const Z: ShaderUniformType = D;
 
-fun f(t: ShaderUniformType) -> MyInt {
+fun f(t: ShaderUniformType) -> MeineInt {
     return t;
 }
 
-fun g(v: MyInt) -> MyInt {
+fun g(v: MeineInt) -> MeineInt {
     return v;
 }
 
