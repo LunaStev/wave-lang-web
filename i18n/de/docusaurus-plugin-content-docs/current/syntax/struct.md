@@ -36,7 +36,7 @@ Die Logik wird separat außerhalb der Struktur definiert.
 ## Syntax der Strukturinstanziierung
 
 Strukturen werden in einem Literalsyntax mit dem Strukturnamen erstellt.
-Struktur-Literale werden als \`StructName { Feldname: Wert; ... } geschrieben.
+Struktur-Literale werden als `StructName { Feldname: Wert; ... }` geschrieben.
 
 ```wave
 var b: Box = Box {
