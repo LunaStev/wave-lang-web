@@ -2,54 +2,54 @@
 sidebar_position: 5
 ---
 
-# 오류 진단
+# Diagnóstico de errores
 
-Wave 컴파일러는 오류를 코드(`E####`)와 함께, 소스 위치/맥락/해결 힌트까지 한 번에 보여줍니다.
+El compilador Wave muestra los errores junto con el código (`E####`), ubicación/contexto de la fuente y sugerencias de resolución todo a la vez.
 
-## 출력 형식
+## Formato de salida
 
-기본 형식은 다음과 같습니다.
+El formato básico es el siguiente.
 
 ```text
-error[E3001]: semantic validation failed: use of undeclared identifier `x`
+error[E3001]: validación semántica fallida: uso de identificador no declarado `x`
   --> file.wave:2:18
  1 | fun main() {
  2 |     println("{}", x);
-   |                  ^ not found in this scope
-   = context: semantic validation
-   = help: fix mutability, scope, and expression validity issues
+   |                  ^ no encontrado en este ámbito
+   = contexto: validación semántica
+   = ayuda: solucionar problemas de mutabilidad, ámbito y validez de expresión
 ```
 
-출력 항목:
+Elementos de salida:
 
-- `error[E....]`: 에러 코드와 요약
-- `--> file:line:column`: 문제 위치
-- 소스 블록 + caret(`^`) 하이라이트
+- `error[E....]`: código de error y resumen
+- `--> file:line:column`: ubicación del problema
+- Bloque de código fuente + resaltado con signo de intercalación (`^`)
 - `context`, `expected`, `found`, `note`, `help`, `suggestion`
 
-## 대표 에러 코드
+## Códigos de error representativos
 
-- `E1001` 예상하지 못한 문자
-- `E1002` 닫히지 않은 블록 주석
-- `E1003` 닫히지 않은 문자열
-- `E1004` 잘못된 문자열 escape
-- `E1005` 잘못된 문자 리터럴
-- `E1006` 잘못된 숫자 리터럴 형식
-- `E2001` 파서 구문 오류
-- `E3001` 의미 분석(semantic validation) 오류
-- `E3102` `null`을 비포인터에 대입
-- `E3201` 암시적 정수 축소 금지
-- `E9001` 백엔드 코드생성 내부 오류
+- `E1001` Carácter inesperado
+- `E1002` Comentario de bloque sin cerrar
+- `E1003` Cadena de texto sin cerrar
+- `E1004` Escape de cadena de texto incorrecto
+- `E1005` Literal de carácter incorrecto
+- `E1006` Formato de literal numérico incorrecto
+- `E2001` Error de sintaxis de parser
+- `E3001` Error de validación semántica
+- `E3102` Asignación de `null` a un no puntero
+- `E3201` Prohibida la reducción implícita de enteros
+- `E9001` Error interno de generación de código de backend
 
-## 백엔드 오류도 소스 위치 표시
+## Los errores de backend también muestran la ubicación en el código fuente
 
-코드 생성(LLVM) 단계에서 내부 panic이 발생해도, 가능한 경우 실제 호출/선언 위치를 추론해 표시합니다.
+Incluso si ocurre un pánico interno en la etapa de generación de código (LLVM), cuando sea posible, se mostrará la ubicación real de la llamada/declaración.
 
 ```text
-error[E9001]: compiler internal error during code generation (llvm-ir-generation)
+error[E9001]: error interno del compilador durante la generación de código (llvm-ir-generation)
   --> test.wave:12:9
-   = found: Function 'foo' not found
-   = note: source position inferred from unresolved function name in backend panic
+   = encontrado: Función 'foo' no encontrada
+   = nota: posición de código fuente inferida a partir del nombre de función no resuelto en pánico de backend
 ```
 
-위치 추론이 불가능한 경우에는 fallback 위치가 사용되며, 해당 사실이 `note`에 함께 표시됩니다.
+Cuando no se puede inferir una posición, se usa la posición de respaldo, y este hecho se indica en la `nota`.
