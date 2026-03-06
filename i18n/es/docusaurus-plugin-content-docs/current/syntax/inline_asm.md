@@ -6,21 +6,21 @@ sidebar_position: 7
 
 ## Introducción
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+El ensamblaje en línea de Wave se escribe usando `asm { ... Se escribe en un bloque `}\`.
+Se pueden controlar directamente los registros, la memoria y los caminos de llamada del sistema dentro del código Wave.
 
-현재 지원 타깃:
+Objetivos actualmente soportados:
 
 - Linux `x86_64`
 - macOS (Darwin) `arm64`
 
-Windows는 아직 지원하지 않습니다.
+Windows aún no está soportado.
 
 ---
 
-## 기본 형태
+## Forma básica
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` puede usarse tanto como una **declaración** como una **expresión**.
 
 ```wave
 asm {
@@ -31,18 +31,18 @@ asm {
 }
 ```
 
-구성 요소:
+Componentes:
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- Línea de cadena: instrucción de ensamblaje real
+- `in(...)`: operando de entrada
+- `out(...)`: operando de salida
+- `clobber(...)`: pista de registros/estado/memoria destruidos
 
 ---
 
-## `asm` 문 (Statement)
+## Declaración `asm`
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+Se usa como una declaración general cuando no se requiere un valor de retorno.
 
 ```wave
 var ret: i64 = 0;
@@ -56,13 +56,13 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+`out(...)` puede admitir varios.
 
 ---
 
-## `asm` 식 (Expression)
+## Expresión `asm`
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+Se puede usar como una expresión que genera valores directamente.
 
 ```wave
 var result: i64 = asm {
@@ -71,41 +71,41 @@ var result: i64 = asm {
 };
 ```
 
-주의:
+Aviso:
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- La expresión `asm` solo permite **exactamente 1 `out(...)`**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## Restricción `in(...)` / `out(...)`
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+La cadena de `in("...")`, `out("...")` es una de las dos siguientes.
 
-1. 구체 레지스터
+1. Registro específico
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- Por ejemplo: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
 
-2. 제약 클래스(constraint class)
+2. Clase de restricción
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Por ejemplo: `"r"`, `"m"`, `"rm"`
 
-예시:
+Ejemplo:
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Destino de salida(`out(...) se recomienda el siguiente patrón según la implementación actual para el `target\`.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Variable: `out("rax") ret`
+- Desreferencia de puntero: `out("rax") deref p`
 
 ---
 
 ## `clobber(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`clobber(...)` puede aceptar varios elementos a la vez y también se puede usar múltiples veces.
 
 ```wave
 asm {
@@ -116,19 +116,19 @@ asm {
 }
 ```
 
-주요 항목:
+Elementos principales:
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Registros: `"rax"`, `"x0"`, etc.
+- Especial: `"memory"`, `"cc"` (normalización interna por objetivo)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등)
+El compilador añade automáticamente clobber básico en modo seguro conservador.
+(`memory`, flags/cc, etc.)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Marcadores de posición de operando (`$0`, `$1`, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Se usa `$N` para referenciar operandos dentro de una cadena de comandos.
 
 ```wave
 asm {
@@ -138,34 +138,34 @@ asm {
 }
 ```
 
-참고:
+Nota:
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- El estilo `%0` se convierte internamente en el estilo `$0`.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Rango de soporte actual para operandos de entrada
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+Los valores `in(...)` actualmente admiten las siguientes formas.
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
+- Identificador de variable
+- Literal de entero
+- Literal de cadena
 - `&identifier`
-- `deref identifier`
-- 음수 정수/실수 리터럴
+- Identificador de desreferencia (`deref identifier`)
+- Literal de número entero/real negativo
 
-복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
+Las expresiones generales complejas pueden estar limitadas, por lo que se recomienda transmitirlas a través de variables temporales cuando sea necesario.
 
 ---
 
 ## Advertencias
 
-인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
-잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
+El ensamblaje en línea esquiva parcialmente las protecciones del sistema de tipos.
+Asignaciones incorrectas de registros, conflictos de restricciones o la falta de clobber pueden provocar la generación de código incorrecto o errores en tiempo de ejecución.
 
-권장 사항:
+Recomendaciones:
 
-- 타깃 ABI와 호출 규약을 먼저 확정
-- 입력/출력 레지스터와 clobber를 명시적으로 관리
-- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
+- Primero, confirme el ABI y las convenciones de llamada de destino.
+- Administre explícitamente los registros de entrada/salida y clobber.
+- Declare `clobber("memory")` cuando manipule memoria directamente.
