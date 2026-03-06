@@ -50,5 +50,4 @@ Si ves este resultado, significa que Wave ha sido instalado correctamente y que 
 Ahora has ejecutado con éxito tu primer programa Wave.
 A partir de ahora, puedes examinar la gramática y las funciones de Wave una por una, e intentar escribir programas más complejos.
 
-정밀한 명령어 옵션(`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)은
-`wavec` CLI 문서에서 확인할 수 있습니다.
+Las opciones precisas de comandos (`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`) se pueden consultar en la documentación CLI de `wavec`.
