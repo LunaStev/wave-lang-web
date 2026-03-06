@@ -4,17 +4,17 @@ sidebar_position: 3
 
 # Erstes Programm ausführen
 
-이전 설치 문서에서 Wave를 이미 설치했다면, 이제 첫 번째 Wave 프로그램을 직접 실행해볼 차례입니다.
-이 섹션에서는 간단한 예제를 통해 Wave 프로그램을 작성하고 실행하는 전체 과정을 단계별로 살펴봅니다.
+Falls Wave bereits gemäß den vorherigen Installationsdokumenten installiert wurde, ist es nun an der Zeit, das erste Wave-Programm direkt auszuführen.
+In diesem Abschnitt wird der gesamte Prozess des Schreibens und Ausführens eines Wave-Programms Schritt für Schritt anhand eines einfachen Beispiels erläutert.
 
-## `hello.wave` 파일 만들기
+## Erstellen der Datei `hello.wave`
 
-먼저 작업할 디렉터리에서 `hello.wave`라는 이름의 새 파일을 생성합니다.
-파일 이름과 확장자는 자유롭게 지정할 수 있지만, 여기서는 예제로 `hello.wave`를 사용합니다.
+Zuerst erstellen Sie eine neue Datei mit dem Namen `hello.wave` im Verzeichnis, in dem Sie arbeiten möchten.
+Dateiname und -erweiterung können frei gewählt werden, aber in diesem Beispiel wird `hello.wave` verwendet.
 
 ## Code schreiben
 
-생성한 `hello.wave` 파일에 아래 코드를 작성합니다.
+Schreiben Sie den folgenden Code in die erstellte Datei `hello.wave`.
 
 ```wave
 fun main() {
@@ -22,36 +22,32 @@ fun main() {
 }
 ```
 
-이 코드에서 `fun main()`은 Wave 프로그램의 실행 시작 지점을 의미합니다.
-Wave 프로그램은 항상 `main` 함수부터 실행됩니다.
+In diesem Code bedeutet `fun main()`, dass der Ausgangspunkt der Ausführung des Wave-Programms dort liegt.
+Wave-Programme werden immer von der `main`-Funktion aus gestartet.
 
-`println` 함수는 문자열을 표준 출력으로 출력하는 함수로,
-화면에 텍스트를 표시할 때 가장 기본적으로 사용됩니다.
+Die Funktion `println` gibt einen String auf die Standardausgabe aus und wird am häufigsten für die Anzeige von Text auf dem Bildschirm verwendet.
 
 ## Erstes Programm ausführen
 
-코드 작성을 마쳤다면, 터미널을 열고 파일이 위치한 디렉터리에서 다음 명령어를 실행합니다.
+Nachdem Sie den Code geschrieben haben, öffnen Sie das Terminal und führen Sie den folgenden Befehl im Verzeichnis aus, in dem sich die Datei befindet.
 
 ```bash
 wavec run hello.wave
 ```
 
-이 명령어는 Wave 컴파일러가 소스 파일을 컴파일한 뒤,
-즉시 실행까지 수행하도록 지시합니다.
+Dieser Befehl veranlasst den Wave-Compiler, die Quelldatei zu kompilieren und dann sofort auszuführen.
 
 ## Ausgabe überprüfen
 
-프로그램이 정상적으로 실행되면, 터미널에 다음과 같은 출력이 표시됩니다.
+Wenn das Programm korrekt ausgeführt wird, wird die folgende Ausgabe im Terminal angezeigt.
 
 ```
 Hello Wave
 ```
 
-이 출력이 보인다면 Wave가 정상적으로 설치되어 있으며,
-프로그램 작성과 실행이 올바르게 이루어졌다는 의미입니다.
+Wenn diese Ausgabe angezeigt wird, bedeutet dies, dass Wave ordnungsgemäß installiert ist und das Programm korrekt geschrieben und ausgeführt wurde.
 
-이제 첫 번째 Wave 프로그램을 성공적으로 실행했습니다.
-이제부터는 Wave의 문법과 기능을 하나씩 살펴보며, 더 복잡한 프로그램을 작성해볼 수 있습니다.
+Nun haben Sie Ihr erstes Wave-Programm erfolgreich ausgeführt.
+Von nun an können Sie sich mit der Syntax und den Funktionen von Wave vertraut machen und komplexere Programme schreiben.
 
-정밀한 명령어 옵션(`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)은
-`wavec` CLI 문서에서 확인할 수 있습니다.
+Detaillierte Befehlsoptionen (`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`) können in der `wavec` CLI-Dokumentation gefunden werden.

@@ -22,24 +22,24 @@ FFI operates by declaring only the existence of functions at compile time, and t
 ## extern Declaration
 
 External functions are declared using the extern keyword.
-현재 Wave에서는 ABI 지정이 반드시 필요하며, **`extern(c)`만 지원**합니다.
+Currently, specifying an ABI is required in Wave, and only **`extern(c)`** is supported.
 
 ```wave
-extern(c) fun 함수명(인자들...) -> 반환타입;
+extern(c) fun functionName(arguments...) -> returnType;
 ```
 
 ---
 
 ## ABI Specification
 
-`extern` 선언에는 ABI를 명시해야 합니다.
-현재 지원되는 ABI는 `c` 하나입니다.
+ABI must be specified in an `extern` declaration.
+Currently, the only supported ABI is `c`.
 
 ```wave
 extern(c) fun printf(fmt: ptr<u8>);
 ```
 
-`extern(rust)` 같은 선언은 파싱될 수 있어도 의미 분석 단계에서 에러가 발생합니다.
+Declarations like `extern(rust)` may be parsed, but will cause errors during semantic analysis.
 
 ---
 
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-이 선언은 `rust_func` 호출 시 실제 링크 심볼로 `puts`를 사용하도록 지정합니다.
+This declaration specifies to use `puts` as the actual link symbol when `rust_func` is called.
 
 ---
 

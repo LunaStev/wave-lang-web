@@ -6,21 +6,21 @@ sidebar_position: 7
 
 ## Introduction
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+Inline assembly in Wave is written with `asm {... It is written within a `}\` block.
+Within Wave code, you can directly control registers, memory, and system call paths.
 
-현재 지원 타깃:
+Currently supported targets:
 
 - Linux `x86_64`
 - macOS (Darwin) `arm64`
 
-Windows는 아직 지원하지 않습니다.
+Windows is not supported yet.
 
 ---
 
-## 기본 형태
+## Basic Form
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` can be used both as a **statement** and as an **expression**.
 
 ```wave
 asm {
@@ -31,18 +31,18 @@ asm {
 }
 ```
 
-구성 요소:
+Components:
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- String line: actual assembly instruction
+- `in(...)`: input operands
+- `out(...)`: output operands
+- `clobber(...)`: hints for clobbered registers/status/memory
 
 ---
 
-## `asm` 문 (Statement)
+## `asm` Statement
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+It is used as a regular statement if no return value is needed.
 
 ```wave
 var ret: i64 = 0;
@@ -56,13 +56,13 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+Multiple `out(...)` can be used.
 
 ---
 
-## `asm` 식 (Expression)
+## `asm` Expression
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+It can be used as an expression that directly generates a value.
 
 ```wave
 var result: i64 = asm {
@@ -71,41 +71,41 @@ var result: i64 = asm {
 };
 ```
 
-주의:
+Caution:
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- `asm` expressions allow **exactly 1 `out(...)`**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## `in(...)` / `out(...)` Constraints
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+The strings for `in("...")`, `out("...")` are one of the following.
 
-1. 구체 레지스터
+1. Specific Registers
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- Examples: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
 
-2. 제약 클래스(constraint class)
+2. Constraint Class
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Examples: `"r"`, `"m"`, `"rm"`
 
-예시:
+Example:
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Output Target (`out(...) target`) the following pattern is recommended based on current implementation.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Variable: `out("rax") ret`
+- Pointer dereference: `out("rax") deref p`
 
 ---
 
 ## `clobber(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`clobber(...)` can take multiple items at once, and can be used multiple times.
 
 ```wave
 asm {
@@ -116,19 +116,19 @@ asm {
 }
 ```
 
-주요 항목:
+Key Items:
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Registers: `"rax"`, `"x0"`, etc.
+- Special: `"memory"`, `"cc"` (internally normalized per target)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등)
+The compiler automatically adds default clobbers in conservative safety mode.
+(`memory`, flags/cc series, etc.)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Operand placeholders (`$0`, `$1`, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Use `$N` to refer to operands within a command string.
 
 ```wave
 asm {
@@ -138,34 +138,34 @@ asm {
 }
 ```
 
-참고:
+Note:
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- Even if `%0` style is used, it is internally converted to `$0` style.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Current support range for input operands
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+`in(...)` values currently support the following forms.
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
+- Variable identifier
+- Integer literal
+- String literal
 - `&identifier`
 - `deref identifier`
-- 음수 정수/실수 리터럴
+- Negative integer/real literal
 
-복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
+Complex general expressions may be restricted, so it is recommended to store them in temporary variables for transmission when necessary.
 
 ---
 
 ## Precautions
 
-인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
-잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
+Inline assembly partially bypasses the protection of the type system.
+Incorrect register specification, constraint conflicts, and missing clobbers can cause incorrect code generation or runtime malfunctions.
 
-권장 사항:
+Recommendations:
 
-- 타깃 ABI와 호출 규약을 먼저 확정
-- 입력/출력 레지스터와 clobber를 명시적으로 관리
-- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
+- First finalize the target ABI and calling conventions
+- Explicitly manage input/output registers and clobbers
+- Declare `clobber("memory")` when directly touching memory

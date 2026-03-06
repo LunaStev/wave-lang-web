@@ -2,31 +2,31 @@
 sidebar_position: 11
 ---
 
-# 주석
+# Comments
 
-Wave는 두 가지 주석을 지원합니다.
+Wave supports two types of comments.
 
-- 한 줄 주석: `//`
-- 블록 주석: `/* ... */`
+- Single-line comment: `//`
+- Block comment: `/* ... */`
 
-## 한 줄 주석
+## Single-line comment
 
-`//` 뒤의 내용은 줄 끝까지 무시됩니다.
+The content following `//` is ignored until the end of the line.
 
 ```wave
 var x: i32 = 10; // line comment
-x += 5;          // still works
+x += 5; // still works
 ```
 
-## 블록 주석
+## Block comment
 
-`/*` 와 `*/` 사이 내용을 무시합니다.
+The content between `/*` and `*/` is ignored.
 
 ```wave
 var y: i32 = 1 /* inline block */ + 2;
 ```
 
-블록 주석은 여러 줄과 중첩을 지원합니다.
+Block comments support multiple lines and nesting.
 
 ```wave
 /* outer
@@ -35,20 +35,20 @@ var y: i32 = 1 /* inline block */ + 2;
 */
 ```
 
-## 문자열과 주석 기호
+## Strings and Comment Symbols
 
-문자열 내부의 `/*`, `*/`, `//`는 주석 시작/종료로 처리되지 않습니다.
+`/*`, `*/`, and `//` within strings are not treated as comment delimiters.
 
 ```wave
 var marker: str = "/*//*/";
 ```
 
-## 주석 오류
+## Comment Error
 
-블록 주석이 닫히지 않으면 컴파일 에러(`E1002`)가 발생합니다.
+If a block comment is not closed, a compile error (`E1002`) occurs.
 
 ```wave
 /* not closed
 ```
 
-컴파일러는 시작 위치, 원인, 수정 힌트를 함께 출력합니다.
+The compiler outputs the start location, cause, and fix hints.
