@@ -220,6 +220,26 @@ Regla:
 
 ---
 
+## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+
+백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+
+```bash
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+```
+
+지원 항목(요약):
+
+- `--target`, `--cpu`, `--features`, `--abi`
+- `--sysroot`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (반복 가능)
+- `-C no-default-libs`
+
+`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+
+---
+
 ## 5. Reglas para la interpretación de importaciones
 
 Las importaciones en Wave se dividen en los siguientes tres tipos.
@@ -359,4 +379,6 @@ wavec run main.wave --debug-wave=tokens,ast
 wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```
