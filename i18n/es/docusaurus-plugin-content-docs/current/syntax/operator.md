@@ -4,9 +4,9 @@ sidebar_position: 5
 
 # Operador
 
-이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
+Este documento recopila operadores realmente utilizables según el compilador actual.
 
-## 산술
+## Aritmética
 
 | Operador | Descripción    |
 | -------- | -------------- |
@@ -14,9 +14,9 @@ sidebar_position: 5
 | `-`      | Sustracción    |
 | `*`      | Multiplicación |
 | `/`      | División       |
-| `%`      | 나머지            |
+| `%`      | Módulo         |
 
-## 비교
+## Comparación
 
 | Operador | Descripción   |
 | -------- | ------------- |
@@ -27,7 +27,7 @@ sidebar_position: 5
 | `>`      | Mayor         |
 | `>=`     | Mayor o igual |
 
-## 논리
+## Lógica
 
 | Operador   | Descripción |
 | ---------- | ----------- |
@@ -35,7 +35,7 @@ sidebar_position: 5
 | \\\`\\ | Lógico OR   |
 | `!`        | Lógico NOT  |
 
-## 비트
+## Bit
 
 | Operador   | Descripción          |
 | ---------- | -------------------- |
@@ -46,37 +46,37 @@ sidebar_position: 5
 | `<<`       | Shift a la izquierda |
 | `>>`       | Shift a la derecha   |
 
-## 대입
+## Asignación
 
-| Operador | Descripción |
-| -------- | ----------- |
-| `=`      | 기본 대입       |
-| `+=`     | 덧셈 후 대입     |
-| `-=`     | 뺄셈 후 대입     |
-| `*=`     | 곱셈 후 대입     |
-| `/=`     | 나눗셈 후 대입    |
-| `%=`     | 나머지 후 대입    |
+| Operador | Descripción                             |
+| -------- | --------------------------------------- |
+| `=`      | Asignación básica                       |
+| `+=`     | Asignación después de la suma           |
+| `-=`     | Asignación después de la resta          |
+| `*=`     | Asignación después de la multiplicación |
+| `/=`     | Asignación después de la división       |
+| `%=`     | Asignación después del módulo           |
 
-## 단항 / 포인터 / 캐스트
+## Unario / Puntero / Conversión
 
-| 연산자/키워드     | Descripción |
-| ----------- | ----------- |
-| `++`, `--`  | 전위/후위 증감    |
-| `&x`        | 주소 획득       |
-| `deref p`   | 포인터 역참조     |
-| `expr as T` | 명시적 캐스트     |
+| Operador/Palabra clave | Descripción                          |
+| ---------------------- | ------------------------------------ |
+| `++`, `--`             | Incremento/Decremento prefijo/sufijo |
+| `&x`                   | Obtención de dirección               |
+| `deref p`              | Desreferenciación de punteros        |
+| `expr as T`            | Conversión explícita                 |
 
-## 포인터 연산
+## Operaciones de puntero
 
-| 표현식                        | 결과                                   |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Expresión                  | Resultado                                        |
+| -------------------------- | ------------------------------------------------ |
+| `ptr<T> + int`             | `ptr<T>` (desplazamiento GEP) |
+| `int + ptr<T>`             | `ptr<T>` (desplazamiento GEP) |
+| `ptr<T> - int`             | `ptr<T>` (desplazamiento GEP) |
+| `ptr<T> - ptr<T>`          | `i64` (diferencia en bytes)   |
+| `ptr == ptr`, `ptr != ptr` | Comparación de punteros                          |
 
-## 예약 또는 미구현 항목
+## Elementos reservados o no implementados
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+Existen tokens gramaticales que no son compatibles con las operaciones expresionales actuales.
+Por ejemplo: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
