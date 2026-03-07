@@ -2,54 +2,54 @@
 sidebar_position: 5
 ---
 
-# 오류 진단
+# エラー診断
 
-Wave 컴파일러는 오류를 코드(`E####`)와 함께, 소스 위치/맥락/해결 힌트까지 한 번에 보여줍니다.
+Waveコンパイラはエラーコード（`E####`）とともに、ソース位置/コンテキスト/解決のヒントを一度に表示します。
 
-## 출력 형식
+## 出力形式
 
-기본 형식은 다음과 같습니다.
+基本形式は次の通りです。
 
 ```text
-error[E3001]: semantic validation failed: use of undeclared identifier `x`
+error[E3001]: セマンティック検証に失敗しました: 宣言されていない識別子`x`の使用
   --> file.wave:2:18
  1 | fun main() {
  2 |     println("{}", x);
-   |                  ^ not found in this scope
-   = context: semantic validation
-   = help: fix mutability, scope, and expression validity issues
+   |                  ^ このスコープに見つかりません
+   = コンテキスト：セマンティック検証
+   = ヘルプ: 変異性、スコープ、および式の有効性の問題を修正
 ```
 
-출력 항목:
+出力項目:
 
-- `error[E....]`: 에러 코드와 요약
-- `--> file:line:column`: 문제 위치
-- 소스 블록 + caret(`^`) 하이라이트
-- `context`, `expected`, `found`, `note`, `help`, `suggestion`
+- `error[E....]`: エラーコードと要約
+- `--> ファイル:行:列`: 問題の位置
+- ソースブロック + caret(`^`) ハイライト
+- `コンテキスト`, `期待される`, `見つかった`, `注`, `ヘルプ`, `提案`
 
-## 대표 에러 코드
+## 代表的なエラーコード
 
-- `E1001` 예상하지 못한 문자
-- `E1002` 닫히지 않은 블록 주석
-- `E1003` 닫히지 않은 문자열
-- `E1004` 잘못된 문자열 escape
-- `E1005` 잘못된 문자 리터럴
-- `E1006` 잘못된 숫자 리터럴 형식
-- `E2001` 파서 구문 오류
-- `E3001` 의미 분석(semantic validation) 오류
-- `E3102` `null`을 비포인터에 대입
-- `E3201` 암시적 정수 축소 금지
-- `E9001` 백엔드 코드생성 내부 오류
+- `E1001` 予期しない文字
+- `E1002` 閉じられていないブロックコメント
+- `E1003` 閉じられていない文字列
+- `E1004` 正しくない文字列エスケープ
+- `E1005` 正しくない文字リテラル
+- `E1006` 正しくない数値リテラル形式
+- `E2001` パーサ構文エラー
+- `E3001` 意味解析（セマンティックバリデーション）エラー
+- `E3102` 非ポインタに `null` を代入
+- `E3201` 暗黙の整数縮小禁止
+- `E9001` バックエンドコード生成内部エラー
 
-## 백엔드 오류도 소스 위치 표시
+## バックエンドエラーにもソースの位置を表示
 
-코드 생성(LLVM) 단계에서 내부 panic이 발생해도, 가능한 경우 실제 호출/선언 위치를 추론해 표시합니다.
+コード生成（LLVM）段階で内部パニックが発生しても、可能な場合は実際の呼び出し・宣言位置を推論して表示します。
 
 ```text
-error[E9001]: compiler internal error during code generation (llvm-ir-generation)
+error[E9001]: コード生成中のコンパイラ内部エラー（llvm-ir-generation）
   --> test.wave:12:9
-   = found: Function 'foo' not found
-   = note: source position inferred from unresolved function name in backend panic
+   = 発見: 関数 'foo' が見つかりません
+   = 注: バックエンドパニックで未解決の関数名から推測されたソース位置
 ```
 
-위치 추론이 불가능한 경우에는 fallback 위치가 사용되며, 해당 사실이 `note`에 함께 표시됩니다.
+位置の推論が不可能な場合はフォールバック位置が使用され、その事実が `注` に一緒に表示されます。

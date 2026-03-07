@@ -4,9 +4,9 @@ sidebar_position: 6
 
 # پوینتر
 
-## Wave Explicit Memory Type Model
+## مدل نوع حافظه صریح Wave
 
-Wave의 포인터 설계는 **Wave Explicit Memory Type Model**을 기반으로 합니다.
+طراحی پوینتر در Wave بر اساس **مدل نوع حافظه صریح Wave** است.
 이 모델은 포인터와 배열을 문법적 트릭이나 라이브러리 추상화가 아닌, **언어 차원의 명시적인 메모리 타입**으로 정의하는 것을 목표로 합니다.
 
 이러한 설계에 따라 Wave에서는 포인터를 `ptr<T>` 형태의 타입으로 표현하며,

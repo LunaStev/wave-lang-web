@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# `wavec` CLI リファレンス
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+この文書は、**現在のWaveコンパイラ（`wavec`）実装基準**のCLI動作を詳細に説明します。
 
-핵심 원칙:
+核心原則:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` はコンパイラです。
+- パッケージのインストール/解決（ロックファイル、レジストリ、ダウンロード）は `wavec` の責任ではありません。
+- 外部依存性は `wavec` 実行時に **明示的CLI引数** で渡します。
 
 ---
 
-## 1. 기본 형식
+## 1. 基本形式
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [グローバルオプション] <コマンド> [コマンドオプション]
 ```
 
-예:
+例:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. コマンド解析ルール（重要）
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` は全体の引数から **global option** を最初にスキャンした後に、残りの引数で `<command>` を解釈します。
 
-즉 global option은 위치가 유연합니다.
+つまり、global option の位置は柔軟です。
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+上記の3つはすべて有効です。
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+`--` を使用すると、その後は global option のスキャンを停止し、コマンド領域に渡します。
 
 ```bash
 wavec -- run main.wave
@@ -52,44 +52,44 @@ wavec -- run main.wave
 
 ---
 
-## 3. Commands
+## 3. コマンド
 
 ## 3.1 `run <file>`
 
-Wave 파일을 컴파일하고 실행합니다.
+Wave ファイルをコンパイルして実行します。
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+動作:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. ソース解析 + インポート拡張
+2. LLVM IR 生成
+3. ネイティブバイナリリンク (`target/<file_stem>`)
+4. 実行
 
-특징:
+特徴:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- 実行されたプログラムの終了コードを `wavec` が伝達します。
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+実行ファイル (exe) を生成します。
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+出力バイナリ:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 `build` オプション (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+`build` コマンドは出力ファイル名と出力形式をオプションで制御できます。
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,22 +97,22 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: 出力ファイル名を指定します。
+  - デフォルト (`-c` なし): 実行ファイルの出力パスを指定
+  - `-c` と共に: オブジェクトファイルの出力パスを指定
+- `-c`: リンクを省略し、オブジェクトファイルのみを生成します。
+- `-c` 使用時はオブジェクトパスを stdout に出力します。
 
-기본 동작:
+デフォルト動作:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (パス出力)
 
 ---
 
 ## 3.4 `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+標準ライブラリのインストール/アップデートコマンドです。
 
 ```bash
 wavec install std
@@ -130,11 +130,11 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## 4. グローバルオプション
 
-## 4.1 최적화
+## 4.1 最適化
 
-허용 값:
+許可される値:
 
 - `-O0`
 - `-O1`
@@ -144,7 +144,7 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+例:
 
 ```bash
 wavec -O3 run main.wave
@@ -152,13 +152,13 @@ wavec -O3 run main.wave
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 デバッグ出力
 
 ```bash
 wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
-허용 항목:
+許可される項目:
 
 - `tokens`
 - `ast`
@@ -169,36 +169,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 リンクオプション
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` または `--link <lib>`
+- `-L<path>` または `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+`wavec`はリンク時に内部的に `-l<lib>`, `-L<path>` 形式で渡します。
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 外部依存オプション（重要）
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+外部import（`pkg::...`）解釈用オプションです。
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+パッケージルートディレクトリの候補を追加します。
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+パッケージ `math` を探すとき:
 
-- `.vex/dep/math` 를 검사
+- `.vex/dep/math` を検査
 
-여러 번 지정 가능:
+複数回指定可能:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -206,36 +206,56 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+パッケージ名を特定のパスに固定します。
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+規則:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- `name` 形式: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` は必ず `name=path` 形式
+- 同じパッケージ名を重複指定するとエラー
 
 ---
 
-## 5. Import 해석 규칙
+## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
 
-Wave import는 다음 3가지로 분기됩니다.
+백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
 
-1. 로컬 import
+```bash
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+```
+
+지원 항목(요약):
+
+- `--target`, `--cpu`, `--features`, `--abi`
+- `--sysroot`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (반복 가능)
+- `-C no-default-libs`
+
+`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+
+---
+
+## 5. Import解釈規則
+
+Wave importは次の3つに分岐します。
+
+1. ローカルimport
 2. std import
-3. 외부 패키지 import
+3. 外部パッケージimport
 
-## 5.1 로컬
+## 5.1 ローカル
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+基準ファイルディレクトリから`<path>.wave`を探します。
 
 ## 5.2 std
 
@@ -243,52 +263,52 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+`~/.wave/lib/wave/std/...`パスを使用します。
 
-## 5.3 외부 패키지
+## 5.3 外部パッケージ
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+形式：
 
-- 최소 `package::module` 2세그먼트 필요
+- 最低限 `package::module` の2セグメントが必要
 
-패키지 루트 결정 순서:
+パッケージルートの決定順序：
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. `--dep name=path` の指定マッピング
+2. 各`--dep-root`から`<root>/<package>`を検索
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+同じパッケージが複数のdep-rootで同時に発見された場合：
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- 自動選択せずに**曖昧さエラー**
+- `--dep name=path`で固定する必要があります
 
-모듈 파일 탐색 순서:
+モジュールファイル探索順序：
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+例：
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+探索：
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. 外部インポート実践例
 
-### 6.1 단일 dep-root
+### 6.1 単一dep-root
 
-디렉터리:
+ディレクトリ：
 
 ```text
 .vex/dep/
@@ -298,19 +318,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+コード：
 
 ```wave
 import("math::add");
 ```
 
-실행:
+実行：
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 曖昧さの解消
 
 ```bash
 wavec run main.wave \
@@ -318,7 +338,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+両方に`math`があるとエラーが出ます。 以下のように固定してください。
 
 ```bash
 wavec run main.wave \
@@ -329,25 +349,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Vexとの役割分担
 
-권장 구조:
+推奨構造：
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: コンパイル/リンク/実行 + 指定された依存性の解釈
+- `vex`: 依存性のインストール/管理後 `wavec ... --dep-root ... --dep ...` の呼び出し
 
-예:
+例：
 
 ```bash
-# 내부적으로 vex가 수행
+# 内部的にvexを実行
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+このモデルは、コンパイラをシンプルで決定的に保ちつつ、パッケージマネージャが自動化を担当します。
 
 ---
 
-## 8. 빠른 참조
+## 8. クイックリファレンス
 
 ```bash
 wavec run main.wave
@@ -359,4 +379,6 @@ wavec run main.wave --debug-wave=tokens,ast
 wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

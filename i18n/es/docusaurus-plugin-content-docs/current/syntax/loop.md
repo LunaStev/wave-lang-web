@@ -61,18 +61,18 @@ Una ventaja es que los elementos necesarios para controlar la repetición están
 ### Estructura básica
 
 ```wave
-for (초기화; 조건식; 증감식) {
-    // 반복할 코드
+for (inicialización; condición; incremento) {
+    // Código a repetir
 }
 ```
 
-Wave의 for 초기화는 여러 형태를 지원합니다.
+La inicialización de for en Wave admite varias formas.
 
-- 암시적 `var` 타입 초기화
-- `var` / `let mut` / `const` 선언 초기화
-- 일반 식 초기화 (기존 변수 재사용)
+- Inicialización implícita del tipo `var`
+- Inicialización de declaración `var` / `let mut` / `const`
+- Inicialización de expresión general (reutilización de variable existente)
 
-### 예제 1: 암시적 타입 초기화
+### Ejemplo 1: Inicialización de tipo implícita
 
 ```wave
 for (i :i32 = 1; i <= 5; i += 1) {
@@ -80,7 +80,7 @@ for (i :i32 = 1; i <= 5; i += 1) {
 }
 ```
 
-### 예제 2: `var` / `let mut` 초기화
+### Ejemplo 2: Inicialización `var` / `let mut`
 
 ```wave
 for (var i: i32 = 0; i < 3; i += 1) {
@@ -92,7 +92,7 @@ for (let mut j: i32 = 0; j < 3; j += 1) {
 }
 ```
 
-### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+### Ejemplo 3: Inicialización basada en expresión (reutilización de variable existente)
 
 ```wave
 var i: i32 = 99;
@@ -104,8 +104,8 @@ for (i = 3; i <= 5; i += 1) {
 println("after loop: {}", i); // 6
 ```
 
-선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
-식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
+La inicialización declarativa (`var`, `let mut`, `i :i32 = ...`) actúa como una variable de ámbito de bucle,
+mientras que la inicialización basada en expresión (`i = ...`) actualiza la variable externa en sí.
 
 ---
 

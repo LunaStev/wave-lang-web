@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# הפניה ל-CLI של `wavec`
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+מסמך זה מתאר בפירוט את פעולת CLI של **המהדר Wave (`wavec`) בהתאם ליישום הנוכחי**.
 
-핵심 원칙:
+עקרונות יסוד:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` הוא מהדר.
+- התקנה/פתרון חבילות (lockfile, registry, הורדה) אינם באחריות `wavec`.
+- תלויות חיצוניות מועברות ל-`wavec` בעת ההפעלה באמצעות **ארגומנטים מפורשים של CLI**.
 
 ---
 
-## 1. 기본 형식
+## 1. פורמט בסיסי
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [אפשרויות גלובליות] <פקודה> [אפשרויות פקודה]
 ```
 
-예:
+לדוגמה:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. חוקי ניתוח פקודה (חשוב)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` סורק תחילה את כל הארגומנטים עבור **אפשרויות גלובליות**, ולאחר מכן מפרש את ה-`<command>` מהארגומנטים שנותרו.
 
-즉 global option은 위치가 유연합니다.
+כלומר, למיקום האפשרויות הגלובליות יש גמישות.
 
 ```bash
 wavec -O3 run main.wave
@@ -42,54 +42,54 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+שלוש האפשרויות הללו כולן תקפות.
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+שימוש ב-`--` מפסיק את סריקת אפשרויות הגלובליות ומעביר את האזור לפקודות.
 
 ```bash
-wavec -- run main.wave
+wavec -- הפעל main.wave
 ```
 
 ---
 
-## 3. Commands
+## 3. פקודות
 
-## 3.1 `run <file>`
+## 3.1 `הפעל <קובץ>`
 
-Wave 파일을 컴파일하고 실행합니다.
+מקומפל ומנוהל קובץ Wave.
 
 ```bash
-wavec run hello.wave
+wavec הפעל hello.wave
 ```
 
-동작:
+פעולה:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. ניתוח מקור + הרחבת ייבוא
+2. יצירת LLVM IR
+3. קישור בינרי מקורי (`target/<file_stem>`)
+4. הפעלה
 
-특징:
+מאפיינים:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- קוד הסיום של התוכנית שהופעלה מועבר על ידי `wavec`.
 
 ---
 
-## 3.2 `build <file>`
+## 3.2 `בנה <קובץ>`
 
-실행 파일(exe)을 생성합니다.
+מייצר קובץ הפעלה (exe).
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+בינרי פלט:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 אפשרות `בנה` (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+ניתן לשלוט בשם קובץ הפלט ותבנית הפלט כמשתנה במסגרת פקודת `בנה`.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,44 +97,44 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <קובץ>`: מציין את שם קובץ הפלט.
+  - ברירת מחדל (ללא `-c`): ייחוס נתיב הפלט של קובץ ההפעלה
+  - בשימוש עם `-c`: ייחוס נתיב פלט של קובץ אובייקט
+- `-c`: ייצור קובץ אובייקט בלבד, ללא קישור.
+- בשימוש `-c`, נתיב האובייקט מודפס ל-stdout.
 
-기본 동작:
+ברירת מחדל של פעולה:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (הדפסת נתיב)
 
 ---
 
-## 3.4 `install std`, `update std`
+## 3.4 `התקן std`, `עדכן std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+פקודת התקנה/עדכון ספרייה סטנדרטית.
 
 ```bash
-wavec install std
-wavec update std
+wavec התקן std
+wavec עדכן std
 ```
 
 ---
 
-## 3.5 `--help`, `--version`
+## 3.5 `--עזרה`, `--גרסה`
 
 ```bash
-wavec --help
-wavec --version
+wavec --עזרה
+wavec --גרסה
 ```
 
 ---
 
-## 4. Global Options
+## 4. אפשרויות גלובליות
 
-## 4.1 최적화
+## 4.1 אופטימיזציה
 
-허용 값:
+ערכים מותרים:
 
 - `-O0`
 - `-O1`
@@ -144,21 +144,21 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+לדוגמה:
 
 ```bash
-wavec -O3 run main.wave
+wavec -O3 הפעל main.wave
 ```
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 פלט איתור באגים
 
 ```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
+wavec --debug-wave=tokens,ast,ir הפעל main.wave
 ```
 
-허용 항목:
+פריטים מותרים:
 
 - `tokens`
 - `ast`
@@ -169,36 +169,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 אפשרויות קישור
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` או `--link <lib>`
+- `-L<path>` או `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+בעת קישור, `wavec` מעביר אותו כ `-l<lib>`, `-L<path>` פנימית.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 אפשרויות תלות חיצוניות (חשוב)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+זוהי אפשרות לפרשנות של import חיצוני (`pkg::...`).
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+מוסיף מועמד לספריית השורש של החבילה.
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+בעת חיפוש החבילה `math`:
 
-- `.vex/dep/math` 를 검사
+- בדוק את `.vex/dep/math`
 
-여러 번 지정 가능:
+ניתן לציין מספר פעמים:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -206,36 +206,56 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+מייצב את שם החבילה לנתיב מסוים.
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+כללים:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- פורמט `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` חייב להיות בפורמט `name=path`
+- אם שם החבילה זהה מצוין מספר פעמים, תופיע שגיאה
 
 ---
 
-## 5. Import 해석 규칙
+## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
 
-Wave import는 다음 3가지로 분기됩니다.
+백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+```bash
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+```
 
-## 5.1 로컬
+지원 항목(요약):
+
+- `--target`, `--cpu`, `--features`, `--abi`
+- `--sysroot`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (반복 가능)
+- `-C no-default-libs`
+
+`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+
+---
+
+## 5. כללי פירוש יבוא
+
+היבוא של Wave מחולק לשלוש אפשרויות הבאות.
+
+1. יבוא מקומי
+2. יבוא std
+3. יבוא חבילה חיצונית
+
+## 5.1 מקומי
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+חפש את `<path>.wave` במדריך קובץ הבסיס.
 
 ## 5.2 std
 
@@ -243,52 +263,52 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+השימוש בנתיב `~/.wave/lib/wave/std/...`.
 
-## 5.3 외부 패키지
+## 5.3 חבילת חוץ
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+פורמט:
 
-- 최소 `package::module` 2세그먼트 필요
+- נדרש לפחות שני סגמנטים `package::module`
 
-패키지 루트 결정 순서:
+סדר קביעת שורש החבילה:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. מיפוי מפורש של `--dep name=path`
+2. חפש `<root>/<package>` בכל `--dep-root`
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+אם אותה חבילה נמצאת בו-זמנית במספר dep-root:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- שגיאת **אמביגות** ולא נבחר אוטומטית
+- חייב להיות מקובע באמצעות `--dep name=path`
 
-모듈 파일 탐색 순서:
+סדר חיפוש קבצי מודול:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+לדוגמה:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+חיפוש:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. דוגמה מעשית ל-import חיצוני
 
-### 6.1 단일 dep-root
+### 6.1 dep-root יחיד
 
-디렉터리:
+ספריה:
 
 ```text
 .vex/dep/
@@ -298,19 +318,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+קוד:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+הפעלה:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 פתרון אי-בהירות
 
 ```bash
 wavec run main.wave \
@@ -318,7 +338,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+אם קיים `math` בשני המקומות, יתעורר שגיאה. ניתן לתקן זאת כך:
 
 ```bash
 wavec run main.wave \
@@ -329,25 +349,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. הפרדת תפקידים עם Vex
 
-권장 구조:
+מבנה מומלץ:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: הידור/קישור/הרצה + פתרון תלות שהוגדרה
+- `vex`: התקנה/ניהול תלות ולאחר מכן `wavec ... --dep-root ... קריאה ל-`--dep ...
 
-예:
+לדוגמה:
 
 ```bash
-# 내부적으로 vex가 수행
+# מורץ על ידי vex באופן פנימי
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+מודל זה שומר על הקומפיילר פשוט ודטרמיניסטי, בעוד מנהל החבילות אחראי לאוטומציה.
 
 ---
 
-## 8. 빠른 참조
+## 8. עיון מהיר
 
 ```bash
 wavec run main.wave
@@ -359,4 +379,6 @@ wavec run main.wave --debug-wave=tokens,ast
 wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

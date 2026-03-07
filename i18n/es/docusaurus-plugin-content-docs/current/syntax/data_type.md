@@ -8,7 +8,7 @@ Este documento explica los diversos tipos de datos proporcionados por el lenguaj
 En Wave, se pueden almacenar y operar valores a través de varios tipos de datos, y cada tipo de dato define claramente la forma de representar esos datos y cómo se manejan en memoria.
 
 Designar claramente los tipos de datos es una de las filosofías de diseño central de Wave.
-Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
+Wave es un sistema de **tipado fuerte completo**. Todas las declaraciones de `var`/`fun` y las inicializaciones de variables requieren tipos explícitos, y no se admite la inferencia de tipos basada en el contexto. Por lo tanto, si no hay un tipo como en `var x = 1;`, la compilación fallará.
 Esto permite expresar claramente la intención del código, detectar errores temprano durante la compilación, y garantizar un uso eficiente de la memoria y una ejecución estable.
 
 ---
@@ -101,7 +101,7 @@ var byteData: byte = 0xFF;
 ## Tipo puntero
 
 El tipo puntero se utiliza para referenciar directamente direcciones de memoria.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+En Wave, el tipo de puntero se declara en la forma `ptr<T>`.
 
 Los punteros se utilizan cuando se requiere acceso a memoria de bajo nivel, y se emplean principalmente en la programación de sistemas o en códigos donde el rendimiento es crítico.
 
@@ -109,12 +109,12 @@ Los punteros se utilizan cuando se requiere acceso a memoria de bajo nivel, y se
 var ptr: ptr<T> = &someVariable;
 ```
 
-## `null` 리터럴
+## Literal `null`
 
-Wave에서 `null`은 정식 리터럴입니다.
+En Wave, `null` es un literal oficial.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` no es un identificador. (no es posible en la forma `var null = ...`)
+- `null` solo se puede asignar al tipo `ptr<T>`.
 
 ```wave
 var p: ptr<i32> = null;  // OK
