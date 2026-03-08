@@ -130,7 +130,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, direction = '
     return (<div className={styles.scrollWrapper}><div className={styles.scrollContent} style={styleVars}><div className={styles.scrollGroup}>{children}</div><div className={styles.scrollGroup} aria-hidden="true">{children}</div></div></div>);
 };
 const CommunitySection: React.FC = () => {
-    const contributors: Contributor[] = [ { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' }, { name: "Megan0704-1", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' } ];
+    const contributors: Contributor[] = [ { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' }, { name: "Megan0704-1", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' }, { name: "Wertzui123", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/46199283?v=4' } ];
     const sponsors: Sponsor[] = [ { name: "heymanbug", tierId: 'homepage.sponsors.tier.honor', link: 'https://github.com/heymanbug' } ];
     return (
         <section className={styles.communitySection}>
