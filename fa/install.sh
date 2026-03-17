@@ -3,7 +3,7 @@ set -e
 
 VERSION=""
 REPO="wavefnd/Wave"
-LLVM_VERSION="14"
+LLVM_VERSION="21"
 
 echo "[info] Detecting system..."
 
@@ -66,62 +66,74 @@ fi
 
 echo "[1/4] Installing LLVM ${LLVM_VERSION}..."
 
+# -----------------------------
+# Linux
+# -----------------------------
 if [[ "$OS" == "linux" ]]; then
 
   if echo "$ID_LIKE" | grep -qi "debian"; then
     sudo apt-get update
-    sudo apt-get install -y llvm-${LLVM_VERSION} llvm-${LLVM_VERSION}-dev clang-${LLVM_VERSION} libclang-${LLVM_VERSION}-dev lld-${LLVM_VERSION} clang
-    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib/llvm-${LLVM_VERSION}"
-    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib/llvm-${LLVM_VERSION}" >> ~/.bashrc
+    sudo apt-get install -y wget gnupg lsb-release
+
+    wget https://apt.llvm.org/llvm.sh
+    chmod +x llvm.sh
+    sudo ./llvm.sh ${LLVM_VERSION}
+
+    sudo apt-get install -y llvm-${LLVM_VERSION} llvm-${LLVM_VERSION}-dev clang-${LLVM_VERSION} lld-${LLVM_VERSION}
 
   elif echo "$ID_LIKE" | grep -qi "fedora"; then
-    sudo dnf install -y llvm14 llvm14-devel clang clang-libs
-    LLVM_LIB="/usr/lib64/llvm${LLVM_VERSION}/lib"
-    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="/usr/lib64/llvm${LLVM_VERSION}"
-    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=/usr/lib64/llvm${LLVM_VERSION}" >> ~/.bashrc
-    if [ -d "$LLVM_LIB" ]; then
-      export LD_LIBRARY_PATH="$LLVM_LIB:$LD_LIBRARY_PATH"
-      echo "export LD_LIBRARY_PATH=$LLVM_LIB:\$LD_LIBRARY_PATH" >> ~/.bashrc
-    fi
+    sudo dnf install -y llvm llvm-devel clang clang-libs lld
 
   elif echo "$ID_LIKE" | grep -qi "arch"; then
-    echo "[error] Arch Linux and Arch-based distributions are not supported yet."
-    echo "Supported: Debian/Ubuntu, Fedora, macOS."
-    exit 1
+    sudo pacman -Sy --noconfirm llvm clang lld
 
   elif echo "$ID_LIKE" | grep -qi "suse"; then
-    echo "[error] openSUSE and SUSE-based distributions are not supported yet."
-    echo "Supported: Debian/Ubuntu, Fedora, macOS."
-    exit 1
+    sudo zypper install -y llvm clang lld llvm-devel
 
   elif echo "$ID_LIKE" | grep -qi "gentoo"; then
-    echo "[error] Gentoo-based distributions are not supported yet."
-    echo "Supported: Debian/Ubuntu, Fedora, macOS."
+    sudo emerge sys-devel/llvm sys-devel/clang sys-devel/lld
+
+  elif [[ "$DISTRO" == "void" ]]; then
+    sudo xbps-install -Sy llvm clang lld
+
+  elif [[ "$DISTRO" == "clear-linux-os" ]]; then
+    sudo swupd bundle-add llvm
+
+  elif [[ "$DISTRO" == "nixos" ]]; then
+    echo "[error] NixOS requires manual environment setup."
+    echo "Use nix-shell or flakes with llvmPackages_${LLVM_VERSION}."
     exit 1
 
   elif [[ "$DISTRO" == "alpine" ]]; then
-    echo "[error] Alpine Linux is not supported because musl libc is incompatible with LLVM ${LLVM_VERSION}."
-    exit 1
-
-  elif [[ "$DISTRO" == "nixos" ]]; then
-    echo "[error] NixOS is not supported due to its non-standard filesystem layout."
-    exit 1
-
-  elif [[ "$DISTRO" == "void" ]]; then
-    echo "[error] Void Linux is not supported yet."
-    exit 1
-
-  elif [[ "$DISTRO" == "clear-linux-os" ]]; then
-    echo "[error] Clear Linux is not supported yet."
+    echo "[error] Alpine Linux is not supported (musl + LLVM ${LLVM_VERSION})."
     exit 1
 
   else
     echo "[error] Unsupported Linux distribution: $DISTRO"
-    echo "Supported: Debian/Ubuntu, Fedora, macOS."
+    exit 1
+  fi
+
+  if command -v llvm-config &> /dev/null; then
+    LLVM_PREFIX=$(llvm-config --prefix)
+    LLVM_LIB_PATH=$(llvm-config --libdir)
+
+    export LLVM_SYS_${LLVM_VERSION}0_PREFIX="$LLVM_PREFIX"
+    echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=$LLVM_PREFIX" >> ~/.bashrc
+
+    export LD_LIBRARY_PATH="$LLVM_LIB_PATH:$LD_LIBRARY_PATH"
+    echo "export LD_LIBRARY_PATH=$LLVM_LIB_PATH:\$LD_LIBRARY_PATH" >> ~/.bashrc
+
+    echo "[info] LLVM prefix: $LLVM_PREFIX"
+    echo "[info] LLVM libdir: $LLVM_LIB_PATH"
+  else
+    echo "[error] llvm-config not found after installation."
     exit 1
   fi
 fi
 
+# -----------------------------
+# macOS
+# -----------------------------
 if [[ "$OS" == "macos" ]]; then
   echo "[info] Installing LLVM via Homebrew..."
 
@@ -130,17 +142,21 @@ if [[ "$OS" == "macos" ]]; then
     exit 1
   fi
 
-  brew install llvm@14
-  LLVM_PREFIX="$(brew --prefix llvm@14)"
+  brew install llvm
+
+  LLVM_PREFIX="$(brew --prefix llvm)"
+  LLVM_LIB_PATH="$LLVM_PREFIX/lib"
 
   export LLVM_SYS_${LLVM_VERSION}0_PREFIX="$LLVM_PREFIX"
   echo "export LLVM_SYS_${LLVM_VERSION}0_PREFIX=$LLVM_PREFIX" >> ~/.zshrc
-fi
 
+  export DYLD_LIBRARY_PATH="$LLVM_LIB_PATH:$DYLD_LIBRARY_PATH"
+  echo "export DYLD_LIBRARY_PATH=$LLVM_LIB_PATH:\$DYLD_LIBRARY_PATH" >> ~/.zshrc
+fi
 
 echo "[2/4] Downloading Wave binary..."
 
-# Map architecture
+# Architecture mapping
 if [[ "$ARCH" == "x86_64" ]]; then
   ARCH_SUFFIX="x86_64"
 elif [[ "$ARCH" == "arm64" ]]; then
@@ -161,7 +177,6 @@ URL="https://github.com/${REPO}/releases/download/${VERSION}/${FILE_NAME}"
 echo "[info] Download: $URL"
 curl -LO "$URL"
 
-
 echo "[3/4] Installing Wave..."
 
 if [[ "$OS" == "linux" ]]; then
@@ -176,6 +191,7 @@ sudo tar -xzf "$FILE_NAME" -C "$INSTALL_DIR"
 sudo chmod +x "$INSTALL_DIR/wavec"
 
 echo "[4/4] Verifying installation..."
+
 export PATH="$INSTALL_DIR:$PATH"
 hash -r || true
 
