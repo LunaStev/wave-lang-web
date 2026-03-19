@@ -21,4 +21,5 @@ Based on familiar syntax elements, it is restructured to quickly learn the langu
 An explicit type system, predictable behavior, and syntax that reveals the intent of the code are key design criteria.
 
 This document introduces the basic syntax and main language features of Wave along with practical examples.
+제어문 섹션에는 `if`, `while`/`for`와 함께 `match` 문이 포함됩니다.
 Each section explains individual syntax elements, and overall it's arranged to understand the structure and design philosophy of the Wave language.
