@@ -220,23 +220,23 @@ Rules:
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 Backend options (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+Backend control options are interpreted only after `--llvm`.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+Supported items (summary):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (repeatable)
 - `-C no-default-libs`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` is currently a reserved dummy flag, and the actual backend pipeline is not yet implemented (TODO).
 
 ---
 
