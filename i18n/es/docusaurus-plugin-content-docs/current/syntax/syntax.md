@@ -21,4 +21,5 @@ Está reestructurado para que, aunque se basa en elementos gramaticales familiar
 Utiliza un sistema de tipos explícito, un comportamiento predecible y una gramática que refleja claramente la intención del código como principios importantes de diseño.
 
 Este documento presenta la gramática básica y las principales características del lenguaje Wave junto con ejemplos prácticos.
+제어문 섹션에는 `if`, `while`/`for`와 함께 `match` 문이 포함됩니다.
 Cada sección explica elementos gramaticales individuales, y en su conjunto está estructurado para comprender la estructura del lenguaje Wave y su filosofía de diseño.
