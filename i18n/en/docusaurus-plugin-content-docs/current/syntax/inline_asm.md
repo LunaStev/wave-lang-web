@@ -18,7 +18,7 @@ Currently supported targets:
 - freestanding `aarch64`
 - freestanding `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows and 32-bit targets are not supported yet.
 
 ---
 
@@ -87,7 +87,7 @@ The strings for `in("...")`, `out("...")` are one of the following.
 
 1. Specific Registers
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Example: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. Constraint Class
 
@@ -126,7 +126,7 @@ Key Items:
 - Special: `"memory"`, `"cc"` (internally normalized per target)
 
 The compiler automatically adds default clobbers in conservative safety mode.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+(`memory`, flags/cc family, etc.; primarily `memory` for RISC-V freestanding)
 
 ---
 
