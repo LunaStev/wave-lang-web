@@ -106,6 +106,16 @@ wavec build app.wave -o ./bin/app\nwavec build app.wave -c\nwavec build app.wave
 - `wavec build app.wave` -> `target/app`
 - `wavec build app.wave -c` -> `target/app.o`（路径输出）
 
+freestanding 커널 오브젝트 예시:
+
+```bash
+wavec --llvm \
+  --target=x86_64-unknown-none-elf \
+  build kernel.wave --emit=obj --freestanding -o kernel.o
+```
+
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+
 ---
 
 ## 3.4 `install std`, `update std`
@@ -231,6 +241,16 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (반복 가능)
 - `-C no-default-libs`
+
+현재 `wavec print target-list` 기준 주요 타깃:
+
+- `x86_64-unknown-linux-gnu`
+- `aarch64-unknown-linux-gnu`
+- `x86_64-apple-darwin`
+- `aarch64-apple-darwin`
+- `x86_64-unknown-none-elf`
+- `aarch64-unknown-none-elf`
+- `riscv64-unknown-none-elf`
 
 `--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
 
