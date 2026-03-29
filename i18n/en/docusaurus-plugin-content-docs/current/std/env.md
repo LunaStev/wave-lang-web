@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf is a NUL-terminated string
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // No key
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // Buffer shortage
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## 2. Reading Integer Environment Variable (Generic Result Type)
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## 3. Current Directory/Change
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Main Functions
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64
