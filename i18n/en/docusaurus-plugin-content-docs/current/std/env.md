@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# std::env 사용법
+# Usage of std::env
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+Offers environment variable inquiry and working directory control.
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## 1. Reading String Environment Variables
 
 ```wave
 fun main() {
