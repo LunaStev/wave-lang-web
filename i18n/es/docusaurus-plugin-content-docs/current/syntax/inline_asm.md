@@ -12,9 +12,13 @@ Se pueden controlar directamente los registros, la memoria y los caminos de llam
 Objetivos actualmente soportados:
 
 - Linux `x86_64`
+- Linux `aarch64`
 - macOS (Darwin) `arm64`
+- freestanding `x86_64`
+- freestanding `aarch64`
+- freestanding `riscv64`
 
-Windows aún no está soportado.
+Windows와 32비트 타깃은 아직 지원하지 않습니다.
 
 ---
 
@@ -83,7 +87,7 @@ La cadena de `in("...")`, `out("...")` es una de las dos siguientes.
 
 1. Registro específico
 
-- Por ejemplo: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. Clase de restricción
 
@@ -122,7 +126,7 @@ Elementos principales:
 - Especial: `"memory"`, `"cc"` (normalización interna por objetivo)
 
 El compilador añade automáticamente clobber básico en modo seguro conservador.
-(`memory`, flags/cc, etc.)
+(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
 
 ---
 
