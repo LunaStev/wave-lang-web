@@ -12,9 +12,13 @@ sidebar_position: 7
 כרגע מטרות נתמכות:
 
 - Linux `x86_64`
+- Linux `aarch64`
 - macOS (Darwin) `arm64`
+- freestanding `x86_64`
+- freestanding `aarch64`
+- freestanding `riscv64`
 
-Windows עדיין לא נתמך.
+Windows와 32비트 타깃은 아직 지원하지 않습니다.
 
 ---
 
@@ -83,7 +87,7 @@ var result: i64 = asm {
 
 1. רשומת מדויקת
 
-- לדוגמה: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. מעמד מגבלות (constraint class)
 
@@ -122,7 +126,7 @@ asm {
 - מיוחד: `"memory"`, `"cc"` (נרמול פנימי לפי יעד)
 
 המהדר מוסיף את ברירת המחדל של clobber במצב שמירה שמרני.
-(`memory`, flags/cc וכולי)
+(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
 
 ---
 

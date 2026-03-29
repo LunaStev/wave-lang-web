@@ -12,9 +12,13 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 현재 지원 타깃:
 
 - Linux `x86_64`
+- Linux `aarch64`
 - macOS (Darwin) `arm64`
+- freestanding `x86_64`
+- freestanding `aarch64`
+- freestanding `riscv64`
 
-Windows는 아직 지원하지 않습니다.
+Windows와 32비트 타깃은 아직 지원하지 않습니다.
 
 ---
 
@@ -83,7 +87,7 @@ var result: i64 = asm {
 
 1. 구체 레지스터
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. 제약 클래스(constraint class)
 
@@ -122,7 +126,7 @@ asm {
 - 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
 
 컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등)
+(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
 
 ---
 

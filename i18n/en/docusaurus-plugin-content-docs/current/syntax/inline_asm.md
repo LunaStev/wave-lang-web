@@ -12,9 +12,13 @@ Within Wave code, you can directly control registers, memory, and system call pa
 Currently supported targets:
 
 - Linux `x86_64`
+- Linux `aarch64`
 - macOS (Darwin) `arm64`
+- freestanding `x86_64`
+- freestanding `aarch64`
+- freestanding `riscv64`
 
-Windows is not supported yet.
+Windows와 32비트 타깃은 아직 지원하지 않습니다.
 
 ---
 
@@ -83,7 +87,7 @@ The strings for `in("...")`, `out("...")` are one of the following.
 
 1. Specific Registers
 
-- Examples: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. Constraint Class
 
@@ -122,7 +126,7 @@ Key Items:
 - Special: `"memory"`, `"cc"` (internally normalized per target)
 
 The compiler automatically adds default clobbers in conservative safety mode.
-(`memory`, flags/cc series, etc.)
+(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
 
 ---
 

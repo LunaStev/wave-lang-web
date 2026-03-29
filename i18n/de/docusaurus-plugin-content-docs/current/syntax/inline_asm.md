@@ -6,15 +6,19 @@ sidebar_position: 7
 
 ## Einführung
 
-Die Inline-Assembly von Wave wird mit `asm { ... }` geschrieben.
+Die Inline-Assembly von Wave wird mit \`asm { ... } geschrieben.
 Innerhalb von Wave-Code können Register, Speicher und Systemaufrufpfade direkt gesteuert werden.
 
 Derzeit unterstützte Ziele:
 
 - Linux `x86_64`
+- Linux `aarch64`
 - macOS (Darwin) `arm64`
+- freestanding `x86_64`
+- freestanding `aarch64`
+- freestanding `riscv64`
 
-Windows wird noch nicht unterstützt.
+Windows와 32비트 타깃은 아직 지원하지 않습니다.
 
 ---
 
@@ -83,7 +87,7 @@ Die Zeichenfolgen von `in("...")`, `out("...")` sind entweder:
 
 1. Spezifische Register
 
-- z.B.: `"rax"`, `"rdi"`, `"x0"`, `"w1"`
+- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. Einschränkungsklasse (constraint class)
 
@@ -122,7 +126,7 @@ Schlüsselpositionen:
 - Spezielle: `"memory"`, `"cc"` (zielabhängig interne Normalisierung)
 
 Der Compiler fügt im konservativen Sicherheitsmodus automatisch ein Standard-clobber hinzu.
-(`memory`, flags/cc Familie etc.)
+(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
 
 ---
 
