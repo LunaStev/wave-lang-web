@@ -50,7 +50,7 @@ Reflection points:
 - IR generation (TargetMachine) stage: `target`, `cpu`, `features`
 - Object/Link stage (clang call): `target`, `abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+The major target triples for documentation by default are:
 
 - Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
 - Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
@@ -97,7 +97,7 @@ Create Default Object:
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+Creating freestanding kernel objects:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
@@ -120,7 +120,7 @@ Disable Automatic Linking of libc/libm:
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+Using `--freestanding` behaves similarly to `-C no-default-libs`, targeting builds that do not assume a runtime standard library, like kernel/boot code.
 
 ---
 
