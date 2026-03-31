@@ -108,7 +108,7 @@ Default behavior:
 - `wavec build app.wave` -> `target/app`
 - `wavec build app.wave -c` -> `target/app.o` (path output)
 
-freestanding 커널 오브젝트 예시:
+Example of a freestanding kernel object:
 
 ```bash
 wavec --llvm \
@@ -116,7 +116,7 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` can also be used in the same way.
 
 ---
 
@@ -246,7 +246,7 @@ Supported items (summary):
 - `-C link-arg=<arg>` (repeatable)
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+The major targets according to `wavec print target-list` are:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
