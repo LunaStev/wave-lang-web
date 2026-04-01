@@ -6,7 +6,7 @@ sidebar_position: 7
 
 ## Einführung
 
-Die Inline-Assembly von Wave wird mit \`asm { ... } geschrieben.
+Die Inline-Assembly von Wave wird mit `asm { ... }` geschrieben.
 Innerhalb von Wave-Code können Register, Speicher und Systemaufrufpfade direkt gesteuert werden.
 
 Derzeit unterstützte Ziele:
