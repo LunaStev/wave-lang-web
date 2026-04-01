@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.6.3">
 <title data-rh="true">Hợp ngữ nội tuyến | Wave</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://wave-lang.dev/vi/img/wave-og.png"><meta data-rh="true" name="twitter:image" content="https://wave-lang.dev/vi/img/wave-og.png"><meta data-rh="true" property="og:locale" content="vi"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" property="og:locale:alternate" content="ko"><meta data-rh="true" property="og:locale:alternate" content="es"><meta data-rh="true" property="og:locale:alternate" content="fa"><meta data-rh="true" property="og:locale:alternate" content="ar"><meta data-rh="true" property="og:locale:alternate" content="zh"><meta data-rh="true" property="og:locale:alternate" content="fr"><meta data-rh="true" property="og:locale:alternate" content="de"><meta data-rh="true" property="og:locale:alternate" content="ru"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" property="og:locale:alternate" content="he"><meta data-rh="true" property="og:locale:alternate" content="ms"><meta data-rh="true" property="og:locale:alternate" content="sw"><meta data-rh="true" property="og:locale:alternate" content="am"><meta data-rh="true" property="og:locale:alternate" content="hi"><meta data-rh="true" property="og:locale:alternate" content="bn"><meta data-rh="true" property="og:locale:alternate" content="ta"><meta data-rh="true" property="og:locale:alternate" content="te"><meta data-rh="true" name="docusaurus_locale" content="vi"><meta data-rh="true" name="docsearch:language" content="vi"><meta data-rh="true" name="keywords" content="Wave, programming language, web development, operating systems, AI, blockchain, hardware, cryptography, networking, compilers"><meta data-rh="true" name="author" content="LunaStev"><meta data-rh="true" name="robots" content="index, follow"><meta data-rh="true" property="og:url" content="https://wave-lang.dev"><meta data-rh="true" name="twitter:title" content="Wave Programming Language"><meta data-rh="true" name="twitter:description" content="Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware."><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Hợp ngữ nội tuyến | Wave"><meta data-rh="true" name="description" content="Giới thiệu"><meta data-rh="true" property="og:description" content="Giới thiệu"><link data-rh="true" rel="icon" href="/vi/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://wave-lang.dev/vi/docs/syntax/inline_asm"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/docs/syntax/inline_asm" hreflang="en"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ko/docs/syntax/inline_asm" hreflang="ko"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/es/docs/syntax/inline_asm" hreflang="es"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/fa/docs/syntax/inline_asm" hreflang="fa"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ar/docs/syntax/inline_asm" hreflang="ar"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/zh/docs/syntax/inline_asm" hreflang="zh"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/fr/docs/syntax/inline_asm" hreflang="fr"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/de/docs/syntax/inline_asm" hreflang="de"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ru/docs/syntax/inline_asm" hreflang="ru"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ja/docs/syntax/inline_asm" hreflang="ja"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/he/docs/syntax/inline_asm" hreflang="he"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ms/docs/syntax/inline_asm" hreflang="ms"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/vi/docs/syntax/inline_asm" hreflang="vi"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/sw/docs/syntax/inline_asm" hreflang="sw"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/am/docs/syntax/inline_asm" hreflang="am"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/hi/docs/syntax/inline_asm" hreflang="hi"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/bn/docs/syntax/inline_asm" hreflang="bn"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ta/docs/syntax/inline_asm" hreflang="ta"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/te/docs/syntax/inline_asm" hreflang="te"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/docs/syntax/inline_asm" hreflang="x-default"><link rel="stylesheet" href="/vi/assets/css/styles.08a045a4.css">
-<script src="/vi/assets/js/runtime~main.d0e71847.js" defer="defer"></script>
+<script src="/vi/assets/js/runtime~main.13ac6325.js" defer="defer"></script>
 <script src="/vi/assets/js/main.f6ea5901.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,9 +15,13 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 <p>현재 지원 타깃:</p>
 <ul>
 <li>Linux <code>x86_64</code></li>
+<li>Linux <code>aarch64</code></li>
 <li>macOS (Darwin) <code>arm64</code></li>
+<li>freestanding <code>x86_64</code></li>
+<li>freestanding <code>aarch64</code></li>
+<li>freestanding <code>riscv64</code></li>
 </ul>
-<p>Windows는 아직 지원하지 않습니다.</p>
+<p>Windows와 32비트 타깃은 아직 지원하지 않습니다.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="기본-형태">기본 형태<a href="#기본-형태" class="hash-link" aria-label="Đường dẫn trực tiếp đến 기본 형태" title="Đường dẫn trực tiếp đến 기본 형태">​</a></h2>
 <p><code>asm</code>은 <strong>문(statement)</strong> 으로도, <strong>식(expression)</strong> 으로도 사용할 수 있습니다.</p>
@@ -49,7 +53,7 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 <li>구체 레지스터</li>
 </ol>
 <ul>
-<li>예: <code>&quot;rax&quot;</code>, <code>&quot;rdi&quot;</code>, <code>&quot;x0&quot;</code>, <code>&quot;w1&quot;</code></li>
+<li>예: <code>&quot;rax&quot;</code>, <code>&quot;rdi&quot;</code>, <code>&quot;x0&quot;</code>, <code>&quot;w1&quot;</code>, <code>&quot;a0&quot;</code>, <code>&quot;t0&quot;</code>, <code>&quot;x10&quot;</code></li>
 </ul>
 <ol start="2">
 <li>제약 클래스(constraint class)</li>
@@ -74,7 +78,7 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 <li>특수: <code>&quot;memory&quot;</code>, <code>&quot;cc&quot;</code>(타깃별 내부 정규화)</li>
 </ul>
 <p>컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(<code>memory</code>, flags/cc 계열 등)</p>
+(<code>memory</code>, flags/cc 계열 등; RISC-V freestanding에서는 주로 <code>memory</code>)</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="오퍼랜드-자리표시자-0-1-">오퍼랜드 자리표시자 (<code>$0</code>, <code>$1</code>, ...)<a href="#오퍼랜드-자리표시자-0-1-" class="hash-link" aria-label="Đường dẫn trực tiếp đến 오퍼랜드-자리표시자-0-1-" title="Đường dẫn trực tiếp đến 오퍼랜드-자리표시자-0-1-">​</a></h2>
 <p>명령 문자열 안에서 오퍼랜드를 참조할 때 <code>$N</code>을 사용합니다.</p>

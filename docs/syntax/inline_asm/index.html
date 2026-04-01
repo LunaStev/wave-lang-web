@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.6.3">
 <title data-rh="true">Inline Assembly | Wave</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://wave-lang.dev/img/wave-og.png"><meta data-rh="true" name="twitter:image" content="https://wave-lang.dev/img/wave-og.png"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="ko"><meta data-rh="true" property="og:locale:alternate" content="es"><meta data-rh="true" property="og:locale:alternate" content="fa"><meta data-rh="true" property="og:locale:alternate" content="ar"><meta data-rh="true" property="og:locale:alternate" content="zh"><meta data-rh="true" property="og:locale:alternate" content="fr"><meta data-rh="true" property="og:locale:alternate" content="de"><meta data-rh="true" property="og:locale:alternate" content="ru"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" property="og:locale:alternate" content="he"><meta data-rh="true" property="og:locale:alternate" content="ms"><meta data-rh="true" property="og:locale:alternate" content="vi"><meta data-rh="true" property="og:locale:alternate" content="sw"><meta data-rh="true" property="og:locale:alternate" content="am"><meta data-rh="true" property="og:locale:alternate" content="hi"><meta data-rh="true" property="og:locale:alternate" content="bn"><meta data-rh="true" property="og:locale:alternate" content="ta"><meta data-rh="true" property="og:locale:alternate" content="te"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="Wave, programming language, web development, operating systems, AI, blockchain, hardware, cryptography, networking, compilers"><meta data-rh="true" name="author" content="LunaStev"><meta data-rh="true" name="robots" content="index, follow"><meta data-rh="true" property="og:url" content="https://wave-lang.dev"><meta data-rh="true" name="twitter:title" content="Wave Programming Language"><meta data-rh="true" name="twitter:description" content="Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware."><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Inline Assembly | Wave"><meta data-rh="true" name="description" content="Introduction"><meta data-rh="true" property="og:description" content="Introduction"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://wave-lang.dev/docs/syntax/inline_asm"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/docs/syntax/inline_asm" hreflang="en"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ko/docs/syntax/inline_asm" hreflang="ko"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/es/docs/syntax/inline_asm" hreflang="es"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/fa/docs/syntax/inline_asm" hreflang="fa"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ar/docs/syntax/inline_asm" hreflang="ar"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/zh/docs/syntax/inline_asm" hreflang="zh"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/fr/docs/syntax/inline_asm" hreflang="fr"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/de/docs/syntax/inline_asm" hreflang="de"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ru/docs/syntax/inline_asm" hreflang="ru"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ja/docs/syntax/inline_asm" hreflang="ja"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/he/docs/syntax/inline_asm" hreflang="he"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ms/docs/syntax/inline_asm" hreflang="ms"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/vi/docs/syntax/inline_asm" hreflang="vi"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/sw/docs/syntax/inline_asm" hreflang="sw"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/am/docs/syntax/inline_asm" hreflang="am"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/hi/docs/syntax/inline_asm" hreflang="hi"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/bn/docs/syntax/inline_asm" hreflang="bn"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/ta/docs/syntax/inline_asm" hreflang="ta"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/te/docs/syntax/inline_asm" hreflang="te"><link data-rh="true" rel="alternate" href="https://wave-lang.dev/docs/syntax/inline_asm" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.08a045a4.css">
-<script src="/assets/js/runtime~main.462d2feb.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.dcc2c8e9.js" defer="defer"></script>
 <script src="/assets/js/main.d11b3c95.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -15,9 +15,13 @@ Within Wave code, you can directly control registers, memory, and system call pa
 <p>Currently supported targets:</p>
 <ul>
 <li>Linux <code>x86_64</code></li>
+<li>Linux <code>aarch64</code></li>
 <li>macOS (Darwin) <code>arm64</code></li>
+<li>freestanding <code>x86_64</code></li>
+<li>freestanding <code>aarch64</code></li>
+<li>freestanding <code>riscv64</code></li>
 </ul>
-<p>Windows is not supported yet.</p>
+<p>Windows and 32-bit targets are not supported yet.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="basic-form">Basic Form<a href="#basic-form" class="hash-link" aria-label="Direct link to Basic Form" title="Direct link to Basic Form">​</a></h2>
 <p><code>asm</code> can be used both as a <strong>statement</strong> and as an <strong>expression</strong>.</p>
@@ -49,7 +53,7 @@ Within Wave code, you can directly control registers, memory, and system call pa
 <li>Specific Registers</li>
 </ol>
 <ul>
-<li>Examples: <code>&quot;rax&quot;</code>, <code>&quot;rdi&quot;</code>, <code>&quot;x0&quot;</code>, <code>&quot;w1&quot;</code></li>
+<li>Example: <code>&quot;rax&quot;</code>, <code>&quot;rdi&quot;</code>, <code>&quot;x0&quot;</code>, <code>&quot;w1&quot;</code>, <code>&quot;a0&quot;</code>, <code>&quot;t0&quot;</code>, <code>&quot;x10&quot;</code></li>
 </ul>
 <ol start="2">
 <li>Constraint Class</li>
@@ -74,7 +78,7 @@ Within Wave code, you can directly control registers, memory, and system call pa
 <li>Special: <code>&quot;memory&quot;</code>, <code>&quot;cc&quot;</code> (internally normalized per target)</li>
 </ul>
 <p>The compiler automatically adds default clobbers in conservative safety mode.
-(<code>memory</code>, flags/cc series, etc.)</p>
+(<code>memory</code>, flags/cc family, etc.; primarily <code>memory</code> for RISC-V freestanding)</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="operand-placeholders-0-1-">Operand placeholders (<code>$0</code>, <code>$1</code>, ...)<a href="#operand-placeholders-0-1-" class="hash-link" aria-label="Direct link to operand-placeholders-0-1-" title="Direct link to operand-placeholders-0-1-">​</a></h2>
 <p>Use <code>$N</code> to refer to operands within a command string.</p>
