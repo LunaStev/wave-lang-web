@@ -2,11 +2,11 @@
 sidebar_position: 3
 ---
 
-# std::env 사용법
+# std::env 使用方法
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+提供环境变量查询和工作目录控制。
 
-## import
+## 导入
 
 ```wave
 import("std::env::environ");
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## 1. 读取字符串环境变量
 
 ```wave
 fun main() {
@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf是NUL终止字符串
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // 无键
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // 缓冲区不足
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## 2. 读取整数环境变量（泛型结果类型）
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## 3. 当前目录/移动
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要函数
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64
