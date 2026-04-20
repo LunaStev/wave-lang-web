@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]`, `#[target(os="macos")]` branches are used only inside the dispatcher.
