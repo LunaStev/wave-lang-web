@@ -2,11 +2,11 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# Verwendung von std::time
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+Bietet Funktionen zur Abfrage der aktuellen Zeit, zur Berechnung von Zeitunterschieden und zum Schlafen.
 
-## import
+## Import
 
 ```wave
 import("std::time::clock");
@@ -15,42 +15,42 @@ import("std::time::sleep");
 import("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1. Abschnitte messen
 
 ```wave
 fun main() {
-    var start: TimeSpec;
-    var end: TimeSpec;
+ var start: TimeSpec;
+ var end: TimeSpec;
 
-    time_now_monotonic(&start);
-    time_sleep_ms(10);
-    time_now_monotonic(&end);
+ time_now_monotonic(&start);
+ time_sleep_ms(10);
+ time_now_monotonic(&end);
 
-    var elapsed_ns: i64 = time_diff_ns(start, end);
-    var elapsed_ms: i64 = time_diff_ms(start, end);
+ var elapsed_ns: i64 = time_diff_ns(start, end);
+ var elapsed_ms: i64 = time_diff_ms(start, end);
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2. Nanosekunden-Timestamp
 
 ```wave
 fun main() {
-    var rt: i64 = time_now_realtime_ns();
-    var mono: i64 = time_now_monotonic_ns();
+ var rt: i64 = time_now_realtime_ns();
+ var mono: i64 = time_now_monotonic_ns();
 }
 ```
 
-## 3. sleep
+## 3. Schlaf
 
 ```wave
 fun main() {
-    time_sleep_us(500);
-    time_sleep_ms(1);
-    time_sleep_ns(100000);
+ time_sleep_us(500);
+ time_sleep_ms(1);
+ time_sleep_ns(100000);
 }
 ```
 
-## 주요 함수
+## Hauptfunktionen
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64
