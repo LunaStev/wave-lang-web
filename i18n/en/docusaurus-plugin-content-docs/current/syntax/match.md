@@ -2,48 +2,48 @@
 sidebar_position: 14
 ---
 
-# Match 문
+# Match Statement
 
-## 소개
+## Introduction
 
-`match` 문은 하나의 값을 여러 패턴과 비교해 분기하는 제어문입니다.
-`if / else if` 체인보다 분기 의도를 더 명확하게 표현할 때 유용합니다.
+`match` is a control statement that branches based on comparing one value to multiple patterns.
+It is useful when you want to more clearly express branching intent than with `if / else if` chains.
 
-현재 Wave의 `match`는 **statement(문)** 이며, 값으로 직접 평가되는 expression 형태는 지원하지 않습니다.
-즉, `var x = match (...) { ... }` 같은 형태는 사용할 수 없습니다.
+Currently, Wave's `match` is a **statement** and does not support the expression form that directly evaluates to a value.
+That is, `var x = match (...) { ... }` form cannot be used.
 
 ---
 
-## 기본 문법
+## Basic Syntax
 
 ```wave
-match (값) {
-    패턴1 => {
-        // 실행 블록
+match (value) {
+    pattern1 => {
+        // execution block
     }
-    패턴2 => {
-        // 실행 블록
+    pattern2 => {
+        // execution block
     }
     _ => {
-        // 기본(default) 블록
+        // default block
     }
 }
 ```
 
-문법 규칙:
+Syntax Rules:
 
-- 헤더는 `match (expr)` 형태를 사용합니다.
-- 각 arm은 `패턴 => { 블록 }` 형태를 사용합니다.
-- arm 본문은 반드시 `{ ... }` 블록이어야 합니다.
-- arm 사이에는 줄바꿈만 써도 되고, `,` 또는 `;`를 구분자로 써도 됩니다.
+- The header uses the `match (expr)` format.
+- Each arm uses the `pattern => { block }` format.
+- The arm body must necessarily use `{ ... }` blocks.
+- Between arms, you can simply use line breaks, or use a `,` or `;` as separators.
 
 ---
 
-## 패턴 종류
+## Pattern Types
 
-현재 지원되는 패턴은 아래 3가지입니다.
+Currently, the following three patterns are supported.
 
-1. 정수 리터럴 패턴
+1. Integer Literal Pattern
 
 ```wave
 0 => { ... }
@@ -51,33 +51,33 @@ match (값) {
 42 => { ... }
 ```
 
-2. 식별자 패턴
+2. Identifier Pattern
 
 ```wave
 Off => { ... }
 On => { ... }
 ```
 
-식별자 패턴은 enum variant 같은 **정수 상수로 해석 가능한 값**을 대상으로 사용합니다.
+Identifier patterns are used for **values that can be interpreted as integer constants**, like enum variants.
 
-3. 와일드카드 패턴 (`_`)
+3. Wildcard Pattern (`_`)
 
 ```wave
 _ => { ... }
 ```
 
-어떤 패턴에도 매칭되지 않았을 때 실행되는 기본 arm입니다.
+This is the default arm executed when no patterns match.
 
 ---
 
-## 매칭 대상 타입
+## Match Target Types
 
-현재 구현 기준으로 `match`의 대상 값은 **정수 계열/enum 계열**이어야 합니다.
-문자열, 부동소수점, 구조체 등은 `match` 대상으로 사용할 수 없습니다.
+As per the current implementation, `match` target values must be of **integer or enum types**.
+Strings, floating-point numbers, and structures cannot be used as targets for `match`.
 
 ---
 
-## 예제 1: 정수 분기
+## Example 1: Integer Branching
 
 ```wave
 fun classify_num(v: i32) -> i32 {
@@ -101,7 +101,7 @@ fun classify_num(v: i32) -> i32 {
 
 ---
 
-## 예제 2: enum 분기
+## Example 2: Enum Branching
 
 ```wave
 enum Mode -> i32 {
@@ -127,38 +127,38 @@ fun classify_mode(m: Mode) -> i32 {
 
 ---
 
-## 동작 규칙
+## Behavior Rules
 
-- `switch` 계열과 유사하게 **일치하는 arm 하나만 실행**됩니다.
-- 자동 fallthrough는 없습니다.
-- `_` arm은 최대 한 번만 사용할 수 있습니다.
-- `_` arm이 없어도 문법상 허용됩니다. (일치 arm이 없으면 아무 arm도 실행되지 않음)
-
----
-
-## 주의 사항
-
-1. 중복 케이스 금지
-
-- 같은 케이스를 중복 선언하면 컴파일 오류가 발생합니다.
-
-2. `_` 중복 금지
-
-- `_` arm을 두 번 이상 선언할 수 없습니다.
-
-3. arm 블록 필수
-
-- `=>` 뒤에는 반드시 `{ ... }` 블록을 써야 합니다.
-
-4. 패턴은 상수여야 함
-
-- 식별자 패턴은 정수 상수/enum variant로 해석 가능한 값만 사용하세요.
+- Similar to `switch` statements, **only one matching arm is executed**.
+- There is no automatic fallthrough.
+- The `_` arm can be used only once.
+- The absence of the `_` arm is grammatically allowed. (If there's no matching arm, no arm will be executed.)
 
 ---
 
-## 요약
+## Cautionary Notes
 
-Wave의 `match`는 정수/enum 분기에 최적화된 statement 제어문입니다.
-`=>` + 블록 구조를 사용하며, 와일드카드(`_`)를 통해 기본 분기를 구성할 수 있습니다.
+1. Duplicate Cases Not Allowed
 
-분기 케이스가 많아질수록 `if / else if`보다 읽기 쉽고, 의도를 명확히 드러낼 수 있습니다.
+- Declaring the same case multiple times will cause a compile error.
+
+2. Duplicate `_` Not Allowed
+
+- The `_` arm cannot be declared more than once.
+
+3. Arm Blocks Are Mandatory
+
+- After `=>`, it must be followed by `{ ... }` blocks.
+
+4. Patterns Must Be Constants
+
+- For identifier patterns, use values that can be interpreted as integer constants or enum variants.
+
+---
+
+## Summary
+
+Wave's `match` is a statement control optimized for integer or enum branching.
+It uses the `=>` + block structure, and a wildcard (`_`) for forming default branches.
+
+As the number of branch cases increases, it is easier to read and can more clearly express intent than `if / else if`.
