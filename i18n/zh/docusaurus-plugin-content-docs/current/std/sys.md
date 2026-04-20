@@ -36,7 +36,7 @@ fun main() {
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2. 套接字示例 (`std::sys::socket`)
 
 ```wave
 import("std::sys::socket");
@@ -51,7 +51,7 @@ fun main() {
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3. 内存示例 (`std::sys::memory`)
 
 ```wave
 import("std::sys::memory");
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 
-## dispatcher 모듈
+## dispatcher 模块
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]`, `#[target(os="macos")]` 分支仅用于 dispatcher 内部。
