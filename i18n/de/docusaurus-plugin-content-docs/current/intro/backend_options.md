@@ -38,50 +38,50 @@ Derzeit ist `--whale` ein **reserviertes Dummy-Flag**.​​
 
 ## 2. Optionen, die nach `--llvm` unterstützt werden​​
 
-## 2.1 타겟/코드젠
+## 2.1 Ziel/Codegen
 
 - `--target <triple>` / `--target=<triple>`
 - `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
 - `--abi <name>` / `--abi=<name>`
 
-반영 지점:
+Implementierungsstelle:
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
+- IR-Erstellungsphase (TargetMachine): `target`, `cpu`, `features`
+- Objekt/Link-Stufe (clang Aufruf): `target`, `abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+Derzeit primäre Ziel-Triple, die standardmäßig dokumentiert werden sollen:
 
 - Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
 - Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
+- Freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
 
-## 2.2 툴체인/링크
+## 2.2 Toolchain/Link
 
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (wiederholbar)​​
 - `-C no-default-libs`
 
-반영 지점:
+Implementierungsstelle:
 
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- `--sysroot` für die Objekterstellung (clang `-c`)
+- Linker-Override und Raw-Link-Argument im Link-Stage einfügen
+- Automatisches Deaktivieren von `-lc -lm` bei Verwendung von `-C no-default-libs`
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## 3. Parsing-Regeln (wichtig)
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+Ohne die Verwendung von `--llvm` werden Backend-Detailoptionen nicht als globale Optionen interpretiert.
 
-예를 들어 아래는 에러입니다.
+Zum Beispiel ist das Folgende ein Fehler.
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+Es sollte unbedingt wie unten geschrieben werden.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,21 +89,21 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## 4. Beispielverwendung
 
-기본 오브젝트 생성:
+Erstellung des Standardobjekts:
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+Erstellung eines freistehenden Kernel-Objekts:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+Benutzerdefinierter Link:
 
 ```bash
 wavec --llvm \
@@ -114,17 +114,17 @@ wavec --llvm \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+Automatisches Deaktivieren der libc/libm-Verknüpfung:
 
 ```bash
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+Die Verwendung von `--freestanding` funktioniert intern ähnlich wie `-C no-default-libs` und ist für Builds geeignet, die keine Runtime-Standardbibliotheken wie Kernel/Boot-Code annehmen.
 
 ---
 
-## 5. 상태 요약
+## 5. Statusübersicht
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- LLVM-Backend: Wird ausgeführt
+- Whale-Backend: Geplant (TODO), nicht implementiert
