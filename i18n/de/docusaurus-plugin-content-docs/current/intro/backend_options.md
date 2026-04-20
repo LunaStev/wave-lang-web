@@ -2,41 +2,41 @@
 sidebar_position: 7
 ---
 
-# 백엔드 옵션 (`--llvm`, `--whale`)
+# Backend-Optionen (`--llvm`, `--whale`)​​
 
-이 문서는 `wavec`의 백엔드 관련 CLI 옵션을 설명합니다.
+Dieses Dokument erklärt die CLI-Optionen im Zusammenhang mit dem Backend von `wavec`.​​
 
-중요 원칙:
+Wichtige Prinzipien:​​
 
-- `wavec`는 패키지 매니저가 아닙니다.
-- 백엔드 동작은 가능한 한 **명시적 인자**로 제어합니다.
-- 백엔드 세부 옵션은 `--llvm` 뒤에서만 해석됩니다.
+- `wavec` ist kein Paketmanager.​
+- Das Backend-Verhalten wird so weit wie möglich durch **explizite Argumente** gesteuert.​​
+- Detaillierte Backend-Optionen werden nur nach `--llvm` interpretiert.​​
 
 ---
 
-## 1. 백엔드 선택자
+## 1. Backend-Auswahl​​
 
 ## 1.1 `--llvm`
 
-`--llvm` 자체는 백엔드 옵션 블록의 시작 마커입니다.
+`--llvm` selbst ist ein Startmarker für den Backend-Optionsblock.​​
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-위처럼 `--llvm` 뒤에 오는 인자들 중 지원되는 항목만 LLVM 백엔드 설정으로 처리됩니다.
+Wie oben werden nur die unterstützten Elemente unter den Argumenten nach `--llvm` als LLVM-Backend-Einstellungen behandelt.​​
 
-## 1.2 `--whale` (현재 TODO)
+## 1.2 `--whale` (derzeit TODO)​​
 
-현재 `--whale`은 **예약된 더미 플래그**입니다.
+Derzeit ist `--whale` ein **reserviertes Dummy-Flag**.​​
 
-- 파서는 인식합니다.
-- 실제 Whale 백엔드 파이프라인은 아직 연결되어 있지 않습니다.
-- 사용 시 TODO 에러로 종료됩니다.
+- Der Parser erkennt es.​​
+- Die tatsächliche Whale-Backend-Pipeline ist noch nicht verbunden.​​
+- Bei Verwendung wird es mit einem TODO-Fehler beendet.​​
 
 ---
 
-## 2. `--llvm` 뒤에서 지원되는 옵션
+## 2. Optionen, die nach `--llvm` unterstützt werden​​
 
 ## 2.1 타겟/코드젠
 
