@@ -14,11 +14,11 @@ Wave的内联汇编是通过 `asm { ... 通过 `}\` 块编写。
 - Linux `x86_64`
 - Linux `aarch64`
 - macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
+- 独立 `x86_64`
+- 独立 `aarch64`
+- 独立 `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows和32位目标尚不支持。
 
 ---
 
@@ -87,7 +87,7 @@ var result: i64 = asm {
 
 1. 具体寄存器
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- 例如：`"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. 约束类(constraint class)
 
@@ -126,7 +126,7 @@ asm {
 - 特殊：`"memory"`, `"cc"`（基于目标的内部规范化）
 
 编译器在保守安全模式下会自动添加基本的clobber。
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+（`memory`，flags/cc 系列等；在 RISC-V 独立模式下主要为 `memory`）
 
 ---
 
