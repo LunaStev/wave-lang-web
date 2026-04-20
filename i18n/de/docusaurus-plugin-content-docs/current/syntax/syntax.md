@@ -21,5 +21,5 @@ Auf bekannten Syntaxelementen basierend, wurde die Sprache so umgestaltet, dass 
 Ein explizites Typsystem, vorhersehbares Verhalten und Syntax, die die Intention des Codes offenlegt, sind wesentliche Designprinzipien.
 
 Dieses Dokument stellt die grundlegende Syntax und die wesentlichen Sprachfunktionen von Wave anhand praktischer Beispiele vor.
-제어문 섹션에는 `if`, `while`/`for`와 함께 `match` 문이 포함됩니다.
+Die Kontrollstruktursektion umfasst Anweisungen wie `if`, `while`/`for` sowie `match`.​​
 Jeder Abschnitt erklärt einzelne Syntaxelemente und ist insgesamt so strukturiert, dass die Struktur und Designphilosophie der Wave-Sprache verständlich wird.
