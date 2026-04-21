@@ -2,16 +2,16 @@
 sidebar_position: 13
 ---
 
-# 제네릭 (Generics)
+# Genéricos (Generics)
 
-Wave 제네릭은 코드 중복 없이 타입 안전한 함수를 작성하기 위한 기능입니다.
+Los genéricos de Wave son una característica para escribir funciones seguras para tipos sin duplicación de código.
 
-핵심 규칙:
+Reglas clave:
 
-- 타입 인자는 반드시 명시합니다.
-- 타입 추론은 허용하지 않습니다.
+- Los parámetros de tipo deben especificarse al enlazar.
+- No se permite la inferencia de tipos.
 
-## 1. 제네릭 함수 선언
+## 1. Declaración de funciones genéricas
 
 ```wave
 fun identity<T>(x: T) -> T {
@@ -19,7 +19,7 @@ fun identity<T>(x: T) -> T {
 }
 ```
 
-호출:
+Llamada:
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 다중 타입 파라미터
+## 2. Parámetros de múltiples tipos
 
 ```wave
 struct Pair<A, B> {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 3. 제네릭 구조체
+## 3. Estructuras genéricas
 
 ```wave
 struct Vec<T> {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 4. 중첩 제네릭
+## 4. Genéricos anidados
 
 ```wave
 struct Vec<T> {
@@ -74,7 +74,7 @@ fun main() {
 }
 ```
 
-## 5. 표준 라이브러리와 함께 사용
+## 5. Uso con la biblioteca estándar
 
 ```wave
 import("std::math::int");
@@ -88,13 +88,13 @@ fun main() {
 }
 ```
 
-## 자주 하는 실수
+## Errores comunes
 
 ```wave
-var x: i32 = identity(10); // 타입 인자 누락 (허용 안 됨)
+var x: i32 = identity(10); // Falta de parámetro de tipo (no permitido)
 ```
 
-반드시 다음처럼 호출해야 합니다.
+Debe llamarse así al enlazar.
 
 ```wave
 var x: i32 = identity<i32>(10);
