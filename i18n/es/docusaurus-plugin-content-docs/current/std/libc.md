@@ -2,18 +2,18 @@
 sidebar_position: 11
 ---
 
-# std::libc 사용법 (호환 계층)
+# Uso de std::libc (capa de compatibilidad)
 
-`std::libc`는 C 라이브러리와 직접 맞물릴 때 쓰는 선택적 레이어입니다.
+`std::libc` es una capa opcional para interactuar directamente con la biblioteca C.
 
-## 언제 쓰나
+## Cuándo usar
 
-- 기존 C 라이브러리 심볼을 그대로 호출해야 할 때
-- 점진적 마이그레이션 중 Wave 코드와 C 코드를 함께 사용할 때
+- Cuando necesita llamar directamente a símbolos de la biblioteca C existentes
+- Cuando se usa código Wave junto con código C durante una migración progresiva
 
-일반적인 Wave 코드에서는 `std::sys`/`std::*`를 우선 사용하세요.
+En código Wave general, use primero `std::sys`/`std::*`.
 
-## import 예시
+## Ejemplo de importación
 
 ```wave
 import("std::libc::stdio");
@@ -21,11 +21,11 @@ import("std::libc::stdlib");
 import("std::libc::string");
 ```
 
-## 1. stdio 호출
+## 1. Llamada a stdio
 
 ```wave
 fun main() {
-    puts("hello from libc" as ptr<i8>);
+    puts("hola desde libc" as ptr<i8>);
 }
 ```
 
@@ -43,7 +43,7 @@ fun main() {
 }
 ```
 
-## 3. 소켓 C ABI
+## 3. Sockets C ABI
 
 ```wave
 import("std::libc::socket");
@@ -56,7 +56,7 @@ fun main() {
 }
 ```
 
-## 제공 모듈
+## Módulos proporcionados
 
 - `std::libc::errno`
 - `std::libc::string`

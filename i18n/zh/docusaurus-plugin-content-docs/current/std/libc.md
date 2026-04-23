@@ -2,18 +2,18 @@
 sidebar_position: 11
 ---
 
-# std::libc 사용법 (호환 계층)
+# std::libc 使用方法（兼容层）
 
-`std::libc`는 C 라이브러리와 직접 맞물릴 때 쓰는 선택적 레이어입니다.
+`std::libc`是用于直接与C库接口的可选层。
 
-## 언제 쓰나
+## 何时使用
 
-- 기존 C 라이브러리 심볼을 그대로 호출해야 할 때
-- 점진적 마이그레이션 중 Wave 코드와 C 코드를 함께 사용할 때
+- 当需要直接调用现有C库符号时
+- 在渐进式迁移中同时使用Wave代码和C代码时
 
-일반적인 Wave 코드에서는 `std::sys`/`std::*`를 우선 사용하세요.
+在通用Wave代码中，请优先使用`std::sys`/`std::*`。
 
-## import 예시
+## import 示例
 
 ```wave
 import("std::libc::stdio");
@@ -21,7 +21,7 @@ import("std::libc::stdlib");
 import("std::libc::string");
 ```
 
-## 1. stdio 호출
+## 1）stdio 调用
 
 ```wave
 fun main() {
@@ -29,7 +29,7 @@ fun main() {
 }
 ```
 
-## 2. malloc/free
+## 2）malloc/free
 
 ```wave
 fun main() {
@@ -43,7 +43,7 @@ fun main() {
 }
 ```
 
-## 3. 소켓 C ABI
+## 3）套接字C ABI
 
 ```wave
 import("std::libc::socket");
@@ -56,7 +56,7 @@ fun main() {
 }
 ```
 
-## 제공 모듈
+## 提供模块
 
 - `std::libc::errno`
 - `std::libc::string`

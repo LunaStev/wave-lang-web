@@ -2,86 +2,86 @@
 sidebar_position: 7
 ---
 
-# 백엔드 옵션 (`--llvm`, `--whale`)
+# 后端选项（`--llvm`，`--whale`）
 
-이 문서는 `wavec`의 백엔드 관련 CLI 옵션을 설명합니다.
+本文档描述了 `wavec` 的后端相关CLI选项。
 
-중요 원칙:
+重要原则：
 
-- `wavec`는 패키지 매니저가 아닙니다.
-- 백엔드 동작은 가능한 한 **명시적 인자**로 제어합니다.
-- 백엔드 세부 옵션은 `--llvm` 뒤에서만 해석됩니다.
+- `wavec` 不是包管理器。
+- 后端操作尽可能通过 **显式参数** 进行控制。
+- 后端详细选项仅在`--llvm`之后解析。
 
 ---
 
-## 1. 백엔드 선택자
+## 1. 后端选择器
 
 ## 1.1 `--llvm`
 
-`--llvm` 자체는 백엔드 옵션 블록의 시작 마커입니다.
+`--llvm` 本身是后端选项块的起始标记。
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-위처럼 `--llvm` 뒤에 오는 인자들 중 지원되는 항목만 LLVM 백엔드 설정으로 처리됩니다.
+如上所示，`--llvm`之后的参数仅支持作为LLVM后端设置处理。
 
-## 1.2 `--whale` (현재 TODO)
+## 1.2 `--whale`（当前TODO）
 
-현재 `--whale`은 **예약된 더미 플래그**입니다.
+当前`--whale`是**预留的虚设标志**。
 
-- 파서는 인식합니다.
-- 실제 Whale 백엔드 파이프라인은 아직 연결되어 있지 않습니다.
-- 사용 시 TODO 에러로 종료됩니다.
+- 解析器可以识别。
+- 实际的Whale后端流水线尚未连接。
+- 使用时以TODO错误终止。
 
 ---
 
-## 2. `--llvm` 뒤에서 지원되는 옵션
+## 2. `--llvm`之后支持的选项
 
-## 2.1 타겟/코드젠
+## 2.1 目标/代码生成
 
 - `--target <triple>` / `--target=<triple>`
 - `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
 - `--abi <name>` / `--abi=<name>`
 
-반영 지점:
+应用点：
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
+- IR 生成（TargetMachine）阶段：`target`、`cpu`、`features`
+- 对象/链接阶段（调用 clang）：`target`、`abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+当前默认将记录的主要目标三重体：
 
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
+- Linux：`x86_64-unknown-linux-gnu`，`aarch64-unknown-linux-gnu`
+- Darwin：`x86_64-apple-darwin`，`aarch64-apple-darwin`
+- 独立：`x86_64-unknown-none-elf`，`aarch64-unknown-none-elf`，`riscv64-unknown-none-elf`
 
-## 2.2 툴체인/링크
+## 2.2 工具链/链接
 
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>`（可重复）
 - `-C no-default-libs`
 
-반영 지점:
+应用点：
 
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- 对象生成（clang `-c`）时使用 `--sysroot`
+- 在链接阶段覆盖链接器，注入原始链接参数
+- 使用 `-C no-default-libs` 时自动禁用 `-lc -lm`
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## 3. 解析规则（重要）
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+如果不使用 `--llvm`，后台详细选项不会被解释为全局选项。
 
-예를 들어 아래는 에러입니다.
+例如，以下是错误的。
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+必须如下所示撰写。
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,21 +89,21 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## 4. 使用示例
 
-기본 오브젝트 생성:
+生成基本对象：
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+独立内核对象生成：
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+自定义链接：
 
 ```bash
 wavec --llvm \
@@ -114,17 +114,17 @@ wavec --llvm \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+禁用 libc/libm 自动链接：
 
 ```bash
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+使用 `--freestanding` 时，其效果与 `-C no-default-libs` 一样，适用于不依赖运行时默认库的构建，例如内核/启动代码。
 
 ---
 
-## 5. 상태 요약
+## 5. 状态摘要
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- LLVM 后端: 运行中
+- Whale 后端：已预订（TODO），未实现

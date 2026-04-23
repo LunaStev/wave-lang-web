@@ -2,11 +2,11 @@
 sidebar_position: 4
 ---
 
-# std::math 사용법
+# std::math 使用方法
 
-정수/실수/비트/수론/삼각 근사 함수를 제공합니다.
+提供整数/实数/位/数论/三角近似函数。
 
-## import
+## 导入
 
 ```wave
 import("std::math::int");
@@ -16,7 +16,7 @@ import("std::math::num");
 import("std::math::trig");
 ```
 
-## 1. 제네릭 수치 함수
+## 1）泛型数值函数
 
 ```wave
 fun main() {
@@ -25,7 +25,7 @@ fun main() {
 }
 ```
 
-## 2. 비트/정렬 계산
+## 2）位/对齐计算
 
 ```wave
 fun main() {
@@ -35,7 +35,7 @@ fun main() {
 }
 ```
 
-## 3. 수론/삼각 근사
+## 3）数论/三角近似
 
 ```wave
 fun main() {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要函数
 
 ```wave
 fun num_abs<T>(x: T, zero: T) -> T

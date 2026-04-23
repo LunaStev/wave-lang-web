@@ -2,11 +2,11 @@
 sidebar_position: 4
 ---
 
-# std::math 사용법
+# Verwendung von std::math
 
-정수/실수/비트/수론/삼각 근사 함수를 제공합니다.
+Bietet Ganzzahl-/Gleitkomma-/Bit-/Zahlentheorie-/Trig Approximationsfunktionen.
 
-## import
+## Import
 
 ```wave
 import("std::math::int");
@@ -16,7 +16,7 @@ import("std::math::num");
 import("std::math::trig");
 ```
 
-## 1. 제네릭 수치 함수
+## 1. Generische numerische Funktion
 
 ```wave
 fun main() {
@@ -25,7 +25,7 @@ fun main() {
 }
 ```
 
-## 2. 비트/정렬 계산
+## 2. Bit-/Ausrichtungsberechnung
 
 ```wave
 fun main() {
@@ -35,7 +35,7 @@ fun main() {
 }
 ```
 
-## 3. 수론/삼각 근사
+## 3. Zahlentheorie/Trig Approximierungen
 
 ```wave
 fun main() {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Hauptfunktionen
 
 ```wave
 fun num_abs<T>(x: T, zero: T) -> T

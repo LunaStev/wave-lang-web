@@ -2,48 +2,48 @@
 sidebar_position: 14
 ---
 
-# Match 문
+# Instrucción Match
 
-## 소개
+## Introducción
 
-`match` 문은 하나의 값을 여러 패턴과 비교해 분기하는 제어문입니다.
-`if / else if` 체인보다 분기 의도를 더 명확하게 표현할 때 유용합니다.
+Una instrucción `match` es una estructura de control que compara un valor con varios patrones para la ramificación.
+Es útil para expresar intenciones de ramificación más claramente que una cadena de `if / else if`.
 
-현재 Wave의 `match`는 **statement(문)** 이며, 값으로 직접 평가되는 expression 형태는 지원하지 않습니다.
-즉, `var x = match (...) { ... }` 같은 형태는 사용할 수 없습니다.
+Actualmente, `match` en Wave es una **instrucción** y no admite la forma de expresión que se evalúa directamente a un valor.
+Es decir, `var x = match (...) { ... }` no se puede usar.
 
 ---
 
-## 기본 문법
+## Sintaxis básica
 
 ```wave
-match (값) {
-    패턴1 => {
-        // 실행 블록
+match (valor) {
+    patrón1 => {
+        // bloque de ejecución
     }
-    패턴2 => {
-        // 실행 블록
+    patrón2 => {
+        // bloque de ejecución
     }
     _ => {
-        // 기본(default) 블록
+        // bloque por defecto
     }
 }
 ```
 
-문법 규칙:
+Reglas de sintaxis:
 
-- 헤더는 `match (expr)` 형태를 사용합니다.
-- 각 arm은 `패턴 => { 블록 }` 형태를 사용합니다.
-- arm 본문은 반드시 `{ ... }` 블록이어야 합니다.
-- arm 사이에는 줄바꿈만 써도 되고, `,` 또는 `;`를 구분자로 써도 됩니다.
+- El encabezado utiliza el formato `match (expr)`.
+- Cada arm usa el formato `patrón => { bloque }`.
+- El cuerpo del arm debe estar entre `{ ... }`.
+- Los arms se pueden separar solo con un salto de línea, o usar `,` o `;` como delimitadores.
 
 ---
 
-## 패턴 종류
+## Tipos de patrones
 
-현재 지원되는 패턴은 아래 3가지입니다.
+Actualmente se admiten tres tipos de patrones.
 
-1. 정수 리터럴 패턴
+1. Patrón literal entero
 
 ```wave
 0 => { ... }
@@ -51,33 +51,33 @@ match (값) {
 42 => { ... }
 ```
 
-2. 식별자 패턴
+2. Patrón de identificador
 
 ```wave
 Off => { ... }
 On => { ... }
 ```
 
-식별자 패턴은 enum variant 같은 **정수 상수로 해석 가능한 값**을 대상으로 사용합니다.
+El patrón de identificador se usa para **valores que se pueden interpretar como constantes enteras**, como las variantes de `enum`.
 
-3. 와일드카드 패턴 (`_`)
+3. Patrón comodín (`_`)
 
 ```wave
 _ => { ... }
 ```
 
-어떤 패턴에도 매칭되지 않았을 때 실행되는 기본 arm입니다.
+Es el arm por defecto que se ejecuta cuando no coincide con ningún patrón.
 
 ---
 
-## 매칭 대상 타입
+## Tipo de valor a coincidir
 
-현재 구현 기준으로 `match`의 대상 값은 **정수 계열/enum 계열**이어야 합니다.
-문자열, 부동소수점, 구조체 등은 `match` 대상으로 사용할 수 없습니다.
+Según la implementación actual, el valor objetivo de `match` debe ser tipo **entero o `enum`**.
+Cadenas de texto, números de coma flotante, estructuras, etc., no se pueden usar como valores para `match`.
 
 ---
 
-## 예제 1: 정수 분기
+## Ejemplo 1: Ramificación de enteros
 
 ```wave
 fun classify_num(v: i32) -> i32 {
@@ -101,7 +101,7 @@ fun classify_num(v: i32) -> i32 {
 
 ---
 
-## 예제 2: enum 분기
+## Ejemplo 2: Ramificación de `enum`
 
 ```wave
 enum Mode -> i32 {
@@ -127,38 +127,38 @@ fun classify_mode(m: Mode) -> i32 {
 
 ---
 
-## 동작 규칙
+## Reglas de funcionamiento
 
-- `switch` 계열과 유사하게 **일치하는 arm 하나만 실행**됩니다.
-- 자동 fallthrough는 없습니다.
-- `_` arm은 최대 한 번만 사용할 수 있습니다.
-- `_` arm이 없어도 문법상 허용됩니다. (일치 arm이 없으면 아무 arm도 실행되지 않음)
-
----
-
-## 주의 사항
-
-1. 중복 케이스 금지
-
-- 같은 케이스를 중복 선언하면 컴파일 오류가 발생합니다.
-
-2. `_` 중복 금지
-
-- `_` arm을 두 번 이상 선언할 수 없습니다.
-
-3. arm 블록 필수
-
-- `=>` 뒤에는 반드시 `{ ... }` 블록을 써야 합니다.
-
-4. 패턴은 상수여야 함
-
-- 식별자 패턴은 정수 상수/enum variant로 해석 가능한 값만 사용하세요.
+- Al igual que en `switch`, solo se ejecuta **un arm coincidido**.
+- No hay un `fallthrough` automático.
+- El arm `_` solo se puede usar una vez como máximo.
+- La gramática permite que no haya arm `_`. (Si no hay arm coincidido, no se ejecuta ningún arm)
 
 ---
 
-## 요약
+## Advertencias
 
-Wave의 `match`는 정수/enum 분기에 최적화된 statement 제어문입니다.
-`=>` + 블록 구조를 사용하며, 와일드카드(`_`)를 통해 기본 분기를 구성할 수 있습니다.
+1. Prohibición de casos duplicados
 
-분기 케이스가 많아질수록 `if / else if`보다 읽기 쉽고, 의도를 명확히 드러낼 수 있습니다.
+- Declarar un caso duplicado provoca un error de compilación.
+
+2. Prohibición de duplicado en `_`
+
+- El arm `_` no se puede declarar más de una vez.
+
+3. El bloque del arm es obligatorio
+
+- Detrás de `=>` debe haber `{ ... }`.
+
+4. El patrón debe ser constante
+
+- Use solo valores que puedan interpretarse como constantes enteras o variantes de `enum` para patrones de identificador.
+
+---
+
+## Resumen
+
+`match` de Wave es una estructura de control de instrucción optimizada para la ramificación de enteros/`enum`.
+Utiliza una estructura de `=>` + bloque, y se puede usar un comodín (`_`) para configurar una ramificación por defecto.
+
+Cuantos más casos de ramificación haya, más fácil es de leer que `if / else if`, y puede aclarar la intención.

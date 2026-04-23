@@ -14,11 +14,11 @@ Objetivos actualmente soportados:
 - Linux `x86_64`
 - Linux `aarch64`
 - macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
+- `x86_64` independiente
+- `aarch64` independiente
+- `riscv64` independiente
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows y los objetivos de 32 bits no están soportados aún.
 
 ---
 
@@ -87,7 +87,7 @@ La cadena de `in("...")`, `out("...")` es una de las dos siguientes.
 
 1. Registro específico
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Ejemplo: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. Clase de restricción
 
@@ -126,7 +126,7 @@ Elementos principales:
 - Especial: `"memory"`, `"cc"` (normalización interna por objetivo)
 
 El compilador añade automáticamente clobber básico en modo seguro conservador.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+(`memory`, y series de flags/cc; en RISC-V independiente generalmente `memory`)
 
 ---
 

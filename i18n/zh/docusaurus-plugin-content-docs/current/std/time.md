@@ -2,11 +2,11 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# std::time 使用方法
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+提供当前时间查询、时间差计算、睡眠功能。
 
-## import
+## 导入
 
 ```wave
 import("std::time::clock");
@@ -15,7 +15,7 @@ import("std::time::sleep");
 import("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1. 区间测量
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2. 纳秒时间戳
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3. 休眠
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要函数
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64

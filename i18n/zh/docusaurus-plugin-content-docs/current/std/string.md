@@ -2,11 +2,11 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# std::string 使用方法
 
-NUL 종료 문자열(`str`) 유틸입니다.
+NUL 终止字符串（`str`）工具。
 
-## import
+## 导入
 
 ```wave
 import("std::string::len");
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. 长度/比较
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. 查找/计数
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. 裁剪范围 + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. 哈希
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要函数
 
 ```wave
 fun len(s: str) -> i32

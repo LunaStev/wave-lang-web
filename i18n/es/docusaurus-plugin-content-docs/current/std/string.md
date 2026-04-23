@@ -2,11 +2,11 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# Uso de std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+Utilidades de cadenas de fin NUL (`str`).
 
-## import
+## importar
 
 ```wave
 import("std::string::len");
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. Longitud/Comparación
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. Búsqueda/Contador
 
 ```wave
 fun main() {
@@ -38,11 +38,11 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. Rango de recorte + ASCII
 
 ```wave
 fun main() {
-    var s: str = "  hello\n";
+    var s: str = "  hola\n";
     var st: i32 = 0;
     var en: i32 = 0;
     trim_range(s, &st, &en);
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. Hash
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Funciones principales
 
 ```wave
 fun len(s: str) -> i32

@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Main Functions
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener
