@@ -2,9 +2,9 @@
 sidebar_position: 5
 ---
 
-# std::mem 사용법
+# std::mem 使用法
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+低レベルのメモリ割り当て/コピー/比較ユーティルです。
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::mem::ops");
 import("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## 1. 基本割り当て/解放
 
 ```wave
 fun main() {
@@ -28,21 +28,21 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## 2. 再割り当てと移動安全なコピー
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // 重なるメモリ領域の安全移動
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## 3. ジェネリックアイテムAPI
 
 ```wave
 fun main() {
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## 4. C文字列ユーティル
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要な関数
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>
