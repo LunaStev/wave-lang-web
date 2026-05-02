@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# `wavec` CLI संदर्भ
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+यह दस्तावेज़ **वर्तमान वेव कंपाइलर (`wavec`) कार्यान्वयन मानक** के CLI क्रियाविन्यास को स्पष्टता से समझाता है।
 
-핵심 원칙:
+मुख्य सिद्धांत:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` एक कंपाइलर है।
+- पैकेज स्थापना/संकल्प (लॉकफाईल, रजिस्ट्री, डाउनलोड) `wavec` की जिम्मेदारी नहीं है।
+- बाहरी निर्भरताएँ `wavec` का निष्पादन करते समय **स्पष्ट CLI तर्क** के रूप में पास की जाती हैं।
 
 ---
 
-## 1. 기본 형식
+## 1. मूल प्रारूप
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [वैश्विक-विकल्प] <कमांड> [कमांड-विकल्प]
 ```
 
-예:
+उदाहरण:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. आदेश पार्सिंग नियम (महत्वपूर्ण)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` पहले सभी аргументов में से **ग्लोबल विकल्प** को स्कैन करता है, फिर बचे हुए аргументов को `<कमांड>` के रूप में पार्स करता है।
 
-즉 global option은 위치가 유연합니다.
+अर्थात, ग्लोबल विकल्प का स्थान लचीला होता है।
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+उपरोक्त तीनों मान्य हैं।
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+`--` का उपयोग करने पर, उसके बाद ग्लोबल विकल्प स्कैनिंग रुक जाती है और कमांड क्षेत्र में चली जाती है।
 
 ```bash
 wavec -- run main.wave
@@ -52,44 +52,44 @@ wavec -- run main.wave
 
 ---
 
-## 3. Commands
+## 3. आदेश
 
 ## 3.1 `run <file>`
 
-Wave 파일을 컴파일하고 실행합니다.
+वेव फ़ाइल को संकलित और चलाया जाता है।
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+क्रिया:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. स्रोत पार्सिंग + इम्पोर्ट विस्तार
+2. LLVM IR निर्माण
+3. नेटिव बाइनरी लिंक (`target/<file_stem>`) के साथ
+4. निष्पादन
 
-특징:
+विशेषताएँ:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- निष्पादित प्रोग्राम के समापन कोड को `wavec` स्थानांतरित करता है।
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+एक्जीक्यूटेबल फ़ाइल (exe) बनाई जाती है।
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+आउटपुट बाइनरी:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 `build` विकल्प (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+`build` कमांड से आउटपुट फ़ाइल नाम और आउटपुट प्रारूप को विकल्प द्वारा नियंत्रित किया जा सकता है।
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,32 +97,32 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: आउटपुट फ़ाइल नाम निर्दिष्ट करता है।
+  - डिफ़ॉल्ट (`-c` नहीं): एक्जीक्यूटेबल फ़ाइल आउटपुट मार्ग निर्दिष्ट करता है।
+  - `-c` के साथ: ऑब्जेक्ट फ़ाइल आउटपुट पथ निर्दिष्ट करता है।
+- `-c`: लिंक को छोड़ता है और केवल ऑब्जेक्ट फ़ाइल बनाता है।
+- `-c` का उपयोग करते समय, ऑब्जेक्ट पथ को stdout में आउटपुट करता है।
 
-기본 동작:
+डिफ़ॉल्ट क्रिया:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (पथ का आउटपुट)
 
-freestanding 커널 오브젝트 예시:
+फ्रीस्टैंडिंग कर्नेल ऑब्जेक्ट उदाहरण:
 
 ```bash
 wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
+ --target=x86_64-unknown-none-elf \
+ build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` को भी उसी तरह से उपयोग किया जा सकता है।
 
 ---
 
 ## 3.4 `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+स्टैंडर्ड लाइब्रेरी इंस्टॉल/अपडेट कमांड है।
 
 ```bash
 wavec install std
@@ -140,11 +140,11 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## 4. ग्लोबल विकल्प
 
-## 4.1 최적화
+## 4.1 अनुकूलन
 
-허용 값:
+स्वीकृत मान:
 
 - `-O0`
 - `-O1`
@@ -154,21 +154,21 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+उदाहरण:
 
 ```bash
-wavec -O3 run main.wave
+wavec -O3 मुख्य.wave चलाएँ
 ```
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 डिबग आउटपुट
 
 ```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
+wavec --debug-wave=tokens,ast,ir मुख्य.wave चलाएँ
 ```
 
-허용 항목:
+स्वीकृत आइटम:
 
 - `tokens`
 - `ast`
@@ -179,36 +179,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 लिंक विकल्प
 
 ```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
+wavec बिल्ड app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` या `--link <lib>`
+- `-L<path>` या `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+`wavec` लिंक करते समय आंतरिक रूप से `-l<lib>`, `-L<path>` के रूप में पारित होता है।
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 बाहरी निर्भरता विकल्प (महत्वपूर्ण)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+बाहरी इंपोर्ट (`pkg::...`) की व्याख्या के लिए विकल्प।
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+पैकेज रूट डायरेक्टरी उम्मीदवार जोड़ें।
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+पैकेज `math` खोजते समय:
 
-- `.vex/dep/math` 를 검사
+- `.vex/dep/math` की जाँच करें
 
-여러 번 지정 가능:
+कई बार निर्दिष्ट किया जा सकता है:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -216,37 +216,37 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+पैकेज नाम को एक विशिष्ट पथ पर तय करता है।
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+नियम:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- `name` प्रारूप: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` का हमेशा `name=path` प्रारूप होना चाहिए
+- उसी पैकेज नाम को दोबारा निर्दिष्ट करने पर त्रुटि
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 बैकएंड विकल्प (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+बैकएंड नियंत्रण विकल्प केवल `--llvm` के बाद ही व्याख्या किए जाते हैं।
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec --llvm --टार्गेट=x86_64-unknown-linux-gnu बिल्ड app.wave -c
 ```
 
-지원 항목(요약):
+समर्थित आइटम (सारांश):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (दोहराया जा सकता है)
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+वर्तमान `wavec print target-list` के अनुसार प्रमुख लक्ष्य:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -256,101 +256,101 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` वर्तमान में आरक्षित डमी ध्वज है, और वास्तविक बैकएंड पाइपलाइन अभी तक लागू नहीं की गई है (TODO)।
 
 ---
 
-## 5. Import 해석 규칙
+## 5. आयात व्याख्या नियम
 
-Wave import는 다음 3가지로 분기됩니다.
+वेव आयात तीन प्रकारों में विभाजित होता है।
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. स्थानीय आयात
+2. मानक आयात
+3. बाहरी पैकेज आयात
 
-## 5.1 로컬
+## 5.1 स्थानीय
 
 ```wave
-import("foo");
+import("फू");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+मानक फ़ाइल निर्देशिका में `<path>.wave` खोजा जाता है।
 
-## 5.2 std
+## 5.2 मानक
 
 ```wave
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+`~/.wave/lib/wave/std/...` पथ का उपयोग किया जाता है।
 
-## 5.3 외부 패키지
+## 5.3 बाहरी पैकेज
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+प्रारूप:
 
-- 최소 `package::module` 2세그먼트 필요
+- कम से कम `पैकेज::मॉड्यूल` के 2 खंड आवश्यक हैं।
 
-패키지 루트 결정 순서:
+पैकेज मूल निर्धारित करने की क्रम:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. `--dep name=path` निर्दिष्ट मानचित्रण
+2. प्रत्येक `--dep-root` में `<root>/<package>` खोज
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+अगर समान पैकेज कई dep-root में एक साथ पाया जाता है:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- स्वचालित चयन नहीं होता और **अस्पष्टता त्रुटि** होती है।
+- इसे `--dep name=path` द्वारा निश्चित करना होगा।
 
-모듈 파일 탐색 순서:
+मॉड्यूल फ़ाइल खोज क्रम:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+उदाहरण:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+खोज:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. बाहरी आयात का व्यावहारिक उदाहरण
 
-### 6.1 단일 dep-root
+### 6.1 एकल dep-root
 
-디렉터리:
+निर्देशिका:
 
 ```text
 .vex/dep/
-  math/
+  गणित/
     src/
-      add.wave
+      जोड़ें.wave
 main.wave
 ```
 
-코드:
+कोड:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+निष्पादन:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 अस्पष्टता समाधन
 
 ```bash
 wavec run main.wave \
@@ -358,7 +358,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+अगर दोनों में `गणित` हो, तो त्रुटि होती है। नीचे दिए गए अनुसार सुनिश्चित करें।
 
 ```bash
 wavec run main.wave \
@@ -369,7 +369,7 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Vex के साथ कार्य भूमिका विभाजन
 
 권장 구조:
 
