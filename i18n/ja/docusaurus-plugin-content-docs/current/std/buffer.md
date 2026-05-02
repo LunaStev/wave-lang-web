@@ -33,7 +33,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### 重要な関数
 
 ```wave
 fun buffer_new(capacity: i64) -> Buffer
@@ -46,9 +46,9 @@ fun buffer_set(buf: ptr<Buffer>, index: i64, value: u8) -> bool
 fun buffer_free(buf: ptr<Buffer>) -> i64
 ```
 
-## 2. 제네릭 버퍼 (`TypedBuffer<T>`)
+## 2. ジェネリックバッファ（`TypedBuffer<T>`）
 
-Wave는 타입 추론이 없으므로 타입 인자를 명시합니다.
+Waveは型推論がないので、型引数を明示します。
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### 重要な関数
 
 ```wave
 fun tbuffer_new<T>(elem_size: i64, initial_cap: i64) -> TypedBuffer<T>
@@ -75,7 +75,7 @@ fun tbuffer_set<T>(buf: ptr<TypedBuffer<T>>, index: i64, value: T) -> bool
 fun tbuffer_free<T>(buf: ptr<TypedBuffer<T>>) -> i64
 ```
 
-주의:
+注意:
 
-- `elem_size`는 호출자가 정확히 넣어야 합니다.
-- 범위 밖 접근은 `false` 또는 기본값(`buffer_at`은 `0`)을 반환합니다.
+- `elem_size`は呼び出し元が正確に入力しなければなりません。
+- 範囲外へのアクセスは`false`またはデフォルト値（`buffer_at`の場合は`0`）を返します。
