@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# std::buffer 사용법
+# std::buffer 使用法
 
-`std::buffer`는 가변 바이트 버퍼와 제네릭 버퍼를 제공합니다.
+`std::buffer`は可変バイトバッファとジェネリックバッファを提供します。
 
 ## import
 
@@ -15,9 +15,9 @@ import("std::buffer::read");
 import("std::buffer::write");
 ```
 
-## 1. 바이트 버퍼 (`Buffer`)
+## 1. バイトバッファ（`Buffer`）
 
-### 생성/추가/수정
+### 生成/追加/修正
 
 ```wave
 fun main() {
