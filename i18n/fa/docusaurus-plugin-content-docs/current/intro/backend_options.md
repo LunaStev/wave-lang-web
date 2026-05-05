@@ -2,86 +2,86 @@
 sidebar_position: 7
 ---
 
-# 백엔드 옵션 (`--llvm`, `--whale`)
+# گزینه‌های Backend (`--llvm`, `--whale`)
 
-이 문서는 `wavec`의 백엔드 관련 CLI 옵션을 설명합니다.
+این سند گزینه‌های CLI مربوط به Backend در `wavec` را شرح می‌دهد.
 
-중요 원칙:
+اصول مهم:
 
-- `wavec`는 패키지 매니저가 아닙니다.
-- 백엔드 동작은 가능한 한 **명시적 인자**로 제어합니다.
-- 백엔드 세부 옵션은 `--llvm` 뒤에서만 해석됩니다.
+- `wavec` یک مدیر بسته نیست.
+- عملکرد Backend تا حد ممکن با **آرگومان‌های صریح** کنترل می‌شود.
+- تنها پس از `--llvm` گزینه‌های جزئی Backend مورد تفسیر قرار می‌گیرند.
 
 ---
 
-## 1. 백엔드 선택자
+## 1. انتخاب‌گر Backend
 
 ## 1.1 `--llvm`
 
-`--llvm` 자체는 백엔드 옵션 블록의 시작 마커입니다.
+`--llvm` به‌تنهایی نشان‌دهنده شروع یک بلوک از گزینه‌های Backend است.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-위처럼 `--llvm` 뒤에 오는 인자들 중 지원되는 항목만 LLVM 백엔드 설정으로 처리됩니다.
+همان‌طور که در بالا ذکر شد، تنها آرگومان‌هایی که بعد از `--llvm` پشتیبانی می‌شوند به عنوان تنظیمات Backend LLVM پردازش می‌شوند.
 
-## 1.2 `--whale` (현재 TODO)
+## 1.2 `--whale` (در حال حاضر TODO)
 
-현재 `--whale`은 **예약된 더미 플래그**입니다.
+در حال حاضر `--whale` به‌عنوان یک **پرچم ساختگی رزرو شده** تلقی می‌شود.
 
-- 파서는 인식합니다.
-- 실제 Whale 백엔드 파이프라인은 아직 연결되어 있지 않습니다.
-- 사용 시 TODO 에러로 종료됩니다.
-
----
-
-## 2. `--llvm` 뒤에서 지원되는 옵션
-
-## 2.1 타겟/코드젠
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-반영 지점:
-
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
-
-현재 기본적으로 문서화할 주요 target triple:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 툴체인/링크
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
-- `-C no-default-libs`
-
-반영 지점:
-
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- تجزیه‌کننده آن را تشخیص می‌دهد.
+- خط لوله Backend واقعی Whale هنوز متصل نشده است.
+- در صورت استفاده به عنوان خطای TODO ختم می‌شود.
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## 2. گزینه‌های پشتیبانی‌شده پس از `--llvm`
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+## 2.1 هدف/تولید کد
 
-예를 들어 아래는 에러입니다.
+- `--target <سه‌گانه>` / `--target=<سه‌گانه>`
+- `--cpu <نام>` / `--cpu=<نام>`
+- `--features <CSV>` / `--features=<CSV>`
+- `--abi <نام>` / `--abi=<نام>`
+
+نقاط انعکاس:
+
+- مرحله تولید IR (ماشین هدف): `target`,`cpu`,`features`
+- مرحله شیء/لینک (در هنگام فراخوانی کلنگ): `target`,`abi`
+
+در حال حاضر، یک سه‌گانه هدف اصلی برای مستندسازی به‌صورت پیش‌فرض:
+
+- لینوکس: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
+- داروین: `x86_64-apple-darwin`, `aarch64-apple-darwin`
+- فری‌ستندینگ: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
+
+## 2.2 ابزارک/لینک
+
+- `--sysroot <مسیر>` / `--sysroot=<مسیر>`
+- `-C لینک‌کننده=<مسیر>`
+- `-C آرگومان-لینک=<arg>` (قابل تکرار)
+- `-C بدون-کتابخانه پیش‌فرض`
+
+نقاط انعکاس:
+
+- `--sysroot` در زمان تولید شیء (از طریق کلنگ `-c`) نگاشت می‌شود.
+- در مرحله لینک، لغو linker و وارد کردن آرگومان‌های خام پیوند انجام می‌شود.
+- هنگام استفاده از `-C بدون-کتابخانه پیش‌فرض`، `-lc -lm` به‌طور خودکار غیرفعال می‌شود.
+
+---
+
+## 3. قوانین تجزیه (مهم)
+
+بدون گنجاندن `--llvm`، گزینه‌های جزئی Backend به‌عنوان گزینه‌های عمومی تفسیر نمی‌شوند.
+
+به‌عنوان مثال، مورد زیر خطا است.
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+حتماً باید به این شکل نوشته شود.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,42 +89,42 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## 4. نمونه‌های استفاده
 
-기본 오브젝트 생성:
+تولید شیء پایه:
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+ایجاد شیء هسته فری‌ستندینگ:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+لینک سفارشی:
 
 ```bash
 wavec --llvm \
   --target=x86_64-unknown-linux-gnu \
   --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
+  -C لینک‌کننده=کلنگ \
+  -C آرگومان-لینک=-Wl,--gc-sections \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+بدون فعالسازی پیوند libc/libm خودکار:
 
 ```bash
-wavec --llvm -C no-default-libs build app.wave
+wavec --llvm -C بدون-کتابخانه پیش‌فرض build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+هنگام استفاده از `--freestanding`، به‌صورت داخلی مشابه `-C no-default-libs` عمل می‌کند و برای ساخت‌هایی که فرض بر عدم استفاده از کتابخانه‌های پیش‌فرض در زمان اجرای کد هسته یا بوت است، تطبیق داده می‌شود.
 
 ---
 
-## 5. 상태 요약
+## 5. خلاصه وضعیت
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- Backend LLVM: در حال اجرا
+- Backend Whale: رزرو شده (TODO)، غیر قابل اجرا
