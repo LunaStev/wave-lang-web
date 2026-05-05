@@ -2,18 +2,18 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# std::net का उपयोग
 
-동기식 IPv4 TCP/UDP API입니다.
+यह एक सिंक्रोनस IPv4 TCP/UDP API है।
 
-## import
+## आयात
 
 ```wave
 import("std::net::tcp");
 import("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1. TCP सर्वर
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2. TCP ग्राहक
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3. UDP ट्रांसमिशन
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## पते का निर्माण
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## प्रमुख फंक्शन्स
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener
