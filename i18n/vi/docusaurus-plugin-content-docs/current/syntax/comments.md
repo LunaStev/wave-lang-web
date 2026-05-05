@@ -2,53 +2,53 @@
 sidebar_position: 11
 ---
 
-# 주석
+# Chú thích
 
-Wave는 두 가지 주석을 지원합니다.
+Wave hỗ trợ hai loại chú thích.
 
-- 한 줄 주석: `//`
-- 블록 주석: `/* ... */`
+- Chú thích một dòng: `//`
+- Chú thích khối: `/* ... */`
 
-## 한 줄 주석
+## Chú thích một dòng
 
-`//` 뒤의 내용은 줄 끝까지 무시됩니다.
+Nội dung sau `//` sẽ bị bỏ qua cho đến khi hết dòng.
 
 ```wave
-var x: i32 = 10; // line comment
-x += 5;          // still works
+var x: i32 = 10; // chú thích dòng
+x += 5;          // vẫn hoạt động
 ```
 
-## 블록 주석
+## Chú thích khối
 
-`/*` 와 `*/` 사이 내용을 무시합니다.
+Bỏ qua nội dung giữa `/*` và `*/`.
 
 ```wave
-var y: i32 = 1 /* inline block */ + 2;
+var y: i32 = 1 /* khối nội tuyến */ + 2;
 ```
 
-블록 주석은 여러 줄과 중첩을 지원합니다.
+Chú thích khối hỗ trợ nhiều dòng và lồng ghép.
 
 ```wave
-/* outer
-   /* inner */
-   outer end
+/* ngoài
+   /* trong */
+   ngoài kết thúc
 */
 ```
 
-## 문자열과 주석 기호
+## Ký hiệu chuỗi và chú thích
 
-문자열 내부의 `/*`, `*/`, `//`는 주석 시작/종료로 처리되지 않습니다.
-
-```wave
-var marker: str = "/*//*/";
-```
-
-## 주석 오류
-
-블록 주석이 닫히지 않으면 컴파일 에러(`E1002`)가 발생합니다.
+`/*`, `*/`, `//` trong chuỗi không được xử lý như là mở/đóng chú thích.
 
 ```wave
-/* not closed
+var marker: str = "/*/";
 ```
 
-컴파일러는 시작 위치, 원인, 수정 힌트를 함께 출력합니다.
+## Lỗi chú thích
+
+Nếu chú thích khối chưa đóng, lỗi biên dịch (`E1002`) sẽ xảy ra.
+
+```wave
+/* chưa đóng
+```
+
+Trình biên dịch xuất ra vị trí bắt đầu, nguyên nhân và gợi ý sửa đổi.
