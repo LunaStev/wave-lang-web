@@ -89,12 +89,12 @@ Types de représentation autorisés :
 
 - `i8`, `i16`, `i32`, `i64`
 - `u8`, `u16`, `u32`, `u64`
-- 해당 타입의 `type alias`
+- l`alias de type` du type correspondant
 
 ```wave
-type MyInt = i32;
+type MonEntier = i32;
 
-enum Example -> MyInt {
+enum Exemple -> MonEntier {
     X,
     Y
 }
@@ -102,11 +102,11 @@ enum Example -> MyInt {
 
 ---
 
-### 값 할당 규칙
+### Règles d'attribution des valeurs
 
-- 명시적 값이 있으면 해당 값 사용
-- 없으면 이전 값 + 1
-- 첫 값이 없으면 0부터 시작
+- Utilisez la valeur explicite si elle existe
+- Sinon, utilisez la valeur précédente + 1
+- Commencez à zéro s'il n'y a pas de première valeur
 
 ```wave
 enum E -> i32 {
@@ -119,50 +119,50 @@ enum E -> i32 {
 
 ---
 
-### enum은 값 타입이다
+### L'enum est un type de valeur
 
-enum은 정수 값이며, 함수 인자·리턴값으로 자유롭게 사용 가능하다.
+L'enum est une valeur entière et peut être utilisée librement comme paramètre ou valeur de retour de fonction.
 
 ```wave
-fun f(t: ShaderUniformType) -> i32 {
+fun f(t: TypeUnifDiviseur) -> i32 {
     return t;
 }
 ```
 
 ---
 
-### 상수로 사용
+### Utilisation comme constante
 
-enum variant는 컴파일 타임 상수다.
+La variante enum est une constante au moment de la compilation.
 
 ```wave
 const X: i32 = B;
-const Y: ShaderUniformType = D;
+const Y: TypeUnifDiviseur = D;
 ```
 
 ---
 
-## 실제 예제
+## Exemple réel
 
 ```wave
-type MyInt = i32;
+type MonEntier = i32;
 
-enum ShaderUniformType -> MyInt {
+enum TypeUnifDiviseur -> MonEntier {
     A = 0,
     B,
     C = 10,
     D
 }
 
-const X: MyInt = 123;
-const Y: MyInt = B;
-const Z: ShaderUniformType = D;
+const X: MonEntier = 123;
+const Y: MonEntier = B;
+const Z: TypeUnifDiviseur = D;
 
-fun f(t: ShaderUniformType) -> MyInt {
+fun f(t: TypeUnifDiviseur) -> MonEntier {
     return t;
 }
 
-fun g(v: MyInt) -> MyInt {
+fun g(v: MonEntier) -> MonEntier {
     return v;
 }
 
