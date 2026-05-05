@@ -4,9 +4,9 @@ sidebar_position: 5
 
 # Wendeshaji
 
-이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
+Hati hii inatoa muhtasari wa waendeshaji wanaoweza kutumika kulingana na kiwango cha kibalili cha sasa.
 
-## 산술
+## Hesabu
 
 | Wendeshaji | Maelezo    |
 | ---------- | ---------- |
@@ -14,9 +14,9 @@ sidebar_position: 5
 | `-`        | Utoaji     |
 | `*`        | Kuzidisha  |
 | `/`        | Mgawanyiko |
-| `%`        | 나머지        |
+| `%`        | Mabaki     |
 
-## 비교
+## Kulinganisha
 
 | Wendeshaji | Maelezo       |
 | ---------- | ------------- |
@@ -27,7 +27,7 @@ sidebar_position: 5
 | `>`        | kubwa         |
 | `>=`       | kubwa au sawa |
 
-## 논리
+## Mantiki
 
 | Wendeshaji | Maelezo     |
 | ---------- | ----------- |
@@ -35,7 +35,7 @@ sidebar_position: 5
 | \\`\\   | Mantiki OR  |
 | `!`        | Mantiki NOT |
 
-## 비트
+## Kidogo
 
 | Wendeshaji | Maelezo         |
 | ---------- | --------------- |
@@ -46,37 +46,37 @@ sidebar_position: 5
 | `<<`       | Hamisha kushoto |
 | `>>`       | Hamisha kulia   |
 
-## 대입
+## Ugawaji
 
-| Wendeshaji | Maelezo  |
-| ---------- | -------- |
-| `=`        | 기본 대입    |
-| `+=`       | 덧셈 후 대입  |
-| `-=`       | 뺄셈 후 대입  |
-| `*=`       | 곱셈 후 대입  |
-| `/=`       | 나눗셈 후 대입 |
-| `%=`       | 나머지 후 대입 |
+| Wendeshaji | Maelezo                    |
+| ---------- | -------------------------- |
+| `=`        | Mgawaji wa Kawaida         |
+| `+=`       | Mgawaji Baada ya Kitu      |
+| `-=`       | Mgawaji Baada ya Kugawa    |
+| `*=`       | Mgawaji Baada ya Kuzidisha |
+| `/=`       | Mgawaji Baada ya Kugawa    |
+| `%=`       | Mgawaji Baada ya Mabaki    |
 
-## 단항 / 포인터 / 캐스트
+## Kiwango / Pointer / Cast
 
-| 연산자/키워드     | Maelezo  |
-| ----------- | -------- |
-| `++`, `--`  | 전위/후위 증감 |
-| `&x`        | 주소 획득    |
-| `deref p`   | 포인터 역참조  |
-| `expr as T` | 명시적 캐스트  |
+| Waendeshaji/Neno kuu | Maelezo                             |
+| -------------------- | ----------------------------------- |
+| `++`, `--`           | Ongezeko/Kupungua Kabla ya/baada ya |
+| `&x`                 | Upatikanaji wa Anwani               |
+| `deref p`            | Rejeleo la Kinyume la Pointer       |
+| `expr kama T`        | Cast wazi                           |
 
-## 포인터 연산
+## Shughuli za pointer
 
-| 표현식                        | 결과                                   |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Maneno                     | Matokeo                                    |
+| -------------------------- | ------------------------------------------ |
+| `ptr<T> + int`             | `ptr<T>` (GEP harakati) |
+| `int + ptr<T>`             | `ptr<T>` (GEP harakati) |
+| `ptr<T> - int`             | `ptr<T>` (GEP harakati) |
+| `ptr<T> - ptr<T>`          | `i64` (tofauti ya byte) |
+| `ptr == ptr`, `ptr != ptr` | Ulinganisho wa pointer                     |
 
-## 예약 또는 미구현 항목
+## Watumishi au Vitu Visivyotengenezwa
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+Kuna vitu ambavyo vinapatikana kama tumbo la kisarufi lakini havikubaliwi chini ya miundo ya utekelezaji wa sasa.
+Mfano: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
