@@ -2,18 +2,18 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# Jinsi ya kutumia std::net
 
-동기식 IPv4 TCP/UDP API입니다.
+Ni API ya TCP/UDP ya IPv4 inayofanya kazi kwa wakati mmoja.
 
-## import
+## ingiza
 
 ```wave
-import("std::net::tcp");
-import("std::net::udp");
+ingiza("std::net::tcp");
+ingiza("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1. Seva ya TCP
 
 ```wave
 fun main() {
@@ -22,7 +22,7 @@ fun main() {
 
     var buf: array<u8, 1024>;
     var n: i64 = tcp_read(client, &buf[0], 1024);
-    if (n > 0) {
+    ikiwa (n > 0) {
         tcp_write_all(client, &buf[0], n);
     }
 
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2. Mteja wa TCP
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3. Utumaji na upokeaji wa UDP
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## Uundaji wa anwani
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener
