@@ -6,47 +6,47 @@ sidebar_position: 7
 
 ## Utangulizi
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+Kusanyiko la moja kwa moja la Wave ni `asm { ... }` imeandikwa kama block.
+Ndani ya msimbo wa Wave, unaweza kudhibiti kwa usahihi rejista, kumbukumbu, na njia za kuita mfumo.
 
-현재 지원 타깃:
+Madhumuni yanayoungwa mkono sasa:
 
 - Linux `x86_64`
 - Linux `aarch64`
 - macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
+- panga peke yake `x86_64`
+- panga peke yake `aarch64`
+- panga peke yake `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows na malengo ya 32-bit bado hayatumiki.
 
 ---
 
-## 기본 형태
+## Umbo la msingi
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` inaweza kutumika kama **kauli(statement)** au **maneno(expression)**.
 
 ```wave
 asm {
-    "instruction"
-    in("constraint_or_reg") value
-    out("constraint_or_reg") target
-    clobber("item")
+    "maelezo"
+    in("kizuizi_au_reg") thamani
+    out("kizuizi_au_reg") lengo
+    clobber("kipengele")
 }
 ```
 
-구성 요소:
+Vipengele:
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- Mstari wa herufi: Amri halisi ya mchakato
+- `in(...)`: operandi ya pembejeo
+- `out(...)`: operandi ya kutoka
+- `clobber(...)`: rejista/ hali/ kidokezo cha kumbukumbu kinachoharibika
 
 ---
 
-## `asm` 문 (Statement)
+## `asm` tamko (Statement)
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+Hutumia sentensi ya kawaida ikiwa hakuna thamani ya kurudisha.
 
 ```wave
 var ret: i64 = 0;
@@ -60,13 +60,13 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+`out(...)` inaweza kuwa na vipengele vingi.
 
 ---
 
-## `asm` 식 (Expression)
+## `asm` usemi (Expression)
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+Inaweza kutumika kama usemi unaotengeneza thamani moja kwa moja.
 
 ```wave
 var result: i64 = asm {
@@ -75,64 +75,64 @@ var result: i64 = asm {
 };
 ```
 
-주의:
+Tahadhari:
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- `asm` usemi unaruhusu **kwa hakika `out(...)` 1 pekee**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## `in(...)` / `out(...)` vikwazo vya usemi
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+Kamba ya `in("...")`, `out("...")` ni moja kati ya yafuatayo.
 
-1. 구체 레지스터
+1. Rejista maalum
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Mfano: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
-2. 제약 클래스(constraint class)
+2. Darasa la kizuizi (constraint class)
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Mfano: `"r"`, `"m"`, `"rm"`
 
-예시:
+Mfano:
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Lengo la pato (`out(...) target`) inashauriwa kuwa na mifumo ifuatayo kulingana na utekelezaji wa sasa.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Kigeu: `out("rax") ret`
+- Kurejelea upya pointeri: `out("rax") deref p`
 
 ---
 
-## `clobber(...)`
+## `uchafuzi(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`uchafuzi(...)` unaweza kupokea vitu kadhaa kwa wakati mmoja, na inaweza kuandikwa mara kadhaa.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+ "xor rax, rax"
+ uchafuzi("rax")
+ uchafuzi("rcx", "rdx")
+ uchafuzi("kumbukumbu")
 }
 ```
 
-주요 항목:
+Vitu kuu:
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Viandikisha: `"rax"`, `"x0"` nk.
+- Maalum: `"kumbukumbu"`, `"cc"`(uratibu wa ndani usio wa kawaida)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+Mkutanisha huongeza uchafuzi msingi kiotomatiki katika hali salama ya kihafidhina.
+(`kumbukumbu`, bendera/cc nk; Kwenye RISC-V freestanding, hasa `kumbukumbu`)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Vishikizi vya nafasi za operandi (`$0`, `$1`, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Katika mistari ya maagizo, tumia `$N` kurejelea kiasi cha uingizaji.
 
 ```wave
 asm {
@@ -142,34 +142,34 @@ asm {
 }
 ```
 
-참고:
+Marejeo:
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- Hata ukiandika `%0` mtindo wa kazi ya ndani, inabadilishwa na `$0` katika mtindo wa ndani.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Maeneo yanayoungwa mkono sasa ya uingizaji wa vitengo
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+Thamani za `in(...)` zinasaidiwa kwa fomu zifuatazo.
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
-- `&identifier`
-- `deref identifier`
-- 음수 정수/실수 리터럴
+- Mtambulishaji wa kigezo
+- Nambari iliyowekwa
+- Maandiko halisi ya Kamba ya Herufi
+- `&kitambulisho`
+- `fungua kitambulisho`
+- Tarakimu hasi za nambari kamili/kondoo za maandiko halisi
 
-복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
+Nakala tata inaweza kuwa na vizuizi, kwa hivyo inashauriwa kutumia mduara wa muda inapohitajika.
 
 ---
 
 ## Tahadhari
 
-인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
-잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
+Mkota ulionganishwa moja kwa moja unapuuza sehemu ya ulinzi wa mfumo wa aina.
+Uwekaji wa usajili mbaya, mivutano ya migogoro, au uhaba wa kuhifadhi inaweza kusababisha kizazi cha kanuni kibaya au utendaji usiofaa wakati wa uendeshaji.
 
-권장 사항:
+Mapendekezo:
 
-- 타깃 ABI와 호출 규약을 먼저 확정
-- 입력/출력 레지스터와 clobber를 명시적으로 관리
-- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
+- Thibitisha sheria za ABI za msingi na rejea kwanza
+- Dhibiti kwa wazi usajili wa pembejeo/pato na kuhifadhi
+- Weka wazi `clobber("kumbukumbu")` unaposhughulikia moja kwa moja kumbukumbu
