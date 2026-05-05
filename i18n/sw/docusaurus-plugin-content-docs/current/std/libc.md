@@ -2,30 +2,30 @@
 sidebar_position: 11
 ---
 
-# std::libc 사용법 (호환 계층)
+# Jinsi ya kutumia std::libc (safu ya utangamano)
 
-`std::libc`는 C 라이브러리와 직접 맞물릴 때 쓰는 선택적 레이어입니다.
+`std::libc` ni safu ya hiari inayotumiwa wakati wa kuingiliana moja kwa moja na maktaba za C.
 
-## 언제 쓰나
+## Wakati wa kutumia
 
-- 기존 C 라이브러리 심볼을 그대로 호출해야 할 때
-- 점진적 마이그레이션 중 Wave 코드와 C 코드를 함께 사용할 때
+- Wakati ni lazima kuita alama zote katika maktaba za C zinazojulikana
+- Wakati wa kutumia msimbo wa Wave na C pamoja katika uhamaji wa hatua kwa hatua
 
-일반적인 Wave 코드에서는 `std::sys`/`std::*`를 우선 사용하세요.
+Kwa msimbo wa kawaida wa Wave, tumia `std::sys`/`std::*` kwanza.
 
-## import 예시
+## Mfano wa Ingizo
 
 ```wave
-import("std::libc::stdio");
-import("std::libc::stdlib");
-import("std::libc::string");
+ingiza("std::libc::stdio");
+ingiza("std::libc::stdlib");
+ingiza("std::libc::string");
 ```
 
-## 1. stdio 호출
+## 1. Kuitwa kwa stdio
 
 ```wave
 fun main() {
-    puts("hello from libc" as ptr<i8>);
+    weka("hello kutoka libc" kama ptr<i8>);
 }
 ```
 
@@ -34,29 +34,29 @@ fun main() {
 ```wave
 fun main() {
     var p: ptr<i8> = malloc(128);
-    if (p == null) {
+    ikiwa (p == null) {
         return;
     }
 
     memset(p, 0, 128);
-    free(p);
+    huria(p);
 }
 ```
 
-## 3. 소켓 C ABI
+## 3. Soketi C ABI
 
 ```wave
-import("std::libc::socket");
+ingiza("std::libc::socket");
 
 fun main() {
     var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (fd >= 0) {
-        shutdown(fd, SHUT_RDWR);
+    ikiwa (fd >= 0) {
+        funga(fd, SHUT_RDWR);
     }
 }
 ```
 
-## 제공 모듈
+## Moduli zinazotolewa
 
 - `std::libc::errno`
 - `std::libc::string`
