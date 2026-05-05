@@ -2,9 +2,9 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# Cách sử dụng std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+Tiện ích chuỗi kết thúc NUL (`str`).
 
 ## import
 
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. Chiều dài/So sánh
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. Tìm kiếm/Đếm
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. Phạm vi cắt + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. Băm
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Hàm chính
 
 ```wave
 fun len(s: str) -> i32
