@@ -6,18 +6,18 @@ sidebar_position: 3
 
 ## Giới thiệu
 
-이 섹션에서는 Wave 언어에서 제공하는 제어문 중 하나인 IF 문의 문법과 사용 방법에 대해 설명합니다.
-IF 문은 조건을 평가한 뒤, 해당 조건이 참일 경우에만 특정 코드 블록을 실행하도록 하는 기본적인 제어 구조입니다.
+Phần này giải thích về cú pháp và cách sử dụng của câu lệnh IF trong số các cấu trúc điều khiển mà ngôn ngữ Wave cung cấp.
+Câu lệnh IF về cơ bản là một cấu trúc điều khiển chỉ thực hiện một khối mã cụ thể nếu điều kiện được đánh giá là đúng.
 
-이를 통해 프로그램은 단순히 위에서 아래로 실행되는 흐름을 넘어서, 상황과 조건에 따라 서로 다른 동작을 수행할 수 있습니다.
-IF 문은 거의 모든 프로그램의 핵심을 이루는 요소이며, 논리적인 분기와 흐름 제어를 구현하는 데 필수적으로 사용됩니다.
+Điều này cho phép chương trình không chỉ chạy tuần tự từ trên xuống dưới mà còn có thể thực hiện các hành động khác nhau tùy thuộc vào điều kiện và tình huống.
+Câu lệnh IF là một yếu tố cốt lõi của hầu hết các chương trình, cần thiết cho việc triển khai các nhánh logic và kiểm soát luồng.
 
 ## Cấu trúc cơ bản
 
-IF 문은 먼저 조건식을 평가하고, 그 결과가 참(True)일 경우에만 중괄호 `{}` 안에 작성된 코드 블록을 실행합니다.
-조건이 거짓(False)일 경우에는 해당 블록을 건너뛰고 다음 코드로 이동합니다.
+Câu lệnh IF trước hết đánh giá một điều kiện, và nếu kết quả là đúng (True), nó thực hiện khối mã được viết trong dấu ngoặc nhọn `{}`.
+Nếu điều kiện là sai (False), khối tương ứng sẽ bị bỏ qua và chuyển sang đoạn mã tiếp theo.
 
-Wave에서 IF 문의 기본 구조는 다음과 같습니다.
+Cấu trúc cơ bản của câu lệnh IF trong Wave như sau.
 
 ```wave
 if (điều kiện) {
@@ -25,15 +25,15 @@ if (điều kiện) {
 }
 ```
 
-조건식에는 비교 연산자나 논리 연산자를 자유롭게 사용할 수 있습니다.
-예를 들어 `==`, `!=`, `<`, `>`, `<=`, `>=`와 같은 비교 연산자를 통해 값의 관계를 비교할 수 있으며,
-`&&`, `||`, `!`와 같은 논리 연산자를 사용해 여러 조건을 조합할 수도 있습니다.
+Bạn có thể sử dụng tùy ý các toán tử so sánh hoặc toán tử logic trong một biểu thức điều kiện.
+Ví dụ, bạn có thể so sánh mối quan hệ giữa các giá trị bằng cách sử dụng các toán tử so sánh như `==`, `!=`, `<`, `>`, `<=`, `>=`,
+và kết hợp nhiều điều kiện bằng cách sử dụng các toán tử logic như `&&`, `||`, `!`.
 
-조건식의 결과는 반드시 참 또는 거짓으로 평가되어야 하며, 조건이 거짓인 경우 IF 블록 내부의 코드는 실행되지 않습니다.
+Kết quả của một biểu thức điều kiện phải được đánh giá là đúng hoặc sai và nếu điều kiện là sai, mã bên trong khối IF sẽ không được thực thi.
 
 ## Ví dụ
 
-다음은 가장 단순한 형태의 IF 문 예제입니다.
+Dưới đây là một ví dụ đơn giản nhất về câu lệnh IF.
 
 ```wave
 var nhiệt_độ :i32 = 30;
@@ -43,17 +43,17 @@ if (nhiệt_độ > 25) {
 }
 ```
 
-위 코드에서는 `temperature` 변수의 값이 25보다 큰지를 조건으로 평가합니다.
-조건이 참일 경우 `"날씨가 덥습니다."`라는 메시지가 출력되며, 조건이 거짓일 경우에는 아무 동작도 수행하지 않습니다.
+Trong mã trên, nó đánh giá điều kiện là giá trị của biến `temperature` có lớn hơn 25 hay không.
+Nếu điều kiện là đúng, thông điệp `"Trời nóng."` sẽ được xuất ra, còn nếu điều kiện là sai thì không có hành động nào được thực hiện.
 
-이처럼 IF 문은 특정 조건을 만족할 때만 코드를 실행하고 싶을 때 사용됩니다.
+Câu lệnh IF được sử dụng khi bạn muốn chỉ thực hiện mã khi một điều kiện cụ thể được thỏa mãn.
 
-## IF-ELSE 문
+## Câu lệnh IF-ELSE
 
-조건이 참이 아닐 경우에도 실행해야 할 코드가 있다면 IF 문에 ELSE 절을 추가할 수 있습니다.
-IF-ELSE 문은 조건의 결과에 따라 두 개의 코드 블록 중 하나를 선택적으로 실행하는 구조입니다.
+Nếu có mã cần được thực thi ngay cả khi điều kiện không đúng, bạn có thể thêm một mệnh đề ELSE vào câu lệnh IF.
+Câu lệnh IF-ELSE là cấu trúc thực thi tùy chọn một trong hai khối mã tùy thuộc vào kết quả của điều kiện.
 
-기본적인 구조는 다음과 같습니다.
+Cấu trúc cơ bản như sau.
 
 ```wave
 if (điều kiện) {
@@ -63,10 +63,10 @@ if (điều kiện) {
 }
 ```
 
-조건이 참이면 IF 블록이 실행되고, 조건이 거짓이면 ELSE 블록이 실행됩니다.
-두 블록 중 하나만 실행되며, 동시에 실행되는 경우는 없습니다.
+Nếu điều kiện là đúng, khối IF được thực thi; nếu điều kiện là sai, khối ELSE được thực thi.
+Chỉ một trong hai khối được thực thi, không bao giờ có trường hợp cả hai khối được thực thi cùng lúc.
 
-다음은 IF-ELSE 문을 사용한 예제입니다.
+Dưới đây là một ví dụ về sử dụng câu lệnh IF-ELSE.
 
 ```wave
 var điểm :i32 = 70;
@@ -78,15 +78,15 @@ if (điểm >= 60) {
 }
 ```
 
-이 코드에서는 `score`가 60 이상인지 여부에 따라 서로 다른 메시지를 출력합니다.
-조건이 참일 경우 `"합격입니다!"`가 출력되며, 그렇지 않으면 `"불합격입니다."`가 출력됩니다.
+Trong mã này, các thông báo khác nhau được xuất ra tùy thuộc vào việc `score` có lớn hơn hoặc bằng 60 hay không.
+Nếu điều kiện là đúng, `"Bạn đã đậu!"` sẽ được xuất ra; nếu không, `"Bạn đã trượt."` sẽ được xuất ra.
 
 ## Cấu trúc IF lồng nhau
 
-IF 문은 다른 IF 문 내부에서도 사용할 수 있으며, 이를 중첩 IF 문이라고 합니다.
-중첩 IF 문은 여러 단계의 조건을 순차적으로 평가해야 할 때 유용합니다.
+Câu lệnh IF có thể được sử dụng bên trong một câu lệnh IF khác, gọi đó là câu lệnh IF lồng nhau.
+Các câu lệnh IF lồng nhau hữu ích khi cần đánh giá điều kiện theo nhiều bước tuần tự.
 
-다음 예제는 점수에 따라 서로 다른 결과를 출력하는 중첩 IF 문의 예시입니다.
+Ví dụ dưới đây là một ví dụ về câu lệnh IF lồng nhau mà kết quả khác nhau được xuất ra tùy thuộc vào điểm số.
 
 ```wave
 var điểm :i32 = 85;
@@ -102,16 +102,15 @@ if (điểm >= 60) {
 }
 ```
 
-이 코드에서는 먼저 점수가 60 이상인지 확인합니다.
-60 미만일 경우에는 바로 `"불합격입니다."`가 출력됩니다.
-60 이상일 경우에는 다시 한 번 조건을 평가하여, 점수가 90 이상이면 `"우수한 성적입니다!"`를 출력하고, 그렇지 않으면 `"합격입니다."`를 출력합니다.
+Mã này trước tiên kiểm tra xem điểm số có lớn hơn hoặc bằng 60 hay không.
+Nếu nhỏ hơn 60, `"Bạn đã trượt."` được xuất ra ngay lập tức.
+Nếu lớn hơn hoặc bằng 60, nó sẽ đánh giá điều kiện một lần nữa; nếu điểm số lớn hơn hoặc bằng 90 thì `"Thành tích xuất sắc!"` được xuất ra, nếu không thì `"Bạn đã đậu."` được xuất ra.
 
-이처럼 중첩 IF 문을 사용하면 복잡한 조건 분기를 단계적으로 표현할 수 있습니다.
+Sử dụng câu lệnh IF lồng nhau, bạn có thể diễn đạt các nhánh điều kiện phức tạp theo từng giai đoạn.
 
 ## Tóm tắt
 
-IF 문은 조건을 평가하여 프로그램의 실행 흐름을 제어하는 기본적인 제어문입니다.
-ELSE 절을 함께 사용하면 조건이 거짓일 경우의 동작도 명확히 정의할 수 있으며,
-중첩 IF 문을 통해 여러 조건을 조합한 복잡한 분기 처리도 가능합니다.
+Câu lệnh IF là một câu lệnh điều khiển cơ bản để kiểm soát luồng thực thi của chương trình bằng cách đánh giá một điều kiện.
+Sử dụng mệnh đề ELSE cùng với câu lệnh IF, bạn có thể xác định rõ ràng hành vi khi điều kiện là sai, và các câu lệnh IF lồng nhau cho phép xử lý nhánh điều kiện phức tạp bằng cách kết hợp nhiều điều kiện khác nhau.
 
-IF 문을 적절히 활용하면 프로그램의 흐름을 보다 논리적이고 명확하게 구성할 수 있습니다.
+Khi được sử dụng đúng cách, câu lệnh IF có thể giúp cấu trúc luồng chương trình một cách logic và rõ ràng hơn.
