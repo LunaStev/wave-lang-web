@@ -38,50 +38,50 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 2. אופציות נתמכות אחרי `--llvm`
 
-## 2.1 타겟/코드젠
+## 2.1 יעד/קוד ייצור
 
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
+- `--target <משולש>` / `--target=<משולש>`
+- `--cpu <שם>` / `--cpu=<שם>`
 - `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
+- `--abi <שם>` / `--abi=<שם>`
 
-반영 지점:
+נקודת יישום:
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
+- שלב יצירת IR (TargetMachine): `יעד`, `cpu`, `תכונות`
+- שלב אובייקט/קישור (קריאה ל-clang): `יעד`, `abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+טריפל יעד מרכזיים לתיעוד כרגע:
 
 - Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
 - Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
 - freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
 
-## 2.2 툴체인/링크
+## 2.2 שרשרת כלים/קישור
 
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `--sysroot <נתיב>` / `--sysroot=<נתיב>`
+- `-C linker=<נתיב>`
+- `-C link-arg=<ארגומנט>` (ניתן לחזור)
 - `-C no-default-libs`
 
-반영 지점:
+נקודת יישום:
 
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- ביצירת אובייקט (עם clang `-c`) ב `--sysroot`
+- בשלב הקישור, הזרקת לינק גולמי, החלפת מקשרים
+- בעת השימוש ב-`-C no-default-libs` מושבת באופן אוטומטי `-lc -lm`
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## 3. חוקי ניתוח (חשוב)
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+אם לא משתמשים ב-`--llvm`, פרטי האופציות של backend לא מתפרשות כאופציות גלובליות.
 
-예를 들어 아래는 에러입니다.
+לדוגמה, הבאות ייחשבו שגיאות.
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+יש לכתוב כפי שמוצג להלן.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,21 +89,21 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## 4. דוגמה לשימוש
 
-기본 오브젝트 생성:
+יצירת אובייקט בסיסי:
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+יצירת אובייקט קרנל freestanding:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+קישור מותאם אישית:
 
 ```bash
 wavec --llvm \
@@ -114,17 +114,17 @@ wavec --llvm \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+השבתת קישור אוטומטי של libc/libm:
 
 ```bash
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+השימוש ב-`--freestanding` משפיע באופן פנימי כמו `-C no-default-libs`, ומתאים לבניות שלא מניחות ספריות ריצה בסיסיות, כמו קוד קרנל/בוט.
 
 ---
 
-## 5. 상태 요약
+## 5. סיכום מצב
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- Backend של LLVM: פועל
+- Backend של Whale: מתוכנן (TODO), לא מיושם
