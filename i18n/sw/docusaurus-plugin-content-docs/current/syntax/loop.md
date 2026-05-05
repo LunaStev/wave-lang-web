@@ -6,26 +6,26 @@ sidebar_position: 4
 
 ## Utangulizi
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+Katika lugha ya Wave, mchakato wa kurudia hutolewa ili kushughulikia hali ambapo msimbo sawa unahitaji kutekelezwa mara nyingi.
+Kurudia hutumika wakati masharti fulani yanapokutana au utekelezaji unarahisishwa kwa kufanya marudio idadi maalum ya nyakati.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+Hii inaruhusu mchakato wa kurejelea mantiki sawa na kuiandika tena bila haja, na kuweka msimbo aua kazi ya kurudia wazi na rahisi.
+Wave inasaidia urudufu unaotegemea hali na urudufuliko unaotegemea idadi ya nyakati zilizochaguliwa na pia hutoa maneno muhimu ili kudhibiti mchakato wa marudio katikati ya utekelezaji.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+Sehemu hii inaelezea jinsi ya kutumia maneno ya `while`, `for`, pamoja na maneno muhimu ya `break` na `continue` ambayo yanadhibiti mchakato wa urudiaji.
 
 ---
 
 ## wakati neno lililohifadhiwa
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+`while` linazingatia utekelezaji wa kizuizi cha msimbo wakati sharti lililopeanwa litaangaliwa kama kweli (`true`).
+Marudio yatakamilika mara tu hali inapokuwa ya uongo (`false`).
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+Njia hii inafaa kwa hali ambapo idadi ya marudio haijulikani wazi na lazima kurudia hadi hali fulani iridhike.
 
 ### Muundo wa Msingi
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+Muundo wa msingi wa sentensi ya while katika Wave ni kama ifuatavyo.
 
 ```wave
 while (hali) {
@@ -33,8 +33,7 @@ while (hali) {
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+Hali lazima itathminiwe kwa aina ya `bool`, na ndani ya block ya kificho inayofungwa na vibano `{}`, unaweza kuandika tamko moja au zaidi.
 
 ### Mfano: Chapisha kutoka 0 hadi 4
 
@@ -47,73 +46,72 @@ while (i < 5) {
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+Katika mfano huu, rudia wakati thamani ya kigezo `i` ni ndogo kuliko 5.
+Kwa kila marudio, toa thamani ya sasa na ongeza thamani ya `i` kwa 1 ili kufanya hali iwe ya uwongo.
 
 ---
 
 ## kwa neno lililohifadhiwa
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+Kauli ya `for` ni sahihi kwa matumizi wakati idadi ya marudio ni sawa.
+Unaweza kuweka wazi mtiririko wa marudio kwa kufafanua thamani ya awali, hali, na upunguzaji kwa mara moja.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Kwa sababu sehemu zote zinazohitajika kwa kudhibiti marudio ziko sehemu moja, ni rahisi kuelewa muundo wa marudio kwa haraka.
 
-### 기본 구조
+### Muundo wa Msingi
 
 ```wave
-for (초기화; 조건식; 증감식) {
-    // 반복할 코드
+kwa (kuanzishwa; hali; uboreshaji) {
+    // misimbo ya kurudia
 }
 ```
 
-Wave의 for 초기화는 여러 형태를 지원합니다.
+Uanzishaji wa for katika Wave unatoa msaada kwa njia nyingi.
 
-- 암시적 `var` 타입 초기화
-- `var` / `let mut` / `const` 선언 초기화
-- 일반 식 초기화 (기존 변수 재사용)
+- Uanzishaji wa aina ya `var` ya kudhaniwa
+- Uanzishaji wa kutangaza `var` / `let mut` / `const`
+- Uanzishaji wa kawaida wa usemi (utumiaji tena wa kigezo kilichopo)
 
-### 예제 1: 암시적 타입 초기화
+### Mfano 1: Uanzishaji wa aina ya kudhaniwa
 
 ```wave
-for (i :i32 = 1; i <= 5; i += 1) {
+kwa (i :i32 = 1; i <= 5; i += 1) {
     println("i = {}", i);
 }
 ```
 
-### 예제 2: `var` / `let mut` 초기화
+### Mfano 2: Uanzishaji wa `var` / `let mut`
 
 ```wave
-for (var i: i32 = 0; i < 3; i += 1) {
+kwa (var i: i32 = 0; i < 3; i += 1) {
     println("var i = {}", i);
 }
 
-for (let mut j: i32 = 0; j < 3; j += 1) {
+kwa (let mut j: i32 = 0; j < 3; j += 1) {
     println("let mut j = {}", j);
 }
 ```
 
-### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+### Mfano 3: Uanzishaji unaotegemea usemi (utumiaji tena wa kigezo kilichopo)
 
 ```wave
 var i: i32 = 99;
 
-for (i = 3; i <= 5; i += 1) {
+kwa (i = 3; i <= 5; i += 1) {
     println("i = {}", i);
 }
 
 println("after loop: {}", i); // 6
 ```
 
-선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
-식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
+Uanzishaji wa kutangaza (`var`, `let mut`, `i :i32 = ...`) hutenda kama kihodhi cha kigezo cha kitanzi, wakati uanzishaji unaotegemea usemi (`i = ...`) husasisha kigezo kilicho nje.
 
 ---
 
 ## Lugha ya kurudia zilizobebana
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+Marudio yanaweza kuandikwa ndani ya marudio mengine, na hii huitwa marudio yaliyopachikwa.
+Marudio yaliyopachikwa ni muhimu wakati wa kupitia miundo ya data ya vipimo viwili au kushughulikia michanganyiko ya hali mbalimbali.
 
 ### Mfano: while marudio mara mbili
 
@@ -132,15 +130,15 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+Katika mfano huu, kila wakati sentensi ya `while` ya nje inatekelezwa, sentensi ya ndani ya `while` inatekelezwa kabisa.
+Kwa njia hii, unaweza kushughulikia michanganyiko ya aina ya (`i`, `j`) kwa mpangilio.
 
 ---
 
 ## Neno lililohifadhiwa break
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+Sentensi ya `break` hukomesha marudio moja kwa moja na kusogeza mtiririko nje ya marudio.
+Hutumiwa wakati hakuna haja ya kufanya marudio zaidi katikati ya marudio.
 
 ### Mfano: Kusitisha kurudiwa kwenye thamani maalum
 
@@ -157,15 +155,15 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+Katika mfano huu, marudio yasiyo na mwisho husimama wakati `i` inakuwa 5, kutokana na utekelezaji wa `break`.
+Kwa njia hii, sentensi ya `break` ni muhimu wakati unataka kudhibiti marudio tofauti na hali ya marudio.
 
 ---
 
 ## Neno lililohifadhiwa continue
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+Sentensi ya `continue` huruka kificho kilichobaki katika marudio ya sasa na kuanza mara moja marudio mengine.
+Hutumiwa wakati unataka kuacha sehemu fulani tu ya logi katika hali fulani.
 
 ### Mfano: Chapisha nambari shufwa pekee
 
@@ -179,15 +177,14 @@ kwa (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+Katika kificho hiki, endapo `i` ni nambari isiyo ya jozi, `continue` inatekelezwa na kipengele cha kutoa matokeo kinakwepwa.
+Matokeo yake ni kwamba ni maadili ya jozi pekee yanayozalishwa.
 
 ---
 
 ## Muhtasari
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Sentensi za marudio za Wave zimetengenezwa ili kutoa maelezo ya kiasili ya marudio ya kutegemea hali na idadi ya marudio.
+Sentensi ya `while` inafaa kwa marudio yanayotegemea hali, wakati kwa sentensi ya `for` ni muhimu unapojua idadi kamili na mtiririko wa marudio.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+Ukitumia `break` na `continue` kwa pamoja, unaweza kudhibiti mtiririko wa utekelezaji kwa undani hata katikati ya marudio, na hivyo kuwezesha muundo wa logiki ya marudio ambayo ni sahihi zaidi na inayobadilika.
