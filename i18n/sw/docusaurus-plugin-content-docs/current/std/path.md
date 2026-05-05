@@ -2,32 +2,32 @@
 sidebar_position: 7
 ---
 
-# std::path 사용법
+# Jinsi ya kutumia std::path
 
-할당 없이 경로를 분석/복사합니다.
+Chambua/Nakala njia bila ugawaji.
 
-## import
+## ingiza
 
 ```wave
-import("std::path::core");
-import("std::path::analyze");
-import("std::path::copy");
+ingiza("std::path::core");
+ingiza("std::path::analyze");
+ingiza("std::path::copy");
 ```
 
-## 1. 경로 결합
+## 1. Uunganishaji wa njia
 
 ```wave
 fun main() {
     var out: array<u8, 256>;
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
-    if (n < 0) {
-        // 버퍼 부족
+    ikiwa (n < 0) {
+        // Ukosefu wa buffer
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## 2. Uchimbaji wa jina la msingi/saraka ya jina
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## 3. Kazi za uchambuzi
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun path_is_sep(c: u8) -> bool
