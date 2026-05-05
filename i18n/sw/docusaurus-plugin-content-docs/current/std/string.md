@@ -2,22 +2,22 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# Jinsi ya kutumia std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+Ni zana ya mfuatano wa maandishi unaoishia na NUL (`str`).
 
-## import
+## ingiza
 
 ```wave
-import("std::string::len");
-import("std::string::cmp");
-import("std::string::find");
-import("std::string::trim");
-import("std::string::ascii");
-import("std::string::hash");
+ingiza("std::string::len");
+ingiza("std::string::cmp");
+ingiza("std::string::find");
+ingiza("std::string::trim");
+ingiza("std::string::ascii");
+ingiza("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. Urefu/Ulinganisho
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. Utafutaji/Tofauti
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. Upunguzaji wa eneo + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. Hashi
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun len(s: str) -> i32
