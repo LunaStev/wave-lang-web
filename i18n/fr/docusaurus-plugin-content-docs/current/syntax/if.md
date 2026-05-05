@@ -6,18 +6,18 @@ sidebar_position: 3
 
 ## Introduction
 
-이 섹션에서는 Wave 언어에서 제공하는 제어문 중 하나인 IF 문의 문법과 사용 방법에 대해 설명합니다.
-IF 문은 조건을 평가한 뒤, 해당 조건이 참일 경우에만 특정 코드 블록을 실행하도록 하는 기본적인 제어 구조입니다.
+Cette section explique la syntaxe et l'utilisation de l'instruction IF, l'une des instructions de contrôle fournies par le langage Wave.
+L'instruction IF est une structure de contrôle de base qui évalue une condition et exécute un bloc de code spécifique uniquement si la condition est vraie.
 
-이를 통해 프로그램은 단순히 위에서 아래로 실행되는 흐름을 넘어서, 상황과 조건에 따라 서로 다른 동작을 수행할 수 있습니다.
-IF 문은 거의 모든 프로그램의 핵심을 이루는 요소이며, 논리적인 분기와 흐름 제어를 구현하는 데 필수적으로 사용됩니다.
+Cela permet au programme de réaliser différentes actions en fonction des situations et des conditions, au-delà d'un simple flux d'exécution de haut en bas.
+L'instruction IF constitue un élément central de presque tous les programmes et est essentielle pour implémenter des branches logiques et contrôler le flux.
 
 ## Structure de base
 
-IF 문은 먼저 조건식을 평가하고, 그 결과가 참(True)일 경우에만 중괄호 `{}` 안에 작성된 코드 블록을 실행합니다.
-조건이 거짓(False)일 경우에는 해당 블록을 건너뛰고 다음 코드로 이동합니다.
+L'instruction IF évalue d'abord une expression conditionnelle et exécute le bloc de code écrit entre accolades `{}` uniquement si le résultat est vrai (True).
+Si la condition est fausse (False), ce bloc est ignoré et le programme passe au code suivant.
 
-Wave에서 IF 문의 기본 구조는 다음과 같습니다.
+La structure de base de l'instruction IF dans Wave est la suivante.
 
 ```wave
 if (condition) {
