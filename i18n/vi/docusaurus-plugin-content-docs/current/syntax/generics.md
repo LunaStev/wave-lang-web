@@ -2,16 +2,16 @@
 sidebar_position: 13
 ---
 
-# 제네릭 (Generics)
+# Tổng quát (Generics)
 
-Wave 제네릭은 코드 중복 없이 타입 안전한 함수를 작성하기 위한 기능입니다.
+Tính năng tổng quát của Wave giúp viết hàm an toàn loại mà không cần dư thừa mã.
 
-핵심 규칙:
+Nguyên tắc cơ bản:
 
-- 타입 인자는 반드시 명시합니다.
-- 타입 추론은 허용하지 않습니다.
+- Tham số loại phải luôn được chỉ định rõ.
+- Không cho phép suy luận loại.
 
-## 1. 제네릭 함수 선언
+## 1. Tuyên bố hàm tổng quát
 
 ```wave
 fun identity<T>(x: T) -> T {
@@ -19,7 +19,7 @@ fun identity<T>(x: T) -> T {
 }
 ```
 
-호출:
+Gọi:
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 다중 타입 파라미터
+## 2. Tham số loại đa dạng
 
 ```wave
 struct Pair<A, B> {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 3. 제네릭 구조체
+## 3. Cấu trúc tổng quát
 
 ```wave
 struct Vec<T> {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 4. 중첩 제네릭
+## 4. Tổng quát lồng nhau
 
 ```wave
 struct Vec<T> {
@@ -74,7 +74,7 @@ fun main() {
 }
 ```
 
-## 5. 표준 라이브러리와 함께 사용
+## 5. Sử dụng cùng thư viện tiêu chuẩn
 
 ```wave
 import("std::math::int");
@@ -88,13 +88,13 @@ fun main() {
 }
 ```
 
-## 자주 하는 실수
+## Những sai lầm thường gặp
 
 ```wave
-var x: i32 = identity(10); // 타입 인자 누락 (허용 안 됨)
+var x: i32 = identity(10); // Thiếu tham số loại (không được phép)
 ```
 
-반드시 다음처럼 호출해야 합니다.
+Cần phải gọi giống như sau.
 
 ```wave
 var x: i32 = identity<i32>(10);
