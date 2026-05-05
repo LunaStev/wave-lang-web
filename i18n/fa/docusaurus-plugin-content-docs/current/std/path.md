@@ -2,19 +2,19 @@
 sidebar_position: 7
 ---
 
-# std::path 사용법
+# استفاده از std::path
 
-할당 없이 경로를 분석/복사합니다.
+مسیرها را بدون تخصیص، تجزیه/کپی می‌کند.
 
-## import
+## واردات
 
 ```wave
-import("std::path::core");
-import("std::path::analyze");
-import("std::path::copy");
+واردات("std::path::core");
+واردات("std::path::analyze");
+واردات("std::path::copy");
 ```
 
-## 1. 경로 결합
+## 1. ترکیب مسیر
 
 ```wave
 fun main() {
@@ -22,12 +22,12 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // 버퍼 부족
+        // طول buffer ناکافی
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## 2. استخراج basename / dirname
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## 3. توابع تجزیه
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun path_is_sep(c: u8) -> bool
