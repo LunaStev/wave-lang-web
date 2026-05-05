@@ -2,24 +2,24 @@
 sidebar_position: 13
 ---
 
-# 제네릭 (Generics)
+# Majeneriki (Generics)
 
-Wave 제네릭은 코드 중복 없이 타입 안전한 함수를 작성하기 위한 기능입니다.
+Majeneriki ya Wave ni kipengele kinachoruhusu kuandika kazi salama aina bila kurudia msimbo.
 
-핵심 규칙:
+Kanuni za msingi:
 
-- 타입 인자는 반드시 명시합니다.
-- 타입 추론은 허용하지 않습니다.
+- Vigezo vya aina lazima vionyeshwe wazi.
+- Uamuzi wa aina haukubaliwi.
 
-## 1. 제네릭 함수 선언
+## 1. Tamko la kazi ya majeneriki
 
 ```wave
 fun identity<T>(x: T) -> T {
-    return x;
+    rudi x;
 }
 ```
 
-호출:
+Mwito:
 
 ```wave
 fun main() {
@@ -28,18 +28,18 @@ fun main() {
 }
 ```
 
-## 2. 다중 타입 파라미터
+## 2. Vigezo vingi vya aina
 
 ```wave
 struct Pair<A, B> {
-    first: A;
-    second: B;
+    ya kwanza: A;
+    ya pili: B;
 }
 
 fun pair<A, B>(a: A, b: B) -> Pair<A, B> {
-    return Pair<A, B> {
-        first: a;
-        second: b;
+    rudi Pair<A, B> {
+        ya kwanza: a;
+        ya pili: b;
     };
 }
 
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 3. 제네릭 구조체
+## 3. Muundo wa majeneriki
 
 ```wave
 struct Vec<T> {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 4. 중첩 제네릭
+## 4. Majeneriki yaliyounganishwa
 
 ```wave
 struct Vec<T> {
@@ -74,11 +74,11 @@ fun main() {
 }
 ```
 
-## 5. 표준 라이브러리와 함께 사용
+## 5. Matumizi na maktaba za kawaida
 
 ```wave
-import("std::math::int");
-import("std::env::environ");
+ingiza("std::math::int");
+ingiza("std::env::environ");
 
 fun main() {
     var x: i32 = num_abs<i32>(-100, 0);
@@ -88,13 +88,13 @@ fun main() {
 }
 ```
 
-## 자주 하는 실수
+## Makosa ya mara kwa mara
 
 ```wave
-var x: i32 = identity(10); // 타입 인자 누락 (허용 안 됨)
+var x: i32 = identity(10); // Kipengele cha aina kimekosekana (haikubaliwi)
 ```
 
-반드시 다음처럼 호출해야 합니다.
+Yapaswa kuitwa kama ifuatavyo.
 
 ```wave
 var x: i32 = identity<i32>(10);
