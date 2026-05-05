@@ -2,11 +2,11 @@
 sidebar_position: 7
 ---
 
-# std::path 사용법
+# שימוש std::path
 
-할당 없이 경로를 분석/복사합니다.
+ניתוח/העתקת נתיב ללא הקצאה.
 
-## import
+## יבוא
 
 ```wave
 import("std::path::core");
@@ -14,7 +14,7 @@ import("std::path::analyze");
 import("std::path::copy");
 ```
 
-## 1. 경로 결합
+## 1. שילוב נתיב
 
 ```wave
 fun main() {
@@ -22,12 +22,12 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // 버퍼 부족
+        // מחסור בבאפר
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## 2. חילוץ basename / dirname
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## 3. פונקציות ניתוח
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## פונקציות עיקריות
 
 ```wave
 fun path_is_sep(c: u8) -> bool
