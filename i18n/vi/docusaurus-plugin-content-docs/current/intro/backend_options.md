@@ -2,86 +2,86 @@
 sidebar_position: 7
 ---
 
-# 백엔드 옵션 (`--llvm`, `--whale`)
+# Tùy chọn backend (`--llvm`, `--whale`)
 
-이 문서는 `wavec`의 백엔드 관련 CLI 옵션을 설명합니다.
+Tài liệu này giải thích các tùy chọn CLI liên quan đến backend của `wavec`.
 
-중요 원칙:
+Nguyên tắc quan trọng:
 
-- `wavec`는 패키지 매니저가 아닙니다.
-- 백엔드 동작은 가능한 한 **명시적 인자**로 제어합니다.
-- 백엔드 세부 옵션은 `--llvm` 뒤에서만 해석됩니다.
+- `wavec` không phải là trình quản lý gói.
+- Hoạt động backend được điều khiển bằng **tham số rõ ràng** càng nhiều càng tốt.
+- Các tùy chọn chi tiết của backend chỉ được phân tích sau `--llvm`.
 
 ---
 
-## 1. 백엔드 선택자
+## 1. Bộ chọn backend
 
 ## 1.1 `--llvm`
 
-`--llvm` 자체는 백엔드 옵션 블록의 시작 마커입니다.
+Chính `--llvm` là dấu đánh dấu bắt đầu cho khối tùy chọn backend.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-위처럼 `--llvm` 뒤에 오는 인자들 중 지원되는 항목만 LLVM 백엔드 설정으로 처리됩니다.
+Như trên, chỉ các mục hỗ trợ trong số các tham số đến sau `--llvm` mới được xử lý như là cài đặt backend LLVM.
 
-## 1.2 `--whale` (현재 TODO)
+## 1.2 `--whale` (hiện tại TODO)
 
-현재 `--whale`은 **예약된 더미 플래그**입니다.
+Hiện tại `--whale` là **cờ tạm thời được dự trữ**.
 
-- 파서는 인식합니다.
-- 실제 Whale 백엔드 파이프라인은 아직 연결되어 있지 않습니다.
-- 사용 시 TODO 에러로 종료됩니다.
+- Parser nhận diện.
+- Pipeline backend Whale thực tế vẫn chưa được kết nối.
+- Khi sử dụng sẽ kết thúc với lỗi TODO.
 
 ---
 
-## 2. `--llvm` 뒤에서 지원되는 옵션
+## 2. Các tùy chọn được hỗ trợ sau `--llvm`
 
-## 2.1 타겟/코드젠
+## 2.1 Target/Codegen
 
 - `--target <triple>` / `--target=<triple>`
 - `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
 - `--abi <name>` / `--abi=<name>`
 
-반영 지점:
+Điểm phản ánh:
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
+- Bước tạo IR (TargetMachine): `target`, `cpu`, `features`
+- Bước Object/Link (gọi clang): `target`, `abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+Các target triple chính cần được tài liệu hóa cơ bản hiện tại:
 
 - Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
 - Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
 - freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
 
-## 2.2 툴체인/링크
+## 2.2 Toolchain/Link
 
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (có thể lặp lại)
 - `-C no-default-libs`
 
-반영 지점:
+Điểm phản ánh:
 
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- Ở bước tạo Object (clang `-c`) có `--sysroot`
+- Ở bước link có ghi đè linker, thêm vào arg liên kết thô
+- Khi sử dụng `-C no-default-libs`, tự động vô hiệu hóa `-lc -lm`
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## 3. Quy tắc phân tích cú pháp (quan trọng)
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+Nếu không sử dụng `--llvm`, các tùy chọn chi tiết backend sẽ không được hiểu như là tùy chọn toàn cục.
 
-예를 들어 아래는 에러입니다.
+Ví dụ như dưới đây là lỗi.
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+Phải viết giống như dưới đây.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,21 +89,21 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## 4. Ví dụ sử dụng
 
-기본 오브젝트 생성:
+Tạo object cơ bản:
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+Tạo đối tượng kernel độc lập:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+Liên kết tùy chỉnh:
 
 ```bash
 wavec --llvm \
@@ -114,17 +114,17 @@ wavec --llvm \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+Vô hiệu hóa tự động liên kết libc/libm:
 
 ```bash
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+Sử dụng `--freestanding` hoạt động theo cùng hướng với `-C no-default-libs` bên trong, và điều chỉnh để xây dựng không dựa trên thư viện chạy mặc định như code kernel/boot.
 
 ---
 
-## 5. 상태 요약
+## 5. Tóm tắt trạng thái
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- Backend LLVM: Đang hoạt động
+- Backend Whale: Đã dự trữ (TODO), chưa thực hiện
