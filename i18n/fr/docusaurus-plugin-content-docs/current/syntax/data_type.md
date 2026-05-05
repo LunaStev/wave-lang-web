@@ -5,23 +5,23 @@ sidebar_position: 2
 # Types de données
 
 Ce document explique les différents types de données fournis par le langage de programmation Wave.
-Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
+Wave permet de stocker et de manipuler des valeurs à l'aide de divers types de données, chacun définissant clairement sa manière de représenter et de gérer les données.
 
-데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
-Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
-이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
+La spécification claire des types de données est l'une des philosophies de conception clés de Wave.
+Wave est un système à **types stricts complets**. Toutes les déclarations `var`/`fun` et les initialisations de variables nécessitent un type explicite, et l'inférence de type basée sur le contexte n'est pas prise en charge. Ainsi, en l'absence de type comme dans `var x = 1;`, la compilation échoue.
+Cela permet d'exprimer clairement l'intention du code, de détecter les erreurs tôt lors de la compilation, et de garantir une gestion efficace de la mémoire et une exécution stable.
 
 ---
 
-## 정수 타입
+## Type entier
 
-정수 타입은 정수 값을 저장하는 데 사용됩니다.
-Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+Le type entier est utilisé pour stocker des valeurs entières.
+Wave utilise fréquemment `i32` (entier signé de 32 bits) et `u32` (entier non signé de 32 bits) par défaut, mais la taille en bits des entiers peut être spécifiée avec une extrême précision si nécessaire.
 
-부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
-이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+Les types d'entiers signés sont disponibles de `i8` à `i1024`, et les types d'entiers non signés de `u8` à `u1024` peuvent être utilisés.
+Cela permet de répondre à un large éventail de besoins allant des calculs simples aux opérations sur de grands nombres entiers, au traitement cryptographique et à la programmation système de bas niveau.
 
-다음은 정수 타입을 사용하는 간단한 예제입니다.
+Voici un exemple simple d'utilisation des types d'entiers.
 
 ```wave
 var a: i32 = 100;
@@ -33,12 +33,12 @@ var b: u32 = 200;
 ## Type de point flottant
 
 Le type de point flottant est utilisé pour stocker des valeurs réelles.
-Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
+Le type à virgule flottante utilisé par défaut dans Wave est `f32`, mais un type de taille plus grande peut être choisi si une précision plus élevée est nécessaire.
 
-Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
-이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
+Wave offre des types de virgule flottante de `f32` à `f128`, permettant à l'utilisateur de choisir entre précision et performance de calcul.
+Ainsi, toutes sortes de calculs sur les nombres réels peuvent être effectués, des calculs numériques courants aux calculs scientifiques de précision.
 
-아래는 부동소수점 타입을 사용하는 예제입니다.
+Voici un exemple d'utilisation des types à virgule flottante.
 
 ```wave
 var pi: f32 = 3.14;
@@ -49,12 +49,12 @@ var e: f64 = 2.71828;
 
 ## Type de chaîne
 
-문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
-Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
+Le type de chaîne est utilisé pour manipuler des données textuelles.
+Dans Wave, le mot-clé `str` est utilisé pour déclarer une chaîne de caractères, et les littéraux de chaînes sont représentés entre guillemets (`"`).
 
-문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+Les chaînes de caractères sont largement utilisées dans les programmes pour l'affichage des messages, le traitement des entrées utilisateur et le traitement des données textuelles.
 
-다음은 문자열 타입의 기본적인 사용 예제입니다.
+Voici un exemple basique d'utilisation du type chaîne de caractères.
 
 ```wave
 var text: str = "Hello Wave";
@@ -64,14 +64,14 @@ var text: str = "Hello Wave";
 
 ## Type booléen
 
-불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
-Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
+Le type booléen est un type de données représentant des valeurs vraies (True) ou fausses (False).
+Dans Wave, le type `bool` est utilisé, et les valeurs sont définies comme `true` ou `false`.
 
-불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
+Le type booléen joue un rôle central dans les instructions conditionnelles et les boucles, et est utilisé pour contrôler le flux du programme.
 
 ```wave
-var isActive: bool = true;
-var isAvailable: bool = true;
+var estActif: bool = true;
+var estDisponible: bool = true;
 ```
 
 ---
@@ -79,60 +79,60 @@ var isAvailable: bool = true;
 ## Type de caractère
 
 Le type de caractère est utilisé pour stocker un seul caractère.
-`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
+Il est déclaré à l'aide du mot-clé `char` et ne peut contenir qu'une seule valeur de caractère.
 
-문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
+Les littéraux de caractère sont exprimés entre apostrophes (`'`).
 
 ```wave
-var letter: char = 'A';
+var lettre: char = 'A';
 ```
 
 ## Type d'octet
 
-바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
-이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
+Le type octet est utilisé pour stocker des données de taille 1 octet.
+Ce type est utile lorsque le traitement de données de bas niveau est nécessaire, comme pour le traitement de données binaires, l'entrée/sortie de fichiers et la programmation réseau.
 
-Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
+Dans Wave, le mot-clé `byte` est utilisé pour déclarer un type octet.
 
 ```wave
-var byteData: byte = 0xFF;
+var donneesOctet: byte = 0xFF;
 ```
 
 ## Type de pointeur
 
-포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+Le type pointeur est utilisé pour référencer une adresse mémoire directement.
+Dans Wave, les pointeurs sont déclarés sous la forme `ptr<T>`.
 
-포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
+Les pointeurs sont utilisés lorsque l'accès à la mémoire de bas niveau est nécessaire, et sont principalement utilisés dans la programmation système ou le code où la performance est cruciale.
 
 ```wave
-var ptr: ptr<T> = &someVariable;
+var ptr: ptr<T> = &quelqueVariable;
 ```
 
-## `null` 리터럴
+## Littéral `null`
 
-Wave에서 `null`은 정식 리터럴입니다.
+Dans Wave, `null` est un littéral officiel.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` n'est pas un identifiant. (La forme `var null = ...` n'est pas autorisée.)
+- `null` ne peut être assigné qu'à des types `ptr<T>`.
 
 ```wave
 var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // ERROR
-// var b: bool = null;   // ERROR
+// var n: i32 = null;    // ERREUR
+// var b: bool = null;   // ERREUR
 ```
 
 ## Type de tableau
 
-배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
-Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
+Le type tableau est utilisé pour stocker plusieurs éléments du même type de données en séquence.
+Dans Wave, les tableaux sont déclarés sous la forme `array<type, taille>`, et la taille du tableau est clairement définie au moment de la compilation.
 
-이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
+Cela rend la structure de la mémoire claire et permet un accès stable.
 
 ```wave
 var numeros: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
-적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
+Chaque type de données est conçu pour permettre de choisir la taille et la portée adaptées à son utilisation et à ses caractéristiques.
+Choisir le type de données approprié permet de gérer la mémoire de manière efficace et améliore considérablement la stabilité et la lisibilité du code.
