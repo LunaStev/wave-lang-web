@@ -56,7 +56,7 @@ fun main() {
 }
 ```
 
-## 제공 모듈
+## ماژول ارائه‌دهنده
 
 - `std::libc::errno`
 - `std::libc::string`
