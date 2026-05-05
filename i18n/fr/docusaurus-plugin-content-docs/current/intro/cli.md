@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# Référence CLI pour `wavec`
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+Ce document explique en détail le fonctionnement en ligne de commande du **processus de construction `wavec` actuel**.
 
-핵심 원칙:
+Principes de base :
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` est un compilateur.
+- L'installation/résolution de paquetages (fichier de verrouillage, registre, téléchargement) n'est pas sous la responsabilité de `wavec`.
+- Les dépendances externes doivent être fournies par **arguments explicites de commande** lors de l'exécution de `wavec`.
 
 ---
 
-## 1. 기본 형식
+## 1. Structure de base
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [options globales] <commande> [options de commande]
 ```
 
-예:
+Exemple :
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. Paramètres de commande (importance)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` analyse d'abord **les options globales** parmi tous les arguments avant d'analyser le reste en tant que `<commande>`.
 
-즉 global option은 위치가 유연합니다.
+Ainsi, les options globales ont une priorité.
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+Les trois exemples ci-dessus sont tous valides.
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+L'utilisation de `--` arrête le scan des options globales et passe le reste en tant qu'arguments de commande.
 
 ```bash
 wavec -- run main.wave
@@ -52,38 +52,38 @@ wavec -- run main.wave
 
 ---
 
-## 3. Commands
+## 3. Commandes
 
-## 3.1 `run <file>`
+## 3.1 `run <fichier>`
 
-Wave 파일을 컴파일하고 실행합니다.
+Compile et exécute le fichier Wave.
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+Fonctionnement :
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. Parsing source + extension d'import
+2. Génération d'IR LLVM
+3. Liens natifs binaires (`target/<file_stem>`)
+4. Exécution
 
-특징:
+Caractéristiques :
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- `wavec` transmet le code de fin du programme exécuté.
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+Crée un fichier exécutable.
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+Répertoire des sorties :
 
 - `target/<file_stem>`
 
