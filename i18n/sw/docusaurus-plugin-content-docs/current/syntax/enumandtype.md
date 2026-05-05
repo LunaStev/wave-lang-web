@@ -2,78 +2,76 @@
 sidebar_position: 10
 ---
 
-# 열거형 (enum)과 타입 별칭 (type alias)
+# Mabadiliko yaliyosarifiwa na kutaja aina ya jina tofauti (type alias)
 
-Wave는 C와 유사한 명시적 타입 시스템을 유지하면서도,
-가독성과 ABI 안정성을 위해 타입 별칭(type alias) 과
-정수 기반 열거형(enum) 을 지원한다.
+Wave inasaidia mfumo wa aina ya lugha inayotangamana na C, huku ikihakikisha utulivu wa muingiliano na ABI kupitia jina tofauti la aina (type alias) na mabadiliko ya nambari za bulingano.
 
 ---
 
-## 타입 별칭 (Type Alias)
+## Jina tofauti la aina (Type Alias)
 
-### 개요
+### Muhtasari
 
-type 키워드는 기존 타입에 새로운 이름을 부여한다.
-이는 새로운 타입을 만드는 것이 아니라, 완전한 동치(alias) 이다.
+Neno kuu la aina hutoa jina jipya kwa aina iliyopo.
+Hili si jambo la kuunda aina mpya, bali ni jina lingine (alias) lililofanana.
 
 ```wave
-type MyInt = i32;
+aina ya MyInt = i32
 ```
 
-위 선언에서 MyInt는 i32와 완전히 동일한 타입이다.
+Katika tamko hili, MyInt inafanana kabisa na i32.
 
 ---
 
-### 특징
+### Tabia
 
-- 런타임 오버헤드 없음
-- ABI 상 완전히 동일
-- 컴파일 타임에만 존재
-- enum의 repr 타입으로 사용 가능
+- Hakuna kuongeza mzigo wa mzunguko wa muda wa kutekeleza programu
+- Inafanana kabisa katika ABI
+- Hupo tu wakati wa uundaji wa programu
+- Inaruhusu matumizi ya aina ya mwakilishi (repr) wa enum
 
 ---
 
-### 사용 예시
+### Mfano wa matumizi
 
 ```wave
-type Size = i64;
-type Index = u32;
+aina ya Ukubwa = i64;
+aina ya Kiashiria = u32;
 
-fun add(a: Size, b: Size) -> Size {
-    return a + b;
+fanya kuongeza(a: Ukubwa, b: Ukubwa) -> Ukubwa {
+    rudisha a + b;
 }
 ```
 
 ---
 
-### 타입 동치성
+### Usawa wa Aina
 
 ```wave
-type A = i32;
-type B = A;
+aina ya A = i32;
+aina ya B = A;
 
-fun f(x: i32) -> i32 { return x; }
+fanya f(x: i32) -> i32 { rudisha x; }
 
-fun main() {
+fanya kuu() {
     var v: B = 10;
-    f(v); // OK
+    f(v); // SAWA
 }
 ```
 
-type은 새 타입이 아니라 이름만 다른 타입이다.
+aina si aina mpya bali ni jina tu tofauti kwa aina.
 
 ---
 
-## 열거형 (enum)
+## Aina ya Orodha (enum)
 
-### 개요
+### Muhtasari
 
-Wave의 enum은 정수 기반 열거형이다.
-모든 열거형은 반드시 repr 타입을 가져야 한다.
+Orodha ya Wave ina msingi wa nambari kamili.
+Kila aina ya orodha lazima iwe na aina ya uwakilishi.
 
 ```wave
-enum ShaderUniformType -> i32 {
+orodha ShaderUniformType -> i32 {
     A = 0,
     B,
     C = 10,
@@ -83,20 +81,20 @@ enum ShaderUniformType -> i32 {
 
 ---
 
-### repr 타입
+### aina ya uwakilishi
 
--> i32 는 이 enum이 어떤 정수 타입으로 표현되는지를 나타낸다.
+-> i32 inaonyesha jinsi orodha hii inavyowakilishwa kama aina ya nambari kamili.
 
-허용되는 repr 타입:
+Aina zinazokubalika za uwakilishi:
 
 - `i8`, `i16`, `i32`, `i64`
 - `u8`, `u16`, `u32`, `u64`
-- 해당 타입의 `type alias`
+- `aina kifupi` ya aina husika
 
 ```wave
-type MyInt = i32;
+aina MyInt = i32;
 
-enum Example -> MyInt {
+enum Mfano -> MyInt {
     X,
     Y
 }
@@ -104,14 +102,14 @@ enum Example -> MyInt {
 
 ---
 
-### 값 할당 규칙
+### Kanuni za Ugawaji wa Thamani
 
-- 명시적 값이 있으면 해당 값 사용
-- 없으면 이전 값 + 1
-- 첫 값이 없으면 0부터 시작
+- Tumia thamani iliyobainishwa ikiwa ipo
+- Ikiwa haipo, tumia thamani ya awali + 1
+- Anza na 0 ikiwa hakuna thamani ya kwanza
 
 ```wave
-enum E -> i32 {
+orodha E -> i32 {
     A,        // 0
     B,        // 1
     C = 10,   // 10
@@ -121,54 +119,54 @@ enum E -> i32 {
 
 ---
 
-### enum은 값 타입이다
+### orodha ni aina ya thamani
 
-enum은 정수 값이며, 함수 인자·리턴값으로 자유롭게 사용 가능하다.
+orodha ni thamani ya nambari kamili, na inaweza kutumika huru kama kipengele na thamani inayorudi.
 
 ```wave
-fun f(t: ShaderUniformType) -> i32 {
-    return t;
+fanya f(t: Aina ya ShaderUniform) -> i32 {
+    rudisha t;
 }
 ```
 
 ---
 
-### 상수로 사용
+### Tumika kama Thabiti
 
-enum variant는 컴파일 타임 상수다.
+mseto wa orodha ni thabiti ya wakati wa kutambaza.
 
 ```wave
-const X: i32 = B;
-const Y: ShaderUniformType = D;
+thabiti X: i32 = B;
+thabiti Y: Aina ya ShaderUniform = D;
 ```
 
 ---
 
-## 실제 예제
+## Mfano Halisi
 
 ```wave
-type MyInt = i32;
+aina MyInt = i32;
 
-enum ShaderUniformType -> MyInt {
+enum Aina ya ShaderUniform -> MyInt {
     A = 0,
     B,
     C = 10,
     D
 }
 
-const X: MyInt = 123;
-const Y: MyInt = B;
-const Z: ShaderUniformType = D;
+thabiti X: MyInt = 123;
+thabiti Y: MyInt = B;
+thabiti Z: Aina ya ShaderUniform = D;
 
-fun f(t: ShaderUniformType) -> MyInt {
-    return t;
+fanya f(t: Aina ya ShaderUniform) -> MyInt {
+    rudisha t;
 }
 
-fun g(v: MyInt) -> MyInt {
-    return v;
+fanya g(v: MyInt) -> MyInt {
+    rudisha v;
 }
 
-fun main() {
+fanya kuu() {
     println("{}", f(A)); // 0
     println("{}", f(B)); // 1
     println("{}", f(C)); // 10
