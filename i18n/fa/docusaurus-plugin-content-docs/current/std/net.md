@@ -2,18 +2,18 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# استفاده از std::net
 
-동기식 IPv4 TCP/UDP API입니다.
+این یک API برای TCP/UDP همزمان IPv4 است.
 
-## import
+## واردات
 
 ```wave
-import("std::net::tcp");
-import("std::net::udp");
+واردات("std::net::tcp");
+واردات("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1. سرور TCP
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2. مشتری TCP
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3. ارسال و دریافت UDP
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## ایجاد آدرس
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener
