@@ -2,22 +2,22 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# استفاده از std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+ابزاری برای رشته‌های خاتمه یافته با NUL (`str`) است.
 
-## import
+## واردات
 
 ```wave
-import("std::string::len");
-import("std::string::cmp");
-import("std::string::find");
-import("std::string::trim");
-import("std::string::ascii");
-import("std::string::hash");
+واردات("std::string::len");
+واردات("std::string::cmp");
+واردات("std::string::find");
+واردات("std::string::trim");
+واردات("std::string::ascii");
+واردات("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. طول/مقایسه
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. جستجو/شمارش
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. محدوده برش و ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. هش
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun len(s: str) -> i32
