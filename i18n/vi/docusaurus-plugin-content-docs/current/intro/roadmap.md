@@ -4,120 +4,102 @@ sidebar_position: 4
 
 # Lộ trình phát triển tích hợp Wave + Whale v2
 
-이 문서는 Wave 언어와 Whale 컴파일러 툴체인의 통합 개발 과정을 단계별로 정리한 로드맵입니다.
-Wave와 Whale은 초기에는 분리된 구성 요소로 시작하지만, 최종적으로는 하나의 독립적인 언어 생태계로 완전히 통합되는 것을 목표로 합니다.
+Tài liệu này là lộ trình được sắp xếp thành từng giai đoạn về quá trình phát triển tích hợp của ngôn ngữ Wave và bộ công cụ biên dịch Whale.
+Wave và Whale bắt đầu là những thành phần riêng biệt nhưng cuối cùng mục tiêu là hoàn toàn được tích hợp thành một hệ sinh thái ngôn ngữ độc lập.
 
-전체 개발 단계는 다음과 같은 흐름을 따릅니다.
+Các giai đoạn phát triển tổng thể theo các bước sau.
 
 ```matlab
 pre-alpha → pre-beta → alpha → beta → rc → phát hành
 ```
 
-각 단계는 이전 단계의 결과를 기반으로 진행되며, 한 단계가 완료되면 이전 구조로 되돌아가지 않는 단방향 개발을 전제로 합니다.
+Mỗi giai đoạn được tiến hành dựa trên kết quả của giai đoạn trước đó và tiền đề là sự phát triển một chiều, nghĩa là khi một giai đoạn hoàn thành thì không quay lại cấu trúc trước đó.
 
 ---
 
 ## Giai đoạn Pre-Beta
 
-Pre-Beta 단계의 목표는 Wave 언어 프론트엔드를 완성하고, LLVM 백엔드를 기반으로 언어의 전체 기능을 구현하는 것입니다.
-이 단계에서는 Whale을 사용하지 않으며, 컴파일과 실행은 전적으로 LLVM을 통해 이루어집니다.
+Mục tiêu của giai đoạn Pre-Beta là hoàn thiện phần front-end của ngôn ngữ Wave và thực hiện đầy đủ các chức năng của ngôn ngữ dựa trên back-end LLVM.
+Trong giai đoạn này, Whale không được sử dụng, việc biên dịch và thực thi hoàn toàn được thực hiện thông qua LLVM.
 
-문법 자체를 확장하는 작업은 이 단계에서 진행하지 않습니다.
-이미 정의된 사양을 기준으로 모든 문법 요소를 실제로 동작하게 만드는 것이 핵심 목표입니다.
-에러 메시지 품질, 타입 검사, 변수 스코프 처리 등 프론트엔드 구조의 안정화에 집중합니다.
+Việc mở rộng cú pháp không được thực hiện trong giai đoạn này.
+Mục tiêu chính là làm cho mọi yếu tố cú pháp hoạt động thực tế theo các đặc tả đã được định nghĩa sẵn.
+Tập trung vào việc ổn định cấu trúc phần front-end như chất lượng thông báo lỗi, kiểm tra kiểu, xử lý phạm vi biến.
 
-구현 범위에는 변수 선언과 출력, 기본 연산이 포함되며, 함수 정의와 호출,
-조건문(`if` / `else if` / `else`), 반복문(`while` / `break` / `continue`) 역시 모두 이 단계에서 완성됩니다.
-또한 포맷 출력, 명시적 타입 지정, `ptr<T>` 형태의 포인터 설계,
-`array<T, N>` 형태의 배열 설계가 포함됩니다.
+Phạm vi hiện thực bao gồm khai báo và xuất biến, các phép toán cơ bản, định nghĩa và gọi hàm, câu lệnh điều kiện (`if` / `else if` / `else`), cũng như vòng lặp (`while` / `break` / `continue`) đều được hoàn thành trong giai đoạn này.
+Ngoài ra, giai đoạn này còn bao gồm thiết kế kiểu pointer dạng `ptr<T>`, định dạng xuất, chỉ định kiểu rõ ràng và thiết kế mảng dạng `array<T, N>`.
 
-이 단계에서 Wave 컴파일러는 전부 Rust로 작성되며,
-LLVM IR 생성과 AOT 실행을 위해 inkwell 및 llvm-sys를 사용합니다.
+Trong giai đoạn này, trình biên dịch Wave được viết hoàn toàn bằng Rust và sử dụng inkwell và llvm-sys để tạo ra LLVM IR và thực hiện AOT.
 
 ---
 
 ## Giai đoạn Alpha
 
-Alpha 단계의 목표는 Whale 백엔드를 도입하고, LLVM과 Whale을 병행 사용하는 구조를 확립하는 것입니다.
-LLVM은 여전히 기본 백엔드로 유지되며, Whale은 선택적으로 사용할 수 있는 백엔드로 추가됩니다.
+Mục tiêu của giai đoạn Alpha là giới thiệu Whale backend và thiết lập cấu trúc sử dụng song song cả LLVM và Whale.
+LLVM vẫn được giữ nguyên là backend cơ bản, và Whale được thêm vào như một backend có thể chọn lựa sử dụng.
 
-Wave 코드를 실행할 때 `--backend` 옵션을 통해 LLVM과 Whale 중 어떤 백엔드를 사용할지 선택할 수 있습니다.
+Khi thực thi mã Wave, có thể chọn backend là LLVM hoặc Whale thông qua tùy chọn `--backend`.
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-이 단계에서는 Whale 자체의 IR 구조를 설계하고 정의합니다.
-Instruction, Value, Block과 같은 핵심 구성 요소를 정리하고,
-Wave AST를 Whale IR로 변환하는 IR Generator를 구현합니다.
+Trong giai đoạn này, thiết kế và định nghĩa cấu trúc IR của chính Whale.
+Sắp xếp các thành phần chính như Instruction, Value, Block và triển khai IR Generator biến đổi Wave AST thành Whale IR.
 
-또한 Whale용 코드 생성기를 구현하여, 어셈블리 또는 바이너리 형태로 실행 가능하도록 만듭니다.
-LLVM에서는 구현하기 어렵거나 비효율적인 타입들, 예를 들어 `i1024`와 같은 초대형 정수 타입이나
-고급 포인터 구조는 Whale 전용 기능으로 이 단계에서 도입됩니다.
+Ngoài ra, triển khai trình tạo mã cho Whale để có thể thực thi dưới dạng assembly hoặc nhị phân.
+Các kiểu khó hoặc không hiệu quả để triển khai trong LLVM, chẳng hạn như kiểu số nguyên lớn `i1024` hoặc cấu trúc con trỏ nâng cao, được giới thiệu như chức năng dành riêng cho Whale trong giai đoạn này.
 
-체크포인트로는 Whale 백엔드에서 Hello World 출력이 가능해야 하며,
-변수 선언과 할당, 포인터 처리, IR 디버깅 도구가 정상적으로 동작해야 합니다.
-Wave → Whale IR 변환이 실질적으로 진행되는 단계입니다.
+Tại điểm kiểm tra, backend Whale phải có thể in ra Hello World, và các công cụ như khai báo và gán biến, xử lý con trỏ, công cụ gỡ lỗi IR phải hoạt động bình thường.
+Đây là giai đoạn thực hiện chuyển đổi từ Wave sang Whale IR.
 
 ---
 
 ## Giai đoạn Beta
 
-Beta 단계의 목표는 Whale로 완전히 전환하고, LLVM 의존성을 제거하는 것입니다.
-이 단계부터 Wave 컴파일과 실행은 Whale만을 사용합니다.
+Mục tiêu của giai đoạn Beta là chuyển đổi hoàn toàn sang Whale và loại bỏ sự phụ thuộc vào LLVM.
+Từ giai đoạn này, việc biên dịch và thực thi Wave chỉ sử dụng Whale.
 
-LLVM 관련 디펜던시와 모듈은 전부 제거되며,
-코드 생성과 실행 경로는 Whale 기준으로 최적화됩니다.
-IR 생성부터 실행까지의 흐름을 단순하고 빠르게 만드는 것이 핵심 과제입니다.
+Sẽ loại bỏ toàn bộ các phụ thuộc và mô-đun liên quan đến LLVM, tối ưu hóa quá trình tạo mã và đường dẫn thực thi theo chuẩn Whale.
+Nhiệm vụ chính là làm cho luồng từ tạo IR đến thực thi trở nên đơn giản và nhanh chóng.
 
-Whale IR에 대한 최적화 패스를 설계하고,
-코드 생성 속도와 실행 효율을 개선합니다.
-Wave의 모든 문법은 이 단계에서 Whale 백엔드 기준으로 완벽하게 지원되어야 합니다.
+Thiết kế các giai đoạn tối ưu hóa cho Whale IR, cải thiện tốc độ tạo mã và hiệu quả thực thi.
+Tất cả ngữ pháp của Wave phải được hỗ trợ hoàn chỉnh trên nền tảng backend của Whale trong giai đoạn này.
 
-테스트 측면에서는 단위 테스트와 전체 테스트 스위트를 모두 수행하며,
-WSON과 표준 라이브러리 호환성, 크로스 플랫폼 Whale 빌드 여부를 함께 검증합니다.
+Về mặt kiểm thử, thực hiện cả kiểm thử đơn vị và toàn bộ bộ kiểm thử, đồng thời kiểm tra sự tương thích của WSON và thư viện chuẩn, cũng như việc xây dựng Whale đa nền tảng.
 
 ---
 
 ## Giai đoạn RC (Ứng cử viên phát hành)
 
-RC 단계의 목표는 Wave의 부트스트랩을 시작하는 것입니다.
-이 단계부터 Wave 컴파일러의 Rust 구현을 점진적으로 제거하고,
-Wave 언어 자체로 Wave 컴파일러를 재작성하기 시작합니다.
+Mục tiêu của giai đoạn RC là bắt đầu bootstrapping cho Wave.
+Từ giai đoạn này bắt đầu dần dần loại bỏ việc triển khai Rust cho trình biên dịch Wave, và bắt đầu viết lại trình biên dịch Wave bằng chính ngôn ngữ Wave.
 
-Whale을 기반으로 Wave IR 생성기를 다시 작성하며,
-컴파일러 핵심 로직과 std / core 라이브러리를 Wave 코드로 대체합니다.
-이 과정을 통해 Whale은 self-hosting 단계에 진입하게 됩니다.
+Viết lại trình tạo Wave IR dựa trên Whale, thay thế logic cơ bản của trình biên dịch và thư viện std / core bằng mã Wave.
+Thông qua quá trình này, Whale sẽ bước vào giai đoạn tự lưu trữ.
 
-부트스트랩이 성공하면, 최초의 Wave-native 컴파일러가 탄생하게 됩니다.
+Khi khởi động thành công, trình biên dịch Wave bản địa đầu tiên sẽ ra đời.
 
 ---
 
 ## Giai đoạn phát hành (v0.0.1)
 
-Release 단계는 Wave의 공식 첫 릴리스를 의미합니다.
-이 시점에서 Wave와 Whale은 완전히 통합된 독립 언어 생태계를 구성합니다.
+Giai đoạn Release có nghĩa là phát hành chính thức lần đầu tiên của Wave.
+Tại thời điểm này, Wave và Whale sẽ cấu thành một hệ sinh thái ngôn ngữ độc lập hoàn toàn tích hợp.
 
-릴리스 구성 요소에는 Wave 언어와 표준 라이브러리,
-Whale 컴파일러 툴체인, Vex 패키지 매니저,
-그리고 WSON 데이터 포맷이 포함됩니다.
+Các thành phần của bản phát hành sẽ bao gồm ngôn ngữ Wave và thư viện chuẩn, bộ công cụ biên dịch Whale, trình quản lý gói Vex, và định dạng dữ liệu WSON.
 
-이 단계의 Wave는 완전히 Wave 코드로 작성된 컴파일러를 가지며,
-Whale의 최적화는 완료된 상태여야 합니다.
-Vex를 통한 빌드 및 배포 흐름이 정착되고,
-`vex build --windows`와 같은 크로스 OS 빌드도 가능해야 합니다.
+Wave trong giai đoạn này phải có trình biên dịch được viết hoàn toàn bằng mã Wave, và việc tối ưu hóa Whale phải đã được hoàn thành.
+Quy trình xây dựng và phân phối thông qua Vex được thiết lập và có thể xây dựng qua các hệ điều hành khác nhau như `vex build --windows`.
 
 ---
 
 ## Chiến lược phát triển meta
 
-Wave + Whale 개발은 단순한 단계 진행이 아니라, 명확한 전략을 기반으로 이루어집니다.
-Whale을 개발하면서 동시에 Wave 백엔드를 구성해 나가는 열차+레일 전략을 채택하여,
-백엔드 구조와 언어 설계를 병행해서 발전시킵니다.
+Phát triển Wave + Whale không chỉ đơn giản là tiến hành theo giai đoạn mà còn dựa trên một chiến lược rõ ràng.
+Áp dụng chiến lược tàu+ray, trong đó phát triển Whale và cấu hình backend Wave đồng thời, để phát triển song song cấu trúc backend và thiết kế ngôn ngữ.
 
-Alpha 단계에서는 `--backend` 옵션을 통한 백엔드 분기 전략이 중요한 역할을 하며,
-LLVM과 Whale을 직접 비교하고 검증할 수 있는 기반을 제공합니다.
+Trong giai đoạn Alpha, chiến lược phân nhánh backend thông qua tùy chọn `--backend` đóng vai trò quan trọng, cung cấp cơ sở để so sánh và xác minh trực tiếp giữa LLVM và Whale.
 
-RC 이후에는 구조가 역전되어,
-Wave 코드가 Whale을 통해 Wave 자신을 컴파일하는 구조 역전 계획이 본격적으로 진행됩니다.
+Sau RC, cấu trúc sẽ được đảo ngược, theo đó mã Wave sẽ biên dịch chính nó thông qua Whale và kế hoạch đảo ngược cấu trúc này sẽ chính thức triển khai.
