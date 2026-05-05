@@ -2,80 +2,80 @@
 sidebar_position: 2
 ---
 
-# std::buffer 사용법
+# Jinsi ya kutumia std::buffer
 
-`std::buffer`는 가변 바이트 버퍼와 제네릭 버퍼를 제공합니다.
+`std::buffer` inatoa buffer ya byte inayobadilika na buffer ya generali.
 
-## import
+## Ingiza
 
 ```wave
-import("std::buffer::types");
-import("std::buffer::alloc");
-import("std::buffer::read");
-import("std::buffer::write");
+ingiza("std::buffer::types");
+ingiza("std::buffer::alloc");
+ingiza("std::buffer::read");
+ingiza("std::buffer::write");
 ```
 
-## 1. 바이트 버퍼 (`Buffer`)
+## 1. Buffer ya Byte (`Buffer`)
 
-### 생성/추가/수정
+### Uundaji/Uongezaji/Hariri
 
 ```wave
-fun main() {
+furaha kuu() {
     var buf: Buffer = buffer_new(128);
 
     buffer_append_str(&buf, "GET /health\n");
     buffer_push(&buf, 0);
 
-    var first: u8 = buffer_at(buf, 0);
-    var ok: bool = buffer_set(&buf, 0, 80); // 'P'
+    var kwanza: u8 = buffer_at(buf, 0);
+    var sawa: bool = buffer_set(&buf, 0, 80); // 'P'
 
     buffer_free(&buf);
 }
 ```
 
-### 핵심 함수
+### Kazi kuu
 
 ```wave
-fun buffer_new(capacity: i64) -> Buffer
-fun buffer_reserve(buf: ptr<Buffer>, required_cap: i64) -> i64
-fun buffer_push(buf: ptr<Buffer>, value: u8) -> i64
-fun buffer_append(buf: ptr<Buffer>, src: ptr<u8>, size: i64) -> i64
-fun buffer_append_str(buf: ptr<Buffer>, s: str) -> i64
-fun buffer_at(buf: Buffer, index: i64) -> u8
-fun buffer_set(buf: ptr<Buffer>, index: i64, value: u8) -> bool
-fun buffer_free(buf: ptr<Buffer>) -> i64
+furaha buffer_new(uwezo: i64) -> Buffer
+furaha buffer_reserve(buf: ptr<Buffer>, inayohitajika: i64) -> i64
+furaha buffer_push(buf: ptr<Buffer>, thamani: u8) -> i64
+furaha buffer_append(buf: ptr<Buffer>, src: ptr<u8>, ukubwa: i64) -> i64
+furaha buffer_append_str(buf: ptr<Buffer>, s: str) -> i64
+furaha buffer_at(buf: Buffer, index: i64) -> u8
+furaha buffer_set(buf: ptr<Buffer>, index: i64, thamani: u8) -> bool
+furaha buffer_free(buf: ptr<Buffer>) -> i64
 ```
 
-## 2. 제네릭 버퍼 (`TypedBuffer<T>`)
+## 2. Generic Buffer (`TypedBuffer<T>`)
 
-Wave는 타입 추론이 없으므로 타입 인자를 명시합니다.
+Kwa kuwa Wave haina uchambuzi wa aina, unapaswa kueleza vigezo vya aina.
 
 ```wave
-fun main() {
+furaha kuu() {
     var nums: TypedBuffer<i32> = tbuffer_new<i32>(4, 16); // elem_size=4
 
     tbuffer_push<i32>(&nums, 10);
     tbuffer_push<i32>(&nums, 20);
 
-    var out: i32 = 0;
-    var got: bool = tbuffer_at<i32>(nums, 1, &out); // out = 20
+    var matokeo: i32 = 0;
+    var imepata: bool = tbuffer_at<i32>(nums, 1, &matokeo); // matokeo = 20
 
     tbuffer_free<i32>(&nums);
 }
 ```
 
-### 핵심 함수
+### Kazi kuu
 
 ```wave
-fun tbuffer_new<T>(elem_size: i64, initial_cap: i64) -> TypedBuffer<T>
-fun tbuffer_reserve<T>(buf: ptr<TypedBuffer<T>>, required_len: i64) -> i64
-fun tbuffer_push<T>(buf: ptr<TypedBuffer<T>>, value: T) -> i64
-fun tbuffer_at<T>(buf: TypedBuffer<T>, index: i64, out_value: ptr<T>) -> bool
-fun tbuffer_set<T>(buf: ptr<TypedBuffer<T>>, index: i64, value: T) -> bool
-fun tbuffer_free<T>(buf: ptr<TypedBuffer<T>>) -> i64
+furaha tbuffer_new<T>(elem_size: i64, uwezo wa awali: i64) -> TypedBuffer<T>
+furaha tbuffer_reserve<T>(buf: ptr<TypedBuffer<T>>, urefu unaohitajika: i64) -> i64
+furaha tbuffer_push<T>(buf: ptr<TypedBuffer<T>>, thamani: T) -> i64
+furaha tbuffer_at<T>(buf: TypedBuffer<T>, index: i64, thamani_ya_matapizo: ptr<T>) -> bool
+furaha tbuffer_set<T>(buf: ptr<TypedBuffer<T>>, index: i64, thamani: T) -> bool
+furaha tbuffer_free<T>(buf: ptr<TypedBuffer<T>>) -> i64
 ```
 
-주의:
+Tahadhari:
 
-- `elem_size`는 호출자가 정확히 넣어야 합니다.
-- 범위 밖 접근은 `false` 또는 기본값(`buffer_at`은 `0`)을 반환합니다.
+- `elem_size` ni lazima iwekwe kwa usahihi na anayepiga simu.
+- Ufikiaji nje ya mipaka utarejesha `false` au thamani ya msingi (`buffer_at` ni `0`).
