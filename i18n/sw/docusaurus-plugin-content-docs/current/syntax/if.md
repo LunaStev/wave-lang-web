@@ -6,18 +6,18 @@ sidebar_position: 3
 
 ## Utangulizi
 
-이 섹션에서는 Wave 언어에서 제공하는 제어문 중 하나인 IF 문의 문법과 사용 방법에 대해 설명합니다.
-IF 문은 조건을 평가한 뒤, 해당 조건이 참일 경우에만 특정 코드 블록을 실행하도록 하는 기본적인 제어 구조입니다.
+Sehemu hii inatoa maelezo juu ya sarufi na matumizi ya IF statement, mojawapo ya sentensi za udhibiti zinazotolewa na lugha ya Wave.
+Sentensi ya IF ni muundo wa msingi wa udhibiti ambao hutathmini kigezo, na inatekeleza tu kizuizi cha nambari maalum ikiwa kigezo hicho ni kweli.
 
-이를 통해 프로그램은 단순히 위에서 아래로 실행되는 흐름을 넘어서, 상황과 조건에 따라 서로 다른 동작을 수행할 수 있습니다.
-IF 문은 거의 모든 프로그램의 핵심을 이루는 요소이며, 논리적인 분기와 흐름 제어를 구현하는 데 필수적으로 사용됩니다.
+Hii inawezesha programu kufanya shughuli tofauti kulingana na hali na kigezo, zaidi ya mtiririko wa utekelezaji kutoka juu kwenda chini.
+Sentensi ya IF ni kipengele muhimu katika karibu programu zote, na inatumiwa kutekeleza matawi ya kimantiki na udhibiti wa mtiririko.
 
 ## Muundo wa Msingi
 
-IF 문은 먼저 조건식을 평가하고, 그 결과가 참(True)일 경우에만 중괄호 `{}` 안에 작성된 코드 블록을 실행합니다.
-조건이 거짓(False)일 경우에는 해당 블록을 건너뛰고 다음 코드로 이동합니다.
+Sentensi ya IF kwanza hujaribu kigezo, na ikiwa matokeo yake ni kweli, hutekeleza tu kizuizi cha nambari ndani ya mabano `{}`.
+Ikiwa kigezo ni uongo (False), inaruka juu ya kizuizi na kuendelea kwenye nambari inayofuata.
 
-Wave에서 IF 문의 기본 구조는 다음과 같습니다.
+Muundo wa msingi wa sentensi ya IF katika Wave ni kama ifuatavyo.
 
 ```wave
 ikiwa (hali) {
@@ -25,15 +25,14 @@ ikiwa (hali) {
 }
 ```
 
-조건식에는 비교 연산자나 논리 연산자를 자유롭게 사용할 수 있습니다.
-예를 들어 `==`, `!=`, `<`, `>`, `<=`, `>=`와 같은 비교 연산자를 통해 값의 관계를 비교할 수 있으며,
-`&&`, `||`, `!`와 같은 논리 연산자를 사용해 여러 조건을 조합할 수도 있습니다.
+Katika masharti, unaweza kutumia waendeshaji wa kulinganisha au wa kupanga bila vikwazo.
+Kwa mfano, unaweza kulinganisha uhusiano wa thamani kwa kutumia waendeshaji wa kulinganisha kama `==`, `!=`, `<`, `>`, `<=`, `>=', na unaweza pia kuchanganya masharti kadhaa kwa kutumia waendeshaji wa mantiki kama `&&`, `||`, `!\`.
 
-조건식의 결과는 반드시 참 또는 거짓으로 평가되어야 하며, 조건이 거짓인 경우 IF 블록 내부의 코드는 실행되지 않습니다.
+Matokeo ya kifungu lazima yatathminiwe kama kweli au uongo, na kama kipengele ni uongo, basi kifungu cha IF ndani hakitatekelezwa.
 
 ## Mfano
 
-다음은 가장 단순한 형태의 IF 문 예제입니다.
+Ifuatayo ni mfano wa muundo wa msingi zaidi wa sentensi ya IF.
 
 ```wave
 var joto :i32 = 30;
@@ -43,17 +42,17 @@ ikiwa (joto > 25) {
 }
 ```
 
-위 코드에서는 `temperature` 변수의 값이 25보다 큰지를 조건으로 평가합니다.
-조건이 참일 경우 `"날씨가 덥습니다."`라는 메시지가 출력되며, 조건이 거짓일 경우에는 아무 동작도 수행하지 않습니다.
+Katika msimbo wa juu, ikiwa thamani ya kigezo `temperature` ni kubwa kuliko 25 hutathminiwa kama sharti.
+Iwapo sharti ni kweli, ujumbe `"Hali ya hewa ni ya joto."` utachapishwa, na iwapo sharti ni uongo, hakuna hatua itakayofanyika.
 
-이처럼 IF 문은 특정 조건을 만족할 때만 코드를 실행하고 싶을 때 사용됩니다.
+Vile vile, sentensi ya IF hutumika wakati unataka msimbo utekelezwe tu wakati kipengele fulani kinakidhi masharti.
 
-## IF-ELSE 문
+## Sentensi ya IF-ELSE
 
-조건이 참이 아닐 경우에도 실행해야 할 코드가 있다면 IF 문에 ELSE 절을 추가할 수 있습니다.
-IF-ELSE 문은 조건의 결과에 따라 두 개의 코드 블록 중 하나를 선택적으로 실행하는 구조입니다.
+Iwapo kuna msimbo unaohitaji kutekelezwa hata kama sharti sio kweli, unaweza kuongeza kifungu cha ELSE kwa sentensi ya IF.
+Muundo wa sentensi ya IF-ELSE hupitisha utekelezaji wa moja kati ya vizuizi viwili vya msimbo kulingana na matokeo ya sharti.
 
-기본적인 구조는 다음과 같습니다.
+Muundo wa msingi ni kama ifuatavyo.
 
 ```wave
 ikiwa (hali) {
@@ -63,10 +62,10 @@ ikiwa (hali) {
 }
 ```
 
-조건이 참이면 IF 블록이 실행되고, 조건이 거짓이면 ELSE 블록이 실행됩니다.
-두 블록 중 하나만 실행되며, 동시에 실행되는 경우는 없습니다.
+Iwapo sharti ni kweli, kizuizi cha IF hufanya kazi, na iwapo sharti si kweli, kizuizi cha ELSE hufanya kazi.
+Moja tu kati ya vizuizi viwili hufanya kazi, na si kwa wakati mmoja.
 
-다음은 IF-ELSE 문을 사용한 예제입니다.
+Ifuatayo ni mfano wa matumizi ya sentensi ya IF-ELSE.
 
 ```wave
 var alama :i32 = 70;
@@ -78,15 +77,15 @@ ikiwa (alama >= 60) {
 }
 ```
 
-이 코드에서는 `score`가 60 이상인지 여부에 따라 서로 다른 메시지를 출력합니다.
-조건이 참일 경우 `"합격입니다!"`가 출력되며, 그렇지 않으면 `"불합격입니다."`가 출력됩니다.
+Katika msimbo huu, ujumbe tofauti huchapishwa kulingana na kama `alama` ni 60 au zaidi.
+Kama sharti liko kweli, `"Umefaulu!"` itachapishwa, la sivyo `"Haujafaulu."` itachapishwa.
 
 ## Sentensi ya IF iliyonakiliwa
 
-IF 문은 다른 IF 문 내부에서도 사용할 수 있으며, 이를 중첩 IF 문이라고 합니다.
-중첩 IF 문은 여러 단계의 조건을 순차적으로 평가해야 할 때 유용합니다.
+Sentensi ya IF inaweza kutumika ndani ya sentensi nyingine za IF, ambapo hii huitwa sentensi ya IF iliyoundwa.
+Sentensi za IF zilizoundwa ni muhimu wakati ambapo masharti yamepangwa kupimwa mfululizo.
 
-다음 예제는 점수에 따라 서로 다른 결과를 출력하는 중첩 IF 문의 예시입니다.
+Mfano ufuatao unaonyesha sentensi za IF zilizoundwa zinazotoa matokeo tofauti kulingana na alama.
 
 ```wave
 var alama :i32 = 85;
@@ -102,16 +101,15 @@ ikiwa (alama >= 60) {
 }
 ```
 
-이 코드에서는 먼저 점수가 60 이상인지 확인합니다.
-60 미만일 경우에는 바로 `"불합격입니다."`가 출력됩니다.
-60 이상일 경우에는 다시 한 번 조건을 평가하여, 점수가 90 이상이면 `"우수한 성적입니다!"`를 출력하고, 그렇지 않으면 `"합격입니다."`를 출력합니다.
+Katika msimbo huu, kwanza tunathibitisha kama alama ni 60 au zaidi.
+Kama ni chini ya 60, basi `"Haujafaulu."` itachapishwa moja kwa moja.
+Iwapo ni 60 au zaidi, sharti litathminiwa tena na kama alama ni 90 au zaidi, `"Umefaulu kwa ubora!"` itachapishwa. La sivyo `"Umefaulu."` itachapishwa.
 
-이처럼 중첩 IF 문을 사용하면 복잡한 조건 분기를 단계적으로 표현할 수 있습니다.
+Kwa kutumia sentensi za IF zilizoundwa, unaweza kuonyesha matawi magumu ya hali kwa mtiririko.
 
 ## Muhtasari
 
-IF 문은 조건을 평가하여 프로그램의 실행 흐름을 제어하는 기본적인 제어문입니다.
-ELSE 절을 함께 사용하면 조건이 거짓일 경우의 동작도 명확히 정의할 수 있으며,
-중첩 IF 문을 통해 여러 조건을 조합한 복잡한 분기 처리도 가능합니다.
+Sentensi ya IF ni sentensi ya msingi ya kudhibiti inayotathmini sharti kwa ajili ya kudhibiti mtiririko wa utekelezaji wa programu.
+Kutumia kifungu cha ELSE pamoja kunaweza kufafanua wazi nini kitatokea ikiwa kipengele ni uongo, na kutumia sentensi ya IF iliyoundwa unaweza kusindika matawi magumu kwa kuchanganya masharti tofauti.
 
-IF 문을 적절히 활용하면 프로그램의 흐름을 보다 논리적이고 명확하게 구성할 수 있습니다.
+Kwa kutumia sentensi ya IF ipasavyo, unaweza kuandaa mtiririko wa programu kwa njia ya kimantiki na wazi zaidi.
