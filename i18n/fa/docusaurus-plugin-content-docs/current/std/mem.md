@@ -2,19 +2,19 @@
 sidebar_position: 5
 ---
 
-# std::mem 사용법
+# استفاده از std::mem
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+یک ابزار مدیریت تخصیص/کپی/مقایسه حافظه سطح پایین است.
 
-## import
+## واردات
 
 ```wave
-import("std::mem::alloc");
-import("std::mem::ops");
-import("std::mem::cstr");
+واردات("std::mem::alloc");
+واردات("std::mem::ops");
+واردات("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## 1. تخصیص/آزاد سازی پایه
 
 ```wave
 fun main() {
@@ -28,21 +28,21 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## 2. تخصیص مجدد و کپی ایمن حرکتی
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // انتقال ایمن منطقه حافظه همپوشانی
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## 3. API آیتم جنریک
 
 ```wave
 fun main() {
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## 4. ابزار رشته C
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>
