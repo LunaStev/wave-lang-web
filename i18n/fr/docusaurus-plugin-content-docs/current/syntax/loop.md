@@ -6,26 +6,26 @@ sidebar_position: 4
 
 ## Introduction
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+Le langage Wave fournit des boucles pour traiter les situations où le même code doit être exécuté plusieurs fois.
+Les boucles sont utilisées pour exécuter un code de façon répétée tant qu'une condition spécifique est remplie ou pour un nombre prédéfini de répétitions.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+Cela permet d'exprimer des tâches répétitives avec un code concis et clair, sans avoir besoin de réécrire la même logique à plusieurs reprises.
+Wave prend en charge les boucles basées sur des conditions et celles basées sur des nombres de répétitions, tout en fournissant des mots clés pour contrôler le flux d'exécution au sein des boucles.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+Cette section explique l'utilisation des boucles `while` et `for`, ainsi que des mots clés `break` et `continue` pour contrôler le flux des boucles.
 
 ---
 
 ## Boucle while
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+La boucle `while` exécute de manière répétée un bloc de code tant que la condition donnée est évaluée comme vraie (`true`).
+La boucle se termine immédiatement lorsque la condition devient fausse (`false`).
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+Cette méthode est adaptée aux situations où le nombre de répétitions n'est pas clair et où il faut répéter jusqu'à ce qu'une certaine condition soit remplie.
 
 ### Structure de base
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+La structure de base de la boucle while dans Wave est la suivante.
 
 ```wave
 while (condition) {
@@ -33,8 +33,7 @@ while (condition) {
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+La condition doit être évaluée comme un type `bool`, et le bloc de code entouré de `{}` peut contenir une ou plusieurs instructions.
 
 ### Exemple : affichage de 0 à 4
 
@@ -47,33 +46,33 @@ while (i < 5) {
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+Dans cet exemple, la boucle s'effectue tant que la variable `i` est inférieure à 5.
+À chaque itération, la valeur actuelle est imprimée et la valeur de `i` est augmentée de 1, rendant finalement la condition fausse.
 
 ---
 
 ## Boucle for
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+La boucle `for` est un type de boucle adapté aux cas où le nombre de répétitions est relativement clair.
+Elle vous permet de définir en une seule fois une valeur initiale, une condition et une incrémentation, exprimant clairement le flux de la boucle.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Les éléments nécessaires au contrôle des répétitions étant regroupés en un seul endroit, la structure de la boucle est facile à comprendre d'un coup d'œil.
 
-### 기본 구조
+### Structure de base
 
 ```wave
-for (초기화; 조건식; 증감식) {
-    // 반복할 코드
+for (initialisation; condition; incrémentation) {
+    // Code à répéter
 }
 ```
 
-Wave의 for 초기화는 여러 형태를 지원합니다.
+Dans Wave, l'initialisation de la boucle for prend en charge plusieurs formes.
 
-- 암시적 `var` 타입 초기화
-- `var` / `let mut` / `const` 선언 초기화
-- 일반 식 초기화 (기존 변수 재사용)
+- Initialisation implicite de type `var`
+- Initialisation par déclaration `var` / `let mut` / `const`
+- Initialisation par expression générale (réutilisation de variables existantes)
 
-### 예제 1: 암시적 타입 초기화
+### Exemple 1: Initialisation de type implicite
 
 ```wave
 for (i :i32 = 1; i <= 5; i += 1) {
@@ -81,7 +80,7 @@ for (i :i32 = 1; i <= 5; i += 1) {
 }
 ```
 
-### 예제 2: `var` / `let mut` 초기화
+### Exemple 2: Initialisation `var` / `let mut`
 
 ```wave
 for (var i: i32 = 0; i < 3; i += 1) {
@@ -93,7 +92,7 @@ for (let mut j: i32 = 0; j < 3; j += 1) {
 }
 ```
 
-### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+### Exemple 3: Initialisation basée sur des expressions (réutilisation de variables existantes)
 
 ```wave
 var i: i32 = 99;
@@ -105,15 +104,14 @@ for (i = 3; i <= 5; i += 1) {
 println("after loop: {}", i); // 6
 ```
 
-선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
-식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
+L'initialisation déclarative (`var`, `let mut`, `i :i32 = ...`) fonctionne comme une variable de portée de boucle, tandis que l'initialisation basée sur des expressions (`i = ...`) met à jour la variable externe elle-même.
 
 ---
 
 ## Boucles imbriquées
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+Les boucles peuvent être imbriquées à l'intérieur d'autres boucles et cela s'appelle une boucle imbriquée.
+Les boucles imbriquées sont utiles pour parcourir des structures de données bidimensionnelles ou traiter des combinaisons de plusieurs conditions.
 
 ### Exemple : double boucle while
 
@@ -132,15 +130,15 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+Dans cet exemple, chaque fois que la boucle `while` extérieure est exécutée, la boucle `while` intérieure est entièrement exécutée.
+Cela permet de traiter de manière séquentielle les combinaisons sous la forme (`i`, `j`).
 
 ---
 
 ## Instruction break
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+L'instruction `break` termine immédiatement la boucle et transfère le contrôle à l'extérieur de la boucle.
+Il est utilisé lorsque vous n'avez plus besoin d'effectuer des répétitions au milieu de la boucle.
 
 ### Exemple : terminaison de la répétition à une valeur spécifique
 
@@ -157,15 +155,15 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+Dans cet exemple, la boucle infinie se termine au moment où `i` devient 5, lorsque `break` est exécuté.
+De cette manière, l'instruction `break` est utile lorsque vous souhaitez contrôler la boucle indépendamment de la condition de boucle.
 
 ---
 
 ## Instruction continue
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+L'instruction `continue` saute le code restant de l'itération actuelle et commence immédiatement l'itération suivante.
+Il est utilisé lorsque vous voulez omettre uniquement certaines logiques sous certaines conditions.
 
 ### Exemple : afficher uniquement les nombres pairs
 
@@ -179,15 +177,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+Dans ce code, lorsque `i` est impair, `continue` est exécuté et saute la partie d'impression.
+En conséquence, seules les valeurs paires sont imprimées.
 
 ---
 
 ## Résumé
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Les boucles de Wave sont conçues pour exprimer naturellement à la fois les boucles basées sur des conditions et celles basées sur des itérations.
+La structure `while` est adaptée aux boucles axées sur des conditions, tandis que `for` est utile lorsque le nombre d'itérations et le flux sont clairs.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+En utilisant `break` et `continue` ensemble, vous pouvez contrôler finement le flux d'exécution même au milieu de la boucle, vous permettant de créer une logique de boucle plus sophistiquée et flexible.
