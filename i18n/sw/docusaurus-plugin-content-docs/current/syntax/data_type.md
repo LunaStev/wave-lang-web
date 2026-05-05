@@ -5,23 +5,23 @@ sidebar_position: 2
 # Aina za Data
 
 Hati hii inaeleza kuhusu aina mbali mbali za data zinazotolewa na lugha ya programu ya Wave.
-Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
+Huko Wave, unaweza kuhifadhi na kufanya operesheni kwenye maadili kwa kutumia aina mbalimbali za data, ambapo kila aina ya data inaelezea wazi jinsi data hiyo inavyowakilishwa na kushughulikiwa katika kumbukumbu.
 
-데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
-Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
-이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
+Kubainisha aina ya data kwa usahihi ni mojawapo ya falsafa kuu za usanifu wa Wave.
+Wave ni mfumo wa aina kali kabisa. Matangazo yote ya `var`/`fun` na uanzilishi wa variable yanahitaji aina iliyo wazi, na utambuzi wa aina kulingana na muktadha hauungwi mkono. Kwa hiyo, kama `var x = 1;` pasipo aina, uundaji utashindwa.
+Hii inaruhusu kueleza makusudi ya msimbo kwa uwazi, kugundua makosa mapema wakati wa kuboresha msimbo, na kuhakikisha matumizi bora ya kumbukumbu na utekelezaji thabiti.
 
 ---
 
-## 정수 타입
+## Aina ya Nambari Kamili
 
-정수 타입은 정수 값을 저장하는 데 사용됩니다.
-Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+Aina ya Nambari Kamili hutumika kuhifadhi thamani za nambari kamili.
+Katika Wave, `i32` (nambari kamili ya biti 32 yenye sahihi) na `u32` (nambari kamili ya biti 32 isiyo na sahihi) hutumiwa mara nyingi, lakini unaweza kubainisha ukubwa wa biti kwa nambari kwa undani kulingana na ulazima.
 
-부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
-이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+Aina za nambari kamili zenye sahihi zinapatikana kutoka `i8` hadi `i1024`, na aina zisizo na sahihi kutoka `u8` hadi `u1024` zinaweza kutumika.
+Hii inaruhusu kutosheleza mahitaji mbalimbali kutoka kwenye mahesabu rahisi hadi operesheni kubwa za nambari kamili, usindikaji wa kriptografia, hadi programu za mifumo ya kiwango cha chini.
 
-다음은 정수 타입을 사용하는 간단한 예제입니다.
+Ifuatayo ni mfano rahisi wa kutumia aina za nambari kamili.
 
 ```wave
 var a: i32 = 100;
@@ -33,12 +33,12 @@ var b: u32 = 200;
 ## Aina ya Nambari Isiyo Kamili
 
 Aina ya nambari isiyo kamili hutumika kuhifadhi thamani za nambari halisi.
-Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
+Katika Wave, aina za nukta zinazotembea zinazotumika kwa kawaida ni `f32`, na ikiwa unahitaji usahihi wa juu zaidi, unaweza kuchagua aina za ukubwa mkubwa zaidi.
 
-Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
-이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
+Wave inatoa aina za nukta zinazotembea kutoka `f32` hadi `f128`, na kuwezesha mtumiaji kufanya uchaguzi kati ya usahihi wa mahesabu na utendaji.
+Hii inaruhusu kushughulikia operesheni za nambari halisi kwa matumizi mbalimbali, kutoka mahesabu ya kawaida hadi mahesabu ya kisayansi ya usahihi wa hali ya juu.
 
-아래는 부동소수점 타입을 사용하는 예제입니다.
+Hapa chini kuna mfano wa kutumia aina za nukta zinazotembea.
 
 ```wave
 var pi: f32 = 3.14;
@@ -49,12 +49,12 @@ var e: f64 = 2.71828;
 
 ## Aina ya Uzi wa Herufi
 
-문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
-Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
+Aina ya uzi hutumika kushughulikia data ya maandishi.
+Katika Wave, neno kuu `str` hutumika kutangaza kamba za maandishi, na herufi za maandishi huonyeshwa kwa kufungwa na alama za nukuu mara mbili (`"`).
 
-문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+Kamba za maandishi hutumiwa sana katika programu kwa ajili ya uchapishaji wa ujumbe, usindikaji wa maingizo ya mtumiaji, na usindikaji wa data inayotegemea maandishi.
 
-다음은 문자열 타입의 기본적인 사용 예제입니다.
+Huu ni mfano wa msingi wa matumizi ya aina ya kamba za maandishi.
 
 ```wave
 var text: str = "Hello Wave";
@@ -64,10 +64,10 @@ var text: str = "Hello Wave";
 
 ## Aina ya Boolean
 
-불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
-Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
+Aina ya Boolean ni aina ya data inayowakilisha thamani ya kweli (True) au uongo (False).
+Katika Wave, aina `bool` hutumika, na thamani imetajwa kama `true` au `false`.
 
-불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
+Aina ya Boolean ina jukumu muhimu katika sentensi za masharti na kurudia, na hutumika kudhibiti mtiririko wa programu.
 
 ```wave
 var isActive: bool = true;
@@ -79,9 +79,9 @@ var isAvailable: bool = true;
 ## Aina ya Herufi
 
 Aina ya herufi hutumika kuhifadhi herufi moja pekee.
-`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
+Hutangazwa kwa kutumia neno kuu `char` na inaweza kushikilia herufi moja pekee.
 
-문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
+Herufi za maandishi huonyeshwa kwa kufungwa na alama za nukuu moja (`'`).
 
 ```wave
 var letter: char = 'A';
@@ -89,10 +89,10 @@ var letter: char = 'A';
 
 ## Aina ya Byte
 
-바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
-이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
+Aina ya Byte hutumika kuhifadhi data ya ukubwa wa baiti moja.
+Aina hii ni muhimu hasa katika usindikaji wa data ya binary, uingizaji/utoaji wa faili, na programu za mtandao ambapo usindikaji wa data wa kiwango cha chini unahitajika.
 
-Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
+Katika Wave, neno kuu `byte` hutumika kutangaza aina ya byte.
 
 ```wave
 var byteData: byte = 0xFF;
@@ -100,39 +100,39 @@ var byteData: byte = 0xFF;
 
 ## Aina ya Kielekezi
 
-포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+Aina ya Pointer hutumika kurejelea moja kwa moja anwani za kumbukumbu.
+Katika Wave, aina ya pointer hutangazwa katika fomu ya `ptr<T>`.
 
-포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
+PoinTea hutumika wakati kunahitajika kufikia kumbukumbu za kiwango cha chini, na hutumiwa sana katika programu za mfumo au kanuni zinazohitaji utendakazi wa hali ya juu.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
 ```
 
-## `null` 리터럴
+## Herufi muhimu ya `null`
 
-Wave에서 `null`은 정식 리터럴입니다.
+Katika Wave, `null` ni herufi muhimu rasmi.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` si kitambulisho. (haiwezi kuwa katika fomu `var null = ...`)’
+- `null` inaweza tu kupewa kwa aina `ptr<T>`.
 
 ```wave
-var p: ptr<i32> = null;  // OK
+var p: ptr<i32> = null;  // SAWA
 
-// var n: i32 = null;    // ERROR
-// var b: bool = null;   // ERROR
+// var n: i32 = null;    // KOSA
+// var b: bool = null;   // KOSA
 ```
 
 ## Aina ya Array
 
-배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
-Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
+Aina ya Array hutumiwa kuhifadhi maadili mengi ya aina sawa katika mpangilio.
+Katika Wave, matriki hutangazwa katika fomu ya `array<type, size>`, na ukubwa wa matriki unabainishwa wazi wakati wa kuweka pamoja.
 
-이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
+Hii inaboresha ufafanuzi wa muundo wa kumbukumbu na inaruhusu ufikio thabiti.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
-적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
+Kila aina ya data imeundwa ili kuruhusu uchaguzi wa upeo na ukubwa unaofaa kwa matumizi na sifa zake.
+Uchaguzi sahihi wa aina ya data huruhusu usimamizi mzuri wa kumbukumbu, na kuboresha sana utulivu na usomaji wa kanuni.
