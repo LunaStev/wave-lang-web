@@ -2,39 +2,37 @@
 sidebar_position: 10
 ---
 
-# 열거형 (enum)과 타입 별칭 (type alias)
+# Enum và Alias kiểu (type alias)
 
-Wave는 C와 유사한 명시적 타입 시스템을 유지하면서도,
-가독성과 ABI 안정성을 위해 타입 별칭(type alias) 과
-정수 기반 열거형(enum) 을 지원한다.
+Wave hỗ trợ alias kiểu (type alias) và enum dựa trên số để duy trì hệ thống kiểu tường minh tương tự như C, và nâng cao độ ổn định của ABI và tính đọc được.
 
 ---
 
-## 타입 별칭 (Type Alias)
+## Alias kiểu (Type Alias)
 
-### 개요
+### Tóm tắt
 
-type 키워드는 기존 타입에 새로운 이름을 부여한다.
-이는 새로운 타입을 만드는 것이 아니라, 완전한 동치(alias) 이다.
+Từ khoá type gán một tên mới cho kiểu dữ liệu hiện có.
+Đây không phải là tạo ra kiểu dữ liệu mới, mà là một alias hoàn toàn.
 
 ```wave
 type MyInt = i32;
 ```
 
-위 선언에서 MyInt는 i32와 완전히 동일한 타입이다.
+Trong khai báo trên, MyInt hoàn toàn đồng nhất với i32.
 
 ---
 
-### 특징
+### Đặc điểm
 
-- 런타임 오버헤드 없음
-- ABI 상 완전히 동일
-- 컴파일 타임에만 존재
-- enum의 repr 타입으로 사용 가능
+- Không có overload runtime
+- Hoàn toàn đồng nhất trên ABI
+- Chỉ tồn tại trong thời gian biên dịch
+- Có thể sử dụng như kiểu repr của enum
 
 ---
 
-### 사용 예시
+### Ví dụ sử dụng
 
 ```wave
 type Size = i64;
@@ -47,7 +45,7 @@ fun add(a: Size, b: Size) -> Size {
 
 ---
 
-### 타입 동치성
+### Tính đồng nhất kiểu dữ liệu
 
 ```wave
 type A = i32;
@@ -61,16 +59,16 @@ fun main() {
 }
 ```
 
-type은 새 타입이 아니라 이름만 다른 타입이다.
+type không phải là một kiểu mới mà chỉ là kiểu với tên khác.
 
 ---
 
-## 열거형 (enum)
+## Enum
 
-### 개요
+### Tóm tắt
 
-Wave의 enum은 정수 기반 열거형이다.
-모든 열거형은 반드시 repr 타입을 가져야 한다.
+Enum của Wave là enum dựa trên số nguyên.
+Tất cả các enum đều phải có một kiểu repr.
 
 ```wave
 enum ShaderUniformType -> i32 {
@@ -83,15 +81,15 @@ enum ShaderUniformType -> i32 {
 
 ---
 
-### repr 타입
+### Kiểu repr
 
--> i32 는 이 enum이 어떤 정수 타입으로 표현되는지를 나타낸다.
+-> i32 chỉ ra enum này được biểu thị bằng kiểu số nguyên nào.
 
-허용되는 repr 타입:
+Các loại repr cho phép:
 
 - `i8`, `i16`, `i32`, `i64`
 - `u8`, `u16`, `u32`, `u64`
-- 해당 타입의 `type alias`
+- `type alias` của loại này
 
 ```wave
 type MyInt = i32;
@@ -104,11 +102,11 @@ enum Example -> MyInt {
 
 ---
 
-### 값 할당 규칙
+### Quy tắc phân bổ giá trị
 
-- 명시적 값이 있으면 해당 값 사용
-- 없으면 이전 값 + 1
-- 첫 값이 없으면 0부터 시작
+- Sử dụng giá trị hiện có nếu có giá trị tường minh
+- Nếu không có, giá trị trước + 1
+- Nếu giá trị đầu tiên không tồn tại, bắt đầu từ 0
 
 ```wave
 enum E -> i32 {
@@ -121,9 +119,9 @@ enum E -> i32 {
 
 ---
 
-### enum은 값 타입이다
+### enum là kiểu giá trị
 
-enum은 정수 값이며, 함수 인자·리턴값으로 자유롭게 사용 가능하다.
+enum là giá trị số nguyên và có thể tự do sử dụng làm tham số hàm hoặc giá trị trả về.
 
 ```wave
 fun f(t: ShaderUniformType) -> i32 {
@@ -133,9 +131,9 @@ fun f(t: ShaderUniformType) -> i32 {
 
 ---
 
-### 상수로 사용
+### Sử dụng như hằng số
 
-enum variant는 컴파일 타임 상수다.
+Các biến thể enum là hằng số thời gian biên dịch.
 
 ```wave
 const X: i32 = B;
@@ -144,7 +142,7 @@ const Y: ShaderUniformType = D;
 
 ---
 
-## 실제 예제
+## Ví dụ thực tế
 
 ```wave
 type MyInt = i32;
@@ -176,6 +174,6 @@ fun main() {
 
     println("{}", g(X)); // 123
     println("{}", g(Y)); // 1
-    println("{}", f(Z)); // 11
+    println("{}", g(Z)); // 11
 }
 ```
