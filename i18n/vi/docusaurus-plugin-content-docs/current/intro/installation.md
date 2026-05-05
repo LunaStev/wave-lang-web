@@ -6,31 +6,31 @@ sidebar_position: 1
 
 ## Hướng dẫn cài đặt
 
-Wave는 제공되는 설치 스크립트를 통해 간단하게 설치할 수 있습니다.
-터미널에서 아래 명령어를 실행하면 지정한 버전의 Wave 컴파일러(`wavec`)가 자동으로 설치됩니다.
+Wave có thể được cài đặt dễ dàng thông qua script cài đặt được cung cấp.
+Khi chạy lệnh dưới đây trong terminal, trình biên dịch Wave (`wavec`) phiên bản chỉ định sẽ được tự động cài đặt.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-설치 스크립트는 시스템 환경을 확인한 뒤, Wave 실행에 필요한 의존성과 컴파일러를 자동으로 설정합니다.
-버전을 명시하지 않을 경우에는 최신 안정 버전 또는 지정한 기준에 따른 기본 버전이 설치됩니다.
+Script cài đặt sẽ xác minh môi trường hệ thống và tự động cài đặt các phụ thuộc và trình biên dịch cần thiết để chạy Wave.
+Nếu không chỉ định phiên bản, phiên bản ổn định mới nhất hoặc phiên bản mặc định theo tiêu chuẩn chỉ định sẽ được cài đặt.
 
-## 설치 예시
+## Ví dụ cài đặt
 
-최신 버전을 설치하려면 다음과 같이 실행합니다.
+Để cài đặt phiên bản mới nhất, thực hiện như sau.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
 ```
 
-특정 버전을 설치하고 싶은 경우에는 `--version` 옵션을 사용합니다.
+Nếu muốn cài đặt một phiên bản cụ thể, hãy sử dụng tùy chọn `--version`.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-나이틀리 빌드와 같이 더 세부적인 버전을 지정하는 것도 가능합니다.
+Cũng có thể chỉ định phiên bản chi tiết hơn như bản build hàng đêm.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
@@ -38,43 +38,40 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 
 ## Công việc thực hiện trong quá trình cài đặt
 
-설치 스크립트는 Wave를 정상적으로 실행할 수 있도록 여러 단계를 자동으로 처리합니다.
-먼저 LLVM 14와 관련된 필수 패키지를 `apt-get`을 통해 설치합니다.
-이후 시스템에서 LLVM을 안정적으로 참조할 수 있도록 `/usr/lib/libllvm-14.so`에 대한 심볼릭 링크를 생성합니다.
+Script cài đặt tự động xử lý nhiều bước để đảm bảo Wave chạy đúng cách.
+Trước tiên, cài đặt các gói cần thiết liên quan đến LLVM 14 qua `apt-get`.
+Sau đó, tạo liên kết tượng trưng tới `/usr/lib/libllvm-14.so` để hệ thống tham chiếu LLVM ổn định.
 
-Wave 컴파일러가 LLVM을 올바르게 찾을 수 있도록 `LLVM_SYS_140_PREFIX` 환경 변수를 설정하며,
-이 설정은 `~/.bashrc`에 추가되어 이후 터미널 세션에서도 유지됩니다.
+Đặt biến môi trường `LLVM_SYS_140_PREFIX` để trình biên dịch Wave tìm thấy LLVM đúng cách, và được thêm vào `~/.bashrc` để duy trì trong các phiên terminal sau.
 
-그 다음 사용자가 지정한 버전의 Wave 패키지(`.tar.gz`)를 다운로드하고 압축을 해제합니다.
-압축 해제 후에는 `wavec` 실행 파일을 `/usr/local/bin`에 설치하여,
-시스템 어디에서든 `wavec` 명령어를 사용할 수 있도록 구성합니다.
+Tiếp theo, tải về và giải nén gói Wave (`.tar.gz`) version người dùng chỉ định.
+Sau khi giải nén, cài đặt tập tin thực thi `wavec` vào `/usr/local/bin`, cấu hình để có thể sử dụng lệnh `wavec` từ bất kỳ đâu trên hệ thống.
 
-설치가 완료되면 `wavec --version` 명령어를 통해 정상적으로 설치되었는지 확인합니다.
+Sau khi cài đặt hoàn tất, xác minh cài đặt đúng cách bằng lệnh `wavec --version`.
 
 ## Kiểm tra cài đặt
 
-설치가 끝난 후, 아래 명령어를 실행하여 Wave 컴파일러가 정상적으로 설치되었는지 확인할 수 있습니다.
+Sau khi cài đặt xong, chạy lệnh dưới đây để kiểm tra trình biên dịch Wave đã được cài đặt đúng chưa.
 
 ```bash
 wavec --version
 ```
 
-명령어 실행 시 설치된 Wave의 버전 정보가 출력되면 정상적으로 설치된 상태입니다.
+Khi thực thi lệnh, nếu thông tin phiên bản của Wave đã cài đặt được hiển thị, tức là đã cài đặt thành công.
 
 ---
 
 ## Hướng dẫn gỡ bỏ Wave (`uninstall.sh`)
 
-Wave를 시스템에서 제거하고 싶을 경우, 제공되는 제거 스크립트를 사용할 수 있습니다.
-이 스크립트는 설치 과정에서 추가된 파일과 설정을 정리하는 역할을 합니다.
+Nếu muốn gỡ bỏ Wave khỏi hệ thống, bạn có thể sử dụng script gỡ bỏ cung cấp.
+Script này có chức năng dọn dẹp các tệp và cài đặt đã thêm vào trong quá trình cài đặt.
 
 ### Cách gỡ bỏ
 
-터미널에서 다음 명령어를 실행합니다.
+Chạy lệnh sau trong terminal.
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
 ```
 
-제거가 완료되면 wavec 명령어는 더 이상 사용되지 않으며,
-Wave와 관련된 실행 파일과 설정이 시스템에서 삭제됩니다.
+Sau khi gỡ bỏ hoàn tất, lệnh wavec không còn sử dụng được, và các tệp thực thi và cài đặt liên quan đến Wave bị xóa khỏi hệ thống.
