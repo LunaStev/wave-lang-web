@@ -2,11 +2,11 @@
 sidebar_position: 1
 ---
 
-# 표준 라이브러리 (std)
+# Bibliothèque standard (std)
 
-이 섹션은 Wave 표준 라이브러리의 실제 사용법을 설명합니다.
+Cette section décrit comment utiliser pratiquement la bibliothèque standard Wave.
 
-## 모듈
+## Modules
 
 - [buffer](./buffer)
 - [env](./env)
@@ -19,20 +19,20 @@ sidebar_position: 1
 - [sys](./sys)
 - [libc](./libc)
 
-## 사용 원칙
+## Principes d'utilisation
 
-- 고수준 코드에서는 `std::*`를 사용합니다.
-- OS 의존 기능은 `std::sys::*` 뒤로 숨겨져 있습니다.
-- `std::libc`는 C 호환이 필요한 경우에만 사용합니다.
+- Dans le code de haut niveau, utilisez `std::*`.
+- Les fonctionnalités dépendantes de l'OS sont cachées derrière `std::sys::*`.
+- Utilisez `std::libc` uniquement lorsque vous avez besoin de compatibilité C.
 
-## 에러 처리 규약
+## Convention de gestion des erreurs
 
-많은 함수가 다음 규약을 따릅니다.
+Beaucoup de fonctions suivent cette convention.
 
-- `>= 0`: 성공
-- `< 0`: 실패 (`-errno` 또는 모듈별 에러 코드)
+- `>= 0`: succès
+- `< 0`: échec (`-errno` ou code d'erreur spécifique au module)
 
-예시:
+Exemple :
 
 ```wave
 import("std::env::environ");
@@ -42,10 +42,10 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // 에러 처리
+        // gestion des erreurs
         return;
     }
 
-    // raw에는 NUL 종료 문자열이 들어 있음
+    // raw contient une chaîne terminée par NUL
 }
 ```
