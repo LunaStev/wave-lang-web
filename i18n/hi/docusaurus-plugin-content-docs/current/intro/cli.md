@@ -371,23 +371,23 @@ wavec run main.wave \
 
 ## 7. Vex के साथ कार्य भूमिका विभाजन
 
-권장 구조:
+अनुशंसा की गई संरचना:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: संकलन/लिंक/निष्पादन + निर्दिष्ट निर्भरता विश्लेषण
+- `vex`: `wavec ...` के बाद निर्भरता स्थापना/प्रबंधन --dep-root ... --dep ...\` कॉल
 
-예:
+उदाहरण:
 
 ```bash
-# 내부적으로 vex가 수행
+# आंतरिक रूप से vex निष्पादित होता है
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+यह मॉडल संकलक को सरल और निर्णायक रखते हुए, पैकेज प्रबंधक को स्वचालन का प्रबंधन करने देता है।
 
 ---
 
-## 8. 빠른 참조
+## 8. त्वरित संदर्भ
 
 ```bash
 wavec run main.wave
@@ -400,5 +400,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec --whale build app.wave -c # TODO: सुरक्षित, लागू नहीं
 ```
