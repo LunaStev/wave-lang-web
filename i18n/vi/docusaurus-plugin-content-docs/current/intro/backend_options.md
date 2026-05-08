@@ -61,13 +61,13 @@ Các target triple chính cần được tài liệu hóa cơ bản hiện tại
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (có thể lặp lại)
-- `-C link-sysroot=<path>`
+- `-C link-sysroot=<đường dẫn>`
 - `-C no-default-libs`
 
 Điểm phản ánh:
 
 - Ở bước tạo Object (clang `-c`) có `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- Ghi đè trình liên kết trong giai đoạn liên kết, chèn tham số liên kết thô, chèn link-sysroot
 - Khi sử dụng `-C no-default-libs`, tự động vô hiệu hóa `-lc -lm`
 
 ---
