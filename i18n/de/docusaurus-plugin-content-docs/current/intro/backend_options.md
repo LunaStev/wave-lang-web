@@ -67,7 +67,7 @@ Derzeit primäre Ziel-Triple, die standardmäßig dokumentiert werden sollen:
 Implementierungsstelle:
 
 - `--sysroot` für die Objekterstellung (clang `-c`)
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- Linker-Überschreibung in der Verknüpfungsphase, Einfügen von Rohlinkargumenten, Einfügen von link-sysroot.
 - Automatisches Deaktivieren von `-lc -lm` bei Verwendung von `-C no-default-libs`
 
 ---
