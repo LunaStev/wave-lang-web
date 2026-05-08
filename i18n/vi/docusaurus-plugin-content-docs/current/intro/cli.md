@@ -244,6 +244,7 @@ Các mục hô trợ (tóm tắt):
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (có thể lặp lại)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Các mục tiêu chính hiện tại theo tiêu chuẩn `wavec print target-list`:
