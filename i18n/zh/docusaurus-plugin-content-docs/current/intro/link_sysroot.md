@@ -2,42 +2,42 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# 手动控制链接 sysroot (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+本文档说明如何在 `wavec` 中**明确控制**链接阶段的 sysroot。
 
-핵심 원칙:
+核心原则：
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<path>`: 编译阶段(clang `-c`) sysroot
+- `-C link-sysroot=<path>`: 链接阶段(linker) sysroot
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+即，分别处理编译和链接的 sysroot。
 
 ---
 
-## 2. 옵션 정의
+## 1. 为什么需要
+
+在交叉链接中使用 `-C linker=<path>` 时，经常需要单独指定链接驱动程序（例如：`aarch64-linux-gnu-gcc`）引用的运行时路径（`crt1.o`、`libc`、`libm`）。
+
+此时，不自动推断链接 sysroot，而是在 CLI 中明确传递。
+
+---
+
+## 2. 选项定义
 
 ## 2.1 `-C link-sysroot=<path>`
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+向链接阶段注入 `--sysroot=<path>`。
 
 ```bash
 wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+在内部，等同于 `-C link-arg=--sysroot=<path>`。
 
 ## 2.2 `-C link-arg=--sysroot=<path>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+继续支持现有的原始链接参数方法。
 
 ```bash
 wavec -C link-arg=--sysroot=/path/to/sysroot ...
@@ -45,25 +45,25 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 
 ---
 
-## 3. 검증 규칙
+## 3. 验证规则
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+在需要链接阶段的构建中，如果以下条件同时满足，则完成 usage error。
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. 使用 `-C linker=...`
+2. 使用 `--sysroot=<path>`
+3. 未指定链接 sysroot(`-C link-sysroot` 或 `-C link-arg=--sysroot=...`)
 
-오류 메시지 예:
+错误消息示例：
 
 ```text
-when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
+使用 -C linker=... 时，--sysroot=<path> 仅用于编译阶段；通过 -C link-sysroot=<path> (或 -C link-arg=--sysroot=<path>) 明确传递链接器 sysroot
 ```
 
 ---
 
-## 4. 사용 예시
+## 4. 使用示例
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 AArch64 Linux 交叉链接
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 原始链接参数方法
 
 ```bash
 wavec \
@@ -88,9 +88,9 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 无链接的构建 (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+如果没有链接阶段，则不需要链接 sysroot。
 
 ```bash
 wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
@@ -98,8 +98,8 @@ wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 
 ---
 
-## 5. 정리
+## 5. 总结
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- `--sysroot` 用于编译阶段控制
+- `-C link-sysroot` 用于链接阶段控制
+- 优先于自动推断的明确控制
