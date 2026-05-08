@@ -2,42 +2,42 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# التحكم اليدوي لنظام sysroot الربط (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+هذه الوثيقة تشرح كيفية **التحكم بشكل صريح** في sysroot خلال مرحلة الربط باستخدام `wavec`.
 
-핵심 원칙:
+المبادئ الأساسية:
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<path>`: sysroot لمرحلة الترجمة (clang '-c')
+- `-C link-sysroot=<path>`: sysroot لمرحلة الربط (linker)
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+هذا يعني أننا نفصل بين sysroot الترجمة وsysroot الربط.
 
 ---
 
-## 2. 옵션 정의
+## 1. لماذا هو مطلوب؟
+
+عند استخدام `-C linker=<path>` أثناء الربط المتقاطع، غالبًا ما تحتاج إلى تحديد مسارات وقت التشغيل (`crt1.o` ،`libc` ،`libm`) التي يشير إليها محرك الربط (مثل `aarch64-linux-gnu-gcc`).
+
+في هذه الحالة، يتم تكوين الأمر بحيث لا يستدل على sysroot الربط تلقائيًا، بل يتم إرساله بشكل صريح عبر CLI.
+
+---
+
+## 2. تعريف الخيارات
 
 ## 2.1 `-C link-sysroot=<path>`
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+يتم حقن `--sysroot=<path>` في مرحلة الربط.
 
 ```bash
 wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+يعادل داخليًا `-C link-arg=--sysroot=<path>`.
 
 ## 2.2 `-C link-arg=--sysroot=<path>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+يستمر دعم الطريقة التقليدية للمعلمات الخام في الربط.
 
 ```bash
 wavec -C link-arg=--sysroot=/path/to/sysroot ...
@@ -45,25 +45,25 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 
 ---
 
-## 3. 검증 규칙
+## 3. قواعد التحقق
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+في البناية التي تحتاج إلى مرحلة ربط، إذا تم استيفاء الشرطين التاليين، يتم إنهاء الدورة باستخدام خطأ.
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. `-C linker=...` مستخدم
+2. `--sysroot=<path>` مستخدم
+3. لم يتم تحديد sysroot الربط (`-C link-sysroot` أو `-C link-arg=--sysroot=...`)
 
-오류 메시지 예:
+مثال لرسالة خطأ:
 
 ```text
-when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
+عندما تستخدم -C linker=... ، - sysroot=<path> هو للمرحلة التجميعية فقط؛ قُم بتمرير sysroot الربط بشكل صريح مع -C link-sysroot=<path> (أو -C link-arg=--sysroot=<path>)
 ```
 
 ---
 
-## 4. 사용 예시
+## 4. مثال الاستخدام
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 الربط المتقاطع لنظام Linux على AArch64
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 طريقة معلمة الربط الخام
 
 ```bash
 wavec \
@@ -88,9 +88,9 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 بناء بدون رابط (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+إذا لم يكن هناك مرحلة رابط، فإن sysroot الرابط ليس مطلوبًا.
 
 ```bash
 wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
@@ -98,8 +98,8 @@ wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 
 ---
 
-## 5. 정리
+## 5. ملخص
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- `--sysroot` هو للتحكم في مرحلة الترجمة
+- `-C link-sysroot` هو للتحكم في مرحلة الرابط
+- الأولوية للتحكم الواضح على الاستدلال التلقائي
