@@ -1,95 +1,95 @@
 ---
-sidebar_position: 6
+sidebar_position: ৬
 ---
 
-# `wavec` CLI 레퍼런스
+# `wavec` CLI রেফারেন্স
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+এই নথি **বর্তমান Wave কম্পাইলার(`wavec`) বাস্তবায়ন মান** এর CLI আচরণ নির্ভুলভাবে বর্ণনা করে।
 
-핵심 원칙:
+মূল নীতি:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
-
----
-
-## 1. 기본 형식
-
-```bash
-wavec [global-options] <command> [command-options]
-```
-
-예:
-
-```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
-```
+- `wavec` একটি কম্পাইলার।
+- প্যাকেজ ইনস্টল/সমাধান (লকফাইল, রেজিস্ট্রি, ডাউনলোড) `wavec` এর দায়িত্ব নয়।
+- বাহ্যিক নির্ভরশীলতাগুলি `wavec` চালানোর সময় **স্পষ্ট CLI প্যারামিটার** গুলির মাধ্যমে প্রদান করা হয়।
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
-
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
-
-즉 global option은 위치가 유연합니다.
+## ১। প্রাথমিক বিন্যাস
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec [গ্লোবাল-বিকল্প] <কমান্ড> [কমান্ড-বিকল্প]
 ```
 
-위 3개는 모두 유효합니다.
-
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+উদাহরণ:
 
 ```bash
-wavec -- run main.wave
+wavec -O2 রান main.wave
+wavec বিল্ড app.wave --link ssl -L ./native/lib
+wavec রান app.wave --dep-root .vex/dep
 ```
 
 ---
 
-## 3. Commands
+## ২। কমান্ড পার্সিং নিয়ম (গুরুত্বপূর্ণ)
 
-## 3.1 `run <file>`
+`wavec` প্রথমে পুরো ইনপুট থেকে **গ্লোবাল অপশন** স্ক্যান করে, তারপর অবশিষ্ট ইনপুট দিয়ে `<কমান্ড>` বিশ্লেষণ করে।
 
-Wave 파일을 컴파일하고 실행합니다.
+অর্থাৎ, গ্লোবাল অপশনের অবস্থান নমনীয়।
 
 ```bash
-wavec run hello.wave
+wavec -O3 রান main.wave
+wavec রান main.wave -O3
+wavec রান -O3 main.wave
 ```
 
-동작:
+উপরের ৩টি বৈধ।
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+ইনপুটে `--` ব্যবহার করলে, তার পরের অংশের গ্লোবাল অপশন স্ক্যান বন্ধ করে কমান্ড এলাকায় পাঠানো হয়।
 
-특징:
-
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+```bash
+wavec -- রান main.wave
+```
 
 ---
 
-## 3.2 `build <file>`
+## ৩। কমান্ডসমূহ
 
-실행 파일(exe)을 생성합니다.
+## ৩.১ `run <file>`
+
+Wave ফাইল কম্পাইল এবং চালনা করা হয়।
 
 ```bash
-wavec build app.wave
+wavec রান hello.wave
 ```
 
-출력 바이너리:
+ক্রিয়া:
 
-- `target/<file_stem>`
+1. উৎস পার্সিং + আমদানি সম্প্রসারণ
+2. LLVM IR জেনারেশন
+3. নেটিভ বাইনারি লিঙ্ক (`target/<ফাইল স্টেম>`)
+4. রান
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+বৈশিষ্ট্য:
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+- চালিত প্রোগ্রামের সমাপ্তি কোড `wavec` দ্বারা প্রেরিত হয়।
+
+---
+
+## ৩.২ `build <file>`
+
+এক্সিকিউটেবল ফাইল (exe) তৈরি করে।
+
+```bash
+wavec বিল্ড app.wave
+```
+
+আউটপুট বাইনারি:
+
+- `target/<ফাইল স্টেম>`
+
+## ৩.৩ `build` অপশন (`-o`, `-c`)
+
+`build` কমান্ডটি আউটপুট ফাইলের নাম এবং আউটপুট ফর্ম্যাট অপশন দ্বারা নিয়ন্ত্রণ করতে পারে।
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,18 +97,18 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: আউটপুট ফাইলের নাম নির্ধারণ করে।
+  - ডিফল্ট (`-c` ছাড়া): এক্সিকিউটেবল ফাইল আউটপুট পাথ নির্ধারণ করুন
+  - `-c` সহ: অবজেক্ট ফাইল আউটপুট পাথ নির্ধারণ করুন
+- `-c`: লিঙ্কিং বাদ দিয়ে কেবল অবজেক্ট ফাইল তৈরি করে।
+- `-c` ব্যবহার করার সময় অবজেক্ট পাথ stdout-এ আউটপুট হয়।
 
-기본 동작:
+মূল আচরণ:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (পাথ আউটপুট)
 
-freestanding 커널 오브젝트 예시:
+ফ্রিস্ট্যান্ডিং কার্নেল অবজেক্ট উদাহরণ:
 
 ```bash
 wavec --llvm \
@@ -116,13 +116,13 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`ও একই ভাবে ব্যবহার করা যায়।
 
 ---
 
-## 3.4 `install std`, `update std`
+## ৩.৪ `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+স্ট্যান্ডার্ড লাইব্রেরি ইনস্টল/আপডেট কমান্ড।
 
 ```bash
 wavec install std
@@ -131,7 +131,7 @@ wavec update std
 
 ---
 
-## 3.5 `--help`, `--version`
+## ৩.৫ `--help`, `--version`
 
 ```bash
 wavec --help
@@ -140,11 +140,11 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## ৪। গ্লোবাল অপশন
 
-## 4.1 최적화
+## ৪.১ অপ্টিমাইজেশন
 
-허용 값:
+অনুমোদিত মান:
 
 - `-O0`
 - `-O1`
@@ -154,7 +154,7 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+উদাহরণ:
 
 ```bash
 wavec -O3 run main.wave
@@ -162,13 +162,13 @@ wavec -O3 run main.wave
 
 ---
 
-## 4.2 디버그 출력
+## ৪.২ ডিবাগ আউটপুট
 
 ```bash
 wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
-허용 항목:
+অনুমোদিত আইটেম:
 
 - `tokens`
 - `ast`
@@ -179,36 +179,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## ৪.৩ লিঙ্ক অপশন
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` অথবা `--link <lib>`
+- `-L<path>` অথবা `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+`wavec` লিংক করার সময় অভ্যন্তরীণভাবে `-l<lib>`, `-L<path>` ফর্ম্যাটে প্রদান করে।
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## ৪.৪ বহিরাগত নির্ভরতা অপশন (গুরুত্বপূর্ণ)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+বাহ্যিক ইম্পোর্ট (`pkg::...`) বিশ্লেষণের জন্য অপশন।
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+প্যাকেজ রুট ডিরেক্টরি প্রার্থী যুক্ত করুন।
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+প্যাকেজ `math` খুঁজলে:
 
-- `.vex/dep/math` 를 검사
+- `.vex/dep/math` পরীক্ষা করুন
 
-여러 번 지정 가능:
+বহুবার নির্ধারণ করা সম্ভব:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -216,38 +216,38 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+প্যাকেজের নাম নির্দিষ্ট পথে স্থির করুন।
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+নিয়ম:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- `নাম` ফরম্যাট: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` হবে অবশ্যই `name=path` ফরম্যাটে
+- একই প্যাকেজ নাম পুনরাবৃত্তি করলে ত্রুটি
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## ৪.৫ ব্যাকএন্ড বিকল্প (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+ব্যাকএন্ড নিয়ন্ত্রণ অপশন শুধুমাত্র `--llvm` এর পরে বিশ্লেষণ করা হয়।
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+সহায়ক আইটেম (সারাংশ):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (পুনরাবৃত্তি সম্ভব)
 - `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+বর্তমানে `wavec print target-list` এর মূল লক্ষ্য:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -257,79 +257,79 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` বর্তমানে একটি সংরক্ষিত ডামি পতাকা হিসেবে রয়েছে, এবং প্রকৃত ব্যাকএন্ড পাইপলাইন এখনও কার্যকর হয়নি (TODO)।
 
 ---
 
-## 5. Import 해석 규칙
+## ৫। আয়তন নিয়ম আমদানি ব্যাখ্যা
 
-Wave import는 다음 3가지로 분기됩니다.
+ওয়েভ আমদানিটি নিম্নলিখিত ৩টি ভাগে বিভক্ত করা হয়।
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. লোকাল আমদানি
+2. স্ট্যান্ডার্ড আমদানি
+3. বহিরাগত প্যাকেজ আমদানি
 
-## 5.1 로컬
+## ৫.১ লোকাল
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+এটি মূল ফাইল ডিরেক্টরিতে `<path>.wave` খুঁজে পায়।
 
-## 5.2 std
+## ৫.২ স্ট্যান্ডার্ড
 
 ```wave
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+`~/.wave/lib/wave/std/...` পথটি ব্যবহার করা হয়।
 
-## 5.3 외부 패키지
+## ৫.৩ বহিরাগত প্যাকেজ
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+ফর্ম্যাট:
 
-- 최소 `package::module` 2세그먼트 필요
+- কমপক্ষে `package::module` এর ২টি সেগমেন্ট প্রয়োজন
 
-패키지 루트 결정 순서:
+প্যাকেজ রুট ঠিক নির্ধারণের অনুক্রম:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. `--dep name=path` স্পষ্ট ম্যাপিং
+2. প্রতি `--dep-root` থেকে `<root>/<package>` অনুসন্ধান করুন
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+একই প্যাকেজ কয়েকটি dep-rootএ এক সঙ্গে খুঁজে পেলে:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- স্বয়ংক্রিয়ভাবে নির্বাচন না করে **অস্পষ্টতা ত্রুটি** হবে
+- `--dep name=path` দিয়ে নিশ্চিৎ করতে হবে
 
-모듈 파일 탐색 순서:
+মডিউল ফাইল অনুসন্ধানের ক্রম:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+উদাহরণ:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+অনুসন্ধান:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## ৬। বাহ্যিক আমদানি বাস্তব উদাহরণ
 
-### 6.1 단일 dep-root
+### ৬.১ একক dep-root
 
-디렉터리:
+ডিরেক্টরি:
 
 ```text
 .vex/dep/
@@ -339,19 +339,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+কোড:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+সম্পাদন:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### ৬.২ অস্পষ্টতা দূরীকরণ
 
 ```bash
 wavec run main.wave \
@@ -359,7 +359,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+উভয় পাশে `math` থাকলে ত্রুটি ঘটে। নিচের মত সুনিশ্চিত করুন।
 
 ```bash
 wavec run main.wave \
@@ -370,25 +370,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## ৭। Vex-এর সঙ্গে ভূমিকা বিভাজন
 
-권장 구조:
+প্রস্তাবিত গঠন:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: কম্পাইল/লিঙ্ক/এগজেকিউট + স্পষ্ট নিয়ন্তা বিশ্লেষণ
+- `vex`: নির্ভরতাগুলি স্থাপন/ব্যবস্থাপনার পর `wavec ... --dep-root ... --dep ...` কলে
 
-예:
+উদাহরণ:
 
 ```bash
-# 내부적으로 vex가 수행
+# অভ্যন্তরীণভাবে vex সম্পাদিত
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+এই মডেলটি কম্পাইলারকে সহজ এবং সিদ্ধান্তমূলক রাখে, যখন প্যাকেজ ম্যানেজার স্বয়ংক্রিয়ীকরণের দায়িত্ব নেয়।
 
 ---
 
-## 8. 빠른 참조
+## ৮। দ্রুত রেফারেন্স
 
 ```bash
 wavec run main.wave
