@@ -244,6 +244,7 @@ wavec --llvm --टार्गेट=x86_64-unknown-linux-gnu बिल्ड ap
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (दोहराया जा सकता है)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 वर्तमान `wavec print target-list` के अनुसार प्रमुख लक्ष्य:
