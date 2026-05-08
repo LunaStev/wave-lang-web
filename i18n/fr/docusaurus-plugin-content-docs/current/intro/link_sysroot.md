@@ -2,68 +2,68 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# Contrôle manuel de sysroot de lien (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+Ce document explique comment **contrôler explicitement** le sysroot de l'étape de liaison dans `wavec`.
 
-핵심 원칙:
+Principes fondamentaux :
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<chemin>` : sysroot de l'étape de compilation (clang `-c`)
+- `-C link-sysroot=<chemin>` : sysroot de l'étape de liaison (linker)
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+Autrement dit, les sysroots de compilation et de liaison sont traités séparément.
 
 ---
 
-## 2. 옵션 정의
+## 1. Pourquoi est-ce nécessaire
 
-## 2.1 `-C link-sysroot=<path>`
+Lors de l'utilisation de `-C linker=<chemin>` dans un lien croisé, il est souvent nécessaire de spécifier séparément les chemins d'exécution (`crt1.o`, `libc`, `libm`) référencés par le pilote de lien (p. ex. : `aarch64-linux-gnu-gcc`).
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+À ce stade, le sysroot de lien n'est pas inféré automatiquement, il est prévu d'être passé explicitement dans la CLI.
+
+---
+
+## 2. Définition des options
+
+## 2.1 `-C link-sysroot=<chemin>`
+
+Injection de `--sysroot=<chemin>` à l'étape de liaison.
 
 ```bash
-wavec -C link-sysroot=/path/to/sysroot ...
+wavec -C link-sysroot=/chemin/vers/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+En interne, cela a le même sens que `-C link-arg=--sysroot=<chemin>`.
 
-## 2.2 `-C link-arg=--sysroot=<path>`
+## 2.2 `-C link-arg=--sysroot=<chemin>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+L'ancien mode d'arguments de lien brut est également pris en charge.
 
 ```bash
-wavec -C link-arg=--sysroot=/path/to/sysroot ...
+wavec -C link-arg=--sysroot=/chemin/vers/sysroot ...
 ```
 
 ---
 
-## 3. 검증 규칙
+## 3. Règles de validation
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+Dans les constructions nécessitant l'étape de liaison, lorsque les conditions suivantes sont remplies simultanément, cela se termine par une erreur d'utilisation.
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. Utilisation de `-C linker=...`
+2. Utilisation de `--sysroot=<chemin>`
+3. Sysroot de lien non spécifié (`-C link-sysroot` ou `-C link-arg=--sysroot=...`).
 
-오류 메시지 예:
+Exemple de message d'erreur :
 
 ```text
-when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
+lors de l'utilisation de -C linker=..., --sysroot=<chemin> est uniquement pour l'étape de compilation ; passer explicitement le sysroot du lien avec -C link-sysroot=<chemin> (ou -C link-arg=--sysroot=<chemin>)
 ```
 
 ---
 
-## 4. 사용 예시
+## 4. Exemple d'utilisation
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 AArch64 Linux lien croisé
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 mode d'arguments de lien brut
 
 ```bash
 wavec \
@@ -88,18 +88,18 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 construction sans lien (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+Lorsque l'étape de liaison est absente, le sysroot de lien n'est pas nécessaire.
 
 ```bash
-wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
+wavec --sysroot=/chemin/vers/sysroot build main.wave --emit=obj
 ```
 
 ---
 
-## 5. 정리
+## 5. Résumé
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- `--sysroot` est un contrôle de l'étape de compilation
+- `-C link-sysroot` est un contrôle de l'étape de liaison
+- Priorité au contrôle explicite par rapport à l'inférence automatique
