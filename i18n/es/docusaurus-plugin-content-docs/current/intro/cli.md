@@ -244,6 +244,7 @@ Elementos compatibles (resumen):
 - `--sysroot`
 - `-C linker=<ruta>`
 - `-C link-arg=<arg>` (repetible)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Los principales objetivos según `wavec print target-list` actual:
