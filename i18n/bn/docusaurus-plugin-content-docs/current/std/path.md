@@ -1,12 +1,12 @@
 ---
-sidebar_position: 7
+sidebar_position: ৭
 ---
 
-# std::path 사용법
+# std::path ব্যবহারের নীতি
 
-할당 없이 경로를 분석/복사합니다.
+বরাদ্দ ছাড়া পথ বিশ্লেষণ/কপি করা যাবে।
 
-## import
+## আমদানি
 
 ```wave
 import("std::path::core");
@@ -14,7 +14,7 @@ import("std::path::analyze");
 import("std::path::copy");
 ```
 
-## 1. 경로 결합
+## ১) পথ সংযুক্তি
 
 ```wave
 fun main() {
@@ -22,12 +22,12 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // 버퍼 부족
+        // বাফার ত্রুটি
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## ২) বেসবেসনাম / ডাইরেক্টরিনাম নিষ্কাশন
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## ৩) বিশ্লেষণ ফাংশন
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## মুখ্য কার্যাবলী
 
 ```wave
 fun path_is_sep(c: u8) -> bool
