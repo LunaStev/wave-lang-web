@@ -2,42 +2,42 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# リンクsysroot手動除去 (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+この文書は、`wavec`でリンクユニットsysrootを**明示的に除去**する方法を説明します。
 
-핵심 원칙:
+核心原則:
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<path>`: コンパイル単位(clang `-c`) sysroot
+- `-C link-sysroot=<path>`: リンク単位(linker) sysroot
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+つまり、コンパイルとリンクのsysrootを分離します。
 
 ---
 
-## 2. 옵션 정의
+## 1. なぜ必要か
+
+クロスリンクで`-C linker=<path>`を使うと、リンクドライバ（例：`aarch64-linux-gnu-gcc`）が参照するランタイムパス(`crt1.o`, `libc`, `libm`)を別途指定しなければならない場合が多いです。
+
+この場合、リンクsysrootは自動推論されず、CLIで明示的に伝達されるよう設定します。
+
+---
+
+## 2. オプション定義
 
 ## 2.1 `-C link-sysroot=<path>`
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+リンク単位に`--sysroot=<path>`を入力します。
 
 ```bash
 wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+内部的には`-C link-arg=--sysroot=<path>`と同じ意味です。
 
 ## 2.2 `-C link-arg=--sysroot=<path>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+既存のrawリンク引数方式も継続サポートします。
 
 ```bash
 wavec -C link-arg=--sysroot=/path/to/sysroot ...
@@ -45,15 +45,15 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 
 ---
 
-## 3. 검증 규칙
+## 3. 検証規則
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+リンク単位が必要なビルドで次の条件が同時に成立するとusage errorで終了します。
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. `-C linker=...` 使用
+2. `--sysroot=<path>` 使用
+3. リンクsysroot(`-C link-sysroot`または`-C link-arg=--sysroot=...`) 未指定
 
-오류 메시지 예:
+エラーメッセージ例:
 
 ```text
 when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
@@ -61,9 +61,9 @@ when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sy
 
 ---
 
-## 4. 사용 예시
+## 4. 使用例示
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 AArch64 Linux クロスリンク
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 raw リンク引数方式
 
 ```bash
 wavec \
@@ -88,9 +88,9 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 リンクがないビルド (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+リンク単位がなければリンクsysrootは必要ありません。
 
 ```bash
 wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
@@ -98,8 +98,8 @@ wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 
 ---
 
-## 5. 정리
+## 5. 整理
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- `--sysroot`はコンパイル単位除去
+- `-C link-sysroot`はリンク単位除去
+- 自動推論より明示的除去を優先
