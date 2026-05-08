@@ -61,12 +61,13 @@ The major target triples for documentation by default are:
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (repeatable)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Reflection points:
 
 - In object creation (clang `-c`), `--sysroot`
-- In the link stage, linker override, raw link arg injection
+- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
 - Automatic deactivation of `-lc -lm` when using `-C no-default-libs`
 
 ---
