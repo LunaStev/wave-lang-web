@@ -1,12 +1,12 @@
 ---
-sidebar_position: 9
+sidebar_position: ৯
 ---
 
-# std::time 사용법
+# std::time ব্যবহার নির্দেশিকা
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+বর্তমান সময় প্রদর্শন, সময়ের পার্থক্য গণনা, স্লিপ ফাংশন প্রদান করে।
 
-## import
+## ইমপোর্ট
 
 ```wave
 import("std::time::clock");
@@ -15,7 +15,7 @@ import("std::time::sleep");
 import("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1. পরিসীমা মাপা
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2. ন্যানোসেকেন্ড টাইমস্ট্যাম্প
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3. স্লিপ
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## মুখ্য কার্যাবলী
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64
