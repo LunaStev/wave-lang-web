@@ -2,68 +2,68 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# Kiểm soát thủ công sysroot liên kết (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+Tài liệu này mô tả cách **kiểm soát rõ ràng** sysroot giai đoạn liên kết trong `wavec`.
 
-핵심 원칙:
+Nguyên tắc cốt lõi:
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<đường dẫn>`: sysroot giai đoạn biên dịch (clang `-c`)
+- `-C link-sysroot=<đường dẫn>`: sysroot giai đoạn liên kết (liên kết)
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+Tức là, xử lý sysroot của biên dịch và liên kết cách riêng biệt.
 
 ---
 
-## 2. 옵션 정의
+## 1. Tại sao cần thiết
 
-## 2.1 `-C link-sysroot=<path>`
+Khi sử dụng `-C linker=<đường dẫn>` trong liên kết chéo, thường phải chỉ định riêng các đường dẫn runtime (`crt1.o`, `libc`, `libm`) mà trình điều khiển liên kết (ví dụ: `aarch64-linux-gnu-gcc`).
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+Khi đó thiết kế để không suy luận tự động sysroot liên kết mà truyền tải rõ ràng từ CLI.
+
+---
+
+## 2. Định nghĩa tùy chọn
+
+## 2.1 `-C link-sysroot=<đường dẫn>`
+
+Chèn `--sysroot=<đường dẫn>` vào giai đoạn liên kết.
 
 ```bash
-wavec -C link-sysroot=/path/to/sysroot ...
+wavec -C link-sysroot=/đường/dẫn/đến/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+Nội bộ có cùng nghĩa với `-C link-arg=--sysroot=<đường dẫn>`.
 
-## 2.2 `-C link-arg=--sysroot=<path>`
+## 2.2 `-C link-arg=--sysroot=<đường dẫn>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+Tiếp tục hỗ trợ phương thức tham số liên kết thô hiện tại.
 
 ```bash
-wavec -C link-arg=--sysroot=/path/to/sysroot ...
+wavec -C link-arg=--sysroot=/đường/dẫn/đến/sysroot ...
 ```
 
 ---
 
-## 3. 검증 규칙
+## 3. Quy tắc xác minh
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+Nếu các điều kiện sau đồng thời tồn tại trong quá trình biên dịch cần giai đoạn liên kết, sẽ kết thúc bằng lỗi sử dụng.
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. Sử dụng `-C linker=...`
+2. Sử dụng `--sysroot=<đường dẫn>`
+3. Chưa chỉ định sysroot liên kết (`-C link-sysroot` hoặc `-C link-arg=--sysroot=...`)
 
-오류 메시지 예:
+Ví dụ thông báo lỗi:
 
 ```text
-when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
+khi sử dụng -C linker=..., --sysroot=<đường dẫn> chỉ dành cho giai đoạn biên dịch; truyền tải rõ ràng sysroot liên kết với -C link-sysroot=<đường dẫn> (hoặc -C link-arg=--sysroot=<đường dẫn>)
 ```
 
 ---
 
-## 4. 사용 예시
+## 4. Ví dụ sử dụng
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 Liên kết chéo Linux AArch64
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 Phương thức tham số liên kết thô
 
 ```bash
 wavec \
@@ -88,18 +88,18 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 Biên dịch không có liên kết (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+Nếu không có giai đoạn liên kết thì không cần sysroot liên kết.
 
 ```bash
-wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
+wavec --sysroot=/đường/dẫn/đến/sysroot build main.wave --emit=obj
 ```
 
 ---
 
-## 5. 정리
+## 5. Tóm tắt
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- Điều khiển giai đoạn biên dịch bằng `--sysroot`
+- Điều khiển giai đoạn liên kết bằng `-C link-sysroot`
+- Ưu tiên kiểm soát rõ ràng hơn so với suy luận tự động
