@@ -61,12 +61,13 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (繰り返し可能)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 反映ポイント:
 
 - オブジェクト生成（clang `-c`）で`--sysroot`
-- リンクステップでのリンカオーバーライドと生リンク引数注入
+- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
 - `-C no-default-libs`使用時の自動`-lc -lm`無効化
 
 ---
