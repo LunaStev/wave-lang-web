@@ -1,247 +1,411 @@
-import React, { useState, useEffect, ReactNode, CSSProperties } from 'react';
+import React, {useMemo, useState} from 'react';
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Heading from '@theme/Heading';
+
 import styles from './styles.module.css';
-import Translate from "@docusaurus/Translate";
-import Link from "@docusaurus/Link";
-import Logo from '@site/static/img/logo.svg';
 
-// --- (기존 타입 정의는 그대로 유지) ---
-interface CodeExample {
-    title: string;
-    code: string;
-    output: string;
-}
-type CodeTabKey = 'hello' | 'variables' | 'functions';
-interface FeatureItem {
-    titleId: string;
-    descriptionId: string;
-    icon: string;
-    code: string;
-}
-interface Contributor {
-    name: string;
-    roleId: string;
-    avatar: string;
-}
-interface Sponsor {
-    name: string;
-    tierId: string;
-    link: string;
-}
-interface InfiniteScrollProps {
-    children: ReactNode;
-    direction?: 'left' | 'right';
-    speed?: number;
-}
-// --- 새로 추가된 Discord 위젯 데이터 타입 ---
-interface DiscordInfo {
-    name: string;
-    instant_invite: string;
-    presence_count: number;
-    members: { avatar_url: string }[];
+type CodeTabKey = 'hello' | 'control' | 'raycaster';
+
+type CodeExample = {
+  label: string;
+  title: string;
+  summary: string;
+  code: string;
+  output: string;
+};
+
+type CommandItem = {
+  label: string;
+  command: string;
+  detail: string;
+};
+
+type PlatformTier = {
+  tier: string;
+  title: string;
+  platforms: string;
+  detail: string;
+};
+
+const codeExamples: Record<CodeTabKey, CodeExample> = {
+  hello: {
+    label: 'Hello',
+    title: 'A small entry point',
+    summary:
+      'Wave keeps the program entry explicit and leaves functionality to the standard library.',
+    code: `fun main() {
+    println("Hello World");
+}`,
+    output: 'Hello World',
+  },
+  control: {
+    label: 'Control',
+    title: 'Typed flow without ceremony',
+    summary:
+      'Variables, conditionals, loops, and functions use direct syntax that stays close to the machine model.',
+    code: `fun greet(name: str) {
+    println("Hello, {}!", name);
 }
 
+fun main() {
+    var x: i32 = 5;
+    var y: i32 = 10;
 
-// --- (기존 AnimatedWave, InteractiveHero, WhyWaveSection 컴포넌트는 그대로 유지) ---
+    if (x < y) {
+        greet("Wave");
+    }
+}`,
+    output: 'Hello, Wave!',
+  },
+  raycaster: {
+    label: 'Systems',
+    title: 'Low-level code stays visible',
+    summary:
+      'The compiler is being built for explicit runtime behavior, platform APIs, and native execution.',
+    code: `import("std::sys::linux::tty");
+import("std::time::clock");
 
-const AnimatedWave = () => (
-    <div className={styles.waveContainer}>
-        <svg
-            className="waves"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28"
-            preserveAspectRatio="none"
-            shapeRendering="auto"
-            style={{ width: '100%', height: '100%' }}
-        >
-            <defs>
-                <path
-                    id="gentle-wave"
-                    d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-                />
-            </defs>
-            <g className="parallax">
-                <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(139, 92, 246,0.7)" />
-                <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(139, 92, 246,0.5)" />
-                <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(139, 92, 246,0.3)" />
-                <use xlinkHref="#gentle-wave" x="48" y="7" fill="rgba(139, 92, 246,1)" />
-            </g>
-        </svg>
-        <style>{`
-      .parallax > use { animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite; }
-      .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-      .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-      .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-      .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
-      @keyframes move-forever { 0% { transform: translate3d(-90px, 0, 0); } 100% { transform: translate3d(85px, 0, 0); } }
-    `}</style>
-    </div>
-);
+const SCREEN_W: i32 = 120;
+const SCREEN_H: i32 = 40;
 
-function InteractiveHero(): JSX.Element {
-    const [activeTab, setActiveTab] = useState<CodeTabKey>('hello');
-    const codeExamples: Record<CodeTabKey, CodeExample> = {
-        hello: { title: 'Hello, World', code: `fun main() {\n  println("Hello, World!");\n}`, output: 'Hello, World!' },
-        variables: { title: 'Variables & Types', code: `fun main() {\n  var name: str = "Wave";\n  let year: i32 = 2024; // immutable\n\n  println("Language: {}, Year: {}", name, year);\n}`, output: 'Language: Wave, Year: 2024' },
-        functions: { title: 'Functions', code: `fun greet(name: str) -> str {\n  return "Hello, " + name;\n}\n\nfun main() {\n  println(greet("Developer"));\n}`, output: 'Hello, Developer' },
-    };
-    const { code, output } = codeExamples[activeTab];
-    return (
-        <header className={clsx(styles.heroBanner)}>
-            <div className={clsx('container', styles.heroContent)}>
-                <Heading as="h1" className={styles.heroTitle}><Translate id="homepage.hero.title">A Modern Language for a New Wave of Developers</Translate></Heading>
-                <p className={styles.heroSubtitle}><Translate id="homepage.hero.subtitle">Intuitive syntax, powerful performance, and built-in safety. Wave is designed to make you productive and your applications robust.</Translate></p>
-                <div className={styles.buttons}>
-                    <Link className="button button--secondary button--lg" to="/docs/intro"><Translate id="read-the-docs">Read the Docs</Translate></Link>
-                    <Link className="button button--primary button--lg" to="https://discord.com/invite/3nev5nHqq9"><Translate id="join-the-community">Join the Community</Translate></Link>
-                </div>
-                <div className={styles.interactiveEditor}>
-                    <div className={styles.editorTabs}>
-                        {(Object.keys(codeExamples) as CodeTabKey[]).map((key) => (<button key={key} className={clsx(styles.editorTab, {[styles.activeTab]: activeTab === key})} onClick={() => setActiveTab(key)}>{codeExamples[key].title}</button>))}
-                    </div>
-                    <div className={styles.editorContent}>
-                        <div className={styles.codePane}><pre><code className="language-wave">{code}</code></pre></div>
-                        <div className={styles.outputPane}><div className={styles.outputHeader}>OUTPUT</div><pre><code>{output}</code></pre></div>
-                    </div>
-                </div>
+fun main() {
+    var player_x: f64 = 8.0;
+    var player_y: f64 = 8.0;
+    var running: bool = true;
+
+    while (running) {
+        var now_ns: i64 = time_now_monotonic_ns();
+        println("frame: {}", now_ns);
+    }
+}`,
+    output: 'frame: 1837469122',
+  },
+};
+
+const commands: CommandItem[] = [
+  {
+    label: 'Install',
+    command: 'curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest',
+    detail: 'Get the latest compiler release on supported Unix-like systems.',
+  },
+  {
+    label: 'Run',
+    command: 'wavec run examples/hello.wave',
+    detail: 'Compile and execute a Wave source file from the CLI.',
+  },
+  {
+    label: 'Build',
+    command: 'wavec build app.wave -o app',
+    detail: 'Emit a native binary when you are ready to ship or inspect output.',
+  },
+  {
+    label: 'Debug',
+    command: 'wavec build app.wave --debug-wave=tokens,ast,ir',
+    detail: 'Inspect compiler stages while working on language behavior.',
+  },
+];
+
+const platformTiers: PlatformTier[] = [
+  {
+    tier: 'Tier 1',
+    title: 'Primary',
+    platforms: 'Linux, Darwin, WaveOS',
+    detail: 'Full standard library support, required CI coverage, and release-blocking status.',
+  },
+  {
+    tier: 'Tier 2',
+    title: 'Secondary',
+    platforms: 'FreeBSD, Redox, Fuchsia',
+    detail: 'Maintained build support with partial standard library coverage.',
+  },
+  {
+    tier: 'Tier 3',
+    title: 'Experimental',
+    platforms: 'OpenBSD',
+    detail: 'Compiler build and compile path prioritized while platform coverage grows.',
+  },
+  {
+    tier: 'Tier 4',
+    title: 'Unofficial',
+    platforms: 'Windows',
+    detail: 'Community-maintained status without official standard library target guarantees.',
+  },
+];
+
+const principles = [
+  {
+    title: 'No builtin functions',
+    detail:
+      'The compiler stays small and explicit; higher-level functionality belongs in libraries.',
+  },
+  {
+    title: 'No implicit runtime',
+    detail:
+      'Wave favors visible behavior and predictable native output over hidden language machinery.',
+  },
+  {
+    title: 'Compiler-first architecture',
+    detail:
+      'Token, AST, IR, machine-code, and hex debugging modes keep internals inspectable.',
+  },
+];
+
+function CopyButton({command}: {command: string}): JSX.Element {
+  const [copied, setCopied] = useState(false);
+
+  function copyCommand() {
+    if (typeof navigator === 'undefined' || !navigator.clipboard) {
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(command)
+      .then(() => {
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1400);
+      })
+      .catch(() => undefined);
+  }
+
+  return (
+    <button type="button" className={styles.copyButton} onClick={copyCommand}>
+      {copied ? 'Copied' : 'Copy'}
+    </button>
+  );
+}
+
+function HeroSection(): JSX.Element {
+  const logo = useBaseUrl('/img/logo.png');
+
+  return (
+    <header className={styles.hero}>
+      <div className={styles.heroMedia} aria-hidden="true" />
+      <div className="container">
+        <div className={styles.heroContent}>
+          <img src={logo} alt="" className={styles.heroLogo} />
+          <p className={styles.eyebrow}>Systems programming language</p>
+          <Heading as="h1" className={styles.heroTitle}>
+            Wave
+          </Heading>
+          <p className={styles.heroSubtitle}>
+            Native systems programming with explicit behavior, standard-library
+            driven capability, and compiler internals that stay inspectable.
+          </p>
+
+          <div className={styles.heroActions}>
+            <Link className={clsx('button', styles.primaryAction)} to="/docs/intro/">
+              Read Docs
+            </Link>
+            <Link
+              className={clsx('button', styles.secondaryAction)}
+              to="https://github.com/wavefnd/Wave/releases">
+              Releases
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function QuickStartSection(): JSX.Element {
+  return (
+    <section className={styles.quickStart}>
+      <div className={clsx('container', styles.quickStartGrid)}>
+        <div>
+          <p className={styles.sectionKicker}>Quick start</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Install, run, inspect.
+          </Heading>
+          <p className={styles.sectionLead}>
+            The website now reflects the compiler repository directly: a small
+            toolchain, explicit CLI commands, and debugging flags for compiler
+            development.
+          </p>
+        </div>
+
+        <div className={styles.commandStack}>
+          {commands.map((item) => (
+            <article className={styles.commandRow} key={item.label}>
+              <div className={styles.commandMeta}>
+                <span>{item.label}</span>
+                <p>{item.detail}</p>
+              </div>
+              <pre className={styles.commandLine}>
+                <code>{item.command}</code>
+              </pre>
+              <CopyButton command={item.command} />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CodeLabSection(): JSX.Element {
+  const [activeTab, setActiveTab] = useState<CodeTabKey>('hello');
+  const activeExample = codeExamples[activeTab];
+  const tabKeys = useMemo(() => Object.keys(codeExamples) as CodeTabKey[], []);
+
+  return (
+    <section className={styles.codeLab}>
+      <div className="container">
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionKicker}>Language surface</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Small syntax, visible systems intent.
+          </Heading>
+        </div>
+
+        <div className={styles.editorShell}>
+          <div className={styles.editorSidebar}>
+            {tabKeys.map((key) => (
+              <button
+                type="button"
+                key={key}
+                className={clsx(styles.editorTab, activeTab === key && styles.editorTabActive)}
+                onClick={() => setActiveTab(key)}>
+                <span>{codeExamples[key].label}</span>
+                <strong>{codeExamples[key].title}</strong>
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.editorPanel}>
+            <div className={styles.editorHeader}>
+              <div>
+                <span className={styles.windowDot} />
+                <span className={styles.windowDot} />
+                <span className={styles.windowDot} />
+              </div>
+              <span>examples/{activeTab}.wave</span>
             </div>
-            <AnimatedWave/>
-        </header>
-    );
-}
-
-const WhyWaveSection: React.FC = () => {
-    const features: FeatureItem[] = [
-        { titleId: 'homepage.features.one.title', descriptionId: 'homepage.features.one.description', icon: '✨', code: `// Less boilerplate, more focus\nfun handler(req: Request, res: Response) -> void {\n  var user: User = db.findUser(req.params.id);\n  res.write(to_json(user));\n}\n\nhttp.route("/users/:id")\n    .method(HttpMethod.GET)\n    .handler(handler)\n    .register();` },
-        { titleId: 'homepage.features.two.title', descriptionId: 'homepage.features.two.description', icon: '🚀', code: `// Compile to native code\n// Zero-cost abstractions\nfun fib(n: i64) -> i64 {\n  if (n <= 1) {\n    return n;\n  }\n  return fib(n - 1) + fib(n - 2);\n}` },
-        { titleId: 'homepage.features.three.title', descriptionId: 'homepage.features.three.description', icon: '🛡️', code: `// No null pointer exceptions\nvar name: str? = fetchName();\n// Compiler ensures safe access\nprintln(name?.length() ?? 0);` },
-    ];
-    return (
-        <section className={styles.whyWaveSection}><div className="container"><Heading as="h2" className={clsx('text--center', styles.sectionTitle)}><Translate id="homepage.why_wave.title">Why Choose Wave?</Translate></Heading><div className={styles.featuresGrid}>{features.map((feature) => (<div key={feature.titleId} className={styles.featureCard}><div className={styles.featureIcon}>{feature.icon}</div><Heading as="h3"><Translate id={feature.titleId} /></Heading><p><Translate id={feature.descriptionId} /></p><div className={styles.featureCode}><pre><code className="language-wave">{feature.code}</code></pre></div></div>))}</div></div></section>
-    );
-};
-
-
-// --- (InfiniteScroll, CommunitySection은 그대로 유지) ---
-const InfiniteScroll: React.FC<InfiniteScrollProps> = ({ children, direction = 'left', speed = 40 }) => {
-    const styleVars: CSSProperties & { [key: string]: string } = { '--scroll-speed': `${speed}s`, '--scroll-direction': direction === 'left' ? 'normal' : 'reverse' };
-    return (<div className={styles.scrollWrapper}><div className={styles.scrollContent} style={styleVars}><div className={styles.scrollGroup}>{children}</div><div className={styles.scrollGroup} aria-hidden="true">{children}</div></div></div>);
-};
-const CommunitySection: React.FC = () => {
-    const contributors: Contributor[] = [ { name: "LunaStev", roleId: 'homepage.contributors.role.founder', avatar: 'https://avatars.githubusercontent.com/u/96914208?v=4' }, { name: "Megan0704-1", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/94007620?v=4' }, { name: "Wertzui123", roleId: 'homepage.contributors.role.contributor', avatar: 'https://avatars.githubusercontent.com/u/46199283?v=4' } ];
-    const sponsors: Sponsor[] = [ { name: "heymanbug", tierId: 'homepage.sponsors.tier.honor', link: 'https://github.com/heymanbug' } ];
-    return (
-        <section className={styles.communitySection}>
-            <div className="container">
-                <div className={styles.communityContainer}><Heading as="h2" className={clsx('text--center', styles.sectionTitle)}><Translate id="homepage.contributors.title" /></Heading><InfiniteScroll direction="right" speed={50}>{contributors.map((c) => (<a href={`https://github.com/${c.name}`} target="_blank" rel="noopener noreferrer" key={c.name} className={styles.contributorCard}><img src={c.avatar} alt={c.name} /><div><h3>{c.name}</h3><p><Translate id={c.roleId} /></p></div></a>))}</InfiniteScroll></div>
-                <div className={styles.communityContainer}><Heading as="h2" className={clsx('text--center', styles.sectionTitle)}><Translate id="homepage.sponsors.title" /></Heading><InfiniteScroll>{sponsors.map((sponsor) => (<a href={sponsor.link} target="_blank" rel="noopener noreferrer" key={sponsor.name} className={styles.sponsorCard}><h3>{sponsor.name}</h3><p><Translate id={sponsor.tierId} /></p></a>))}</InfiniteScroll></div>
-            </div>
-            <div className={clsx(styles.communityContainer, styles.translateSection)}><Heading as="h2" className={styles.sectionTitle}><Translate id="homepage.translations.title">Help Translate Wave</Translate></Heading><p><Translate id="homepage.translations.subtitle">Make Wave accessible to developers worldwide by contributing translations.</Translate></p><a href="https://crowdin.com/project/wave-website" target="_blank" rel="noopener noreferrer" className={styles.translateButton}>🌐 <Translate id="homepage.translations.button">Contribute on Crowdin</Translate></a></div>
-        </section>
-    );
-};
-
-// --- ✨ 새로운 Discord 위젯 섹션 ✨ ---
-interface DiscordInfo {
-    id: string;
-    name: string;
-    instant_invite: string | null;
-    presence_count: number;
-    // 아이콘과 배너를 위한 속성을 추가할 수 있습니다.
-    icon_url: string;
-}
-
-const DiscordWidgetSection: React.FC = () => {
-    const [discordInfo, setDiscordInfo] = useState<DiscordInfo | null>(null);
-    const [error, setError] = useState<string | null>(null);
-    const serverId = "1268404228683202570";
-    const inviteLink = "https://discord.gg/3nev5nHqq9";
-
-    useEffect(() => {
-        fetch(`https://discord.com/api/guilds/${serverId}/widget.json`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Failed to fetch Discord data. Please ensure the server widget is enabled.');
-                }
-                return res.json();
-            })
-            .then((data) => {
-                const iconUrl = `https://cdn.discordapp.com/icons/${serverId}/${data.icon}.png`;
-                setDiscordInfo({ ...data, icon_url: iconUrl });
-            })
-            .catch(() => {
-                setError("Could not load community details. The server widget might be disabled.");
-            });
-    }, [serverId]);
-
-    return (
-        <section className={styles.discordWidgetSection}>
-            <div className="container">
-                <div className={styles.discordWidgetCard}>
-                    <div className={styles.discordWidgetHeader}>
-                        <Heading as="h2" className={styles.sectionTitle}>
-                            <Translate id="homepage.discord.title">Join Our Community</Translate>
-                        </Heading>
-                        <p>
-                            <Translate id="homepage.discord.subtitle">
-                                Connect with other developers, ask questions, and share your projects.
-                            </Translate>
-                        </p>
-                    </div>
-                    <div className={styles.discordWidgetContent}>
-                        {error && <div className={styles.discordError}>{error}</div>}
-                        {!discordInfo && !error && <div>Loading...</div>}
-                        {discordInfo && (
-                            <>
-                                <div className={styles.discordServerInfo}>
-                                    <img
-                                        src={discordInfo.icon_url}
-                                        alt={`${discordInfo.name} server icon`}
-                                        className={styles.discordServerIcon}
-                                        onError={(e) => {
-                                            e.currentTarget.onerror = null;
-                                            e.currentTarget.src = Logo;
-                                        }}
-                                    />
-                                    <div>
-                                        <h3>{discordInfo.name}</h3>
-                                        <div className={styles.discordStatus}>
-                                            <span className={styles.onlineIndicator}></span>
-                                            {discordInfo.presence_count}{' '}
-                                            <Translate id="homepage.discord.members_online">Members Online</Translate>
-                                        </div>
-                                    </div>
-                                </div>
-                                <Link
-                                    className="button button--primary button--lg"
-                                    href={inviteLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Translate id="homepage.discord.join_button">Join Server</Translate>
-                                </Link>
-                            </>
-                        )}
-                    </div>
+            <div className={styles.editorBody}>
+              <pre>
+                <code>{activeExample.code}</code>
+              </pre>
+              <aside>
+                <p>{activeExample.summary}</p>
+                <div className={styles.outputBox}>
+                  <span>Output</span>
+                  <code>{activeExample.output}</code>
                 </div>
+              </aside>
             </div>
-        </section>
-    );
-};
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
+function PrinciplesSection(): JSX.Element {
+  return (
+    <section className={styles.principles}>
+      <div className="container">
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionKicker}>Project philosophy</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            The compiler does less hidden work.
+          </Heading>
+        </div>
 
-// --- 최종 렌더링 컴포넌트 (수정됨) ---
-const HomepageFeatures: React.FC = () => {
-    return (
-        <>
-            <InteractiveHero />
-            <WhyWaveSection />
-            <CommunitySection />
-            <DiscordWidgetSection /> {/* Discord 위젯 섹션 추가 */}
-        </>
-    );
-};
+        <div className={styles.principleGrid}>
+          {principles.map((principle) => (
+            <article className={styles.principleCard} key={principle.title}>
+              <Heading as="h3">{principle.title}</Heading>
+              <p>{principle.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-export default HomepageFeatures;
+function PlatformSection(): JSX.Element {
+  return (
+    <section className={styles.platforms}>
+      <div className={clsx('container', styles.platformGrid)}>
+        <div>
+          <p className={styles.sectionKicker}>Target policy</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Platform support is tiered on purpose.
+          </Heading>
+          <p className={styles.sectionLead}>
+            Wave sets expectations for standard library coverage, CI, and
+            release stability by target family.
+          </p>
+        </div>
+
+        <div className={styles.tierList}>
+          {platformTiers.map((tier) => (
+            <article className={styles.tierRow} key={tier.tier}>
+              <div>
+                <span>{tier.tier}</span>
+                <strong>{tier.title}</strong>
+              </div>
+              <p>{tier.platforms}</p>
+              <small>{tier.detail}</small>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CommunitySection(): JSX.Element {
+  return (
+    <section className={styles.community}>
+      <div className={clsx('container', styles.communityGrid)}>
+        <div>
+          <p className={styles.sectionKicker}>Contributing</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Built in public with signed-off changes.
+          </Heading>
+          <p className={styles.sectionLead}>
+            Wave accepts GitHub pull requests and email patches. Contributions
+            are expected to be focused, signed off, and verified against the
+            compiler toolchain.
+          </p>
+        </div>
+
+        <div className={styles.contributePanel}>
+          <pre>
+            <code>{`git checkout -b fix/parser-bug
+git commit -s -m "Fix parser behavior"
+git format-patch -1
+git send-email --to wave-patches@lunastev.org *.patch`}</code>
+          </pre>
+          <div className={styles.communityActions}>
+            <Link className={clsx('button', styles.primaryAction)} to="/docs/intro/">
+              Start with Docs
+            </Link>
+            <Link
+              className={clsx('button', styles.secondaryAction)}
+              to="https://discord.gg/3nev5nHqq9">
+              Join Discord
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function HomepageFeatures(): JSX.Element {
+  return (
+    <>
+      <HeroSection />
+      <QuickStartSection />
+      <CodeLabSection />
+      <PrinciplesSection />
+      <PlatformSection />
+      <CommunitySection />
+    </>
+  );
+}

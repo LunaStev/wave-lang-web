@@ -1,30 +1,146 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global Docusaurus and Wave theme tokens.
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #6b84ff; /* 변경된 기본 색상 */
-  --ifm-color-primary-dark: #5a75e6; /* 어두운 색상 */
-  --ifm-color-primary-darker: #4a66cc; /* 더 어두운 색상 */
-  --ifm-color-primary-darkest: #3a57b3; /* 가장 어두운 색상 */
-  --ifm-color-primary-light: #7a96ff; /* 밝은 색상 */
-  --ifm-color-primary-lighter: #8aaaff; /* 더 밝은 색상 */
-  --ifm-color-primary-lightest: #9bbdff; /* 가장 밝은 색상 */
+  --ifm-color-primary: #0aa79a;
+  --ifm-color-primary-dark: #09978b;
+  --ifm-color-primary-darker: #088b80;
+  --ifm-color-primary-darkest: #076f67;
+  --ifm-color-primary-light: #12bdaf;
+  --ifm-color-primary-lighter: #20d0c2;
+  --ifm-color-primary-lightest: #6ee8dd;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --ifm-font-family-monospace:
+    'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
+    monospace;
+  --ifm-global-radius: 8px;
+  --ifm-button-border-radius: 7px;
+  --ifm-card-border-radius: 8px;
+  --docusaurus-highlighted-code-line-bg: rgba(8, 167, 154, 0.12);
+
+  --wave-background: #f6f8fb;
+  --wave-surface: #ffffff;
+  --wave-band: #eef5f3;
+  --wave-soft: #edf3f7;
+  --wave-ink: #111820;
+  --wave-muted: #546371;
+  --wave-border: rgba(14, 26, 39, 0.12);
+  --wave-border-strong: rgba(14, 26, 39, 0.22);
+  --wave-accent: #14c8b8;
+  --wave-accent-strong: #0da999;
+  --wave-warn: #e7a53f;
+  --wave-violet: #7c5cff;
+  --wave-code: #071017;
+  --wave-code-ink: #d8f8f3;
+  --wave-shadow-soft: 0 12px 30px rgba(19, 34, 49, 0.07);
+  --wave-shadow-panel: 0 22px 70px rgba(19, 34, 49, 0.12);
+  --wave-shadow-float: 0 18px 60px rgba(19, 34, 49, 0.14);
 }
 
-/* Dark mode에서 색상 변경 */
 [data-theme='dark'] {
-  --ifm-color-primary: #5a75e6; /* 어두운 모드에서의 기본 색상 */
-  --ifm-color-primary-dark: #4a66cc; /* 어두운 색상 */
-  --ifm-color-primary-darker: #3a57b3; /* 더 어두운 색상 */
-  --ifm-color-primary-darkest: #2a498b; /* 가장 어두운 색상 */
-  --ifm-color-primary-light: #7a96ff; /* 밝은 색상 */
-  --ifm-color-primary-lighter: #8aaaff; /* 더 밝은 색상 */
-  --ifm-color-primary-lightest: #9bbdff; /* 가장 밝은 색상 */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #39ddca;
+  --ifm-color-primary-dark: #22cdbb;
+  --ifm-color-primary-darker: #1fc1b0;
+  --ifm-color-primary-darkest: #199f92;
+  --ifm-color-primary-light: #5be3d4;
+  --ifm-color-primary-lighter: #78e9dd;
+  --ifm-color-primary-lightest: #a8f2eb;
+  --ifm-background-color: #071017;
+  --ifm-background-surface-color: #0d171e;
+  --ifm-navbar-background-color: #071017;
+  --ifm-footer-background-color: #060b10;
+  --docusaurus-highlighted-code-line-bg: rgba(57, 221, 202, 0.16);
+
+  --wave-background: #071017;
+  --wave-surface: #0d171e;
+  --wave-band: #101d23;
+  --wave-soft: #14262d;
+  --wave-ink: #f4fbff;
+  --wave-muted: #a8b7bf;
+  --wave-border: rgba(217, 244, 247, 0.13);
+  --wave-border-strong: rgba(217, 244, 247, 0.24);
+  --wave-accent: #39ddca;
+  --wave-accent-strong: #68f0e0;
+  --wave-warn: #f1bb62;
+  --wave-violet: #a78bfa;
+  --wave-code: #05090d;
+  --wave-code-ink: #dffcf7;
+  --wave-shadow-soft: 0 16px 34px rgba(0, 0, 0, 0.25);
+  --wave-shadow-panel: 0 26px 78px rgba(0, 0, 0, 0.34);
+  --wave-shadow-float: 0 22px 68px rgba(0, 0, 0, 0.32);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--wave-background);
+  color: var(--wave-ink);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--wave-accent) 34%, transparent);
+}
+
+.main-wrapper {
+  background: var(--wave-background);
+}
+
+.homepage-wrapper {
+  overflow: clip;
+}
+
+.button {
+  box-shadow: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.navbar-sidebar {
+  background: var(--wave-surface);
+}
+
+.navbar-sidebar__brand {
+  box-shadow: none;
+  border-bottom: 1px solid var(--wave-border);
+}
+
+.navbar-sidebar__item {
+  color: var(--wave-ink);
+}
+
+.theme-doc-sidebar-container,
+.table-of-contents {
+  border-color: var(--wave-border) !important;
+}
+
+.card,
+.pagination-nav__link,
+.theme-admonition {
+  border-radius: 8px;
+}
+
+pre,
+code {
+  border-radius: 7px;
 }

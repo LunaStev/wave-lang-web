@@ -140,15 +140,15 @@ const config: Config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        {name: 'keywords', content: 'Wave, programming language, web development, operating systems, AI, blockchain, hardware, cryptography, networking, compilers'},
-        {name: 'description', content: 'Wave is a modern programming language that redefines development with an integrated ecosystem across web, OS, AI, and hardware.'},
+        {name: 'keywords', content: 'Wave, systems programming language, compiler, LLVM, standard library, native code, WaveOS'},
+        {name: 'description', content: 'Wave is a systems programming language focused on explicit behavior, native output, and inspectable compiler internals.'},
         {name: 'author', content: 'LunaStev'},
         {name: 'robots', content: 'index, follow'},
         {property: 'og:title', content: 'Wave Programming Language'},
-        {property: 'og:description', content: 'Wave is a modern programming language that integrates web, OS, AI, blockchain, hardware, and more into one ecosystem.'},
+        {property: 'og:description', content: 'Wave is a systems programming language for explicit low-level control and high performance.'},
         {property: 'og:url', content: 'https://wave-lang.dev'},
         {name: 'twitter:title', content: 'Wave Programming Language'},
-        {name: 'twitter:description', content: 'Wave is a modern programming language designed for an integrated ecosystem that spans web, OS, AI, blockchain, and hardware.'},
+        {name: 'twitter:description', content: 'Wave is a systems programming language focused on explicit behavior and native output.'},
       ],
       // Replace with your project's social card
       image: 'img/wave-og.png',
