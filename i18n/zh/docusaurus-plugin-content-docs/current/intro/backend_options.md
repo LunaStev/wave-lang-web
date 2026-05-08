@@ -67,7 +67,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 应用点：
 
 - 对象生成（clang `-c`）时使用 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- 在链接阶段进行链接器覆盖，注入原始链接参数，注入 link-sysroot
 - 使用 `-C no-default-libs` 时自动禁用 `-lc -lm`
 
 ---
