@@ -67,7 +67,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 प्रतिबिंबित बिंदु:
 
 - ऑब्जेक्ट निर्माण (क्लैंग `-c`) में `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- लिंक चरण पर लिंक ओवरराइड करें, रॉ लिंक तर्क का इंजेक्शन करें, लिंक-sysroot को इंजेक्ट करें
 - `-C no-default-libs` के उपयोग के समय स्वत: `-lc -lm` निष्क्रियता
 
 ---
