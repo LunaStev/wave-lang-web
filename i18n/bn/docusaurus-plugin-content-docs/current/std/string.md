@@ -1,12 +1,12 @@
 ---
-sidebar_position: 8
+sidebar_position: ৮
 ---
 
-# std::string 사용법
+# std::string ব্যবহারের নির্দেশিকা
 
-NUL 종료 문자열(`str`) 유틸입니다.
+NUL শেষ স্ট্রিং (`str`) ইউটিলিটি।
 
-## import
+## আমদানি
 
 ```wave
 import("std::string::len");
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## ১) দৈর্ঘ্য/তুলনা
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## ২) খোজ নেবেন/গণনা করবেন
 
 ```wave
 fun main() {
@@ -38,30 +38,30 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## ৩) ট্রিম রেঞ্জ + ASCII
 
 ```wave
 fun main() {
-    var s: str = "  hello\n";
+    var s: str = "  হ্যালো\n";
     var st: i32 = 0;
     var en: i32 = 0;
     trim_range(s, &st, &en);
 
-    var d: bool = is_digit(53);    // '5'
-    var up: u8 = to_upper(97);     // 'a' -> 'A'
+    var d: bool = is_digit(৫৩);   // '৫'
+    var up: u8 = to_upper(৯৭);   // 'a' -> 'A'
 }
 ```
 
-## 4. 해시
+## 4. হ্যাশ
 
 ```wave
 fun main() {
-    var h1: i32 = djb2_32("cache-key");
-    var h2: i64 = fnv1a_64("cache-key");
+    var h1: i32 = djb2_32("ক্যাশ-কী");
+    var h2: i64 = fnv1a_64("ক্যাশ-কী");
 }
 ```
 
-## 주요 함수
+## মুখ্য কার্যাবলী
 
 ```wave
 fun len(s: str) -> i32
