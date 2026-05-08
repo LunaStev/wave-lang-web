@@ -61,12 +61,13 @@ Hivi sasa, troja muhimu za lengo kwa maandishi ni:
 - `--sysroot <njia>` / `--sysroot=<njia>`
 - `-C kiunganishi=<njia>`
 - `-C kiungo-hoja=<hoja>` (Inaweza kurudiwa)
+- `-C link-sysroot=<path>`
 - `-C hakuna maktaba chaguomsingi`
 
 Sehemu za kutafakari:
 
 - Uundaji wa kitu (clang `-c`) una `--sysroot`
-- Katika hatua ya kiungo, kiunganishi kibadilishwe, hatua ya moja kwa moja ya ingizo la kiungo
+- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
 - Unapotumia `-C no-default-libs`, `-lc -lm` huzima kiotomatiki
 
 ---
