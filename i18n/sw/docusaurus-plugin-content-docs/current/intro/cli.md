@@ -244,7 +244,7 @@ Vitu vilivyoandaliwa (muhtasari):
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (Inaweza kurudiwa)
-- `-C link-sysroot=<path>`
+- `-C link-sysroot=<njia>`
 - `-C no-default-libs`
 
 Lengo kuu kwa msingi wa `wavec print target-list` ya sasa:
