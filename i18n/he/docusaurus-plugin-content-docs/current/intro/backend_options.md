@@ -61,13 +61,13 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `--sysroot <נתיב>` / `--sysroot=<נתיב>`
 - `-C linker=<נתיב>`
 - `-C link-arg=<ארגומנט>` (ניתן לחזור)
-- `-C link-sysroot=<path>`
+- `-C link-sysroot=<נתיב>`
 - `-C no-default-libs`
 
 נקודת יישום:
 
 - ביצירת אובייקט (עם clang `-c`) ב `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- במחלקת הלינק, ניתן להגדיר override ל-linker, להזין קלט לינק raw ולהזין link-sysroot.
 - בעת השימוש ב-`-C no-default-libs` מושבת באופן אוטומטי `-lc -lm`
 
 ---
