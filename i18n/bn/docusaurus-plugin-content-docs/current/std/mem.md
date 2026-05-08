@@ -1,12 +1,12 @@
 ---
-sidebar_position: 5
+sidebar_position: ৫
 ---
 
-# std::mem 사용법
+# std::mem ব্যবহারের নির্দেশিকা
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+নিম্ন স্তরের মেমোরি বরাদ্দ/কপি/তুলনা ইউটিলিটি।
 
-## import
+## আমদানি
 
 ```wave
 import("std::mem::alloc");
@@ -14,7 +14,7 @@ import("std::mem::ops");
 import("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## ১) মৌলিক বরাদ্দ/বাতিলকরণ
 
 ```wave
 fun main() {
@@ -28,21 +28,21 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## ২) পুনঃ বরাদ্দ এবং স্থানান্তর নিরাপদ কপি
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // ওভারল্যাপ করা মেমোরি স্থান নিরাপদ স্থানান্তর
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## ৩) সাধারণ আইটেম API
 
 ```wave
 fun main() {
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## ৪) C স্ট্রিং ইউটিল
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## প্রধান ফাংশন
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>
