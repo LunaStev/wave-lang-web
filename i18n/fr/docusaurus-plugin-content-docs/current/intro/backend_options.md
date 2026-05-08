@@ -61,13 +61,13 @@ Principaux triples cibles actuellement documentés par défaut :
 - `--sysroot <chemin>` / `--sysroot=<chemin>`
 - `-C linker=<chemin>`
 - `-C link-arg=<arg>` (répétable)
-- `-C link-sysroot=<path>`
+- `-C link-sysroot=<chemin>`
 - `-C no-default-libs`
 
 Points d'application :
 
 - Création d'objet (clang `-c`) avec `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- Substitution du linker à l'étape de liaison, injection d'arguments de lien brut, injection de link-sysroot
 - Désactivation automatique de `-lc -lm` lorsque `-C no-default-libs` est utilisé
 
 ---
