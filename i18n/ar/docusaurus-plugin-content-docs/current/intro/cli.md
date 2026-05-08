@@ -2,94 +2,94 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# مرجع CLI لـ `wavec`
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+توضح هذه الوثيقة بعناية سلوك CLI لـ **Wave Compiler الحالي (`wavec`)** بناءً على التنفيذ الحالي.
 
-핵심 원칙:
+المبادئ الأساسية:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
-
----
-
-## 1. 기본 형식
-
-```bash
-wavec [global-options] <command> [command-options]
-```
-
-예:
-
-```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
-```
+- `wavec` هو مترجم.
+- تثبيت/حل الحزم (lockfile, registry, التحميل) ليس من مسؤولية `wavec`.
+- يتم تمرير التبعيات الخارجية كـ **معامل CLI صريح** عند تشغيل `wavec`.
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
-
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
-
-즉 global option은 위치가 유연합니다.
+## 1. الصيغة الأساسية
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec [خيارات عامة] <أمر> [خيارات الأمر]
 ```
 
-위 3개는 모두 유효합니다.
-
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+مثال:
 
 ```bash
-wavec -- run main.wave
+wavec -O2 تشغيل main.wave
+wavec بناء app.wave --link ssl -L ./native/lib
+wavec تشغيل app.wave --dep-root .vex/dep
 ```
 
 ---
 
-## 3. Commands
+## 2. قواعد تحليل الأوامر (مهم)
+
+يقوم `wavec` أولاً بمسح **الخيار العام** من إجمالي المعاملات ثم يحلل `<command>` بما تبقى.
+
+وبالتالي، فإن الخيار العام مرن في الموقع.
+
+```bash
+wavec -O3 تشغيل main.wave
+wavec تشغيل main.wave -O3
+wavec تشغيل -O3 main.wave
+```
+
+الثلاثة أعلاه جميعها صالحة.
+
+عند استخدام `--`، يتوقف المسح للخيار العام بعده ويتم تمريره إلى منطقة الأمر.
+
+```bash
+wavec -- تشغيل main.wave
+```
+
+---
+
+## 3. الأوامر
 
 ## 3.1 `run <file>`
 
-Wave 파일을 컴파일하고 실행합니다.
+يقوم بتجميع وتشغيل ملف Wave.
 
 ```bash
-wavec run hello.wave
+wavec تشغيل hello.wave
 ```
 
-동작:
+السلوك:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. تحليل المصدر + توسيع الاستيراد
+2. إنشاء LLVM IR
+3. رابط ثنائي أصلي (`target/<file_stem>`)
+4. تشغيل
 
-특징:
+الخصائص:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- ينقل `wavec` كود إنهاء البرنامج الذي تم تشغيله.
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+إنشاء ملف قابل للتنفيذ (exe).
 
 ```bash
-wavec build app.wave
+wavec بناء app.wave
 ```
 
-출력 바이너리:
+ثنائي الإخراج:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 خيارات `build` (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+يمكن للأمر `build` التحكم في اسم ملف الإخراج وتنسيق الإخراج كخيارات.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,32 +97,32 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: يحدد اسم ملف الإخراج.
+  - افتراضيًا (بدون `-c`): تحديد مسار إخراج الملف القابل للتنفيذ.
+  - مع `-c`: تحديد مسار إخراج ملف الكائن.
+- `-c`: حذف الرابط وإنشاء ملف الكائن فقط.
+- عند استخدام `-c` يتم إخراج مسار الكائن إلى stdout.
 
-기본 동작:
+السلوك الافتراضي:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (مسار الإخراج)
 
-freestanding 커널 오브젝트 예시:
+مثال على كائن نواة منفصل:
 
 ```bash
 wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
+ --target=x86_64-unknown-none-elf \
+ build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+يمكن أيضًا استخدام `aarch64-unknown-none-elf` و `riscv64-unknown-none-elf` بنفس الطريقة.
 
 ---
 
 ## 3.4 `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+هذا هو الأمر لتثبيت/تحديث مكتبة القياسية.
 
 ```bash
 wavec install std
@@ -140,11 +140,11 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## ٤. خيارات عامة
 
-## 4.1 최적화
+## ٤.١ تحسين
 
-허용 값:
+القيم المسموح بها:
 
 - `-O0`
 - `-O1`
@@ -154,7 +154,7 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+مثال:
 
 ```bash
 wavec -O3 run main.wave
@@ -162,13 +162,13 @@ wavec -O3 run main.wave
 
 ---
 
-## 4.2 디버그 출력
+## ٤.٢ إخراج التصحيح
 
 ```bash
 wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
-허용 항목:
+العناصر المسموح بها:
 
 - `tokens`
 - `ast`
@@ -179,36 +179,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## ٤.٣ خيارات الربط
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` أو `--link <lib>`
+- `-L<path>` أو `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+يتم تمرير `wavec` داخليًا في شكل `-l<lib>`، `-L<path>` أثناء الربط.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 خيارات الاعتمادات الخارجية (مهم)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+خيارات التحليل للاستيراد الخارجي (`pkg::...`).
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+إضافة مرشحين لدليل جذر الحزمة.
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+عند البحث عن الحزمة `math`:
 
-- `.vex/dep/math` 를 검사
+- افحص `.vex/dep/math`
 
-여러 번 지정 가능:
+يمكن تحديده عدة مرات:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -216,38 +216,38 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+تثبيت اسم الحزمة في مسار محدد.
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+القواعد:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- صيغة `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` يجب أن يكون بصيغة `name=path`
+- عند تكرار تحديد نفس اسم الحزمة، يحدث خطأ
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 خيارات الخلفية (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+خيارات التحكم في الخلفية تُفسر فقط وراء `--llvm`.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+العناصر المدعومة (ملخص):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (يمكن تكراره)
 - `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+الأهداف الرئيسية الحالية بناءً على `wavec print target-list`:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -257,26 +257,26 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` هو علم افتراضي محجوز حالياً، وخط أنابيب الخلفية الفعلي لم يتم تنفيذه بعد (TODO).
 
 ---
 
-## 5. Import 해석 규칙
+## 5. قواعد تحليل الاستيراد
 
-Wave import는 다음 3가지로 분기됩니다.
+ينقسم استيراد Wave إلى 3 أنواع:
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. استيراد محلي
+2. استيراد std
+3. استيراد حزمة خارجية
 
-## 5.1 로컬
+## 5.1 محلي
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+ابحث عن `<path>.wave` في الدليل المرجعي للملف.
 
 ## 5.2 std
 
@@ -284,52 +284,52 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+استخدم المسار `~/.wave/lib/wave/std/...`.
 
-## 5.3 외부 패키지
+## 5.3 حزمة خارجية
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+الصيغة:
 
-- 최소 `package::module` 2세그먼트 필요
+- مطلوب على الأقل 2 قطعة `package::module`
 
-패키지 루트 결정 순서:
+ترتيب تحديد الجذر للحزمة:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. تعيين محدد بـ `--dep name=path`
+2. ابحث في كل `--dep-root` عن `<root>/<package>`
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+إذا تم العثور على نفس الحزمة في عدة جذور dep في نفس الوقت:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- لن يتم التحديد تلقائيًا و **خطأ عدم الوضوح**
+- يجب التثبيت بـ `--dep name=path`
 
-모듈 파일 탐색 순서:
+ترتيب بحث ملفات الوحدة:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+مثال:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+البحث:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. أمثلة حقيقية على استيراد خارجي
 
-### 6.1 단일 dep-root
+### 6.1 جذر dep واحد
 
-디렉터리:
+الدليل:
 
 ```text
 .vex/dep/
@@ -339,19 +339,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+الرمز:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+التشغيل:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 إزالة الالتباس
 
 ```bash
 wavec run main.wave \
@@ -359,7 +359,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+يحدث خطأ إذا كان `math` موجود على كلا الجانبين. ثبّت كما هو موضح أدناه.
 
 ```bash
 wavec run main.wave \
@@ -370,25 +370,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. فصل الأدوار مع Vex
 
-권장 구조:
+الهيكل الموصى به:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: تجميع/ربط/تنفيذ + تحليل التبعية المحددة
+- `vex`: التثبيت/الإدارة التبعية بعد \`wavec ... --dep-root ... استدعاء --dep ...
 
-예:
+مثال:
 
 ```bash
-# 내부적으로 vex가 수행
+# يتم تنفيذ vex داخليًا
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+يحافظ هذا النموذج على بساطة وحسم المترجم، بينما يتولى مدير الحزم مهام الأتمتة.
 
 ---
 
-## 8. 빠른 참조
+## ٨. مرجع سريع
 
 ```bash
 wavec run main.wave
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec --whale build app.wave -c # TODO: محجوز، غير مطبق بعد
 ```
