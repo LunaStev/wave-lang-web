@@ -244,6 +244,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `--sysroot`
 - `-C linker=<chemin>`
 - `-C link-arg=<arg>` (répétable)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Cibles principales selon le `wavec print target-list` actuel :
