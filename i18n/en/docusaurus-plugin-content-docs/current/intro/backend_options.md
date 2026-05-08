@@ -67,7 +67,7 @@ The major target triples for documentation by default are:
 Reflection points:
 
 - In object creation (clang `-c`), `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입, link-sysroot 주입
+- In the link stage, inject linker override, raw link arg, link-sysroot
 - Automatic deactivation of `-lc -lm` when using `-C no-default-libs`
 
 ---
