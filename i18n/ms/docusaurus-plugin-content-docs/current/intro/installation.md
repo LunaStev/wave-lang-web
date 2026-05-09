@@ -54,25 +54,25 @@ Setelah pemasangan selesai, sahkan sama ada ia dipasang dengan betul menggunakan
 Selepas pemasangan selesai, anda boleh menjalankan arahan di bawah untuk memastikan pengkompil Wave telah dipasang dengan betul.
 
 ```bash
-wavec --version
+wavec --versi
 ```
 
-명령어 실행 시 설치된 Wave의 버전 정보가 출력되면 정상적으로 설치된 상태입니다.
+Jika maklumat versi Wave yang dipasang dipaparkan semasa pelaksanaan arahan, maka ia telah dipasang dengan betul.
 
 ---
 
-## Wave 제거 가이드 (`uninstall.sh`)
+## Panduan penyingkiran Wave (`uninstall.sh`)
 
-Wave를 시스템에서 제거하고 싶을 경우, 제공되는 제거 스크립트를 사용할 수 있습니다.
-이 스크립트는 설치 과정에서 추가된 파일과 설정을 정리하는 역할을 합니다.
+Jika anda ingin membuang Wave dari sistem, anda boleh menggunakan skrip penghapusan yang disediakan.
+Skrip ini bertanggungjawab untuk membersihkan fail dan tetapan yang ditambahkan semasa proses pemasangan.
 
-### 제거 방법
+### Kaedah penyingkiran
 
-터미널에서 다음 명령어를 실행합니다.
+Jalankan arahan berikut di terminal.
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
 ```
 
-제거가 완료되면 wavec 명령어는 더 이상 사용되지 않으며,
-Wave와 관련된 실행 파일과 설정이 시스템에서 삭제됩니다.
+Apabila penghapusan selesai, arahan wavec tidak akan lagi digunakan,
+dan fail serta tetapan yang berkaitan dengan Wave akan dipadam dari sistem.
