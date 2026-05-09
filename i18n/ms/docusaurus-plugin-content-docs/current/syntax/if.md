@@ -2,58 +2,57 @@
 sidebar_position: 3
 ---
 
-# IF 문
+# Pernyataan IF
 
-## 소개
+## Pengenalan
 
-이 섹션에서는 Wave 언어에서 제공하는 제어문 중 하나인 IF 문의 문법과 사용 방법에 대해 설명합니다.
-IF 문은 조건을 평가한 뒤, 해당 조건이 참일 경우에만 특정 코드 블록을 실행하도록 하는 기본적인 제어 구조입니다.
+Seksyen ini menerangkan tatabahasa dan cara penggunaan salah satu pernyataan kawalan yang disediakan dalam bahasa Wave, yaitu pernyataan IF.
+Pernyataan IF adalah struktur kawalan asas yang menilai keadaan dan hanya melaksanakan blok kod tertentu jika keadaan tersebut benar.
 
-이를 통해 프로그램은 단순히 위에서 아래로 실행되는 흐름을 넘어서, 상황과 조건에 따라 서로 다른 동작을 수행할 수 있습니다.
-IF 문은 거의 모든 프로그램의 핵심을 이루는 요소이며, 논리적인 분기와 흐름 제어를 구현하는 데 필수적으로 사용됩니다.
+Ini membolehkan program untuk melakukannya berdasarkan pelbagai situasi dan kondisi, lebih daripada sekadar mengalir dari atas ke bawah.
+Pernyataan IF adalah elemen penting dalam hampir semua program dan digunakan untuk mengimplementasikan cabang logik dan kawalan aliran.
 
-## 기본 구조
+## Struktur Dasar
 
-IF 문은 먼저 조건식을 평가하고, 그 결과가 참(True)일 경우에만 중괄호 `{}` 안에 작성된 코드 블록을 실행합니다.
-조건이 거짓(False)일 경우에는 해당 블록을 건너뛰고 다음 코드로 이동합니다.
+Pernyataan IF pertama harus menilai ekspresi kemudian hanya melaksanakan blok kod di dalam kurungan `{}` jika keputusan adalah benar (True).
+Sekiranya keadaan adalah palsu (False), ia akan melangkau blok tersebut dan bergerak ke kod berikutnya.
 
-Wave에서 IF 문의 기본 구조는 다음과 같습니다.
+Struktur asas pernyataan IF dalam Wave adalah seperti berikut.
 
 ```wave
-if (조건) {
-    // 조건이 참일 경우 실행될 코드
+if (keadaan) {
+    // Kod yang akan dilaksanakan jika keadaan benar
 }
 ```
 
-조건식에는 비교 연산자나 논리 연산자를 자유롭게 사용할 수 있습니다.
-예를 들어 `==`, `!=`, `<`, `>`, `<=`, `>=`와 같은 비교 연산자를 통해 값의 관계를 비교할 수 있으며,
-`&&`, `||`, `!`와 같은 논리 연산자를 사용해 여러 조건을 조합할 수도 있습니다.
+Operasi perbandingan dan logik boleh digunapakai dengan bebas dalam ekspresi tersebut.
+Sebagai contoh, anda boleh membandingkan hubungan nilai menggunakan operator perbandingan seperti `==`, `!=`, `<`, `>`, `<=`, `>=`, dan menggunakan operator logik seperti `&&`, `||`, `!` untuk menggabungkan pelbagai syarat.
 
-조건식의 결과는 반드시 참 또는 거짓으로 평가되어야 하며, 조건이 거짓인 경우 IF 블록 내부의 코드는 실행되지 않습니다.
+Keputusan ekspresi mesti sama ada benar atau palsu, dan sekiranya palsu, kod dalam blok IF tidak akan dilaksanakan.
 
-## 예제
+## Contoh
 
-다음은 가장 단순한 형태의 IF 문 예제입니다.
+Berikut adalah contoh mudah paling asas bagi pernyataan IF.
 
 ```wave
 var temperature :i32 = 30;
 
 if (temperature > 25) {
-    println("날씨가 덥습니다.");
+    println("Cuaca amat panas.");
 }
 ```
 
-위 코드에서는 `temperature` 변수의 값이 25보다 큰지를 조건으로 평가합니다.
-조건이 참일 경우 `"날씨가 덥습니다."`라는 메시지가 출력되며, 조건이 거짓일 경우에는 아무 동작도 수행하지 않습니다.
+Dalam kod di atas, nilai pembolehubah `temperature` dinilai untuk menentukan sama ada ia lebih besar daripada 25.
+Jika keadaan adalah benar, mesej `"Cuaca sangat panas."` akan dipaparkan, dan jika tidak, tiada tindakan yang akan diambil.
 
-이처럼 IF 문은 특정 조건을 만족할 때만 코드를 실행하고 싶을 때 사용됩니다.
+Dengan cara ini, pernyataan IF digunakan apabila anda ingin menjalankan kod hanya apabila kondisi tertentu dipenuhi.
 
-## IF-ELSE 문
+## Pernyataan IF-ELSE
 
-조건이 참이 아닐 경우에도 실행해야 할 코드가 있다면 IF 문에 ELSE 절을 추가할 수 있습니다.
-IF-ELSE 문은 조건의 결과에 따라 두 개의 코드 블록 중 하나를 선택적으로 실행하는 구조입니다.
+Jika terdapat kod yang perlu dilaksanakan walaupun keadaan tidak benar, anda boleh menambah syarat ELSE kepada pernyataan IF.
+Pernyataan IF-ELSE adalah struktur kawalan yang membolehkan salah satu dari dua blok kod dilaksanakan berdasarkan hasil keadaan.
 
-기본적인 구조는 다음과 같습니다.
+Struktur asas adalah seperti berikut.
 
 ```wave
 if (조건) {
