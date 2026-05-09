@@ -2,56 +2,52 @@
 sidebar_position: 3
 ---
 
-# 첫 번째 프로그램 실행하기
+# Menjalankan Program Pertama
 
-이전 설치 문서에서 Wave를 이미 설치했다면, 이제 첫 번째 Wave 프로그램을 직접 실행해볼 차례입니다.
-이 섹션에서는 간단한 예제를 통해 Wave 프로그램을 작성하고 실행하는 전체 과정을 단계별로 살펴봅니다.
+Jika anda telah memasang Wave sebelum ini dalam dokumen pemasangan, kini adalah masa untuk menjalankan program Wave pertama anda.
+Dalam seksyen ini, kami akan melihat keseluruhan proses menulis dan menjalankan program Wave melalui contoh yang mudah.
 
-## `hello.wave` 파일 만들기
+## Membuat Fail `hello.wave`
 
-먼저 작업할 디렉터리에서 `hello.wave`라는 이름의 새 파일을 생성합니다.
-파일 이름과 확장자는 자유롭게 지정할 수 있지만, 여기서는 예제로 `hello.wave`를 사용합니다.
+Pertama, cipta fail baru bernama `hello.wave` dalam direktori kerja.
+Anda boleh menentukan nama dan sambungan fail sesuka hati, tetapi untuk contoh ini, kami akan menggunakan `hello.wave`.
 
-## 코드 작성하기
+## Menulis Kod
 
-생성한 `hello.wave` 파일에 아래 코드를 작성합니다.
+Tulis kod di bawah dalam fail `hello.wave` yang telah dibuat.
 
 ```wave
 fun main() {
-    println("Hello Wave");
+    println("Halo Wave");
 }
 ```
 
-이 코드에서 `fun main()`은 Wave 프로그램의 실행 시작 지점을 의미합니다.
-Wave 프로그램은 항상 `main` 함수부터 실행됩니다.
+Dalam kod ini, `fun main()` menandakan titik permulaan pelaksanaan program Wave.
+Program Wave selalu dimulakan dari fungsi `main`.
 
-`println` 함수는 문자열을 표준 출력으로 출력하는 함수로,
-화면에 텍스트를 표시할 때 가장 기본적으로 사용됩니다.
+Fungsi `println` adalah fungsi untuk mencetak rantaian ke output standard, dan digunakan paling asas untuk memaparkan teks di layar.
 
-## 프로그램 실행하기
+## Menjalankan Program
 
-코드 작성을 마쳤다면, 터미널을 열고 파일이 위치한 디렉터리에서 다음 명령어를 실행합니다.
+Setelah selesai menulis kod, buka terminal dan jalankan arahan berikut dalam direktori yang mengandungi fail.
 
 ```bash
 wavec run hello.wave
 ```
 
-이 명령어는 Wave 컴파일러가 소스 파일을 컴파일한 뒤,
-즉시 실행까지 수행하도록 지시합니다.
+Perintah ini memberitahu pengkompil Wave untuk mengkompilasi fail sumber dan sekaligus melaksanakannya.
 
-## 출력 확인하기
+## Pengesahan Output
 
-프로그램이 정상적으로 실행되면, 터미널에 다음과 같은 출력이 표시됩니다.
+Sekiranya program berjaya dijalankan, output berikut akan dipaparkan di terminal.
 
 ```
 Hello Wave
 ```
 
-이 출력이 보인다면 Wave가 정상적으로 설치되어 있으며,
-프로그램 작성과 실행이 올바르게 이루어졌다는 의미입니다.
+Jika output ini muncul, ia bermakna Wave telah dipasang dengan betul, dan pengarang serta pelaksanaan program telah dilakukan dengan tepat.
 
-이제 첫 번째 Wave 프로그램을 성공적으로 실행했습니다.
-이제부터는 Wave의 문법과 기능을 하나씩 살펴보며, 더 복잡한 프로그램을 작성해볼 수 있습니다.
+Anda telah berjaya menjalankan program Wave pertama.
+Sekarang anda boleh menjelajahi tatabahasa dan fungsi Wave satu persatu dan mencipta program yang lebih kompleks.
 
-정밀한 명령어 옵션(`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)은
-`wavec` CLI 문서에서 확인할 수 있습니다.
+Pilihan perintah yang tepat (`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`) boleh disemak dalam dokumentasi CLI `wavec`.
