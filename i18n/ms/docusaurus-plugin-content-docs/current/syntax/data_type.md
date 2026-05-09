@@ -101,7 +101,7 @@ var byteData: byte = 0xFF;
 ## Jenis Penunjuk
 
 Jenis Penunjuk digunakan untuk merujuk alamat memori secara langsung.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+Dalam Wave, jenis penunjuk ditakrifkan dalam format `ptr<T>`.
 
 Penunjuk digunakan apabila akses memori rendah diperlukan dan biasanya digunakan dalam pengaturcaraan sistem atau kod yang memerlukan prestasi tinggi.
 
@@ -109,12 +109,12 @@ Penunjuk digunakan apabila akses memori rendah diperlukan dan biasanya digunakan
 var ptr: ptr<T> = &someVariable;
 ```
 
-## `null` 리터럴
+## Literal `null`
 
-Wave에서 `null`은 정식 리터럴입니다.
+Dalam Wave, `null` adalah literal rasmi.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` bukanlah pengenalan. (Tidak dapat menggunakan bentuk `var null = ...`)
+- `null` hanya boleh ditugaskan kepada jenis `ptr<T>`.
 
 ```wave
 var p: ptr<i32> = null;  // OK
