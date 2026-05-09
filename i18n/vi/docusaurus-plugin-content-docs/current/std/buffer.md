@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# std::buffer 사용법
+# Cách sử dụng std::buffer
 
-`std::buffer`는 가변 바이트 버퍼와 제네릭 버퍼를 제공합니다.
+`std::buffer` cung cấp buffer byte có thể thay đổi và buffer tổng quát.
 
 ## import
 
@@ -15,9 +15,9 @@ import("std::buffer::read");
 import("std::buffer::write");
 ```
 
-## 1. 바이트 버퍼 (`Buffer`)
+## 1. Buffer byte (`Buffer`)
 
-### 생성/추가/수정
+### Tạo/thêm/sửa
 
 ```wave
 fun main() {
@@ -33,7 +33,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### Hàm cơ bản
 
 ```wave
 fun buffer_new(capacity: i64) -> Buffer
@@ -46,9 +46,9 @@ fun buffer_set(buf: ptr<Buffer>, index: i64, value: u8) -> bool
 fun buffer_free(buf: ptr<Buffer>) -> i64
 ```
 
-## 2. 제네릭 버퍼 (`TypedBuffer<T>`)
+## 2. Buffer tổng quát (`TypedBuffer<T>`)
 
-Wave는 타입 추론이 없으므로 타입 인자를 명시합니다.
+Wave không có suy diễn kiểu, vì vậy các tham số kiểu cần phải được chỉ định rõ ràng.
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### Hàm cơ bản
 
 ```wave
 fun tbuffer_new<T>(elem_size: i64, initial_cap: i64) -> TypedBuffer<T>
@@ -75,7 +75,7 @@ fun tbuffer_set<T>(buf: ptr<TypedBuffer<T>>, index: i64, value: T) -> bool
 fun tbuffer_free<T>(buf: ptr<TypedBuffer<T>>) -> i64
 ```
 
-주의:
+Chú ý:
 
-- `elem_size`는 호출자가 정확히 넣어야 합니다.
-- 범위 밖 접근은 `false` 또는 기본값(`buffer_at`은 `0`)을 반환합니다.
+- `elem_size` cần được người gọi đưa vào chính xác.
+- Truy cập ngoài phạm vi trả về `false` hoặc giá trị mặc định (`buffer_at` là `0`).

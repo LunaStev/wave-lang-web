@@ -61,12 +61,13 @@ Principal objetivo triple actualmente documentado:
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (repetible)
+- `-C link-sysroot=<ruta>`
 - `-C no-default-libs`
 
 Punto de aplicación:
 
 - En la creación de objetos con clang `-c` se utiliza `--sysroot`
-- Inyección de argumentos de enlace sin procesar y sobrescritura de enlazador en la etapa de enlace
+- En la etapa de enlace, anular el linker, inyectar argumento de enlace raw, inyectar link-sysroot
 - Desactivación automática de `-lc -lm` cuando se usa `-C no-default-libs`
 
 ---

@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-# std::path 사용법
+# std::path 使用法
 
-할당 없이 경로를 분석/복사합니다.
+割り当てなしでパスを解析/コピーします。
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::path::analyze");
 import("std::path::copy");
 ```
 
-## 1. 경로 결합
+## 1. パス結合
 
 ```wave
 fun main() {
@@ -22,12 +22,12 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // 버퍼 부족
+        // バッファ不足
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## 2. ベースネーム / ディレクトリネーム抽出
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## 3. 解析関数
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## 主要な関数
 
 ```wave
 fun path_is_sep(c: u8) -> bool

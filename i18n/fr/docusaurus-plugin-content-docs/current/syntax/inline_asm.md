@@ -6,10 +6,10 @@ sidebar_position: 7
 
 ## Introduction
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+L'assemblage en ligne de Wave commence par `asm { ... Se termine par un bloc `}\`.
+Il est possible de contrôler directement les registres, la mémoire et les chemins d'appel système dans le code Wave.
 
-현재 지원 타깃:
+Cibles actuellement prises en charge :
 
 - Linux `x86_64`
 - Linux `aarch64`
@@ -18,13 +18,13 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 - freestanding `aarch64`
 - freestanding `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows et les cibles 32 bits ne sont pas encore pris en charge.
 
 ---
 
-## 기본 형태
+## Forme de base
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` peut être utilisé à la fois comme **instruction** et **expression**.
 
 ```wave
 asm {
@@ -35,21 +35,21 @@ asm {
 }
 ```
 
-구성 요소:
+Composants :
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- Ligne de chaîne : commande d'assemblage réelle
+- `in(...)`: opérande d'entrée
+- `out(...)`: opérande de sortie
+- `clobber(...)`: Indices des registres/états/mémoires détruits
 
 ---
 
-## `asm` 문 (Statement)
+## Instruction `asm` (Statement)
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+Utilisez cela comme une instruction générale lorsqu'il n'y a pas de valeur de retour.
 
 ```wave
-var ret: i64 = 0;
+var ret : i64 = 0;
 asm {
     "mov rax, 1"
     "syscall"
@@ -60,56 +60,56 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+Il peut y avoir plusieurs `out(...)`.
 
 ---
 
-## `asm` 식 (Expression)
+## Expression `asm` (Expression)
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+Peut être utilisé comme une expression qui génère directement une valeur.
 
 ```wave
-var result: i64 = asm {
+var result : i64 = asm {
     "mov rax, 123"
     out("rax") result
 };
 ```
 
-주의:
+Attention :
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- Une expression `asm` autorise **exactement un seul `out(...)`**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## Contraintes `in(...)` / `out(...)`
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+Les chaînes pour `in("...")`, `out("...")` peuvent être parmi les deux suivantes :
 
-1. 구체 레지스터
+1. Registre spécifique
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Ex : `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
-2. 제약 클래스(constraint class)
+2. Classe de contrainte (constraint class)
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Ex : `"r"`, `"m"`, `"rm"`
 
-예시:
+Exemple :
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Cible de sortie (`out(...) target`) est recommandé d'utiliser le modèle suivant selon l'implémentation actuelle.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Variable : `out("rax") ret`
+- Déréférencement de pointeur : `out("rax") deref p`
 
 ---
 
 ## `clobber(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`clobber(...)` peut recevoir plusieurs éléments à la fois et être utilisé plusieurs fois.
 
 ```wave
 asm {
@@ -120,19 +120,19 @@ asm {
 }
 ```
 
-주요 항목:
+Principaux éléments :
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Registres : `"rax"`, `"x0"`, etc.
+- Spéciaux : `"memory"`, `"cc"` (normalisation interne dépendant de la cible)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+Le compilateur ajoute automatiquement un clobber de base en mode sécurisé conservateur.
+(`memory`, catégories flags/cc, etc.; principalement `memory` pour RISC-V autonome)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Oprérateurs ($0, $1, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Utilisez `$N` pour référencer les opérandes dans une chaîne de commande.
 
 ```wave
 asm {
@@ -142,34 +142,34 @@ asm {
 }
 ```
 
-참고:
+Note :
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- Même si vous utilisez le style `%0`, il est converti en style `$0` en interne.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Plage de support actuelle pour les opérandes d'entrée
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+Actuellement, `in(...)` prend en charge les formes suivantes :
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
+- Identificateur de variable
+- Littéral entier
+- Littéral de chaîne
 - `&identifier`
 - `deref identifier`
-- 음수 정수/실수 리터럴
+- Littéral entier/flottant négatif
 
-복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
+Les expressions complexes générales peuvent être limitées, il est donc recommandé de les transmettre via une variable temporaire si nécessaire.
 
 ---
 
 ## Précautions
 
-인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
-잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
+L'asm inline contourne partiellement les protections du système de types.
+La spécification incorrecte des registres, les conflits de contraintes et l'oubli de clobber peuvent entraîner la génération de code incorrect ou un dysfonctionnement en temps d'exécution.
 
-권장 사항:
+Recommandations :
 
-- 타깃 ABI와 호출 규약을 먼저 확정
-- 입력/출력 레지스터와 clobber를 명시적으로 관리
-- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
+- Confirmez d'abord l'ABI cible et la convention d'appel
+- Gérez explicitement les registres d'entrée/sortie et les clobbers
+- Déclarez `clobber("memory")` si vous accédez directement à la mémoire.

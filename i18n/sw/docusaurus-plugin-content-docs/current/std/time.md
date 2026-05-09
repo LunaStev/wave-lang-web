@@ -2,20 +2,20 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# Jinsi ya kutumia std::time
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+Inatoa huduma za kuchunguza wakati wa sasa, kuhesabu tofauti ya muda, na kuweka usingizi.
 
-## import
+## ingiza
 
 ```wave
-import("std::time::clock");
-import("std::time::diff");
-import("std::time::sleep");
-import("std::sys::time");
+ingiza("std::time::clock");
+ingiza("std::time::diff");
+ingiza("std::time::sleep");
+ingiza("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1. Upimaji wa vipindi
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2. Muda wa nanosekondi
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3. usingizi
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64

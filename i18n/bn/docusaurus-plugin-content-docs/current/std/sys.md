@@ -1,25 +1,25 @@
 ---
-sidebar_position: 10
+sidebar_position: ১০
 ---
 
-# std::sys 사용법
+# std::sys ব্যবহার নির্দেশিকা
 
-`std::sys`는 고수준 모듈 아래의 OS 추상화 계층입니다.
+`std::sys` হল উচ্চ-স্তরের মডিউলের নিচে OS বিমূর্ততা স্তর।
 
 ```text
-std(high-level)
+std(উচ্চ-স্তর)
   -> sys dispatcher
-  -> sys/linux or sys/macos
+  -> sys/linux বা sys/macos
   -> syscall
 ```
 
-## 기본 규약
+## প্রাথমিক প্রোটোকল
 
-- 대부분 함수는 raw syscall 값을 반환합니다.
-- `>= 0` 성공, `< 0` 실패(`-errno`).
-- 고수준 앱 코드에서는 가능하면 `std::sys` 대신 `std::net`, `std::time`, `std::env`를 먼저 사용하세요.
+- বেশিরভাগ ফাংশন মূল syscall মান ফেরত দেয়।
+- `>= 0` সফল, `< 0` ব্যর্থতা(`-errno`)।
+- উচ্চ-স্তরের অ্যাপ কোডে সম্ভব হলে `std::sys` এর পরিবর্তে `std::net`, `std::time`, `std::env` প্রথমে ব্যবহার করুন।
 
-## 1. 파일 읽기 예제 (`std::sys::fs`)
+## 1. ফাইল পড়ার উদাহরণ (`std::sys::fs`)।
 
 ```wave
 import("std::sys::fs");
@@ -36,7 +36,7 @@ fun main() {
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2. সকেট উদাহরণ (`std::sys::socket`)।
 
 ```wave
 import("std::sys::socket");
@@ -51,7 +51,7 @@ fun main() {
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3. মেমরি উদাহরণ (`std::sys::memory`)।
 
 ```wave
 import("std::sys::memory");
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 
-## dispatcher 모듈
+## ডিসপ্যাচার মডিউল
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]`, `#[target(os="macos")]` শাখাগুলি ডিসপ্যাচারের অভ্যন্তরে ব্যবহৃত হয়।

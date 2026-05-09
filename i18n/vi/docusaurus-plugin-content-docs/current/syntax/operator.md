@@ -4,19 +4,19 @@ sidebar_position: 5
 
 # toán tử
 
-이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
+Tài liệu này tổng hợp các toán tử thực sự có thể sử dụng theo tiêu chuẩn trình biên dịch hiện tại.
 
-## 산술
+## Số học
 
-| toán tử | Mô tả     |
-| ------- | --------- |
-| `+`     | phép cộng |
-| `-`     | phép trừ  |
-| `*`     | phép nhân |
-| `/`     | phép chia |
-| `%`     | 나머지       |
+| toán tử | Mô tả        |
+| ------- | ------------ |
+| `+`     | phép cộng    |
+| `-`     | phép trừ     |
+| `*`     | phép nhân    |
+| `/`     | phép chia    |
+| `%`     | Phần còn lại |
 
-## 비교
+## So sánh
 
 | toán tử | Mô tả             |
 | ------- | ----------------- |
@@ -27,7 +27,7 @@ sidebar_position: 5
 | `>`     | lớn hơn           |
 | `>=`    | lớn hơn hoặc bằng |
 
-## 논리
+## Logic
 
 | toán tử    | Mô tả     |
 | ---------- | --------- |
@@ -35,7 +35,7 @@ sidebar_position: 5
 | \\\`\\ | logic OR  |
 | `!`        | logic NOT |
 
-## 비트
+## Bit
 
 | toán tử    | Mô tả    |
 | ---------- | -------- |
@@ -46,37 +46,37 @@ sidebar_position: 5
 | `<<`       | dời trái |
 | `>>`       | dời phải |
 
-## 대입
+## Gán
 
-| toán tử | Mô tả    |
-| ------- | -------- |
-| `=`     | 기본 대입    |
-| `+=`    | 덧셈 후 대입  |
-| `-=`    | 뺄셈 후 대입  |
-| `*=`    | 곱셈 후 대입  |
-| `/=`    | 나눗셈 후 대입 |
-| `%=`    | 나머지 후 대입 |
+| toán tử | Mô tả                   |
+| ------- | ----------------------- |
+| `=`     | Gán cơ bản              |
+| `+=`    | Gán sau khi cộng        |
+| `-=`    | Gán sau khi trừ         |
+| `*=`    | Gán sau khi nhân        |
+| `/=`    | Gán sau khi chia        |
+| `%=`    | Gán sau khi lấy phần dư |
 
-## 단항 / 포인터 / 캐스트
+## Một ngôi / Con trỏ / Chuyển kiểu
 
-| 연산자/키워드     | Mô tả    |
-| ----------- | -------- |
-| `++`, `--`  | 전위/후위 증감 |
-| `&x`        | 주소 획득    |
-| `deref p`   | 포인터 역참조  |
-| `expr as T` | 명시적 캐스트  |
+| Toán tử/Từ khóa | Mô tả                    |
+| --------------- | ------------------------ |
+| `++`, `--`      | Tăng/giảm trước/sau      |
+| `&x`            | Lấy địa chỉ              |
+| `deref p`       | Tham chiếu ngược con trỏ |
+| `expr as T`     | Chuyển kiểu tường minh   |
 
-## 포인터 연산
+## Toán tử con trỏ
 
-| 표현식                        | 결과                                   |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Biểu thức                  | Kết quả                                     |
+| -------------------------- | ------------------------------------------- |
+| `ptr<T> + int`             | `ptr<T>` (Di chuyển GEP) |
+| `int + ptr<T>`             | `ptr<T>` (Di chuyển GEP) |
+| `ptr<T> - int`             | `ptr<T>` (Di chuyển GEP) |
+| `ptr<T> - ptr<T>`          | `i64` (Chênh lệch byte)  |
+| `ptr == ptr`, `ptr != ptr` | So sánh con trỏ                             |
 
-## 예약 또는 미구현 항목
+## Mục dự trữ hoặc chưa triển khai
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+Có các mục mà token cú pháp tồn tại nhưng không được hỗ trợ bởi các phép toán diễn đạt hiện tại.
+Ví dụ: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.

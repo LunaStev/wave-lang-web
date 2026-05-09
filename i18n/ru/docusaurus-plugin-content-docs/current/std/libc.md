@@ -2,18 +2,18 @@
 sidebar_position: 11
 ---
 
-# std::libc 사용법 (호환 계층)
+# Как использовать std::libc (слой совместимости)
 
-`std::libc`는 C 라이브러리와 직접 맞물릴 때 쓰는 선택적 레이어입니다.
+`std::libc` — это необязательный слой, который используется при непосредственном взаимодействии с библиотекой C.
 
-## 언제 쓰나
+## Когда использовать
 
-- 기존 C 라이브러리 심볼을 그대로 호출해야 할 때
-- 점진적 마이그레이션 중 Wave 코드와 C 코드를 함께 사용할 때
+- Когда необходимо вызывать существующий символ библиотеки C как есть
+- Когда использовать код Wave и код C совместно в рамках постепенной миграции
 
-일반적인 Wave 코드에서는 `std::sys`/`std::*`를 우선 사용하세요.
+В общем коде Wave сначала рекомендуется использовать `std::sys`/`std::*`.
 
-## import 예시
+## Пример импорта
 
 ```wave
 import("std::libc::stdio");
@@ -21,11 +21,11 @@ import("std::libc::stdlib");
 import("std::libc::string");
 ```
 
-## 1. stdio 호출
+## 1. вызов stdio
 
 ```wave
 fun main() {
-    puts("hello from libc" as ptr<i8>);
+ puts("hello from libc" as ptr<i8>);
 }
 ```
 
@@ -33,30 +33,30 @@ fun main() {
 
 ```wave
 fun main() {
-    var p: ptr<i8> = malloc(128);
-    if (p == null) {
-        return;
-    }
+ var p: ptr<i8> = malloc(128);
+ if (p == null) {
+ return;
+ }
 
-    memset(p, 0, 128);
-    free(p);
+ memset(p, 0, 128);
+ free(p);
 }
 ```
 
-## 3. 소켓 C ABI
+## 3. сокет C ABI
 
 ```wave
 import("std::libc::socket");
 
 fun main() {
-    var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (fd >= 0) {
-        shutdown(fd, SHUT_RDWR);
-    }
+ var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+ if (fd >= 0) {
+ shutdown(fd, SHUT_RDWR);
+ }
 }
 ```
 
-## 제공 모듈
+## Предоставляемые модули
 
 - `std::libc::errno`
 - `std::libc::string`

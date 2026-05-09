@@ -2,11 +2,11 @@
 sidebar_position: 5
 ---
 
-# std::mem 사용법
+# std::mem का उपयोग
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+यह कमस्तरीय मेमोरी आवंटन/कॉपी/तुलना उपयोगिता है।
 
-## import
+## आयात
 
 ```wave
 import("std::mem::alloc");
@@ -14,7 +14,7 @@ import("std::mem::ops");
 import("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## 1. मूल आवंटन/मुक्ति
 
 ```wave
 fun main() {
@@ -28,21 +28,21 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## 2. पुन: आवंटन और सुरक्षित कॉपी
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // ओवरलैपिंग मेमोरी के सुरक्षित स्थानांतरण
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## 3. जेनेरिक आइटम API
 
 ```wave
 fun main() {
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## 4. C स्ट्रिंग यूटिलिटी
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## प्रमुख फंक्शन्स
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>

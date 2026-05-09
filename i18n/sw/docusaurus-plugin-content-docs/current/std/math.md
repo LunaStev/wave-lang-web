@@ -2,21 +2,21 @@
 sidebar_position: 4
 ---
 
-# std::math 사용법
+# Jinsi ya kutumia std::math
 
-정수/실수/비트/수론/삼각 근사 함수를 제공합니다.
+Inatoa kazi za nambari kamili/nambari halisi/vipande/vitendo vya hesabu/vitendo vya pembe-tatu.
 
-## import
+## ingiza
 
 ```wave
-import("std::math::int");
-import("std::math::float");
-import("std::math::bits");
-import("std::math::num");
-import("std::math::trig");
+ingiza("std::math::int");
+ingiza("std::math::float");
+ingiza("std::math::bits");
+ingiza("std::math::num");
+ingiza("std::math::trig");
 ```
 
-## 1. 제네릭 수치 함수
+## 1. Kazi ya nambari za generic
 
 ```wave
 fun main() {
@@ -25,7 +25,7 @@ fun main() {
 }
 ```
 
-## 2. 비트/정렬 계산
+## 2. Hesabu za vipande/mpangilio
 
 ```wave
 fun main() {
@@ -35,7 +35,7 @@ fun main() {
 }
 ```
 
-## 3. 수론/삼각 근사
+## 3. Vitendo vya hesabu/vitendo vya pembe-tatu
 
 ```wave
 fun main() {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun num_abs<T>(x: T, zero: T) -> T

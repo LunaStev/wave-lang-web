@@ -2,53 +2,53 @@
 sidebar_position: 11
 ---
 
-# 주석
+# Kumbuka
 
-Wave는 두 가지 주석을 지원합니다.
+Mwave inasaidia aina mbili za maelezo.
 
-- 한 줄 주석: `//`
-- 블록 주석: `/* ... */`
+- Maelezo ya mstari moja: `//`
+- Kumbukumbu ya block: `/* ... */`
 
-## 한 줄 주석
+## Kumbukumbu ya mstari moja
 
-`//` 뒤의 내용은 줄 끝까지 무시됩니다.
+Yaliyomo baada ya `//` yanadharauliwa hadi mwisho wa mstari.
 
 ```wave
-var x: i32 = 10; // line comment
-x += 5;          // still works
+var x: i32 = 10; // maoni ya mstari
+x += 5;          // bado inaendelea kufanya kazi
 ```
 
-## 블록 주석
+## Maoni ya block
 
-`/*` 와 `*/` 사이 내용을 무시합니다.
+Inadharau maudhui kati ya `/*` na `*/`.
 
 ```wave
-var y: i32 = 1 /* inline block */ + 2;
+var y: i32 = 1 /* block ya mstari */ + 2;
 ```
 
-블록 주석은 여러 줄과 중첩을 지원합니다.
+Maoni ya block yanasaidia mistari mingi na kurudia.
 
 ```wave
-/* outer
-   /* inner */
-   outer end
+/* ya nje
+   /* ya ndani */
+   mwisho wa nje
 */
 ```
 
-## 문자열과 주석 기호
+## Nafasi ya mfuatano na alama ya maoni
 
-문자열 내부의 `/*`, `*/`, `//`는 주석 시작/종료로 처리되지 않습니다.
-
-```wave
-var marker: str = "/*//*/";
-```
-
-## 주석 오류
-
-블록 주석이 닫히지 않으면 컴파일 에러(`E1002`)가 발생합니다.
+Ndani ya mfuatano, `/*`, `*/`, `//` hazishughulikiwi kama mwanzo/mwisho wa maoni.
 
 ```wave
-/* not closed
+var marker: str = "/*//*";
 ```
 
-컴파일러는 시작 위치, 원인, 수정 힌트를 함께 출력합니다.
+## Hitilafu ya maoni
+
+Ikiwa maoni ya block hayajakamilika, hitilafu ya kukusanya (`E1002`) itatokea.
+
+```wave
+/* haijafungwa
+```
+
+Kikokotoo kinachapisha nafasi ya kuanza, sababu, na vidokezo vya kurekebisha.

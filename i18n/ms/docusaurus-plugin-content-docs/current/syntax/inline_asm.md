@@ -2,14 +2,14 @@
 sidebar_position: 7
 ---
 
-# 인라인 어셈블리
+# Pemasangan Dalam Talian
 
-## 소개
+## Pengenalan
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+Pemasangan dalam talian Wave ditulis sebagai `asm { ... ` ditulis dalam blok.
+Anda boleh mengawal register, memori, dan laluan panggilan sistem secara langsung dalam kod Wave.
 
-현재 지원 타깃:
+Sasaran sokongan semasa:
 
 - Linux `x86_64`
 - Linux `aarch64`
@@ -18,35 +18,35 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 - freestanding `aarch64`
 - freestanding `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows dan sasaran 32-bit masih belum disokong.
 
 ---
 
-## 기본 형태
+## Bentuk Asas
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` boleh digunakan sebagai **pernyataan (statement)** atau **ekspresi (expression)**.
 
 ```wave
 asm {
-    "instruction"
-    in("constraint_or_reg") value
-    out("constraint_or_reg") target
+    "arahan"
+    in("constraint_or_reg") nilai
+    out("constraint_or_reg") sasaran
     clobber("item")
 }
 ```
 
-구성 요소:
+Komponen:
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- Barisan rentetan: arahan pemasangan sebenar
+- `in(...)`: Operan Input
+- `out(...)`: Operan Output
+- `clobber(...)`: Petunjuk pendaftaran/status/memory yang dihapus.
 
 ---
 
-## `asm` 문 (Statement)
+## `asm` Pernyataan (Statement)
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+Digunakan sebagai pernyataan umum jika tidak memerlukan nilai kembalian.
 
 ```wave
 var ret: i64 = 0;
@@ -60,13 +60,13 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+`out(...)` boleh mempunyai beberapa.
 
 ---
 
-## `asm` 식 (Expression)
+## `asm` Ekspresi (Expression)
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+Boleh digunakan sebagai ekspresi yang menjana nilai secara langsung.
 
 ```wave
 var result: i64 = asm {
@@ -75,41 +75,41 @@ var result: i64 = asm {
 };
 ```
 
-주의:
+Perhatian:
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- `asm` ekspresi hanya membenarkan **exactly 1 `out(...)`**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## `in(...)` / `out(...)` Pembatasan
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+String untuk `in("...")`, `out("...")` adalah salah satu daripada dua berikut.
 
-1. 구체 레지스터
+1. Pendaftaran Spesifik
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Contoh: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
-2. 제약 클래스(constraint class)
+2. Kelas Pembatas (Constraint Class)
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Contoh: `"r"`, `"m"`, `"rm"`
 
-예시:
+Contoh:
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Sasaran Output (`out(...)` target\` disarankan untuk mengikuti pola berikut berdasarkan pelaksanaan saat ini.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Variabel: `out("rax") ret`
+- Pengindeksan Pembendahan: `out("rax") deref p`
 
 ---
 
 ## `clobber(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`clobber(...)` boleh mempunyai beberapa item pada satu masa dan boleh digunakan berulang kali.
 
 ```wave
 asm {
@@ -120,19 +120,19 @@ asm {
 }
 ```
 
-주요 항목:
+Item Utama:
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Pendaftaran: `"rax"`, `"x0"` dan lain-lain
+- Istimewa: `"memory"`, `"cc"` (normalisasi dalaman berdasarkan sasaran)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+Penterjemah secara automatik akan menambah clobber default dalam mod keselamatan konservatif.
+(`memory`, bender/cc; di RISC-V freestanding, kebanyakannya `memory`)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Penanda Operan (`$0`, `$1`, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Gunakan `$N` untuk merujuk kepada operan dalam rentetan perintah.
 
 ```wave
 asm {
@@ -142,19 +142,19 @@ asm {
 }
 ```
 
-참고:
+Rujukan:
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- Walaupun menggunakan gaya `%0`, ia akan ditukar secara dalaman kepada gaya `$0`.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Rentang sokongan semasa untuk operan input.
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+`in(...)` nilai sokongan bentuk berikut.
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
+- Pengantara Pembolehubah
+- Literal Integer
+- Literal Rentetan
 - `&identifier`
 - `deref identifier`
 - 음수 정수/실수 리터럴
@@ -163,7 +163,7 @@ asm {
 
 ---
 
-## 주의사항
+## Dokumen Subjek
 
 인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
 잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.

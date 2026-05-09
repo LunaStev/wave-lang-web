@@ -2,81 +2,81 @@
 sidebar_position: 5
 ---
 
-# 연산자
+# Operator
 
-이 문서는 현재 컴파일러 기준으로 실제 사용 가능한 연산자를 정리합니다.
+Dokumen ini menyusun operator yang boleh digunakan berdasarkan kompilator semasa.
 
-## 산술
+## Aritmetik
 
-| 연산자 | 설명  |
-| --- | --- |
-| `+` | 덧셈  |
-| `-` | 뺄셈  |
-| `*` | 곱셈  |
-| `/` | 나눗셈 |
-| `%` | 나머지 |
+| Operator | Keterangan  |
+| -------- | ----------- |
+| `+`      | Penjumlahan |
+| `-`      | Pengurangan |
+| `*`      | darab       |
+| `/`      | pembahagian |
+| `%`      | remainder   |
 
-## 비교
+## perbandingan
 
-| 연산자  | 설명     |
-| ---- | ------ |
-| `==` | 같음     |
-| `!=` | 다름     |
-| `<`  | 작음     |
-| `<=` | 작거나 같음 |
-| `>`  | 큼      |
-| `>=` | 크거나 같음 |
+| pengendali | keterangan            |
+| ---------- | --------------------- |
+| `==`       | sama                  |
+| `!=`       | tidak sama            |
+| `<`        | kurang                |
+| `<=`       | kurang atau sama      |
+| `>`        | lebih besar           |
+| `>=`       | lebih besar atau sama |
 
-## 논리
+## logik
 
-| 연산자        | 설명     |
-| ---------- | ------ |
-| `&&`       | 논리 AND |
-| `\\|\\|` | 논리 OR  |
-| `!`        | 논리 NOT |
+| pengendali | keterangan  |
+| ---------- | ----------- |
+| `&&`       | logik DAN   |
+| `\|\|`     | logik ATAU  |
+| `!`        | logik TIDAK |
 
-## 비트
+## bit
 
-| 연산자    | 설명      |
-| ------ | ------- |
-| `&`    | 비트 AND  |
-| `\\|` | 비트 OR   |
-| `^`    | 비트 XOR  |
-| `~`    | 비트 NOT  |
-| `<<`   | 왼쪽 시프트  |
-| `>>`   | 오른쪽 시프트 |
+| pengendali | keterangan    |
+| ---------- | ------------- |
+| `&`        | bit DAN       |
+| `\|`       | bit ATAU      |
+| `^`        | bit XOR       |
+| `~`        | bit NOT       |
+| `<<`       | geseran kiri  |
+| `>>`       | geseran kanan |
 
-## 대입
+## penugasan
 
-| 연산자  | 설명       |
-| ---- | -------- |
-| `=`  | 기본 대입    |
-| `+=` | 덧셈 후 대입  |
-| `-=` | 뺄셈 후 대입  |
-| `*=` | 곱셈 후 대입  |
-| `/=` | 나눗셈 후 대입 |
-| `%=` | 나머지 후 대입 |
+| pengendali | keterangan                    |
+| ---------- | ----------------------------- |
+| `=`        | penugasan asas                |
+| `+=`       | Penugasan selepas penjumlahan |
+| `-=`       | Penugasan selepas pengurangan |
+| `*=`       | Penugasan selepas pendaraban  |
+| `/=`       | Penugasan selepas pembahagian |
+| `%=`       | Penugasan selepas modulus     |
 
-## 단항 / 포인터 / 캐스트
+## Unari / Pointer / Cast
 
-| 연산자/키워드     | 설명       |
-| ----------- | -------- |
-| `++`, `--`  | 전위/후위 증감 |
-| `&x`        | 주소 획득    |
-| `deref p`   | 포인터 역참조  |
-| `expr as T` | 명시적 캐스트  |
+| Operator/Kata Kunci | Keterangan               |
+| ------------------- | ------------------------ |
+| `++`, `--`          | Inkrement Pre/Post       |
+| `&x`                | Kendali Alamat           |
+| `deref p`           | Referensi Balik Penunjuk |
+| `expr as T`         | Cast Eksplisit           |
 
-## 포인터 연산
+## Operasi Penunjuk
 
-| 표현식                        | 결과                                   |
-| -------------------------- | ------------------------------------ |
-| `ptr<T> + int`             | `ptr<T>` (GEP 이동) |
-| `int + ptr<T>`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - int`             | `ptr<T>` (GEP 이동) |
-| `ptr<T> - ptr<T>`          | `i64` (바이트 차이)    |
-| `ptr == ptr`, `ptr != ptr` | 포인터 비교                               |
+| Ekspresi                   | Hasil                                        |
+| -------------------------- | -------------------------------------------- |
+| `ptr<T> + int`             | `ptr<T>` (Pergerakan GEP) |
+| `int + ptr<T>`             | Mana-mana                                    |
+| `ptr<T> - int`             | `ptr<T>` (Pergerakan GEP) |
+| `ptr<T> - ptr<T>`          | Apapun yang diinginkan                       |
+| `ptr == ptr`, `ptr != ptr` | Perbandingan Penunjuk                        |
 
-## 예약 또는 미구현 항목
+## Item yang dipesan atau belum dilaksanakan
 
-문법 토큰은 존재하지만 현재 표현식 연산으로는 지원되지 않는 항목이 있습니다.
-예: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.
+Ada item yang merupakan token sintaks yang ada tetapi saat ini tidak didukung oleh operasi ekspresi.
+Contoh: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.

@@ -2,20 +2,20 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# استفاده از std::time
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+امکاناتی برای نمایش زمان حال، محاسبه اختلاف زمانی، و خواب فراهم می‌کند.
 
-## import
+## واردات
 
 ```wave
-import("std::time::clock");
-import("std::time::diff");
-import("std::time::sleep");
-import("std::sys::time");
+واردات("std::time::clock");
+واردات("std::time::diff");
+واردات("std::time::sleep");
+واردات("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1. تنظیم بازه
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2. تمبر زمان نانوثانیه
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3. خواب
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64

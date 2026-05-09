@@ -108,7 +108,7 @@ wavec build app.wave -c -o ./build/app.o
 - `wavec build app.wave` -> `target/app`
 - `wavec build app.wave -c` -> `target/app.o` (הדפסת נתיב)
 
-freestanding 커널 오브젝트 예시:
+דוגמה לאובייקט kernel freestanding:
 
 ```bash
 wavec --llvm \
@@ -116,7 +116,7 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+ניתן להשתמש באותה דרך עבור `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`.
 
 ---
 
@@ -230,23 +230,24 @@ wavec run app.wave --dep math=.vex/dep/math
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 אופציות של ה-backend (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+אופציות שליטה ב-backend מפורשות רק אחרי `--llvm`.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+פריטים נתמכים (סיכום):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (ניתן לחזור)
+- `-C link-sysroot=<נתיב>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+מטרות עיקריות לפי `wavec print target-list` הנוכחי:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -256,7 +257,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` הוא כרגע דגל דמי שמור, וPipeline ה-backend הוא עדיין לא ממומש בפועל (TODO).
 
 ---
 
@@ -400,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec --whale build app.wave -c # TODO: שמור, לא ממומש
 ```

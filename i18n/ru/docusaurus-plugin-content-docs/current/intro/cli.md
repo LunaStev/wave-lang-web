@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# Справочник по CLI `wavec`.
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+Этот документ детально описывает работу CLI в **текущей реализации компилятора Wave (`wavec`)**.
 
-핵심 원칙:
+Основные принципы:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` — это компилятор.
+- Инсталляция/удаление пакетом (lockfile, реестр, загрузка) не является обязанностью `wavec`.
+- Внешние зависимости передаются как **явные аргументы CLI** при выполнении `wavec`.
 
 ---
 
-## 1. 기본 형식
+## 1. Основной формат
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [глобальные-опции] <команда> [опции-команды]
 ```
 
-예:
+Пример:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. Правила разборки команд (важно)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+В `wavec` сначала сканируются **глобальные параметры** из всех аргументов, а остальные интерпретируются как `<command>`.
 
-즉 global option은 위치가 유연합니다.
+Иными словами, глобальные параметры гибки в плане размещения.
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+Все 3 варианта допустимы.
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+Использование `--` останавливает сканирование глобальных параметров и передает их в область команды.
 
 ```bash
 wavec -- run main.wave
@@ -52,44 +52,44 @@ wavec -- run main.wave
 
 ---
 
-## 3. Commands
+## 3. Команды
 
-## 3.1 `run <file>`
+## 3.1 `run <файл>`
 
-Wave 파일을 컴파일하고 실행합니다.
+Компилирует и выполняет файл Wave.
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+Действие:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. Анализ источника + расширение import
+2. Генерация LLVM IR
+3. Связывание нативного бинарного файла (`target/<file_stem>`)
+4. Выполнение
 
-특징:
+Особенности:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- `wavec` передает код завершения выполненной программы.
 
 ---
 
-## 3.2 `build <file>`
+## 3.2 `build <файл>`
 
-실행 파일(exe)을 생성합니다.
+Создает исполняемый файл (exe).
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+Выходной бинарный файл:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 опции `build` (`-o`, `-c`)б
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+Команда `build` позволяет контролировать имя и формат выходного файла через опции.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,18 +97,18 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: указывает имя выходного файла.
+  - По умолчанию (без `-c`): указывает путь к исполняемому файлу
+  - При использовании с `-c`: указывает путь к объектному файлу
+- `-c`: пропускает линковщик и генерирует только объектный файл.
+- При использовании `-c` путь объекта выводится на stdout.
 
-기본 동작:
+Основное поведение:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (вывод пути)б
 
-freestanding 커널 오브젝트 예시:
+Пример freestanding объектного ядра:
 
 ```bash
 wavec --llvm \
@@ -116,13 +116,13 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` также могут использоваться таким же образом.
 
 ---
 
 ## 3.4 `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+Команды установки/обновления стандартной библиотеки.
 
 ```bash
 wavec install std
@@ -140,11 +140,11 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## 4. Глобальные опции
 
-## 4.1 최적화
+## 4.1 Оптимизация
 
-허용 값:
+Допустимые значения:
 
 - `-O0`
 - `-O1`
@@ -154,7 +154,7 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+Пример:
 
 ```bash
 wavec -O3 run main.wave
@@ -162,13 +162,13 @@ wavec -O3 run main.wave
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 Отладочный вывод
 
 ```bash
 wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
-허용 항목:
+Допустимые элементы:
 
 - `tokens`
 - `ast`
@@ -179,36 +179,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 Опции связывания
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` или `--link <lib>`
+- `-L<path>` или `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+При связывании `wavec` внутренне передает в формате `-l<lib>`, `-L<path>`.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 Опции внешней зависимости (важно)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+Опция, используемая для разбора внешних пакетов (`pkg::...`).
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+Добавляет кандидат в корневой директории пакета.
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+При поиске пакета `math`:
 
-- `.vex/dep/math` 를 검사
+- .vex/dep/math проверяется
 
-여러 번 지정 가능:
+Может быть указано несколько раз:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -216,37 +216,38 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+Фиксирует имя пакета для определенного пути.
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+Правила:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- Формат `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` всегда в формате `name=путь`
+- Если дублировать одноИмя пакета несколько раз будет ошибкой
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 параметры бэкенда (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+Опции управления бэкендом интерпретируются только после `--llvm`.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+Поддерживаемые элементы (краткое содержание):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (можно повторять)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+Текущие основные целевые платформы на основании `wavec print target-list`:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -256,79 +257,79 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` в настоящее время зарезервирован как флаг-заглушка, фактический бэкенд-пайплайн пока не реализован (TODO).
 
 ---
 
-## 5. Import 해석 규칙
+## 5. Правила интерпретации импортов
 
-Wave import는 다음 3가지로 분기됩니다.
+Импорты Wave разделяются на три категории.
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. Локальный импорт
+2. std импорт
+3. Импорт внешних пакетов
 
-## 5.1 로컬
+## 5.1 Локально
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+Ищет `<path>.wave` в каталоге файла основы.
 
-## 5.2 std
+## 5.2 стд
 
 ```wave
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+Использует путь `~/.wave/lib/wave/std/...`.
 
-## 5.3 외부 패키지
+## 5.3 внешние пакеты
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+Формат:
 
-- 최소 `package::module` 2세그먼트 필요
+- Требуется минимум 2 сегмента `package::module`.
 
-패키지 루트 결정 순서:
+Порядок определения корня пакета:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. Явное сопоставление `--dep name=path`.
+2. Поиск `<root>/<package>` в каждом `--dep-root`.
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+Если одинаковый пакет найден в нескольких dep-root:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- Не выбирается автоматически и возникает **ошибка неоднозначности**.
+- Должен быть зафиксирован с помощью `--dep name=path`.
 
-모듈 파일 탐색 순서:
+Порядок поиска файла модуля:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+Пример:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+Поиск:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. Практический пример внешнего импорта
 
-### 6.1 단일 dep-root
+### 6.1 один dep-root
 
-디렉터리:
+Каталог:
 
 ```text
 .vex/dep/
@@ -338,19 +339,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+Код:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+Выполнить:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 Устранение неоднозначности
 
 ```bash
 wavec run main.wave \
@@ -358,7 +359,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+Если с обеих сторон есть `math`, возникает ошибка. Исправляем, как показано ниже.
 
 ```bash
 wavec run main.wave \
@@ -369,25 +370,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Разделение ролей с Vex
 
-권장 구조:
+Рекомендуемая структура:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: компиляция/линковка/исполнение + разрешение указанной зависимости
+- `vex`: установка/управление зависимостями, затем `wavec ... --dep-root ... --dep ...` вызов
 
-예:
+Пример:
 
 ```bash
-# 내부적으로 vex가 수행
+# Внутренне выполняется vex
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+Эта модель поддерживает компилятор простым и определенным, позволяя менеджеру пакетов ответственным за автоматизацию.
 
 ---
 
-## 8. 빠른 참조
+## 8. Быстрая справка
 
 ```bash
 wavec run main.wave
@@ -400,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec --whale build app.wave -c # TODO: зарезервировано, не реализовано
 ```

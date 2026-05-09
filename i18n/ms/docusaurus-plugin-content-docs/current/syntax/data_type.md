@@ -2,26 +2,26 @@
 sidebar_position: 2
 ---
 
-# 데이터 타입
+# Jenis Data
 
-이 문서는 Wave 프로그래밍 언어에서 제공하는 다양한 데이터 타입에 대해 설명합니다.
-Wave에서는 여러 종류의 데이터 타입을 통해 값을 저장하고 연산할 수 있으며, 각 데이터 타입은 해당 데이터의 표현 방식과 메모리 처리 방식을 명확하게 정의합니다.
+Dokumen ini menerangkan pelbagai jenis data yang disediakan dalam bahasa pengaturcaraan Wave.
+Dalam Wave, pelbagai jenis data membolehkan penyimpanan dan pengendalian nilai, dan setiap jenis data mendefinisikan cara representasi dan pengendalian memori.
 
-데이터 타입을 명확히 지정하는 것은 Wave의 핵심 설계 철학 중 하나입니다.
-Wave는 **완전한 강타입** 시스템입니다. 모든 `var`/`fun` 선언과 변수 초기화는 명시적 타입이 필요하며, 문맥 기반의 타입 추론은 지원되지 않습니다. 따라서 `var x = 1;`처럼 타입이 없으면 컴파일이 실패합니다.
-이를 통해 코드의 의도를 분명하게 표현할 수 있고, 컴파일 타임에 오류를 조기에 발견하며, 효율적인 메모리 사용과 안정적인 실행을 보장할 수 있습니다.
+Menetapkan jenis data dengan jelas adalah salah satu filosofi reka bentuk utama Wave.
+Wave adalah sistem **tipus tegar lengkap**. Semua deklarasi `var`/`fun` dan penginisialisasian pembolehubah memerlukan jenis yang jelas, dan inferensi jenis berdasarkan konteks tidak disokong. Oleh itu, jika jenis tidak ditentukan seperti `var x = 1;`, kompilasi akan gagal.
+Ini membolehkan niat kod dinyatakan dengan jelas, mengenal pasti kesilapan lebih awal semasa waktu pengkompilasian, dan memastikan penggunaan memori yang efisien serta pelaksanaan yang stabil.
 
 ---
 
-## 정수 타입
+## Jenis Integer
 
-정수 타입은 정수 값을 저장하는 데 사용됩니다.
-Wave에서는 기본적으로 `i32`(부호 있는 32비트 정수)와 `u32`(부호 없는 32비트 정수)를 자주 사용하지만, 필요에 따라 정수의 비트 크기를 매우 세밀하게 지정할 수 있습니다.
+Jenis integer digunakan untuk menyimpan nilai integer.
+Dalam Wave, `i32` (integer 32-bit bertanda) dan `u32` (integer 32-bit tidak bertanda) sering digunakan, tetapi anda dapat menyesuaikan saiz bit integer dengan sangat terperinci jika perlu.
 
-부호가 있는 정수 타입은 `i8`부터 `i1024`까지 제공되며, 부호가 없는 정수 타입은 `u8`부터 `u1024`까지 사용할 수 있습니다.
-이를 통해 단순한 계산부터 대용량 정수 연산, 암호학적 처리, 저수준 시스템 프로그래밍까지 폭넓은 요구를 만족할 수 있습니다.
+Jenis integer bertanda tersedia dari `i8` hingga `i1024`, dan jenis integer tidak bertanda tersedia dari `u8` hingga `u1024`.
+Ini memenuhi pelbagai keperluan dari pengiraan mudah hingga pengendalian integer besar, pemprosesan kriptografi, dan pengaturcaraan sistem rendah.
 
-다음은 정수 타입을 사용하는 간단한 예제입니다.
+Berikut adalah contoh mudah menggunakan jenis integer.
 
 ```wave
 var a: i32 = 100;
@@ -30,15 +30,15 @@ var b: u32 = 200;
 
 ---
 
-## 부동소수점 타입
+## Jenis Point Apung
 
-부동소수점 타입은 실수 값을 저장하는 데 사용됩니다.
-Wave에서 기본적으로 사용하는 부동소수점 타입은 `f32`이며, 보다 높은 정밀도가 필요한 경우 더 큰 크기의 타입을 선택할 수 있습니다.
+Jenis point apung digunakan untuk menyimpan nilai nombor nyata.
+Jenis point apung yang biasa digunakan dalam Wave adalah `f32`, dan jika keperluan ketepatan lebih tinggi, anda boleh memilih jenis yang lebih besar.
 
-Wave는 `f32`부터 `f128`까지의 부동소수점 타입을 제공하여, 계산의 정밀도와 성능 사이에서 사용자가 직접 선택할 수 있도록 합니다.
-이를 통해 일반적인 수치 계산부터 정밀한 과학 계산까지 다양한 용도의 실수 연산을 처리할 수 있습니다.
+Wave menyediakan jenis point apung dari `f32` hingga `f128`, membolehkan pengguna memilih antara ketepatan pengiraan dan prestasi.
+Ini membolehkan pelbagai pengendalian operasi nombor sebenar dari pengiraan numerik umum hingga pengiraan saintifik yang tepat.
 
-아래는 부동소수점 타입을 사용하는 예제입니다.
+Berikut adalah contoh menggunakan jenis point apung.
 
 ```wave
 var pi: f32 = 3.14;
@@ -47,14 +47,14 @@ var e: f64 = 2.71828;
 
 ---
 
-## 문자열 타입
+## Jenis Rantaian
 
-문자열 타입은 텍스트 데이터를 다루는 데 사용됩니다.
-Wave에서는 `str` 키워드를 사용하여 문자열을 선언하며, 문자열 리터럴은 큰따옴표(`"`)로 감싸서 표현합니다.
+Jenis rantaian digunakan untuk mengendalikan data teks.
+Dalam Wave, anda menggunakan kata kunci `str` untuk mengisytiharkan rantaian, dan literal rantaian diwakili dengan tanda petikan besar (`"`).
 
-문자열은 프로그램에서 메시지 출력, 사용자 입력 처리, 텍스트 기반 데이터 처리 등에 폭넓게 활용됩니다.
+Rantaian digunakan secara meluas dalam program untuk output mesej, pengendalian input pengguna, dan pengendalian data berasaskan teks.
 
-다음은 문자열 타입의 기본적인 사용 예제입니다.
+Berikut adalah contoh penggunaan asas jenis rantaian.
 
 ```wave
 var text: str = "Hello Wave";
@@ -62,12 +62,12 @@ var text: str = "Hello Wave";
 
 ---
 
-## 불리언 타입
+## Jenis Boolean
 
-불리언 타입은 참(True) 또는 거짓(False) 값을 표현하는 데이터 타입입니다.
-Wave에서는 `bool` 타입을 사용하며, 값은 `true` 또는 `false`로 지정합니다.
+Jenis boolean adalah jenis data yang mewakili nilai benar (True) atau salah (False).
+Dalam Wave, jenis `bool` digunakan, dan nilainya ditentukan sebagai `true` atau `false`.
 
-불리언 타입은 조건문과 반복문에서 핵심적인 역할을 하며, 프로그램의 흐름을 제어하는 데 사용됩니다.
+Jenis boolean memainkan peranan penting dalam penyataan kondisi dan gelung, dan digunakan untuk mengawal aliran program.
 
 ```wave
 var isActive: bool = true;
@@ -76,45 +76,45 @@ var isAvailable: bool = true;
 
 ---
 
-## 문자 타입
+## Jenis Watak
 
-문자 타입은 단일 문자를 저장하는 데 사용됩니다.
-`char` 키워드를 사용하여 선언하며, 하나의 문자만을 담을 수 있습니다.
+Jenis watak digunakan untuk menyimpan satu aksara.
+Dikenali dengan menggunakan kata kunci `char`, ia boleh menyimpan hanya satu aksara.
 
-문자 리터럴은 작은따옴표(`'`)로 감싸서 표현합니다.
+Literal karakter diketengahkan menggunakan tanda petik kecil (`'`).
 
 ```wave
 var letter: char = 'A';
 ```
 
-## 바이트 타입
+## Jenis Byte
 
-바이트 타입은 1바이트 크기의 데이터를 저장하는 데 사용됩니다.
-이 타입은 주로 바이너리 데이터 처리, 파일 입출력, 네트워크 프로그래밍과 같이 저수준 데이터 처리가 필요한 경우에 유용합니다.
+Jenis Byte digunakan untuk menyimpan data berukuran 1 byte.
+Jenis ini biasanya berguna dalam pemprosesan data rendah seperti pemprosesan data binari, input/output fail, dan pengaturcaraan rangkaian.
 
-Wave에서는 `byte` 키워드를 사용하여 바이트 타입을 선언합니다.
+Dalam Wave, jenis byte dinyatakan menggunakan kata kunci `byte`.
 
 ```wave
 var byteData: byte = 0xFF;
 ```
 
-## 포인터 타입
+## Jenis Penunjuk
 
-포인터 타입은 메모리 주소를 직접 참조하는 데 사용됩니다.
-Wave에서는 `ptr<T>` 형태로 포인터 타입을 선언합니다.
+Jenis Penunjuk digunakan untuk merujuk alamat memori secara langsung.
+Dalam Wave, jenis penunjuk ditakrifkan dalam format `ptr<T>`.
 
-포인터는 저수준 메모리 접근이 필요한 경우에 사용되며, 시스템 프로그래밍이나 성능이 중요한 코드에서 주로 활용됩니다.
+Penunjuk digunakan apabila akses memori rendah diperlukan dan biasanya digunakan dalam pengaturcaraan sistem atau kod yang memerlukan prestasi tinggi.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
 ```
 
-## `null` 리터럴
+## Literal `null`
 
-Wave에서 `null`은 정식 리터럴입니다.
+Dalam Wave, `null` adalah literal rasmi.
 
-- `null`은 식별자가 아닙니다. (`var null = ...` 형태 불가)
-- `null`은 오직 `ptr<T>` 타입에만 대입할 수 있습니다.
+- `null` bukanlah pengenalan. (Tidak dapat menggunakan bentuk `var null = ...`)
+- `null` hanya boleh ditugaskan kepada jenis `ptr<T>`.
 
 ```wave
 var p: ptr<i32> = null;  // OK
@@ -123,16 +123,16 @@ var p: ptr<i32> = null;  // OK
 // var b: bool = null;   // ERROR
 ```
 
-## 배열 타입
+## Jenis Array
 
-배열 타입은 동일한 데이터 타입의 여러 값을 순차적으로 저장하는 데 사용됩니다.
-Wave에서는 `array<타입, 크기>` 형태로 배열을 선언하며, 배열의 크기를 컴파일 타임에 명확히 지정합니다.
+Jenis Array digunakan untuk menyimpan beberapa nilai dengan jenis data yang sama secara berurutan.
+Dalam Wave, array dinyatakan dalam bentuk `array<jenis, saiz>` dan saiz array ditentukan dengan jelas semasa waktu kompilasi.
 
-이를 통해 메모리 구조가 명확해지고, 안정적인 접근이 가능합니다.
+Ini memudahkan struktur memori menjadi jelas dan membolehkan akses yang stabil.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-각 데이터 타입은 용도와 특성에 맞는 범위와 크기를 선택할 수 있도록 설계되어 있습니다.
-적절한 데이터 타입을 선택하면 메모리를 효율적으로 관리할 수 있으며, 코드의 안정성과 가독성 또한 크게 향상됩니다.
+Setiap jenis data direka untuk membolehkan pemilihan julat dan saiz yang sesuai dengan keperluan dan ciri.
+Dengan memilih jenis data yang tepat, memori dapat diuruskan dengan cekap, dan kestabilan serta kebolehcetakan kod juga meningkat dengan ketara.

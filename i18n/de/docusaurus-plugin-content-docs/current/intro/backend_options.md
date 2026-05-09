@@ -61,12 +61,13 @@ Derzeit primäre Ziel-Triple, die standardmäßig dokumentiert werden sollen:
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (wiederholbar)​​
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Implementierungsstelle:
 
 - `--sysroot` für die Objekterstellung (clang `-c`)
-- Linker-Override und Raw-Link-Argument im Link-Stage einfügen
+- Linker-Überschreibung in der Verknüpfungsphase, Einfügen von Rohlinkargumenten, Einfügen von link-sysroot.
 - Automatisches Deaktivieren von `-lc -lm` bei Verwendung von `-C no-default-libs`
 
 ---

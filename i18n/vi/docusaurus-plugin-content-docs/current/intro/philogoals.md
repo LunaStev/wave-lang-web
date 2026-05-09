@@ -4,84 +4,60 @@ sidebar_position: 2
 
 # Triết lý và mục tiêu của Wave
 
-Wave는 기존 저수준 언어가 가진 한계를 보완하면서,
-하나의 언어로 다양한 개발 영역을 아우를 수 있는 통합된 개발 생태계를 구축하는 것을 목표로 합니다.
+Wave nhắm đến mục tiêu bổ sung những giới hạn của các ngôn ngữ bậc thấp hiện tại và xây dựng một hệ sinh thái phát triển tích hợp, nơi có thể bao quát nhiều lĩnh vực phát triển chỉ bằng một ngôn ngữ duy nhất.
 
-웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어 제어, 컴파일러, 네트워킹, 암호화와 같이
-서로 성격이 크게 다른 분야를 각각 다른 언어로 나누어 다루는 대신,
-Wave는 하나의 언어와 하나의 도구 체계 안에서 이 모든 영역을 자연스럽게 연결하고자 합니다.
+Thay vì xử lý các lĩnh vực khác nhau như phát triển web, hệ điều hành, trí tuệ nhân tạo, blockchain, điều khiển phần cứng, trình biên dịch, mạng và mã hóa bằng các ngôn ngữ khác nhau, Wave muốn kết nối tự nhiên tất cả các lĩnh vực này trong một ngôn ngữ và hệ thống công cụ duy nhất.
 
-Wave는 범용성을 단순히 “많은 곳에 쓸 수 있다”는 의미로 보지 않습니다.
-각 영역이 요구하는 성능, 제어력, 안정성을 동시에 충족시키는 것을 목표로 하며,
-이를 위해 언어 차원에서 일관된 설계와 명확한 규칙을 유지합니다.
+Wave không coi tính phổ dụng là chỉ đơn giản có thể sử dụng ở nhiều nơi.
+Chúng tôi đặt mục tiêu đáp ứng đồng thời hiệu suất, khả năng kiểm soát và độ ổn định mà mỗi lĩnh vực yêu cầu, và để làm được điều này, chúng tôi duy trì thiết kế nhất quán và quy tắc rõ ràng ở tầm ngôn ngữ.
 
-특히 Wave는 하드웨어에 대한 깊은 전문 지식이 없는 개발자도
-하드웨어 기능을 활용할 수 있도록 설계되었습니다.
-표준 하드웨어 라이브러리는 복잡한 하드웨어 개념을 추상화하여,
-직관적인 방식으로 사용할 수 있도록 돕습니다.
+Đặc biệt, Wave được thiết kế để các nhà phát triển không có kiến thức chuyên sâu về phần cứng cũng có thể sử dụng được các chức năng của phần cứng.
+Thư viện phần cứng tiêu chuẩn giúp trừu tượng hóa các khái niệm phần cứng phức tạp để có thể sử dụng theo cách trực quan.
 
-동시에 Wave는 필요한 경우 하드웨어를 직접 제어할 수 있는 저수준 접근도 제공합니다.
-이를 통해 개발자는 추상화된 인터페이스와 직접 제어 사이를 자유롭게 오갈 수 있으며,
-성능을 희생하지 않으면서도 코드의 복잡성을 최소화할 수 있습니다.
+Đồng thời, Wave cũng cung cấp phương pháp tiếp cận cấp thấp giúp kiểm soát trực tiếp phần cứng khi cần thiết.
+Thông qua cách này, các nhà phát triển có thể chuyển đổi linh hoạt giữa giao diện trừu tượng và kiểm soát trực tiếp, đồng thời có thể tối thiểu hóa độ phức tạp của mã mà không hy sinh hiệu suất.
 
-궁극적으로 Wave는 하나의 언어로 다양한 작업을 처리하고,
-효율적인 성능과 일관된 개발 경험을 제공하는 통합 환경을 지향합니다.
+Cuối cùng, Wave hướng đến việc xử lý nhiều tác vụ khác nhau bằng một ngôn ngữ, đồng thời cung cấp môi trường tích hợp với hiệu suất hiệu quả và kinh nghiệm phát triển nhất quán.
 
 ## Hiệu suất và hiệu quả
 
-Wave는 고성능을 전제로 설계된 언어입니다.
-컴파일러와 실행 모델은 최적화된 코드 생성을 목표로 하며,
-다양한 플랫폼에서 안정적인 성능을 유지할 수 있도록 구성됩니다.
+Wave là một ngôn ngữ được thiết kế trên cơ sở hiệu suất cao.
+Trình biên dịch và mô hình thực thi được nhắm đến việc tạo ra mã tối ưu hóa và được cấu hình để duy trì hiệu suất ổn định trên nhiều nền tảng.
 
-이를 통해 웹 애플리케이션과 같은 고수준 영역부터,
-운영 체제나 시스템 소프트웨어처럼 성능이 중요한 영역까지
-하나의 언어로 일관된 성능 특성을 제공하는 것을 목표로 합니다.
+Thông qua cách này, từ lĩnh vực cấp cao như ứng dụng web đến các khu vực mà hiệu suất là yếu tố quan trọng như hệ điều hành hay phần mềm hệ thống, Wave đặt mục tiêu cung cấp các đặc điểm về hiệu suất nhất quán chỉ với một ngôn ngữ.
 
 ## An toàn và xử lý lỗi
 
-Wave는 안전한 프로그래밍을 중요한 설계 기준으로 삼고 있습니다.
-컴파일 타임 단계에서 가능한 오류를 최대한 검출하여,
-런타임에서 발생할 수 있는 문제를 최소화하는 방향으로 설계되었습니다.
+Wave coi lập trình an toàn là tiêu chí thiết kế quan trọng.
+Wave được thiết kế theo hướng phát hiện tối đa các lỗi có thể xảy ra ở giai đoạn thời gian biên dịch để tối thiểu hóa các vấn đề có thể xảy ra trong thời gian chạy.
 
-메모리 안전성, 타입 안전성과 같은 기본적인 안정성을 보장하면서도,
-이를 위해 성능을 희생하지 않는 것을 목표로 합니다.
-Wave는 안전성과 성능이 상충되는 개념이 아니라,
-언어 설계를 통해 함께 달성할 수 있는 요소라고 봅니다.
+Wave đặt mục tiêu đảm bảo tính ổn định cơ bản như an toàn bộ nhớ và an toàn kiểu dữ liệu mà không hy sinh hiệu suất.
+Wave không coi an toàn và hiệu suất là những khái niệm đối lập, mà là những yếu tố có thể đạt được cùng nhau thông qua thiết kế ngôn ngữ.
 
 ## Nâng cao năng suất cho nhà phát triển
 
-Wave는 직관적이고 일관된 문법을 통해
-개발자가 언어를 빠르게 익히고 효율적으로 사용할 수 있도록 설계되었습니다.
+Wave được thiết kế để có cú pháp dễ hiểu và nhất quán, giúp các nhà phát triển nắm bắt nhanh chóng và sử dụng ngôn ngữ một cách hiệu quả.
 
-또한 풍부한 표준 라이브러리와 도구 체계(Vex, WSON 등)를 통해
-복잡한 작업을 반복 구현하지 않고도 해결할 수 있도록 지원합니다.
-이를 통해 개발자는 환경 설정이나 보일러플레이트 코드보다
-문제 해결 자체에 집중할 수 있습니다.
+Ngoài ra, thông qua thư viện chuẩn phong phú và hệ thống công cụ (Vex, WSON, v.v.), Wave hỗ trợ giải quyết các tác vụ phức tạp mà không cần phải lặp đi lặp lại việc triển khai.
+Thông qua cách này, các nhà phát triển có thể tập trung vào việc giải quyết vấn đề hơn là cài đặt môi trường hay mã máy móc.
 
 ## Tính độc lập nền tảng
 
-Wave는 특정 운영 체제나 환경에 종속되지 않는 언어를 지향합니다.
-동일한 코드가 다양한 운영 체제에서 일관되게 동작할 수 있도록 설계되어 있으며,
-개발자는 한 번 작성한 코드를 여러 환경에서 재사용할 수 있습니다.
+Wave hướng đến trở thành một ngôn ngữ không phụ thuộc vào hệ điều hành hay môi trường cụ thể nào.
+Wave được thiết kế để mã có thể hoạt động nhất quán trên nhiều hệ điều hành khác nhau, và các nhà phát triển có thể tái sử dụng mã đã viết một lần trên nhiều môi trường.
 
-이러한 플랫폼 독립성은 Wave가 범용 언어로서 기능하기 위한
-중요한 기반 요소 중 하나입니다.
+Tính nền tảng độc lập này là một trong những yếu tố quan trọng để Wave hoạt động như một ngôn ngữ phổ quát.
 
 ## Cộng đồng và khả năng mở rộng
 
-Wave는 오픈 소스 커뮤니티와의 협력을 통해 성장하는 언어입니다.
-사용자와 개발자는 Wave의 기능을 확장하고 개선하는 데 자유롭게 참여할 수 있으며,
-이 과정은 언어의 방향성과 완성도를 함께 만들어가는 과정이기도 합니다.
+Wave là một ngôn ngữ phát triển thông qua sự hợp tác với cộng đồng mã nguồn mở.
+Người dùng và nhà phát triển có thể thoải mái tham gia mở rộng và cải thiện các chức năng của Wave, và quá trình này cũng là quá trình cùng phát triển hướng đi và sự hoàn thiện của ngôn ngữ.
 
-Wave는 커스터마이징과 확장을 전제로 설계되어,
-특정 분야나 요구사항에 맞게 언어와 생태계를 유연하게 활용할 수 있도록 합니다.
+Wave được thiết kế với tiền đề là có thể tùy chỉnh và mở rộng, cho phép sử dụng ngôn ngữ và hệ sinh thái một cách linh hoạt để phù hợp với các lĩnh vực hoặc yêu cầu cụ thể.
 
 ## Mục tiêu hướng tới tương lai
 
-Wave는 현재의 기술 환경에 머무르지 않고,
-앞으로 등장할 새로운 기술 흐름을 수용할 수 있는 언어를 목표로 합니다.
+Wave không chỉ dừng lại ở môi trường công nghệ hiện tại mà còn nhắm đến việc trở thành một ngôn ngữ có thể tiếp nhận các xu hướng công nghệ mới sẽ xuất hiện trong tương lai.
 
-인공지능, 분산 시스템, 양자 컴퓨팅과 같은 미래 기술을 염두에 두고,
-언어와 도구 체계를 지속적으로 확장해 나갈 계획입니다.
-이러한 방향성은 Wave가 단기적인 도구가 아닌,
-장기적으로 발전 가능한 언어로 자리 잡기 위한 기반이 됩니다.
+Chúng tôi có kế hoạch mở rộng liên tục ngôn ngữ và hệ thống công cụ với ý tưởng về các công nghệ tương lai như trí tuệ nhân tạo, hệ thống phân tán và tính toán lượng tử.
+Hướng đi này là nền tảng để Wave không chỉ là một công cụ ngắn hạn mà còn trở thành một ngôn ngữ có thể phát triển lâu dài.

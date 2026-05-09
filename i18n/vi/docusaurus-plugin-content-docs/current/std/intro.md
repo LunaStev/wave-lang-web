@@ -2,11 +2,11 @@
 sidebar_position: 1
 ---
 
-# 표준 라이브러리 (std)
+# Thư viện chuẩn (std)
 
-이 섹션은 Wave 표준 라이브러리의 실제 사용법을 설명합니다.
+Phần này giải thích cách sử dụng thực tế của thư viện chuẩn Wave.
 
-## 모듈
+## Mô-đun
 
 - [buffer](./buffer)
 - [env](./env)
@@ -19,20 +19,20 @@ sidebar_position: 1
 - [sys](./sys)
 - [libc](./libc)
 
-## 사용 원칙
+## Nguyên tắc sử dụng
 
-- 고수준 코드에서는 `std::*`를 사용합니다.
-- OS 의존 기능은 `std::sys::*` 뒤로 숨겨져 있습니다.
-- `std::libc`는 C 호환이 필요한 경우에만 사용합니다.
+- Trong mã cấp cao, sử dụng `std::*`.
+- Các chức năng phụ thuộc vào OS được ẩn sau `std::sys::*`.
+- `std::libc` chỉ được sử dụng khi cần tương thích với C.
 
-## 에러 처리 규약
+## Quy tắc xử lý lỗi
 
-많은 함수가 다음 규약을 따릅니다.
+Nhiều hàm tuân theo các quy tắc sau:
 
-- `>= 0`: 성공
-- `< 0`: 실패 (`-errno` 또는 모듈별 에러 코드)
+- `>= 0`: thành công
+- `< 0`: thất bại (`-errno` hoặc mã lỗi theo mô-đun)
 
-예시:
+Ví dụ:
 
 ```wave
 import("std::env::environ");
@@ -42,10 +42,10 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // 에러 처리
+        // xử lý lỗi
         return;
     }
 
-    // raw에는 NUL 종료 문자열이 들어 있음
+    // raw chứa chuỗi kết thúc NUL
 }
 ```

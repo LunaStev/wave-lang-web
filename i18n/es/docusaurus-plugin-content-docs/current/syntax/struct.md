@@ -36,7 +36,7 @@ La lógica operativa se define por separado fuera de la estructura.
 ## Sintaxis de creación de estructura
 
 Una estructura se crea en un formato literal utilizando el nombre de la estructura.
-Un literal de estructura es `NombreDeEstructura { nombreDelCampo: valor; ... }`.
+Un literal de estructura es \`NombreDeEstructura { nombreDelCampo: valor; ... Se escribe en el formato }.
 
 ```wave
 var b: Caja = Caja {

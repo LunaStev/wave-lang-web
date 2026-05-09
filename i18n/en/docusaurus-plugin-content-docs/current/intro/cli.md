@@ -244,6 +244,7 @@ Supported items (summary):
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (repeatable)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 The major targets according to `wavec print target-list` are:

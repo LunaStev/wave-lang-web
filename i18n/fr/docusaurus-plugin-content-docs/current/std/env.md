@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# std::env 사용법
+# Utilisation de std::env
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+Fournit la consultation des variables d'environnement et le contrôle du répertoire de travail.
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## 1. Lecture des variables d'environnement de chaîne
 
 ```wave
 fun main() {
@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf est une chaîne terminée par NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // clé introuvable
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // buffer insuffisant
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## 2. Lire les variables d'environnement entières (type de résultat générique)
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## 3. Répertoire courant/déplacement
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Fonctions principales
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64

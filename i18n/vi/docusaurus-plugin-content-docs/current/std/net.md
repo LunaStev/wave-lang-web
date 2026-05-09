@@ -2,9 +2,9 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# Cách sử dụng std::net
 
-동기식 IPv4 TCP/UDP API입니다.
+Là API TCP/UDP IPv4 đồng bộ.
 
 ## import
 
@@ -13,7 +13,7 @@ import("std::net::tcp");
 import("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1. Máy chủ TCP
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2. Máy khách TCP
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3. Gửi/nhận UDP
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## Tạo địa chỉ
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Hàm chính
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener

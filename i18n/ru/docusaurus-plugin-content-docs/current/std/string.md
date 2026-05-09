@@ -2,11 +2,11 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# Как использовать std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+Утилиты для работы со строками с окончанием NUL (`str`).
 
-## import
+## импорт
 
 ```wave
 import("std::string::len");
@@ -17,51 +17,51 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. длина/сравнение
 
 ```wave
 fun main() {
-    var l: i32 = len("wave");
-    var e: bool = eq("a", "a");
-    var c: i32 = cmp("abc", "abd"); // -1
-    var sw: bool = starts_with("/api/v1", "/api");
+ var l: i32 = len("wave");
+ var e: bool = eq("a", "a");
+ var c: i32 = cmp("abc", "abd"); // -1
+ var sw: bool = starts_with("/api/v1", "/api");
 }
 ```
 
-## 2. 검색/카운트
+## 2. поиск/подсчет
 
 ```wave
 fun main() {
-    var p1: i32 = find_char("hello", 108); // 'l' -> 2
-    var p2: i32 = find("wave-lang", "lang");
-    var cnt: i32 = count("aaaa", "aa");
+ var p1: i32 = find_char("hello", 108); // 'l' -> 2
+ var p2: i32 = find("wave-lang", "lang");
+ var cnt: i32 = count("aaaa", "aa");
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. операции trim + ASCII
 
 ```wave
 fun main() {
-    var s: str = "  hello\n";
-    var st: i32 = 0;
-    var en: i32 = 0;
-    trim_range(s, &st, &en);
+ var s: str = " hello\n";
+ var st: i32 = 0;
+ var en: i32 = 0;
+ trim_range(s, &st, &en);
 
-    var d: bool = is_digit(53);    // '5'
-    var up: u8 = to_upper(97);     // 'a' -> 'A'
+ var d: bool = is_digit(53); // '5'
+ var up: u8 = to_upper(97); // 'a' -> 'A'
 }
 ```
 
-## 4. 해시
+## 4. хеширование
 
 ```wave
 fun main() {
-    var h1: i32 = djb2_32("cache-key");
-    var h2: i64 = fnv1a_64("cache-key");
+ var h1: i32 = djb2_32("cache-key");
+ var h2: i64 = fnv1a_64("cache-key");
 }
 ```
 
-## 주요 함수
+## Основные функции
 
 ```wave
 fun len(s: str) -> i32

@@ -2,54 +2,54 @@
 sidebar_position: 5
 ---
 
-# 오류 진단
+# Chẩn đoán lỗi
 
-Wave 컴파일러는 오류를 코드(`E####`)와 함께, 소스 위치/맥락/해결 힌트까지 한 번에 보여줍니다.
+Trình biên dịch Wave hiển thị lỗi cùng với mã lỗi (`E####`), vị trí/ngữ cảnh/đề xuất giải pháp cho mã nguồn cùng lúc.
 
-## 출력 형식
+## Dạng đầu ra
 
-기본 형식은 다음과 같습니다.
+Dạng cơ bản như sau.
 
 ```text
-error[E3001]: semantic validation failed: use of undeclared identifier `x`
+error[E3001]: xác nhận ngữ nghĩa không thành công: sử dụng định danh chưa được khai báo `x`
   --> file.wave:2:18
  1 | fun main() {
  2 |     println("{}", x);
-   |                  ^ not found in this scope
-   = context: semantic validation
-   = help: fix mutability, scope, and expression validity issues
+   |                  ^ không tìm thấy trong phạm vi này
+   = ngữ cảnh: xác nhận ngữ nghĩa
+   = gợi ý: sửa đổi tính thay đổi, phạm vi và tính hợp lệ của biểu thức
 ```
 
-출력 항목:
+Mục đầu ra:
 
-- `error[E....]`: 에러 코드와 요약
-- `--> file:line:column`: 문제 위치
-- 소스 블록 + caret(`^`) 하이라이트
+- `error[E....]`: mã lỗi và tóm tắt
+- `--> file:line:column`: vị trí vấn đề
+- khối mã nguồn + caret(`^`) nổi bật
 - `context`, `expected`, `found`, `note`, `help`, `suggestion`
 
-## 대표 에러 코드
+## Mã lỗi đại diện
 
-- `E1001` 예상하지 못한 문자
-- `E1002` 닫히지 않은 블록 주석
-- `E1003` 닫히지 않은 문자열
-- `E1004` 잘못된 문자열 escape
-- `E1005` 잘못된 문자 리터럴
-- `E1006` 잘못된 숫자 리터럴 형식
-- `E2001` 파서 구문 오류
-- `E3001` 의미 분석(semantic validation) 오류
-- `E3102` `null`을 비포인터에 대입
-- `E3201` 암시적 정수 축소 금지
-- `E9001` 백엔드 코드생성 내부 오류
+- `E1001` ký tự không mong đợi
+- `E1002` chú thích khối chưa được đóng kín
+- `E1003` chuỗi chưa được đóng kín
+- `E1004` escape chuỗi không hợp lệ
+- `E1005` literal ký tự không hợp lệ
+- `E1006` dạng literal số không hợp lệ
+- `E2001` lỗi cú pháp trình phân tích cú pháp
+- `E3001` lỗi xác nhận ngữ nghĩa
+- `E3102` gán `null` cho không phải là con trỏ
+- `E3201` không cho phép thu hẹp số nguyên ẩn
+- `E9001` lỗi nội bộ khi tạo mã hậu kỳ
 
-## 백엔드 오류도 소스 위치 표시
+## Lỗi back-end cũng hiển thị vị trí nguồn
 
-코드 생성(LLVM) 단계에서 내부 panic이 발생해도, 가능한 경우 실제 호출/선언 위치를 추론해 표시합니다.
+Ngay cả khi có sự cố panic nội bộ trong giai đoạn tạo mã (LLVM), vị trí gọi/thông báo thực tế sẽ được suy luận và hiển thị nếu có thể.
 
 ```text
-error[E9001]: compiler internal error during code generation (llvm-ir-generation)
+error[E9001]: lỗi nội bộ của trình biên dịch trong quá trình tạo mã (llvm-ir-generation)
   --> test.wave:12:9
-   = found: Function 'foo' not found
-   = note: source position inferred from unresolved function name in backend panic
+   = tìm thấy: Không tìm thấy hàm 'foo'
+   = lưu ý: vị trí nguồn được suy ra từ tên hàm chưa được giải quyết trong tình trạng hoảng sợ của backend
 ```
 
-위치 추론이 불가능한 경우에는 fallback 위치가 사용되며, 해당 사실이 `note`에 함께 표시됩니다.
+Khi không thể suy luận về vị trí, vị trí dự phòng sẽ được sử dụng và thực tế này sẽ được ghi cùng với `note`.

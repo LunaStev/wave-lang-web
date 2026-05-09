@@ -2,48 +2,48 @@
 sidebar_position: 14
 ---
 
-# Match 문
+# Câu lệnh Match
 
-## 소개
+## Giới thiệu
 
-`match` 문은 하나의 값을 여러 패턴과 비교해 분기하는 제어문입니다.
-`if / else if` 체인보다 분기 의도를 더 명확하게 표현할 때 유용합니다.
+Câu lệnh `match` là câu lệnh điều khiển phân nhánh với nhiều mẫu khác nhau để so sánh một giá trị.
+Nó hữu ích khi bạn muốn biểu đạt ý định phân nhánh rõ ràng hơn so với chuỗi `if / else if`.
 
-현재 Wave의 `match`는 **statement(문)** 이며, 값으로 직접 평가되는 expression 형태는 지원하지 않습니다.
-즉, `var x = match (...) { ... }` 같은 형태는 사용할 수 없습니다.
+Hiện tại, `match` của Wave là một **câu lệnh (statement)** và không hỗ trợ dạng biểu thức (expression) được đánh giá trực tiếp thành giá trị.
+Tức là, `var x = match (...) { ... Không thể sử dụng các dạng như `{
 
 ---
 
-## 기본 문법
+## Ngữ pháp cơ bản
 
 ```wave
-match (값) {
-    패턴1 => {
-        // 실행 블록
+match (giá trị) {
+    mẫu1 => {
+        // khối thực thi
     }
-    패턴2 => {
-        // 실행 블록
+    mẫu2 => {
+        // khối thực thi
     }
     _ => {
-        // 기본(default) 블록
+        // khối mặc định
     }
 }
 ```
 
-문법 규칙:
+Quy tắc ngữ pháp:
 
-- 헤더는 `match (expr)` 형태를 사용합니다.
-- 각 arm은 `패턴 => { 블록 }` 형태를 사용합니다.
-- arm 본문은 반드시 `{ ... }` 블록이어야 합니다.
-- arm 사이에는 줄바꿈만 써도 되고, `,` 또는 `;`를 구분자로 써도 됩니다.
+- Tiêu đề sử dụng dạng `match (expr)`.
+- Mỗi arm sử dụng dạng `mẫu => { khối }`.
+- Nội dung arm phải là `{ ... }` phải là một khối.
+- Giữa các arm có thể chỉ cần xuống dòng hoặc sử dụng `,` hoặc `;` làm dấu phân cách.
 
 ---
 
-## 패턴 종류
+## Các loại mẫu
 
-현재 지원되는 패턴은 아래 3가지입니다.
+Hiện có ba mẫu được hỗ trợ dưới đây.
 
-1. 정수 리터럴 패턴
+1. Mẫu số nguyên dạng literal
 
 ```wave
 0 => { ... }
@@ -51,33 +51,33 @@ match (값) {
 42 => { ... }
 ```
 
-2. 식별자 패턴
+2. Mẫu định danh
 
 ```wave
 Off => { ... }
 On => { ... }
 ```
 
-식별자 패턴은 enum variant 같은 **정수 상수로 해석 가능한 값**을 대상으로 사용합니다.
+Mẫu định danh được sử dụng cho **giá trị có thể diễn giải là hằng số nguyên** như variant enum.
 
-3. 와일드카드 패턴 (`_`)
+3. Mẫu wildcard (`_`)
 
 ```wave
 _ => { ... }
 ```
 
-어떤 패턴에도 매칭되지 않았을 때 실행되는 기본 arm입니다.
+Đây là arm mặc định thực thi khi không có mẫu nào phù hợp.
 
 ---
 
-## 매칭 대상 타입
+## Loại mục tiêu để match
 
-현재 구현 기준으로 `match`의 대상 값은 **정수 계열/enum 계열**이어야 합니다.
-문자열, 부동소수점, 구조체 등은 `match` 대상으로 사용할 수 없습니다.
+Theo tiêu chuẩn hiện tại, giá trị mục tiêu của `match` phải là **dòng số nguyên/dòng enum**.
+Không thể sử dụng chuỗi, số thực động, cấu trúc v.v. làm mục tiêu của `match`.
 
 ---
 
-## 예제 1: 정수 분기
+## Ví dụ 1: Phân nhánh số nguyên
 
 ```wave
 fun classify_num(v: i32) -> i32 {
@@ -101,7 +101,7 @@ fun classify_num(v: i32) -> i32 {
 
 ---
 
-## 예제 2: enum 분기
+## Ví dụ 2: Phân nhánh enum
 
 ```wave
 enum Mode -> i32 {
@@ -127,38 +127,38 @@ fun classify_mode(m: Mode) -> i32 {
 
 ---
 
-## 동작 규칙
+## Quy tắc hoạt động
 
-- `switch` 계열과 유사하게 **일치하는 arm 하나만 실행**됩니다.
-- 자동 fallthrough는 없습니다.
-- `_` arm은 최대 한 번만 사용할 수 있습니다.
-- `_` arm이 없어도 문법상 허용됩니다. (일치 arm이 없으면 아무 arm도 실행되지 않음)
-
----
-
-## 주의 사항
-
-1. 중복 케이스 금지
-
-- 같은 케이스를 중복 선언하면 컴파일 오류가 발생합니다.
-
-2. `_` 중복 금지
-
-- `_` arm을 두 번 이상 선언할 수 없습니다.
-
-3. arm 블록 필수
-
-- `=>` 뒤에는 반드시 `{ ... }` 블록을 써야 합니다.
-
-4. 패턴은 상수여야 함
-
-- 식별자 패턴은 정수 상수/enum variant로 해석 가능한 값만 사용하세요.
+- Giống như các dòng `switch`, **chỉ có arm phù hợp duy nhất được thực thi**.
+- Không có fallthrough tự động.
+- Arm `_` chỉ có thể được sử dụng một lần duy nhất.
+- Về mặt cú pháp, arm `_` có thể không cần thiết. (Nếu không có arm nào phù hợp, không có arm nào được thực thi)
 
 ---
 
-## 요약
+## Những điều cần chú ý
 
-Wave의 `match`는 정수/enum 분기에 최적화된 statement 제어문입니다.
-`=>` + 블록 구조를 사용하며, 와일드카드(`_`)를 통해 기본 분기를 구성할 수 있습니다.
+1. Cấm trùng lặp các trường hợp
 
-분기 케이스가 많아질수록 `if / else if`보다 읽기 쉽고, 의도를 명확히 드러낼 수 있습니다.
+- Khai báo lặp lại cùng một trường hợp sẽ gây ra lỗi biên dịch.
+
+2. Cấm trùng lặp `_`
+
+- Không thể khai báo arm `_` nhiều hơn hai lần.
+
+3. Khối arm là bắt buộc
+
+- Sau `=>` phải có `{ ... Phải sử dụng khối `}\`.
+
+4. Mẫu phải là hằng số
+
+- Chỉ sử dụng giá trị có thể được diễn giải bằng hằng số nguyên hoặc biến thể enum cho mẫu định danh.
+
+---
+
+## Tóm tắt
+
+`match` của Wave là câu lệnh điều khiển được tối ưu hóa cho nhánh số nguyên/enum.
+Sử dụng cấu trúc khối `=>`, có thể sử dụng wildcard (`_`) để tạo ra nhánh cơ bản.
+
+Khi số lượng trường hợp nhánh tăng lên, dễ đọc hơn so với `if / else if` và có thể thể hiện ý định rõ ràng hơn.

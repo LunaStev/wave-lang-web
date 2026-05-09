@@ -1,19 +1,19 @@
 ---
-sidebar_position: 11
+sidebar_position: ১১
 ---
 
-# std::libc 사용법 (호환 계층)
+# std::libc ব্যবহারের নীতি (যোগাযোগ স্তর)
 
-`std::libc`는 C 라이브러리와 직접 맞물릴 때 쓰는 선택적 레이어입니다.
+`std::libc` C গ্রন্থাগারের সঙ্গে সরাসরি কাজ করতে ব্যবহৃত ঐচ্ছিক স্তর।
 
-## 언제 쓰나
+## কখন ব্যবহৃত হয়
 
-- 기존 C 라이브러리 심볼을 그대로 호출해야 할 때
-- 점진적 마이그레이션 중 Wave 코드와 C 코드를 함께 사용할 때
+- অত্যাধুনিক C লাইব্রেরি চিহ্নগুলো সরাসরি কল করতে হলে
+- ধাপে মাইগ্রেশন চলাকালে ওয়েভ কোড ও C কোড একত্রে করতে হলে
 
-일반적인 Wave 코드에서는 `std::sys`/`std::*`를 우선 사용하세요.
+সাধারণ Wave কোডে `std::sys`/`std::*` প্রথম ব্যবহার করুন।
 
-## import 예시
+## আমদানির উদাহরণ
 
 ```wave
 import("std::libc::stdio");
@@ -21,7 +21,7 @@ import("std::libc::stdlib");
 import("std::libc::string");
 ```
 
-## 1. stdio 호출
+## ১) stdio কল করুন
 
 ```wave
 fun main() {
@@ -29,7 +29,7 @@ fun main() {
 }
 ```
 
-## 2. malloc/free
+## ২) malloc/fগree ব্যবহার
 
 ```wave
 fun main() {
@@ -43,7 +43,7 @@ fun main() {
 }
 ```
 
-## 3. 소켓 C ABI
+## ৩) সকেট C ABI
 
 ```wave
 import("std::libc::socket");
@@ -56,7 +56,7 @@ fun main() {
 }
 ```
 
-## 제공 모듈
+## প্রদত্ত মডিউল
 
 - `std::libc::errno`
 - `std::libc::string`

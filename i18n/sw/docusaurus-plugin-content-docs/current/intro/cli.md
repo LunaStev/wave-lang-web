@@ -2,149 +2,149 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# Marejeleo ya CLI ya `wavec`
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+Hati hii inaelezea kwa kina utekelezaji wa CLI kulingana na **kiwango cha sasa cha utekelezaji wa wa Mwave (`wavec`)**.
 
-핵심 원칙:
+Misingi muhimu:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
-
----
-
-## 1. 기본 형식
-
-```bash
-wavec [global-options] <command> [command-options]
-```
-
-예:
-
-```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
-```
+- `wavec` ni kikokotoo.
+- Ufungaji/ufumbuzi wa kifurushi (faili la kufuli, usajili, upakuaji) sio jukumu la `wavec`.
+- Uhuru wa nje unapitishwa kwa `wavec` kama **maelezo ya CLI ya wazi**.
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
-
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
-
-즉 global option은 위치가 유연합니다.
+## 1. Umbizo la msingi
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec [chaguo-la-dunia] <amri> [chaguo-la-amri]
 ```
 
-위 3개는 모두 유효합니다.
-
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+Mf:
 
 ```bash
-wavec -- run main.wave
+wavec -O2 endesha main.wave
+wavec jenga app.wave --link ssl -L ./native/lib
+wavec endesha app.wave --dep-root .vex/dep
 ```
 
 ---
 
-## 3. Commands
+## 2. Kanuni za uchanganuzi wa amri (Mruhimu)
 
-## 3.1 `run <file>`
+`wavec` kwanza huskani **chagua-la-dunia** kwenye maelezo yote, kisha hutafakari `<command>` kwa maelezo mengine.
 
-Wave 파일을 컴파일하고 실행합니다.
+Yaani chaguo-la-dunia hayana nafasi maalum.
 
 ```bash
-wavec run hello.wave
+wavec -O3 endesha main.wave
+wavec endesha main.wave -O3
+wavec endesha -O3 main.wave
 ```
 
-동작:
+Nambari zote tatu zilizotajwa hapo juu ni sahihi.
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+Unapotumia `--`, utapunguza uchangaji wa chaguo-la-dunia baada yake na kuhamisha kwenye eneo la amri.
 
-특징:
-
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+```bash
+wavec -- endesha main.wave
+```
 
 ---
 
-## 3.2 `build <file>`
+## 3. Amri
 
-실행 파일(exe)을 생성합니다.
+## 3.1 `ondoa <faili>`
 
-```bash
-wavec build app.wave
-```
-
-출력 바이너리:
-
-- `target/<file_stem>`
-
-## 3.3 `build` 옵션 (`-o`, `-c`)
-
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+Inakusanya na kuendesha faili ya Mwave.
 
 ```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
+wavec endesha hello.wave
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+Kufanya kazi:
 
-기본 동작:
+1. Uchanganuzi wa chanzo + upanuzi wa kuingiza
+2. Uundaji wa LLVM IR
+3. Kiungo cha binary asilia (`target/<file_stem>`)
+4. Endesha
 
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+Tabia:
 
-freestanding 커널 오브젝트 예시:
+- `wavec` inapeleka msimbo wa kumalizia wa programu iliyotekelezwa.
+
+---
+
+## 3.2 `jenga <faili>`
+
+Huunda faili ya kutekeleza (exe).
+
+```bash
+wavec jenga app.wave
+```
+
+Failia zinazotoka:
+
+- `lengo/<shina_la_faili>`
+
+## 3.3 Machaguo ya `build` (`-o`, `-c`)
+
+Amri ya `build` inaweza kudhibiti jina la faili na muundo wa toleo kama chaguzi.
+
+```bash
+wavec jenga app.wave -o ./bin/app
+wavec jenga app.wave -c
+wavec jenga app.wave -c -o ./build/app.o
+```
+
+- `-o <faili>`: Taja jina la faili la pato.
+  - Kimya chaguo(`-c` haipo): taja njia ya pato la faili ya kutekeleza
+  - Pamoja na `-c`: taja njia ya pato la faili la kitu
+- `-c`: Ruka kiungo na uzalishe faili la kitu pekee.
+- Wakati wa kutumia `-c`, toa njia ya kitu kwa stdout.
+
+Utendaji wa kawaida:
+
+- `wavec jenga app.wave` -> `lengo/app`
+- `wavec jenga app.wave -c` -> `lengo/app.o` (njia ya kutokea)
+
+Mfano wa kitu cha kernel cha kujitegemea:
 
 ```bash
 wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
+  --lengo=x86_64-unknown-none-elf \
+  jenga kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+Unaweza pia kutumia `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` kwa njia ile ile.
 
 ---
 
-## 3.4 `install std`, `update std`
+## 3.4 `weka std`, `sasisha std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+Amri ya kusakinisha/kusasaisha maktaba ya kawaida.
 
 ```bash
-wavec install std
-wavec update std
+wavec weka std
+wavec sasisha std
 ```
 
 ---
 
-## 3.5 `--help`, `--version`
+## 3.5 `--msaidizi`, `--toleo`
 
 ```bash
-wavec --help
-wavec --version
+wavec --msaidizi
+wavec --toleo
 ```
 
 ---
 
-## 4. Global Options
+## 4. Chaguzi za Ulimwengu
 
-## 4.1 최적화
+## 4.1 Uboreshaji
 
-허용 값:
+Thamani za kuruhusiwa:
 
 - `-O0`
 - `-O1`
@@ -154,21 +154,21 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+Mf.:
 
 ```bash
-wavec -O3 run main.wave
+wavec -O3 endesha main.wave
 ```
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 Toa Debug
 
 ```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
+wavec --debug-wave=tokens,ast,ir endesha main.wave
 ```
 
-허용 항목:
+Vitu vya kuruhusiwa:
 
 - `tokens`
 - `ast`
@@ -179,74 +179,75 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 Chaguzi za Kiungo
 
 ```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
+wavec kujenga app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` au `--link <lib>`
+- `-L<path>` au `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+`wavec` inapeleka kibinafsi kwa mchakato wa kiungo katika umbo la `-l<lib>`, `-L<path>`.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 Chaguo la utegemezi wa nje (Muhimu)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+Ni chaguo la kutafsiri import ya nje (`pkg::...`).
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+Huongeza chaguo la msimbo mzizi wa kifurushi.
 
 ```bash
-wavec run app.wave --dep-root .vex/dep
+wavec endesha app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+Wakati unapochunguza kifurushi `math`:
 
-- `.vex/dep/math` 를 검사
+- Chunguza `.vex/dep/math`
 
-여러 번 지정 가능:
+Inaweza kuainishwa mara nyingi:
 
 ```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
+wavec endesha app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+Inafunga jina la kifurushi kwa njia mahususi.
 
 ```bash
-wavec run app.wave --dep math=.vex/dep/math
+wavec endesha app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+Kanuni:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- Muundo wa `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` lazima iwe kwa umbo la `name=path`
+- Kukitaja jina la kifurushi mara kwa mara huzalisha kosa.
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 Chaguo la usaidizi wa nyuma (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+Chaguo la udhibiti wa usaidizi wa nyuma linatafsiriwa baada ya kupita `--llvm` pekee.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec --llvm --target=x86_64-unknown-linux-gnu kujenga app.wave -c
 ```
 
-지원 항목(요약):
+Vitu vilivyoandaliwa (muhtasari):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (Inaweza kurudiwa)
+- `-C link-sysroot=<njia>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+Lengo kuu kwa msingi wa `wavec print target-list` ya sasa:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -256,26 +257,26 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` kwa sasa ni bendera ya watekaji iliyohifadhiwa, na usaidizi wa nyuma halisi bado haujatekelezwa (TODO).
 
 ---
 
-## 5. Import 해석 규칙
+## 5. Kanuni za tafsiri ya Import
 
-Wave import는 다음 3가지로 분기됩니다.
+Import ya Wave imegawanyika kwenye vitendo vitatu vifuatavyo.
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. Import ya ndani
+2. Import ya std
+3. Import ya kifurushi cha nje
 
-## 5.1 로컬
+## 5.1 Ndani
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+Inatafuta `<path>.wave` kwenye saraka ya faili ya msingi.
 
 ## 5.2 std
 
@@ -283,111 +284,111 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+Inatumia njia ya `~/.wave/lib/wave/std/...`.
 
-## 5.3 외부 패키지
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-형식:
-
-- 최소 `package::module` 2세그먼트 필요
-
-패키지 루트 결정 순서:
-
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
-
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
-
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
-
-모듈 파일 탐색 순서:
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-예:
+## 5.3 Pakiti za Nje
 
 ```wave
-import("math::core::vec");
+ingiza("math::add");
+ingiza("json::parser::core");
 ```
 
-탐색:
+Fomati:
 
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
+- Angalau sehemu kuu mbili za `package::module` zinahitajika
+
+Mpangilio wa Njia za Pakiti:
+
+1. Piga ramani `--dep name=path`
+2. Tafuta `<root>/<package>` katika kila `--dep-root`
+
+Ikiwa pakiti sawa itapatikana katika mizizi kotekote kwa wakati mmoja:
+
+- Usichague kwa umoja, **uzingatia kosa la mfuatano**
+- Inapaswa kuwekwa na `--dep name=path`
+
+Mpangilio wa Utafutaji wa Njia ya Moduli:
+
+1. `<mzizi_wa_pakiti>/<njia_ya_moduli>.wave`
+2. `<mzizi_wa_pakiti>/src/<njia_ya_moduli>.wave`
+
+Mfano:
+
+```wave
+ingiza("math::core::vec");
+```
+
+Utafutaji:
+
+- `<mzizi_wa_pakiti>/core/vec.wave`
+- `<mzizi_wa_pakiti>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. Mifano ya Utekelezaji wa Ingizo la Nje
 
-### 6.1 단일 dep-root
+### 6.1 Mizizi ya Dep Moja Tu
 
-디렉터리:
+Saraka:
 
 ```text
 .vex/dep/
-  math/
+  hesabu/
     src/
-      add.wave
-main.wave
+      ongeza.wave
+kuu.wave
 ```
 
-코드:
+Msimbo:
 
 ```wave
-import("math::add");
+ingiza("math::add");
 ```
 
-실행:
+Utekelezaji:
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec endesha kuu.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 Kushindwa kwa Mfuatano wa Mfuatano
 
 ```bash
-wavec run main.wave \
+wavec endesha kuu.wave \
   --dep-root .vex/dep \
-  --dep-root ./vendor/dep
+  --dep-root ./muuzaji/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+Ikiwa `math` ipo kwa pande zote mbili, kuna kosa. Inapaswa kuwekwa kama ifuatavyo.
 
 ```bash
-wavec run main.wave \
+wavec endesha kuu.wave \
   --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
+  --dep-root ./muuzaji/dep \
+  --dep math=./muuzaji/dep/math
 ```
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Uchambuzi wa Jukumu la Vex
 
-권장 구조:
+Muundo wa Ruhusa:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: hariri/kufunga/utekelezaji + ufafanuzi uliotajwa
+- `vex`: usakinishaji/usimamizi wa utegemezi baada ya `wavec ...` --mizizi ya utegemezi ... --tegemezi ...\` ramani
 
-예:
+Mfano:
 
 ```bash
-# 내부적으로 vex가 수행
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
+# Vex inatekelezwa kwa ndani
+wavec endesha kuu.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+Mfuatano huu unahamisha mhariri kwa urahisi na kudumisha moja kwa moja usimamizi wa pakiti.
 
 ---
 
-## 8. 빠른 참조
+## 8. Marejeo ya Haraka
 
 ```bash
 wavec run main.wave
@@ -400,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec --whale build app.wave -c # TODO: imehifadhiwa, haijatekelezwa
 ```

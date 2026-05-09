@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: ৩
 ---
 
-# std::env 사용법
+# std::env ব্যবহারের নিয়ম
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+পরিবেশ ভেরিয়েবলের আবেদন এবং কাজের তফসিল নিয়ন্ত্রণ প্রদান করে।
 
-## import
+## আমদানি
 
 ```wave
 import("std::env::environ");
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## ১) স্ট্রিং পরিবেশ ভেরিয়েবল পড়া
 
 ```wave
 fun main() {
@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf এ NUL সমাপ্ত স্ট্রিং
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // কী অনুপস্থিত
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // বাফার পর্যাপ্ত নয়
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## ২) পূর্ণসংখ্যা পরিবেশ ভেরিয়েবল পড়া (সাধারণ ফলাফল প্রকার)
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## ৩) বর্তমান তফসিল/আন্দোলন
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## প্রধান ফাংশন
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64

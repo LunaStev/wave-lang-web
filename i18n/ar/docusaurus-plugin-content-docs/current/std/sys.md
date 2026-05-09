@@ -1,28 +1,28 @@
 ---
-sidebar_position: 10
+sidebar_position: ١٠
 ---
 
-# std::sys 사용법
+# كيفية استخدام std::sys
 
-`std::sys`는 고수준 모듈 아래의 OS 추상화 계층입니다.
+`std::sys` هو طبقة تجريد لنظام التشغيل تحت الوحدات النمطية عالية المستوى.
 
 ```text
-std(high-level)
-  -> sys dispatcher
-  -> sys/linux or sys/macos
+std(عالي المستوى)
+  -> موزع sys
+  -> sys/linux أو sys/macos
   -> syscall
 ```
 
-## 기본 규약
+## الاتفاقية الأساسية
 
-- 대부분 함수는 raw syscall 값을 반환합니다.
-- `>= 0` 성공, `< 0` 실패(`-errno`).
-- 고수준 앱 코드에서는 가능하면 `std::sys` 대신 `std::net`, `std::time`, `std::env`를 먼저 사용하세요.
+- ترجع معظم الدوال قيمة استدعاء النظام الخام.
+- `>= 0` نجاح، `< 0` فشل (`-errno`).
+- في كود التطبيقات عالية المستوى، يُرجى استخدام `std::net` و`std::time` و`std::env` بدلًا من `std::sys` إن أمكن.
 
-## 1. 파일 읽기 예제 (`std::sys::fs`)
+## 1. مثال على قراءة الملفات (`std::sys::fs`)
 
 ```wave
-import("std::sys::fs");
+استيراد("std::sys::fs");
 
 fun main() {
     var fd: i64 = open("/etc/hosts", 0, 0);
@@ -36,10 +36,10 @@ fun main() {
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2. مثال على المقبس (`std::sys::socket`)
 
 ```wave
-import("std::sys::socket");
+استيراد("std::sys::socket");
 
 fun main() {
     var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -51,10 +51,10 @@ fun main() {
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3. مثال على الذاكرة (`std::sys::memory`)
 
 ```wave
-import("std::sys::memory");
+استيراد("std::sys::memory");
 
 fun main() {
     var p: ptr<u8> = sys_alloc(4096);
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 
-## dispatcher 모듈
+## وحدة الموزع
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]` و `#[target(os="macos")]` يتم استخدامها فقط داخل الموزع.

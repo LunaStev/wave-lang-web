@@ -2,11 +2,11 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# std::string का उपयोग
 
-NUL 종료 문자열(`str`) 유틸입니다.
+यह NUL-समाप्त स्ट्रिंग (`str`) उपयोगिता है।
 
-## import
+## आयात
 
 ```wave
 import("std::string::len");
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. लंबाई/तुलना
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. तलाशी/गणना
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. ट्रिम सीमा + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. हैश
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## प्रमुख फ़ंक्शंस
 
 ```wave
 fun len(s: str) -> i32

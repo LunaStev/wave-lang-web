@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# std::env 사용법
+# Cách sử dụng std::env
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+Cung cấp truy vấn biến môi trường và điều khiển thư mục làm việc.
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## 1. Đọc biến môi trường chuỗi
 
 ```wave
 fun main() {
@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf là chuỗi kết thúc NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // Không có khóa
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // Thiếu bộ nhớ đệm
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## 2. Đọc biến môi trường số nguyên (Loại kết quả tổng quát)
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## 3. Thư mục hiện tại/Chuyển đổi
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Hàm chính
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64

@@ -2,71 +2,71 @@
 sidebar_position: 10
 ---
 
-# std::sys 사용법
+# Jinsi ya kutumia std::sys
 
-`std::sys`는 고수준 모듈 아래의 OS 추상화 계층입니다.
+`std::sys` ni safu ya kufunika OS chini ya module zenye kiwango cha juu.
 
 ```text
-std(high-level)
-  -> sys dispatcher
-  -> sys/linux or sys/macos
-  -> syscall
+std(kiwango cha juu)
+  -> mtumaji wa sys
+  -> sys/linux au sys/macos
+  -> wito wa mfumo
 ```
 
-## 기본 규약
+## Mkataba wa msingi
 
-- 대부분 함수는 raw syscall 값을 반환합니다.
-- `>= 0` 성공, `< 0` 실패(`-errno`).
-- 고수준 앱 코드에서는 가능하면 `std::sys` 대신 `std::net`, `std::time`, `std::env`를 먼저 사용하세요.
+- Kazi nyingi zinarudisha thamani za mfumo za msingi.
+- `>= 0` mafanikio, `< 0` kushindwa(`-errno`).
+- Katika msimbo wa programu wa kiwango cha juu, tumia `std::net`, `std::time`, `std::env` kwanza badala ya `std::sys` inapowezekana.
 
-## 1. 파일 읽기 예제 (`std::sys::fs`)
+## 1. Mfano wa kusoma faili (`std::sys::fs`)
 
 ```wave
-import("std::sys::fs");
+ingiza("std::sys::fs");
 
 fun main() {
-    var fd: i64 = open("/etc/hosts", 0, 0);
-    if (fd < 0) {
-        return;
+    var fd: i64 = fungua("/etc/hosts", 0, 0);
+    ikiwa (fd < 0) {
+        rudi;
     }
 
     var buf: array<u8, 256>;
-    var n: i64 = read(fd, &buf[0], 256);
-    close(fd);
+    var n: i64 = soma(fd, &buf[0], 256);
+    funga(fd);
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2. Mfano wa soketi (`std::sys::socket`)
 
 ```wave
-import("std::sys::socket");
+ingiza("std::sys::socket");
 
 fun main() {
     var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (fd < 0) {
-        return;
+    ikiwa (fd < 0) {
+        rudi;
     }
 
-    shutdown(fd, SHUT_RDWR);
+    zima(fd, SHUT_RDWR);
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3. Mfano wa kumbukumbu (`std::sys::memory`)
 
 ```wave
-import("std::sys::memory");
+ingiza("std::sys::memory");
 
 fun main() {
     var p: ptr<u8> = sys_alloc(4096);
-    if (p == null) {
-        return;
+    ikiwa (p == null) {
+        rudi;
     }
 
     sys_free(p, 4096);
 }
 ```
 
-## dispatcher 모듈
+## moduli ya dispatcher
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]`, `#[target(os="macos")]` matawi yanatumika tu ndani ya dispatcher.

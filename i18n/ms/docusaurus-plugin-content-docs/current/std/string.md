@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # std::string 사용법
 
-NUL 종료 문자열(`str`) 유틸입니다.
+Input
 
 ## import
 

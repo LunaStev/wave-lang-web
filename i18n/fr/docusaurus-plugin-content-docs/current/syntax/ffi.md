@@ -4,93 +4,93 @@ sidebar_position: 9
 
 # FFI
 
-이 문서는 Wave 언어에서 외부에 구현된 함수를 호출하기 위한 FFI(외부 함수 인터페이스) 규격을 설명합니다.
-FFI를 통해 Wave 프로그램은 다른 언어로 작성된 네이티브 라이브러리와 직접 연동할 수 있습니다.
+Ce document décrit la spécification de l'interface FFI (Foreign Function Interface) pour appeler des fonctions externes implémentées dans le langage Wave.
+Grâce à l'FFI, les programmes Wave peuvent interagir directement avec des bibliothèques natives écrites dans d'autres langages.
 
 ---
 
-## 개요
+## Vue d'ensemble
 
-Wave의 FFI는 선언 기반으로 동작합니다.
-외부 함수는 Wave 코드에서 구현하지 않으며, 해당 함수가 어떤 ABI(Application Binary Interface)를 따르는지만 명시합니다.
-실제 구현은 링크 단계에서 외부 라이브러리로부터 해결됩니다.
+L'FFI de Wave fonctionne sur la base de déclarations.
+Les fonctions externes ne sont pas implémentées dans le code Wave ; seul l'ABI (Application Binary Interface) suivi est spécifié.
+L'implémentation réelle est résolue à partir de bibliothèques externes au moment de la liaison.
 
-FFI는 컴파일 타임에 함수의 존재만을 선언하고, 실행 파일 생성 시 링커가 실제 심볼을 연결하는 방식으로 동작합니다.
+L'FFI déclare simplement l'existence de fonctions au moment de la compilation, et le linker connecte les symboles réels lors de la création du fichier exécutable.
 
 ---
 
-## extern 선언
+## Déclaration externe
 
-외부 함수는 extern 키워드를 사용하여 선언합니다.
-현재 Wave에서는 ABI 지정이 반드시 필요하며, **`extern(c)`만 지원**합니다.
+Les fonctions externes sont déclarées avec le mot-clé extern.
+Actuellement, Wave nécessite que l'ABI soit spécifié et supporte **seulement `extern(c)`**.
 
 ```wave
-extern(c) fun 함수명(인자들...) -> 반환타입;
+extern(c) fun nom_fonction(paramètres...) -> type_retour;
 ```
 
 ---
 
-## ABI 지정
+## Spécification de l'ABI
 
-`extern` 선언에는 ABI를 명시해야 합니다.
-현재 지원되는 ABI는 `c` 하나입니다.
+Vous devez spécifier l'ABI dans une déclaration `extern`.
+Actuellement, un seul ABI `c` est pris en charge.
 
 ```wave
 extern(c) fun printf(fmt: ptr<u8>);
 ```
 
-`extern(rust)` 같은 선언은 파싱될 수 있어도 의미 분석 단계에서 에러가 발생합니다.
+Les déclarations comme `extern(rust)` peuvent être analysées mais provoqueront une erreur au stade de l'analyse sémantique.
 
 ---
 
-## 함수 단위 extern 선언
+## Déclaration externe au niveau des fonctions
 
-외부 함수 하나를 선언할 경우 다음과 같이 작성합니다.
+Pour déclarer une seule fonction externe, écrivez comme suit.
 
 ```wave
-extern(c) fun InitWindow(width: i32, height: i32, title: ptr<u8>);
+extern(c) fun InitWindow(largeur: i32, hauteur: i32, titre: ptr<u8>);
 ```
 
-이 선언은 C ABI를 따르는 `InitWindow` 심볼이 외부 라이브러리에 존재함을 의미합니다.
+Cette déclaration signifie que le symbole `InitWindow` suivant l'ABI C existe dans une bibliothèque externe.
 
 ---
 
-## 블록 단위 extern 선언
+## Déclaration externe au niveau du bloc
 
-동일한 ABI를 사용하는 외부 함수가 여러 개일 경우, 블록 형태로 묶어 선언할 수 있습니다.
+Si plusieurs fonctions externes utilisent le même ABI, vous pouvez les regrouper et les déclarer sous forme de bloc.
 
 ```wave
 extern(c) {
-    fun InitWindow(width: i32, height: i32, title: ptr<u8>);
+    fun InitWindow(largeur: i32, hauteur: i32, titre: ptr<u8>);
     fun CloseWindow();
     fun BeginDrawing();
     fun EndDrawing();
 }
 ```
 
-블록 단위 선언은 함수 단위 선언과 의미적으로 완전히 동일하며, 단순히 가독성과 구조화를 위한 문법입니다.
+Les déclarations au niveau des blocs sont sémantiquement identiques à celles au niveau des fonctions ; elles visent seulement à améliorer la lisibilité et l'organisation.
 
 ---
 
-## 심볼 이름 지정
+## Spécification du nom de symbole
 
-일부 ABI에서는 Wave 함수 이름과 실제 링커 심볼 이름이 일치하지 않을 수 있습니다.
-이 경우, 외부 함수가 연결될 실제 심볼 이름을 문자열로 명시할 수 있습니다.
+Dans certains ABI, le nom de la fonction Wave peut différer du nom de symbole réel du linker.
+Dans ce cas, vous pouvez spécifier le nom réel du symbole auquel la fonction externe sera connectée sous forme de chaîne.
 
-### 함수 단위 심볼 지정
+### Spécification de symboles au niveau des fonctions
 
 ```wave
 extern(c, "puts")
 fun rust_func(i32);
 ```
 
-이 선언은 `rust_func` 호출 시 실제 링크 심볼로 `puts`를 사용하도록 지정합니다.
+Cette déclaration spécifie que le symbole `puts` sera utilisé dans la liaison lors de l'appel de `rust_func`.
 
 ---
 
-### 블록 단위 심볼 지정
+### Spécification de symboles au niveau des blocs
 
-블록 단위 선언에서는 각 함수 뒤에 심볼 이름을 개별적으로 지정할 수 있습니다.
+Dans une déclaration au niveau du bloc, un nom de symbole peut être spécifié individuellement après chaque fonction.
 
 ```wave
 extern(c) {
@@ -101,22 +101,22 @@ extern(c) {
 
 ---
 
-## 포인터 타입
+## Type pointeur
 
-포인터는 `ptr<T>` 형태로 표현합니다.
+Les pointeurs sont exprimés sous la forme `ptr<T>`.
 
 ```wave
 ptr<u8>
 ptr<MyStruct>
 ```
 
-`ptr<T>`는 외부 언어의 포인터와 직접 대응되며, 메모리 소유권이나 생명주기는 Wave에서 관리하지 않습니다.
+Le `ptr<T>` correspond directement à un pointeur d'une langue externe, et la propriété ou le cycle de vie de la mémoire n'est pas géré par Wave.
 
 ---
 
-## 구조체 사용
+## Utilisation des structures
 
-구조체는 외부 함수의 인자 또는 반환값으로 사용할 수 있습니다.
+Les structures peuvent être utilisées comme paramètres ou valeurs de retour des fonctions externes.
 
 ```wave
 struct Color {
@@ -127,13 +127,13 @@ struct Color {
 }
 ```
 
-FFI에서 구조체를 사용할 경우, 필드 순서는 선언된 순서를 유지하며 ABI에서 요구하는 메모리 레이아웃을 따릅니다.
+Lors de l'utilisation des structures dans le FFI, l'ordre des champs doit être maintenu comme déclaré, suivant le layout mémoire requis par l'ABI.
 
 ---
 
-## 외부 함수 호출
+## Appel de fonction externe
 
-`extern`으로 선언된 함수는 일반 함수와 동일한 방식으로 호출합니다.
+Les fonctions déclarées avec `extern` sont appelées de la même manière que des fonctions ordinaires.
 
 ```wave
 fun main() -> i32 {
@@ -145,26 +145,26 @@ fun main() -> i32 {
 }
 ```
 
-호출 시 문법적 차이는 없으며, 호출 규약과 심볼 연결은 전적으로 ABI와 링커에 의해 처리됩니다.
+Il n'y a pas de différence syntaxique lors de l'appel ; les conventions d'appel et la résolution de symboles sont entièrement gérées par l'ABI et le linker.
 
 ---
 
-## 링킹
+## Linking
 
-외부 함수의 실제 구현은 링크 단계에서 외부 라이브러리로부터 제공됩니다.
-Wave 컴파일러는 외부 함수 호출을 포함한 오브젝트 파일을 생성하며, 링커가 지정된 라이브러리를 통해 심볼을 해결합니다.
+L'implémentation réelle des fonctions externes est fournie par des bibliothèques externes à l'étape de linking.
+Le compilateur Wave génère des fichiers objets incluant les appels de fonctions externes, et le linker résout les symboles via les bibliothèques spécifiées.
 
-라이브러리 지정 방식은 빌드 도구 및 CLI 옵션을 통해 이루어집니다.
+La spécification des bibliothèques se fait via des outils de build et des options CLI.
 
 ---
 
-## 제한 사항
+## Limitations
 
-Wave에서는 다음 기능을 제공하지 않습니다.
+Wave ne fournit pas les fonctionnalités suivantes.
 
-- 함수 포인터
-- 콜백 함수
-- 자동 메모리 관리
-- 언어 간 예외 처리 연동
+- Pointeurs de fonctions
+- Fonctions de rappel
+- Gestion automatique de la mémoire
+- Intégration de la gestion des exceptions entre langages
 
-이러한 기능은 이후 버전에서 별도로 다루어질 수 있습니다.
+Ces fonctionnalités peuvent être abordées séparément dans les versions futures.

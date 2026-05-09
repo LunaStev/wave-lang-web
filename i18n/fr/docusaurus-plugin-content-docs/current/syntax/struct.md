@@ -2,187 +2,185 @@
 sidebar_position: 8
 ---
 
-# 구조체
+# Structure
 
-## 개요
+## Aperçu
 
-Wave 언어의 구조체는 사용자 정의 데이터 타입을 선언하기 위한 핵심 문법 요소입니다.
-구조체를 사용하면 서로 다른 타입의 값을 하나의 논리적인 단위로 묶어 표현할 수 있으며, 이를 통해 복잡한 데이터 구조를 명확하고 안전하게 모델링할 수 있습니다.
+Les structures dans le langage Wave sont des éléments syntaxiques de base pour déclarer des types de données définis par l'utilisateur.
+Les structures permettent de regrouper des valeurs de types différents en une seule unité logique, modélisant ainsi de manière claire et sécurisée des structures de données complexes.
 
-Wave의 구조체는 값 타입(value type) 으로 동작합니다.
-모든 필드는 반드시 명시적인 타입을 가져야 하며, 구조체 인스턴스를 생성할 때 모든 필드는 초기화되어야 합니다.
-이러한 규칙을 통해 구조체의 상태는 항상 완전하고 예측 가능한 형태를 유지합니다.
--------------------------------------------------------------
+Les structures de Wave agissent comme des types valeur.
+Tous les champs doivent avoir un type explicite et doivent être initialisés lors de la création d'une instance de structure.
+Ces règles permettent à l'état de la structure de rester toujours complet et prévisible.
+--------------------------------------------------------------------------------------------------------
 
-## 구조체 선언 문법
+## Syntaxe de déclaration de structure
 
-구조체는 `struct` 키워드를 사용하여 선언합니다.
-구조체의 이름은 파스칼 표기법(PascalCase)을 사용하며, 구조체 본문에는 하나 이상의 필드를 정의할 수 있습니다.
+Les structures sont déclarées à l'aide du mot-clé `struct`.
+Le nom des structures utilise la notation PascalCase et le corps d'une structure peut définir un ou plusieurs champs.
 
-필드는 `이름: 타입;` 형식으로 선언되며, 각 필드 선언 뒤에는 반드시 세미콜론이 필요합니다.
+Les champs sont déclarés au format `nom: type;`, avec un point-virgule requis après chaque déclaration de champ.
 
 ```wave
-struct Box {
-    size: i32;
-    weight: f32;
+structure Box {
+    taille: i32;
+    poids: f32;
 }
 ```
 
-구조체 선언 시 필드가 작성된 순서는 메모리 배치 순서와 동일하게 사용됩니다.
-구조체 내부에는 필드 선언만 허용되며, 함수나 메서드는 포함될 수 없습니다.
-동작 로직은 구조체 외부에서 별도로 정의됩니다.
-------------------------------------------
+Lors de la déclaration d'une structure, l'ordre des champs écrits est utilisé tel quel pour la disposition en mémoire.
+À l'intérieur d'une structure, seules les déclarations de champs sont autorisées ; les fonctions ou les méthodes ne peuvent pas être incluses.
+La logique opérationnelle est définie séparément de la structure.
+---------------------------------------------------------------------------------
 
-## 구조체 생성 문법
+## Syntaxe de création de structure
 
-구조체는 구조체 이름을 사용하는 리터럴 형식으로 생성합니다.
-구조체 리터럴은 `StructName { 필드명: 값; ... }` 형태로 작성합니다.
+Les structures sont créées à l'aide d'un format littéral utilisant le nom de la structure.
+Les littéraux de structure sont de la forme `NomStructure { nomChamp: valeur;... Finissez par une accolade `}\`.
 
 ```wave
 var b: Box = Box {
-    size: 42;
-    weight: 10.5;
+    taille: 42;
+    poids: 10.5;
 };
 ```
 
-구조체를 생성할 때는 정의된 모든 필드를 반드시 초기화해야 하며,
-하나라도 누락될 경우 컴파일 오류가 발생합니다.
+Lors de la création d'une structure, tous les champs définis doivent être initialisés ;
+si un seul champ manque, une erreur de compilation se produit.
 
-초기화 시 필드의 작성 순서는 구조체 선언 순서와 일치할 필요는 없지만,
-각 필드에 전달되는 값의 타입은 구조체에 정의된 타입과 정확히 일치해야 합니다.
-Wave에서는 구조체 필드 초기화 과정에서 암묵적인 타입 변환을 허용하지 않습니다.
+Lors de l'initialisation, l'ordre des champs n'a pas à correspondre à l'ordre de déclaration de la structure, mais le type des valeurs assignées à chaque champ doit correspondre exactement au type défini dans la structure.
+Wave ne permet pas la conversion implicite de type lors de l'initialisation des champs de structure.
 
 ---
 
-## 구조체 필드 접근 문법
+## Syntaxe d'accès aux champs de la structure
 
-구조체의 필드는 점 표기법(dot notation)을 통해 접근합니다.
-필드 접근은 읽기와 쓰기 모두 동일한 문법을 사용합니다.
+Les champs de la structure sont accessibles via la notation pointée.
+Les accès en lecture et en écriture des champs utilisent la même syntaxe.
 
 ```wave
-println("Size: {}", b.size);
-println("Weight: {}", b.weight);
+println("Taille : {}", b.taille);
+println("Poids : {}", b.poids);
 ```
 
-존재하지 않는 필드 이름을 사용하려고 하면 컴파일 단계에서 오류가 발생합니다.
-구조체는 값 타입이기 때문에, 구조체 전체를 대입하거나 함수 인자로 전달할 경우
-구조체에 포함된 모든 필드가 함께 복사됩니다.
+Essayer d'utiliser un nom de champ inexistant provoque une erreur au moment de la compilation.
+Étant un type valeur, lorsqu'une structure est assignée entièrement ou passée comme argument à une fonction,
+tous les champs de la structure sont copiés en même temps.
 
 ---
 
-## 구조체 메서드 정의 문법
+## Syntaxe de définition des méthodes de structure
 
-Wave 언어는 구조체 내부에 직접 메서드를 정의하지 않습니다.
-대신 `proto` 키워드를 사용하여 구조체에 연결된 메서드 집합을 선언합니다.
+Le langage Wave ne permet pas de définir des méthodes directement à l'intérieur des structures.
+À la place, le mot-clé `proto` est utilisé pour déclarer un ensemble de méthodes liées à une structure.
 
-`proto` 블록은 특정 구조체에 소속된 함수들의 영역이며,
-이 블록 안에서 정의된 함수는 해당 구조체의 메서드처럼 사용됩니다.
+Un bloc `proto` est une zone pour les fonctions associées à une structure spécifique ;
+les fonctions définies dans ce bloc sont utilisées comme des méthodes de la structure.
 
-메서드는 첫 번째 매개변수로 `self`를 사용하여 구조체 인스턴스를 전달받습니다.
-`self`는 구조체 전체 값을 의미하며, 값 복사 방식으로 전달됩니다.
+Les méthodes utilisent `self` comme premier paramètre pour recevoir l'instance de la structure.
+`self` représente la valeur entière de la structure et est transmis par copie de valeur.
 
 ```wave
 proto Box {
     fun print(self) {
-        println("size={}, weight={}", self.size, self.weight);
+        println("taille={}, poids={}", self.taille, self.poids);
     }
 
-    fun added_size(self, x: i32) -> i32 {
-        return self.size + x;
+    fun taille_ajoutée(self, x: i32) -> i32 {
+        return self.taille + x;
     }
 }
 ```
 
-`proto` 블록은 구조체 선언과 같은 파일에 위치할 필요는 없으며,
-여러 개의 `proto` 블록을 통해 동일한 구조체에 대한 메서드를 분산 정의할 수 있습니다.
+Un bloc `proto` n'a pas besoin d'être situé dans le même fichier que la déclaration de structure ; plusieurs blocs `proto` peuvent être utilisés pour définir des méthodes réparties pour la même structure.
 
-메서드 호출은 점 표기법을 사용하며, 일반적인 함수 호출과 동일한 방식으로 동작합니다.
+L'appel de méthode utilise la notation pointée et fonctionne de la même manière qu'un appel de fonction classique.
 
 ```wave
 b.print();
-var n: i32 = b.added_size(5);
+var n: i32 = b.taille_ajoutée(5);
 ```
 
 ---
 
-## 함수 인자로서의 구조체 사용
+## Utilisation des structures en tant qu'arguments de fonction
 
-구조체는 함수의 인자로 전달될 때 값 복사 방식으로 처리됩니다.
-함수 내부에서 구조체의 필드를 수정하더라도, 호출한 쪽의 구조체 인스턴스에는 영향을 주지 않습니다.
+Les structures sont traitées par copie de valeur lorsqu'elles sont passées comme arguments à une fonction.
+Même si les champs de la structure sont modifiés à l'intérieur de la fonction, cela n'affecte pas l'instance de structure du côté appelant.
 
 ```wave
 fun calc(box: Box) -> i32 {
-    return box.size * 2;
+    return box.taille * 2;
 }
 ```
 
-구조체를 함수의 반환값으로 사용하는 경우에도 동일하게 값 복사가 발생합니다.
-이러한 동작은 구조체의 불변성과 예측 가능한 데이터 흐름을 보장합니다.
+Lorsqu'une structure est utilisée comme valeur de retour d'une fonction, une copie de valeur se produit également.
+Ce comportement garantit l'immuabilité et un flux de données prévisible pour les structures.
 
 ---
 
-## 중첩 구조체 (Nested Struct)
+## Structure imbriquée (Nested Struct)
 
-Wave에서는 구조체의 필드 타입으로 다른 구조체를 사용할 수 있습니다.
-구조체는 완전한 타입이기 때문에, 구조체 안에 또 다른 구조체를 포함하는 형태로 자유롭게 중첩할 수 있습니다.
+Dans Wave, d'autres structures peuvent être utilisées comme type de champ d'une structure.
+Étant un type entier, les structures peuvent être librement imbriquées les unes dans les autres.
 
 ```wave
-struct Position {
+structure Position {
     x: i32;
     y: i32;
 }
 
-struct Player {
-    name: str;
+structure Joueur {
+    nom: str;
     pos: Position;
 }
 ```
 
-중첩된 구조체의 필드는 점 표기법을 연속으로 사용하여 접근합니다.
+Les champs des structures imbriquées sont accessibles en utilisant continuellement la notation par points.
 
 ```wave
 var p: Player = Player {
-    name: "Alice";
+    nom: "Alice";
     pos: Position { x: 10; y: 20; };
 };
 
-println("Player X: {}", p.pos.x);
-println("Player Y: {}", p.pos.y);
+println("Joueur X : {}", p.pos.x);
+println("Joueur Y : {}", p.pos.y);
 ```
 
-구조체 리터럴 내부에 또 다른 구조체 리터럴을 중첩하여 작성할 수 있으며,
-이 경우에도 모든 필드 초기화 규칙은 동일하게 적용됩니다.
+Vous pouvez imbriquer un autre littéral de structure à l'intérieur d'un littéral de structure,
+et toutes les règles d'initialisation de champ s'appliquent également dans ce cas.
 
 ---
 
-## 구조체 배열
+## Tableau de structures
 
-구조체는 배열의 원소 타입으로 사용할 수 있습니다.
-Wave의 배열 문법은 `array<타입, 길이>` 형식을 사용하며, 구조체 타입도 그대로 지정할 수 있습니다.
+Les structures peuvent être utilisées comme type d'élément dans des tableaux.
+La syntaxe des tableaux dans Wave utilise le format `array<type, taille>` ; le type de structure peut être spécifié tel quel.
 
 ```wave
-var players: array<Player, 3> = [
-    Player { name: "A"; pos: Position { x: 1; y: 2; }; },
-    Player { name: "B"; pos: Position { x: 3; y: 4; }; },
-    Player { name: "C"; pos: Position { x: 5; y: 6; }; }
+var joueurs: array<Player, 3> = [
+    Player { nom: "A"; pos: Position { x: 1; y: 2; }; },
+    Player { nom: "B"; pos: Position { x: 3; y: 4; }; },
+    Player { nom: "C"; pos: Position { x: 5; y: 6; }; }
 ];
 ```
 
-구조체 배열의 원소에 접근할 때는 배열 인덱스를 먼저 사용한 뒤,
-점 표기법을 통해 구조체 내부 필드에 접근합니다.
+Pour accéder à un élément d'un tableau de structures, utilisez d'abord l'indice du tableau,
+puis accédez aux champs internes de la structure via la notation par points.
 
 ```wave
-println("Second Player X: {}", players[1].pos.x);
+println("Deuxième joueur X : {}", joueurs[1].pos.x);
 ```
 
 ---
 
-## 구조체의 기본 연산 가능 여부
+## Compatibilité des opérations de base pour les structures
 
-Wave의 구조체는 사용자 정의 타입이기 때문에,
-산술 연산이나 비교 연산에 자동으로 참여하지 않습니다.
+Les structures dans Wave sont des types définis par l'utilisateur;
+els ne participent pas automatiquement aux opérations arithmétiques ou de comparaison.
 
-구조체의 동등성 비교, 정렬, 해싱, 수치 연산 등이 필요하다면
-반드시 `proto` 블록을 통해 해당 동작을 명시적으로 정의해야 합니다.
-Wave는 구조체에 대해 암묵적인 연산자를 제공하지 않으며,
-모든 동작은 명시적으로 정의되는 것을 원칙으로 합니다.
+Si vous avez besoin de comparer l'égalité, de trier, de hacher ou d'effectuer des opérations numériques sur des structures,
+vous devez définir ces comportements explicitement via un bloc `proto`.
+Wave ne fournit pas d'opérateurs implicites pour les structures;
+toutes les actions doivent être définies explicitement par principe.

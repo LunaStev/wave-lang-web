@@ -2,18 +2,18 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# שימוש std::net
 
-동기식 IPv4 TCP/UDP API입니다.
+API סינכרוני ל-IPv4 TCP/UDP.
 
-## import
+## יבוא
 
 ```wave
 import("std::net::tcp");
 import("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1. שרת TCP
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2. לקוח TCP
 
 ```wave
 fun main() {
@@ -47,14 +47,14 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3. שליחה וקבלה ב-UDP
 
 ```wave
 fun main() {
     var sock: UdpSocket = udp_bind(9000);
     var peer: UdpAddr = udp_addr_loopback(9001);
 
-    udp_send_str_to(sock, peer, "hello");
+    udp_send_str_to(sock, peer, "שלום");
 
     var src: UdpAddr;
     var buf: array<u8, 512>;
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## יצירת כתובות
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## פונקציות עיקריות
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener

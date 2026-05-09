@@ -1,87 +1,88 @@
 ---
-sidebar_position: 7
+sidebar_position: ৭
 ---
 
-# 백엔드 옵션 (`--llvm`, `--whale`)
+# ব্যাকএন্ড বিকল্প (`--llvm`, `--whale`)
 
-이 문서는 `wavec`의 백엔드 관련 CLI 옵션을 설명합니다.
+এই নথি `wavec` এর ব্যাকএন্ড সংক্রান্ত CLI বিকল্পগুলি ব্যাখ্যা করে।
 
-중요 원칙:
+প্রধান নীতি:
 
-- `wavec`는 패키지 매니저가 아닙니다.
-- 백엔드 동작은 가능한 한 **명시적 인자**로 제어합니다.
-- 백엔드 세부 옵션은 `--llvm` 뒤에서만 해석됩니다.
+- `wavec` কোনো প্যাকেজ ম্যানেজার নয়।
+- ব্যাক-এন্ড প্রক্রিয়া সম্ভব হলে **স্পষ্ট অর্গুমেন্ট** দিয়ে নিয়ন্ত্রিত হয়।
+- ব্যাকএন্ড বিকল্পের বিবরণ শুধুমাত্র `--llvm` এর পরে ব্যাখ্যা করা হয়।
 
 ---
 
-## 1. 백엔드 선택자
+## ১। ব্যাকএন্ড নির্বাচক
 
-## 1.1 `--llvm`
+## ১.১ `--llvm`
 
-`--llvm` 자체는 백엔드 옵션 블록의 시작 마커입니다.
+`--llvm` নিজেই ব্যাকএন্ড বিকল্প ব্লকের শুরু চিহ্ন।
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-위처럼 `--llvm` 뒤에 오는 인자들 중 지원되는 항목만 LLVM 백엔드 설정으로 처리됩니다.
+উপরে উল্লেখিত, `--llvm` এর পরে আসা সমর্থিত আইটেমগুলি শুধুমাত্র LLVM ব্যাকএন্ড সেটআপ হিসেবে প্রক্রিয়াকৃত হবে।
 
-## 1.2 `--whale` (현재 TODO)
+## ১.২ `--whale` (বর্তমানে TODO)
 
-현재 `--whale`은 **예약된 더미 플래그**입니다.
+বর্তমানে `--whale` একটি **রিজার্ভড ডামি ফ্ল্যাগ**।
 
-- 파서는 인식합니다.
-- 실제 Whale 백엔드 파이프라인은 아직 연결되어 있지 않습니다.
-- 사용 시 TODO 에러로 종료됩니다.
+- পার্সার চিনে নেয়।
+- প্রকৃত Whale ব্যাকএন্ড পাইপলাইন এখনও সংযোগহীন।
+- ব্যবহারের সময় TODO ত্রুটির মাধ্যমে বন্ধ হয়।
 
 ---
 
-## 2. `--llvm` 뒤에서 지원되는 옵션
+## ২। `--llvm` এর পরে সমর্থিত বিকল্পগুলি
 
-## 2.1 타겟/코드젠
+## ২.১ লক্ষ্য/কোডজেন
 
 - `--target <triple>` / `--target=<triple>`
 - `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
 - `--abi <name>` / `--abi=<name>`
 
-반영 지점:
+প্রতিফলন বিন্দু:
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
-- 오브젝트/링크 단계(clang 호출): `target`, `abi`
+- IR উৎপাদন (TargetMachine) স্তর: `target`, `cpu`, `features`
+- বস্তু/লিঙ্ক স্তর (clang কল): `target`, `abi`
 
-현재 기본적으로 문서화할 주요 target triple:
+বর্তমানে ডকুমেন্ট করা প্রধান টার্গেট ট্রিপল:
 
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
+- লিনাক্স: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
+- ডারউইন: `x86_64-apple-darwin`, `aarch64-apple-darwin`
+- ফ্রিস্ট্যান্ডিং: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
 
-## 2.2 툴체인/링크
+## ২.২ টুলচেইন/লিঙ্ক
 
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (পুনরাবৃত্তি উপযুক্ত)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
-반영 지점:
+প্রতিফলন বিন্দু:
 
-- 오브젝트 생성(clang `-c`)에 `--sysroot`
-- 링크 단계에서 linker override, raw link arg 주입
-- `-C no-default-libs` 사용 시 자동 `-lc -lm` 비활성화
+- অব্জেক্ট অর্জনে (clang `-c`) `--sysroot`
+- লিঙ্ক পর্যায়ে লিঙ্কার ওভাররাইড, রো লিঙ্ক আর্গ ইনজেকশন ও লিঙ্ক-সিসরুট ইনজেকশন
+- `-C no-default-libs` ব্যবহারের সময় স্বয়ংক্রিয় `-lc -lm` নিষ্ক্রিয়।
 
 ---
 
-## 3. 파싱 규칙 (중요)
+## ৩। পার্সিং নিয়ম (গুরুত্বপূর্ণ)
 
-`--llvm`를 쓰지 않으면 백엔드 세부 옵션은 global option으로 해석되지 않습니다.
+`--llvm` ব্যবহার না করলে ব্যাকএন্ডের বিস্তারিত বিকল্পগুলি গ্লোবাল অপশনে পরিণত হয় না।
 
-예를 들어 아래는 에러입니다.
+উদাহরণস্বরূপ নিচেরটি একটি ত্রুটি।
 
 ```bash
 wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-반드시 아래처럼 작성해야 합니다.
+অবশ্যই নিচের মতো লিখতে হবে।
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
@@ -89,21 +90,21 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ---
 
-## 4. 사용 예시
+## ৪। ব্যবহারের উদাহরণ
 
-기본 오브젝트 생성:
+প্রাথমিক অব্জেক্ট উৎপাদন:
 
 ```bash
 wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
-freestanding 커널 오브젝트 생성:
+ফ্রিস্ট্যান্ডিং কার্নেল অবজেক্ট তৈরি:
 
 ```bash
 wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-커스텀 링크:
+কাস্টম লিঙ্ক:
 
 ```bash
 wavec --llvm \
@@ -114,17 +115,17 @@ wavec --llvm \
   build app.wave
 ```
 
-libc/libm 자동 링크 비활성화:
+libc/libm নিজস্ব লিংক নিষ্ক্রিয়করণ:
 
 ```bash
 wavec --llvm -C no-default-libs build app.wave
 ```
 
-`--freestanding`을 사용하면 내부적으로 `-C no-default-libs`와 같은 방향으로 동작하며, 커널/부트 코드처럼 런타임 기본 라이브러리를 가정하지 않는 빌드에 맞춰집니다.
+`--freestanding` ব্যবহার করলে অভ্যন্তরীণভাবে `-C no-default-libs` এর মত কাজ করে, এবং কার্নেল/বুট কোডের মত রuntime এর মৌলিক লাইব্রেরি গঠিত না বলে ধরা হয় এমন বিল্ড তৈরির জন্য উপলব্ধ।
 
 ---
 
-## 5. 상태 요약
+## ৫। অবস্থার সারাংশ
 
-- LLVM 백엔드: 동작 중
-- Whale 백엔드: 예약됨(TODO), 미구현
+- LLVM ব্যাকেন্ড: কাজ করছে
+- Whale ব্যাকেন্ড: সংরক্ষিত (TODO), অসম্পূর্ণ

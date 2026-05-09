@@ -244,6 +244,7 @@ Unterstützte Elemente (Zusammenfassung):​​
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (wiederholbar)​​
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Derzeitige Hauptziele laut `wavec print target-list`:​​

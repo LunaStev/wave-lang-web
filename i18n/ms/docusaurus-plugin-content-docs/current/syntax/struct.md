@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# 구조체
+# Struktur
 
 ## 개요
 
@@ -14,9 +14,9 @@ Wave의 구조체는 값 타입(value type) 으로 동작합니다.
 이러한 규칙을 통해 구조체의 상태는 항상 완전하고 예측 가능한 형태를 유지합니다.
 -------------------------------------------------------------
 
-## 구조체 선언 문법
+## Menerangkan cara membuat menggunakan struktur.
 
-구조체는 `struct` 키워드를 사용하여 선언합니다.
+Struktur ditakrifkan menggunakan kata kunci `struct`.
 구조체의 이름은 파스칼 표기법(PascalCase)을 사용하며, 구조체 본문에는 하나 이상의 필드를 정의할 수 있습니다.
 
 필드는 `이름: 타입;` 형식으로 선언되며, 각 필드 선언 뒤에는 반드시 세미콜론이 필요합니다.
@@ -29,14 +29,17 @@ struct Box {
 ```
 
 구조체 선언 시 필드가 작성된 순서는 메모리 배치 순서와 동일하게 사용됩니다.
-구조체 내부에는 필드 선언만 허용되며, 함수나 메서드는 포함될 수 없습니다.
+Komponen struktur diisytiharkan.
 동작 로직은 구조체 외부에서 별도로 정의됩니다.
 ------------------------------------------
 
-## 구조체 생성 문법
+## Menerangkan dengan menggunakan contoh kod struktur.
 
 구조체는 구조체 이름을 사용하는 리터럴 형식으로 생성합니다.
-구조체 리터럴은 `StructName { 필드명: 값; ... }` 형태로 작성합니다.
+var b: Box = Box {
+size: 42;
+weight: 10.5;
+}; }\` 형태로 작성합니다.
 
 ```wave
 var b: Box = Box {
@@ -54,14 +57,13 @@ Wave에서는 구조체 필드 초기화 과정에서 암묵적인 타입 변환
 
 ---
 
-## 구조체 필드 접근 문법
+## Kaedah struktur bergantung pada struktur itu.
 
-구조체의 필드는 점 표기법(dot notation)을 통해 접근합니다.
+Struktur menyokong pembentangan kaedah.
 필드 접근은 읽기와 쓰기 모두 동일한 문법을 사용합니다.
 
 ```wave
-println("Size: {}", b.size);
-println("Weight: {}", b.weight);
+Cegah berkongsi data dalam struktur.
 ```
 
 존재하지 않는 필드 이름을 사용하려고 하면 컴파일 단계에서 오류가 발생합니다.
@@ -70,7 +72,7 @@ println("Weight: {}", b.weight);
 
 ---
 
-## 구조체 메서드 정의 문법
+## Kaedah menggunakan struktur untuk mengelak daripada berkongsi data.
 
 Wave 언어는 구조체 내부에 직접 메서드를 정의하지 않습니다.
 대신 `proto` 키워드를 사용하여 구조체에 연결된 메서드 집합을 선언합니다.
@@ -127,27 +129,13 @@ Wave에서는 구조체의 필드 타입으로 다른 구조체를 사용할 수
 구조체는 완전한 타입이기 때문에, 구조체 안에 또 다른 구조체를 포함하는 형태로 자유롭게 중첩할 수 있습니다.
 
 ```wave
-struct Position {
-    x: i32;
-    y: i32;
-}
-
-struct Player {
-    name: str;
-    pos: Position;
-}
+Di sini
 ```
 
 중첩된 구조체의 필드는 점 표기법을 연속으로 사용하여 접근합니다.
 
 ```wave
-var p: Player = Player {
-    name: "Alice";
-    pos: Position { x: 10; y: 20; };
-};
-
-println("Player X: {}", p.pos.x);
-println("Player Y: {}", p.pos.y);
+Pelbagai maklumat berkaitan diterangkan di sini.
 ```
 
 구조체 리터럴 내부에 또 다른 구조체 리터럴을 중첩하여 작성할 수 있으며,

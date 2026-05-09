@@ -2,24 +2,24 @@
 sidebar_position: 5
 ---
 
-# std::mem 사용법
+# Jinsi ya kutumia std::mem
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+Ni zana ya ugawaji/kopi/kulinganisha wa kumbukumbu wa kiwango cha chini.
 
-## import
+## ingiza
 
 ```wave
-import("std::mem::alloc");
-import("std::mem::ops");
-import("std::mem::cstr");
+ingiza("std::mem::alloc");
+ingiza("std::mem::ops");
+ingiza("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## 1. Ugawaji/Uondoaji msingi
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc_zeroed(256);
-    if (p == null) {
+    ikiwa (p == null) {
         return;
     }
 
@@ -28,26 +28,26 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## 2. Ugawaji upya na Usalama wa Nakala ya Kusonga
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // Uhamisho salama wa maeneo ya kumbukumbu yanayoingiliana
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## 3. API ya item ya generic
 
 ```wave
 fun main() {
     var arr: ptr<i32> = mem_alloc_items_zeroed<i32>(8, 4);
-    if (arr == null) {
+    ikiwa (arr == null) {
         return;
     }
 
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## 4. Zana ya mfuatano wa maandishi ya C
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## Kazi kuu
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>

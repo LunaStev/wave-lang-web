@@ -4,24 +4,22 @@ sidebar_position: 1
 
 # Ngữ pháp
 
-이 문서는 Wave 프로그래밍 언어의 문법 전반에 대해 설명합니다.
-Wave는 현재 개발이 진행 중인 언어이기 때문에, 일부 문법과 기능은 아직 완전히 구현되지 않았거나 향후 변경될 가능성이 있습니다.
-그럼에도 불구하고 이 문서는 현재 시점에서 Wave가 지향하는 문법 구조와 핵심 개념을 이해하는 데 목적을 두고 작성되었습니다.
+Tài liệu này giải thích về toàn bộ cú pháp của ngôn ngữ lập trình Wave.
+Vì Wave hiện là một ngôn ngữ đang phát triển, có thể một số cú pháp và tính năng chưa được hoàn thiện hoặc có khả năng thay đổi trong tương lai.
+Tuy vậy, tài liệu này được soạn thảo nhằm mục đích giúp người đọc hiểu về cấu trúc cú pháp và khái niệm chính mà Wave muốn hướng tới vào thời điểm hiện tại.
 
-이 문서를 통해 독자는 Wave의 현재 상태를 파악할 수 있을 뿐만 아니라,
-언어가 어떤 방향으로 설계되고 확장되고 있는지에 대한 전반적인 그림을 얻을 수 있습니다.
+Thông qua tài liệu này, người đọc có thể nắm rõ trạng thái hiện tại của Wave cũng như có cái nhìn tổng quát về hướng mà ngôn ngữ đang được thiết kế và phát triển.
 
-Wave는 저수준 제어와 고수준 추상화를 결합한 언어로 설계되었습니다.
-시스템 프로그래밍과 같은 저수준 영역부터, 웹 개발, 인공지능, 블록체인과 같은 고수준 응용 분야까지 폭넓게 활용할 수 있도록 설계 목표를 두고 있습니다.
-이를 위해 Wave는 성능과 제어력을 중시하면서도, 생산성을 해치지 않는 문법과 구조를 채택하고 있습니다.
+Wave được thiết kế như một ngôn ngữ kết hợp giữa kiểm soát cấp thấp và trừu tượng hóa cấp cao.
+Đặt mục tiêu thiết kế để có thể được sử dụng rộng rãi từ các lĩnh vực thấp cấp như lập trình hệ thống đến các ứng dụng cấp cao như phát triển web, trí tuệ nhân tạo và blockchain.
+Để làm được điều này, Wave áp dụng cú pháp và cấu trúc không hy sinh năng suất, nhưng vẫn đảm bảo được hiệu suất và quyền kiểm soát.
 
-또한 Wave는 강력한 표준 라이브러리와 통합된 빌드 및 도구 체계를 염두에 두고 설계되고 있으며,
-이를 통해 개발자가 복잡한 설정에 시간을 소모하지 않고 핵심 로직 구현에 집중할 수 있도록 하는 것을 목표로 합니다.
+Ngoài ra, Wave được thiết kế hướng đến một thư viện chuẩn mạnh mẽ, cùng với hệ thống xây dựng và công cụ tích hợp. Nhờ đó, các lập trình viên có thể tập trung nhiều hơn vào việc triển khai logic cốt lõi mà không mất thời gian vào việc cấu hình phức tạp.
 
-Wave의 문법은 C나 Rust와 유사한 부분이 존재하지만, 단순한 모방을 목표로 하지 않습니다.
-익숙한 문법 요소를 바탕으로 하되, 언어를 빠르게 학습하고 실제 개발에서 효율적으로 사용할 수 있도록 재구성되었습니다.
-명시적인 타입 시스템, 예측 가능한 동작, 그리고 코드의 의도를 드러내는 문법을 중요한 설계 기준으로 삼고 있습니다.
+Cú pháp của Wave có nhiều phần tương tự với C và Rust, nhưng nó không nhằm mục tiêu chỉ để sao chép.
+Nó được tái cấu trúc dựa trên các yếu tố cú pháp quen thuộc, đặt mục tiêu giúp người dùng học ngôn ngữ nhanh chóng và sử dụng nó một cách hiệu quả trong phát triển thực tế.
+Hệ thống loại rõ ràng, hoạt động có thể dự đoán và cú pháp thể hiện ý định của mã là những tiêu chí thiết kế quan trọng của nó.
 
-이 문서에서는 Wave의 기본 문법과 주요 언어 기능을 실제 예제와 함께 소개합니다.
-제어문 섹션에는 `if`, `while`/`for`와 함께 `match` 문이 포함됩니다.
-각 섹션은 개별 문법 요소를 설명하며, 전체적으로는 Wave 언어의 구조와 설계 철학을 이해할 수 있도록 구성되어 있습니다.
+Trong tài liệu này, chúng tôi giới thiệu các cú pháp cơ bản của Wave và các chức năng ngôn ngữ chủ chốt kèm theo ví dụ thực tế.
+Phần câu lệnh điều khiển bao gồm câu lệnh `if`, `while`/`for` cùng với câu lệnh `match`.
+Mỗi phần sẽ giải thích từng yếu tố ngữ pháp riêng biệt, và toàn bộ tài liệu được tổ chức để giúp người đọc hiểu cấu trúc và triết lý thiết kế của ngôn ngữ Wave.

@@ -1,19 +1,19 @@
 ---
-sidebar_position: 6
+sidebar_position: ৬
 ---
 
-# std::net 사용법
+# std::net ব্যবহার নির্দেশ
 
-동기식 IPv4 TCP/UDP API입니다.
+সিঙ্ক্রোনাইজ ইন্টিরোজ় TCP/UDP API হলো এটি।
 
-## import
+## আমদানি
 
 ```wave
 import("std::net::tcp");
 import("std::net::udp");
 ```
 
-## 1. TCP 서버
+## ১) TCP সার্ভার
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## ২) TCP ক্লায়েন্ট
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## ৩) UDP প্রেরণ ও গ্রহণ
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## ঠিকানার সৃষ্টি
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## প্রধান ফাংশন
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener

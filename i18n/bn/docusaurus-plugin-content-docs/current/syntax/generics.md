@@ -1,17 +1,17 @@
 ---
-sidebar_position: 13
+sidebar_position: ১৩
 ---
 
-# 제네릭 (Generics)
+# জেনেরিকস (Generics)
 
-Wave 제네릭은 코드 중복 없이 타입 안전한 함수를 작성하기 위한 기능입니다.
+Wave জেনেরিক হল কোড পুনরাবৃত্তি ছাড়াই টাইপ নিরাপদ ফাংশন লেখার একটি ফিচার।
 
-핵심 규칙:
+মূল নিয়মাবলী:
 
-- 타입 인자는 반드시 명시합니다.
-- 타입 추론은 허용하지 않습니다.
+- টাইপ প্যারামিটার অবশ্যই উল্লেখ করতে হবে।
+- টাইপ অনুমান অনুমোদিত নয়।
 
-## 1. 제네릭 함수 선언
+## 1. জেনেরিক ফাংশন ঘোষণা
 
 ```wave
 fun identity<T>(x: T) -> T {
@@ -19,16 +19,16 @@ fun identity<T>(x: T) -> T {
 }
 ```
 
-호출:
+কল:
 
 ```wave
 fun main() {
-    var a: i32 = identity<i32>(10);
-    var b: f64 = identity<f64>(3.14);
+    var a: i32 = identity<i32>(১০);
+    var b: f64 = identity<f64>(৩.১৪);
 }
 ```
 
-## 2. 다중 타입 파라미터
+## 2. একাধিক টাইপ প্যারামিটার
 
 ```wave
 struct Pair<A, B> {
@@ -44,11 +44,11 @@ fun pair<A, B>(a: A, b: B) -> Pair<A, B> {
 }
 
 fun main() {
-    var p: Pair<i32, f64> = pair<i32, f64>(1, 2.5);
+    var p: Pair<i32, f64> = pair<i32, f64>(১, ২.৫);
 }
 ```
 
-## 3. 제네릭 구조체
+## 3. জেনেরিক স্ট্রাকচার
 
 ```wave
 struct Vec<T> {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 4. 중첩 제네릭
+## 4. ইনলাইন জেনেরিক
 
 ```wave
 struct Vec<T> {
@@ -74,28 +74,28 @@ fun main() {
 }
 ```
 
-## 5. 표준 라이브러리와 함께 사용
+## 5. স্ট্যান্ডার্ড লাইব্রেরির সাথে ব্যবহার
 
 ```wave
 import("std::math::int");
 import("std::env::environ");
 
 fun main() {
-    var x: i32 = num_abs<i32>(-100, 0);
+    var x: i32 = num_abs<i32>(-১০০, ০);
 
     var r: EnvResult<i32> = env_get_i32("PORT");
-    var port: i32 = env_unwrap_or<i32>(r, 8080);
+    var port: i32 = env_unwrap_or<i32>(r, ৮০৮০);
 }
 ```
 
-## 자주 하는 실수
+## অপরাধবোধ যা প্রায়শই ঘটে
 
 ```wave
-var x: i32 = identity(10); // 타입 인자 누락 (허용 안 됨)
+var x: i32 = identity(১০); // টাইপ প্যারামিটার অনুপস্থিত (অনুমোদিত নয়)
 ```
 
-반드시 다음처럼 호출해야 합니다.
+অবশ্যই নিম্নরূপ কল করতে হবে।
 
 ```wave
-var x: i32 = identity<i32>(10);
+var x: i32 = identity<i32>(১০);
 ```

@@ -4,84 +4,60 @@ sidebar_position: 2
 
 # Falsafa na Malengo ya Wave
 
-Wave는 기존 저수준 언어가 가진 한계를 보완하면서,
-하나의 언어로 다양한 개발 영역을 아우를 수 있는 통합된 개발 생태계를 구축하는 것을 목표로 합니다.
+Wave inakusudia kufidia mipaka ya lugha za kiwango cha chini na kujenga mfumo unaojumuisha ambapo maeneo mbalimbali ya maendeleo yanaweza kushughulikiwa kwa lugha moja.
 
-웹 개발, 운영 체제, 인공지능, 블록체인, 하드웨어 제어, 컴파일러, 네트워킹, 암호화와 같이
-서로 성격이 크게 다른 분야를 각각 다른 언어로 나누어 다루는 대신,
-Wave는 하나의 언어와 하나의 도구 체계 안에서 이 모든 영역을 자연스럽게 연결하고자 합니다.
+Badala ya kushughulikia maeneo yaliyo tofauti kama vile maendeleo ya wavuti, mifumo ya uendeshaji, akili bandia, blockchain, udhibiti wa vifaa, wakusanyaji, usambazaji wa mtandao, na usimbaji kwa lugha tofauti, Wave inataka kuunganisha maeneo haya yote kwa lugha moja na mfumo wa zana moja.
 
-Wave는 범용성을 단순히 “많은 곳에 쓸 수 있다”는 의미로 보지 않습니다.
-각 영역이 요구하는 성능, 제어력, 안정성을 동시에 충족시키는 것을 목표로 하며,
-이를 위해 언어 차원에서 일관된 설계와 명확한 규칙을 유지합니다.
+Wave haioni matumizi ya jumla kama tu kutumia kwa sehemu nyingi.
+Tunalenga kufikia utendaji, udhibiti, na uthabiti unaohitajika katika kila eneo, na kwa hili tunadumisha muundo wa kufuatana na sheria wazi kwenye kiwango cha lugha.
 
-특히 Wave는 하드웨어에 대한 깊은 전문 지식이 없는 개발자도
-하드웨어 기능을 활용할 수 있도록 설계되었습니다.
-표준 하드웨어 라이브러리는 복잡한 하드웨어 개념을 추상화하여,
-직관적인 방식으로 사용할 수 있도록 돕습니다.
+Mhaswa, Wave imeundwa ili iweze kutumiwa na watengenezaji wasio na maarifa ya kina juu ya vifaa pia kutumia shughuli za vifaa.
+Maktaba ya vifaa vya kawaida hufanya dhana ngumu za vifaa kuwa ni rahisi kueleweka, kusaidia matumizi kwa njia rahisi.
 
-동시에 Wave는 필요한 경우 하드웨어를 직접 제어할 수 있는 저수준 접근도 제공합니다.
-이를 통해 개발자는 추상화된 인터페이스와 직접 제어 사이를 자유롭게 오갈 수 있으며,
-성능을 희생하지 않으면서도 코드의 복잡성을 최소화할 수 있습니다.
+Wakati huo huo, Wave inatoa fursa ya ufikiaji wa kiwango cha chini cha moja kwa moja kudhibiti vifaa wakati inahitajika.
+Hii inawawezesha watengenezaji kuhamia kati ya kiolesura kilichofifia na udhibiti wa moja kwa moja kwa uhuru, kupunguza ugumu wa kodi bila kughairi utendaji kazi.
 
-궁극적으로 Wave는 하나의 언어로 다양한 작업을 처리하고,
-효율적인 성능과 일관된 개발 경험을 제공하는 통합 환경을 지향합니다.
+Mwisho wa yote, Wave inaelekea kuwa mazingira ya kuunganisha yanayotoa utendaji mzuri na uzoefu wa maendeleo wa kufuatana, kushughulikia majukumu kwa lugha moja.
 
 ## Utendaji na Ufanisi
 
-Wave는 고성능을 전제로 설계된 언어입니다.
-컴파일러와 실행 모델은 최적화된 코드 생성을 목표로 하며,
-다양한 플랫폼에서 안정적인 성능을 유지할 수 있도록 구성됩니다.
+Wave ni lugha iliyoundwa kwa msingi wa utendaji wa juu.
+Mfano wa mkusanyaji na utekelezaji una lengo la kuzalisha msimbo ulioboreshwa ili udumisha utendaji thabiti katika majukwaa tofauti.
 
-이를 통해 웹 애플리케이션과 같은 고수준 영역부터,
-운영 체제나 시스템 소프트웨어처럼 성능이 중요한 영역까지
-하나의 언어로 일관된 성능 특성을 제공하는 것을 목표로 합니다.
+Ni kwa njia hii tuna lengo la kutoa vipengele vya utendaji wa kufuatana kwa lugha moja kutoka sehemu za kiwango cha juu kama vile programu za wavuti, hadi maeneo ambayo utendaji ni muhimu kama mifumo ya uendeshaji au programu za mfumo.
 
 ## Usalama na Ushughulikiaji wa Hitilafu
 
-Wave는 안전한 프로그래밍을 중요한 설계 기준으로 삼고 있습니다.
-컴파일 타임 단계에서 가능한 오류를 최대한 검출하여,
-런타임에서 발생할 수 있는 문제를 최소화하는 방향으로 설계되었습니다.
+Wave hufanya uandaaji wa programu salama kuwa kigezo muhimu cha muundo.
+Imeundwa kugundua makosa mengi iwezekanavyo wakati wa awamu ya mkusanyiko ili kupunguza matatizo yanayoweza kutokea wakati wa utekelezaji.
 
-메모리 안전성, 타입 안전성과 같은 기본적인 안정성을 보장하면서도,
-이를 위해 성능을 희생하지 않는 것을 목표로 합니다.
-Wave는 안전성과 성능이 상충되는 개념이 아니라,
-언어 설계를 통해 함께 달성할 수 있는 요소라고 봅니다.
+Lengo ni kutoa uhakikisho wa msingi wa usalama kama vile usalama wa kumbukumbu na aina, bila kuathiri utendaji.
+Wave huona usalama na utendaji sio kama dhana kinzani bali ni vipengele vinavyoweza kufikiwa pamoja kupitia muundo wa lugha.
 
 ## Kuinua Uzalishaji wa Mdhibiti
 
-Wave는 직관적이고 일관된 문법을 통해
-개발자가 언어를 빠르게 익히고 효율적으로 사용할 수 있도록 설계되었습니다.
+Wave imeundwa kwa sarufi ya kufuata na ya kimantiki ili watengenezaji wajifunze haraka na kutumia kwa ufanisi.
 
-또한 풍부한 표준 라이브러리와 도구 체계(Vex, WSON 등)를 통해
-복잡한 작업을 반복 구현하지 않고도 해결할 수 있도록 지원합니다.
-이를 통해 개발자는 환경 설정이나 보일러플레이트 코드보다
-문제 해결 자체에 집중할 수 있습니다.
+Pia, kupitia maktaba ya kawaida iliyo tajiri na mfumo wa zana (mfano, Vex, WSON), inasaidia kutatua kazi ngumu bila kuyatekeleza mara kwa mara.
+Kwa njia hii, watengenezaji wanaweza kuzingatia zaidi kutatua shida badala ya kuseti mazingira au misimbo ya kawaida.
 
 ## Ukomo wa Jukwaa
 
-Wave는 특정 운영 체제나 환경에 종속되지 않는 언어를 지향합니다.
-동일한 코드가 다양한 운영 체제에서 일관되게 동작할 수 있도록 설계되어 있으며,
-개발자는 한 번 작성한 코드를 여러 환경에서 재사용할 수 있습니다.
+Wave inalenga kuwa lugha isiyo tegemezi kwa mfumo maalum wa uendeshaji au mazingira.
+Imeundwa ili msimbo sawa ufanye kazi kwa ufanifu katika mifumo mingi ya uendeshaji, na watengenezaji wanaweza kutumia tena msimbo uliotengeneza mara moja katika mazingira mbalimbali.
 
-이러한 플랫폼 독립성은 Wave가 범용 언어로서 기능하기 위한
-중요한 기반 요소 중 하나입니다.
+Uhuru huu wa jukwaa ni moja ya vipengele muhimu ambavyo Wave inatumia kufanya kazi kama lugha yenye matumizi ya jumla.
 
 ## Jamii na Upanuzi
 
-Wave는 오픈 소스 커뮤니티와의 협력을 통해 성장하는 언어입니다.
-사용자와 개발자는 Wave의 기능을 확장하고 개선하는 데 자유롭게 참여할 수 있으며,
-이 과정은 언어의 방향성과 완성도를 함께 만들어가는 과정이기도 합니다.
+Wave ni lugha inayokua kupitia ushirikiano na jamii ya chanzo huria.
+Watumiaji na watengenezaji wanaweza kushiriki kwa uhuru katika kuongeza na kuboresha vipengele vya Wave, na mchakato huu pia huunda mwelekeo na ukamilifu wa lugha.
 
-Wave는 커스터마이징과 확장을 전제로 설계되어,
-특정 분야나 요구사항에 맞게 언어와 생태계를 유연하게 활용할 수 있도록 합니다.
+Wave imeundwa na dhana ya kubadilishwa na kupanuliwa, hivyo inaruhusu matumizi ya lugha na mfumo kwa kutoa mahitaji maalum au mahitaji.
 
 ## Malengo ya Kuelekea Kesho
 
-Wave는 현재의 기술 환경에 머무르지 않고,
-앞으로 등장할 새로운 기술 흐름을 수용할 수 있는 언어를 목표로 합니다.
+Wave inalenga kuwa lugha ambayo haijabaki katika mazingira yaliyopo ya teknolojia, lakini inakaribisha mitindo mpya ya teknolojia itakayokuja.
 
-인공지능, 분산 시스템, 양자 컴퓨팅과 같은 미래 기술을 염두에 두고,
-언어와 도구 체계를 지속적으로 확장해 나갈 계획입니다.
-이러한 방향성은 Wave가 단기적인 도구가 아닌,
-장기적으로 발전 가능한 언어로 자리 잡기 위한 기반이 됩니다.
+Tukiwa na teknolojia za baadaye kama akili bandia, mifumo ya kusambazwa, na kompyuta za quantum akilini, tunapanga kupanua lugha na mfumo wa zana kila mara.
+Mwelekeo huu unaunda msingi kwa Wave kuwa lugha inayoweza kukua kwa muda mrefu, badala ya kuwa zana ya muda mfupi.

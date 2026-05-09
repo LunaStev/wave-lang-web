@@ -2,21 +2,21 @@
 sidebar_position: 4
 ---
 
-# std::math 사용법
+# استفاده از std::math
 
-정수/실수/비트/수론/삼각 근사 함수를 제공합니다.
+توابع اعداد صحیح/اعشاری/بیت/نظریه اعداد/مثلثاتی تقریبی را ارائه می‌دهد.
 
-## import
+## واردات
 
 ```wave
-import("std::math::int");
-import("std::math::float");
-import("std::math::bits");
-import("std::math::num");
-import("std::math::trig");
+واردات("std::math::int");
+واردات("std::math::float");
+واردات("std::math::bits");
+واردات("std::math::num");
+واردات("std::math::trig");
 ```
 
-## 1. 제네릭 수치 함수
+## 1. توابع جنریک عددی
 
 ```wave
 fun main() {
@@ -25,7 +25,7 @@ fun main() {
 }
 ```
 
-## 2. 비트/정렬 계산
+## 2. محاسبات بیت/تراز
 
 ```wave
 fun main() {
@@ -35,7 +35,7 @@ fun main() {
 }
 ```
 
-## 3. 수론/삼각 근사
+## 3. نظریه اعداد/تقریب مثلثاتی
 
 ```wave
 fun main() {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## توابع اصلی
 
 ```wave
 fun num_abs<T>(x: T, zero: T) -> T

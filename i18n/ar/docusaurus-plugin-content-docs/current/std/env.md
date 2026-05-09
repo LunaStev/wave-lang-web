@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: ٣
 ---
 
-# std::env 사용법
+# دليل استخدام std::env
 
-환경 변수 조회와 작업 디렉터리 제어를 제공합니다.
+يوفر الاستعلام من المتغيرات البيئية وإدارة الدليل والعمل.
 
-## import
+## استيراد
 
 ```wave
 import("std::env::environ");
@@ -14,7 +14,7 @@ import("std::env::cwd");
 import("std::env::consts");
 ```
 
-## 1. 문자열 환경 변수 읽기
+## ١) قراءة متغيرات النص البيئي
 
 ```wave
 fun main() {
@@ -22,16 +22,16 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf는 NUL 종료 문자열
+        // buf بها سلسلة منتهية بـ NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 키 없음
+        // المفتاح غير موجود
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 버퍼 부족
+        // المخزن المؤقت غير كافٍ
     }
 }
 ```
 
-## 2. 정수 환경 변수 읽기 (제네릭 결과 타입)
+## ٢) قراءة متغيرات بيئية صحيحة (قيمة منمة)
 
 ```wave
 fun main() {
@@ -42,7 +42,7 @@ fun main() {
 }
 ```
 
-## 3. 현재 디렉터리/이동
+## ٣) الدليل الحالي/التغيير
 
 ```wave
 fun main() {
@@ -55,7 +55,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## الدوال الأساسية
 
 ```wave
 fun env_get(name: str, dst: ptr<u8>, dst_cap: i64) -> i64

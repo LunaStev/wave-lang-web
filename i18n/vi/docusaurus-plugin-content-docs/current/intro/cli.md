@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# Tham khảo CLI `wavec`
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+Tài liệu này giải thích chi tiết hoạt động của CLI **theo tiêu chuẩn triển khai hiện tại của trình biên dịch Wave (`wavec`)**.
 
-핵심 원칙:
+Nguyên tắc cơ bản:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` là trình biên dịch.
+- Cài đặt/giải quyết gói (lockfile, registry, tải xuống) không phải là trách nhiệm của `wavec`.
+- Phụ thuộc bên ngoài được truyền dưới dạng **tham số CLI tường minh** khi chạy `wavec`.
 
 ---
 
-## 1. 기본 형식
+## 1. Dạng cơ bản
 
 ```bash
 wavec [global-options] <command> [command-options]
 ```
 
-예:
+Ví dụ:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. Quy tắc phân tích cú pháp lệnh (quan trọng)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` quét **global option** từ toàn bộ các tham số trước, sau đó giải thích `<command>` từ các tham số còn lại.
 
-즉 global option은 위치가 유연합니다.
+Có nghĩa là, vị trí của global option là linh hoạt.
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+Cả 3 đều có hiệu lực.
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+Sử dụng `--` để dừng quét global option sau dấu và chuyển sang vùng lệnh.
 
 ```bash
 wavec -- run main.wave
@@ -52,44 +52,44 @@ wavec -- run main.wave
 
 ---
 
-## 3. Commands
+## 3. Lệnh
 
 ## 3.1 `run <file>`
 
-Wave 파일을 컴파일하고 실행합니다.
+Biên dịch và thực thi tập tin Wave.
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+Hoạt động:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. Phân tích cú pháp và mở rộng import
+2. Tạo LLVM IR
+3. Liên kết nhị phân bản địa (`target/<file_stem>`)
+4. Thực thi
 
-특징:
+Đặc điểm:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- `wavec` truyền mã thoát của chương trình thực thi.
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+Tạo các tệp thực thi (exe).
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+Nhị phân đầu ra:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 Tùy chọn `build` (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+Lệnh `build` có thể kiểm soát tên và định dạng của tệp đầu ra như một tùy chọn.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,18 +97,18 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: chỉ định tên tệp đầu ra.
+  - Mặc định (không có `-c`): chỉ định đường dẫn đầu ra của tệp thực thi
+  - Kèm với `-c`: chỉ định đường dẫn đầu ra của tệp đối tượng
+- `-c`: bỏ qua liên kết và chỉ tạo tệp đối tượng.
+- Khi sử dụng `-c`, sẽ xuất đường dẫn tệp đối tượng ra stdout.
 
-기본 동작:
+Hành động mặc định:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (xuất đường dẫn)
 
-freestanding 커널 오브젝트 예시:
+Ví dụ đối tượng kernel không phụ thuộc:
 
 ```bash
 wavec --llvm \
@@ -116,35 +116,35 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` cũng có thể được sử dụng theo cách như vậy.
 
 ---
 
-## 3.4 `install std`, `update std`
+## 3.4 `cài đặt std`, `cập nhật std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+Lệnh cài đặt/cập nhật thư viện tiêu chuẩn.
 
 ```bash
-wavec install std
-wavec update std
+wavec cài đặt std
+wavec cập nhật std
 ```
 
 ---
 
-## 3.5 `--help`, `--version`
+## 3.5 `--trợ giúp`, `--phiên bản`
 
 ```bash
-wavec --help
-wavec --version
+wavec --trợ giúp
+wavec --phiên bản
 ```
 
 ---
 
-## 4. Global Options
+## 4. Tùy chọn toàn cầu
 
-## 4.1 최적화
+## 4.1 Tối ưu hóa
 
-허용 값:
+Giá trị cho phép:
 
 - `-O0`
 - `-O1`
@@ -154,21 +154,21 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+Ví dụ:
 
 ```bash
-wavec -O3 run main.wave
+wavec -O3 chạy main.wave
 ```
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 Xuất gỡ lỗi
 
 ```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
+wavec --gỡ lỗi-wave=tokens,ast,ir chạy main.wave
 ```
 
-허용 항목:
+Các mục cho phép:
 
 - `tokens`
 - `ast`
@@ -179,74 +179,75 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 Tùy chọn liên kết
 
 ```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
+wavec dựng app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` hoặc `--link <lib>`
+- `-L<path>` hoặc `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+`wavec` sẽ truyền nội bộ dưới dạng `-l<lib>`, `-L<path>` khi liên kết.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 Tùy chọn phụ thuộc bên ngoài (quan trọng)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+Tùy chọn để phân tích import bên ngoài (`pkg::...`).
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+Thêm ứng cử viên cho thư mục gốc của gói.
 
 ```bash
-wavec run app.wave --dep-root .vex/dep
+wavec chạy app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+Khi tìm gói `math`:
 
-- `.vex/dep/math` 를 검사
+- Kiểm tra `.vex/dep/math`
 
-여러 번 지정 가능:
+Có thể chỉ định nhiều lần:
 
 ```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
+wavec chạy app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+Gắn tên gói vào một đường dẫn cụ thể.
 
 ```bash
-wavec run app.wave --dep math=.vex/dep/math
+wavec chạy app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+Quy tắc:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- Định dạng `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` phải có dạng `name=path`
+- Lỗi nếu chỉ định trùng tên gói
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 Tùy chọn backend (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+Các tùy chọn điều khiển backend chỉ được diễn giải sau `--llvm`.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+Các mục hô trợ (tóm tắt):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (có thể lặp lại)
+- `-C link-sysroot=<đường dẫn>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+Các mục tiêu chính hiện tại theo tiêu chuẩn `wavec print target-list`:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -256,26 +257,26 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` hiện là cờ dummy đã được đặt trước, pipeline backend thực tế chưa được triển khai (TODO).
 
 ---
 
-## 5. Import 해석 규칙
+## 5. Quy tắc diễn giải nhập khẩu
 
-Wave import는 다음 3가지로 분기됩니다.
+Nhập khẩu Wave được phân chia thành 3 loại sau.
 
-1. 로컬 import
-2. std import
-3. 외부 패키지 import
+1. nhập khẩu cục bộ
+2. nhập khẩu std
+3. nhập khẩu gói ngoại vi
 
-## 5.1 로컬
+## 5.1 Cục bộ
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+Tìm kiếm `<path>.wave` trong thư mục tiêu chuẩn.
 
 ## 5.2 std
 
@@ -283,52 +284,52 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+Sử dụng đường dẫn `~/.wave/lib/wave/std/...`.
 
-## 5.3 외부 패키지
+## 5.3 Gói ngoại vi
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+Hình thức:
 
-- 최소 `package::module` 2세그먼트 필요
+- Cần ít nhất 2 đoạn `package::module`
 
-패키지 루트 결정 순서:
+Thứ tự xác định gốc gói:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. Ánh xạ rõ ràng bằng `--dep name=path`
+2. Tìm kiếm `<root>/<package>` trong mỗi `--dep-root`
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+Nếu cùng một gói được tìm thấy đồng thời trong nhiều dep-root:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- Không tự động lựa chọn, dan phát sinh lỗi mơ hồ
+- Cần cố định bằng `--dep name=path`
 
-모듈 파일 탐색 순서:
+Thứ tự khám phá tệp mô-đun:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+Ví dụ:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+Khám phá:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. Ví dụ thực tế về nhập khẩu ngoại vi
 
-### 6.1 단일 dep-root
+### 6.1 dep-root đơn nhất
 
-디렉터리:
+Thư mục:
 
 ```text
 .vex/dep/
@@ -338,30 +339,30 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+Mã:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+Thực thi:
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec chạy main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 Giải quyết mơ hồ
 
 ```bash
-wavec run main.wave \
+wavec chạy main.wave \
   --dep-root .vex/dep \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+Nếu có `math` ở cả hai bên, sẽ xảy ra lỗi. Sửa như dưới đây.
 
 ```bash
-wavec run main.wave \
+wavec chạy main.wave \
   --dep-root .vex/dep \
   --dep-root ./vendor/dep \
   --dep math=./vendor/dep/math
@@ -369,25 +370,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Tách biệt vai trò với Vex
 
-권장 구조:
+Cấu trúc khuyến nghị:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: biên dịch/liên kết/thực thi + phân giải phụ thuộc rõ ràng
+- `vex`: cài đặt/quản lý phụ thuộc sau đó `wavec ... --dep-root ... --dep ...` gọi
 
-예:
+Ví dụ:
 
 ```bash
-# 내부적으로 vex가 수행
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
+# Thực thi vex nội bộ
+wavec chạy main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+Mô hình này giữ cho trình biên dịch đơn giản và quyết định, trong khi trình quản lý gói đảm nhiệm tự động hóa.
 
 ---
 
-## 8. 빠른 참조
+## 8. Tham khảo nhanh
 
 ```bash
 wavec run main.wave

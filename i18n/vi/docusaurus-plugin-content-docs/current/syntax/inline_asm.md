@@ -6,10 +6,10 @@ sidebar_position: 7
 
 ## Giới thiệu
 
-Wave의 인라인 어셈블리는 `asm { ... }` 블록으로 작성합니다.
-Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접 제어할 수 있습니다.
+Wave trong cụm hợp ngữ nội tuyến được viết dưới dạng `asm { ... Viết theo dạng khối `}\`.
+Có thể điều khiển trực tiếp thanh ghi, bộ nhớ và đường dẫn gọi hệ thống từ trong mã Wave.
 
-현재 지원 타깃:
+Các nền tảng hỗ trợ hiện tại:
 
 - Linux `x86_64`
 - Linux `aarch64`
@@ -18,35 +18,35 @@ Wave 코드 안에서 레지스터, 메모리, 시스템 호출 경로를 직접
 - freestanding `aarch64`
 - freestanding `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Chưa hỗ trợ Windows và nền tảng 32-bit.
 
 ---
 
-## 기본 형태
+## Hình thức cơ bản
 
-`asm`은 **문(statement)** 으로도, **식(expression)** 으로도 사용할 수 있습니다.
+`asm` có thể được sử dụng như **câu lệnh (statement)** hoặc **biểu thức (expression)**.
 
 ```wave
 asm {
-    "instruction"
-    in("constraint_or_reg") value
-    out("constraint_or_reg") target
+    "mệnh lệnh"
+    in("constraint_or_reg") giá trị
+    out("constraint_or_reg") mục tiêu
     clobber("item")
 }
 ```
 
-구성 요소:
+Các thành phần:
 
-- 문자열 줄: 실제 어셈블리 명령어
-- `in(...)`: 입력 오퍼랜드
-- `out(...)`: 출력 오퍼랜드
-- `clobber(...)`: 파괴되는 레지스터/상태/메모리 힌트
+- Dòng chuỗi: lệnh hợp ngữ thực tế
+- `in(...)`: toán hạng đầu vào
+- `out(...)`: toán hạng đầu ra
+- `clobber(...)`: gợi ý thanh ghi/trạng thái/bộ nhớ bị thay đổi
 
 ---
 
-## `asm` 문 (Statement)
+## Câu lệnh `asm` (Statement)
 
-반환값이 없어도 되는 경우 일반 문장으로 사용합니다.
+Sử dụng như câu lệnh thông thường nếu không cần giá trị trả về.
 
 ```wave
 var ret: i64 = 0;
@@ -60,13 +60,13 @@ asm {
 }
 ```
 
-`out(...)`은 여러 개를 둘 수 있습니다.
+Có thể đặt nhiều `out(...)`.
 
 ---
 
-## `asm` 식 (Expression)
+## Biểu thức `asm` (Expression)
 
-값을 직접 생성하는 식으로 사용할 수 있습니다.
+Có thể được sử dụng như một biểu thức tạo giá trị trực tiếp.
 
 ```wave
 var result: i64 = asm {
@@ -75,41 +75,41 @@ var result: i64 = asm {
 };
 ```
 
-주의:
+Lưu ý:
 
-- `asm` 식은 **정확히 1개의 `out(...)`** 만 허용합니다.
+- Biểu thức `asm` chỉ cho phép **duy nhất 1 `out(...)`**.
 
 ---
 
-## `in(...)` / `out(...)` 제약식
+## Ràng buộc `in(...)` / `out(...)`
 
-`in("...")`, `out("...")`의 문자열은 다음 둘 중 하나입니다.
+Chuỗi trong `in("...")`, `out("...")` có thể là một trong hai dạng sau.
 
-1. 구체 레지스터
+1. Thanh ghi cụ thể
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- Ví dụ: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
-2. 제약 클래스(constraint class)
+2. Lớp ràng buộc (constraint class)
 
-- 예: `"r"`, `"m"`, `"rm"`
+- Ví dụ: `"r"`, `"m"`, `"rm"`
 
-예시:
+Ví dụ:
 
 ```wave
 in("r") &buf
 out("rax") ret
 ```
 
-출력 대상(`out(...) target`)은 현재 구현 기준으로 다음 패턴을 권장합니다.
+Đối tượng đầu ra (`out(...) target`) hiện tại được khuyến khích theo mẫu sau.
 
-- 변수: `out("rax") ret`
-- 포인터 역참조: `out("rax") deref p`
+- Biến số: `out("rax") ret`
+- Tham chiếu ngược con trỏ: `out("rax") deref p`
 
 ---
 
 ## `clobber(...)`
 
-`clobber(...)`는 한 번에 여러 항목을 받을 수 있고, 여러 번 써도 됩니다.
+`clobber(...)` có thể nhận nhiều mục cùng lúc và có thể được sử dụng nhiều lần.
 
 ```wave
 asm {
@@ -120,19 +120,19 @@ asm {
 }
 ```
 
-주요 항목:
+Các mục chính:
 
-- 레지스터: `"rax"`, `"x0"` 등
-- 특수: `"memory"`, `"cc"`(타깃별 내부 정규화)
+- Thanh ghi: `"rax"`, `"x0"`, v.v.
+- Đặc biệt: `"memory"`, `"cc"` (chuẩn hóa nội bộ theo mục tiêu)
 
-컴파일러는 보수적 안전 모드에서 기본 clobber를 자동으로 추가합니다.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+Trình biên dịch sẽ tự động thêm clobber cơ bản trong chế độ an toàn bảo thủ.
+(`memory`, các chuỗi flags/cc, v.v.; Chủ yếu là `memory` trên nền RISC-V không phụ thuộc)
 
 ---
 
-## 오퍼랜드 자리표시자 (`$0`, `$1`, ...)
+## Placeholder cho toán hạng (`$0`, `$1`, ...)
 
-명령 문자열 안에서 오퍼랜드를 참조할 때 `$N`을 사용합니다.
+Sử dụng `$N` để tham chiếu toán hạng trong chuỗi lệnh.
 
 ```wave
 asm {
@@ -142,34 +142,34 @@ asm {
 }
 ```
 
-참고:
+Tham khảo:
 
-- `%0` 스타일을 써도 내부적으로 `$0` 스타일로 변환됩니다.
+- Dù sử dụng kiểu `%0`, nội bộ sẽ chuyển thành kiểu `$0`.
 
 ---
 
-## 입력 오퍼랜드 현재 지원 범위
+## Phạm vi hỗ trợ hiện tại cho toán hạng đầu vào
 
-`in(...)` 값은 현재 다음 형태를 지원합니다.
+Giá trị `in(...)` hiện tại hỗ trợ các dạng sau.
 
-- 변수 식별자
-- 정수 리터럴
-- 문자열 리터럴
+- Biến số định danh
+- Số nguyên kiểu literal
+- Chuỗi kiểu literal
 - `&identifier`
 - `deref identifier`
-- 음수 정수/실수 리터럴
+- Số nguyên âm/ số thực kiểu literal
 
-복잡한 일반 표현식은 제한될 수 있으므로, 필요 시 임시 변수에 담아 전달하는 패턴을 권장합니다.
+Các biểu thức phức hợp thường bị hạn chế, do đó khuyến khích truyền qua biến tạm thời khi cần.
 
 ---
 
 ## Lưu ý.
 
-인라인 어셈블리는 타입 시스템의 보호를 부분적으로 우회합니다.
-잘못된 레지스터 지정, 제약식 충돌, clobber 누락은 잘못된 코드 생성이나 런타임 오동작을 유발할 수 있습니다.
+Inline assembly có thể phần nào vượt qua được sự bảo vệ của hệ thống kiểu.
+Chỉ định thanh ghi sai, xung đột ràng buộc, hoặc thiếu clobber có thể dẫn đến tạo mã sai hoặc hành vi sai khi chạy.
 
-권장 사항:
+Khuyến nghị:
 
-- 타깃 ABI와 호출 규약을 먼저 확정
-- 입력/출력 레지스터와 clobber를 명시적으로 관리
-- 메모리를 직접 건드리면 `clobber("memory")`를 함께 선언
+- Xác định ABI và quy ước gọi hàm của mục tiêu trước tiên
+- Quản lý nhập/xuất và clobber một cách rõ ràng
+- Nếu truy cập trực tiếp vào bộ nhớ thì cùng khai báo `clobber("memory")`.

@@ -1,23 +1,23 @@
 ---
-sidebar_position: 8
+sidebar_position: ٨
 ---
 
-# std::string 사용법
+# كيفية استخدام std::string
 
-NUL 종료 문자열(`str`) 유틸입니다.
+أدوات سلسلة مستندة إلى NUL ('str').
 
-## import
+## استيراد
 
 ```wave
-import("std::string::len");
-import("std::string::cmp");
-import("std::string::find");
-import("std::string::trim");
-import("std::string::ascii");
-import("std::string::hash");
+استيراد("std::string::len");
+استيراد("std::string::cmp");
+استيراد("std::string::find");
+استيراد("std::string::trim");
+استيراد("std::string::ascii");
+استيراد("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1. الطول/المقارنة
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2. البحث/العد
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3. نطاق القطع + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4. التجزئة
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## الدالات الرئيسية
 
 ```wave
 fun len(s: str) -> i32

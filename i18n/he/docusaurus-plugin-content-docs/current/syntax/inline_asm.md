@@ -18,7 +18,7 @@ sidebar_position: 7
 - freestanding `aarch64`
 - freestanding `riscv64`
 
-Windows와 32비트 타깃은 아직 지원하지 않습니다.
+Windows ויעדי 32 ביט עדיין לא נתמכים.
 
 ---
 
@@ -87,7 +87,7 @@ var result: i64 = asm {
 
 1. רשומת מדויקת
 
-- 예: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
+- לדוגמה: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
 
 2. מעמד מגבלות (constraint class)
 
@@ -126,7 +126,7 @@ asm {
 - מיוחד: `"memory"`, `"cc"` (נרמול פנימי לפי יעד)
 
 המהדר מוסיף את ברירת המחדל של clobber במצב שמירה שמרני.
-(`memory`, flags/cc 계열 등; RISC-V freestanding에서는 주로 `memory`)
+(סדרת `memory`, flags/cc ועוד; ב-RISC-V freestanding בעיקר `memory`)
 
 ---
 

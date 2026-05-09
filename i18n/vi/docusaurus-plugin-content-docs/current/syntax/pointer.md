@@ -4,36 +4,36 @@ sidebar_position: 6
 
 # Con trỏ
 
-## Wave Explicit Memory Type Model
+## Mô hình kiểu bộ nhớ tường minh Wave
 
-Wave의 포인터 설계는 **Wave Explicit Memory Type Model**을 기반으로 합니다.
-이 모델은 포인터와 배열을 문법적 트릭이나 라이브러리 추상화가 아닌, **언어 차원의 명시적인 메모리 타입**으로 정의하는 것을 목표로 합니다.
+Thiết kế con trỏ của Wave dựa trên **Mô hình kiểu bộ nhớ tường minh Wave**.
+Mô hình này nhằm mục tiêu định nghĩa con trỏ và mảng không phải là thủ thuật cú pháp hay trừu tượng hóa thư viện, mà là **kiểu bộ nhớ rõ ràng trên cấp độ ngôn ngữ**.
 
-이러한 설계에 따라 Wave에서는 포인터를 `ptr<T>` 형태의 타입으로 표현하며,
-이는 특정 타입 `T`의 값을 저장하고 있는 메모리 주소를 가리키는 타입임을 명확하게 드러냅니다.
-이 접근 방식은 포인터를 연산자나 선언 문법이 아닌 타입 시스템의 일부로 다룸으로써,
-메모리 구조를 더 직관적이고 일관되게 표현할 수 있게 합니다.
+Theo thiết kế này, trong Wave, con trỏ được biểu diễn dưới dạng kiểu `ptr<T>`,
+điều này làm rõ ràng là một kiểu chỉ ra địa chỉ bộ nhớ lưu trữ giá trị của kiểu `T` nhất định.
+Cách tiếp cận này xử lý con trỏ như một phần của hệ thống kiểu chứ không phải là toán tử hay cú pháp khai báo,
+cho phép biểu diễn cấu trúc bộ nhớ trực quan và nhất quán hơn.
 
 ---
 
-Wave에서 포인터는 `ptr<T>` 형태의 명시적 타입입니다.
-주소 획득은 `&`, 역참조는 `deref`를 사용합니다.
+Trong Wave, con trỏ là kiểu tường minh dưới dạng `ptr<T>`.
+Lấy địa chỉ dùng `&`, và phép tham chiếu ngược dùng `deref`.
 
-## 선언과 초기화
+## Khai báo và khởi tạo
 
 ```wave
 var x: i32 = 10;
 var p: ptr<i32> = &x;
 ```
 
-포인터 타입은 중첩 가능합니다.
+Kiểu con trỏ có thể lồng được.
 
 ```wave
 var p1: ptr<i32> = &x;
 var p2: ptr<ptr<i32>> = &p1;
 ```
 
-## 역참조
+## Tham chiếu ngược
 
 ```wave
 var x: i32 = 10;
@@ -44,37 +44,37 @@ deref p = 20;
 println("{}", x);       // 20
 ```
 
-## `null` 리터럴 규칙
+## Quy tắc literal `null`
 
-`null`은 **정식 리터럴**입니다. 식별자가 아니며 변수명으로 사용할 수 없습니다.
+`null` là **literal tường minh**. Không phải là một định danh và không thể được dùng làm tên biến.
 
-핵심 규칙:
+Quy tắc chính:
 
-- `null`은 오직 `ptr<T>` 대상에만 대입할 수 있습니다.
-- `i32`, `bool`, `array<...>` 같은 비포인터 타입에는 대입할 수 없습니다.
-- 정수 리터럴(`0`, `123`, `-1` 등)로 포인터를 초기화할 수 없습니다. 명시적으로 `null`을 사용합니다.
+- `null` chỉ có thể được gán cho đối tượng `ptr<T>`.
+- Không thể gán cho các kiểu không phải con trỏ như `i32`, `bool`, `array<...>`.
+- Không thể khởi tạo con trỏ với hằng số nguyên (`0`, `123`, `-1`, v.v.). Sử dụng `null` một cách tường minh.
 
 ```wave
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // ERROR
-// var b: bool = null; // ERROR
+// var n: i32 = null;  // LỖI
+// var b: bool = null; // LỖI
 ```
 
-## 포인터 산술
+## Số học con trỏ
 
-Wave는 다음 포인터 산술을 지원합니다.
+Wave hỗ trợ phép số học con trỏ sau.
 
-- `ptr + int`: GEP 기반 포인터 전진
-- `int + ptr`: 동일 동작
-- `ptr - int`: GEP 기반 포인터 후진
-- `ptr - ptr`: `i64` 바이트 차이 계산
+- `ptr + int`: Tiến con trỏ dựa trên GEP
+- `int + ptr`: Hành động tương tự
+- `ptr - int`: Lùi con trỏ dựa trên GEP
+- `ptr - ptr`: Tính toán chênh lệch byte `i64`
 
-포인트:
+Ghi chú:
 
-- `ptr<T> +/- n`은 `T`의 크기(`sizeof(T)`)를 기준으로 이동합니다.
-- 즉 `ptr<i32> + 3`은 바이트 기준으로 `+12` 이동입니다.
+- `ptr<T> +/- n` di chuyển dựa trên kích thước của `T` (`sizeof(T)`).
+- Tức là `ptr<i32> + 3` di chuyển `+12` theo byte.
 
 ```wave
 var base: ptr<i32> = 0x1000 as ptr<i32>;
@@ -83,12 +83,12 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (byte diff)
+var diff: i64 = p1 - base;   // 12 (chênh lệch byte)
 ```
 
-## 포인터 비교
+## So sánh con trỏ
 
-포인터는 비교에 사용할 수 있습니다.
+Con trỏ có thể được sử dụng để so sánh.
 
 ```wave
 if (p == null) { ... }
@@ -96,9 +96,9 @@ if (p != null) { ... }
 if (p1 == p2) { ... }
 ```
 
-## 배열과의 관계
+## Quan hệ với mảng
 
-포인터 배열:
+Mảng con trỏ:
 
 ```wave
 var a: i32 = 10;
@@ -107,7 +107,7 @@ var arr: array<ptr<i32>, 2> = [&a, &b];
 println("{} {}", deref arr[0], deref arr[1]);
 ```
 
-배열 포인터:
+Con trỏ mảng:
 
 ```wave
 var p: ptr<array<i32, 3>> = &[1, 2, 3];
@@ -116,7 +116,7 @@ if (p != null) {
 }
 ```
 
-## 안전성 노트
+## Ghi chú an toàn
 
-Wave는 현재 Rust 같은 소유권/수명 기반 포인터 안전 모델이 아닙니다.
-따라서 `null` 역참조를 자동으로 막아주지 않습니다. `deref` 전에 명시적으로 `null` 체크를 넣는 패턴을 권장합니다.
+Wave hiện không có mô hình an toàn con trỏ dựa trên quyền sở hữu/sự sống như Rust.
+Do đó, không tự động ngăn chặn việc tham chiếu ngược `null`. Chúng tôi khuyên bạn nên thêm mẫu kiểm tra `null` một cách tường minh trước `deref`.

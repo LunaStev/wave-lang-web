@@ -61,12 +61,13 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>`（可重复）
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 应用点：
 
 - 对象生成（clang `-c`）时使用 `--sysroot`
-- 在链接阶段覆盖链接器，注入原始链接参数
+- 在链接阶段进行链接器覆盖，注入原始链接参数，注入 link-sysroot
 - 使用 `-C no-default-libs` 时自动禁用 `-lc -lm`
 
 ---

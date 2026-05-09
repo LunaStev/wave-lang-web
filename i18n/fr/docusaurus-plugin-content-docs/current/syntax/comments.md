@@ -2,53 +2,53 @@
 sidebar_position: 11
 ---
 
-# 주석
+# Commentaire
 
-Wave는 두 가지 주석을 지원합니다.
+Wave prend en charge deux types de commentaires.
 
-- 한 줄 주석: `//`
-- 블록 주석: `/* ... */`
+- Commentaire sur une ligne : `//`
+- Commentaire de bloc : `/* ... */`
 
-## 한 줄 주석
+## Commentaire sur une ligne
 
-`//` 뒤의 내용은 줄 끝까지 무시됩니다.
+Le contenu après `//` est ignoré jusqu'à la fin de la ligne.
 
 ```wave
-var x: i32 = 10; // line comment
-x += 5;          // still works
+var x: i32 = 10; // commentaire de ligne
+x += 5;          // fonctionne toujours
 ```
 
-## 블록 주석
+## Commentaire de bloc
 
-`/*` 와 `*/` 사이 내용을 무시합니다.
+Le contenu entre `/*` et `*/` est ignoré.
 
 ```wave
-var y: i32 = 1 /* inline block */ + 2;
+var y: i32 = 1 /* bloc en ligne */ + 2;
 ```
 
-블록 주석은 여러 줄과 중첩을 지원합니다.
+Les commentaires de bloc supportent plusieurs lignes et l'imbrication.
 
 ```wave
-/* outer
-   /* inner */
-   outer end
+/* extérieur
+   /* intérieur */
+   fin extérieur
 */
 ```
 
-## 문자열과 주석 기호
+## Chaînes de caractères et symboles de commentaire
 
-문자열 내부의 `/*`, `*/`, `//`는 주석 시작/종료로 처리되지 않습니다.
+Les `/*`, `*/`, `//` à l'intérieur des chaînes ne sont pas traités comme des débuts/fins de commentaire.
 
 ```wave
 var marker: str = "/*//*/";
 ```
 
-## 주석 오류
+## Erreur de commentaire
 
-블록 주석이 닫히지 않으면 컴파일 에러(`E1002`)가 발생합니다.
+Une erreur de compilation (`E1002`) se produit si un commentaire de bloc n'est pas fermé.
 
 ```wave
-/* not closed
+/* non fermé
 ```
 
-컴파일러는 시작 위치, 원인, 수정 힌트를 함께 출력합니다.
+Le compilateur affiche la position de départ, la cause et un indice de correction.
