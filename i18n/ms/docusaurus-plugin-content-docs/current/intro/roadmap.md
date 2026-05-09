@@ -2,29 +2,30 @@
 sidebar_position: 4
 ---
 
-# Wave + Whale 통합 개발 로드맵 v2
+# Peta jalan pembangunan integrasi Wave + Whale v2
 
-이 문서는 Wave 언어와 Whale 컴파일러 툴체인의 통합 개발 과정을 단계별로 정리한 로드맵입니다.
-Wave와 Whale은 초기에는 분리된 구성 요소로 시작하지만, 최종적으로는 하나의 독립적인 언어 생태계로 완전히 통합되는 것을 목표로 합니다.
+Dokumen ini adalah peta jalan yang menyusun proses pembangunan terintegrasi antara bahasa Wave dan rangka kerja pengkompil Whale.
+Wave dan Whale bermula sebagai komponen berasingan tetapi berhasrat untuk sepenuhnya berintegrasi menjadi ekosistem bahasa yang berdiri sendiri pada akhirnya.
 
-전체 개발 단계는 다음과 같은 흐름을 따릅니다.
+Seluruh fasa pembangunan mengikuti aliran seperti berikut.
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → release
+pre-alpha → pre-beta → alpha → beta → rc → keluaran
 ```
 
-각 단계는 이전 단계의 결과를 기반으로 진행되며, 한 단계가 완료되면 이전 구조로 되돌아가지 않는 단방향 개발을 전제로 합니다.
+Setiap langkah berlangsung berdasarkan keputusan dari langkah terdahulu, dan setelah satu langkah selesai, pembangunan satu arah yang tidak berpatah balik ke struktur awal.
 
 ---
 
-## Pre-Beta 단계
+## Fasa Pre-Beta
 
-Pre-Beta 단계의 목표는 Wave 언어 프론트엔드를 완성하고, LLVM 백엔드를 기반으로 언어의 전체 기능을 구현하는 것입니다.
-이 단계에서는 Whale을 사용하지 않으며, 컴파일과 실행은 전적으로 LLVM을 통해 이루어집니다.
+Tujuan fasa Pre-Beta adalah untuk menyelesaikan front-end bahasa Wave dan melaksanakan keseluruhan fungsi bahasa berdasarkan back-end LLVM.
+Pada tahap ini, Whale tidak digunakan, dan pengkompilasi dan pelaksanaan dilakukan sepenuhnya melalui LLVM.
 
-문법 자체를 확장하는 작업은 이 단계에서 진행하지 않습니다.
-이미 정의된 사양을 기준으로 모든 문법 요소를 실제로 동작하게 만드는 것이 핵심 목표입니다.
-에러 메시지 품질, 타입 검사, 변수 스코프 처리 등 프론트엔드 구조의 안정화에 집중합니다.
+Kerja untuk memperluaskan tatabahasa itu sendiri tidak akan dilakukan dalam tahap ini.
+Matlamat utama adalah untuk menjadikan semua elemen tatabahasa berfungsi berdasarkan spesifikasi yang telah ditentukan.
+Kami memberi tumpuan kepada menstabilkan struktur front-end,
+seperti kualiti pesanan ralat, pemeriksaan jenis, dan pengurusan skop Variabel.
 
 구현 범위에는 변수 선언과 출력, 기본 연산이 포함되며, 함수 정의와 호출,
 조건문(`if` / `else if` / `else`), 반복문(`while` / `break` / `continue`) 역시 모두 이 단계에서 완성됩니다.
