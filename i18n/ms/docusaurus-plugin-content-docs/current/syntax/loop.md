@@ -2,126 +2,124 @@
 sidebar_position: 4
 ---
 
-# 반복문
+# Pernyataan Pengulangan
 
-## 소개
+## Pengenalan
 
-Wave 언어에서는 동일한 코드를 여러 번 실행해야 하는 상황을 처리하기 위해 반복문을 제공합니다.
-반복문은 특정 조건이 만족되는 동안 코드를 계속 실행하거나, 정해진 횟수만큼 반복 실행할 때 사용됩니다.
+Dalam bahasa Wave, pernyataan pengulangan disediakan untuk mengendalikan situasi di mana kod yang sama perlu dilaksanakan berulang kali.
+Pernyataan pengulangan digunakan untuk mengeksekusi kod berulang kali sehingga syarat tertentu dipenuhi, atau untuk mengulangi sejumlah kali yang ditetapkan.
 
-이를 통해 동일한 로직을 반복해서 작성할 필요 없이, 간결하고 명확한 코드로 반복 작업을 표현할 수 있습니다.
-Wave는 조건 기반 반복과 횟수 기반 반복을 모두 지원하며, 반복 도중 실행 흐름을 제어할 수 있는 키워드도 함께 제공합니다.
+Ini membolehkan anda menyatakan tugas yang diulang dengan kod yang pendek dan jelas tanpa perlu menulis logik yang sama berulang kali.
+Wave menyokong kedua-dua pengulangan berdasarkan syarat dan pengulangan berdasarkan bilangan, dan juga menyediakan kata kunci untuk mengawal aliran pelaksanaan semasa pengulangan.
 
-이 섹션에서는 `while` 문과 `for` 문, 그리고 반복 흐름을 제어하는 `break`, `continue` 키워드의 사용 방법을 설명합니다.
+Bahagian ini menerangkan cara menggunakan pernyataan `while` dan `for`, serta kata kunci `break` dan `continue` untuk mengawal aliran pengulangan.
 
 ---
 
-## while 문
+## Pernyataan while
 
-`while` 문은 주어진 조건식이 참(`true`)으로 평가되는 동안 코드 블록을 반복 실행합니다.
-조건식이 거짓(`false`)이 되는 순간 반복은 즉시 종료됩니다.
+Pernyataan `while` mengeksekusi blok kod berulang kali sementara syarat diberikan dinilai sebagai benar (`true`).
+Pengulangan akan berhenti segera apabila syarat menjadi salah (`false`).
 
-이 방식은 반복 횟수가 명확하지 않고, 특정 조건이 만족될 때까지 반복해야 하는 상황에 적합합니다.
+Ini adalah sesuai untuk situasi di mana bilangan pengulangan tidak jelas dan perlu diulang sehingga syarat tertentu dipenuhi.
 
-### 기본 구조
+### Struktur Asas
 
-Wave에서 while 문의 기본 구조는 다음과 같습니다.
+Struktur asas bagi pernyataan while dalam Wave adalah seperti berikut.
 
 ```wave
-while (조건식) {
-    // 반복할 코드
+while (syarat) {
+    // Kod yang akan diulang
 }
 ```
 
-조건식은 반드시 `bool` 타입으로 평가되어야 하며,
-중괄호 `{}`로 감싸진 코드 블록 안에는 하나 이상의 명령문을 작성할 수 있습니다.
+Syarat harus dinilai sebagai jenis `bool`, dan kod yang dibungkus dalam kurungan `{}` boleh mengandungi satu atau lebih arahan.
 
-### 예제: 0부터 4까지 출력
+### Contoh: Mencetak dari 0 hingga 4
 
 ```wave
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i는 {}입니다.", i);
+    println("i = {}", i);
     i = i + 1;
 }
 ```
 
-이 예제에서는 변수 `i`가 5보다 작은 동안 반복이 수행됩니다.
-매 반복마다 현재 값을 출력하고, `i`의 값을 1씩 증가시켜 조건이 eventually 거짓이 되도록 만듭니다.
+Dalam contoh ini, pengulangan berlaku ketika variabel `i` adalah kurang daripada 5.
+Setiap pengulangan mencetak nilai semasa dan meningkatkan nilai `i` sebanyak 1, membuat syarat jadi salah akhirnya.
 
 ---
 
-## for 문
+## Pernyataan for
 
-`for` 문은 반복 횟수가 비교적 명확한 경우에 사용하기 적합한 반복문입니다.
-초기값, 조건식, 증감식을 한 번에 정의하여 반복의 흐름을 명확하게 표현할 수 있습니다.
+`for` adalah jenis gelung yang sesuai digunakan apabila bilangan pengulangannya agak jelas.
+Anda boleh mendefinisikan nilai awal, ekspresi syarat, dan ekspresi pengurangan sekaligus untuk menjelaskan aliran gelung.
 
-반복 제어에 필요한 요소가 한 곳에 모여 있기 때문에, 반복 구조를 한눈에 파악하기 쉽다는 장점이 있습니다.
+Karena elemen yang diperlukan untuk pengendalian gelung terkumpul di satu tempat, mudah untuk memahami struktur gelung dengan cepat.
 
-### 기본 구조
+### Struktur Asas
 
 ```wave
-for (초기화; 조건식; 증감식) {
-    // 반복할 코드
+for (inialisasi; syarat; pengulangan) {
+    // Kod yang akan diulang
 }
 ```
 
-Wave의 for 초기화는 여러 형태를 지원합니다.
+Inisialisasi untuk gelung 'for' di Wave menyokong pelbagai bentuk.
 
-- 암시적 `var` 타입 초기화
-- `var` / `let mut` / `const` 선언 초기화
-- 일반 식 초기화 (기존 변수 재사용)
+- Inisialisasi jenis `var` yang tersirat.
+- Inisialisasi untuk pengisytiharan `var` / `let mut` / `const`.
+- Inisialisasi secara umum (menggunakan semula pembolehubah yang sedia ada).
 
-### 예제 1: 암시적 타입 초기화
+### Contoh 1: Inisialisasi jenis tersirat.
 
 ```wave
 for (i :i32 = 1; i <= 5; i += 1) {
-    println("i = {}", i);
+    print("i = {}", i);
 }
 ```
 
-### 예제 2: `var` / `let mut` 초기화
+### Contoh 2: Inisialisasi `var` / `let mut`.
 
 ```wave
 for (var i: i32 = 0; i < 3; i += 1) {
-    println("var i = {}", i);
+    print("var i = {}", i);
 }
 
 for (let mut j: i32 = 0; j < 3; j += 1) {
-    println("let mut j = {}", j);
+    print("let mut j = {}", j);
 }
 ```
 
-### 예제 3: 식 기반 초기화 (기존 변수 재사용)
+### Contoh 3: Inisialisasi berdasarkan ungkapan (menggunakan semula pembolehubah yang sedia ada).
 
 ```wave
 var i: i32 = 99;
 
 for (i = 3; i <= 5; i += 1) {
-    println("i = {}", i);
+    print("i = {}", i);
 }
 
-println("after loop: {}", i); // 6
+print("selepas gelung: {}", i); // 6
 ```
 
-선언형 초기화(`var`, `let mut`, `i :i32 = ...`)는 루프 스코프 변수로 동작하고,  
-식 기반 초기화(`i = ...`)는 바깥 변수 자체를 갱신합니다.
+Inisialisasi jenis pengisytiharan (`var`, `let mut`, `i :i32 = ...`) berfungsi dengan pembolehubah skop gelung, manakala inisialisasi berasaskan ungkapan (`i = ...`) mengemas kini pembolehubah luar itu sendiri.
 
 ---
 
-## 중첩 반복문
+## Gelung Dalam Gelung
 
-반복문은 다른 반복문 내부에 작성할 수 있으며, 이를 중첩 반복문이라고 합니다.
-중첩 반복문은 2차원 데이터 구조를 순회하거나, 여러 조건의 조합을 처리할 때 유용합니다.
+Gelung boleh ditulis di dalam gelung lain, dan ini dinamakan gelung bersarang.
+Gelung bersarang berguna untuk melintasi struktur data dua dimensi atau untuk memproses kombinasi beberapa syarat.
 
-### 예제: 2중 while 문
+### Contoh: Gelung while 2-lapis
 
 ```wave
-var i :i32 = 0;
+var i: i32 = 0;
 
 while (i < 3) {
-    var j :i32 = 0;
+    var j: i32 = 0;
 
     while (j < 2) {
         println("i={}, j={}", i, j);
@@ -132,20 +130,20 @@ while (i < 3) {
 }
 ```
 
-이 예제에서는 바깥쪽 `while` 문이 한 번 실행될 때마다, 안쪽 `while` 문이 모두 실행됩니다.
-이를 통해 (`i`, `j`) 형태의 조합을 순차적으로 처리할 수 있습니다.
+Dalam contoh ini, setiap kali pernyataan `while` luar dijalankan, semua pernyataan `while` dalam akan dijalankan.
+Ini membolehkan anda untuk memproses kombinasi dalam bentuk (`i`, `j`) secara berurutan.
 
 ---
 
-## break 문
+## Pernyataan break
 
-`break` 문은 반복문을 즉시 종료하고, 해당 반복문 바깥으로 흐름을 이동시킵니다.
-반복 도중 더 이상 반복을 수행할 필요가 없을 때 사용됩니다.
+Pernyataan `break` segera menghentikan gelung dan memindahkan aliran ke luar gelung itu.
+Digunakan apabila tiada lagi keperluan untuk meneruskan gelung.
 
-### 예제: 특정 값에서 반복 종료
+### Contoh: Menghentikan gelung pada nilai tertentu
 
 ```wave
-var i :i32 = 0;
+var i: i32 = 0;
 
 while (true) {
     if (i == 5) {
@@ -157,17 +155,17 @@ while (true) {
 }
 ```
 
-이 예제에서는 무한 반복문 안에서 `i`가 5가 되는 순간 `break`가 실행되어 반복이 종료됩니다.
-이처럼 `break` 문은 반복 조건과 별개로 반복을 제어하고 싶을 때 유용합니다.
+Dalam contoh ini, apabila `i` menjadi 5 dalam gelung tanpa henti, pernyataan `break` dilaksanakan dan gelung itu dihentikan.
+Dengan cara ini, pernyataan `break` berguna apabila anda ingin mengawal gelung di luar syarat gelung.
 
 ---
 
-## continue 문
+## Pernyataan continue
 
-`continue` 문은 현재 반복에서 남은 코드를 건너뛰고, 다음 반복을 바로 시작합니다.
-특정 조건일 때 일부 로직만 생략하고 싶을 경우에 사용됩니다.
+Pernyataan `continue` melangkau sebarang kod yang tinggal untuk gelung semasa dan segera memulakan gelung seterusnya.
+Digunakan apabila anda ingin mengabaikan sebahagian logik apabila syarat tertentu ditemui.
 
-### 예제: 짝수만 출력
+### Contoh: Hanya cetak angka genap
 
 ```wave
 for (var i: i32 = 0; i <= 10; i = i + 1) {
@@ -179,15 +177,14 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-이 코드에서는 `i`가 홀수일 경우 `continue`가 실행되어 출력 부분을 건너뜁니다.
-그 결과 짝수 값만 출력됩니다.
+Dalam kod ini, apabila `i` adalah genap, pernyataan `continue` dilaksanakan dan bahagian cetakan dilangkau.
+Hasilnya, hanya nilai genap yang akan dicetak.
 
 ---
 
-## 요약
+## Ringkasan
 
-Wave의 반복문은 조건 기반과 횟수 기반 반복을 모두 자연스럽게 표현할 수 있도록 설계되었습니다.
-`while` 문은 조건 중심의 반복에 적합하며, `for` 문은 반복 횟수와 흐름이 명확한 경우에 유용합니다.
+Gelung Wave dirancang untuk secara semula jadi menyampaikan kedua-dua pengulangan berdasarkan syarat dan bilangan.
+Pernyataan `while` sesuai untuk pengulangan berasaskan syarat, manakala pernyataan `for` berguna apabila bilangan pengulangan dan aliran adalah jelas.
 
-`break`와 `continue`를 함께 사용하면 반복 도중에도 실행 흐름을 세밀하게 제어할 수 있어,
-보다 정교하고 유연한 반복 로직을 구성할 수 있습니다.
+Dengan menggunakan `break` dan `continue` bersamaan, anda boleh mengawal aliran pelaksanaan dengan lebih halus semasa pengulangan dan membina logik pengulangan yang lebih canggih dan fleksibel.
