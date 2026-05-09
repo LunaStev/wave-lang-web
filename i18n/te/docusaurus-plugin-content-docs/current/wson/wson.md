@@ -2,33 +2,33 @@
 sidebar_position: 3
 ---
 
-# Wave 직렬화 객체 표기법
+# Wave Serialized Object Notation
 
-WSON(Wave Serialized Object Notation)은 Wave 프로그래밍 언어의 기본 데이터 직렬화 포맷으로, 기존 JSON의 한계를 극복하고 보다 강력한 기능과 효율성을 제공하기 위해 설계되었습니다. WSON은 사람이 읽고 쓰기 쉬운 구조를 유지하면서도 성능을 극대화하여, 다양한 환경에서 데이터를 더욱 안전하고 빠르게 교환할 수 있도록 지원합니다.
+WSON (Wave Serialized Object Notation) is the basic data serialization format for the Wave programming language, designed to overcome the limitations of existing JSON and to provide more powerful features and efficiency. WSON maintains a human-readable and writable structure while maximizing performance, enabling faster and safer data exchange in various environments.
 
-## 특징
+## Features
 
-### 1. **엄격한 타입 시스템**
+### 1. **Strict Type System**
 
-WSON은 명확한 데이터 타입을 유지하여, JSON의 동적 타입으로 인한 예측 불가능성을 제거합니다. 이를 통해 데이터를 직렬화 및 역직렬화할 때 타입 안정성을 보장할 수 있습니다.
+WSON maintains clear data types to eliminate unpredictability caused by JSON's dynamic typing. This ensures type safety when serializing and deserializing data.
 
-### 2. **높은 성능**
+### 2. **High Performance**
 
-WSON은 최소한의 오버헤드를 가지도록 설계되어 빠른 데이터 처리 속도를 제공합니다. 이는 대량의 데이터를 직렬화할 때 특히 효과적입니다.
+WSON is designed to have minimal overhead, providing rapid data processing speeds. This is particularly effective when serializing large amounts of data.
 
-### 3. **Wave 친화적인 설계**
+### 3. **Wave-Friendly Design**
 
-Wave 프로그래밍 언어와 완벽하게 연동되도록 설계되어 있으며, Wave의 표준 라이브러리에서 기본적으로 지원됩니다.
+It is designed to integrate seamlessly with the Wave programming language and is natively supported in Wave's standard library.
 
-### 4. **가독성과 용이한 파싱**
+### 4. **Readability and Easy Parsing**
 
-JSON과 유사한 문법을 유지하면서도 더욱 간결한 표현이 가능하여, 사람이 직접 읽고 수정하기 용이합니다. 또한, 효율적인 파싱이 가능하도록 최적화되었습니다.
+It maintains a syntax similar to JSON while allowing for more concise expressions, making it more convenient for humans to read and modify. It has also been optimized to allow for efficient parsing.
 
-### 5. **다양한 데이터 구조 지원**
+### 5. **Support for Diverse Data Structures**
 
-WSON은 단순한 키-값 쌍뿐만 아니라, 네이티브 배열, 구조체, 튜플 등의 복잡한 데이터 구조를 지원합니다. 이를 통해 더욱 유연한 데이터 표현이 가능합니다.
+WSON supports not only simple key-value pairs but also complex data structures like native arrays, structs, and tuples. This allows for more flexible data representations.
 
-## 활용 분야
+## Areas of Application
 
 - Wave 기반 애플리케이션의 데이터 저장 및 전송
 
