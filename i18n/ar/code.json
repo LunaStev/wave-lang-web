@@ -1,42 +1,42 @@
 {
   "tagline": {
-    "message": "لغة واحدة، إمكانيات لا حصر لها"
+    "message": "لغة واحدة وإمكانيات لا حصر لها"
   },
   "get-started": {
-    "message": "ابدأ في غضون 5 دقائق"
+    "message": "ابدأ في 5 دقائق"
   },
   "read-the-docs": {
     "message": "اقرأ الوثيقة"
   },
   "homepage.hero.title": {
-    "message": "لغة حديثة لموجة جديدة من التطوير"
+    "message": "لغة حديثة لموجة جديدة من التطور"
   },
   "homepage.hero.subtitle": {
-    "message": "نحو سهولة في التعلم، أداء قوي، وأمان مدمج. صُممت Wave لزيادة إنتاجيتك وجعل التطبيق أقوى."
+    "message": "بناء جملة بديهي وأداء قوي وأمان مدمج. تم تصميم Wave لزيادة إنتاجيتك وجعل تطبيقاتك قوية."
   },
   "homepage.why_wave.title": {
-    "message": "لماذا يجب أن تختار Wave؟"
+    "message": "لماذا تختار Wave؟"
   },
   "homepage.features.one.title": {
-    "message": "بسيط وبديهي"
+    "message": "موجزة وبديهية"
   },
   "homepage.features.one.description": {
-    "message": "تمكنك Wave من تقليل الرموز غير الضرورية والتركيز على المنطق الأساسي. التعلم بفضل نحوه الحديث سهل وممتع."
+    "message": "Wave يقلل من التعليمات البرمجية غير الضرورية ويسمح لك بالتركيز على المنطق الأساسي. بناء الجملة الحديث يجعل من السهل التعلم والمتعة في الاستخدام."
   },
   "homepage.features.two.title": {
     "message": "سريع وفعال"
   },
   "homepage.features.two.description": {
-    "message": "يتم الترجمة إلى شفرة محلية، وتحقيق أداء على مستوى C++ من خلال تجريد بدون تكلفة. مناسب تماماً للمهام التي تتطلب موارد كبيرة."
+    "message": "تم تجميعه إلى كود أصلي، وهو يحقق مستوى أداء C++ من خلال التجريد بدون تكلفة. مثالية للمهام ذات الموارد الحيوية."
   },
   "homepage.features.three.title": {
-    "message": "آمن ومتعدد المهام"
+    "message": "آمنة ومتزامنة"
   },
   "homepage.features.three.description": {
-    "message": "يمنع الأخطاء الشائعة مثل أخطاء المرجع Null في وقت الترجمة. مع نموذج التزامن المدمج، أصبح البرمجة متعددة الأنوية أسهل من أي وقت مضى."
+    "message": "يمنع الأخطاء الشائعة مثل الأخطاء المرجعية الفارغة في وقت الترجمة. نموذج التزامن المدمج يجعل البرمجة متعددة النواة أسهل من أي وقت مضى."
   },
   "homepage.contributors.title": {
-    "message": "مساهمون"
+    "message": "مساهم"
   },
   "homepage.contributors.role.founder": {
     "message": "مؤسس اللغة"
@@ -48,16 +48,16 @@
     "message": "تطوير المترجم"
   },
   "homepage.contributors.role.library": {
-    "message": "مسؤول مكتبة المعايير"
+    "message": "مدير المكتبة القياسية"
   },
   "homepage.contributors.role.contributor": {
     "message": "مساهم"
   },
   "homepage.sponsors.title": {
-    "message": "الراعي"
+    "message": "راعي"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "راعي الشرف"
+    "message": "الراعي الفخري"
   },
   "homepage.sponsors.tier.platinum": {
     "message": "الراعي البلاتيني"
@@ -69,12 +69,12 @@
     "message": "الراعي الفضي"
   },
   "homepage.translations.title": {
-    "message": "المشاركة في ترجمة Wave"
+    "message": "Wave شارك في الترجمة"
   },
   "homepage.translations.subtitle": {
-    "message": "ساعد في الترجمة لكي يتمكن المطورون في جميع أنحاء العالم التعلم بدون حواجز لغوية."
+    "message": "يرجى المساهمة في الترجمات حتى يتمكن المطورون حول العالم من تعلم Wave دون حواجز لغوية."
   },
   "homepage.translations.button": {
-    "message": "المشاركة في الترجمة من خلال Crowdin"
+    "message": "شارك في الترجمة في Crowdin"
   }
 }

@@ -31,7 +31,7 @@ const MAGIC: i32 = 0x1BADB002;
 
 ```wave
 static COUNTER: i32 = 0;
-static VGA_BUFFER: указатель<char> = 0xb8000 as указатель<char>;
+static VGA_BUFFER: ptr<char> = 0xb8000 as ptr<char>;
 ```
 
 ## Локальная переменная: `var` / `let`
@@ -39,7 +39,7 @@ static VGA_BUFFER: указатель<char> = 0xb8000 as указатель<char
 Внутри функции или блока используются только локальные переменные.
 
 ```wave
-функция main() -> i32 {
+fun main() -> i32 {
     var x: i32 = 10;
     let y: i32 = 20;
     let mut z: i32 = 30;

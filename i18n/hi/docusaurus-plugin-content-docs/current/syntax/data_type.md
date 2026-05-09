@@ -57,7 +57,7 @@ Wave में, स्ट्रिंग घोषित करने के ल
 नीचे स्ट्रिंग प्रकार के आधारभूत उपयोग का एक उदाहरण दिया गया है।
 
 ```wave
-var text: str = "हैलो वेव";
+var text: str = "Hello Wave";
 ```
 
 ---
@@ -117,10 +117,10 @@ Wave में, `null` एक वैध लिटरल है।
 - `null` केवल `ptr<T>` प्रकार में ही असाइन किया जा सकता है।
 
 ```wave
-var p: ptr<i32> = null;  // सही
+var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // त्रुटि
-// var b: bool = null;   // त्रुटि
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## एरे प्रकार

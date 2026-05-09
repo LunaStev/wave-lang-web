@@ -25,7 +25,7 @@ Externe Funktionen werden mit dem Schlüsselwort extern deklariert.
 Derzeit ist es in Wave erforderlich, das ABI anzugeben, und es wird nur **`extern(c)` unterstützt**.
 
 ```wave
-extern(c) fun funktionName(argumente...) -> rückgabetyp;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---

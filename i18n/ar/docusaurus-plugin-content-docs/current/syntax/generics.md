@@ -1,5 +1,5 @@
 ---
-sidebar_position: ١٣
+sidebar_position: 13
 ---
 
 # جينيريكس (Generics)
@@ -77,8 +77,8 @@ fun main() {
 ## 5. استخدام مع المكتبة القياسية
 
 ```wave
-استيراد("std::math::int");
-استيراد("std::env::environ");
+import("std::math::int");
+import("std::env::environ");
 
 fun main() {
     var x: i32 = num_abs<i32>(-100, 0);
@@ -91,7 +91,7 @@ fun main() {
 ## الأخطاء الشائعة
 
 ```wave
-var x: i32 = identity(10); // خطأ في حذف معلمات النوع (غير مسموح به)
+var x: i32 = identity(10); // وسيطة النوع مفقودة (غير مسموح بها)
 ```
 
 يجب استدعائه كما في الأمثلة الصحيحة.

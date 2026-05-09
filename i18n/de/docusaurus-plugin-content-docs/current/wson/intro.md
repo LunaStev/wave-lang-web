@@ -26,7 +26,7 @@ sidebar_position: 2
 
 - Zwischen Schlüssel und Wert können die Symbole `:` oder `=` verwendet werden. Beide Symbole können gemischt verwendet werden.
 
-- Jedes Attribut wird durch ein Komma (\`,’) getrennt.
+- Jede Eigenschaft wird durch ein Komma (`,`) getrennt.
 
 - Innerhalb eines Objekts können andere Objekte verschachtelt werden.
 
@@ -34,7 +34,7 @@ Beispiel:
 
 ```
 {
-    status: "Erfolg",
+    status: "success",
     code = 200,
     user = { id: 123, name: "John Doe" }
 }
@@ -42,7 +42,7 @@ Beispiel:
 
 ## 4. Array
 
-- Ein Array ist von eckigen Klammern `[]` umgeben, und die Elemente sind durch Kommas (\`,’) getrennt.
+- Arrays werden von eckigen Klammern `[]` umgeben und Elemente werden durch Kommas (`,`) getrennt.
 
 - Die Elemente eines Arrays können verschiedene Datentypen wie Objekte, Zeichenfolgen und Zahlen sein.
 
@@ -51,9 +51,9 @@ Beispiel:
 Beispiel:
 
 ```
-Aufgaben: [
-    { task_id: 1, title: "Projektbericht abschließen" },
-    { task_id: 2, title: "Team-Feedback überprüfen" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -70,8 +70,8 @@ Aufgaben: [
 Beispiel:
 
 ```
-Name: "John Doe"
-Alter = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Datentypen
@@ -86,7 +86,7 @@ Alter = 25
 
 ```
 42
-3,14
+3.14
 ```
 
 - Boolean(Boolean): Verwendet die Werte `true` oder `false`.
@@ -102,30 +102,30 @@ is_active = true
 
 ```ws
 {
-    // Statuscode und Nachrichteninformation
-    status: "erfolgreich",
+    // Statuscode und Nachrichteninformationen
+    status: "success",
     code: 200,
-    message: "Daten erfolgreich abgerufen",
+    message: "Data retrieved successfully",
 
-    benutzer = {
+    user = {
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        alter: 25  # Benutzeralter
+        age: 25  # Benutzeralter
     },
 
-    aufgaben: [
+    tasks: [
         {
-            aufgaben_id: 1,
-            titel: "Projektbericht abschließen",
-            status: "in-Progress",
-            faelliges_datum: "2024-10-15"
+            task_id: 1,
+            title: "Complete project report",
+            status: "in-progress",
+            due_date: "2024-10-15"
         },
         {
-            aufgaben_id: 2,
-            titel: "Feedback vom Team überprüfen",
-            status: "ausstehend",
-            faelliges_datum: "2024-10-20"
+            task_id: 2,
+            title: "Review team feedback",
+            status: "pending",
+            due_date: "2024-10-20"
         }
     ]
 }

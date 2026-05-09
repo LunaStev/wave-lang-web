@@ -57,7 +57,7 @@ var e: f64 = 2.71828;
 در زیر مثالی از استفاده پایه از نوع رشته آورده شده است.
 
 ```wave
-var text: str = "سلام ویو";
+var text: str = "Hello Wave";
 ```
 
 ---
@@ -117,10 +117,10 @@ var ptr: ptr<T> = &someVariable;
 - `null` فقط می‌تواند به نوع `ptr<T>` اختصاص یابد.
 
 ```wave
-var p: ptr<i32> = null;  // درست
+var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // خطا
-// var b: bool = null;   // خطا
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## نوع آرایه

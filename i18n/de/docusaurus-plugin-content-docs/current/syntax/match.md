@@ -17,11 +17,11 @@ Das bedeutet, `var x = match (...) { ... }`-ähnliche Formen können nicht verwe
 ## Grundsyntax
 
 ```wave
-match (Wert) {
-    Muster1 => {
+match (value) {
+    pattern1 => {
         // Ausführungsblock
     }
-    Muster2 => {
+    pattern2 => {
         // Ausführungsblock
     }
     _ => {
@@ -33,7 +33,7 @@ match (Wert) {
 Syntaxregel:
 
 - Der Header verwendet das Format `match (expr)`.
-- Jeder Arm verwendet das Format `Muster => { Block }`.
+- Jeder Arm verwendet das Format `{ ... }`.
 - Der Arm-Körper muss `{ ... }`-Block sein.
 - Zwischen den Armen können nur Zeilenumbrüche verwendet werden, oder `,` bzw. `;` als Trennzeichen.
 
@@ -148,7 +148,7 @@ fun classify_mode(m: Mode) -> i32 {
 
 3. Ein Arm-Block ist erforderlich
 
-- Nach `=>` muss `{ ... Sie müssen einen `}\` Block verwenden.
+
 
 4. Das Muster muss konstant sein.
 

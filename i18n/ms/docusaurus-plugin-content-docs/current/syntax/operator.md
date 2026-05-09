@@ -2,81 +2,81 @@
 sidebar_position: 5
 ---
 
-# Operator
+# pengendali
 
-Dokumen ini menyusun operator yang boleh digunakan berdasarkan kompilator semasa.
+Dokumen ini menyusun operator sebenar yang tersedia berdasarkan pengkompil semasa.
 
-## Aritmetik
+## aritmetik
 
-| Operator | Keterangan  |
-| -------- | ----------- |
-| `+`      | Penjumlahan |
-| `-`      | Pengurangan |
-| `*`      | darab       |
-| `/`      | pembahagian |
-| `%`      | remainder   |
+| pengendali | Penerangan |
+| --- | --- |
+| `+` | tambahan |
+| `-` | Tolak |
+| `*` | Pendaraban |
+| `/` | Bahagian |
+| `%` | berehat |
 
-## perbandingan
+## Bandingkan
 
-| pengendali | keterangan            |
-| ---------- | --------------------- |
-| `==`       | sama                  |
-| `!=`       | tidak sama            |
-| `<`        | kurang                |
-| `<=`       | kurang atau sama      |
-| `>`        | lebih besar           |
-| `>=`       | lebih besar atau sama |
+| pengendali | Penerangan |
+| --- | --- |
+| `==` | sama |
+| `!=` | berbeza |
+| `<` | Kecil |
+| `<=` | kurang daripada atau sama dengan |
+| `>` | Besar |
+| `>=` | lebih besar daripada atau sama dengan |
 
 ## logik
 
-| pengendali | keterangan  |
-| ---------- | ----------- |
-| `&&`       | logik DAN   |
-| `\|\|`     | logik ATAU  |
-| `!`        | logik TIDAK |
+| pengendali | Penerangan |
+| --- | --- |
+| `&&` | logik DAN |
+| `\|\|` | logik ATAU |
+| `!` | Logik BUKAN |
 
-## bit
+## sedikit
 
-| pengendali | keterangan    |
-| ---------- | ------------- |
-| `&`        | bit DAN       |
-| `\|`       | bit ATAU      |
-| `^`        | bit XOR       |
-| `~`        | bit NOT       |
-| `<<`       | geseran kiri  |
-| `>>`       | geseran kanan |
+| pengendali | Penerangan |
+| --- | --- |
+| `&` | bitwise DAN |
+| `\|` | sedikit ATAU |
+| `^` | bitwise XOR |
+| `~` | sedikit BUKAN |
+| `<<` | beralih ke kiri |
+| `>>` | anjakan kanan |
 
-## penugasan
+## kemasukan kolej
 
-| pengendali | keterangan                    |
-| ---------- | ----------------------------- |
-| `=`        | penugasan asas                |
-| `+=`       | Penugasan selepas penjumlahan |
-| `-=`       | Penugasan selepas pengurangan |
-| `*=`       | Penugasan selepas pendaraban  |
-| `/=`       | Penugasan selepas pembahagian |
-| `%=`       | Penugasan selepas modulus     |
+| pengendali | Penerangan |
+| --- | --- |
+| `=` | Tugasan asas |
+| `+=` | Tugasan selepas penambahan |
+| `-=` | Tugasan selepas penolakan |
+| `*=` | Tugasan selepas pendaraban |
+| `/=` | Penggantian selepas bahagian |
+| `%=` | Tugasan selepas baki |
 
-## Unari / Pointer / Cast
+## unary/pointer/cast
 
-| Operator/Kata Kunci | Keterangan               |
-| ------------------- | ------------------------ |
-| `++`, `--`          | Inkrement Pre/Post       |
-| `&x`                | Kendali Alamat           |
-| `deref p`           | Referensi Balik Penunjuk |
-| `expr as T`         | Cast Eksplisit           |
+| Operator/Kata Kunci | Penerangan |
+| --- | --- |
+| `++`, `--` | Depan/belakang meningkat/mengurang |
+| `&x` | Dapatkan alamat |
+| `deref p` | dereference penunjuk |
+| `expr as T` | pelakon eksplisit |
 
-## Operasi Penunjuk
+## aritmetik penunjuk
 
-| Ekspresi                   | Hasil                                        |
-| -------------------------- | -------------------------------------------- |
-| `ptr<T> + int`             | `ptr<T>` (Pergerakan GEP) |
-| `int + ptr<T>`             | Mana-mana                                    |
-| `ptr<T> - int`             | `ptr<T>` (Pergerakan GEP) |
-| `ptr<T> - ptr<T>`          | Apapun yang diinginkan                       |
-| `ptr == ptr`, `ptr != ptr` | Perbandingan Penunjuk                        |
+| ungkapan | Keputusan |
+| --- | --- |
+| `ptr<T> + int` | `ptr<T>` (pergerakan GEP) |
+| `int + ptr<T>` | `ptr<T>` (pergerakan GEP) |
+| `ptr<T> - int` | `ptr<T>` (pergerakan GEP) |
+| `ptr<T> - ptr<T>` | `i64` (perbezaan bait) |
+| `ptr == ptr`, `ptr != ptr` | perbandingan penunjuk |
 
-## Item yang dipesan atau belum dilaksanakan
+## Barangan terpelihara atau tidak dilaksanakan
 
-Ada item yang merupakan token sintaks yang ada tetapi saat ini tidak didukung oleh operasi ekspresi.
+Token tatabahasa wujud, tetapi sesetengahnya tidak disokong oleh operasi ungkapan pada masa ini.
 Contoh: `??`, `?:`, `in`, `is`, `!&`, `!|`, `~^`.

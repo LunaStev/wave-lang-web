@@ -1,5 +1,5 @@
 ---
-sidebar_position: ১১
+sidebar_position: 11
 ---
 
 # std::libc ব্যবহারের নীতি (যোগাযোগ স্তর)

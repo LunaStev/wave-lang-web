@@ -9,12 +9,12 @@ sidebar_position: 8
 ## واردات
 
 ```wave
-واردات("std::string::len");
-واردات("std::string::cmp");
-واردات("std::string::find");
-واردات("std::string::trim");
-واردات("std::string::ascii");
-واردات("std::string::hash");
+import("std::string::len");
+import("std::string::cmp");
+import("std::string::find");
+import("std::string::trim");
+import("std::string::ascii");
+import("std::string::hash");
 ```
 
 ## 1. طول/مقایسه

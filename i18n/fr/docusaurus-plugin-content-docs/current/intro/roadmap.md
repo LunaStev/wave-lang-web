@@ -10,7 +10,7 @@ Wave et Whale commencent initialement comme des composants séparés, mais visen
 Les étapes de développement suivent le déroulement suivant.
 
 ```matlab
-pré-alpha → pré-bêta → alpha → bêta → rc → release
+pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
 Chaque étape progresse sur la base des résultats de l'étape précédente, en supposant un développement unidirectionnel où l'on ne revient pas à la structure précédente une fois une étape complétée.

@@ -57,8 +57,8 @@ Points essentiels :
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // ERREUR
-// var b: bool = null; // ERREUR
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## Arithmétique des pointeurs
@@ -82,7 +82,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (différence en octets)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## Comparaison de pointeurs

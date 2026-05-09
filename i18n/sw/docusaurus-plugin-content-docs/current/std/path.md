@@ -9,9 +9,9 @@ Chambua/Nakala njia bila ugawaji.
 ## ingiza
 
 ```wave
-ingiza("std::path::core");
-ingiza("std::path::analyze");
-ingiza("std::path::copy");
+import("std::path::core");
+import("std::path::analyze");
+import("std::path::copy");
 ```
 
 ## 1. Uunganishaji wa njia
@@ -21,8 +21,8 @@ fun main() {
     var out: array<u8, 256>;
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
-    ikiwa (n < 0) {
-        // Ukosefu wa buffer
+    if (n < 0) {
+        // Nje ya bafa
     }
 }
 ```

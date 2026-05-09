@@ -1,5 +1,5 @@
 ---
-sidebar_position: ١٠
+sidebar_position: 10
 ---
 
 # كيفية استخدام std::sys
@@ -7,9 +7,9 @@ sidebar_position: ١٠
 `std::sys` هو طبقة تجريد لنظام التشغيل تحت الوحدات النمطية عالية المستوى.
 
 ```text
-std(عالي المستوى)
-  -> موزع sys
-  -> sys/linux أو sys/macos
+std(high-level)
+  -> sys dispatcher
+  -> sys/linux or sys/macos
   -> syscall
 ```
 
@@ -17,12 +17,12 @@ std(عالي المستوى)
 
 - ترجع معظم الدوال قيمة استدعاء النظام الخام.
 - `>= 0` نجاح، `< 0` فشل (`-errno`).
-- في كود التطبيقات عالية المستوى، يُرجى استخدام `std::net` و`std::time` و`std::env` بدلًا من `std::sys` إن أمكن.
+- في كود التطبيقات عالية المستوى، يُرجى استخدام `std::sys` و`std::net` و`std::time` بدلًا من `std::env` إن أمكن.
 
 ## 1. مثال على قراءة الملفات (`std::sys::fs`)
 
 ```wave
-استيراد("std::sys::fs");
+import("std::sys::fs");
 
 fun main() {
     var fd: i64 = open("/etc/hosts", 0, 0);
@@ -39,7 +39,7 @@ fun main() {
 ## 2. مثال على المقبس (`std::sys::socket`)
 
 ```wave
-استيراد("std::sys::socket");
+import("std::sys::socket");
 
 fun main() {
     var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -54,7 +54,7 @@ fun main() {
 ## 3. مثال على الذاكرة (`std::sys::memory`)
 
 ```wave
-استيراد("std::sys::memory");
+import("std::sys::memory");
 
 fun main() {
     var p: ptr<u8> = sys_alloc(4096);

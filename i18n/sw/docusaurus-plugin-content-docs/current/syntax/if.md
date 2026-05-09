@@ -20,13 +20,13 @@ Ikiwa kigezo ni uongo (False), inaruka juu ya kizuizi na kuendelea kwenye nambar
 Muundo wa msingi wa sentensi ya IF katika Wave ni kama ifuatavyo.
 
 ```wave
-ikiwa (hali) {
-    // Msimbo utaotekelezwa ikiwa hali ni kweli
+if (condition) {
+    // Kanuni ya kutekelezwa ikiwa hali ni kweli
 }
 ```
 
 Katika masharti, unaweza kutumia waendeshaji wa kulinganisha au wa kupanga bila vikwazo.
-Kwa mfano, unaweza kulinganisha uhusiano wa thamani kwa kutumia waendeshaji wa kulinganisha kama `==`, `!=`, `<`, `>`, `<=`, `>=', na unaweza pia kuchanganya masharti kadhaa kwa kutumia waendeshaji wa mantiki kama `&&`, `||`, `!\`.
+
 
 Matokeo ya kifungu lazima yatathminiwe kama kweli au uongo, na kama kipengele ni uongo, basi kifungu cha IF ndani hakitatekelezwa.
 
@@ -35,10 +35,10 @@ Matokeo ya kifungu lazima yatathminiwe kama kweli au uongo, na kama kipengele ni
 Ifuatayo ni mfano wa muundo wa msingi zaidi wa sentensi ya IF.
 
 ```wave
-var joto :i32 = 30;
+var temperature :i32 = 30;
 
-ikiwa (joto > 25) {
-    chapisha("Hali ya hewa ni ya joto.");
+if (temperature > 25) {
+    println("Hali ya hewa ni ya joto.");
 }
 ```
 
@@ -55,10 +55,10 @@ Muundo wa sentensi ya IF-ELSE hupitisha utekelezaji wa moja kati ya vizuizi viwi
 Muundo wa msingi ni kama ifuatavyo.
 
 ```wave
-ikiwa (hali) {
-    // Msimbo utaotekelezwa ikiwa hali ni kweli
-} vinginevyo {
-    // Msimbo utaotekelezwa ikiwa hali ni uwongo
+if (condition) {
+    // Kanuni ya kutekelezwa ikiwa hali ni kweli
+} else {
+    // Msimbo wa kutekelezwa ikiwa hali ni ya uwongo
 }
 ```
 
@@ -68,12 +68,12 @@ Moja tu kati ya vizuizi viwili hufanya kazi, na si kwa wakati mmoja.
 Ifuatayo ni mfano wa matumizi ya sentensi ya IF-ELSE.
 
 ```wave
-var alama :i32 = 70;
+var score :i32 = 70;
 
-ikiwa (alama >= 60) {
-    chapisha("Umefaulu!");
-} vinginevyo {
-    chapisha("Umeshindwa.");
+if (score >= 60) {
+    println("Umefaulu!");
+} else {
+    println("Imeshindwa.");
 }
 ```
 
@@ -88,16 +88,16 @@ Sentensi za IF zilizoundwa ni muhimu wakati ambapo masharti yamepangwa kupimwa m
 Mfano ufuatao unaonyesha sentensi za IF zilizoundwa zinazotoa matokeo tofauti kulingana na alama.
 
 ```wave
-var alama :i32 = 85;
+var score :i32 = 85;
 
-ikiwa (alama >= 60) {
-    ikiwa (alama >= 90) {
-        chapisha("Matokeo bora!");
-    } vinginevyo {
-        chapisha("Umefaulu.");
-    } 
-} vinginevyo {
-    chapisha("Umeshindwa.");
+if (score >= 60) {
+    if (score >= 90) {
+        println("Alama bora!");
+    } else {
+        println("Nilipita.");
+    }
+} else {
+    println("Imeshindwa.");
 }
 ```
 

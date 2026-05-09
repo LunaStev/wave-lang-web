@@ -1,80 +1,80 @@
 {
   "tagline": {
-    "message": "አንድ ቋንቋ፣ በማንኛውም አካባቢ የማስቀመጥ እድል"
+    "message": "አንድ ቋንቋ ፣ ማለቂያ የሌላቸው እድሎች"
   },
   "get-started": {
-    "message": "በ5 ደቂቃ ውስጥ ጀምር"
+    "message": "በ 5 ደቂቃዎች ውስጥ ይጀምሩ"
   },
   "read-the-docs": {
-    "message": "ፎቶዎችን አንብብ"
+    "message": "ሰነዱን ያንብቡ"
   },
   "homepage.hero.title": {
-    "message": "ለሃይማኖት ተዋዋቂ ስህተት ግብ ያለው ቃንቃ"
+    "message": "ለአዲስ የእድገት ማዕበል ዘመናዊ ቋንቋ"
   },
   "homepage.hero.subtitle": {
-    "message": "ቀላል የንባብ ፅሁፍ፣ ማየትች የሆነ ምስል አላማ፣ እና የተጠቃሚ መዳረሻን አዳምጧል፡፡ Wave በግብዓት ሪፖርት መጠን እና ማሽንን በማስቀመጥ ላይ ተመስርቷል፡፡"
+    "message": "ሊታወቅ የሚችል አገባብ፣ ኃይለኛ አፈጻጸም እና አብሮገነብ ደህንነት። Wave የተነደፈው የእርስዎን ምርታማነት ለመጨመር እና መተግበሪያዎችዎን ጠንካራ ለማድረግ ነው።"
   },
   "homepage.why_wave.title": {
-    "message": "ለምንምንም Wave ምርጡ ዳርነት እንደሚያሳድገው ከከሆነ፤?"
+    "message": "ለምን Waveን ይምረጡ?"
   },
   "homepage.features.one.title": {
-    "message": "በቀላል የሚወደድ ፣ የሚስከትም ይሁን፤"
+    "message": "አጭር እና ሊታወቅ የሚችል"
   },
   "homepage.features.one.description": {
-    "message": "Wave የመዋቅር ምክትታው ተጨማሪ ይቀንማል፡፡ ወቅታዊ ፅሁፍ በማንነት ተወቅሮ ይታይ፡፡ መጠቆምም ምሳቁ ደስታው በሚል ነው፡፡"
+    "message": "Wave አላስፈላጊ ኮድን ይቀንሳል እና በዋና አመክንዮ ላይ እንዲያተኩሩ ያስችልዎታል። ዘመናዊው አገባብ ለመማር ቀላል እና ለመጠቀም አስደሳች ያደርገዋል።"
   },
   "homepage.features.two.title": {
-    "message": "በሃላፌነት የተጎናኘ"
+    "message": "ፈጣን እና ውጤታማ"
   },
   "homepage.features.two.description": {
-    "message": "ወተላይ ኮድ ይምረጣል እና በመስመር ላይ ካለው መከተቢያ ውስጥ በማንኛው ቦታ ላይ ወስት ይፈጥራሉ። ክፍል-ፍትህ የለም ስለዚህ ደብሩ በቻው ሲያስጀመር እና ሼስ ነገር ይጠብቃል። ይልቀሱት ፍቃዱ እንሰይዐል ፣ ዲኤደር ፍለስተታ ይወስደኛል።"
+    "message": "ወደ ቤተኛ ኮድ የተቀናበረ፣ የC++ ደረጃ አፈጻጸምን በዜሮ-ወጪ ማጠቃለያ በኩል ማሳካት ይችላል። ለሀብት-ወሳኝ ተግባራት ተስማሚ።"
   },
   "homepage.features.three.title": {
-    "message": "አሳማሚ እና ቁልፉ ይገለጻል።"
+    "message": "አስተማማኝ እና በአንድ ጊዜ"
   },
   "homepage.features.three.description": {
-    "message": "በአብዛኛው ከሆነ በአንደ ዕፁ እንከተን አለፉ፡፡ ማንገዲዩ መስመር ላይ በተጨማሪ በቪጋ ላይ ካለው ፋሽን በነተር ሞዴል ይባል፣ አሁን ራህፋ ነገር እንደ ደርዷው የሚዘ የምሳॻያ ይችላል።"
+    "message": "እንደ ባዶ የማጣቀሻ ስህተቶች ያሉ የተለመዱ ሳንካዎችን በማጠናቀር ጊዜ ይከላከላል። አብሮገነብ የተመጣጠነ ሞዴል መልቲኮር ፕሮግራሚንግ ከመቼውም ጊዜ በበለጠ ቀላል ያደርገዋል።"
   },
   "homepage.contributors.title": {
-    "message": "ተዋጊ"
+    "message": "አበርካች"
   },
   "homepage.contributors.role.founder": {
-    "message": "የቋንቋ ተመነ አስጀት"
+    "message": "የቋንቋ መስራች"
   },
   "homepage.contributors.role.designer": {
-    "message": "የቋንቋ አቀራር አርቆ"
+    "message": "የቋንቋ ዲዛይነር"
   },
   "homepage.contributors.role.compiler": {
-    "message": "የኮምፕላይለር አንቀኛ"
+    "message": "የማጠናከሪያ ልማት"
   },
   "homepage.contributors.role.library": {
-    "message": "የመለለመተ ቤት ኢየጋ ዓለም"
+    "message": "መደበኛ የቤተ-መጽሐፍት አስተዳዳሪ"
   },
   "homepage.contributors.role.contributor": {
-    "message": "ተዋጊ"
+    "message": "አበርካች"
   },
   "homepage.sponsors.title": {
-    "message": "ኢዱጋ አሰጣገል"
+    "message": "ስፖንሰር"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "የክብር ኢዱጋ አሰጣገል"
+    "message": "የክብር ስፖንሰር"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "ፍላቲነም ኢዱጋ አሰጣገል"
+    "message": "የፕላቲኒየም ስፖንሰር"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "ወርቅ ኢዱጋ አሰጣገል"
+    "message": "የወርቅ ስፖንሰር"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "ብር ኢዱጋ አሰጣገል"
+    "message": "የብር ስፖንሰር"
   },
   "homepage.translations.title": {
-    "message": "በWave ትርጉም ላይ ማሳካኝ"
+    "message": "Wave በትርጉም ውስጥ ይሳተፉ"
   },
   "homepage.translations.subtitle": {
-    "message": "ዓለም አቀፍ አትፎስኖች ኃላ ነገር ማሻሻይ የጊዜ ዋኒነ ፤ Wave ትርጉም ተዋጊዎች ሁን."
+    "message": "እባክዎ በዓለም ዙሪያ ያሉ ገንቢዎች Waveን ያለ ቋንቋ እንቅፋት እንዲማሩ ለትርጉሞች ያዋጡ።"
   },
   "homepage.translations.button": {
-    "message": "በCrowdin ትርጉም ተሰምዮ መቀነሸ."
+    "message": "Crowdin ላይ በትርጉም ይሳተፉ"
   }
 }

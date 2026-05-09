@@ -42,10 +42,10 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // エラーハンドリング
+        // エラー処理
         return;
     }
 
-    // rawにはNUL終端文字列が入っている
+    // rawにはNUL終了文字列が含まれています
 }
 ```

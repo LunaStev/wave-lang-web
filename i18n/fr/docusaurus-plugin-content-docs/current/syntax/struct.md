@@ -22,9 +22,9 @@ Le nom des structures utilise la notation PascalCase et le corps d'une structure
 Les champs sont déclarés au format `nom: type;`, avec un point-virgule requis après chaque déclaration de champ.
 
 ```wave
-structure Box {
-    taille: i32;
-    poids: f32;
+struct Box {
+    size: i32;
+    weight: f32;
 }
 ```
 
@@ -36,12 +36,12 @@ La logique opérationnelle est définie séparément de la structure.
 ## Syntaxe de création de structure
 
 Les structures sont créées à l'aide d'un format littéral utilisant le nom de la structure.
-Les littéraux de structure sont de la forme `NomStructure { nomChamp: valeur;... Finissez par une accolade `}\`.
+Les littéraux de structure sont écrits sous la forme `StructName { field_name: value; ... }`.
 
 ```wave
 var b: Box = Box {
-    taille: 42;
-    poids: 10.5;
+    size: 42;
+    weight: 10.5;
 };
 ```
 
@@ -59,8 +59,8 @@ Les champs de la structure sont accessibles via la notation pointée.
 Les accès en lecture et en écriture des champs utilisent la même syntaxe.
 
 ```wave
-println("Taille : {}", b.taille);
-println("Poids : {}", b.poids);
+println("Size: {}", b.size);
+println("Weight: {}", b.weight);
 ```
 
 Essayer d'utiliser un nom de champ inexistant provoque une erreur au moment de la compilation.
@@ -83,11 +83,11 @@ Les méthodes utilisent `self` comme premier paramètre pour recevoir l'instance
 ```wave
 proto Box {
     fun print(self) {
-        println("taille={}, poids={}", self.taille, self.poids);
+        println("size={}, weight={}", self.size, self.weight);
     }
 
-    fun taille_ajoutée(self, x: i32) -> i32 {
-        return self.taille + x;
+    fun added_size(self, x: i32) -> i32 {
+        return self.size + x;
     }
 }
 ```
@@ -98,7 +98,7 @@ L'appel de méthode utilise la notation pointée et fonctionne de la même mani�
 
 ```wave
 b.print();
-var n: i32 = b.taille_ajoutée(5);
+var n: i32 = b.added_size(5);
 ```
 
 ---
@@ -110,7 +110,7 @@ Même si les champs de la structure sont modifiés à l'intérieur de la fonctio
 
 ```wave
 fun calc(box: Box) -> i32 {
-    return box.taille * 2;
+    return box.size * 2;
 }
 ```
 
@@ -125,13 +125,13 @@ Dans Wave, d'autres structures peuvent être utilisées comme type de champ d'un
 Étant un type entier, les structures peuvent être librement imbriquées les unes dans les autres.
 
 ```wave
-structure Position {
+struct Position {
     x: i32;
     y: i32;
 }
 
-structure Joueur {
-    nom: str;
+struct Player {
+    name: str;
     pos: Position;
 }
 ```
@@ -140,12 +140,12 @@ Les champs des structures imbriquées sont accessibles en utilisant continuellem
 
 ```wave
 var p: Player = Player {
-    nom: "Alice";
+    name: "Alice";
     pos: Position { x: 10; y: 20; };
 };
 
-println("Joueur X : {}", p.pos.x);
-println("Joueur Y : {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 Vous pouvez imbriquer un autre littéral de structure à l'intérieur d'un littéral de structure,
@@ -159,10 +159,10 @@ Les structures peuvent être utilisées comme type d'élément dans des tableaux
 La syntaxe des tableaux dans Wave utilise le format `array<type, taille>` ; le type de structure peut être spécifié tel quel.
 
 ```wave
-var joueurs: array<Player, 3> = [
-    Player { nom: "A"; pos: Position { x: 1; y: 2; }; },
-    Player { nom: "B"; pos: Position { x: 3; y: 4; }; },
-    Player { nom: "C"; pos: Position { x: 5; y: 6; }; }
+var players: array<Player, 3> = [
+    Player { name: "A"; pos: Position { x: 1; y: 2; }; },
+    Player { name: "B"; pos: Position { x: 3; y: 4; }; },
+    Player { name: "C"; pos: Position { x: 5; y: 6; }; }
 ];
 ```
 
@@ -170,7 +170,7 @@ Pour accéder à un élément d'un tableau de structures, utilisez d'abord l'ind
 puis accédez aux champs internes de la structure via la notation par points.
 
 ```wave
-println("Deuxième joueur X : {}", joueurs[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

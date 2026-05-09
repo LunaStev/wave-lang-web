@@ -2,47 +2,47 @@
 sidebar_position: 1
 ---
 
-# Fungsi dan Pembolehubah
+# విధులు మరియు వేరియబుల్స్
 
-## Pengenalan
+## పరిచయం
 
-Falsafah reka bentuk utama bahasa pemrograman Wave adalah untuk mengekalkan keseimbangan antara prestasi rendah dan pengabstrakan tinggi, serta menyediakan persekitaran pembangunan perisian yang cekap dan fleksibel.
-Dalam seksyen ini, kami akan memperkenalkan fungsi dan pembolehubah, elemen paling asas yang membentuk program Wave.
+Wave ప్రోగ్రామింగ్ భాష యొక్క ప్రధాన రూపకల్పన తత్వశాస్త్రం తక్కువ-స్థాయి పనితీరు మరియు ఉన్నత-స్థాయి సంగ్రహణ మధ్య సమతుల్యతను కొనసాగిస్తూ సమర్థవంతమైన మరియు సౌకర్యవంతమైన సాఫ్ట్‌వేర్ అభివృద్ధి వాతావరణాన్ని అందించడం.
+ఈ విభాగం Wave ప్రోగ్రామ్‌ను రూపొందించే అత్యంత ప్రాథమిక అంశాలను పరిచయం చేస్తుంది: విధులు మరియు వేరియబుల్స్.
 
-Fungsi adalah unit utama yang membentuk operasi dan logik program, manakala pembolehubah bertugas menyimpan dan menguruskan data diperlukan dalam proses tersebut.
-Menggunakan fungsi dapat mengurangkan kod berulang dan membolehkan program dipisahkan secara logik, sehingga meningkatkan kebolehbaca dan kebolehlaksanaan.
+ఫంక్షన్లు అనేది ప్రోగ్రామ్ యొక్క ఆపరేషన్ మరియు లాజిక్‌ను రూపొందించే కోర్ యూనిట్లు మరియు ప్రక్రియలో అవసరమైన డేటాను నిల్వ చేయడం మరియు నిర్వహించడంలో వేరియబుల్స్ పాత్ర పోషిస్తాయి.
+ఫంక్షన్‌లు మరియు వేరియబుల్‌లను ఎలా నిర్వచించాలో మరియు ఉపయోగించాలో సరిగ్గా అర్థం చేసుకోవడం ద్వారా, మీరు Wave భాష యొక్క నిర్మాణం మరియు డిజైన్ ఉద్దేశాన్ని మరింత లోతుగా ఉపయోగించుకోవచ్చు.
 
 ---
 
-## Fungsi
+## ఫంక్షన్
 
-Dalam Wave, fungsi adalah blok kod yang boleh digunakan semula dan boleh dilaksanakan secara bebas.
-Ia membolehkan pengekstrakan tindakan atau pengiraan tertentu sebagai satu unit dan boleh dipanggil bila perlu di seluruh program.
+Waveలో, ఫంక్షన్‌లు స్వతంత్రంగా అమలు చేయగల కోడ్ యొక్క పునర్వినియోగ బ్లాక్‌లు.
+నిర్దిష్ట చర్యలు లేదా గణనలు ఒకే యూనిట్‌గా వ్యక్తీకరించబడతాయి మరియు ప్రోగ్రామ్ అంతటా అవసరమైనప్పుడు కాల్ చేయవచ్చు.
 
-Fungsi dalam Wave ditakrifkan dengan kata kunci `fun`, dan terdiri daripada nama fungsi, senarai parameter, dan badan fungsi yang dibungkus dalam kurungan { }.
-అలాగే గణన నిర్వహణ, ఇన్ మరియు ఆౌట్ మేనేజ్ మెంట్, లాజిక్ వేరీకరణ వంటి అనేక కారణాలకు ఉపయోగిస్తారు.
+ఫంక్షన్‌లను ఉపయోగించడం వల్ల పునరావృత కోడ్‌ను తగ్గించవచ్చు మరియు రీడబిలిటీ మరియు మెయింటెనబిలిటీని మెరుగుపరచడానికి తార్కికంగా వేరు చేయవచ్చు.
+ఇది గణన ప్రాసెసింగ్, ఇన్‌పుట్/అవుట్‌పుట్ మేనేజ్‌మెంట్ మరియు లాజిక్ సెపరేషన్ వంటి వివిధ ప్రయోజనాల కోసం కూడా ఉపయోగించబడుతుంది.
 
-Waveలో ఫంక్షన్ `fun` కీవర్డ్‌తో నిర్వచించబడుతుంది, ఫంక్షన్ పేరు మరియు పారామీటర్ జాబితా మరియు కొవ్వుల `{}` లో కప్పబడిన ఫంక్షన్ శరీరం.
+Waveలో, ఒక ఫంక్షన్ కీవర్డ్‌తో నిర్వచించబడింది
 
-### Mendefinisikan Fungsi
+### ఒక విధిని నిర్వచించండి
 
-Berikut adalah bentuk asas definisi fungsi paling ringkas dalam Wave.
+Waveలో అత్యంత ప్రాథమిక విధి నిర్వచన రూపం క్రింది విధంగా ఉంది.
 
 ```wave
 fun main() {
-    // Tulis kod di sini
+    // మీ కోడ్‌ను ఇక్కడ వ్రాయండి
 }
 ```
 
-Fungsi `main` adalah titik masuk untuk menjalankan program, dan setiap program Wave mesti mempunyai satu fungsi `main`.
-Program akan mula menjalankan dari fungsi ini.
+`main` ఫంక్షన్ అనేది ప్రోగ్రామ్ యొక్క ఎగ్జిక్యూషన్ ఎంట్రీ పాయింట్ మరియు Wave ప్రోగ్రామ్‌లో `main` ఫంక్షన్ తప్పనిసరిగా ఉండాలి.
+ఈ ఫంక్షన్ నుండి ప్రోగ్రామ్ అమలు ప్రారంభమవుతుంది.
 
-Fungsi boleh mempunyai parameter mengikut keperluan dan boleh mengembalikan hasil atau nilai ke tempat yang memanggilnya.
-Jika ada nilai yang dikembalikan, jenis pengembalian dinyatakan dalam pernyataan fungsi.
+విధులు అవసరమైన విధంగా పారామితులను తీసుకోగలవు మరియు కాలర్‌కు గణన ఫలితాలు లేదా విలువలను కూడా అందించగలవు.
+రిటర్న్ విలువ ఉంటే, రిటర్న్ రకం ఫంక్షన్ డిక్లరేషన్‌లో పేర్కొనబడుతుంది.
 
-### Contoh: Fungsi Ringkas
+### ఉదాహరణ: సాధారణ ఫంక్షన్
 
-Contoh berikut adalah fungsi ringkas yang menerima dua nombor bulat dan mengembalikan jumlahnya.
+కింది ఉదాహరణ రెండు పూర్ణాంకాలను తీసుకొని వాటి మొత్తాన్ని తిరిగి ఇచ్చే సాధారణ ఫంక్షన్.
 
 ```wave
 fun add(a :i32, b :i32) -> i32 {
@@ -50,63 +50,63 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // Memanggil fungsi add
-    println(result);            // Output: 12
+    var result = add(5, 7);     // ఫంక్షన్ కాల్ జోడించండి
+    println(result);            // అవుట్‌పుట్: 12
 }
 ```
 
-Dalam contoh ini, fungsi `add` mengambil dua parameter integer `a` dan `b`, menjumlahkan keduanya, dan mengembalikan hasilnya.
-Dalam fungsi `main`, kami memanggil fungsi `add`, menyimpan nilai yang dikembalikan dalam sebuah pembolehubah, dan kemudian mencetaknya.
+ఈ ఉదాహరణలో, `add` ఫంక్షన్ రెండు పూర్ణాంకాల పారామితులను తీసుకుంటుంది, `a` మరియు `b`, వాటిని జోడించి, ఫలితాన్ని అందిస్తుంది.
+`main` ఫంక్షన్ `add` ఫంక్షన్‌ని పిలుస్తుంది, తిరిగి వచ్చిన విలువను వేరియబుల్‌లో నిల్వ చేస్తుంది మరియు దాన్ని అవుట్‌పుట్ చేస్తుంది.
 
-Oleh itu, fungsi mengabstrakkan tindakan tertentu dan membolehkannya digunakan semula di berbagai bahagian program.
+ఈ విధంగా, ఫంక్షన్‌లు నిర్దిష్ట చర్యలను కలుపుతాయి మరియు వాటిని ప్రోగ్రామ్‌లోని బహుళ భాగాలలో మళ్లీ ఉపయోగించేందుకు అనుమతిస్తాయి.
 
-## Pembolehubah
+## వేరియబుల్
 
-Pembolehubah digunakan untuk menyimpan dan memanipulasi data dalam program.
-Wave jelas membezakan antara pembolehubah boleh ubah dan tidak boleh ubah semasa pengisytiharan, membolehkan maksud perubahan data ditunjukkan dalam kod.
+ప్రోగ్రామ్‌లో డేటాను నిల్వ చేయడానికి మరియు మార్చడానికి వేరియబుల్స్ ఉపయోగించబడతాయి.
+Wave అనేది వేరియబుల్స్ డిక్లేర్ చేసేటప్పుడు వేరియబుల్ మరియు ఇమ్యుటబుల్ వేరియబుల్స్ మధ్య తేడాను స్పష్టంగా గుర్తించడానికి రూపొందించబడింది, తద్వారా డేటాను మార్చాలనే ఉద్దేశ్యం కోడ్ స్థాయిలో బహిర్గతమవుతుంది.
 
-Ini menjadikan perubahan status program lebih jelas dan mengurangkan kesilapan akibat pengubahsuaian nilai yang tidak diingini.
+ఇది ప్రోగ్రామ్ స్థితి మార్పులను మరింత స్పష్టంగా చేస్తుంది మరియు అనుకోకుండా విలువ మార్పుల వల్ల ఏర్పడే లోపాలను తగ్గిస్తుంది.
 
-### Pembolehubah Boleh Ubah
+### మార్చగల వేరియబుల్
 
-Dalam Wave, pembolehubah adalah secara asasnya boleh ubah.
-Ianya bermaksud bahawa selepas diisytiharkan, nilai boleh diubah semasa pelaksanaan program.
+Waveలో, వేరియబుల్స్ డిఫాల్ట్‌గా మార్చబడతాయి.
+దీనర్థం ఒకసారి ప్రకటించిన తర్వాత కూడా, ప్రోగ్రామ్ అమలు సమయంలో దాని విలువను మార్చవచ్చు.
 
-Pembolehubah boleh ubah diisytiharkan menggunakan kata kunci var.
+మార్చగల వేరియబుల్స్ var కీవర్డ్ ఉపయోగించి ప్రకటించబడతాయి.
 
 ```wave
 var x :i32 = 10;
 x = 20;
 ```
 
-మీరు కోడ్లో `x` ప్రారంభ విలువ `10`గా ఉంటుంది, తరువాత `20` కు మారవచ్చు.
-అయితే, స్థితి మారాలిసిన డేటాలో మారద్రవ్యం వాడాలి.
+ఎగువ కోడ్‌లో, `x` `10` యొక్క ప్రారంభ విలువను కలిగి ఉంది మరియు తర్వాత `20`కి మార్చవచ్చు.
+స్థితి మారవలసిన డేటా కోసం వేరియబుల్ వేరియబుల్స్ ఉపయోగించబడతాయి.
 
-### Pembolehubah Tidak Boleh Ubah
+### మార్పులేని వేరియబుల్
 
-మీరు సమర్థంగా మూల్యాన్ని అస్థిరంగా(immutable)గా చెల్లిస్తే, ఆ తర్వాత మీరు ఆ విలువను మార్చలేరు.
-అస్థిర ప్రతిబంధకాన్ని  let కీవర్డ్ తో సమర్ధం చేయండి.
+మీరు ఒక వేరియబుల్‌ను మార్పులేనిదిగా ప్రకటించినప్పుడు, దాని ప్రారంభ విలువను కేటాయించిన తర్వాత దాని విలువ మార్చబడదు.
+మార్పులేని వేరియబుల్స్ లెట్ కీవర్డ్ ఉపయోగించి ప్రకటించబడతాయి.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // లోపం: అస్థిర కాంతి విలువ మార్చలేరు.
+// y = 10;   // లోపం: మార్పులేని వేరియబుల్స్ వాటి విలువను మార్చలేవు.
 ```
 
-అస్ధిర ప్రతిబంధకాలు విలువలు మారవని నడుస్తున్నందున ప్రోగ్రాంకు స్థిరత్వం మరియు అంచనా వేయడం అందిస్తుంది.
-విలువలను మార్చాల్సిన అవసరం లేకుండా, అస్థిర ప్రతిబింబాలను ఉపయోగించడం సిఫారసు చేయబడింది.
+మార్పులేని వేరియబుల్స్ ప్రోగ్రామ్‌ల స్థిరత్వం మరియు అంచనాను పెంచడంలో సహాయపడతాయి ఎందుకంటే వాటి విలువలు మారవని హామీ ఇస్తాయి.
+స్థిరమైన డేటా కోసం మార్పులేని వేరియబుల్‌లను ఉపయోగించమని సిఫార్సు చేయబడింది, దీని విలువ మారవలసిన అవసరం లేదు.
 
-Waveలో, `let` కీవర్డ్ తో పాటు `mut`ను ఉపయోగించి, మీరు స్పష్టంగా లోచి నిలుస్తారు.
+Waveలో, మీరు `let` కీవర్డ్‌తో `mut`ని ఉపయోగించడం ద్వారా మ్యుటబిలిటీని స్పష్టంగా అనుమతించవచ్చు.
 
 ```wave
 let mut y :i32 = 5;
 y = 10;
 ```
 
-ఈ ఫంక్షన్ `let` తో  ప్రకటించబడిన దాతలను ఫలితంగా, `mut` కీవర్డ్ ద్వారా విలువను మార్చవచ్చు.
+వేరియబుల్ `let` గా ప్రకటించబడింది, అయితే దాని విలువ `mut` కీవర్డ్ ద్వారా మార్చబడుతుంది.
 
-### నమోదార్ధం ఉదాహరణ
+### వేరియబుల్ డిక్లరేషన్ ఉదాహరణ
 
-అతिरिक्त ఇంటర్ మాధ్యమం, స్క్రిప్టుల తరగతుల కోసం వివిధ రకాల వేరియబుల్స్ ని ఉంటుంది.
+వివిధ రకాలైన మార్చదగిన మరియు మార్పులేని వేరియబుల్‌లను ప్రకటించడానికి క్రింది ఉదాహరణ.
 
 ```wave
 var x :i32 = 10;
@@ -115,7 +115,7 @@ var name :str = "Wave";
 let is_active :bool = true;
 ```
 
-ఈ ఉదాహరణలో `x` మరియు `name` వేరియబుల్స్, `y` మరియు `is_active` తగినంత స్పష్టంగా ఉంటాయి.
-Waveగా `var` మరియు `let` ను కచ్చితంగా అర్థం చేసుకోవడంవల్ల అనువదించడం కొరకు అది అంకితం ఉంది.
+ఈ ఉదాహరణలో, `x` మరియు `name` మ్యూటబుల్ వేరియబుల్స్ మరియు `y` మరియు `is_active` మారని వేరియబుల్స్.
+Wave `var` మరియు `let` మధ్య తేడాను స్పష్టంగా చూపుతుంది, డేటాను మార్చవచ్చో లేదో కోడ్ స్థాయిలో వెల్లడిస్తుంది.
 
-మార్పు వేరియబుల్స్ మరియు అప్రామాణిక వేరియబుల్స్ ని సరిగ్గా మారుస్తే, డేటా సమాచారాన్ని కాస్త వరకు బలోపేతం చేయడానికి మరింత మార్పు పొందవచ్చు.
+వేరియబుల్ మరియు స్థిరమైన వేరియబుల్స్ మధ్య సరిగ్గా వేరు చేయడం ద్వారా, మీరు డేటా అనుగుణ్యతను కొనసాగిస్తూ మరింత బలమైన మరియు ఊహాజనిత ప్రోగ్రామ్‌ను సృష్టించవచ్చు.

@@ -61,7 +61,7 @@ Các target triple chính cần được tài liệu hóa cơ bản hiện tại
 - `--sysroot <path>` / `--sysroot=<path>`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (có thể lặp lại)
-- `-C link-sysroot=<đường dẫn>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Điểm phản ánh:

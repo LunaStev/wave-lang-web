@@ -2,9 +2,9 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# std:: penggunaan rentetan
 
-Input
+Utiliti rentetan tamat NUL (`str`).
 
 ## import
 
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1) Panjang/Perbandingan
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2) Cari / Kira
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3) Trim julat + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4) Hash
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## fungsi utama
 
 ```wave
 fun len(s: str) -> i32

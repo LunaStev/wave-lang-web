@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٤
+sidebar_position: 4
 ---
 
 # إعداد برنامج بسيط

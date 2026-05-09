@@ -8,8 +8,8 @@ Este documento explica cómo **controlar explícitamente** el sysroot de la etap
 
 Principios básicos:
 
-- `--sysroot=<ruta>`: sysroot de la etapa de compilación (clang `-c`)
-- `-C link-sysroot=<ruta>`: sysroot de la etapa de enlace (linker)
+- `--sysroot=<path>`: sysroot de la etapa de compilación (clang `-c`)
+- `-C link-sysroot=<path>`: sysroot de la etapa de enlace (linker)
 
 Es decir, separa el sysroot para la compilación y el enlace.
 
@@ -17,7 +17,7 @@ Es decir, separa el sysroot para la compilación y el enlace.
 
 ## 1. ¿Por qué es necesario?
 
-En el enlace cruzado, si se utiliza `-C linker=<ruta>`, a menudo es necesario especificar por separado las rutas de tiempo de ejecución (`crt1.o`, `libc`, `libm`) a las que hace referencia el controlador de enlace (por ejemplo, `aarch64-linux-gnu-gcc`).
+En el enlace cruzado, si se utiliza `-C linker=<path>`, a menudo es necesario especificar por separado las rutas de tiempo de ejecución (`aarch64-linux-gnu-gcc`, `crt1.o`, `libc`) a las que hace referencia el controlador de enlace (por ejemplo, `libm`).
 
 En este caso, se diseña para que el sysroot de enlace no se infiera automáticamente, sino que se pase explícitamente en la CLI.
 
@@ -25,22 +25,22 @@ En este caso, se diseña para que el sysroot de enlace no se infiera automática
 
 ## 2. Definición de opción
 
-## 2.1 `-C link-sysroot=<ruta>`
+## 2.1 `-C link-sysroot=<path>`
 
-Inyecta `--sysroot=<ruta>` en la etapa de enlace.
+Inyecta `--sysroot=<path>` en la etapa de enlace.
 
 ```bash
-wavec -C link-sysroot=/ruta/a/sysroot ...
+wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-Internamente, tiene el mismo significado que `-C link-arg=--sysroot=<ruta>`.
+Internamente, tiene el mismo significado que `-C link-arg=--sysroot=<path>`.
 
-## 2.2 `-C link-arg=--sysroot=<ruta>`
+## 2.2 `-C link-arg=--sysroot=<path>`
 
 El método de argumento de enlace raw existente también es compatible.
 
 ```bash
-wavec -C link-arg=--sysroot=/ruta/a/sysroot ...
+wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ```
 
 ---
@@ -50,13 +50,13 @@ wavec -C link-arg=--sysroot=/ruta/a/sysroot ...
 En una compilación que requiere la etapa de enlace, si se cumplen simultáneamente las siguientes condiciones, se termina con error de uso.
 
 1. Uso de `-C linker=...`
-2. Uso de `--sysroot=<ruta>`
+2. Uso de `--sysroot=<path>`
 3. No se especifica el sysroot de enlace (`-C link-sysroot` o `-C link-arg=--sysroot=...`).
 
 Ejemplo de mensaje de error:
 
 ```text
-cuando se utiliza -C linker=..., --sysroot=<ruta> es solo para la etapa de compilación; pase sysroot del linker explícitamente con -C link-sysroot=<ruta> (o -C link-arg=--sysroot=<ruta>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -93,7 +93,7 @@ wavec \
 Si no se requiere la etapa de enlace, no se necesita el sysroot de enlace.
 
 ```bash
-wavec --sysroot=/ruta/a/sysroot build main.wave --emit=obj
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

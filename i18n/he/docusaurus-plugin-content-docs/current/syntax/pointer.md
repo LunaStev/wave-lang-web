@@ -56,8 +56,8 @@ println("{}", x);       // 20
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // שגיאה
-// var b: bool = null; // שגיאה
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## אריתמטיקת מצביעים
@@ -65,8 +65,8 @@ var arrp: ptr<array<i32, 3>> = null;
 Wave תומכת באריתמטיקת מצביעים הבאה.
 
 - `ptr + int`: Pointer Forwarding מבוסס GEP
-- `int + ptr`: פעולה זהה
-- `ptr - int`: Pointer Backwarding מבוסס GEP
+- `ptr + int`: פעולה זהה
+- `int + ptr`: Pointer Backwarding מבוסס GEP
 - `ptr - ptr`: חישוב ההבדל בבתים `i64`
 
 נקודות:
@@ -81,7 +81,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (הפרש בתים)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## השוואת מצביעים
@@ -117,4 +117,4 @@ if (p != null) {
 ## פתק בטיחות
 
 כיום Wave אינה בעלת מודל בטיחות מצביעים מבוסס בעלות/חיים כמו Rust.
-לכן, אינו חוסם באופן אוטומטי `null` הפניה הפוכה. מומלץ להכניס דפוס בדיקה `null` מפורש לפני `deref`.
+לכן, אינו חוסם באופן אוטומטי `null` הפניה הפוכה. מומלץ להכניס דפוס בדיקה `deref` מפורש לפני `null`.

@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. فرمت پایه
 
 ```bash
-wavec [گزینه‌های-جهانی] <فرمان> [گزینه‌های-فرمان]
+wavec [global-options] <command> [command-options]
 ```
 
 مثال:
@@ -32,7 +32,7 @@ wavec run app.wave --dep-root .vex/dep
 
 ## 2. قوانین تجزیه فرمان (مهم)
 
-`wavec` ابتدا **گزینه‌های جهانی** را از بین تمام آرگومان‌ها اسکن می‌کند، سپس بقیه را به‌عنوان `<فرمان>` تفسیر می‌کند.
+`wavec` ابتدا **گزینه‌های جهانی** را از بین تمام آرگومان‌ها اسکن می‌کند، سپس بقیه را به‌عنوان `<command>` تفسیر می‌کند.
 
 یعنی گزینه‌های جهانی در مکان‌های مختلف قابل قرارگیری هستند.
 
@@ -54,7 +54,7 @@ wavec -- run main.wave
 
 ## 3. دستورات
 
-## 3.1 `اجرا <فایل>`
+## 3.1 `run <file>`
 
 فایل ویو را کامپایل و اجرا می‌کند.
 
@@ -66,7 +66,7 @@ wavec run hello.wave
 
 1. تجزیه منبع + توسعه import
 2. تولید LLVM IR
-3. ایجاد لینک باینری بومی (`target/<فایل_نام>`)
+3. ایجاد لینک باینری بومی (`target/<file_stem>`)
 4. اجرا
 
 ویژگی‌ها:
@@ -75,7 +75,7 @@ wavec run hello.wave
 
 ---
 
-## 3.2 `ساخت <فایل>`
+## 3.2 `build <file>`
 
 فایل اجرایی (exe) را تولید می‌کند.
 
@@ -85,11 +85,11 @@ wavec build app.wave
 
 باینری خروجی:
 
-- `target/<فایل_نام>`
+- `target/<file_stem>`
 
-## 3.3 گزینه‌های `ساخت` (`-o`, `-c`)
+## 3.3 گزینه‌های `build` (`-o`, `-c`)
 
-فرمان `ساخت` اجازه می‌دهد نام فایل خروجی و قالب خروجی از طریق گزینه‌ها کنترل شود.
+فرمان `build` اجازه می‌دهد نام فایل خروجی و قالب خروجی از طریق گزینه‌ها کنترل شود.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,7 +97,7 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <فایل>`: نام فایل خروجی را مشخص می‌کند.
+- `-o <file>`: نام فایل خروجی را مشخص می‌کند.
   - پیش‌فرض (بدون `-c`): مسیر خروجی فایل اجرایی را مشخص می‌کند
   - همراه با `-c`: مسیر خروجی فایل شیء را مشخص می‌کند
 - `-c`: از لینک صرف‌نظر کرده و تنها فایل شیء ایجاد می‌کند.
@@ -120,7 +120,7 @@ wavec --llvm \
 
 ---
 
-## 3.4 `نصب std`، `به‌روزرسانی std`
+## 3.4 `install std`، `update std`
 
 دستورات نصب/به‌روزرسانی کتابخانه‌های استاندارد.
 
@@ -131,11 +131,11 @@ wavec update std
 
 ---
 
-## 3.5 `--راهنما`، `--نسخه`
+## 3.5 `--help`، `--version`
 
 ```bash
-wavec --راهنما
-wavec --نسخه
+wavec --help
+wavec --version
 ```
 
 ---
@@ -186,7 +186,7 @@ wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` یا `--link <lib>`
-- `-L<مسیر>` یا `-L <مسیر>`
+- `-L<path>` یا `-L <path>`
 
 هنگام لینک، `wavec` به طور داخلی به شکل `-l<lib>`, `-L<path>` منتقل می‌کند.
 
@@ -196,7 +196,7 @@ wavec build app.wave --link ssl --link crypto -L ./native/lib
 
 این گزینه‌ها برای تفسیر import‌های خارجی (`pkg::...`) استفاده می‌شوند.
 
-### `--dep-root <پوشه>`
+### `--dep-root <dir>`
 
 کاندیداهای پوشه ریشه پکیج را اضافه می‌کند.
 
@@ -214,7 +214,7 @@ wavec run app.wave --dep-root .vex/dep
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
-### `--dep <نام>=<مسیر>`
+### `--dep <name>=<path>`
 
 نام پکیج را به مسیر خاصی ثابت می‌کند.
 
@@ -242,10 +242,10 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
-- `-C لینک‌کننده=<مسیر>`
-- `-C آرگومان-لینک=<arg>` (قابل تکرار)
-- `-C link-sysroot=<مسیر>`
-- `-C بدون-کتابخانه پیش‌فرض`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (قابل تکرار)
+- `-C link-sysroot=<path>`
+- `-C no-default-libs`
 
 در حال حاضر، اهداف اصلی بر اساس `wavec print target-list`:
 
@@ -295,22 +295,22 @@ import("json::parser::core");
 
 فرمت:
 
-- حداقل ۲ بخش `پکیج::ماژول` مورد نیاز است
+- حداقل ۲ بخش `package::module` مورد نیاز است
 
 ترتیب تعیین ریشه پکیج:
 
-1. نگاشت مشخص‌شده با `--dep نام=مسیر`
-2. در هر `--dep-root` به دنبال `<ریشه>/<پکیج>` جستجو کنید.
+1. نگاشت مشخص‌شده با `--dep name=path`
+2. در هر `--dep-root` به دنبال `<root>/<package>` جستجو کنید.
 
 اگر یک پکیج در چند dep-root به طور همزمان پیدا شود:
 
 - به طور خودکار انتخاب نمی‌کند و **خطای ابهام** رخ می‌دهد
-- باید با `--dep نام=مسیر` ثابت شود
+- باید با `--dep name=path` ثابت شود
 
 ترتیب جستجوی فایل ماژول:
 
-1. `<ریشه_پکیج>/<مسیر_ماژول>.wave`
-2. `<ریشه_پکیج>/src/<مسیر_ماژول>.wave`
+1. `<package_root>/<module_path>.wave`
+2. `<package_root>/src/<module_path>.wave`
 
 مثال:
 
@@ -320,8 +320,8 @@ import("math::core::vec");
 
 کاوش:
 
-- `<ریشه_پکیج>/core/vec.wave`
-- `<ریشه_پکیج>/src/core/vec.wave`
+- `<package_root>/core/vec.wave`
+- `<package_root>/src/core/vec.wave`
 
 ---
 
@@ -380,7 +380,7 @@ wavec run main.wave \
 مثال:
 
 ```bash
-# به‌طور داخلی توسط vex اجرا می‌شود
+# در داخل، vex انجام می دهد
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # یادداشت: رزرو شده، پیاده‌سازی نشده
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

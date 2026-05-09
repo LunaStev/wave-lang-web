@@ -2,9 +2,9 @@
 sidebar_position: 5
 ---
 
-# std::mem 사용법
+# std:: mem ን እንዴት መጠቀም እንደሚቻል
 
-저수준 메모리 할당/복사/비교 유틸입니다.
+ይህ ዝቅተኛ-ደረጃ የማህደረ ትውስታ ድልድል/መገልበጥ/ንፅፅር መገልገያ ነው።
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::mem::ops");
 import("std::mem::cstr");
 ```
 
-## 1. 기본 할당/해제
+## 1) ነባሪ ምደባ/መልቀቅ
 
 ```wave
 fun main() {
@@ -28,21 +28,21 @@ fun main() {
 }
 ```
 
-## 2. 재할당과 이동 안전 복사
+## 2) እንደገና ይመድቡ እና ደህንነቱ የተጠበቀ ቅጂ ይውሰዱ
 
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 겹치는 메모리 영역 안전 이동
+    // ተደራራቢ የማህደረ ትውስታ ቦታዎች ደህንነቱ የተጠበቀ እንቅስቃሴ
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
 }
 ```
 
-## 3. 제네릭 item API
+## 3) አጠቃላይ ንጥል ኤፒአይ
 
 ```wave
 fun main() {
@@ -58,7 +58,7 @@ fun main() {
 }
 ```
 
-## 4. C 문자열 유틸
+## 4) C string utility
 
 ```wave
 fun main() {
@@ -70,7 +70,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## ዋና ተግባር
 
 ```wave
 fun mem_alloc(size: i64) -> ptr<u8>

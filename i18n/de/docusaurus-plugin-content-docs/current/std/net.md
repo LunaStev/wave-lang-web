@@ -17,17 +17,17 @@ import("std::net::udp");
 
 ```wave
 fun main() {
-    var hörer: TcpListener = tcp_bind_with_backlog(8080, 128);
-    var klient: TcpStream = tcp_accept(hörer);
+    var listener: TcpListener = tcp_bind_with_backlog(8080, 128);
+    var client: TcpStream = tcp_accept(listener);
 
-    var puffer: array<u8, 1024>;
-    var n: i64 = tcp_read(klient, &puffer[0], 1024);
+    var buf: array<u8, 1024>;
+    var n: i64 = tcp_read(client, &buf[0], 1024);
     if (n > 0) {
-        tcp_write_all(klient, &puffer[0], n);
+        tcp_write_all(client, &buf[0], n);
     }
 
-    tcp_close(klient);
-    tcp_close_listener(hörer);
+    tcp_close(client);
+    tcp_close_listener(listener);
 }
 ```
 
@@ -36,14 +36,14 @@ fun main() {
 ```wave
 fun main() {
     var addr: TcpAddr = tcp_addr_loopback(8080);
-    var strom: TcpStream = tcp_connect(addr);
+    var stream: TcpStream = tcp_connect(addr);
 
-    tcp_write_str(strom, "ping");
+    tcp_write_str(stream, "ping");
 
-    var antwort: array<u8, 16>;
-    tcp_read_exact(strom, &antwort[0], 4);
+    var reply: array<u8, 16>;
+    tcp_read_exact(stream, &reply[0], 4);
 
-    tcp_close(strom);
+    tcp_close(stream);
 }
 ```
 
@@ -54,11 +54,11 @@ fun main() {
     var sock: UdpSocket = udp_bind(9000);
     var peer: UdpAddr = udp_addr_loopback(9001);
 
-    udp_send_str_to(sock, peer, "hallo");
+    udp_send_str_to(sock, peer, "hello");
 
-    var quelle: UdpAddr;
-    var puffer: array<u8, 512>;
-    var n: i64 = udp_recv_from(sock, &puffer[0], 512, &quelle);
+    var src: UdpAddr;
+    var buf: array<u8, 512>;
+    var n: i64 = udp_recv_from(sock, &buf[0], 512, &src);
 
     udp_close(sock);
 }
@@ -68,7 +68,7 @@ fun main() {
 
 ```wave
 fun main() {
-    var irgend: TcpAddr = tcp_addr_any(8080);
+    var any: TcpAddr = tcp_addr_any(8080);
     var ip: TcpAddr = tcp_addr(0x7F000001, 8080); // 127.0.0.1
 }
 ```
@@ -76,18 +76,18 @@ fun main() {
 ## Hauptfunktionen
 
 ```wave
-fun tcp_verknüpfen(hafen: i16) -> TcpListener
-fun tcp_verknüpfen_mit_rückstand(hafen: i16, rückstand: i32) -> TcpListener
-fun tcp_akzeptieren(hörer: TcpListener) -> TcpStream
-fun tcp_verbinden(addr: TcpAddr) -> TcpStream
-fun tcp_lesen(strom: TcpStream, puffer: ptr<u8>, länge: i64) -> i64
-fun tcp_schreiben(strom: TcpStream, puffer: ptr<u8>, länge: i64) -> i64
-fun tcp_alle_schreiben(strom: TcpStream, puffer: ptr<u8>, länge: i64) -> i64
-fun tcp_exact_lesen(strom: TcpStream, puffer: ptr<u8>, länge: i64) -> i64
-fun tcp_schließen(strom: TcpStream)
+fun tcp_bind(port: i16) -> TcpListener
+fun tcp_bind_with_backlog(port: i16, backlog: i32) -> TcpListener
+fun tcp_accept(listener: TcpListener) -> TcpStream
+fun tcp_connect(addr: TcpAddr) -> TcpStream
+fun tcp_read(stream: TcpStream, buf: ptr<u8>, len: i64) -> i64
+fun tcp_write(stream: TcpStream, buf: ptr<u8>, len: i64) -> i64
+fun tcp_write_all(stream: TcpStream, buf: ptr<u8>, len: i64) -> i64
+fun tcp_read_exact(stream: TcpStream, buf: ptr<u8>, len: i64) -> i64
+fun tcp_close(stream: TcpStream)
 
-fun udp_verknüpfen(hafen: i16) -> UdpSocket
-fun udp_senden_an(sock: UdpSocket, addr: UdpAddr, puffer: ptr<u8>, länge: i64) -> i64
-fun udp_empfangen_von(sock: UdpSocket, puffer: ptr<u8>, länge: i64, quelle: ptr<UdpAddr>) -> i64
-fun udp_schließen(sock: UdpSocket)
+fun udp_bind(port: i16) -> UdpSocket
+fun udp_send_to(sock: UdpSocket, addr: UdpAddr, buf: ptr<u8>, len: i64) -> i64
+fun udp_recv_from(sock: UdpSocket, buf: ptr<u8>, len: i64, src: ptr<UdpAddr>) -> i64
+fun udp_close(sock: UdpSocket)
 ```

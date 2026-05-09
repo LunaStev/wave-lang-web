@@ -10,7 +10,7 @@ Wave và Whale bắt đầu là những thành phần riêng biệt nhưng cuố
 Các giai đoạn phát triển tổng thể theo các bước sau.
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → phát hành
+pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
 Mỗi giai đoạn được tiến hành dựa trên kết quả của giai đoạn trước đó và tiền đề là sự phát triển một chiều, nghĩa là khi một giai đoạn hoàn thành thì không quay lại cấu trúc trước đó.

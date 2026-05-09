@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. 基本格式
 
 ```bash
-wavec [全局选项] <命令> [命令选项]
+wavec [global-options] <command> [command-options]
 ```
 
 例如：
@@ -75,7 +75,7 @@ wavec run hello.wave
 
 ---
 
-## 3.2 `build <文件>`
+## 3.2 `build <file>`
 
 生成可执行文件(exe)。
 
@@ -85,17 +85,19 @@ wavec build app.wave
 
 输出二进制文件:
 
-- `target/<文件名>`
+- `target/<file_stem>`
 
 ## 3.3 `build`选项(`-o`, `-c`)
 
 `build`命令可以用选项控制输出文件名和格式。
 
 ```bash
-wavec build app.wave -o ./bin/app\nwavec build app.wave -c\nwavec build app.wave -c -o ./build/app.o
+wavec build app.wave -o ./bin/app
+wavec build app.wave -c
+wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <文件>`: 指定输出文件名。
+- `-o <file>`: 指定输出文件名。
   - 默认（无`-c`）：指定可执行文件输出路径
   - 与`-c`一起：指定目标文件输出路径
 - `-c`：省略链接，仅生成目标文件。
@@ -123,7 +125,8 @@ wavec --llvm \
 标准库安装/更新命令。
 
 ```bash
-wavec install std\nwavec update std
+wavec install std
+wavec update std
 ```
 
 ---
@@ -131,7 +134,8 @@ wavec install std\nwavec update std
 ## 3.5 `--help`, `--version`
 
 ```bash
-wavec --help\nwavec --version
+wavec --help
+wavec --version
 ```
 
 ---
@@ -182,7 +186,7 @@ wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` 或 `--link <lib>`
-- `-L<路径>` 或 `-L <路径>`
+- `-L<path>` 或 `-L <path>`
 
 `wavec`在链接时内部传递为`-l<lib>`、`-L<path>`形式。
 
@@ -376,7 +380,7 @@ wavec run main.wave \
 例如：
 
 ```bash
-# 内部由vex执行
+# 在内部，vex 确实
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -397,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: 预留，但未实现
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

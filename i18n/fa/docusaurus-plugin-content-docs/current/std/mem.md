@@ -9,9 +9,9 @@ sidebar_position: 5
 ## واردات
 
 ```wave
-واردات("std::mem::alloc");
-واردات("std::mem::ops");
-واردات("std::mem::cstr");
+import("std::mem::alloc");
+import("std::mem::ops");
+import("std::mem::cstr");
 ```
 
 ## 1. تخصیص/آزاد سازی پایه
@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // انتقال ایمن منطقه حافظه همپوشانی
+    // حرکت ایمن مناطق حافظه با هم تداخل دارند
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

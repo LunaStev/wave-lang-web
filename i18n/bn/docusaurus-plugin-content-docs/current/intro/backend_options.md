@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৭
+sidebar_position: 7
 ---
 
 # ব্যাকএন্ড বিকল্প (`--llvm`, `--whale`)

@@ -17,7 +17,7 @@ std(high-level)
 
 - Hầu hết các hàm trả về giá trị syscall thô.
 - `>= 0` thành công, `< 0` thất bại(`-errno`).
-- Trong mã ứng dụng cao cấp, nếu có thể, hãy sử dụng `std::net`, `std::time`, `std::env` trước thay vì `std::sys`.
+- Trong mã ứng dụng cao cấp, nếu có thể, hãy sử dụng `std::sys`, `std::net`, `std::time` trước thay vì `std::env`.
 
 ## 1. Ví dụ đọc tệp (`std::sys::fs`)
 

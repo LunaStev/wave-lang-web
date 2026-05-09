@@ -38,14 +38,14 @@ sidebar_position: 1
 import("std::env::environ");
 
 fun main() {
- var raw: array<u8, 64>;
- var n: i64 = env_get("HOME", &raw[0], 64);
+    var raw: array<u8, 64>;
+    var n: i64 = env_get("HOME", &raw[0], 64);
 
- if (n < 0) {
- // обработка ошибок
- return;
- }
+    if (n < 0) {
+        // Обработка ошибок
+        return;
+    }
 
- // в raw хранится строка с окончанием NUL
+    // raw содержит строку, завершающуюся NUL
 }
 ```

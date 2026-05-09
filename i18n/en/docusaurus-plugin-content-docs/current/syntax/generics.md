@@ -91,7 +91,7 @@ fun main() {
 ## Common Mistakes
 
 ```wave
-var x: i32 = identity(10); // Missing type parameter (not allowed)
+var x: i32 = identity(10); // Missing type argument (not allowed)
 ```
 
 Must be called as follows.

@@ -21,15 +21,15 @@ import("std::buffer::write");
 
 ```wave
 fun main() {
- var buf: Buffer = buffer_new(128);
+    var buf: Buffer = buffer_new(128);
 
- buffer_append_str(&buf, "GET /health\n");
- buffer_push(&buf, 0);
+    buffer_append_str(&buf, "GET /health\n");
+    buffer_push(&buf, 0);
 
- var first: u8 = buffer_at(buf, 0);
- var ok: bool = buffer_set(&buf, 0, 80); // 'P'
+    var first: u8 = buffer_at(buf, 0);
+    var ok: bool = buffer_set(&buf, 0, 80); // 'P'
 
- buffer_free(&buf);
+    buffer_free(&buf);
 }
 ```
 
@@ -52,15 +52,15 @@ Wave does not have type inference, so type arguments must be specified.
 
 ```wave
 fun main() {
- var nums: TypedBuffer<i32> = tbuffer_new<i32>(4, 16); // elem_size=4
+    var nums: TypedBuffer<i32> = tbuffer_new<i32>(4, 16); // elem_size=4
 
- tbuffer_push<i32>(&nums, 10);
- tbuffer_push<i32>(&nums, 20);
+    tbuffer_push<i32>(&nums, 10);
+    tbuffer_push<i32>(&nums, 20);
 
- var out: i32 = 0;
- var got: bool = tbuffer_at<i32>(nums, 1, &out); // out = 20
+    var out: i32 = 0;
+    var got: bool = tbuffer_at<i32>(nums, 1, &out); // out = 20
 
- tbuffer_free<i32>(&nums);
+    tbuffer_free<i32>(&nums);
 }
 ```
 

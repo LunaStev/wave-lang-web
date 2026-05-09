@@ -2,51 +2,49 @@
 sidebar_position: 3
 ---
 
-# Whale Compiler Toolchain
+# Whale Compiler-Toolchain
 
 ## Übersicht
 
-Whale ist eine dedizierte Compiler-Toolchain für die Wave-Programmiersprache..
-Whale übernimmt den gesamten Prozess des Analysierens, Optimierens und Transformierens von Quellcodes, die in Wave geschrieben wurden, in Binärdateien für Zielplattformen.
-Diese Toolchain wurde speziell für die Wave-Sprache entwickelt und berücksichtigt keine Unterstützung für andere Sprachen oder die Integration externer Toolchains..
+Whale ist eine dedizierte Compiler-Toolchain für die Programmiersprache Wave.
+Whale ist für den gesamten Prozess der Analyse, Optimierung und Konvertierung des mit Wave geschriebenen Quellcodes in Binärdateien für die Zielplattform verantwortlich.
+Diese Toolchain ist ausschließlich für die Sprache Wave konzipiert und berücksichtigt keine Unterstützung für andere Sprachen oder die Integration mit externen Toolchains.
 
 ## Gestaltungsziele
+Die wichtigsten Designziele von Whale sind:
 
-Die Hauptziele der Gestaltung von Whale sind:
-
-- Exklusive Unterstützung für Wave: Whale unterstützt ausschließlich die Wave-Sprache und berücksichtigt keine Integration mit anderen Sprachen.
-- Modularstruktur: Jede Funktion ist als unabhängiges Modul konzipiert, das bei Bedarf hinzugefügt oder entfernt werden kann.
-- Verwendung einer eigenen IR: Whale verwendet keine bestehenden externen IRs wie LLVM IR, sondern definiert seine eigene Zwischenrepräsentation.
-- Unterstützung mehrerer Zielplattformen: Ermöglicht den Build für verschiedene Umgebungen, unabhängig vom Betriebssystem und der Hardwarearchitektur.
-- Präzise Kontrolle: Entwickelt, damit Entwickler den gesamten Kompilierungsprozess detailliert steuern können.
-- Abbau externer Abhängigkeiten: Whale ist nicht auf externe C/C++-Laufzeiten oder Compiler angewiesen.
+* Nur Wave-Unterstützung: Whale unterstützt nur die Wave-Sprache und berücksichtigt keine Integration mit anderen Sprachen.
+* Modularer Aufbau: Jede Funktion besteht aus einem eigenständigen Modul, das je nach Bedarf hinzugefügt oder entfernt werden kann.
+* Verwenden Sie unabhängiges IR: Whale definiert seine eigene Zwischendarstellung, anstatt vorhandenes externes IR wie LLVM zu verwenden.
+* Unterstützung mehrerer Zielplattformen: Erstellen Sie unabhängig von Betriebssystem und Hardwarearchitektur für eine Vielzahl von Umgebungen.
+* Präzise Steuerung: Es ist so strukturiert, dass Entwickler den gesamten Kompilierungsprozess im Detail steuern können.
+* Entfernung externer Abhängigkeiten: Whale ist nicht von externen C/C++-Laufzeiten oder Compilern abhängig.
 
 ## Zielunterstützung
 
 Whale zielt darauf ab, die folgenden Zielumgebungen zu unterstützen:
 
-- Betriebssysteme:
-  - Linux
-  - Windows
-  - macOS
-  - UEFI (BIOS ausgeschlossen)
-  - WaveOS (eigenes OS)
-- Architekturen:
-  - x86_64 (AMD64)
-  - ARM64
-  - Andere können durch Hinzufügen von Modulen erweitert werden
+* Betriebssystem:
+    * Linux
+    * Windows
+    * macOS
+    * UEFI (außer BIOS)
+    * WaveOS (selbst-OS)
+* Architektur:
+    * x86_64 (AMD64)
+    * ARM64
+    * Andere können durch das Hinzufügen von Modulen erweitert werden
 
-## Externe Integration (FFI)
+## Externe Verknüpfung (FFI)
 
-Whale은 기술적으로 FFI(Foreign Function Interface)를 지원할 수 있도록 설계되지만,
-Wave의 철학상 외부 언어와의 연동은 권장되지 않으며 표준적으로 제공되지 않습니다.
-Wave ist darauf ausgelegt, alle Funktionen innerhalb seiner eigenen Sprache zu implementieren.
+Whale ist technisch so konzipiert, dass es FFI (Foreign Function Interface) unterstützt.
+Aufgrund der Philosophie von Wave wird die Integration mit externen Sprachen nicht empfohlen und ist nicht standardmäßig vorgesehen.
+Wave ist so konzipiert, dass alle Funktionen in seiner eigenen Sprache implementiert werden können.
 
-## Erweiterbarkeit
+## Skalierbarkeit
+Whale kann auf folgende Arten erweitert werden:
 
-Whale kann auf folgende Weise erweitert werden:
-
-- Hinzufügen von Modulen für neue Betriebssysteme oder Architekturen
-- Einfügen benutzerdefinierter Optimierungsalgorithmen
-- Anpassung der Bauprofile und Linker-Einstellungen
-- Definition eigener Ausführungsformate
+* Fügen Sie Module für neue Betriebssysteme oder Architekturen hinzu
+* Einfügen benutzerdefinierter Optimierungsalgorithmen
+* Anpassen von Build-Profilen und Linker-Einstellungen
+* Definieren Sie Ihr eigenes ausführbares Format

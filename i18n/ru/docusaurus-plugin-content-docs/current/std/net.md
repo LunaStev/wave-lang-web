@@ -17,17 +17,17 @@ import("std::net::udp");
 
 ```wave
 fun main() {
- var listener: TcpListener = tcp_bind_with_backlog(8080, 128);
- var client: TcpStream = tcp_accept(listener);
+    var listener: TcpListener = tcp_bind_with_backlog(8080, 128);
+    var client: TcpStream = tcp_accept(listener);
 
- var buf: array<u8, 1024>;
- var n: i64 = tcp_read(client, &buf[0], 1024);
- if (n > 0) {
- tcp_write_all(client, &buf[0], n);
- }
+    var buf: array<u8, 1024>;
+    var n: i64 = tcp_read(client, &buf[0], 1024);
+    if (n > 0) {
+        tcp_write_all(client, &buf[0], n);
+    }
 
- tcp_close(client);
- tcp_close_listener(listener);
+    tcp_close(client);
+    tcp_close_listener(listener);
 }
 ```
 
@@ -35,15 +35,15 @@ fun main() {
 
 ```wave
 fun main() {
- var addr: TcpAddr = tcp_addr_loopback(8080);
- var stream: TcpStream = tcp_connect(addr);
+    var addr: TcpAddr = tcp_addr_loopback(8080);
+    var stream: TcpStream = tcp_connect(addr);
 
- tcp_write_str(stream, "ping");
+    tcp_write_str(stream, "ping");
 
- var reply: array<u8, 16>;
- tcp_read_exact(stream, &reply[0], 4);
+    var reply: array<u8, 16>;
+    tcp_read_exact(stream, &reply[0], 4);
 
- tcp_close(stream);
+    tcp_close(stream);
 }
 ```
 
@@ -51,16 +51,16 @@ fun main() {
 
 ```wave
 fun main() {
- var sock: UdpSocket = udp_bind(9000);
- var peer: UdpAddr = udp_addr_loopback(9001);
+    var sock: UdpSocket = udp_bind(9000);
+    var peer: UdpAddr = udp_addr_loopback(9001);
 
- udp_send_str_to(sock, peer, "hello");
+    udp_send_str_to(sock, peer, "hello");
 
- var src: UdpAddr;
- var buf: array<u8, 512>;
- var n: i64 = udp_recv_from(sock, &buf[0], 512, &src);
+    var src: UdpAddr;
+    var buf: array<u8, 512>;
+    var n: i64 = udp_recv_from(sock, &buf[0], 512, &src);
 
- udp_close(sock);
+    udp_close(sock);
 }
 ```
 
@@ -68,8 +68,8 @@ fun main() {
 
 ```wave
 fun main() {
- var any: TcpAddr = tcp_addr_any(8080);
- var ip: TcpAddr = tcp_addr(0x7F000001, 8080); // 127.0.0.1
+    var any: TcpAddr = tcp_addr_any(8080);
+    var ip: TcpAddr = tcp_addr(0x7F000001, 8080); // 127.0.0.1
 }
 ```
 

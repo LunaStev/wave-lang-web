@@ -25,7 +25,7 @@ Les fonctions externes sont déclarées avec le mot-clé extern.
 Actuellement, Wave nécessite que l'ABI soit spécifié et supporte **seulement `extern(c)`**.
 
 ```wave
-extern(c) fun nom_fonction(paramètres...) -> type_retour;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -48,7 +48,7 @@ Les déclarations comme `extern(rust)` peuvent être analysées mais provoqueron
 Pour déclarer une seule fonction externe, écrivez comme suit.
 
 ```wave
-extern(c) fun InitWindow(largeur: i32, hauteur: i32, titre: ptr<u8>);
+extern(c) fun InitWindow(width: i32, height: i32, title: ptr<u8>);
 ```
 
 Cette déclaration signifie que le symbole `InitWindow` suivant l'ABI C existe dans une bibliothèque externe.
@@ -61,7 +61,7 @@ Si plusieurs fonctions externes utilisent le même ABI, vous pouvez les regroupe
 
 ```wave
 extern(c) {
-    fun InitWindow(largeur: i32, hauteur: i32, titre: ptr<u8>);
+    fun InitWindow(width: i32, height: i32, title: ptr<u8>);
     fun CloseWindow();
     fun BeginDrawing();
     fun EndDrawing();
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-Cette déclaration spécifie que le symbole `puts` sera utilisé dans la liaison lors de l'appel de `rust_func`.
+Cette déclaration spécifie que le symbole `rust_func` sera utilisé dans la liaison lors de l'appel de `puts`.
 
 ---
 

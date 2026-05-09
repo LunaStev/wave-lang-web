@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٣
+sidebar_position: 3
 ---
 
 # تشغيل أول برنامج
@@ -18,7 +18,7 @@ sidebar_position: ٣
 
 ```wave
 fun main() {
-    println("مرحبًا ويف");
+    println("Hello Wave");
 }
 ```
 
@@ -42,7 +42,7 @@ wavec run hello.wave
 إذا تم تشغيل البرنامج بنجاح، يظهر الإخراج التالي في الطرفية.
 
 ```
-مرحبا ويف
+Hello Wave
 ```
 
 إذا رأيت هذا الإخراج، فإن ذلك يعني أن Wave تم تثبيته بنجاح، وتم تنفيذ كتابة وتشغيل البرنامج بشكل صحيح.

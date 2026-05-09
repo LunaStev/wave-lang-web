@@ -41,9 +41,9 @@ Seuls les éléments pris en charge parmi les arguments suivant `--llvm` comme c
 ## 2.1 Cible/Codegen
 
 - `--target <triple>` / `--target=<triple>`
-- `--cpu <nom>` / `--cpu=<nom>`
+- `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
-- `--abi <nom>` / `--abi=<nom>`
+- `--abi <name>` / `--abi=<name>`
 
 Points d'application :
 
@@ -58,17 +58,17 @@ Principaux triples cibles actuellement documentés par défaut :
 
 ## 2.2 Toolchain/Lien
 
-- `--sysroot <chemin>` / `--sysroot=<chemin>`
-- `-C linker=<chemin>`
+- `--sysroot <path>` / `--sysroot=<path>`
+- `-C linker=<path>`
 - `-C link-arg=<arg>` (répétable)
-- `-C link-sysroot=<chemin>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Points d'application :
 
 - Création d'objet (clang `-c`) avec `--sysroot`
 - Substitution du linker à l'étape de liaison, injection d'arguments de lien brut, injection de link-sysroot
-- Désactivation automatique de `-lc -lm` lorsque `-C no-default-libs` est utilisé
+- Désactivation automatique de `-C no-default-libs` lorsque `-lc -lm` est utilisé
 
 ---
 

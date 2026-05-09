@@ -50,8 +50,8 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // Appel de la fonction add
-    println(result);            // Affichage : 12
+    var result = add(5, 7);     // ajouter un appel de fonction
+    println(result);            // Sortie : 12
 }
 ```
 
@@ -89,13 +89,13 @@ Les variables immuables sont déclarées à l'aide du mot clé let.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // Erreur : une variable immuable ne peut pas être modifiée.
+// y = 10;   // Erreur : les variables immuables ne peuvent pas modifier leur valeur.
 ```
 
 Les variables immuables garantissent que les valeurs ne changent pas, ce qui contribue à accroître la stabilité et la prévisibilité du programme.
 Il est recommandé d'utiliser des variables immuables pour les données constantes qui ne nécessitent pas de changement de valeur.
 
-Dans Wave, vous pouvez explicitement autoriser la mutabilité en utilisant `mut` avec le mot clé `let`.
+Dans Wave, vous pouvez explicitement autoriser la mutabilité en utilisant `let` avec le mot clé `mut`.
 
 ```wave
 let mut y :i32 = 5;
@@ -112,7 +112,7 @@ Voici un exemple de déclaration de variables mutables et immuables de différen
 var x :i32 = 10;
 let y :f64 = 3.14159;
 var name :str = "Wave";
-let is_active :bool = vrai;
+let is_active :bool = true;
 ```
 
 Dans cet exemple, `x` et `name` sont des variables mutables, tandis que `y` et `is_active` sont des variables immuables.

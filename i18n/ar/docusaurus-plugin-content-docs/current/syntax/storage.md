@@ -1,5 +1,5 @@
 ---
-sidebar_position: ١٢
+sidebar_position: 12
 ---
 
 # القواعد العامة/المحلية للتخزين

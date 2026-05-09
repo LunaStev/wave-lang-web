@@ -2,26 +2,26 @@
 sidebar_position: 2
 ---
 
-# Jenis Data
+# jenis data
 
-Dokumen ini menerangkan pelbagai jenis data yang disediakan dalam bahasa pengaturcaraan Wave.
-Dalam Wave, pelbagai jenis data membolehkan penyimpanan dan pengendalian nilai, dan setiap jenis data mendefinisikan cara representasi dan pengendalian memori.
+Dokumen ini menerangkan pelbagai jenis data yang disediakan oleh bahasa pengaturcaraan Wave.
+Dalam Wave, anda boleh menyimpan dan mengendalikan nilai melalui beberapa jenis jenis data, dan setiap jenis data dengan jelas mentakrifkan cara data dinyatakan dan cara memori diproses.
 
-Menetapkan jenis data dengan jelas adalah salah satu filosofi reka bentuk utama Wave.
-Wave adalah sistem **tipus tegar lengkap**. Semua deklarasi `var`/`fun` dan penginisialisasian pembolehubah memerlukan jenis yang jelas, dan inferensi jenis berdasarkan konteks tidak disokong. Oleh itu, jika jenis tidak ditentukan seperti `var x = 1;`, kompilasi akan gagal.
-Ini membolehkan niat kod dinyatakan dengan jelas, mengenal pasti kesilapan lebih awal semasa waktu pengkompilasian, dan memastikan penggunaan memori yang efisien serta pelaksanaan yang stabil.
+Menentukan jenis data dengan jelas ialah salah satu falsafah reka bentuk teras Wave.
+Wave ialah sistem **benar-benar kuat**. All `var`/`fun` declarations and variable initializations require explicit types, and context-based type inference is not supported. Oleh itu, jika tiada jenis seperti `var x = 1;`, kompilasi akan gagal.
+Ini membolehkan anda menyatakan dengan jelas maksud kod anda, menangkap ralat awal pada masa penyusunan, dan memastikan penggunaan memori yang cekap dan pelaksanaan yang stabil.
 
 ---
 
-## Jenis Integer
+## jenis integer
 
 Jenis integer digunakan untuk menyimpan nilai integer.
-Dalam Wave, `i32` (integer 32-bit bertanda) dan `u32` (integer 32-bit tidak bertanda) sering digunakan, tetapi anda dapat menyesuaikan saiz bit integer dengan sangat terperinci jika perlu.
+Secara lalai, Wave sering menggunakan `i32` (integer 32-bit yang ditandatangani) dan
 
-Jenis integer bertanda tersedia dari `i8` hingga `i1024`, dan jenis integer tidak bertanda tersedia dari `u8` hingga `u1024`.
-Ini memenuhi pelbagai keperluan dari pengiraan mudah hingga pengendalian integer besar, pemprosesan kriptografi, dan pengaturcaraan sistem rendah.
+Jenis integer yang ditandatangani tersedia daripada `i8` hingga `i1024`, dan jenis integer yang tidak ditandatangani tersedia daripada `u8` hingga `u1024`.
+Ini boleh memenuhi pelbagai keperluan, daripada pengiraan mudah kepada operasi integer besar, pemprosesan kriptografi dan pengaturcaraan sistem peringkat rendah.
 
-Berikut adalah contoh mudah menggunakan jenis integer.
+Berikut ialah contoh mudah menggunakan jenis integer:
 
 ```wave
 var a: i32 = 100;
@@ -30,15 +30,15 @@ var b: u32 = 200;
 
 ---
 
-## Jenis Point Apung
+## jenis titik terapung
 
-Jenis point apung digunakan untuk menyimpan nilai nombor nyata.
-Jenis point apung yang biasa digunakan dalam Wave adalah `f32`, dan jika keperluan ketepatan lebih tinggi, anda boleh memilih jenis yang lebih besar.
+Jenis titik terapung digunakan untuk menyimpan nilai sebenar.
+Jenis titik terapung lalai yang digunakan dalam Wave ialah `f32`, dan jika ketepatan yang lebih tinggi diperlukan, jenis saiz yang lebih besar boleh dipilih.
 
-Wave menyediakan jenis point apung dari `f32` hingga `f128`, membolehkan pengguna memilih antara ketepatan pengiraan dan prestasi.
-Ini membolehkan pelbagai pengendalian operasi nombor sebenar dari pengiraan numerik umum hingga pengiraan saintifik yang tepat.
+Wave menyediakan jenis titik terapung daripada `f32` kepada `f128`, membolehkan pengguna memilih antara ketepatan pengiraan dan prestasi.
+Ini membolehkan anda mengendalikan operasi nombor nyata untuk pelbagai tujuan, daripada pengiraan berangka am kepada pengiraan saintifik yang tepat.
 
-Berikut adalah contoh menggunakan jenis point apung.
+Di bawah ialah contoh menggunakan jenis titik terapung.
 
 ```wave
 var pi: f32 = 3.14;
@@ -47,14 +47,14 @@ var e: f64 = 2.71828;
 
 ---
 
-## Jenis Rantaian
+## jenis rentetan
 
-Jenis rantaian digunakan untuk mengendalikan data teks.
-Dalam Wave, anda menggunakan kata kunci `str` untuk mengisytiharkan rantaian, dan literal rantaian diwakili dengan tanda petikan besar (`"`).
+Jenis rentetan digunakan untuk mengendalikan data teks.
+Dalam Wave, rentetan diisytiharkan menggunakan kata kunci `str`, dan literal rentetan dinyatakan dengan membungkusnya dalam tanda petikan berganda (`"`).
 
-Rantaian digunakan secara meluas dalam program untuk output mesej, pengendalian input pengguna, dan pengendalian data berasaskan teks.
+Rentetan digunakan secara meluas dalam atur cara untuk mengeluarkan mesej, memproses input pengguna dan memproses data berasaskan teks.
 
-Berikut adalah contoh penggunaan asas jenis rantaian.
+Berikut ialah contoh asas menggunakan jenis rentetan.
 
 ```wave
 var text: str = "Hello Wave";
@@ -62,12 +62,12 @@ var text: str = "Hello Wave";
 
 ---
 
-## Jenis Boolean
+## Jenis jongkong
 
-Jenis boolean adalah jenis data yang mewakili nilai benar (True) atau salah (False).
-Dalam Wave, jenis `bool` digunakan, dan nilainya ditentukan sebagai `true` atau `false`.
+Jenis Boolean ialah jenis data yang mewakili nilai True atau False.
+Wave menggunakan jenis `bool` dan nilainya ditentukan sebagai `true` atau `false`.
 
-Jenis boolean memainkan peranan penting dalam penyataan kondisi dan gelung, dan digunakan untuk mengawal aliran program.
+Jenis Boolean memainkan peranan penting dalam pernyataan bersyarat dan gelung dan digunakan untuk mengawal aliran program.
 
 ```wave
 var isActive: bool = true;
@@ -76,45 +76,45 @@ var isAvailable: bool = true;
 
 ---
 
-## Jenis Watak
+## jenis watak
 
-Jenis watak digunakan untuk menyimpan satu aksara.
-Dikenali dengan menggunakan kata kunci `char`, ia boleh menyimpan hanya satu aksara.
+Jenis aksara digunakan untuk menyimpan aksara tunggal.
+Ia diisytiharkan menggunakan kata kunci `char` dan boleh mengandungi hanya satu aksara.
 
-Literal karakter diketengahkan menggunakan tanda petik kecil (`'`).
+Character literals are expressed by surrounding them with single quotation marks (`'`).
 
 ```wave
 var letter: char = 'A';
 ```
 
-## Jenis Byte
+## jenis bait
 
-Jenis Byte digunakan untuk menyimpan data berukuran 1 byte.
-Jenis ini biasanya berguna dalam pemprosesan data rendah seperti pemprosesan data binari, input/output fail, dan pengaturcaraan rangkaian.
+Jenis bait digunakan untuk menyimpan data yang bersaiz 1 bait.
+Jenis ini berguna terutamanya apabila pemprosesan data peringkat rendah diperlukan, seperti pemprosesan data binari, input/output fail dan pengaturcaraan rangkaian.
 
-Dalam Wave, jenis byte dinyatakan menggunakan kata kunci `byte`.
+Dalam Wave, jenis bait diisytiharkan menggunakan kata kunci `byte`.
 
 ```wave
 var byteData: byte = 0xFF;
 ```
 
-## Jenis Penunjuk
+## jenis penunjuk
 
-Jenis Penunjuk digunakan untuk merujuk alamat memori secara langsung.
-Dalam Wave, jenis penunjuk ditakrifkan dalam format `ptr<T>`.
+Jenis penunjuk digunakan untuk merujuk terus alamat memori.
+Dalam Wave, jenis penunjuk diisytiharkan dalam bentuk `ptr<T>`.
 
-Penunjuk digunakan apabila akses memori rendah diperlukan dan biasanya digunakan dalam pengaturcaraan sistem atau kod yang memerlukan prestasi tinggi.
+Penunjuk digunakan apabila akses memori tahap rendah diperlukan dan digunakan terutamanya dalam pengaturcaraan sistem atau kod kritikal prestasi.
 
 ```wave
 var ptr: ptr<T> = &someVariable;
 ```
 
-## Literal `null`
+## `null` Literal
 
-Dalam Wave, `null` adalah literal rasmi.
+Wave hingga `null` ialah literal berkanun.
 
-- `null` bukanlah pengenalan. (Tidak dapat menggunakan bentuk `var null = ...`)
-- `null` hanya boleh ditugaskan kepada jenis `ptr<T>`.
+- `null` bukan pengecam. (Tidak tersedia dalam format `var null = ...`)
+- `null` hanya boleh diberikan kepada jenis `ptr<T>`.
 
 ```wave
 var p: ptr<i32> = null;  // OK
@@ -123,16 +123,16 @@ var p: ptr<i32> = null;  // OK
 // var b: bool = null;   // ERROR
 ```
 
-## Jenis Array
+## jenis tatasusunan
 
-Jenis Array digunakan untuk menyimpan beberapa nilai dengan jenis data yang sama secara berurutan.
-Dalam Wave, array dinyatakan dalam bentuk `array<jenis, saiz>` dan saiz array ditentukan dengan jelas semasa waktu kompilasi.
+Jenis tatasusunan digunakan untuk menyimpan berbilang nilai secara berurutan daripada jenis data yang sama.
+Dalam Wave, tatasusunan diisytiharkan dalam bentuk `array<type, size>`, dan saiz tatasusunan dinyatakan dengan jelas pada masa penyusunan.
 
-Ini memudahkan struktur memori menjadi jelas dan membolehkan akses yang stabil.
+Ini menjadikan struktur memori jelas dan membolehkan akses yang stabil.
 
 ```wave
 var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
-Setiap jenis data direka untuk membolehkan pemilihan julat dan saiz yang sesuai dengan keperluan dan ciri.
-Dengan memilih jenis data yang tepat, memori dapat diuruskan dengan cekap, dan kestabilan serta kebolehcetakan kod juga meningkat dengan ketara.
+Setiap jenis data direka bentuk supaya anda boleh memilih julat dan saiz yang sesuai dengan tujuan dan cirinya.
+Memilih jenis data yang betul membolehkan anda mengurus memori dengan cekap dan juga meningkatkan kestabilan dan kebolehbacaan kod anda.

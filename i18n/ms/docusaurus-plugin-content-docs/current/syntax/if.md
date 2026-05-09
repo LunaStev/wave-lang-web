@@ -2,114 +2,114 @@
 sidebar_position: 3
 ---
 
-# Pernyataan IF
+# kenyataan IF
+## pengenalan
+Bahagian ini menerangkan sintaks dan penggunaan pernyataan IF, salah satu pernyataan kawalan yang disediakan oleh bahasa Wave.
+Pernyataan IF ialah struktur kawalan asas yang menilai keadaan dan kemudian melaksanakan blok kod tertentu hanya jika syarat itu benar.
 
-## Pengenalan
+Ini membolehkan program melangkaui aliran pelaksanaan atas-bawah yang mudah dan melakukan tindakan yang berbeza bergantung pada situasi dan keadaan.
+Pernyataan IF ialah elemen teras hampir semua program dan penting untuk melaksanakan percabangan logik dan kawalan aliran.
 
-Seksyen ini menerangkan tatabahasa dan cara penggunaan salah satu pernyataan kawalan yang disediakan dalam bahasa Wave, yaitu pernyataan IF.
-Pernyataan IF adalah struktur kawalan asas yang menilai keadaan dan hanya melaksanakan blok kod tertentu jika keadaan tersebut benar.
+## struktur asas
 
-Ini membolehkan program untuk melakukannya berdasarkan pelbagai situasi dan kondisi, lebih daripada sekadar mengalir dari atas ke bawah.
-Pernyataan IF adalah elemen penting dalam hampir semua program dan digunakan untuk mengimplementasikan cabang logik dan kawalan aliran.
+Pernyataan IF terlebih dahulu menilai ungkapan bersyarat dan melaksanakan blok kod yang ditulis dalam pendakap `{}` hanya jika hasilnya Benar.
+Jika syaratnya Salah, langkau blok itu dan beralih ke kod seterusnya.
 
-## Struktur Dasar
-
-Pernyataan IF pertama harus menilai ekspresi kemudian hanya melaksanakan blok kod di dalam kurungan `{}` jika keputusan adalah benar (True).
-Sekiranya keadaan adalah palsu (False), ia akan melangkau blok tersebut dan bergerak ke kod berikutnya.
-
-Struktur asas pernyataan IF dalam Wave adalah seperti berikut.
+Struktur asas pernyataan IF dalam Wave adalah seperti berikut:
 
 ```wave
-if (keadaan) {
-    // Kod yang akan dilaksanakan jika keadaan benar
+if (condition) {
+    // Kod untuk dilaksanakan jika syarat adalah benar
 }
 ```
 
-Operasi perbandingan dan logik boleh digunapakai dengan bebas dalam ekspresi tersebut.
-Sebagai contoh, anda boleh membandingkan hubungan nilai menggunakan operator perbandingan seperti `==`, `!=`, `<`, `>`, `<=`, `>=`, dan menggunakan operator logik seperti `&&`, `||`, `!` untuk menggabungkan pelbagai syarat.
+Operator perbandingan dan operator logik boleh digunakan secara bebas dalam ungkapan bersyarat.
+Sebagai contoh, anda boleh membandingkan perhubungan nilai melalui pengendali perbandingan seperti `==`, `!=`, `<`, `>`,
+Anda juga boleh menggabungkan berbilang keadaan menggunakan operator logik seperti `&&`, `||` dan `!`.
 
-Keputusan ekspresi mesti sama ada benar atau palsu, dan sekiranya palsu, kod dalam blok IF tidak akan dilaksanakan.
+Hasil ungkapan bersyarat mesti dinilai kepada benar atau salah, dan jika syarat itu salah, kod di dalam blok IF tidak akan dilaksanakan.
 
-## Contoh
+## contoh
 
-Berikut adalah contoh mudah paling asas bagi pernyataan IF.
+Berikut ialah contoh pernyataan IF dalam bentuk yang paling mudah.
 
 ```wave
 var temperature :i32 = 30;
 
 if (temperature > 25) {
-    println("Cuaca amat panas.");
+    println("Cuaca panas.");
 }
 ```
 
-Dalam kod di atas, nilai pembolehubah `temperature` dinilai untuk menentukan sama ada ia lebih besar daripada 25.
-Jika keadaan adalah benar, mesej `"Cuaca sangat panas."` akan dipaparkan, dan jika tidak, tiada tindakan yang akan diambil.
+Dalam kod di atas, ia dinilai berdasarkan sama ada nilai pembolehubah `temperature` lebih besar daripada 25.
+Jika syarat adalah benar, mesej `"Cuaca panas."` adalah output, dan jika syarat itu palsu, tiada tindakan dilakukan.
 
-Dengan cara ini, pernyataan IF digunakan apabila anda ingin menjalankan kod hanya apabila kondisi tertentu dipenuhi.
+Seperti ini, pernyataan IF digunakan apabila anda ingin melaksanakan kod hanya apabila syarat tertentu dipenuhi.
 
-## Pernyataan IF-ELSE
+## pernyataan IF-ELSE
 
-Jika terdapat kod yang perlu dilaksanakan walaupun keadaan tidak benar, anda boleh menambah syarat ELSE kepada pernyataan IF.
-Pernyataan IF-ELSE adalah struktur kawalan yang membolehkan salah satu dari dua blok kod dilaksanakan berdasarkan hasil keadaan.
+Jika anda mempunyai kod yang perlu dilaksanakan walaupun syaratnya tidak benar, anda boleh menambah klausa ELSE pada pernyataan IF.
+Pernyataan IF-ELSE ialah struktur yang secara selektif melaksanakan satu daripada dua blok kod bergantung pada hasil keadaan.
 
-Struktur asas adalah seperti berikut.
+Struktur asas adalah seperti berikut:
 
 ```wave
-jika (syarat) {
-    // kod yang akan dijalankan jika syarat benar
+if (condition) {
+    // Kod untuk dilaksanakan jika syarat adalah benar
 } else {
-    // kod yang akan dijalankan jika syarat salah
+    // Kod untuk dilaksanakan jika syarat adalah palsu
 }
 ```
 
-Apabila syarat benar, blok IF akan dilaksanakan, dan apabila syarat salah, blok ELSE akan dilaksanakan.
-Hanya satu daripada dua blok yang akan dilaksanakan, dan tidak ada situasi di mana kedua-duanya dilaksanakan.
+Jika syarat adalah benar, blok IF dilaksanakan, dan jika syarat adalah palsu, blok ELSE dilaksanakan.
+Hanya satu daripada dua blok itu dilaksanakan, tidak sekali-kali serentak.
 
-Berikut adalah contoh menggunakan pernyataan IF-ELSE.
+Di bawah ialah contoh menggunakan pernyataan IF-ELSE.
 
 ```wave
-var skor :i32 = 70;
+var score :i32 = 70;
 
-if (skor >= 60) {
+if (score >= 60) {
     println("Anda lulus!");
 } else {
-    println("Anda gagal.");
+    println("Ia gagal.");
 }
 ```
 
-Dalam kod ini, ia akan mencetak mesej yang berbeza bergantung kepada sama ada `skor` adalah 60 atau lebih.
-Jika syarat benar, `"Anda lulus!"` akan dicetak, jika tidak `"Anda gagal."` akan dicetak.
+Kod ini mengeluarkan mesej yang berbeza bergantung pada sama ada `score` ialah 60 atau lebih tinggi.
+Jika keadaan adalah benar, `"Anda lulus!"` ialah output; jika tidak, `"Ia gagal."` ialah output.
 
-## Pernyataan IF bersarang
+## pernyataan IF bersarang
 
-Pernyataan IF boleh digunakan dalam pernyataan IF lain, dan ini dipanggil pernyataan IF bersarang.
-Pernyataan IF bersarang berguna apabila perlu menilai pelbagai tahap syarat secara berurutan.
+Pernyataan IF juga boleh digunakan di dalam pernyataan IF lain, yang dipanggil pernyataan IF bersarang.
+Penyataan IF bersarang berguna apabila keadaan dalam berbilang langkah perlu dinilai secara berurutan.
 
-Contoh berikut adalah mengenai pernyataan IF bersarang yang mencetak hasil yang berbeza berdasarkan skor.
+Contoh berikut ialah contoh pernyataan IF bersarang yang menghasilkan keputusan berbeza bergantung pada skor.
 
 ```wave
-var skor :i32 = 85;
+var score :i32 = 85;
 
-if (skor >= 60) {
-    if (skor >= 90) {
-        println("Keputusan cemerlang!");
+if (score >= 60) {
+    if (score >= 90) {
+        println("Gred cemerlang!");
     } else {
-        println("Anda lulus!");
-    } 
+        println("saya lulus.");
+    }
 } else {
-    println("Anda gagal.");
+    println("Ia gagal.");
 }
 ```
 
-Dalam kod ini, ia terlebih dahulu memeriksa sama ada skor adalah 60 atau lebih.
-Jika kurang dari 60, `"Anda gagal."` akan dicetak serta-merta.
-Jika 60 atau lebih, ia akan menilai semula syarat, dan jika skornya 90 atau lebih, ia akan mencetak `"Keputusan cemerlang!"`, jika tidak, ia akan mencetak `"Anda lulus!"`.
+Kod ini mula-mula menyemak sama ada skor adalah 60 atau lebih tinggi.
+Jika kurang daripada 60, `"Ia gagal."` dikeluarkan serta-merta.
+Jika skor melebihi 60, keadaan dinilai sekali lagi dan jika skor melebihi 90, `"Gred cemerlang!"` ialah output, jika tidak, `"saya lulus."` ialah output.
 
-Dengan menggunakan pernyataan IF bersarang seperti ini, anda boleh menyatakan cabang syarat yang kompleks secara berperingkat.
+Penyataan IF bersarang seperti ini membolehkan anda menyatakan cawangan bersyarat kompleks langkah demi langkah.
 
-## Ringkasan
+## ringkasan
 
-Pernyataan IF adalah pernyataan kawalan asas yang menilai syarat untuk mengawal aliran pelaksanaan program.
-Menggunakan pernyataan ELSE bersama-sama memudahkan anda menetapkan secara jelas tindakan bagi situasi apabila syarat adalah salah, dan dengan pernyataan IF bersarang anda juga boleh mengendalikan cabang yang kompleks dengan gabungan pelbagai syarat.
+Pernyataan IF ialah pernyataan kawalan asas yang mengawal aliran pelaksanaan program dengan menilai keadaan.
+Dengan menggunakan klausa ELSE bersama-sama, anda boleh mentakrifkan dengan jelas tingkah laku apabila syarat itu palsu.
+Cawangan kompleks yang menggabungkan berbilang syarat juga boleh dilakukan melalui pernyataan IF bersarang.
 
-Dengan menggunakan pernyataan IF dengan betul, anda boleh membangunkan aliran program yang lebih logik dan jelas.
+Penggunaan pernyataan IF yang betul boleh membantu anda mengatur aliran program anda dengan lebih logik dan jelas.

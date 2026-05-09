@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ```wave
 fun main() {
-    println("שלום ווייב");
+    println("Hello Wave");
 }
 ```
 
@@ -37,7 +37,7 @@ fun main() {
 ## תוצאות הפעלה
 
 ```text
-שלום ווייב
+Hello Wave
 ```
 
 ---
@@ -49,14 +49,14 @@ Wave תומכת בהטמעת מחרוזות.
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("שלום, {}!", name);
+    println("Hello, {}!", name);
 }
 ```
 
 תצוגה:
 
 ```text
-שלום, ווייב!
+Hello, Wave!
 ```
 
 ---

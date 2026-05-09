@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # Kumbuka
 
-Mwave inasaidia aina mbili za maelezo.
+Wave inasaidia aina mbili za maelezo.
 
 - Maelezo ya mstari moja: `//`
 - Kumbukumbu ya block: `/* ... */`
@@ -14,8 +14,8 @@ Mwave inasaidia aina mbili za maelezo.
 Yaliyomo baada ya `//` yanadharauliwa hadi mwisho wa mstari.
 
 ```wave
-var x: i32 = 10; // maoni ya mstari
-x += 5;          // bado inaendelea kufanya kazi
+var x: i32 = 10; // line comment
+x += 5;          // still works
 ```
 
 ## Maoni ya block
@@ -23,15 +23,15 @@ x += 5;          // bado inaendelea kufanya kazi
 Inadharau maudhui kati ya `/*` na `*/`.
 
 ```wave
-var y: i32 = 1 /* block ya mstari */ + 2;
+var y: i32 = 1 /* inline block */ + 2;
 ```
 
 Maoni ya block yanasaidia mistari mingi na kurudia.
 
 ```wave
-/* ya nje
-   /* ya ndani */
-   mwisho wa nje
+/* outer
+   /* inner */
+   outer end
 */
 ```
 
@@ -40,7 +40,7 @@ Maoni ya block yanasaidia mistari mingi na kurudia.
 Ndani ya mfuatano, `/*`, `*/`, `//` hazishughulikiwi kama mwanzo/mwisho wa maoni.
 
 ```wave
-var marker: str = "/*//*";
+var marker: str = "/*//*/";
 ```
 
 ## Hitilafu ya maoni
@@ -48,7 +48,7 @@ var marker: str = "/*//*";
 Ikiwa maoni ya block hayajakamilika, hitilafu ya kukusanya (`E1002`) itatokea.
 
 ```wave
-/* haijafungwa
+/* not closed
 ```
 
 Kikokotoo kinachapisha nafasi ya kuanza, sababu, na vidokezo vya kurekebisha.

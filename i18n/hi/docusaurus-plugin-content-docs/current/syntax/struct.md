@@ -22,9 +22,9 @@ sidebar_position: 8
 फील्ड्स को `नाम: प्रकार;` प्रारूप में घोषित किया जाता है और प्रत्येक फील्ड घोषणा के बाद एक अनिवार्य सेमीकोलन की आवश्यकता होती है।
 
 ```wave
-स्ट्रक्चर बॉक्स {
-    आकार: i32;
-    वजन: f32;
+struct Box {
+    size: i32;
+    weight: f32;
 }
 ```
 
@@ -39,9 +39,9 @@ sidebar_position: 8
 स्ट्रक्चर लिटेरल `StructName { फील्ड नाम: मान; ... }` रूप में लिखें।
 
 ```wave
-var b: बॉक्स = बॉक्स {
-    आकार: 42;
-    वजन: 10.5;
+var b: Box = Box {
+    size: 42;
+    weight: 10.5;
 };
 ```
 
@@ -59,8 +59,8 @@ var b: बॉक्स = बॉक्स {
 फील्ड पहुंच हेतु पढ़ाई और लिखाई के लिए समान वाक्य रचना का उपयोग होता है।
 
 ```wave
-println("आकार: {}", b.size);
-println("वजन: {}", b.weight);
+println("Size: {}", b.size);
+println("Weight: {}", b.weight);
 ```
 
 यदि आप असामान्य फील्ड नाम का उपयोग करते हैं, तो संकलन चरण में त्रुटि उत्पन्न होती है।
@@ -82,7 +82,7 @@ println("वजन: {}", b.weight);
 ```wave
 proto Box {
     fun print(self) {
-        println("आकार={}, वजन={}", self.size, self.weight);
+        println("size={}, weight={}", self.size, self.weight);
     }
 
     fun added_size(self, x: i32) -> i32 {
@@ -144,8 +144,8 @@ var p: Player = Player {
     pos: Position { x: 10; y: 20; };
 };
 
-println("प्लेयर X: {}", p.pos.x);
-println("प्लेयर Y: {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 संरचना लिटरल्स के अंदर एक और संरचना लिटरल को नेस्ट किया जा सकता है,
@@ -170,7 +170,7 @@ var players: array<Player, 3> = [
 फिर बिंदु नोटेशन के माध्यम से संरचना के आंतरिक फील्ड्स तक पहुंचें।
 
 ```wave
-println("दूसरा प्लेयर X: {}", players[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

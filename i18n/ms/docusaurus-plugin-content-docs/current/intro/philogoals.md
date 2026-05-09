@@ -4,81 +4,84 @@ sidebar_position: 2
 
 # Falsafah dan matlamat Wave
 
-Wave bertujuan untuk membangunkan ekosistem pembangunan yang terintegrasi,
-yang merangkumi pelbagai bidang pembangunan dengan satu bahasa sambil memperbaiki had bahasa berlevel rendah yang sedia ada.
+Wave melengkapkan batasan bahasa peringkat rendah sedia ada,
+Matlamat kami adalah untuk membina ekosistem pembangunan bersepadu yang boleh merangkumi pelbagai bidang pembangunan dalam satu bahasa.
 
-Sebaliknya, Wave berhasrat untuk menghubungkan semua bidang ini secara semula jadi,
-dengan satu bahasa dan satu set alat, daripada mengendalikan bidang yang sangat berbeza seperti pembangunan web,
-sistem operasi, kecerdasan buatan, blockchain, kawalan perkakasan, pemrograman, rangkaian, dan penyulitan dengan bahasa yang berbeza.
+Seperti pembangunan web, sistem pengendalian, kecerdasan buatan, rantaian blok, kawalan perkakasan, penyusun, rangkaian dan penyulitan.
+Daripada berurusan dengan bidang dengan ciri yang sangat berbeza dalam bahasa yang berbeza,
+Wave berusaha untuk menyambung secara semula jadi semua kawasan ini dalam satu bahasa dan satu sistem alat.
 
-Wave tidak melihat kebolehan penggunaan sebagai "boleh digunakan di banyak tempat" secara sederhana.
-Kami bertujuan untuk memenuhi prestasi, kawalan, dan kestabilan yang diperlukan oleh setiap bidang,
-dengan mengekalkan reka bentuk yang konsisten dan peraturan yang jelas di peringkat bahasa.
+Wave tidak menganggap serba boleh hanya bermaksud "boleh digunakan di banyak tempat."
+Kami berhasrat untuk memenuhi prestasi, kawalan dan kestabilan yang diperlukan pada setiap kawasan secara serentak.
+Untuk mencapai matlamat ini, kami mengekalkan reka bentuk yang konsisten dan peraturan yang jelas pada peringkat bahasa.
 
-Terutama sekali, Wave dirancang agar pemaju tanpa pengetahuan mendalam mengenai perkakasan,oleh memanfaatkan fungsi perkakasan.
-Perpustakaan perkakasan standard membantu mempermudahkan konsep perkakasan yang kompleks,
-dengan cara yang intuitif.
+Khususnya, Wave membenarkan pembangun tanpa kepakaran perkakasan yang mendalam untuk
+Ia direka untuk memanfaatkan keupayaan perkakasan.
+Perpustakaan perkakasan standard konsep perkakasan kompleks abstrak,
+Membantu anda menggunakannya dengan cara yang intuitif.
 
-Pada masa yang sama, Wave juga menyediakan pendekatan rendah yang membolehkan kawalan langsung ke atas perkakasan jika perlu.
-Oleh itu, pemaju dapat bergerak bebas antara antara muka abstrak dan kawalan langsung,
-semasa meminimumkan kompleksiti kod tanpa mengorbankan prestasi.
+Pada masa yang sama, Wave juga menyediakan akses peringkat rendah kepada kawalan perkakasan langsung jika diperlukan.
+Ini membolehkan pembangun bebas bergerak antara antara muka abstrak dan kawalan langsung.
+Minimumkan kerumitan kod tanpa mengorbankan prestasi.
 
-Akhirnya, Wave bertujuan untuk menangani pelbagai tugas dalam satu bahasa,
-dengan menyediakan persekitaran yang terintegrasi yang menawarkan prestasi yang efisien serta pengalaman pembangunan yang konsisten.
+Akhirnya, Wave mengendalikan banyak tugas dalam satu bahasa,
+Kami menyasarkan persekitaran bersepadu yang menyediakan prestasi yang cekap dan pengalaman pembangunan yang konsisten.
 
-## Prestasi dan kecekapan
+## Prestasi dan Kecekapan
 
-Wave adalah bahasa yang direka dengan asumsi prestasi tinggi.
-Model pengkompil dan pelaksanaan bertujuan untuk mencipta kod yang dioptimumkan,
-dan direka untuk mengekalkan prestasi yang stabil di pelbagai platform.
+Wave ialah bahasa yang direka bentuk dengan mengambil kira prestasi tinggi.
+Model pengkompil dan pelaksanaan bertujuan untuk menghasilkan kod yang dioptimumkan,
+Ia dikonfigurasikan untuk mengekalkan prestasi yang stabil pada pelbagai platform.
 
-Oleh itu, kami bertujuan untuk menyediakan ciri prestasi yang konsisten dengan satu bahasa,
-bermula dari kawasan berlevel tinggi seperti aplikasi web,
-hingga ke kawasan penting prestasi seperti sistem operasi atau perisian sistem.
+Melalui ini, dari kawasan peringkat tinggi seperti aplikasi web,
+Malah kawasan di mana prestasi adalah kritikal, seperti sistem pengendalian dan perisian sistem.
+Matlamatnya adalah untuk menyediakan ciri prestasi yang konsisten dalam satu bahasa.
 
 ## Keselamatan dan pengendalian ralat
 
-Wave menganggap pengaturcaraan selamat sebagai kriteria reka bentuk yang penting.
-Ia direka untuk mengesan sebarang ralat yang mungkin terjadi pada peringkat waktu pengkompil,
-dengan mengurangkan masalah yang mungkin timbul semasa waktu pelaksanaan.
+Wave meletakkan pengaturcaraan selamat sebagai kriteria reka bentuk yang penting.
+Dengan mengesan sebanyak mungkin ralat yang mungkin pada peringkat masa penyusunan,
+Ia direka untuk meminimumkan masalah yang mungkin berlaku pada masa jalan.
 
-Sambil menjamin kestabilan asas seperti keselamatan memori dan keselamatan jenis,
-kami bertujuan untuk tidak mengorbankan prestasi.
-Wave melihat keselamatan dan prestasi bukan sebagai konsep yang bertentangan,
-but as an element to be achieved together through language design.
+Sambil memastikan keselamatan asas seperti keselamatan ingatan dan keselamatan jenis,
+Untuk mencapai matlamat ini, kami berhasrat untuk tidak mengorbankan prestasi.
+Wave bukanlah konsep yang bercanggah antara keselamatan dan prestasi,
+Saya percaya ini adalah elemen yang boleh dicapai bersama melalui reka bentuk bahasa.
 
-## Meningkatkan produktiviti pembangun
+## Peningkatan produktiviti pembangun
 
-Wave direka supaya pembangun dapat dengan cepat menguasai dan menggunakan bahasa dengan berkesan,
-dalui sintaksis yang intuitif dan konsisten.
+Wave menggunakan tatabahasa yang intuitif dan konsisten untuk
+Ia direka untuk membantu pembangun mempelajari bahasa dengan cepat dan menggunakannya dengan cekap.
 
-Selain itu, kami menyediakan sokongan melalui perpustakaan standard yang kaya dan set alat (seperti Vex, WSON)
-untuk menyelesaikan tugas-tugas kompleks tanpa perlu mengimplementasikannya berulang kali.
-Ini membolehkan pemaju memberi tumpuan kepada penyelesaian masalah itu sendiri,
-bukannya konfigurasi asas atau kod template.
+Selain itu, melalui perpustakaan dan sistem alat standard yang kaya (Vex, WSON, dll.)
+Kami membantu anda menyelesaikan tugas yang rumit tanpa pelaksanaan berulang.
+Ini membolehkan pembangun menghabiskan lebih sedikit masa pada konfigurasi atau kod boilerplate.
+Anda boleh fokus untuk menyelesaikan masalah itu sendiri.
 
-## Kemandirian platform
+## kemerdekaan platform
 
-Wave bertujuan untuk menjadi bahasa yang tidak terikat kepada sistem operasi atau persekitaran tertentu.
-Ia direka untuk memastikan bahawa kod yang sama berfungsi secara konsisten di pelbagai sistem operasi,
-dan pemaju boleh menggunakan semula kod yang ditulis sekali di pelbagai persekitaran.
+Wave bertujuan untuk menjadi bahasa yang tidak bergantung pada sistem pengendalian atau persekitaran tertentu.
+Ia direka bentuk supaya kod yang sama boleh dijalankan secara konsisten merentasi sistem pengendalian yang berbeza.
+Pembangun boleh menulis kod sekali dan menggunakannya semula dalam berbilang persekitaran.
 
-Kemandirian platform ini adalah salah satu elemen asas untuk Wave berfungsi sebagai bahasa yang serba boleh.
+Kebebasan platform ini membolehkan Wave berfungsi sebagai bahasa tujuan umum.
+Ia adalah salah satu elemen asas yang penting.
 
-## Komuniti dan kebolehkembangan
+## Komuniti dan Kebolehskalaan
 
-Wave adalah bahasa yang berkembang melalui kerjasama dengan komuniti sumber terbuka.
-Pengguna dan pemaju dapat mengambil bahagian dengan bebas dalam memperluas dan meningkatkan fungsi Wave,
-dan proses ini juga merupakan proses penentuan arah dan kesempurnaan bahasa.
+Wave ialah bahasa yang berkembang melalui kerjasama dengan komuniti sumber terbuka.
+Pengguna dan pembangun bebas untuk mengambil bahagian dalam mengembangkan dan menambah baik fungsi Wave,
+Proses ini juga merupakan proses mewujudkan hala tuju dan kesempurnaan bahasa.
 
-Wave direka untuk membolehkan penyesuaian dan pengembangan,
-tetapi juga membolehkan penggunaan yang fleksibel bahasa dan ekosistem sesuai dengan bidang tertentu atau keperluan.
+Wave direka bentuk dengan premis penyesuaian dan pengembangan,
+Ia membenarkan penggunaan bahasa dan ekosistem yang fleksibel untuk disesuaikan dengan bidang atau keperluan tertentu.
 
-## Matlamat yang berorientasikan masa depan
+## matlamat berorientasikan masa depan
 
-Wave tidak hanya akan kekal di persekitaran teknologi semasa, tetapi adalah sasaran untuk menjadi bahasa yang mampu menjalinkan arus teknologi baharu pada masa yang akan datang.
+Wave tidak berhenti pada persekitaran teknologi semasa,
+Kami menyasarkan untuk menjadi bahasa yang boleh menampung aliran teknologi baharu yang akan muncul pada masa hadapan.
 
-Kami merancang untuk terus mengembangkan bahasa dan set alat sambil mengambil kira teknologi masa depan seperti kecerdasan buatan,
-sistem terdistribusi, dan pengkomputan kuantum.
-Arah ini adalah asas bagi Wave untuk tidak menjadi alat jangka pendek,
-bagaimanapun menjadi bahasa untuk perkembangan jangka panjang.
+Dengan teknologi masa depan seperti kecerdasan buatan, sistem teragih, dan pengkomputeran kuantum dalam fikiran,
+Kami merancang untuk terus mengembangkan bahasa dan sistem alat kami.
+Arah ini bermakna Wave bukan alat jangka pendek,
+Ia berfungsi sebagai asas untuk mengukuhkan dirinya sebagai bahasa yang boleh berkembang dalam jangka panjang.

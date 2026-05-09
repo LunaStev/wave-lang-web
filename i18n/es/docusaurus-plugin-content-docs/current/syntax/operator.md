@@ -32,7 +32,7 @@ Este documento recopila operadores realmente utilizables según el compilador ac
 | Operador   | Descripción |
 | ---------- | ----------- |
 | `&&`       | Lógico AND  |
-| \\\`\\ | Lógico OR   |
+| `\|\|` | lógico O |
 | `!`        | Lógico NOT  |
 
 ## Bit
@@ -40,7 +40,7 @@ Este documento recopila operadores realmente utilizables según el compilador ac
 | Operador   | Descripción          |
 | ---------- | -------------------- |
 | `&`        | Bit AND              |
-| \\\`\\ | Bit OR               |
+| `\|` | bit O |
 | `^`        | Bit XOR              |
 | `~`        | NOT de bit           |
 | `<<`       | Shift a la izquierda |

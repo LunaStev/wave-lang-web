@@ -19,15 +19,15 @@ import("std::sys::time");
 
 ```wave
 fun main() {
- var start: TimeSpec;
- var end: TimeSpec;
+    var start: TimeSpec;
+    var end: TimeSpec;
 
- time_now_monotonic(&start);
- time_sleep_ms(10);
- time_now_monotonic(&end);
+    time_now_monotonic(&start);
+    time_sleep_ms(10);
+    time_now_monotonic(&end);
 
- var elapsed_ns: i64 = time_diff_ns(start, end);
- var elapsed_ms: i64 = time_diff_ms(start, end);
+    var elapsed_ns: i64 = time_diff_ns(start, end);
+    var elapsed_ms: i64 = time_diff_ms(start, end);
 }
 ```
 
@@ -35,8 +35,8 @@ fun main() {
 
 ```wave
 fun main() {
- var rt: i64 = time_now_realtime_ns();
- var mono: i64 = time_now_monotonic_ns();
+    var rt: i64 = time_now_realtime_ns();
+    var mono: i64 = time_now_monotonic_ns();
 }
 ```
 
@@ -44,9 +44,9 @@ fun main() {
 
 ```wave
 fun main() {
- time_sleep_us(500);
- time_sleep_ms(1);
- time_sleep_ns(100000);
+    time_sleep_us(500);
+    time_sleep_ms(1);
+    time_sleep_ns(100000);
 }
 ```
 

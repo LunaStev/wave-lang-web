@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٢
+sidebar_position: 2
 ---
 
 # نظام Wave البيئي

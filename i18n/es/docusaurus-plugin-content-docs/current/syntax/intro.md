@@ -50,7 +50,7 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // Llamada a la función add
+    var result = add(5, 7);     // agregar llamada de función
     println(result);            // Salida: 12
 }
 ```

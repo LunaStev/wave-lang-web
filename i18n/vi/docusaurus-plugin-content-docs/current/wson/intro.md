@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## 1. Cấu trúc cơ bản
 
-- Nội dung của tập tin bắt đầu và kết thúc bằng một đối tượng (`object`) được bao quanh bởi dấu ngoặc nhọn `{}`.
+- Nội dung của tập tin bắt đầu và kết thúc bằng một đối tượng (`{}`) được bao quanh bởi dấu ngoặc nhọn `object`.
 
 - Đối tượng được cấu thành bởi cặp tên thuộc tính (key) và giá trị (value).
 
@@ -34,9 +34,9 @@ Ví dụ:
 
 ```
 {
-    trạng thái: "thành công",
-    mã = 200,
-    người dùng = { id: 123, tên: "John Doe" }
+    status: "success",
+    code = 200,
+    user = { id: 123, name: "John Doe" }
 }
 ```
 
@@ -51,9 +51,9 @@ Ví dụ:
 Ví dụ:
 
 ```
-nhiệm vụ: [
-    { mã_nhiệm_vụ: 1, tiêu đề: "Hoàn thành báo cáo dự án" },
-    { mã_nhiệm_vụ: 2, tiêu đề: "Xem xét phản hồi của nhóm" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -70,8 +70,8 @@ nhiệm vụ: [
 Ví dụ:
 
 ```
-tên: "John Doe"
-tuổi = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Các loại dữ liệu
@@ -79,7 +79,7 @@ tuổi = 25
 - Chuỗi (String): Văn bản được bao bọc bởi dấu ngoặc kép `"`.
 
 ```
-"xin chào thế giới"
+"hello world"
 ```
 
 - Số (Number): Là giá trị số nguyên hoặc số thực.
@@ -92,7 +92,7 @@ tuổi = 25
 - Boolean: Sử dụng giá trị `true` hoặc `false`.
 
 ```
-is_active = đúng
+is_active = true
 ```
 
 - Đối tượng (Object): Là cặp khóa-giá trị được bao quanh bởi dấu ngoặc nhọn `{}`.
@@ -102,30 +102,30 @@ is_active = đúng
 
 ```ws
 {
-    // mã trạng thái và thông điệp
-    trạng thái: "thành công",
-    mã: 200,
-    thông điệp: "Dữ liệu được truy xuất thành công",
+    // Mã trạng thái và thông tin tin nhắn
+    status: "success",
+    code: 200,
+    message: "Data retrieved successfully",
 
-    người dùng = {
+    user = {
         id = 123,
-        tên: "John Doe",
+        name: "John Doe",
         email: "john@example.com",
-        tuổi: 25  # tuổi người dùng
+        age: 25  # tuổi người dùng
     },
 
-    công việc: [
+    tasks: [
         {
-            id_công_việc: 1,
-            tiêu đề: "Hoàn thành báo cáo dự án",
-            trạng thái: "đang thực hiện",
-            hạn: "2024-10-15"
+            task_id: 1,
+            title: "Complete project report",
+            status: "in-progress",
+            due_date: "2024-10-15"
         },
         {
-            id_công_việc: 2,
-            tiêu đề: "Xem xét phản hồi của nhóm",
-            trạng thái: "đang chờ",
-            hạn: "2024-10-20"
+            task_id: 2,
+            title: "Review team feedback",
+            status: "pending",
+            due_date: "2024-10-20"
         }
     ]
 }

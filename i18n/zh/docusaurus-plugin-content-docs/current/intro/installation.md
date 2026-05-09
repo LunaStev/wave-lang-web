@@ -47,7 +47,7 @@ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-be
 然后下载并解压用户指定版本的 Wave 包（`.tar.gz`）。
 解压后，将 `wavec` 可执行文件安装到 `/usr/local/bin`，以便在系统的任何地方都可以使用 `wavec` 命令。
 
-安装完成后，可以通过 `wavec --version` 命令验证安装是否成功。
+安装完成后，可以通过 `wavec` 命令验证安装是否成功。
 
 ## 确认安装
 

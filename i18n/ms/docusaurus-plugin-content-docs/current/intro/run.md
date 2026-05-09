@@ -2,52 +2,56 @@
 sidebar_position: 3
 ---
 
-# Menjalankan Program Pertama
+# Menjalankan program pertama anda
 
-Jika anda telah memasang Wave sebelum ini dalam dokumen pemasangan, kini adalah masa untuk menjalankan program Wave pertama anda.
-Dalam seksyen ini, kami akan melihat keseluruhan proses menulis dan menjalankan program Wave melalui contoh yang mudah.
+Jika anda telah memasang Wave daripada artikel pemasangan sebelumnya, kini tiba masanya untuk menjalankan program Wave pertama secara langsung.
+Bahagian ini membimbing anda melalui keseluruhan proses menulis dan menjalankan program Wave langkah demi langkah menggunakan contoh mudah.
 
-## Membuat Fail `hello.wave`
+## Buat fail `hello.wave`
 
-Pertama, cipta fail baru bernama `hello.wave` dalam direktori kerja.
-Anda boleh menentukan nama dan sambungan fail sesuka hati, tetapi untuk contoh ini, kami akan menggunakan `hello.wave`.
+Mula-mula, buat fail baharu bernama `hello.wave` dalam direktori kerja anda.
+Nama fail dan sambungan boleh ditentukan secara bebas, tetapi kami akan menggunakan `hello.wave` sebagai contoh.
 
-## Menulis Kod
+## Tulis kod
 
-Tulis kod di bawah dalam fail `hello.wave` yang telah dibuat.
+Tulis kod di bawah dalam fail `hello.wave` yang dibuat.
 
 ```wave
 fun main() {
-    println("Halo Wave");
+    println("Hello Wave");
 }
 ```
 
-Dalam kod ini, `fun main()` menandakan titik permulaan pelaksanaan program Wave.
-Program Wave selalu dimulakan dari fungsi `main`.
+Dalam kod ini, `fun main()` merujuk kepada titik permulaan pelaksanaan program Wave.
+Program Wave sentiasa berjalan bermula dari fungsi `main`.
 
-Fungsi `println` adalah fungsi untuk mencetak rantaian ke output standard, dan digunakan paling asas untuk memaparkan teks di layar.
+Fungsi `println` ialah fungsi yang mengeluarkan rentetan kepada output standard.
+Ia paling biasa digunakan apabila memaparkan teks pada skrin.
 
-## Menjalankan Program
+## Jalankan program
 
-Setelah selesai menulis kod, buka terminal dan jalankan arahan berikut dalam direktori yang mengandungi fail.
+Sebaik sahaja anda selesai menulis kod, buka terminal dan jalankan arahan berikut dari direktori tempat fail itu berada.
 
 ```bash
 wavec run hello.wave
 ```
 
-Perintah ini memberitahu pengkompil Wave untuk mengkompilasi fail sumber dan sekaligus melaksanakannya.
+Perintah ini dilaksanakan selepas pengkompil Wave menyusun fail sumber.
+Mengarahkan anda untuk melaksanakan serta-merta.
 
-## Pengesahan Output
+## Semak output
 
-Sekiranya program berjaya dijalankan, output berikut akan dipaparkan di terminal.
+Jika program berjalan seperti biasa, anda akan melihat output berikut dalam terminal:
 
 ```
 Hello Wave
 ```
 
-Jika output ini muncul, ia bermakna Wave telah dipasang dengan betul, dan pengarang serta pelaksanaan program telah dilakukan dengan tepat.
+Jika anda melihat output ini, Wave dipasang dengan betul.
+Ini bermakna program telah ditulis dan dilaksanakan dengan betul.
 
-Anda telah berjaya menjalankan program Wave pertama.
-Sekarang anda boleh menjelajahi tatabahasa dan fungsi Wave satu persatu dan mencipta program yang lebih kompleks.
+Anda kini telah berjaya menjalankan program Wave pertama anda.
+Mulai sekarang, anda boleh melihat sintaks dan fungsi Wave satu demi satu dan menulis atur cara yang lebih kompleks.
 
-Pilihan perintah yang tepat (`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`) boleh disemak dalam dokumentasi CLI `wavec`.
+Pilihan arahan yang tepat (`-O*`, `--debug-wave`, `--link`, `--dep-root`, `--dep`)
+Anda boleh menyemaknya dalam dokumen `wavec` CLI.

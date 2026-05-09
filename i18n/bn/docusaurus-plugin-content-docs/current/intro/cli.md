@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৬
+sidebar_position: 6
 ---
 
 # `wavec` CLI রেফারেন্স
@@ -17,29 +17,29 @@ sidebar_position: ৬
 ## ১। প্রাথমিক বিন্যাস
 
 ```bash
-wavec [গ্লোবাল-বিকল্প] <কমান্ড> [কমান্ড-বিকল্প]
+wavec [global-options] <command> [command-options]
 ```
 
 উদাহরণ:
 
 ```bash
-wavec -O2 রান main.wave
-wavec বিল্ড app.wave --link ssl -L ./native/lib
-wavec রান app.wave --dep-root .vex/dep
+wavec -O2 run main.wave
+wavec build app.wave --link ssl -L ./native/lib
+wavec run app.wave --dep-root .vex/dep
 ```
 
 ---
 
 ## ২। কমান্ড পার্সিং নিয়ম (গুরুত্বপূর্ণ)
 
-`wavec` প্রথমে পুরো ইনপুট থেকে **গ্লোবাল অপশন** স্ক্যান করে, তারপর অবশিষ্ট ইনপুট দিয়ে `<কমান্ড>` বিশ্লেষণ করে।
+`wavec` প্রথমে পুরো ইনপুট থেকে **গ্লোবাল অপশন** স্ক্যান করে, তারপর অবশিষ্ট ইনপুট দিয়ে `<command>` বিশ্লেষণ করে।
 
 অর্থাৎ, গ্লোবাল অপশনের অবস্থান নমনীয়।
 
 ```bash
-wavec -O3 রান main.wave
-wavec রান main.wave -O3
-wavec রান -O3 main.wave
+wavec -O3 run main.wave
+wavec run main.wave -O3
+wavec run -O3 main.wave
 ```
 
 উপরের ৩টি বৈধ।
@@ -47,7 +47,7 @@ wavec রান -O3 main.wave
 ইনপুটে `--` ব্যবহার করলে, তার পরের অংশের গ্লোবাল অপশন স্ক্যান বন্ধ করে কমান্ড এলাকায় পাঠানো হয়।
 
 ```bash
-wavec -- রান main.wave
+wavec -- run main.wave
 ```
 
 ---
@@ -59,14 +59,14 @@ wavec -- রান main.wave
 Wave ফাইল কম্পাইল এবং চালনা করা হয়।
 
 ```bash
-wavec রান hello.wave
+wavec run hello.wave
 ```
 
 ক্রিয়া:
 
 1. উৎস পার্সিং + আমদানি সম্প্রসারণ
 2. LLVM IR জেনারেশন
-3. নেটিভ বাইনারি লিঙ্ক (`target/<ফাইল স্টেম>`)
+3. নেটিভ বাইনারি লিঙ্ক (`target/<file_stem>`)
 4. রান
 
 বৈশিষ্ট্য:
@@ -80,12 +80,12 @@ wavec রান hello.wave
 এক্সিকিউটেবল ফাইল (exe) তৈরি করে।
 
 ```bash
-wavec বিল্ড app.wave
+wavec build app.wave
 ```
 
 আউটপুট বাইনারি:
 
-- `target/<ফাইল স্টেম>`
+- `target/<file_stem>`
 
 ## ৩.৩ `build` অপশন (`-o`, `-c`)
 
@@ -224,7 +224,7 @@ wavec run app.wave --dep math=.vex/dep/math
 
 নিয়ম:
 
-- `নাম` ফরম্যাট: `[A-Za-z_][A-Za-z0-9_]*`
+- `name` ফরম্যাট: `[A-Za-z_][A-Za-z0-9_]*`
 - `--dep` হবে অবশ্যই `name=path` ফরম্যাটে
 - একই প্যাকেজ নাম পুনরাবৃত্তি করলে ত্রুটি
 
@@ -380,7 +380,7 @@ wavec run main.wave \
 উদাহরণ:
 
 ```bash
-# অভ্যন্তরীণভাবে vex সম্পাদিত
+# অভ্যন্তরীণভাবে, ভেক্স করে
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 

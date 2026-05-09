@@ -32,7 +32,7 @@ This document organizes the operators currently usable based on the compiler.
 | Operator | Description |
 | -------- | ----------- |
 | `&&`     | Logical AND |
-| \`\\   | Logical OR  |
+| `\|\|` | logical OR |
 | `!`      | Logical NOT |
 
 ## Bitwise
@@ -40,7 +40,7 @@ This document organizes the operators currently usable based on the compiler.
 | Operator | Description |
 | -------- | ----------- |
 | `&`      | Bitwise AND |
-| \`\\   | Bitwise OR  |
+| `\|` | bit OR |
 | `^`      | Bitwise XOR |
 | `~`      | Bitwise NOT |
 | `<<`     | Left Shift  |

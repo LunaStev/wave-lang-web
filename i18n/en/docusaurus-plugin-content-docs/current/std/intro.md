@@ -42,10 +42,10 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // Handle error
+        // Error handling
         return;
     }
 
-    // raw contains a NUL-terminated string
+    // raw contains NUL-terminated string
 }
 ```

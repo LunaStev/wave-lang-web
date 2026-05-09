@@ -14,8 +14,8 @@ Wave prend en charge deux types de commentaires.
 Le contenu après `//` est ignoré jusqu'à la fin de la ligne.
 
 ```wave
-var x: i32 = 10; // commentaire de ligne
-x += 5;          // fonctionne toujours
+var x: i32 = 10; // line comment
+x += 5;          // still works
 ```
 
 ## Commentaire de bloc
@@ -23,15 +23,15 @@ x += 5;          // fonctionne toujours
 Le contenu entre `/*` et `*/` est ignoré.
 
 ```wave
-var y: i32 = 1 /* bloc en ligne */ + 2;
+var y: i32 = 1 /* inline block */ + 2;
 ```
 
 Les commentaires de bloc supportent plusieurs lignes et l'imbrication.
 
 ```wave
-/* extérieur
-   /* intérieur */
-   fin extérieur
+/* outer
+   /* inner */
+   outer end
 */
 ```
 
@@ -48,7 +48,7 @@ var marker: str = "/*//*/";
 Une erreur de compilation (`E1002`) se produit si un commentaire de bloc n'est pas fermé.
 
 ```wave
-/* non fermé
+/* not closed
 ```
 
 Le compilateur affiche la position de départ, la cause et un indice de correction.

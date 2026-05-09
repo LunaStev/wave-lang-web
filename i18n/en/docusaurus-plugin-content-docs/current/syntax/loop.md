@@ -61,7 +61,7 @@ Because all the elements needed to control the loop are gathered in one place, i
 ### Basic Structure
 
 ```wave
-for (initialization; condition; increment/decrement) {
+for (init; condition; step) {
     // code to repeat
 }
 ```
@@ -131,7 +131,7 @@ while (i < 3) {
 ```
 
 In this example, each time the outer `while` loop runs, the inner `while` loop runs completely.
-This allows sequential processing of combinations in the form of (`i`, `j`).
+This allows sequential processing of combinations in the form of (`while`, `while`).
 
 ---
 

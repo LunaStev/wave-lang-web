@@ -33,7 +33,7 @@ match (value) {
 Syntax Rules:
 
 - The header uses the `match (expr)` format.
-- Each arm uses the `pattern => { block }` format.
+- Each arm uses the `{ ... }` format.
 - The arm body must necessarily use `{ ... }` blocks.
 - Between arms, you can simply use line breaks, or use a `,` or `;` as separators.
 

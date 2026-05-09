@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৫
+sidebar_position: 5
 ---
 
 # std::mem ব্যবহারের নির্দেশিকা
@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // ওভারল্যাপ করা মেমোরি স্থান নিরাপদ স্থানান্তর
+    // ওভারল্যাপিং মেমরি এলাকায় নিরাপদ আন্দোলন
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

@@ -18,7 +18,7 @@ sidebar_position: 3
 
 ```wave
 fun main() {
-    println("שלום Wave");
+    println("Hello Wave");
 }
 ```
 
@@ -42,7 +42,7 @@ wavec run hello.wave
 כאשר התוכנית פועלת כראוי, הפלט הבא מוצג בטרמינל.
 
 ```
-שלום ווייב
+Hello Wave
 ```
 
 אם אתה רואה פלט זה, זה מצביע על כך ש-Wave הותקן כראוי, והתוכנית נכתבה ומבוצעת באופן נכון.

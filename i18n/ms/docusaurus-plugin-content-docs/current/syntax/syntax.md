@@ -2,26 +2,26 @@
 sidebar_position: 1
 ---
 
-# Tatabahasa
+# tatabahasa
 
-Dokumen ini menerangkan keseluruhan tatabahasa bahasa pengaturcaraan Wave.
-Wave adalah bahasa yang sedang dalam pembangunan, jadi beberapa tatabahasa dan fungsinya mungkin belum sepenuhnya dilaksanakan atau mungkin berubah pada masa hadapan.
-Walau bagaimanapun, dokumen ini ditulis dengan tujuan untuk memahami struktur tatabahasa dan konsep utama yang digerakkan oleh Wave pada saat ini.
+Dokumen ini menerangkan tatabahasa keseluruhan bahasa pengaturcaraan Wave.
+Oleh kerana Wave ialah bahasa yang sedang dibangunkan, sesetengah sintaks dan ciri mungkin belum dilaksanakan sepenuhnya atau mungkin berubah pada masa hadapan.
+Namun begitu, dokumen ini ditulis dengan tujuan untuk memahami struktur tatabahasa dan konsep teras yang disasarkan oleh Wave pada masa ini.
 
-Melalui dokumen ini, pembaca tidak hanya dapat memahami keadaan semasa Wave,
-bahasa ini juga memberikan gambaran keseluruhan tentang arah reka bentuk dan peluasan yang dilakukan.
+Dokumen ini bukan sahaja akan memberikan pembaca idea tentang status semasa Wave;
+Anda boleh mendapatkan gambaran keseluruhan tentang cara bahasa itu direka bentuk dan dikembangkan.
 
-Wave direka sebagai bahasa yang menggabungkan kawalan tahap rendah dengan pengabstrakan tahap tinggi.
-Ia dirancang untuk digunakan secara meluas dari kawasan tahap rendah seperti pengaturcaraan sistem kepada bidang aplikasi tahap tinggi seperti pembangunan web, kecerdasan buatan, dan blockchain.
-Untuk tujuan ini, Wave mengutamakan prestasi dan kawalan sambil mengekalkan tatabahasa dan struktur yang tidak merugikan produktiviti.
+Wave direka bentuk sebagai bahasa yang menggabungkan kawalan tahap rendah dan abstraksi tahap tinggi.
+Matlamat reka bentuk adalah untuk membolehkan pelbagai penggunaan, daripada kawasan peringkat rendah seperti pengaturcaraan sistem kepada bidang aplikasi peringkat tinggi seperti pembangunan web, kecerdasan buatan dan rantaian blok.
+Untuk tujuan ini, Wave menekankan prestasi dan kawalan, sambil mengguna pakai tatabahasa dan struktur yang tidak menjejaskan produktiviti.
 
-Wave juga direka dengan mengambil kira perpustakaan standard yang berkuasa dan sistem pembinaan serta alat yang terintegrasi,
-untuk membolehkan pembangun memfokuskan pada pelaksanaan logik teras tanpa menghabiskan masa untuk penyetelan yang kompleks.
+Wave juga sedang direka bentuk dengan perpustakaan standard yang berkuasa dan rangka kerja binaan dan perkakas bersepadu dalam fikiran.
+Ini bertujuan untuk membolehkan pembangun menumpukan pada melaksanakan logik teras daripada menghabiskan masa pada persediaan yang kompleks.
 
-Tatabahasa Wave mempunyai persamaan dengan C atau Rust, tetapi tidak bertujuan untuk meniru secara langsung.
-Walaupun berdasarkan elemen tatabahasa yang dikenali, ia telah direka semula agar bahasa dapat dipelajari dengan cepat dan digunakan secara berkesan dalam pembangunan sebenar.
-Sistem jenis yang jelas, tingkah laku yang boleh diramal, dan tatabahasa yang menunjukkan niat kod dianggap sebagai kriteria reka bentuk yang penting.
+Sintaks Wave mempunyai beberapa persamaan dengan C atau Rust, tetapi ia tidak bertujuan untuk meniru mudah.
+Ia berdasarkan unsur tatabahasa yang biasa, tetapi telah disusun semula untuk membantu anda mempelajari bahasa dengan cepat dan menggunakannya dengan cekap dalam pembangunan sebenar.
+Sistem jenis eksplisit, tingkah laku boleh diramal dan sintaks yang mendedahkan maksud kod adalah kriteria reka bentuk yang penting.
 
-Dokumen ini memperkenalkan tatabahasa asas Wave dan fungsi utama bahasa dengan contoh sebenar.
-Bahagian struktur kawalan mengandungi arahan `if`, `while`/`for` serta arahan `match`.
-Setiap seksyen menerangkan unsur tatabahasa individu dan secara keseluruhan susunannya membolehkan pemahaman tentang struktur dan falsafah reka bentuk bahasa Wave.
+Dokumen ini memperkenalkan sintaks asas dan ciri bahasa utama Wave dengan contoh praktikal.
+Bahagian pernyataan kawalan mengandungi pernyataan `if` bersama-sama dengan `while`, `for`/`match`.
+Setiap bahagian menerangkan elemen tatabahasa individu, dan disusun untuk membantu anda memahami struktur dan falsafah reka bentuk bahasa Wave secara keseluruhan.

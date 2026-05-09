@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. פורמט בסיסי
 
 ```bash
-wavec [אפשרויות גלובליות] <פקודה> [אפשרויות פקודה]
+wavec [global-options] <command> [command-options]
 ```
 
 לדוגמה:
@@ -47,19 +47,19 @@ wavec run -O3 main.wave
 שימוש ב-`--` מפסיק את סריקת אפשרויות הגלובליות ומעביר את האזור לפקודות.
 
 ```bash
-wavec -- הפעל main.wave
+wavec -- run main.wave
 ```
 
 ---
 
 ## 3. פקודות
 
-## 3.1 `הפעל <קובץ>`
+## 3.1 `run <file>`
 
 מקומפל ומנוהל קובץ Wave.
 
 ```bash
-wavec הפעל hello.wave
+wavec run hello.wave
 ```
 
 פעולה:
@@ -75,7 +75,7 @@ wavec הפעל hello.wave
 
 ---
 
-## 3.2 `בנה <קובץ>`
+## 3.2 `build <file>`
 
 מייצר קובץ הפעלה (exe).
 
@@ -87,9 +87,9 @@ wavec build app.wave
 
 - `target/<file_stem>`
 
-## 3.3 אפשרות `בנה` (`-o`, `-c`)
+## 3.3 אפשרות `build` (`-o`, `-c`)
 
-ניתן לשלוט בשם קובץ הפלט ותבנית הפלט כמשתנה במסגרת פקודת `בנה`.
+ניתן לשלוט בשם קובץ הפלט ותבנית הפלט כמשתנה במסגרת פקודת `build`.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,7 +97,7 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <קובץ>`: מציין את שם קובץ הפלט.
+- `-o <file>`: מציין את שם קובץ הפלט.
   - ברירת מחדל (ללא `-c`): ייחוס נתיב הפלט של קובץ ההפעלה
   - בשימוש עם `-c`: ייחוס נתיב פלט של קובץ אובייקט
 - `-c`: ייצור קובץ אובייקט בלבד, ללא קישור.
@@ -120,22 +120,22 @@ wavec --llvm \
 
 ---
 
-## 3.4 `התקן std`, `עדכן std`
+## 3.4 `install std`, `update std`
 
 פקודת התקנה/עדכון ספרייה סטנדרטית.
 
 ```bash
-wavec התקן std
-wavec עדכן std
+wavec install std
+wavec update std
 ```
 
 ---
 
-## 3.5 `--עזרה`, `--גרסה`
+## 3.5 `--help`, `--version`
 
 ```bash
-wavec --עזרה
-wavec --גרסה
+wavec --help
+wavec --version
 ```
 
 ---
@@ -157,7 +157,7 @@ wavec --גרסה
 לדוגמה:
 
 ```bash
-wavec -O3 הפעל main.wave
+wavec -O3 run main.wave
 ```
 
 ---
@@ -165,7 +165,7 @@ wavec -O3 הפעל main.wave
 ## 4.2 פלט איתור באגים
 
 ```bash
-wavec --debug-wave=tokens,ast,ir הפעל main.wave
+wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
 פריטים מותרים:
@@ -244,7 +244,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (ניתן לחזור)
-- `-C link-sysroot=<נתיב>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 מטרות עיקריות לפי `wavec print target-list` הנוכחי:
@@ -300,7 +300,7 @@ import("json::parser::core");
 סדר קביעת שורש החבילה:
 
 1. מיפוי מפורש של `--dep name=path`
-2. חפש `<root>/<package>` בכל `--dep-root`
+2. חפש `--dep-root` בכל `<root>/<package>`
 
 אם אותה חבילה נמצאת בו-זמנית במספר dep-root:
 
@@ -375,12 +375,12 @@ wavec run main.wave \
 מבנה מומלץ:
 
 - `wavec`: הידור/קישור/הרצה + פתרון תלות שהוגדרה
-- `vex`: התקנה/ניהול תלות ולאחר מכן `wavec ... --dep-root ... קריאה ל-`--dep ...
+- `vex`: התקנה/ניהול תלות ולאחר מכן `wavec ... --dep-root ... --dep ...`--dep ...
 
 לדוגמה:
 
 ```bash
-# מורץ על ידי vex באופן פנימי
+# מבחינה פנימית, Vex עושה זאת
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: שמור, לא ממומש
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

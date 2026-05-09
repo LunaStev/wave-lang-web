@@ -17,7 +17,7 @@ Autrement dit, `var x = match (...) { ... }` de ce type ne peut pas être utilis
 ## Syntaxe de base
 
 ```wave
-match (valeur) {
+match (value) {
     pattern1 => {
         // bloc d'exécution
     }
@@ -33,7 +33,7 @@ match (valeur) {
 Règles de syntaxe :
 
 - L'en-tête utilise la forme `match (expr)`.
-- Chaque arm utilise la forme `pattern => { block }`.
+- Chaque arm utilise la forme `{ ... }`.
 - Le corps de arm doit être `{ ... }` bloc.
 - Entre les arms, seules les sauts de ligne peuvent être utilisés, ou vous pouvez utiliser `,` ou `;` comme séparateur.
 

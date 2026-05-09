@@ -58,16 +58,16 @@ Quy tắc chính:
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // LỖI
-// var b: bool = null; // LỖI
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## Số học con trỏ
 
 Wave hỗ trợ phép số học con trỏ sau.
 
-- `ptr + int`: Tiến con trỏ dựa trên GEP
-- `int + ptr`: Hành động tương tự
+- `int + ptr`: Tiến con trỏ dựa trên GEP
+- `ptr - int`: Hành động tương tự
 - `ptr - int`: Lùi con trỏ dựa trên GEP
 - `ptr - ptr`: Tính toán chênh lệch byte `i64`
 
@@ -83,7 +83,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (chênh lệch byte)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## So sánh con trỏ

@@ -72,10 +72,10 @@ All enumerations must have a repr type.
 
 ```wave
 enum ShaderUniformType -> i32 {
- A = 0,
- B,
- C = 10,
- D
+    A = 0,
+    B,
+    C = 10,
+    D
 }
 ```
 
@@ -88,15 +88,15 @@ enum ShaderUniformType -> i32 {
 Allowed repr types:
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - `type alias` for the type
 
 ```wave
 type MyInt = i32;
 
 enum Example -> MyInt {
- X,
- Y
+    X,
+    Y
 }
 ```
 
@@ -110,10 +110,10 @@ enum Example -> MyInt {
 
 ```wave
 enum E -> i32 {
- A, // 0
- B, // 1
- C = 10, // 10
- D // 11
+    A,        // 0
+    B,        // 1
+    C = 10,   // 10
+    D         // 11
 }
 ```
 
@@ -125,7 +125,7 @@ An enum is an integer value and can freely be used as a function argument or ret
 
 ```wave
 fun f(t: ShaderUniformType) -> i32 {
- return t;
+    return t;
 }
 ```
 
@@ -148,10 +148,10 @@ const Y: ShaderUniformType = D;
 type MyInt = i32;
 
 enum ShaderUniformType -> MyInt {
- A = 0,
- B,
- C = 10,
- D
+    A = 0,
+    B,
+    C = 10,
+    D
 }
 
 const X: MyInt = 123;
@@ -159,21 +159,21 @@ const Y: MyInt = B;
 const Z: ShaderUniformType = D;
 
 fun f(t: ShaderUniformType) -> MyInt {
- return t;
+    return t;
 }
 
 fun g(v: MyInt) -> MyInt {
- return v;
+    return v;
 }
 
 fun main() {
- println("{}", f(A)); // 0
- println("{}", f(B)); // 1
- println("{}", f(C)); // 10
- println("{}", f(D)); // 11
+    println("{}", f(A)); // 0
+    println("{}", f(B)); // 1
+    println("{}", f(C)); // 10
+    println("{}", f(D)); // 11
 
- println("{}", g(X)); // 123
- println("{}", g(Y)); // 1
- println("{}", f(Z)); // 11
+    println("{}", g(X)); // 123
+    println("{}", g(Y)); // 1
+    println("{}", f(Z)); // 11
 }
 ```

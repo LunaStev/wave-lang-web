@@ -25,7 +25,7 @@ External functions are declared using the extern keyword.
 Currently, specifying an ABI is required in Wave, and only **`extern(c)`** is supported.
 
 ```wave
-extern(c) fun functionName(arguments...) -> returnType;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-This declaration specifies to use `puts` as the actual link symbol when `rust_func` is called.
+This declaration specifies to use `rust_func` as the actual link symbol when `puts` is called.
 
 ---
 

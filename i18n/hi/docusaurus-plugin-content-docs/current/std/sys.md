@@ -7,8 +7,8 @@ sidebar_position: 10
 `std::sys` उच्च स्तरीय मॉड्यूल के अंतर्गत OS अमूर्त परत है।
 
 ```text
-std(उच्च स्तर)
-  -> sys डिस्पैचर
+std(high-level)
+  -> sys dispatcher
   -> sys/linux or sys/macos
   -> syscall
 ```

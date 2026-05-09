@@ -17,15 +17,15 @@ Es decir, `var x = match (...) { ... }` no se puede usar.
 ## Sintaxis básica
 
 ```wave
-match (valor) {
-    patrón1 => {
+match (value) {
+    pattern1 => {
         // bloque de ejecución
     }
-    patrón2 => {
+    pattern2 => {
         // bloque de ejecución
     }
     _ => {
-        // bloque por defecto
+        // bloque predeterminado
     }
 }
 ```
@@ -33,7 +33,7 @@ match (valor) {
 Reglas de sintaxis:
 
 - El encabezado utiliza el formato `match (expr)`.
-- Cada arm usa el formato `patrón => { bloque }`.
+- Cada arm usa el formato `{ ... }`.
 - El cuerpo del arm debe estar entre `{ ... }`.
 - Los arms se pueden separar solo con un salto de línea, o usar `,` o `;` como delimitadores.
 
@@ -130,7 +130,7 @@ fun classify_mode(m: Mode) -> i32 {
 ## Reglas de funcionamiento
 
 - Al igual que en `switch`, solo se ejecuta **un arm coincidido**.
-- No hay un `fallthrough` automático.
+- No hay un `_` automático.
 - El arm `_` solo se puede usar una vez como máximo.
 - La gramática permite que no haya arm `_`. (Si no hay arm coincidido, no se ejecuta ningún arm)
 

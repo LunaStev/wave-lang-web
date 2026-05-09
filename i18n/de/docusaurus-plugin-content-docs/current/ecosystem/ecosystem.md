@@ -6,57 +6,51 @@ sidebar_position: 2
 
 ## Übersicht
 
-Das Wave-Ökosystem ist mehr als nur eine Programmiersprache.
-Wave는 다양한 도구, 라이브러리, 그리고 개발 철학이 어우러진 환경을 통해,
-프로그래머가 어떤 분야에서도 창의적으로 작업할 수 있도록 돕는 종합적인 개발 생태계입니다.
+Das Wave-Ökosystem besteht aus mehr als nur Programmiersprachen.
+Wave bietet eine Umgebung, die verschiedene Tools, Bibliotheken und Entwicklungsphilosophien kombiniert.
+Es handelt sich um ein umfassendes Entwicklungsökosystem, das Programmierern hilft, in jedem Bereich kreativ zu arbeiten.
 
-## Struktur des Wave-Ökosystems
-
+## Zusammensetzung des Wave-Ökosystems
 ### Wave
+Der Kern des Wave-Ökosystems ist die Programmiersprache Wave.
+Basierend auf der Philosophie von C und Rust ist es darauf ausgelegt, ein Gleichgewicht zwischen einfacher Kontrolle und hoher Produktivität zu schaffen.
 
-Der Kern des Wave-Ökosystems ist die Wave-Programmiersprache.
-Es basiert auf den Philosophien von C und Rust und ist darauf ausgelegt, ein Gleichgewicht zwischen Low-Level-Steuerung und hoher Produktivität zu erreichen.
-
-- **Leichte Lernkurve**: Mittelstufe zwischen C und Rust.
-- **Leistungsstarke Funktionen**: Unterstützung für verschiedene Datentypen wie Zeiger, Arrays, Serialisierung.
+* **Einfache Lernkurve**: Mittlerer Schwierigkeitsgrad zwischen C und Rust.
+* **Leistungsstarke Funktionen**: Unterstützt verschiedene Datentypen wie Zeiger, Arrays und Serialisierung.
 
 ### Standardbibliothek
+Wave bietet eine Fülle von Standardbibliotheken, sodass Programmierer nicht auf separate externe Bibliotheken angewiesen sind.
 
-Wave bietet eine reichhaltige Standardbibliothek, sodass Programmierer nicht auf externe Bibliotheken angewiesen sind.
-
-- **hardwave**: Hardwaresteuerung
-- **http**: HTTP- und WebSocket-Kommunikation
-- **iosys**: Datei- und Stream-I/O
-- **sys**: Systemsteuerung
-- **wson**: Hochleistungs-Dateserialisierungsformat
-- **quantum**: Unterstützung für Quantencomputing
+* **hardwave**: Hardware-Steuerung
+* **http**: HTTP- und WebSocket-Kommunikation
+* **iosys**: Datei- und Strip-E/A
+* **sys**: Systemsteuerung
+* **wson**: Hochleistungsfähiges Datenserialisierungsformat
+* **Quantum**: Unterstützung für Quantencomputer
 
 ### Gemeinschafts- und Ökosystemphilosophie
-
 Wave legt Wert auf die Interaktion mit Entwicklern, nicht nur auf die Sprache selbst.
 
-- **Entwicklerzentriertes Design**: Respekt vor verschiedenen Sprachen und Kulturen.
-- **Unterstützung für Minderheitensprachen und ausgestorbene Sprachen**: Umarmung der globalen sprachlichen Vielfalt.
-- **Zukunftsweisende Technologien**: Unterstützung für Quantencomputing und Sicherheitsstandards der nächsten Generation.
+* **Entwicklerzentriertes Design**: Respektierung verschiedener Sprachen und Kulturen.
+* **Unterstützung für Minderheiten- und tote Sprachen**: Förderung der globalen sprachlichen Vielfalt.
+* **Zukunftssichere Technologie**: Unterstützung für Quantencomputing und Sicherheitsstandards der nächsten Generation.
 
-### Toolchain
+### Werkzeugkette
+Wave maximiert die Produktivität durch umfassende Entwicklungstools.
 
-Wave maximiert die Produktivität durch die Vollständigkeit der Entwicklungstools.
-
-- **Wave-Paketmanager (Vex)**: Plattformunabhängiger Aufbau und Bereitstellung.
-- **Wave-Debugger**: Intuitive Fehlerbehebung.
+* **Wave Package Manager (Vex)**: Plattformunabhängige Erstellung und Bereitstellung.
+* **Wave Debugger**: Intuitives Debuggen.
 
 ---
 
 ## Ziele des Wave-Ökosystems
+Das Wave-Ökosystem entwickelt sich um die folgenden Werte:
 
-Das Wave-Ökosystem entwickelt sich basierend auf den folgenden Werten:
-
-1. **Eine Sprache, die Vielfalt umarmt**: Unterstützung für alle Entwickler, Wave in ihrer eigenen Sprache und Kultur zu nutzen.
-2. **Integration aller Entwicklungsbereiche**: Verwendung in Web-, Hardware-, KI-, Netzwerk- und anderen Bereichen.
-3. **Bereit für die Zukunft**: Anpassung an neue Technologien wie Quantencomputing und Post-Quanten-Verschlüsselung.
+1. **Sprache, die Vielfalt berücksichtigt**: Unterstützt alle Entwickler bei der Verwendung von Wave entsprechend ihrer eigenen Sprache und Kultur.
+2. **Integration aller Entwicklungsbereiche**: Wird in verschiedenen Bereichen wie Web, Hardware, KI und Netzwerk verwendet.
+3. **Vorbereitung auf die Zukunft**: Reaktion auf neue Technologien wie Quantencomputing und Post-Quanten-Verschlüsselung.
 
 ---
 
-Das Wave-Ökosystem strebt nicht nur danach, Werkzeuge bereitzustellen, sondern auch eine **umfassende und innovative Umgebung** zu schaffen, die Entwicklern eine bessere Erfahrung und Effizienz bietet.
-Erkunden Sie neue Möglichkeiten mit Wave!
+Das Wave-Ökosystem geht über die bloße Bereitstellung von Tools hinaus und zielt darauf ab, eine **umfassende und innovative Umgebung** zu sein, die Entwicklern ein besseres Erlebnis und eine bessere Effizienz bietet.
+Entdecken Sie neue Möglichkeiten mit Wave!

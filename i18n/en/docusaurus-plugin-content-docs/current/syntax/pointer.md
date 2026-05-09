@@ -65,8 +65,8 @@ var arrp: ptr<array<i32, 3>> = null;
 Wave supports the following pointer arithmetic.
 
 - `ptr + int`: GEP-based pointer advance
-- `int + ptr`: Same operation
-- `ptr - int`: GEP-based pointer retreat
+- `ptr + int`: Same operation
+- `int + ptr`: GEP-based pointer retreat
 - `ptr - ptr`: `i64` byte difference calculation
 
 Points:
@@ -117,4 +117,4 @@ if (p != null) {
 ## Safety Note
 
 Wave does not currently have an ownership/lifetime-based pointer safety model like Rust.
-Therefore, it does not automatically prevent `null` dereferencing. We recommend the pattern of explicitly inserting a `null` check before `deref`.
+Therefore, it does not automatically prevent `null` dereferencing. We recommend the pattern of explicitly inserting a `deref` check before `null`.

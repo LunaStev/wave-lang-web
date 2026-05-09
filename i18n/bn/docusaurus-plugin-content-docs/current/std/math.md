@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৪
+sidebar_position: 4
 ---
 
 # std::math ব্যবহারের পদ্ধতি

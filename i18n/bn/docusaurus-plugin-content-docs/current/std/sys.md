@@ -1,5 +1,5 @@
 ---
-sidebar_position: ১০
+sidebar_position: 10
 ---
 
 # std::sys ব্যবহার নির্দেশিকা
@@ -7,9 +7,9 @@ sidebar_position: ১০
 `std::sys` হল উচ্চ-স্তরের মডিউলের নিচে OS বিমূর্ততা স্তর।
 
 ```text
-std(উচ্চ-স্তর)
+std(high-level)
   -> sys dispatcher
-  -> sys/linux বা sys/macos
+  -> sys/linux or sys/macos
   -> syscall
 ```
 

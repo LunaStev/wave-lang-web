@@ -18,7 +18,7 @@ Escribe el siguiente código en el archivo `hello.wave` recién creado.
 
 ```wave
 fun main() {
-    println("Hola Wave");
+    println("Hello Wave");
 }
 ```
 
@@ -42,7 +42,7 @@ Este comando indica al compilador Wave que compile el archivo fuente y realice l
 Si el programa se ejecuta correctamente, se mostrará la siguiente salida en el terminal.
 
 ```
-Hola Wave
+Hello Wave
 ```
 
 Si ves este resultado, significa que Wave ha sido instalado correctamente y que la escritura y ejecución del programa fueron correctas.

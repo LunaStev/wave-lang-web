@@ -16,7 +16,7 @@ sidebar_position: 10
 هذا ليس لإنشاء نوع جديد، بل هو اسم مستعار مطابق تمامًا.
 
 ```wave
-نوع MyInt = i32؛
+type MyInt = i32;
 ```
 
 في الإعلان أعلاه، MyInt هو نوع مطابق تمامًا لـ i32.
@@ -35,11 +35,11 @@ sidebar_position: 10
 ### مثال على الاستخدام
 
 ```wave
-نوع Size = i64؛
-نوع Index = u32؛
+type Size = i64;
+type Index = u32;
 
-وظيفة add(a: Size، b: Size) -> Size {
-    إرجاع a + b؛
+fun add(a: Size, b: Size) -> Size {
+    return a + b;
 }
 ```
 
@@ -48,14 +48,14 @@ sidebar_position: 10
 ### مطابقة النوع
 
 ```wave
-نوع A = i32؛
-نوع B = A؛
+type A = i32;
+type B = A;
 
-وظيفة f(x: i32) -> i32 { إرجاع x؛ }
+fun f(x: i32) -> i32 { return x; }
 
-وظيفة رئيسية() {
-    var v: B = 10؛
-    f(v)؛ // حسنا
+fun main() {
+    var v: B = 10;
+    f(v); // OK
 }
 ```
 
@@ -72,9 +72,9 @@ sidebar_position: 10
 
 ```wave
 enum ShaderUniformType -> i32 {
-    A = 0،
-    B،
-    C = 10،
+    A = 0,
+    B,
+    C = 10,
     D
 }
 ```
@@ -88,14 +88,14 @@ enum ShaderUniformType -> i32 {
 أنواع المقدّم (repr) المسموح بها:
 
 - `i8`، `i16`، `i32`، `i64`
-- `u8`، `u16`، `u32`، `u64`
+- `i8`، `i16`، `i32`، `i64`
 - اسم مستعار للنوع المحدد
 
 ```wave
-نوع MyInt = i32؛
+type MyInt = i32;
 
 enum Example -> MyInt {
-    X،
+    X,
     Y
 }
 ```
@@ -110,9 +110,9 @@ enum Example -> MyInt {
 
 ```wave
 enum E -> i32 {
-    A،        // 0
-    B،        // 1
-    C = 10،   // 10
+    A,        // 0
+    B,        // 1
+    C = 10,   // 10
     D         // 11
 }
 ```
@@ -124,8 +124,8 @@ enum E -> i32 {
 النوع enum يمثل قيمة عدد صحيح، ويمكن استخدامه بحرية كمعامل معاملات الدالة أو كقيمة عائدة.
 
 ```wave
-وظيفة f(t: ShaderUniformType) -> i32 {
-    إرجاع t؛
+fun f(t: ShaderUniformType) -> i32 {
+    return t;
 }
 ```
 
@@ -136,8 +136,8 @@ enum E -> i32 {
 النوع المتفاوت من enum هو ثابت في وقت التجميع.
 
 ```wave
-const X: i32 = B؛
-const Y: ShaderUniformType = D؛
+const X: i32 = B;
+const Y: ShaderUniformType = D;
 ```
 
 ---
@@ -145,35 +145,35 @@ const Y: ShaderUniformType = D؛
 ## مثال فعلي
 
 ```wave
-نوع MyInt = i32؛
+type MyInt = i32;
 
 enum ShaderUniformType -> MyInt {
-    A = 0،
-    B،
-    C = 10،
+    A = 0,
+    B,
+    C = 10,
     D
 }
 
-ثابت X: MyInt = 123؛
-ثابت Y: MyInt = B؛
-ثابت Z: ShaderUniformType = D؛
+const X: MyInt = 123;
+const Y: MyInt = B;
+const Z: ShaderUniformType = D;
 
-وظيفة f(t: ShaderUniformType) -> MyInt {
-    إرجاع t؛
+fun f(t: ShaderUniformType) -> MyInt {
+    return t;
 }
 
-وظيفة g(v: MyInt) -> MyInt {
-    إرجاع v؛
+fun g(v: MyInt) -> MyInt {
+    return v;
 }
 
-وظيفة رئيسية() {
-    طباعة("{}", f(A))؛ // 0
-    طباعة("{}", f(B))؛ // 1
-    طباعة("{}", f(C))؛ // 10
-    طباعة("{}", f(D))؛ // 11
+fun main() {
+    println("{}", f(A)); // 0
+    println("{}", f(B)); // 1
+    println("{}", f(C)); // 10
+    println("{}", f(D)); // 11
 
-    طباعة("{}", g(X))؛ // 123
-    طباعة("{}", g(Y))؛ // 1
-    طباعة("{}", f(Z))؛ // 11
+    println("{}", g(X)); // 123
+    println("{}", g(Y)); // 1
+    println("{}", f(Z)); // 11
 }
 ```

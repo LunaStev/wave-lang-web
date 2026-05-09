@@ -40,10 +40,10 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 2.1 هدف/تولید کد
 
-- `--target <سه‌گانه>` / `--target=<سه‌گانه>`
-- `--cpu <نام>` / `--cpu=<نام>`
-- `--features <CSV>` / `--features=<CSV>`
-- `--abi <نام>` / `--abi=<نام>`
+- `--target <triple>` / `--target=<triple>`
+- `--cpu <name>` / `--cpu=<name>`
+- `--features <csv>` / `--features=<csv>`
+- `--abi <name>` / `--abi=<name>`
 
 نقاط انعکاس:
 
@@ -58,17 +58,17 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 2.2 ابزارک/لینک
 
-- `--sysroot <مسیر>` / `--sysroot=<مسیر>`
-- `-C لینک‌کننده=<مسیر>`
-- `-C آرگومان-لینک=<arg>` (قابل تکرار)
-- `-C link-sysroot=<مسیر>`
-- `-C بدون-کتابخانه پیش‌فرض`
+- `--sysroot <path>` / `--sysroot=<path>`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (قابل تکرار)
+- `-C link-sysroot=<path>`
+- `-C no-default-libs`
 
 نقاط انعکاس:
 
-- `--sysroot` در زمان تولید شیء (از طریق کلنگ `-c`) نگاشت می‌شود.
+- `-c` در زمان تولید شیء (از طریق کلنگ `--sysroot`) نگاشت می‌شود.
 - در مرحله لینک، از برونزد خطی استفاده کنید، تغییر دستور کار، برونزاد sysroot لینک.
-- هنگام استفاده از `-C بدون-کتابخانه پیش‌فرض`، `-lc -lm` به‌طور خودکار غیرفعال می‌شود.
+- هنگام استفاده از `-C no-default-libs`، `-lc -lm` به‌طور خودکار غیرفعال می‌شود.
 
 ---
 
@@ -110,15 +110,15 @@ wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --fr
 wavec --llvm \
   --target=x86_64-unknown-linux-gnu \
   --sysroot=/opt/sysroot \
-  -C لینک‌کننده=کلنگ \
-  -C آرگومان-لینک=-Wl,--gc-sections \
+  -C linker=clang \
+  -C link-arg=-Wl,--gc-sections \
   build app.wave
 ```
 
 بدون فعالسازی پیوند libc/libm خودکار:
 
 ```bash
-wavec --llvm -C بدون-کتابخانه پیش‌فرض build app.wave
+wavec --llvm -C no-default-libs build app.wave
 ```
 
 هنگام استفاده از `--freestanding`، به‌صورت داخلی مشابه `-C no-default-libs` عمل می‌کند و برای ساخت‌هایی که فرض بر عدم استفاده از کتابخانه‌های پیش‌فرض در زمان اجرای کد هسته یا بوت است، تطبیق داده می‌شود.

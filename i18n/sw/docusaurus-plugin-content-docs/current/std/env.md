@@ -9,9 +9,9 @@ Inatoa upatikanaji wa vigezo vya mazingira na udhibiti wa saraka ya kazi.
 ## ingiza
 
 ```wave
-ingiza("std::env::environ");
-ingiza("std::env::cwd");
-ingiza("std::env::consts");
+import("std::env::environ");
+import("std::env::cwd");
+import("std::env::consts");
 ```
 
 ## 1. Soma kigezo cha mazingira cha mfululizo wa maandishi
@@ -21,12 +21,12 @@ fun main() {
     var buf: array<u8, 256>;
     var n: i64 = env_get("HOME", &buf[0], 256);
 
-    ikiwa (n >= 0) {
-        // buf ina mfululizo wa maandishi unaoishia na NUL
+    if (n >= 0) {
+        // buf ni mfuatano wa NUL uliokatishwa
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // Hakuna ufunguo
+        // hakuna ufunguo
     } else if (n == ENV_ERR_NO_SPACE) {
-        // Ukosefu wa buffer
+        // Nje ya bafa
     }
 }
 ```
@@ -49,7 +49,7 @@ fun main() {
     var cwd: array<u8, 512>;
     var n: i64 = env_getcwd(&cwd[0], 512);
 
-    ikiwa (n >= 0) {
+    if (n >= 0) {
         env_chdir("/tmp");
     }
 }

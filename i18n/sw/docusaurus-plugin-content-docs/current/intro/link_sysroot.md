@@ -8,8 +8,8 @@ Hati hii inaelezea jinsi ya **kudhibiti kwa wazi** sysroot ya hatua ya kiungo nd
 
 Kanuni kuu:
 
-- `--sysroot=<njia>`: kiwango cha sysroot (clang `-c`)
-- `-C link-sysroot=<njia>`: kiwango cha sysroot (kiungo)
+- `--sysroot=<path>`: kiwango cha sysroot (clang `-c`)
+- `-C link-sysroot=<path>`: kiwango cha sysroot (kiungo)
 
 Hiyo ni, unatenganisha na kushughulikia sysroot ya kutafsiri na kuunganisha.
 
@@ -25,22 +25,22 @@ Katika hatua hii, sysroot ya kiungo haihitimii kiotomatiki, lakini imetengenezwa
 
 ## 2. Ufafanuzi wa chaguo
 
-## 2.1 `-C link-sysroot=<njia>`
+## 2.1 `-C link-sysroot=<path>`
 
-Inapachika `--sysroot=<njia>` katika hatua ya kiungo.
+Inapachika `--sysroot=<path>` katika hatua ya kiungo.
 
 ```bash
-wavec -C link-sysroot=/njia/kuelekea/sysroot ...
+wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-Kiundani, ina maana sawa na `-C link-arg=--sysroot=<njia>`.
+Kiundani, ina maana sawa na `-C link-arg=--sysroot=<path>`.
 
-## 2.2 `-C link-arg=--sysroot=<njia>`
+## 2.2 `-C link-arg=--sysroot=<path>`
 
 Njia ya awali ya kiungo mbichi bado inaungwa mkono.
 
 ```bash
-wavec -C link-arg=--sysroot=/njia/kuelekea/sysroot ...
+wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ```
 
 ---
@@ -50,13 +50,13 @@ wavec -C link-arg=--sysroot=/njia/kuelekea/sysroot ...
 Katika ujenzi ambao unahitaji hatua ya mwiko, ikiwa hali zifuatazo zote zinatimizwa, inamaliza na kosa la matumizi.
 
 1. Kutumia `-C linker=...`
-2. Kutumia `--sysroot=<njia>`
+2. Kutumia `--sysroot=<path>`
 3. Sysroot ya mwiko (`-C link-sysroot` au `-C link-arg=--sysroot=...`) haijatajwa
 
 Mfano wa ujumbe wa kosa:
 
 ```text
-unapotumia -C linker=..., --sysroot=<njia> ni hatua ya kutafsiri pekee; pitisha sysroot ya mwiko wazi kwa -C link-sysroot=<njia> (au -C link-arg=--sysroot=<njia>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -70,9 +70,9 @@ wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
-  jenga test/test93.wave \
-  --kichwa aarch64-unknown-linux-gnu \
-  --toa=bin \
+  build test/test93.wave \
+  --target aarch64-unknown-linux-gnu \
+  --emit=bin \
   -o /tmp/test93-aarch64.bin
 ```
 
@@ -83,9 +83,9 @@ wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-arg=--sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
-  jenga test/test93.wave \
-  --kichwa aarch64-unknown-linux-gnu \
-  --toa=bin
+  build test/test93.wave \
+  --target aarch64-unknown-linux-gnu \
+  --emit=bin
 ```
 
 ## 4.3 Ujenzi bila kiungo (`--emit=obj`)
@@ -93,7 +93,7 @@ wavec \
 Iwapo hakuna hatua ya kiungo, sysroot ya kiungo haihitajiki.
 
 ```bash
-wavec --sysroot=/njia/kuelekea/sysroot jenga main.wave --toa=obj
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

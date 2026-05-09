@@ -17,15 +17,15 @@ sidebar_position: 6
 ## 1. الصيغة الأساسية
 
 ```bash
-wavec [خيارات عامة] <أمر> [خيارات الأمر]
+wavec [global-options] <command> [command-options]
 ```
 
 مثال:
 
 ```bash
-wavec -O2 تشغيل main.wave
-wavec بناء app.wave --link ssl -L ./native/lib
-wavec تشغيل app.wave --dep-root .vex/dep
+wavec -O2 run main.wave
+wavec build app.wave --link ssl -L ./native/lib
+wavec run app.wave --dep-root .vex/dep
 ```
 
 ---
@@ -37,9 +37,9 @@ wavec تشغيل app.wave --dep-root .vex/dep
 وبالتالي، فإن الخيار العام مرن في الموقع.
 
 ```bash
-wavec -O3 تشغيل main.wave
-wavec تشغيل main.wave -O3
-wavec تشغيل -O3 main.wave
+wavec -O3 run main.wave
+wavec run main.wave -O3
+wavec run -O3 main.wave
 ```
 
 الثلاثة أعلاه جميعها صالحة.
@@ -47,7 +47,7 @@ wavec تشغيل -O3 main.wave
 عند استخدام `--`، يتوقف المسح للخيار العام بعده ويتم تمريره إلى منطقة الأمر.
 
 ```bash
-wavec -- تشغيل main.wave
+wavec -- run main.wave
 ```
 
 ---
@@ -59,7 +59,7 @@ wavec -- تشغيل main.wave
 يقوم بتجميع وتشغيل ملف Wave.
 
 ```bash
-wavec تشغيل hello.wave
+wavec run hello.wave
 ```
 
 السلوك:
@@ -80,7 +80,7 @@ wavec تشغيل hello.wave
 إنشاء ملف قابل للتنفيذ (exe).
 
 ```bash
-wavec بناء app.wave
+wavec build app.wave
 ```
 
 ثنائي الإخراج:
@@ -112,8 +112,8 @@ wavec build app.wave -c -o ./build/app.o
 
 ```bash
 wavec --llvm \
- --target=x86_64-unknown-none-elf \
- build kernel.wave --emit=obj --freestanding -o kernel.o
+  --target=x86_64-unknown-none-elf \
+  build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
 يمكن أيضًا استخدام `aarch64-unknown-none-elf` و `riscv64-unknown-none-elf` بنفس الطريقة.
@@ -375,12 +375,12 @@ wavec run main.wave \
 الهيكل الموصى به:
 
 - `wavec`: تجميع/ربط/تنفيذ + تحليل التبعية المحددة
-- `vex`: التثبيت/الإدارة التبعية بعد \`wavec ... --dep-root ... استدعاء --dep ...
+- `vex`: اتصل بـ `wavec ... --dep-root ... --dep ...` بعد تثبيت/إدارة التبعيات.
 
 مثال:
 
 ```bash
-# يتم تنفيذ vex داخليًا
+# داخليًا، فيكس يفعل ذلك
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: محجوز، غير مطبق بعد
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

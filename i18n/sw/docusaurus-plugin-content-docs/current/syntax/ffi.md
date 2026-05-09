@@ -25,7 +25,7 @@ Kazi za nje hutangazwa kwa kutumia neno kuu 'extern'.
 Kwa sasa, ABI ya Wave inahitaji kutangazwa, na inasaidia **`extern(c)` tu**.
 
 ```wave
-extern(c) lambia jina_la_kazi(paramu...) -> aina_yarejesho;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -36,7 +36,7 @@ Matamko ya 'extern' yanahitaji kutaja ABI.
 ABI inayoungwa mkono sasa ni moja tu `c`.
 
 ```wave
-extern(c) lambia printf(fmt: ptr<u8>);
+extern(c) fun printf(fmt: ptr<u8>);
 ```
 
 Matamko kama `extern(rust)` yanaweza kuruhusiwa lakini yanaweza kusababisha hitilafu katika sehemu ya uchanganuzi wa maana.
@@ -48,7 +48,7 @@ Matamko kama `extern(rust)` yanaweza kuruhusiwa lakini yanaweza kusababisha hiti
 Unapotangaza kazi moja ya nje, andika kama ifuatavyo.
 
 ```wave
-extern(c) kazi InitWindow(upana: i32, urefu: i32, kichwa: ptr<u8>);
+extern(c) fun InitWindow(width: i32, height: i32, title: ptr<u8>);
 ```
 
 Taarifa hii ina maana kwamba alama ya `InitWindow` inayofuata C ABI ipo kwenye maktaba ya nje.
@@ -61,10 +61,10 @@ Wakati kuna kazi nyingi za nje zinazotumia ABI sawa, unaweza kuziunganisha pamoj
 
 ```wave
 extern(c) {
-    kazi InitWindow(upana: i32, urefu: i32, kichwa: ptr<u8>);
-    kazi CloseWindow();
-    kazi BeginDrawing();
-    kazi EndDrawing();
+    fun InitWindow(width: i32, height: i32, title: ptr<u8>);
+    fun CloseWindow();
+    fun BeginDrawing();
+    fun EndDrawing();
 }
 ```
 
@@ -80,10 +80,11 @@ Katika kesi hii, unaweza kubainisha jina halisi la alama ambalo kazi ya nje itau
 ### Uainishaji wa alama za kiwango cha kazi
 
 ```wave
-nje(c, "inawekwa") matumizifanyikazi_inayopigwa(i32);
+extern(c, "puts")
+fun rust_func(i32);
 ```
 
-Tamko hili linaelekeza kutumia `puts` kama kiungo cha ndani wakati `rust_func` inaitwa.
+Tamko hili linaelekeza kutumia `rust_func` kama kiungo cha ndani wakati `puts` inaitwa.
 
 ---
 
@@ -92,7 +93,7 @@ Tamko hili linaelekeza kutumia `puts` kama kiungo cha ndani wakati `rust_func` i
 Katika matangazo ya kiwango cha sehemu, unaweza kubainisha jina la alama kando ya kila jina la kazi.
 
 ```wave
-nje(c) {
+extern(c) {
     fun my_puts(ptr<i8>) "puts";
     fun my_strlen(ptr<i8>) "strlen";
 }
@@ -118,7 +119,7 @@ ptr<MyStruct>
 Miundo inaweza kutumika kama vigezo vya kazi za nje au kama thamani zinazorejeshwa.
 
 ```wave
-muundo Rangi {
+struct Color {
     r: u8,
     g: u8,
     b: u8,
@@ -135,12 +136,12 @@ Unapotumia miundo katika FFI, utaratibu wa mashamba unafuata mpangilio uliotanga
 Kazi zilizotangazwa kama `extern` huitwa kama kazi za kawaida.
 
 ```wave
-kazi kuu() -> i32 {
+fun main() -> i32 {
     InitWindow(800, 600, "Wave");
     BeginDrawing();
     EndDrawing();
     CloseWindow();
-    rudisha 0;
+    return 0;
 }
 ```
 
@@ -151,7 +152,7 @@ Hakuna tofauti za kisarufi wakati wa kuita, na mikataba ya wito na unganisho la 
 ## Kiungo
 
 Utekelezaji halisi wa kazi ya nje hutolewa kutoka kwa maktaba ya moja kwa moja kwenye viungo.
-Kifurushi cha Waves huzalisha faili ya kitu iliyo na miito ya kazi za nje, ikitatua utegemezi kupitia maktaba maalum.
+Kifurushi cha Wave huzalisha faili ya kitu iliyo na miito ya kazi za nje, ikitatua utegemezi kupitia maktaba maalum.
 
 Njia ya kufafanua maktaba hupitishwa kupitia zana za ujenzi na chaguo za CLI.
 

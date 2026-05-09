@@ -57,7 +57,7 @@ var e: f64 = 2.71828;
 فيما يلي مثال أساسي لاستخدام نوع السلسلة النصية.
 
 ```wave
-var text: str = "مرحبا ويف";
+var text: str = "Hello Wave";
 ```
 
 ---
@@ -117,10 +117,10 @@ var ptr: ptr<T> = &someVariable;
 - القيمة `null` يمكن أن تُسنَد فقط إلى النوع `ptr<T>`.
 
 ```wave
-var p: ptr<i32> = null;  // صحيح
+var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // خطأ
-// var b: bool = null;   // خطأ
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## نوع المصفوفة

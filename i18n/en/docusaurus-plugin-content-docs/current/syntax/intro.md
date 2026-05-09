@@ -50,7 +50,7 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // call add function
+    var result = add(5, 7);     // add function call
     println(result);            // Output: 12
 }
 ```
@@ -89,13 +89,13 @@ Immutable variables are declared using the let keyword.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // Error: Cannot change value of an immutable variable.
+// y = 10;   // Error: Immutable variables cannot change their value.
 ```
 
 Immutable variables guarantee that values are not changed, thus helping to increase the stability and predictability of the program.
 It is recommended to use immutable variables for constant data that does not require changes.
 
-In Wave, you can explicitly allow mutability by using `mut` with the `let` keyword.
+In Wave, you can explicitly allow mutability by using `let` with the `mut` keyword.
 
 ```wave
 let mut y :i32 = 5;

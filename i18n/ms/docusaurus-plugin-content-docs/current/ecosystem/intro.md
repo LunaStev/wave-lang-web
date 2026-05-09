@@ -4,72 +4,64 @@ sidebar_position: 1
 
 # Wave OS
 
-## Gambaran Keseluruhan
-
-Wave OS adalah **sistem operasi** yang diintegrasikan secara rapat dengan **bahasa pengaturcaraan Wave**, direka untuk memastikan pemaju boleh bekerja pada perkakasan yang dioptimumkan dengan lancar menggunakan Wave.
-Wave OS menawarkan prestasi tinggi, kestabilan, dan fleksibiliti, mencerminkan falsafah bahasa Wave dengan tepat untuk memudahkan pengaturcaraan sistem berperingkat rendah dengan mudah dan cekap.
+## Gambaran keseluruhan
+Wave OS ialah sistem pengendalian** disepadukan rapat dengan **bahasa pengaturcaraan Wave**.
+Direka bentuk untuk membantu pembangun bekerja dengan lancar pada perkakasan yang dioptimumkan menggunakan Wave.
+Wave OS menyediakan prestasi tinggi, kestabilan dan fleksibiliti, serta mencerminkan falsafah bahasa Wave dengan jujur, menjadikan **pengaturcaraan sistem peringkat rendah** mudah dan cekap.
 
 ## Ciri-ciri Wave OS
+### Penyepaduan dengan bahasa Wave
+Wave OS berkait rapat dengan bahasa Wave dan direka bentuk untuk memaksimumkan keupayaan Menggabungkan keupayaan kawalan peringkat rendah yang berkuasa bagi bahasa Wave dengan keupayaan kawalan perkakasan langsung Wave OS membolehkan **pembangunan sistem yang cekap**.
 
-### Integrasi dengan Bahasa Wave
+* Sambungan semula jadi antara model memori Wave dan panggilan sistem.
+* Kawalan dan pengoptimuman perkakasan peringkat rendah yang mudah.
 
-Wave OS berkait rapat dengan bahasa Wave dan direka untuk **memaksimumkan fungsi bahasa Wave**. Menggabungkan kuasa kawalan berperingkat rendah bahasa Wave dan keupayaan kawalan perkakasan langsung Wave OS membolehkan **pembangunan sistem yang cekap**.
+### Reka bentuk yang ringan
+Wave OS meminimumkan ciri yang tidak diperlukan untuk menyediakan sistem pengendalian **cekap dan ringan**.
 
-- Menghubungkan model memori Wave dan panggilan sistem dengan lancar.
-- Kawalan perkakasan berperingkat rendah dan pengoptimuman adalah mudah.
+* **Reka bentuk kernel yang kecil, pantas dan stabil**.
+* **Menggunakan sumber yang rendah**, menjadikannya sesuai untuk pelbagai persekitaran seperti sistem terbenam, peranti IoT dan pelayan.
 
-### Reka Bentuk Ringan
+### kawalan perkakasan
+Wave OS menyediakan **integrasi rapat dengan perkakasan**, membenarkan pembangun mengawal dan mengoptimumkan perkakasan secara langsung.
 
-Wave OS menyediakan **sistem operasi yang cekap dan ringan** dengan meminimumkan fungsi yang tidak perlu.
+* **Pemacu Peranti**: Menyediakan pemacu yang boleh antara muka dengan pelbagai perkakasan dengan mudah.
+* **Kawalan Perkakasan**: Kawal perkakasan dengan kod yang ditulis dalam bahasa Wave dan bina sistem masa nyata.
 
-- **Reka bentuk teras yang kecil, pantas dan stabil.**
-- **Menggunakan sumber dengan sedikit** sesuai untuk sistem terbenam, peranti IoT, pelayan, dan pelbagai persekitaran.
+### Pelbagai tugas dan pengurusan proses
+Wave OS **menyokong berbilang tugas** dan menyediakan pengurusan proses yang cekap dan pelaksanaan serentak.
 
-### Pengendalian Perkakasan
+* **Pengurusan benang dan proses**: Operasi yang boleh dipercayai dalam persekitaran multithreading dan multiprocessing dengan komunikasi antara proses dan fungsi penyegerakan.
+* **Penjadual**: Penjadual yang mengedarkan sumber sistem dengan cekap sambil mengekalkan prestasi tinggi.
 
-Wave OS menyediakan **integrasi yang rapat dengan perkakasan** agar pengembang dapat mengawal dan mengoptimumkan perkakasan secara langsung.
+### Ciri sistem lanjutan
+Wave OS bukan sekadar sistem pengendalian.
 
-- **Pemacu Peranti**: Menyediakan pemacu yang mudah diintegrasi dengan pelbagai perkakasan.
-- **Pengendalian Perkakasan**: Mengawal perkakasan menggunakan kod yang ditulis dalam bahasa Wave dan membina sistem masa nyata.
-
-### Pengurusan Pelbagai Tugas dan Proses
-
-Wave OS **menyokong pelbagai tugas** serta menyediakan pengurusan proses yang efisien dan pelaksanaan serentak.
-
-- **Pengurusan Benang dan Proses**: Berfungsi dengan stabil dalam persekitaran pelbagai benang dan pelbagai proses melalui komunikasi dan penyelarasan antara proses.
-- **Penjadual**: Penjadual yang membahagikan sumber sistem secara efisien sambil mengekalkan prestasi yang tinggi.
-
-### Fungsi Sistem Lanjutan
-
-Wave OS menawarkan lebih daripada sekadar fungsionaliti sistem operasi yang sederhana.
-
-- **Sistem Fail**: Menyediakan sistem fail berprestasi tinggi dan fungsi pengurusan I/O.
-- **Komunikasi Rangkaian**: Perpustakaan dan sokongan sistem untuk protokol rangkaian berkelajuan tinggi.
-- **Fungsi Keselamatan**: Menyokong teknologi keselamatan terkini seperti penyulitan pasca-kuantum.
+* **Sistem Fail**: Menyediakan sistem fail berprestasi tinggi dan fungsi pengurusan I/O.
+* **Komunikasi Rangkaian**: Perpustakaan dan sokongan sistem untuk protokol rangkaian berkelajuan tinggi.
+* **Ciri Keselamatan**: Menyokong teknologi keselamatan terkini seperti penyulitan pasca kuantum.
 
 ---
 
 ## Matlamat Wave OS
+Wave Matlamat OS adalah untuk memaksimumkan kebebasan dan kecekapan pembangunan sistem.
 
-Matlamat Wave OS adalah untuk memaksimumkan kebebasan dan kecekapan pembangunan sistem.
-
-- Menyediakan persekitaran di mana pengembang boleh berinteraksi terus dengan perkakasan melalui **integrasi rapat dengan perkakasan**.
-- Secara aktif memanfaatkan **fungsi kuat bahasa Wave di dalam OS** untuk merealisasikan sistem berprestasi tinggi.
-- Dengan **reka bentuk mesra pengembang**, bertujuan untuk menjadikan pengaturcaraan sistem lebih intuitif dan mudah.
+* **Menyediakan persekitaran di mana pembangun boleh berinteraksi secara langsung dengan perkakasan melalui penyepaduan rapat dengan perkakasan**.
+* **Menggunakan secara aktif ciri berkuasa bahasa Wave dalam OS** untuk melaksanakan sistem berprestasi tinggi.
+* Dengan **reka bentuk mesra pembangun**, kami menyasarkan untuk menjadikan pengaturcaraan sistem intuitif dan mudah.
 
 ---
 
-## Bidang Penggunaan Wave OS
-
+## Kawasan aplikasi Wave OS
 Wave OS boleh digunakan dalam pelbagai bidang.
 
-- **Sistem Terbenam**: Wave OS menyediakan prestasi yang dioptimumkan dalam sistem dengan sumber terhad melalui reka bentuk yang ringan.
-- **IoT**: Terintegrasi dengan lancar dengan perkakasan peranti IoT, menyokong pembangunan berkesan dalam persekitaran IoT.
-- **Pelayan Berprestasi Tinggi**: Wave OS menawarkan operasi yang stabil dan efisien dalam sistem berprestasi tinggi dan persekitaran pelayan.
-- **Sistem Masa Nyata**: Menawarkan prestasi yang kuat dalam sistem dengan keperluan kawalan perkakasan dan pemprosesan masa nyata.
-- **Kemudahan Pengguna**: Menyokong penggunaan yang lancar tanpa kesulitan kepada pengguna melalui antaramuka yang intuitif.
+* **Sistem Terbenam**: Reka bentuk ringan Wave OS memberikan prestasi yang dioptimumkan walaupun dalam sistem dengan sumber terhad.
+* **IoT**: Sepadu lancar dengan perkakasan peranti IoT, menyokong pembangunan berkesan dalam persekitaran IoT.
+* **Pelayan Berprestasi Tinggi**: Wave OS menyediakan operasi yang stabil dan cekap walaupun dalam sistem dan persekitaran pelayan berprestasi tinggi.
+* **Sistem Masa Nyata**: Prestasi berkuasa dalam sistem dengan kawalan perkakasan dan keperluan pemprosesan masa nyata.
+* **Kemudahan Pengguna**: Antara muka intuitif membolehkan pengguna menggunakannya dengan lancar tanpa sebarang kesulitan.
 
 ---
 
-Wave OS adalah sistem operasi inovatif yang menyediakan **semua alat dan fungsi** yang diperlukan untuk pembangunan sistem bersama bahasa Wave.
-Pengembang boleh menggabungkan reka bentuk efisien Wave OS dan keupayaan kuat bahasa Wave untuk membina **sistem yang dioptimumkan**.
+Wave OS ialah sistem pengendalian inovatif yang menyediakan **semua alatan dan ciri** yang diperlukan untuk pembangunan sistem bersama-sama dengan bahasa Wave.
+Pembangun boleh membina **sistem yang dioptimumkan** dengan menggabungkan reka bentuk cekap Wave

@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 重なるメモリ領域の安全移動
+    // 重複するメモリ領域の安全な移動
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

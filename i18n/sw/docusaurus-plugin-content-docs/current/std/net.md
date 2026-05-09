@@ -9,8 +9,8 @@ Ni API ya TCP/UDP ya IPv4 inayofanya kazi kwa wakati mmoja.
 ## ingiza
 
 ```wave
-ingiza("std::net::tcp");
-ingiza("std::net::udp");
+import("std::net::tcp");
+import("std::net::udp");
 ```
 
 ## 1. Seva ya TCP
@@ -22,7 +22,7 @@ fun main() {
 
     var buf: array<u8, 1024>;
     var n: i64 = tcp_read(client, &buf[0], 1024);
-    ikiwa (n > 0) {
+    if (n > 0) {
         tcp_write_all(client, &buf[0], n);
     }
 

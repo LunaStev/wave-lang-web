@@ -9,11 +9,11 @@ sidebar_position: 4
 ## واردات
 
 ```wave
-واردات("std::math::int");
-واردات("std::math::float");
-واردات("std::math::bits");
-واردات("std::math::num");
-واردات("std::math::trig");
+import("std::math::int");
+import("std::math::float");
+import("std::math::bits");
+import("std::math::num");
+import("std::math::trig");
 ```
 
 ## 1. توابع جنریک عددی

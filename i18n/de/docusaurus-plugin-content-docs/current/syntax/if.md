@@ -20,8 +20,8 @@ Ist die Bedingung falsch (False), wird der betreffende Block übersprungen und z
 Die Grundstruktur der IF-Anweisung in Wave sieht wie folgt aus.
 
 ```wave
-if (Bedingung) {
-    // Code, der ausgeführt wird, wenn die Bedingung wahr ist
+if (condition) {
+    // Code, der ausgeführt werden soll, wenn die Bedingung wahr ist
 }
 ```
 
@@ -38,7 +38,7 @@ Hier ist ein einfaches Beispiel für eine IF-Anweisung.
 var temperature :i32 = 30;
 
 if (temperature > 25) {
-    println("Es ist heiß.");
+    println("Das Wetter ist heiß.");
 }
 ```
 
@@ -55,10 +55,10 @@ Die IF-ELSE-Anweisung ist eine Struktur, die je nach Ergebnis der Bedingung eine
 Der grundlegende Aufbau ist wie folgt.
 
 ```wave
-if (Bedingung) {
-    // Code, der ausgeführt wird, wenn die Bedingung wahr ist
+if (condition) {
+    // Code, der ausgeführt werden soll, wenn die Bedingung wahr ist
 } else {
-    // Code, der ausgeführt wird, wenn die Bedingung falsch ist
+    // Code, der ausgeführt werden soll, wenn die Bedingung falsch ist
 }
 ```
 
@@ -71,9 +71,9 @@ Hier ist ein Beispiel für die Verwendung der IF-ELSE-Anweisung.
 var score :i32 = 70;
 
 if (score >= 60) {
-    println("Bestanden!");
+    println("Du hast bestanden!");
 } else {
-    println("Nicht bestanden.");
+    println("Es ist fehlgeschlagen.");
 }
 ```
 
@@ -92,12 +92,12 @@ var score :i32 = 85;
 
 if (score >= 60) {
     if (score >= 90) {
-        println("Ausgezeichnete Leistung!");
+        println("Ausgezeichnete Noten!");
     } else {
-        println("Bestanden.");
-    } 
+        println("Ich habe bestanden.");
+    }
 } else {
-    println("Nicht bestanden.");
+    println("Es ist fehlgeschlagen.");
 }
 ```
 

@@ -75,12 +75,12 @@ Wave言語は構造体内部に直接メソッドを定義しません。
 `proto`ブロックは特定の構造体に所属する関数の領域であり、このブロック内で定義された関数はその構造体のメソッドのように使用されます。
 
 メソッドは最初のパラメーターとして`self`を使用して構造体インスタンスを受け取ります。
-`self`は構造体全体の値を意味し、値コピー方式で渡されます。
+`proto`は構造体全体の値を意味し、値コピー方式で渡されます。
 
 ```wave
 proto Box {
     fun print(self) {
-        println("サイズ={}, 重さ={}", self.size, self.weight);
+        println("size={}, weight={}", self.size, self.weight);
     }
 
     fun added_size(self, x: i32) -> i32 {
@@ -142,8 +142,8 @@ var p: Player = Player {
     pos: Position { x: 10; y: 20; };
 };
 
-println("プレイヤー X: {}", p.pos.x);
-println("プレイヤー Y: {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 構造体リテラル内に別の構造体リテラルをネストして書くことができ、
@@ -167,7 +167,7 @@ var players: array<Player, 3> = [
 構造体配列の要素にアクセスする際には、まず配列インデックスを使用し、その後、ドット表記法を使って構造体内のフィールドにアクセスします。
 
 ```wave
-println("2番目のプレイヤー X: {}", players[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

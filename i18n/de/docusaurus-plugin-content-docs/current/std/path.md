@@ -18,11 +18,11 @@ import("std::path::copy");
 
 ```wave
 fun main() {
-    var ausgabe: array<u8, 256>;
-    var n: i32 = pfad_kombinieren2(&ausgabe[0], 256, "/var/log", "wave/app.log");
+    var out: array<u8, 256>;
+    var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // Puffer zu klein
+        // Kein Puffer mehr
     }
 }
 ```
@@ -31,11 +31,11 @@ fun main() {
 
 ```wave
 fun main() {
-    var basis: array<u8, 64>;
-    var verzeichnis: array<u8, 128>;
+    var base: array<u8, 64>;
+    var dir: array<u8, 128>;
 
-    pfad_basename_kopieren(&basis[0], 64, "/tmp/data/report.txt"); // report.txt
-    pfad_dirname_kopieren(&verzeichnis[0], 128, "/tmp/data/report.txt"); // /tmp/data
+    path_basename_copy(&base[0], 64, "/tmp/data/report.txt"); // report.txt
+    path_dirname_copy(&dir[0], 128, "/tmp/data/report.txt"); // /tmp/data
 }
 ```
 
@@ -43,24 +43,24 @@ fun main() {
 
 ```wave
 fun main() {
-    var abs: bool = pfad_ist_abs("/usr/bin");
-    var hat_erw: bool = pfad_hat_erw("main.wave");
-    var erw_pos: i32 = pfad_erw_start("main.wave");
+    var abs: bool = path_is_abs("/usr/bin");
+    var has_ext: bool = path_has_ext("main.wave");
+    var ext_pos: i32 = path_ext_start("main.wave");
 }
 ```
 
 ## Hauptfunktionen
 
 ```wave
-fun pfad_ist_sep(c: u8) -> bool
-fun pfad_länge(pfad: str) -> i32
-fun pfad_ist_abs(pfad: str) -> bool
-fun pfad_basename_start(pfad: str) -> i32
-fun pfad_basename_länge(pfad: str) -> i32
-fun pfad_dirname_länge(pfad: str) -> i32
-fun pfad_erw_start(pfad: str) -> i32
-fun pfad_hat_erw(pfad: str) -> bool
-fun pfad_kombinieren2(dst: ptr<u8>, dst_kap: i32, links: str, rechts: str) -> i32
-fun pfad_basename_kopieren(dst: ptr<u8>, dst_kap: i32, pfad: str) -> i32
-fun pfad_dirname_kopieren(dst: ptr<u8>, dst_kap: i32, pfad: str) -> i32
+fun path_is_sep(c: u8) -> bool
+fun path_len(path: str) -> i32
+fun path_is_abs(path: str) -> bool
+fun path_basename_start(path: str) -> i32
+fun path_basename_len(path: str) -> i32
+fun path_dirname_len(path: str) -> i32
+fun path_ext_start(path: str) -> i32
+fun path_has_ext(path: str) -> bool
+fun path_join2(dst: ptr<u8>, dst_cap: i32, left: str, right: str) -> i32
+fun path_basename_copy(dst: ptr<u8>, dst_cap: i32, path: str) -> i32
+fun path_dirname_copy(dst: ptr<u8>, dst_cap: i32, path: str) -> i32
 ```

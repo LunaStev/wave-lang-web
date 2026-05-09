@@ -14,8 +14,8 @@ Wave unterstützt zwei Arten von Kommentaren.
 Der Inhalt nach `//` wird bis zum Ende der Zeile ignoriert.
 
 ```wave
-var x: i32 = 10; // Zeilenkommentar
-x += 5;          // funktioniert noch
+var x: i32 = 10; // line comment
+x += 5;          // still works
 ```
 
 ## Blockkommentar
@@ -29,9 +29,9 @@ var y: i32 = 1 /* inline block */ + 2;
 Blockkommentare unterstützen mehrere Zeilen und Schachtelungen.
 
 ```wave
-/* außen
-   /* innen */
-   außen Ende
+/* outer
+   /* inner */
+   outer end
 */
 ```
 
@@ -48,7 +48,7 @@ var marker: str = "/*//*/";
 Wenn ein Blockkommentar nicht geschlossen wird, tritt ein Kompilierungsfehler (`E1002`) auf.
 
 ```wave
-/* nicht geschlossen
+/* not closed
 ```
 
 Der Compiler gibt die Startposition, Ursache und Korrekturhinweise aus.

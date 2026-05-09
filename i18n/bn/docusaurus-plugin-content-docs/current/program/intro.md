@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ```wave
 fun main() {
-    println("হ্যালো Wave");
+    println("Hello Wave");
 }
 ```
 
@@ -37,7 +37,7 @@ fun main() {
 ## নিষ্পাদন ফলাফল
 
 ```text
-হ্যালো Wave
+Hello Wave
 ```
 
 ---
@@ -49,14 +49,14 @@ fun main() {
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("হ্যালো, {}!", name);
+    println("Hello, {}!", name);
 }
 ```
 
 আউটপুট:
 
 ```text
-হ্যালো, Wave!
+Hello, Wave!
 ```
 
 ---

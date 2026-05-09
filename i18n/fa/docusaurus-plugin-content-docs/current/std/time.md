@@ -9,10 +9,10 @@ sidebar_position: 9
 ## واردات
 
 ```wave
-واردات("std::time::clock");
-واردات("std::time::diff");
-واردات("std::time::sleep");
-واردات("std::sys::time");
+import("std::time::clock");
+import("std::time::diff");
+import("std::time::sleep");
+import("std::sys::time");
 ```
 
 ## 1. تنظیم بازه

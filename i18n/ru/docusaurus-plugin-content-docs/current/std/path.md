@@ -18,12 +18,12 @@ import("std::path::copy");
 
 ```wave
 fun main() {
- var out: array<u8, 256>;
- var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
+    var out: array<u8, 256>;
+    var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
- if (n < 0) {
- // недостаточная длина буфера
- }
+    if (n < 0) {
+        // Нет буфера
+    }
 }
 ```
 
@@ -31,11 +31,11 @@ fun main() {
 
 ```wave
 fun main() {
- var base: array<u8, 64>;
- var dir: array<u8, 128>;
+    var base: array<u8, 64>;
+    var dir: array<u8, 128>;
 
- path_basename_copy(&base[0], 64, "/tmp/data/report.txt"); // report.txt
- path_dirname_copy(&dir[0], 128, "/tmp/data/report.txt"); // /tmp/data
+    path_basename_copy(&base[0], 64, "/tmp/data/report.txt"); // report.txt
+    path_dirname_copy(&dir[0], 128, "/tmp/data/report.txt"); // /tmp/data
 }
 ```
 
@@ -43,9 +43,9 @@ fun main() {
 
 ```wave
 fun main() {
- var abs: bool = path_is_abs("/usr/bin");
- var has_ext: bool = path_has_ext("main.wave");
- var ext_pos: i32 = path_ext_start("main.wave");
+    var abs: bool = path_is_abs("/usr/bin");
+    var has_ext: bool = path_has_ext("main.wave");
+    var ext_pos: i32 = path_ext_start("main.wave");
 }
 ```
 

@@ -17,7 +17,7 @@ In other words, handle the sysroot of compile and link separately.
 
 ## 1. Why is it necessary?
 
-When using `-C linker=<path>` in cross linking, it is often necessary to separately specify the runtime paths (`crt1.o`, `libc`, `libm`) referenced by the link driver (e.g., `aarch64-linux-gnu-gcc`).
+When using `-C linker=<path>` in cross linking, it is often necessary to separately specify the runtime paths (`aarch64-linux-gnu-gcc`, `crt1.o`, `libc`) referenced by the link driver (e.g., `libm`).
 
 At this point, the link sysroot is not automatically inferred and is designed to be explicitly passed on the CLI.
 

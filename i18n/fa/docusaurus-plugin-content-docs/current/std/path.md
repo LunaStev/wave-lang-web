@@ -9,9 +9,9 @@ sidebar_position: 7
 ## واردات
 
 ```wave
-واردات("std::path::core");
-واردات("std::path::analyze");
-واردات("std::path::copy");
+import("std::path::core");
+import("std::path::analyze");
+import("std::path::copy");
 ```
 
 ## 1. ترکیب مسیر
@@ -22,7 +22,7 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // طول buffer ناکافی
+        // خارج از بافر
     }
 }
 ```

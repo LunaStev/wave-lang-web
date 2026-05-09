@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## Introduction
 
-Inline assembly in Wave is written with `asm {... It is written within a `}\` block.
+Inline assembly of Wave is written in `asm { ... }` blocks.
 Within Wave code, you can directly control registers, memory, and system call paths.
 
 Currently supported targets:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - freestanding `aarch64`
+- freestanding `riscv64`
 - freestanding `riscv64`
 
 Windows and 32-bit targets are not supported yet.
@@ -38,7 +38,7 @@ asm {
 Components:
 
 - String line: actual assembly instruction
-- `in(...)`: input operands
+- `clobber(...)`: input operands
 - `out(...)`: output operands
 - `clobber(...)`: hints for clobbered registers/status/memory
 
@@ -103,7 +103,7 @@ out("rax") ret
 Output Target (`out(...) target`) the following pattern is recommended based on current implementation.
 
 - Variable: `out("rax") ret`
-- Pointer dereference: `out("rax") deref p`
+- Pointer dereference: `clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 Key Items:
 
 - Registers: `"rax"`, `"x0"`, etc.
-- Special: `"memory"`, `"cc"` (internally normalized per target)
+- Special: `$0`, `$1` (internally normalized per target)
 
 The compiler automatically adds default clobbers in conservative safety mode.
 (`memory`, flags/cc family, etc.; primarily `memory` for RISC-V freestanding)

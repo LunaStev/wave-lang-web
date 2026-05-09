@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // Di chuyển an toàn vùng bộ nhớ chồng lên nhau
+    // Di chuyển an toàn các vùng nhớ chồng chéo
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

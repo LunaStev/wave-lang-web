@@ -14,8 +14,8 @@ Wave hỗ trợ hai loại chú thích.
 Nội dung sau `//` sẽ bị bỏ qua cho đến khi hết dòng.
 
 ```wave
-var x: i32 = 10; // chú thích dòng
-x += 5;          // vẫn hoạt động
+var x: i32 = 10; // line comment
+x += 5;          // still works
 ```
 
 ## Chú thích khối
@@ -23,15 +23,15 @@ x += 5;          // vẫn hoạt động
 Bỏ qua nội dung giữa `/*` và `*/`.
 
 ```wave
-var y: i32 = 1 /* khối nội tuyến */ + 2;
+var y: i32 = 1 /* inline block */ + 2;
 ```
 
 Chú thích khối hỗ trợ nhiều dòng và lồng ghép.
 
 ```wave
-/* ngoài
-   /* trong */
-   ngoài kết thúc
+/* outer
+   /* inner */
+   outer end
 */
 ```
 
@@ -40,7 +40,7 @@ Chú thích khối hỗ trợ nhiều dòng và lồng ghép.
 `/*`, `*/`, `//` trong chuỗi không được xử lý như là mở/đóng chú thích.
 
 ```wave
-var marker: str = "/*/";
+var marker: str = "/*//*/";
 ```
 
 ## Lỗi chú thích
@@ -48,7 +48,7 @@ var marker: str = "/*/";
 Nếu chú thích khối chưa đóng, lỗi biên dịch (`E1002`) sẽ xảy ra.
 
 ```wave
-/* chưa đóng
+/* not closed
 ```
 
 Trình biên dịch xuất ra vị trí bắt đầu, nguyên nhân và gợi ý sửa đổi.

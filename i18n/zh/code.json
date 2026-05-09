@@ -3,43 +3,43 @@
     "message": "一种语言，无限可能"
   },
   "get-started": {
-    "message": "五分钟内开始"
+    "message": "5 分钟即可开始"
   },
   "read-the-docs": {
     "message": "阅读文档"
   },
   "homepage.hero.title": {
-    "message": "为开发新潮流提供现代语言"
+    "message": "引领新发展浪潮的现代语言"
   },
   "homepage.hero.subtitle": {
-    "message": "直观的语法，强大的性能，以及内置的安全性。Wave旨在提高您的生产力并增强应用程序的稳固性。"
+    "message": "直观的语法、强大的性能和内置的安全性。 Wave 旨在提高您的工作效率并使您的应用程序更加强大。"
   },
   "homepage.why_wave.title": {
-    "message": "为何选择Wave？"
+    "message": "为什么选择Wave？"
   },
   "homepage.features.one.title": {
-    "message": "简洁且直观"
+    "message": "简洁直观"
   },
   "homepage.features.one.description": {
-    "message": "Wave减少不必要的代码，使您能够专注于核心逻辑。借助现代语法，学习容易，使用愉快。"
+    "message": "Wave 减少不必要的代码，让您专注于核心逻辑。现代语法使其易于学习且使用起来有趣。"
   },
   "homepage.features.two.title": {
-    "message": "快速且高效"
+    "message": "快速高效"
   },
   "homepage.features.two.description": {
-    "message": "编译为本机代码，通过零成本抽象实现C++级别的性能。对于资源密集型任务是理想的选择。"
+    "message": "编译为本机代码，它通过零成本抽象实现 C++ 级别的性能。非常适合资源关键型任务。"
   },
   "homepage.features.three.title": {
-    "message": "安全且并发"
+    "message": "安全且同步"
   },
   "homepage.features.three.description": {
-    "message": "在编译时防止NULL引用错误等常见BUG。内置并发模型使多核编程比以往更加简单。"
+    "message": "防止编译时出现空引用错误等常见错误。内置并发模型使多核编程比以往更容易。"
   },
   "homepage.contributors.title": {
     "message": "贡献者"
   },
   "homepage.contributors.role.founder": {
-    "message": "语言创始人"
+    "message": "语言的创始人"
   },
   "homepage.contributors.role.designer": {
     "message": "语言设计师"
@@ -48,33 +48,33 @@
     "message": "编译器开发"
   },
   "homepage.contributors.role.library": {
-    "message": "标准库负责人"
+    "message": "标准库管理器"
   },
   "homepage.contributors.role.contributor": {
     "message": "贡献者"
   },
   "homepage.sponsors.title": {
-    "message": "赞助商"
+    "message": "赞助"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "荣誉赞助商"
+    "message": "名誉赞助商"
   },
   "homepage.sponsors.tier.platinum": {
     "message": "白金赞助商"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "黄金赞助商"
+    "message": "金牌赞助商"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "白银赞助商"
+    "message": "银牌赞助商"
   },
   "homepage.translations.title": {
-    "message": "参与Wave翻译"
+    "message": "Wave 参与翻译"
   },
   "homepage.translations.subtitle": {
-    "message": "请帮助翻译，助力全球开发者学习Wave。"
+    "message": "请贡献翻译，以便世界各地的开发者能够毫无语言障碍地学习Wave。"
   },
   "homepage.translations.button": {
-    "message": "在Crowdin参与翻译"
+    "message": "Crowdin 参与翻译"
   }
 }

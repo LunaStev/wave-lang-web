@@ -119,8 +119,8 @@ var ptr: ptr<T> = &someVariable;
 ```wave
 var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // 错误
-// var b: bool = null;   // 错误
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## 数组类型
@@ -131,7 +131,7 @@ var p: ptr<i32> = null;  // OK
 通过这种方式，内存结构变得明确，可以实现稳定的访问。
 
 ```wave
-var numbers: array<0> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 每种数据类型都被设计为能够选择适合其用途和特性的范围和大小。

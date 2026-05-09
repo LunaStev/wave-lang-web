@@ -5,72 +5,63 @@ sidebar_position: 1
 # Wave OS
 
 ## Übersicht
+Wave OS ist ein Betriebssystem**, das eng in die Programmiersprache **Wave** integriert ist.
+Entwickelt, um Entwicklern zu helfen, mit Wave nahtlos an optimierter Hardware zu arbeiten.
+Wave OS bietet hohe Leistung, Stabilität und Flexibilität und spiegelt getreu die Philosophie der Wave-Sprache wider, wodurch **Systemprogrammierung auf niedriger Ebene** einfach und effizient wird.
 
-Wave OS는 **Wave 프로그래밍 언어**와 긴밀하게 통합된 **운영 체제**로,
-개발자가 Wave를 사용하여 최적화된 하드웨어 상에서 원활하게 작업할 수 있도록 설계되었습니다.
-Wave OS bietet hohe Leistung, Stabilität und Flexibilität, spiegelt die Philosophie der Wave-Sprache wider und erleichtert effizientes Low-Level-System-Programmieren.
+## Merkmale von Wave OS
+### Integration mit der Sprache Wave
+Wave OS ist eng mit der Wave-Sprache verwandt und wurde entwickelt, um die Fähigkeiten der Wave-Sprache zu maximieren. Die Kombination der leistungsstarken Low-Level-Steuerungsfähigkeiten der Wave-Sprache mit den direkten Hardware-Steuerungsfähigkeiten von Wave OS ermöglicht eine **effiziente Systementwicklung**.
 
-## Eigenschaften von Wave OS
+* Natürliche Verbindung zwischen dem Speichermodell von Wave und Systemaufrufen.
+* Einfache Hardwaresteuerung und -optimierung auf niedriger Ebene.
 
-### Integration mit der Wave-Sprache
+### Leichtes Design
+Wave OS minimiert unnötige Funktionen, um ein **effizientes und leichtes** Betriebssystem bereitzustellen.
 
-Wave OS ist eng mit der Wave-Sprache verbunden und darauf ausgelegt, die **Funktionen der Wave-Sprache zu maximieren**. Die leistungsstarke Low-Level-Steuerungsfähigkeit der Wave-Sprache kombiniert mit der direkten Hardwaresteuerung von Wave OS ermöglicht **effiziente Systementwicklung**.
+* **Kleines, schnelles und stabiles** Kernel-Design.
+* **Verbrauch nur geringe Ressourcen** und eignet sich daher für verschiedene Umgebungen wie eingebettete Systeme, IoT-Geräte und Server.
 
-- Nahtlose Verbindung zwischen dem Speicher-Modell von Wave und Systemaufrufen.
-- Einfache Low-Level-Hardwaresteuerung und -optimierung.
+### Hardware-Steuerung
+Wave OS bietet **enge Integration mit der Hardware**, sodass Entwickler die Hardware direkt steuern und optimieren können.
 
-### Leichtgewichtige Konstruktion
+* **Gerätetreiber**: Stellt Treiber bereit, die sich problemlos mit verschiedener Hardware verbinden lassen.
+* **Hardware-Steuerung**: Steuern Sie Hardware mit in der Sprache Wave geschriebenem Code und bauen Sie ein Echtzeitsystem auf.
 
-Wave OS bietet ein **effizientes und leichtgewichtiges** Betriebssystem durch Minimierung unnötiger Funktionen.
+### Multitasking und Prozessmanagement
+Wave OS **unterstützt Multitasking** und sorgt für effizientes Prozessmanagement und gleichzeitige Ausführung.
 
-- **Klein, schnell und stabil** Kernel-Design.
-- Geringer Ressourcenverbrauch und geeignet für verschiedene Umgebungen wie eingebettete Systeme, IoT-Geräte und Server.
-
-### Hardwaresteuerung
-
-Wave OS bietet eine enge **Integration mit Hardware**, die es Entwicklern ermöglicht, Hardware direkt zu steuern und zu optimieren.
-
-- **Gerätetreiber**: Bereitstellung von Treibern, die eine einfache Integration mit verschiedener Hardware ermöglichen.
-- **Hardwaresteuerung**: Kontrolle der Hardware und Aufbau eines Echtzeitsystems mit Code, der in der Wave-Sprache geschrieben ist.
-
-### Multitasking und Prozessverwaltung
-
-Wave OS unterstützt **Multitasking** und bietet eine effiziente Prozessverwaltung und gleichzeitige Ausführung.
-
-- **Thread- und Prozessverwaltung**: Arbeitet stabil in einer Umgebung mit Multithreading und Multiprocessing durch Kommunikations- und Synchronisationsfunktionen zwischen Prozessen.
-- **Scheduler**: Scheduler, der Systemressourcen effizient verteilt und dabei hohe Leistung beibehält.
+* **Thread- und Prozessmanagement**: Zuverlässiger Betrieb in Multithreading- und Multiprocessing-Umgebungen mit prozessübergreifenden Kommunikations- und Synchronisationsfunktionen.
+* **Scheduler**: Ein Scheduler, der Systemressourcen effizient verteilt und gleichzeitig eine hohe Leistung aufrechterhält.
 
 ### Erweiterte Systemfunktionen
+Wave OS ist mehr als nur ein Betriebssystem.
 
-Wave OS bietet mehr als nur ein einfaches Betriebssystem.
-
-- **Dateisystem**: Bereitstellung eines leistungsstarken Dateisystems und I/O-Management-Funktionen.
-- **Netzwerkkommunikation**: Unterstützung von Bibliotheken und Systemen für Hochgeschwindigkeitsnetzwerkprotokolle.
-- **Sicherheitsfunktionen**: Unterstützung neuester Sicherheitstechnologien wie Post-Quantum-Verschlüsselung.
+* **Dateisystem**: Bietet leistungsstarke Dateisystem- und E/A-Verwaltungsfunktionen.
+* **Netzwerkkommunikation**: Bibliotheken und Systemunterstützung für Hochgeschwindigkeits-Netzwerkprotokolle.
+* **Sicherheitsfunktionen**: Unterstützt die neuesten Sicherheitstechnologien wie Post-Quanten-Verschlüsselung.
 
 ---
 
 ## Ziele von Wave OS
+Wave Das Ziel von OS ist es, die Freiheit und Effizienz der Systementwicklung zu maximieren.
 
-Das Ziel von Wave OS ist es, die Freiheit und Effizienz der Systementwicklung zu maximieren.
-
-- Bereitstellung einer Umgebung, in der Entwickler direkt mit der Hardware interagieren können, durch **enge Integration mit der Hardware**.
-- Implementierung von Hochleistungssystemen durch **aktive Nutzung der leistungsstarken Funktionen der Wave-Sprache innerhalb des OS**.
-- Ziel ist es, **entwicklerfreundliches Design** zu bieten, das Systemprogrammierung intuitiv und einfach macht.
-
----
-
-## Anwendungsbereiche von Wave OS
-
-Wave OS kann in verschiedenen Bereichen genutzt werden.
-
-- **Embedded-Systeme**: Wave OS bietet durch ein leichtgewichtiges Design optimierte Leistung auch in Systemen mit begrenzten Ressourcen.
-- **IoT**: Unterstützt effektive Entwicklung in IoT-Umgebungen durch nahtlose Integration mit der Hardware von IoT-Geräten.
-- **Hochleistung-Server**: Wave OS bietet stabile und effiziente Arbeitsabläufe auch in Hochleistungssystemen und Serverumgebungen.
-- **Echtzeitsysteme**: Leistet hohe Performance in Systemen mit Hardwaresteuerung und Echtzeitverarbeitungsanforderungen.
-- **Benutzerfreundlichkeit**: Unterstützt eine reibungslose Nutzung durch eine intuitive Schnittstelle, die den Benutzerkomfort gewährleistet.
+* **Bietet eine Umgebung, in der Entwickler durch enge Integration mit der Hardware direkt mit der Hardware interagieren können**.
+* **Nutzt aktiv die leistungsstarken Funktionen der Wave-Sprache in OS**, um ein Hochleistungssystem zu implementieren.
+* Mit **entwicklerfreundlichem Design** möchten wir die Systemprogrammierung intuitiv und einfach gestalten.
 
 ---
 
-Wave OS ist ein innovatives Betriebssystem, das zusammen mit der Wave-Sprache **alle notwendigen Tools und Funktionen** zur Systementwicklung bietet.
-Entwickler können ein **optimiertes System** aufbauen, indem sie das effiziente Design von Wave OS mit den leistungsstarken Funktionen der Wave-Sprache kombinieren.
+## Anwendungsgebiete von Wave OS
+Wave OS kann in verschiedenen Bereichen eingesetzt werden.
+
+* **Eingebettete Systeme**: Wave Das leichte Design von OS bietet optimierte Leistung auch in Systemen mit begrenzten Ressourcen.
+* **IoT**: Lässt sich nahtlos in die Hardware von IoT-Geräten integrieren und unterstützt so eine effektive Entwicklung in der IoT-Umgebung.
+* **Hochleistungsserver**: Wave OS sorgt für einen stabilen und effizienten Betrieb auch in Hochleistungssystemen und Serverumgebungen.
+* **Echtzeitsysteme**: Leistungsstarke Leistung in Systemen mit Anforderungen an Hardwaresteuerung und Echtzeitverarbeitung.
+* **Benutzerkomfort**: Die intuitive Benutzeroberfläche ermöglicht Benutzern eine reibungslose Verwendung ohne Unannehmlichkeiten.
+
+---
+
+Wave OS ist ein innovatives Betriebssystem, das neben der Sprache Wave **alle für die Systementwicklung erforderlichen Tools und Funktionen** bereitstellt.
+Entwickler können **optimierte Systeme** erstellen, indem sie das effiziente Design von Wave kombinieren

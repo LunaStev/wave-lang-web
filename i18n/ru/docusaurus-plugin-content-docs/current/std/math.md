@@ -20,8 +20,8 @@ import("std::math::trig");
 
 ```wave
 fun main() {
- var a: i32 = num_abs<i32>(-10, 0);
- var b: f64 = num_clamp<f64>(3.14, 0.0, 1.0);
+    var a: i32 = num_abs<i32>(-10, 0);
+    var b: f64 = num_clamp<f64>(3.14, 0.0, 1.0);
 }
 ```
 
@@ -29,9 +29,9 @@ fun main() {
 
 ```wave
 fun main() {
- var aligned: i32 = align_up(1000, 64); // 1024
- var pc: i32 = popcount(0b101101); // 4
- var lg: i32 = ilog2_floor(1024); // 10
+    var aligned: i32 = align_up(1000, 64);  // 1024
+    var pc: i32 = popcount(0b101101);       // 4
+    var lg: i32 = ilog2_floor(1024);         // 10
 }
 ```
 
@@ -39,12 +39,12 @@ fun main() {
 
 ```wave
 fun main() {
- var g: i32 = gcd(48, 18); // 6
- var p: i32 = pow_i32(2, 10); // 1024
+    var g: i32 = gcd(48, 18);        // 6
+    var p: i32 = pow_i32(2, 10);     // 1024
 
- var s: f64 = sin_f64(MATH_PI_F64 / 2.0);
- var c: f64 = cos_f64(0.0);
- var r: f64 = sqrt_f64(9.0);
+    var s: f64 = sin_f64(MATH_PI_F64 / 2.0);
+    var c: f64 = cos_f64(0.0);
+    var r: f64 = sqrt_f64(9.0);
 }
 ```
 

@@ -46,6 +46,6 @@ fun main() {
         return;
     }
 
-    // raw包含一个NUL终止字符串
+    // raw 包含以 NUL 结尾的字符串
 }
 ```

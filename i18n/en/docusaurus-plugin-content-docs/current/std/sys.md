@@ -17,7 +17,7 @@ std(high-level)
 
 - Most functions return raw syscall values.
 - `>= 0` success, `< 0` failure (`-errno`).
-- In high-level app code, prefer using `std::net`, `std::time`, `std::env` over `std::sys` whenever possible.
+- In high-level app code, prefer using `std::sys`, `std::net`, `std::time` over `std::env` whenever possible.
 
 ## 1. File Reading Example (`std::sys::fs`)
 

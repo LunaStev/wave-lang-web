@@ -32,7 +32,7 @@ Tài liệu này tổng hợp các toán tử thực sự có thể sử dụng 
 | toán tử    | Mô tả     |
 | ---------- | --------- |
 | `&&`       | logic AND |
-| \\\`\\ | logic OR  |
+| `\|\|` | logic HOẶC |
 | `!`        | logic NOT |
 
 ## Bit
@@ -40,7 +40,7 @@ Tài liệu này tổng hợp các toán tử thực sự có thể sử dụng 
 | toán tử    | Mô tả    |
 | ---------- | -------- |
 | `&`        | bit AND  |
-| \\\`\\ | bit OR   |
+| `\|` | bit HOẶC |
 | `^`        | bit XOR  |
 | `~`        | bit NOT  |
 | `<<`       | dời trái |

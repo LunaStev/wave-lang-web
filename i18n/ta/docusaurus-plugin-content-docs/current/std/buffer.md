@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# std::buffer 사용법
+# std::buffer பயன்பாடு
 
-`std::buffer`는 가변 바이트 버퍼와 제네릭 버퍼를 제공합니다.
+`std::buffer` மாறி பைட் பஃபர்கள் மற்றும் ஜெனரிக் பஃபர்களை வழங்குகிறது.
 
 ## import
 
@@ -15,9 +15,9 @@ import("std::buffer::read");
 import("std::buffer::write");
 ```
 
-## 1. 바이트 버퍼 (`Buffer`)
+## 1) பைட் பஃபர் (`Buffer`)
 
-### 생성/추가/수정
+### உருவாக்கவும்/சேர்க்கவும்/மாற்றவும்
 
 ```wave
 fun main() {
@@ -33,7 +33,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### முக்கிய செயல்பாடு
 
 ```wave
 fun buffer_new(capacity: i64) -> Buffer
@@ -46,9 +46,9 @@ fun buffer_set(buf: ptr<Buffer>, index: i64, value: u8) -> bool
 fun buffer_free(buf: ptr<Buffer>) -> i64
 ```
 
-## 2. 제네릭 버퍼 (`TypedBuffer<T>`)
+## 2) பொதுவான தாங்கல் (`TypedBuffer<T>`)
 
-Wave는 타입 추론이 없으므로 타입 인자를 명시합니다.
+Wave க்கு வகை அனுமானம் இல்லை, எனவே வகை வாதங்கள் குறிப்பிடப்பட்டுள்ளன.
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-### 핵심 함수
+### முக்கிய செயல்பாடு
 
 ```wave
 fun tbuffer_new<T>(elem_size: i64, initial_cap: i64) -> TypedBuffer<T>
@@ -75,7 +75,7 @@ fun tbuffer_set<T>(buf: ptr<TypedBuffer<T>>, index: i64, value: T) -> bool
 fun tbuffer_free<T>(buf: ptr<TypedBuffer<T>>) -> i64
 ```
 
-주의:
+குறிப்பு:
 
-- `elem_size`는 호출자가 정확히 넣어야 합니다.
-- 범위 밖 접근은 `false` 또는 기본값(`buffer_at`은 `0`)을 반환합니다.
+- `elem_size` ஐ அழைப்பவர் சரியாக உள்ளிட வேண்டும்.
+- வரம்பிற்கு வெளியே உள்ள அணுகல் `false` அல்லது இயல்புநிலையை வழங்குகிறது (`buffer_at` என்பது `0`).

@@ -39,9 +39,9 @@ var p2: ptr<ptr<i32>> = &p1;
 var x: i32 = 10;
 var p: ptr<i32> = &x;
 
-println("{}", deref p); // Gibt 10 aus
+println("{}", deref p); // 10
 deref p = 20;
-println("{}", x); // Gibt 20 aus
+println("{}", x);       // 20
 ```
 
 ## `null` Literal-Regeln
@@ -58,16 +58,16 @@ Kernregeln:
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // FEHLER
-// var b: bool = null; // FEHLER
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## Zeigerarithmetik
 
 Wave unterstützt die folgende Zeigerarithmetik.
 
-- `ptr + int`: Zeigervorschub basierend auf GEP
-- `int + ptr`: gleiche Operation
+- `int + ptr`: Zeigervorschub basierend auf GEP
+- `ptr - int`: gleiche Operation
 - `ptr - int`: Zeigerrückschub basierend auf GEP
 - `ptr - ptr`: Berechnung der Byte-Differenz als `i64`
 
@@ -83,7 +83,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base; // 12 (Byte-Differenz)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## Zeigervergleich

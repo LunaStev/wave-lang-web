@@ -34,7 +34,7 @@ Exemple:
 
 ```
 {
-    status: "succès",
+    status: "success",
     code = 200,
     user = { id: 123, name: "John Doe" }
 }
@@ -51,9 +51,9 @@ Exemple:
 Exemple:
 
 ```
-tâches: [
-    { task_id: 1, title: "Compléter le rapport de projet" },
-    { task_id: 2, title: "Revoir les retours d'équipe" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -63,15 +63,15 @@ tâches: [
 
 - Les types de valeurs incluent chaînes, nombres, booléens, objets et tableaux.
 
-- Les chaînes sont entourées de guillemets `"`.
+- Les chaînes sont entourées de guillemets `“`.
 
 - Les nombres sont utilisés sans guillemets et peuvent être des entiers ou des flottants.
 
 Exemple:
 
 ```
-nom: "John Doe"
-âge = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Types de données (Data Types)
@@ -86,7 +86,7 @@ nom: "John Doe"
 
 ```
 42
-3,14
+3.14
 ```
 
 - Booléen (Boolean) : utilise des valeurs `true` ou `false`.
@@ -102,10 +102,10 @@ is_active = true
 
 ```ws
 {
-    // Code de statut et information de message
+    // Code d'état et informations sur les messages
     status: "success",
     code: 200,
-    message: "Données récupérées avec succès",
+    message: "Data retrieved successfully",
 
     user = {
         id = 123,
@@ -117,14 +117,14 @@ is_active = true
     tasks: [
         {
             task_id: 1,
-            title: "Terminer le rapport de projet",
-            status: "en cours",
+            title: "Complete project report",
+            status: "in-progress",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "Examiner les commentaires de l'équipe",
-            status: "en attente",
+            title: "Review team feedback",
+            status: "pending",
             due_date: "2024-10-20"
         }
     ]

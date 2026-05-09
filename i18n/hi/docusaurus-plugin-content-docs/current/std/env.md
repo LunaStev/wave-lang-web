@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf NUL समाप्त स्ट्रिंग है
+        // buf एक NUL समाप्त स्ट्रिंग है
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // कुंजी नहीं मिली
+        // चाभी नहीं
     } else if (n == ENV_ERR_NO_SPACE) {
-        // बफर अपर्याप्त
+        // बफ़र से बाहर
     }
 }
 ```

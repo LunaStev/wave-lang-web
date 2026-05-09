@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৩
+sidebar_position: 3
 ---
 
 # std::env ব্যবহারের নিয়ম
@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf এ NUL সমাপ্ত স্ট্রিং
+        // buf হল একটি NUL সমাপ্ত স্ট্রিং
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // কী অনুপস্থিত
+        // কোন চাবি নেই
     } else if (n == ENV_ERR_NO_SPACE) {
-        // বাফার পর্যাপ্ত নয়
+        // বাফার আউট
     }
 }
 ```

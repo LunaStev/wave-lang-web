@@ -12,7 +12,7 @@ sidebar_position: 1
 
 ```wave
 fun main() {
-    println("سلام ویو");
+    println("Hello Wave");
 }
 ```
 
@@ -37,7 +37,7 @@ fun main() {
 ## نتیجه اجرا
 
 ```text
-سلام ویو
+Hello Wave
 ```
 
 ---
@@ -48,15 +48,15 @@ fun main() {
 
 ```wave
 fun main() {
-    var name: str = "ویو";
-    println("سلام, {}!", name);
+    var name: str = "Wave";
+    println("Hello, {}!", name);
 }
 ```
 
 خروجی:
 
 ```text
-سلام, ویو!
+Hello, Wave!
 ```
 
 ---

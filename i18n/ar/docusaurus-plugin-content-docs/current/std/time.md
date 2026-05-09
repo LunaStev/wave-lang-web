@@ -9,10 +9,10 @@ sidebar_position: 9
 ## استيراد
 
 ```wave
-استيراد("std::time::clock");
-استيراد("std::time::diff");
-استيراد("std::time::sleep");
-استيراد("std::sys::time");
+import("std::time::clock");
+import("std::time::diff");
+import("std::time::sleep");
+import("std::sys::time");
 ```
 
 ## 1. قياس الفترات

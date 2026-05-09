@@ -91,7 +91,7 @@ fun main() {
 ## 常见错误
 
 ```wave
-var x: i32 = identity(10); // 类型参数缺失（不允许）
+var x: i32 = identity(10); // 缺少类型参数（不允许）
 ```
 
 必须如下所示调用。

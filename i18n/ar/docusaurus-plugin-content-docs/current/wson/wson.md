@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٣
+sidebar_position: 3
 ---
 
 # Wave طريقة توضيح كائن التسلسل

@@ -20,8 +20,8 @@ Si la condición es falsa (False), el bloque se omite y se procede al siguiente 
 La estructura básica del comando IF en Wave es la siguiente.
 
 ```wave
-if (condición) {
-    // Código a ejecutar si la condición es verdadera
+if (condition) {
+    // Código que se ejecutará si la condición es verdadera
 }
 ```
 
@@ -35,9 +35,9 @@ El resultado de la expresión condicional debe evaluarse como verdadero o falso,
 A continuación, se presenta un ejemplo simple del comando IF.
 
 ```wave
-var temperatura :i32 = 30;
+var temperature :i32 = 30;
 
-if (temperatura > 25) {
+if (temperature > 25) {
     println("Hace calor.");
 }
 ```
@@ -55,10 +55,10 @@ El comando IF-ELSE es una estructura que ejecuta uno de dos bloques de código d
 La estructura básica es la siguiente.
 
 ```wave
-if (condición) {
-    // Código a ejecutar si la condición es verdadera
+if (condition) {
+    // Código que se ejecutará si la condición es verdadera
 } else {
-    // Código a ejecutar si la condición es falsa
+    // Código que se ejecutará si la condición es falsa
 }
 ```
 
@@ -68,12 +68,12 @@ Solo se ejecuta uno de los dos bloques, nunca simultáneamente.
 A continuación se muestra un ejemplo con una sentencia IF-ELSE.
 
 ```wave
-var puntaje :i32 = 70;
+var score :i32 = 70;
 
-if (puntaje >= 60) {
-    println("¡Aprobado!");
+if (score >= 60) {
+    println("¡Pasaste!");
 } else {
-    println("No aprobado.");
+    println("Falló.");
 }
 ```
 
@@ -88,16 +88,16 @@ Las sentencias IF anidadas son útiles cuando se deben evaluar condiciones en m�
 El siguiente ejemplo es una sentencia IF anidada que imprime resultados diferentes según la puntuación.
 
 ```wave
-var puntaje :i32 = 85;
+var score :i32 = 85;
 
-if (puntaje >= 60) {
-    if (puntaje >= 90) {
-        println("¡Excelente calificación!");
+if (score >= 60) {
+    if (score >= 90) {
+        println("¡Excelentes calificaciones!");
     } else {
-        println("Aprobado.");
-    } 
+        println("Pasé.");
+    }
 } else {
-    println("No aprobado.");
+    println("Falló.");
 }
 ```
 

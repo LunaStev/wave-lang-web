@@ -2,9 +2,9 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# std :: ሕብረቁምፊ አጠቃቀም
 
-NUL 종료 문자열(`str`) 유틸입니다.
+NUL መጨረሻ ሕብረቁምፊ (`str`) መገልገያ።
 
 ## import
 
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1) ርዝመት / ማነፃፀር
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2) ፍለጋ/መቁጠር
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3) ክልልን + ASCII ይከርክሙ
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4) ሃሽ
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## ዋና ተግባር
 
 ```wave
 fun len(s: str) -> i32

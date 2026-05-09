@@ -49,14 +49,14 @@ Wave поддерживает интерполяцию строк.
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("Привет, {}!", name);
+    println("Hello, {}!", name);
 }
 ```
 
 Вывод:
 
 ```text
-Привет, Wave!
+Hello, Wave!
 ```
 
 ---

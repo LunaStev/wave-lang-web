@@ -63,7 +63,7 @@ tasks: [
 
 - 值的类型包括字符串、数字、布尔值、对象和数组等。
 
-- 字符串用双引号 `"` 括起来。
+- 字符串用双引号 `“` 括起来。
 
 - 数字使用时不加引号，可以是整数或浮点数的形式。
 
@@ -102,7 +102,7 @@ is_active = true
 
 ```ws
 {
-    // 状态代码和消息信息
+    // 状态码和消息信息
     status: "success",
     code: 200,
     message: "Data retrieved successfully",

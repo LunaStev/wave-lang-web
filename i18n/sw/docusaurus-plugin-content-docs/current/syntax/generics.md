@@ -15,7 +15,7 @@ Kanuni za msingi:
 
 ```wave
 fun identity<T>(x: T) -> T {
-    rudi x;
+    return x;
 }
 ```
 
@@ -32,14 +32,14 @@ fun main() {
 
 ```wave
 struct Pair<A, B> {
-    ya kwanza: A;
-    ya pili: B;
+    first: A;
+    second: B;
 }
 
 fun pair<A, B>(a: A, b: B) -> Pair<A, B> {
-    rudi Pair<A, B> {
-        ya kwanza: a;
-        ya pili: b;
+    return Pair<A, B> {
+        first: a;
+        second: b;
     };
 }
 
@@ -77,8 +77,8 @@ fun main() {
 ## 5. Matumizi na maktaba za kawaida
 
 ```wave
-ingiza("std::math::int");
-ingiza("std::env::environ");
+import("std::math::int");
+import("std::env::environ");
 
 fun main() {
     var x: i32 = num_abs<i32>(-100, 0);
@@ -91,7 +91,7 @@ fun main() {
 ## Makosa ya mara kwa mara
 
 ```wave
-var x: i32 = identity(10); // Kipengele cha aina kimekosekana (haikubaliwi)
+var x: i32 = identity(10); // Aina ya hoja inayokosekana (hairuhusiwi)
 ```
 
 Yapaswa kuitwa kama ifuatavyo.

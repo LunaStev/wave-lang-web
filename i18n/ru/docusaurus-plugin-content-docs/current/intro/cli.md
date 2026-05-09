@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. Основной формат
 
 ```bash
-wavec [глобальные-опции] <команда> [опции-команды]
+wavec [global-options] <command> [command-options]
 ```
 
 Пример:
@@ -54,7 +54,7 @@ wavec -- run main.wave
 
 ## 3. Команды
 
-## 3.1 `run <файл>`
+## 3.1 `run <file>`
 
 Компилирует и выполняет файл Wave.
 
@@ -75,7 +75,7 @@ wavec run hello.wave
 
 ---
 
-## 3.2 `build <файл>`
+## 3.2 `build <file>`
 
 Создает исполняемый файл (exe).
 
@@ -225,7 +225,7 @@ wavec run app.wave --dep math=.vex/dep/math
 Правила:
 
 - Формат `name`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` всегда в формате `name=путь`
+- `--dep` всегда в формате `name=path`
 - Если дублировать одноИмя пакета несколько раз будет ошибкой
 
 ---
@@ -300,7 +300,7 @@ import("json::parser::core");
 Порядок определения корня пакета:
 
 1. Явное сопоставление `--dep name=path`.
-2. Поиск `<root>/<package>` в каждом `--dep-root`.
+2. Поиск `--dep-root` в каждом `<root>/<package>`.
 
 Если одинаковый пакет найден в нескольких dep-root:
 
@@ -380,7 +380,7 @@ wavec run main.wave \
 Пример:
 
 ```bash
-# Внутренне выполняется vex
+# Внутренне Vex делает
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: зарезервировано, не реализовано
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

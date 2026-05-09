@@ -17,7 +17,7 @@ Kernprinzipien:
 ## 1. Grundform
 
 ```bash
-wavec [Globale-Optionen] <Befehl> [Befehlsoptionen]
+wavec [global-options] <command> [command-options]
 ```
 
 Beispiel:
@@ -32,7 +32,7 @@ wavec run app.wave --dep-root .vex/dep
 
 ## 2. Befehlsanalyse-Regeln (wichtig)
 
-Zuerst scannt `wavec` die **globalen Optionen** in allen Argumenten und interpretiert dann den verbleibenden Teil als `<Befehl>`.
+Zuerst scannt `wavec` die **globalen Optionen** in allen Argumenten und interpretiert dann den verbleibenden Teil als `<command>`.
 
 Das bedeutet, dass die Position der globalen Option flexibel ist.
 
@@ -380,7 +380,7 @@ Empfohlene Struktur:
 Beispiel:
 
 ```bash
-# intern wird von vex ausgeführt
+# Intern tut Vex es
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserviert, nicht implementiert
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

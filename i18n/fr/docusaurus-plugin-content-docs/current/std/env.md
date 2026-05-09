@@ -24,9 +24,9 @@ fun main() {
     if (n >= 0) {
         // buf est une chaîne terminée par NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // clé introuvable
+        // pas de clé
     } else if (n == ENV_ERR_NO_SPACE) {
-        // buffer insuffisant
+        // Hors tampon
     }
 }
 ```

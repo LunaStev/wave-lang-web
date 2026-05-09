@@ -9,8 +9,8 @@ API متزامن لـ IPv4 TCP/UDP.
 ## استيراد
 
 ```wave
-استيراد("std::net::tcp");
-استيراد("std::net::udp");
+import("std::net::tcp");
+import("std::net::udp");
 ```
 
 ## 1. خادم TCP

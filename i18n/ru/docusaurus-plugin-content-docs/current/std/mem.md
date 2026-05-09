@@ -18,13 +18,13 @@ import("std::mem::cstr");
 
 ```wave
 fun main() {
- var p: ptr<u8> = mem_alloc_zeroed(256);
- if (p == null) {
- return;
- }
+    var p: ptr<u8> = mem_alloc_zeroed(256);
+    if (p == null) {
+        return;
+    }
 
- mem_set(p, 65, 10); // 'A'
- mem_free(p, 256);
+    mem_set(p, 65, 10); // 'A'
+    mem_free(p, 256);
 }
 ```
 
@@ -32,13 +32,13 @@ fun main() {
 
 ```wave
 fun main() {
- var p: ptr<u8> = mem_alloc(16);
- p = mem_realloc(p, 16, 64);
+    var p: ptr<u8> = mem_alloc(16);
+    p = mem_realloc(p, 16, 64);
 
- // безопасное перемещение в перекрывающиеся области памяти
- mem_move(p + 1, p, 10);
+    // Безопасное перемещение перекрывающихся областей памяти
+    mem_move(p + 1, p, 10);
 
- mem_free(p, 64);
+    mem_free(p, 64);
 }
 ```
 
@@ -46,15 +46,15 @@ fun main() {
 
 ```wave
 fun main() {
- var arr: ptr<i32> = mem_alloc_items_zeroed<i32>(8, 4);
- if (arr == null) {
- return;
- }
+    var arr: ptr<i32> = mem_alloc_items_zeroed<i32>(8, 4);
+    if (arr == null) {
+        return;
+    }
 
- mem_set_items<i32>(arr, 7, 8, 4);
- mem_swap<i32>(&arr[0], &arr[1]);
+    mem_set_items<i32>(arr, 7, 8, 4);
+    mem_swap<i32>(&arr[0], &arr[1]);
 
- mem_free_items<i32>(arr, 8, 4);
+    mem_free_items<i32>(arr, 8, 4);
 }
 ```
 
@@ -62,11 +62,11 @@ fun main() {
 
 ```wave
 fun main() {
- var dst: array<u8, 32>;
- mem_copy_cstr(&dst[0], "wave");
+    var dst: array<u8, 32>;
+    mem_copy_cstr(&dst[0], "wave");
 
- var n: i64 = mem_len_cstr("hello");
- var eq: bool = mem_eq_cstr("abc", "abc");
+    var n: i64 = mem_len_cstr("hello");
+    var eq: bool = mem_eq_cstr("abc", "abc");
 }
 ```
 

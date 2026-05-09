@@ -88,7 +88,7 @@ enum ShaderUniformType -> i32 {
 Các loại repr cho phép:
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - `type alias` của loại này
 
 ```wave
@@ -174,6 +174,6 @@ fun main() {
 
     println("{}", g(X)); // 123
     println("{}", g(Y)); // 1
-    println("{}", g(Z)); // 11
+    println("{}", f(Z)); // 11
 }
 ```

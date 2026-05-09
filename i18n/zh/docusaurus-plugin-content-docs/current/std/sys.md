@@ -7,17 +7,17 @@ sidebar_position: 10
 `std::sys` 是高层模块下的操作系统抽象层。
 
 ```text
-std(高层)
-  -> sys 调度器
-  -> sys/linux 或 sys/macos
-  -> 系统调用
+std(high-level)
+  -> sys dispatcher
+  -> sys/linux or sys/macos
+  -> syscall
 ```
 
 ## 基本规范
 
 - 大多数函数返回原始系统调用值。
 - `>= 0` 表示成功，`< 0` 表示失败（`-errno`）。
-- 在高层应用程序代码中，尽可能先使用 `std::net`、`std::time`、`std::env` 而不是 `std::sys`。
+- 在高层应用程序代码中，尽可能先使用 `std::sys`、`std::net`、`std::time` 而不是 `std::env`。
 
 ## 1. 文件读取示例 (`std::sys::fs`)
 

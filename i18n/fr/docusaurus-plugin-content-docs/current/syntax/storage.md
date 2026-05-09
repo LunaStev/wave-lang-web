@@ -29,8 +29,8 @@ const MAGIC: i32 = 0x1BADB002;
 Elle est réaffectable et si aucune valeur initiale n'est donnée, elle est initialisée à la valeur zéro de type.
 
 ```wave
-static COMPTEUR : i32 = 0;
-static VGA_BUFFER : ptr<char> = 0xb8000 en tant que ptr<char>;
+static COUNTER: i32 = 0;
+static VGA_BUFFER: ptr<char> = 0xb8000 as ptr<char>;
 ```
 
 ## Variable locale : `var` / `let`
@@ -39,9 +39,9 @@ static VGA_BUFFER : ptr<char> = 0xb8000 en tant que ptr<char>;
 
 ```wave
 fun main() -> i32 {
-    var x : i32 = 10;
-    let y : i32 = 20;
-    let mut z : i32 = 30;
+    var x: i32 = 10;
+    let y: i32 = 20;
+    let mut z: i32 = 30;
 
     x = x + 1;
     z = z + 1;
@@ -52,5 +52,5 @@ fun main() -> i32 {
 ## Contraintes
 
 - `var`, `let` ne peuvent pas être utilisés au niveau supérieur.
-- `const`, `static` ne peuvent pas être utilisés à l'intérieur d'une fonction/bloc.
+- `var`, `let` ne peuvent pas être utilisés à l'intérieur d'une fonction/bloc.
 - `let` est immuable et ne peut pas être réaffecté.

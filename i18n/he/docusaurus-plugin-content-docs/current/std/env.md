@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // המשתנה הופעה במערך עם NUL
+        // buf היא מחרוזת עם סיום NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // המפתח לא נמצא
+        // ללא מפתח
     } else if (n == ENV_ERR_NO_SPACE) {
-        // חוסר מקום במערך
+        // מחוץ למאגר
     }
 }
 ```

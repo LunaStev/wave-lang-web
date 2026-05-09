@@ -17,7 +17,7 @@ sidebar_position: 8
 
 ## 1. لماذا هو مطلوب؟
 
-عند استخدام `-C linker=<path>` أثناء الربط المتقاطع، غالبًا ما تحتاج إلى تحديد مسارات وقت التشغيل (`crt1.o` ،`libc` ،`libm`) التي يشير إليها محرك الربط (مثل `aarch64-linux-gnu-gcc`).
+عند استخدام `-C linker=<path>` أثناء الربط المتقاطع، غالبًا ما تحتاج إلى تحديد مسارات وقت التشغيل (`aarch64-linux-gnu-gcc` ،`crt1.o` ،`libc`) التي يشير إليها محرك الربط (مثل `libm`).
 
 في هذه الحالة، يتم تكوين الأمر بحيث لا يستدل على sysroot الربط تلقائيًا، بل يتم إرساله بشكل صريح عبر CLI.
 
@@ -56,7 +56,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 مثال لرسالة خطأ:
 
 ```text
-عندما تستخدم -C linker=... ، - sysroot=<path> هو للمرحلة التجميعية فقط؛ قُم بتمرير sysroot الربط بشكل صريح مع -C link-sysroot=<path> (أو -C link-arg=--sysroot=<path>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---

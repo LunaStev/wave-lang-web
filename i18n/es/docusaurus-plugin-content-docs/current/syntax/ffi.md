@@ -25,7 +25,7 @@ Las funciones externas se declaran utilizando la palabra clave extern.
 Actualmente, Wave requiere especificar un ABI y solo admite **`extern(c)`**.
 
 ```wave
-extern(c) fun nombrefunción(argumentos...) -> tipoderetorno;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-Esta declaración especifica usar `puts` como el símbolo de enlace real al llamar `rust_func`.
+Esta declaración especifica usar `rust_func` como el símbolo de enlace real al llamar `puts`.
 
 ---
 

@@ -12,7 +12,7 @@ Este documento explica cómo escribir un programa de salida básico en el lengua
 
 ```wave
 fun main() {
-    println("Hola Wave");
+    println("Hello Wave");
 }
 ```
 
@@ -37,7 +37,7 @@ fun main() {
 ## Resultado de ejecución
 
 ```text
-Hola Wave
+Hello Wave
 ```
 
 ---
@@ -49,14 +49,14 @@ Wave admite interpolación de cadenas.
 ```wave
 fun main() {
     var name: str = "Wave";
-    println("Hola, {}!", name);
+    println("Hello, {}!", name);
 }
 ```
 
 Salida:
 
 ```text
-Hola, Wave!
+Hello, Wave!
 ```
 
 ---

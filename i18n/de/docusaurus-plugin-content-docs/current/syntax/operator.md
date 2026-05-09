@@ -32,7 +32,7 @@ Dieses Dokument fasst die tatsächlich verwendbaren Operatoren basierend auf dem
 | Operator   | Beschreibung    |
 | ---------- | --------------- |
 | `&&`       | Logisches UND   |
-| \\\`\\ | Logisches ODER  |
+| `\|\|` | logisches ODER |
 | `!`        | Logisches NICHT |
 
 ## Bit
@@ -40,7 +40,7 @@ Dieses Dokument fasst die tatsächlich verwendbaren Operatoren basierend auf dem
 | Operator   | Beschreibung    |
 | ---------- | --------------- |
 | `&`        | Bitweises UND   |
-| \\\`\\ | Bitweises ODER  |
+| `\|` | Bit ODER |
 | `^`        | Bitweises XOR   |
 | `~`        | Bitweises NICHT |
 | `<<`       | Linksshift      |

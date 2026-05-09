@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf là chuỗi kết thúc NUL
+        // buf là một chuỗi kết thúc bằng NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // Không có khóa
+        // không có chìa khóa
     } else if (n == ENV_ERR_NO_SPACE) {
-        // Thiếu bộ nhớ đệm
+        // Hết bộ đệm
     }
 }
 ```

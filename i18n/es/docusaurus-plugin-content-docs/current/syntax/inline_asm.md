@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## Introducción
 
-El ensamblaje en línea de Wave se escribe usando `asm { ... Se escribe en un bloque `}\`.
+El ensamblaje en línea de Wave está escrito en bloques `asm { ... }`.
 Se pueden controlar directamente los registros, la memoria y los caminos de llamada del sistema dentro del código Wave.
 
 Objetivos actualmente soportados:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- `x86_64` independiente
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - `aarch64` independiente
+- `riscv64` independiente
 - `riscv64` independiente
 
 Windows y los objetivos de 32 bits no están soportados aún.
@@ -38,7 +38,7 @@ asm {
 Componentes:
 
 - Línea de cadena: instrucción de ensamblaje real
-- `in(...)`: operando de entrada
+- `clobber(...)`: operando de entrada
 - `out(...)`: operando de salida
 - `clobber(...)`: pista de registros/estado/memoria destruidos
 
@@ -100,10 +100,10 @@ in("r") &buf
 out("rax") ret
 ```
 
-Destino de salida(`out(...) se recomienda el siguiente patrón según la implementación actual para el `target\`.
+
 
 - Variable: `out("rax") ret`
-- Desreferencia de puntero: `out("rax") deref p`
+- Desreferencia de puntero: `clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 Elementos principales:
 
 - Registros: `"rax"`, `"x0"`, etc.
-- Especial: `"memory"`, `"cc"` (normalización interna por objetivo)
+- Especial: `$0`, `$1` (normalización interna por objetivo)
 
 El compilador añade automáticamente clobber básico en modo seguro conservador.
 (`memory`, y series de flags/cc; en RISC-V independiente generalmente `memory`)

@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## 1. Basic Structure
 
-- The content of the file starts and ends with an object (`object`) enclosed in curly braces `{}`.
+- The content of the file starts and ends with an object (`{}`) enclosed in curly braces `object`.
 
 - An object consists of pairs of attribute names (key) and values (value).
 
@@ -63,7 +63,7 @@ tasks: [
 
 - Types of values include strings, numbers, booleans, objects, and arrays.
 
-- A string is enclosed in double quotes `"`.
+- A string is enclosed in double quotes `“`.
 
 - Numbers are used without double quotes and can be integers or floating-point numbers.
 
@@ -111,7 +111,7 @@ is_active = true
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        age: 25  # User age
+        age: 25  # user age
     },
 
     tasks: [

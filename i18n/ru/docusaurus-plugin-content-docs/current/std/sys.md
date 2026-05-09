@@ -8,16 +8,16 @@ sidebar_position: 10
 
 ```text
 std(high-level)
- -> sys dispatcher
- -> sys/linux or sys/macos
- -> syscall
+  -> sys dispatcher
+  -> sys/linux or sys/macos
+  -> syscall
 ```
 
 ## Основные правила
 
 - Большинство функций возвращает значение как из raw syscall.
 - `>= 0` успех, `< 0` ошибка(`-errno`).
-- В высокоуровневом приложении, если возможно, сначала используйте `std::net`, `std::time`, `std::env`, а не `std::sys`.
+- В высокоуровневом приложении, если возможно, сначала используйте `std::sys`, `std::net`, `std::time`, а не `std::env`.
 
 ## 1. Пример чтения файла (`std::sys::fs`)
 
@@ -25,14 +25,14 @@ std(high-level)
 import("std::sys::fs");
 
 fun main() {
- var fd: i64 = open("/etc/hosts", 0, 0);
- if (fd < 0) {
- return;
- }
+    var fd: i64 = open("/etc/hosts", 0, 0);
+    if (fd < 0) {
+        return;
+    }
 
- var buf: array<u8, 256>;
- var n: i64 = read(fd, &buf[0], 256);
- close(fd);
+    var buf: array<u8, 256>;
+    var n: i64 = read(fd, &buf[0], 256);
+    close(fd);
 }
 ```
 
@@ -42,12 +42,12 @@ fun main() {
 import("std::sys::socket");
 
 fun main() {
- var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
- if (fd < 0) {
- return;
- }
+    var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (fd < 0) {
+        return;
+    }
 
- shutdown(fd, SHUT_RDWR);
+    shutdown(fd, SHUT_RDWR);
 }
 ```
 
@@ -57,12 +57,12 @@ fun main() {
 import("std::sys::memory");
 
 fun main() {
- var p: ptr<u8> = sys_alloc(4096);
- if (p == null) {
- return;
- }
+    var p: ptr<u8> = sys_alloc(4096);
+    if (p == null) {
+        return;
+    }
 
- sys_free(p, 4096);
+    sys_free(p, 4096);
 }
 ```
 

@@ -37,10 +37,10 @@ In der obigen Deklaration ist MyInt genau derselbe Typ wie i32.
 ### Beispielverwendung
 
 ```wave
-type Größe = i64;
+type Size = i64;
 type Index = u32;
 
-fun add(a: Größe, b: Größe) -> Größe {
+fun add(a: Size, b: Size) -> Size {
     return a + b;
 }
 ```
@@ -89,14 +89,14 @@ enum ShaderUniformType -> i32 {
 
 Zulässige repr-Typen:
 
-- `i8`, `i16`, `i32`, `i64`
+- `u8`, `u16`, `u32`, `u64`
 - `u8`, `u16`, `u32`, `u64`
 - `type alias` des entsprechenden Typs
 
 ```wave
 type MyInt = i32;
 
-enum Beispiel -> MyInt {
+enum Example -> MyInt {
     X,
     Y
 }
@@ -147,24 +147,24 @@ const Y: ShaderUniformType = D;
 ## Konkretes Beispiel
 
 ```wave
-type MeineInt = i32;
+type MyInt = i32;
 
-enum ShaderUniformType -> MeineInt {
+enum ShaderUniformType -> MyInt {
     A = 0,
     B,
     C = 10,
     D
 }
 
-const X: MeineInt = 123;
-const Y: MeineInt = B;
+const X: MyInt = 123;
+const Y: MyInt = B;
 const Z: ShaderUniformType = D;
 
-fun f(t: ShaderUniformType) -> MeineInt {
+fun f(t: ShaderUniformType) -> MyInt {
     return t;
 }
 
-fun g(v: MeineInt) -> MeineInt {
+fun g(v: MyInt) -> MyInt {
     return v;
 }
 

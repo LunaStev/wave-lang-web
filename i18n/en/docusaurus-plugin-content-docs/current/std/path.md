@@ -22,7 +22,7 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // Buffer insufficient
+        // Out of buffer
     }
 }
 ```

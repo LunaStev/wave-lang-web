@@ -2,9 +2,9 @@
 sidebar_position: 8
 ---
 
-# std::string 사용법
+# std::சரம் பயன்பாடு
 
-NUL 종료 문자열(`str`) 유틸입니다.
+NUL இறுதி சரம் (`str`) பயன்பாடு.
 
 ## import
 
@@ -17,7 +17,7 @@ import("std::string::ascii");
 import("std::string::hash");
 ```
 
-## 1. 길이/비교
+## 1) நீளம்/ஒப்பீடு
 
 ```wave
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
 }
 ```
 
-## 2. 검색/카운트
+## 2) தேடல்/எண்ணிக்கை
 
 ```wave
 fun main() {
@@ -38,7 +38,7 @@ fun main() {
 }
 ```
 
-## 3. 트림 범위 + ASCII
+## 3) டிரிம் வரம்பு + ASCII
 
 ```wave
 fun main() {
@@ -52,7 +52,7 @@ fun main() {
 }
 ```
 
-## 4. 해시
+## 4) ஹாஷ்
 
 ```wave
 fun main() {
@@ -61,7 +61,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## முக்கிய செயல்பாடு
 
 ```wave
 fun len(s: str) -> i32

@@ -56,7 +56,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 त्रुटि संदेश उदाहरण:
 
 ```text
-जब -C linker=... का उपयोग करते हैं, --sysroot=<path> केवल संकलन-चरण के लिए होता है; लिंक sysroot को स्पष्ट रूप से -C link-sysroot=<path> (या -C link-arg=--sysroot=<path>) से पास करें
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -66,11 +66,11 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ## 4.1 AArch64 Linux क्रॉस लिंक
 
 ```bash
-वेवेक \
+wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
-  टेस्ट/test93.wave का निर्माण \
+  build test/test93.wave \
   --target aarch64-unknown-linux-gnu \
   --emit=bin \
   -o /tmp/test93-aarch64.bin
@@ -79,11 +79,11 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ## 4.2 रॉ लिंक तर्क विधि
 
 ```bash
-वेवेक \
+wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-arg=--sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
-  टेस्ट/test93.wave का निर्माण \
+  build test/test93.wave \
   --target aarch64-unknown-linux-gnu \
   --emit=bin
 ```
@@ -93,7 +93,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 यदि लिंक चरण नहीं है, तो लिंक sysroot की आवश्यकता नहीं होती।
 
 ```bash
-वेवेक --sysroot=/path/to/sysroot मुख्य.wav का निर्माण --emit=obj
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

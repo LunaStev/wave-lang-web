@@ -2,70 +2,70 @@
 sidebar_position: 2
 ---
 
-# Tatabahasa
+# tatabahasa
 
-## 1. Struktur Asas
+## 1. Struktur asas
 
-- Kandungan fail bermula dan berakhir dengan objek yang dikelilingi oleh kurungan `{}`.
+- Kandungan fail bermula dan berakhir dengan objek (`{}`) yang dikelilingi oleh pendakap `object`.
 
-- Objek terdiri daripada pasangan nama atribut (key) dan nilai (value).
+- Objek terdiri daripada pasangan nama atribut (kunci) dan nilai (nilai).
 
-- Nama atribut dan nilai dipisahkan dengan titik dua (`:`) atau tanda sama dengan (`=`).
+- Nama dan nilai hartanah dipisahkan oleh titik bertindih (`:`) atau tanda sama (`=`).
 
-## 2. Ulasan
+## 2. Komen
 
-- Ulasan bermula dengan `//` atau `#`, dan ditulis dalam satu baris.
+- Komen bermula dengan `//` atau `#` dan ditulis dalam satu baris.
 
-- Ulasan dikenakan sehingga akhir baris.
+- Komen dikenakan sehingga tamat baris.
 
-- Ulasan pelbagai baris tidak disokong secara berasingan, dan jika ulasan ditulis merentasi beberapa baris, `//` atau `#` perlu ditambah pada setiap baris.
+- Komen berbilang baris tidak disokong secara berasingan dan apabila menulis ulasan pada berbilang baris, `//` atau `#` mesti ditambahkan pada setiap baris.
 
-## 3. Objek (Object)
+## 3. Objek
 
-- Objek dikelilingi oleh kurungan `{}` dan mengandungi pasangan kunci-nilai.
+- Objek dikelilingi oleh pendakap kerinting `{}` dan mengandungi pasangan nilai kunci.
 
-- Tanda `:` atau `=` boleh digunakan di antara kunci dan nilai. Kedua-dua tanda boleh digunakan.
+- Simbol `:` atau `=` boleh digunakan antara kunci dan nilai. Kedua-dua simbol boleh digunakan secara bergantian.
 
-- Setiap atribut dipisahkan dengan koma (`,`).
+- Setiap sifat dipisahkan dengan koma (`,`).
 
-- Objek boleh mengandungi objek lain secara bersarang.
+- Anda boleh menggunakan objek dengan meletakkan objek lain di dalamnya.
 
 Contoh:
 
 ```
 {
-    status: "berjaya",
+    status: "success",
     code = 200,
     user = { id: 123, name: "John Doe" }
 }
 ```
 
-## 4. Tatasusunan (Array)
+## 4. Susunan
 
-- Tatasusunan dikelilingi oleh kurungan siku `[]`, dan elemen-elemen dipisahkan dengan koma (`,`).
+- Tatasusunan dikelilingi oleh kurungan segi empat sama `[]`, dan elemen dipisahkan dengan koma (`,`).
 
-- Elemen dalam tatasusunan boleh terdiri daripada pelbagai jenis data seperti objek, rentetan, dan nombor.
+- Unsur tatasusunan boleh terdiri daripada pelbagai jenis data, seperti objek, rentetan dan nombor.
 
-- Dalam WSON, tatasusunan boleh terkandung dalam objek, dan dalam tatasusunan yang lain, objek ataupun tatasusunan lain boleh bersarang.
+- Dalam WSON, tatasusunan boleh terkandung dalam objek, dan tatasusunan atau objek lain boleh bersarang dalam tatasusunan.
 
 Contoh:
 
 ```
 tasks: [
-    { task_id: 1, title: "Lengkapkan laporan projek" },
-    { task_id: 2, title: "Semak maklum balas pasukan" }
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
-## 5. Pasangan Kunci-Nilai (Key-Value Pair)
+## 5. Pasangan Nilai-Kekunci
 
-- Nama atribut terdiri daripada rentetan dan nilai diletakkan di belakang tanda `:` atau `=` tanpa ruang.
+- Nama sifat terdiri daripada rentetan dan nilai diletakkan selepas `:` dan `=` tanpa ruang.
 
-- Jenis nilai termasuk rentetan, nombor, boolean, objek, tatasusunan, dll.
+- Jenis nilai termasuk rentetan, nombor, boolean, objek dan tatasusunan.
 
-- Rentetan dikelilingi oleh tanda petik besar `“`.
+- Rentetan itu dikelilingi oleh petikan berganda `“`.
 
-- Nombor digunakan tanpa tanda petik, dan boleh berbentuk integer atau floating point.
+- Nombor digunakan tanpa petikan berganda dan boleh dalam bentuk integer atau nombor nyata.
 
 Contoh:
 
@@ -74,57 +74,57 @@ name: "John Doe"
 age = 25
 ```
 
-## 6. Jenis Data (Data Types)
+## 6. Jenis Data
 
-- Rentetan (String): Teks yang dikelilingi oleh tanda petik besar `"`.
+- Rentetan: Teks yang disertakan dalam tanda petikan berganda `"`.
 
 ```
 "hello world"
 ```
 
-- Nombor (Number): Nilai integer atau floating point.
+- Nombor: Integer atau nombor nyata.
 
 ```
 42
 3.14
 ```
 
-- Boolean (Boolean): Menggunakan nilai `true` atau `false`.
+- Boolean: Gunakan nilai `true` atau `false`.
 
 ```
 is_active = true
 ```
 
-- Objek(Object): Pasangan kunci dan nilai yang dikelompokkan dalam kurung kurawal `{}`.
-- Array: Senarai elemen yang dikelompokkan dalam kurung siku `[]`.
+- Objek: Sepasang kunci-ㄱbat yang disertakan dalam pendakap kerinting `{}`.
+- Tatasusunan: Senarai elemen yang disertakan dalam kurungan segi empat sama `[]`.
 
-## 7. Penerangan contoh
+## 7. Contoh penerangan
 
 ```ws
 {
-    // Maklumat kod dan mesej status
-    status: "berjaya",
+    // Kod status dan maklumat mesej
+    status: "success",
     code: 200,
-    message: "Data berjaya diperoleh",
+    message: "Data retrieved successfully",
 
     user = {
         id = 123,
         name: "John Doe",
         email: "john@example.com",
-        age: 25  # Umur pengguna
+        age: 25  # umur pengguna
     },
 
     tasks: [
         {
             task_id: 1,
-            title: "Selesaikan laporan projek",
-            status: "dalam proses",
+            title: "Complete project report",
+            status: "in-progress",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "Semak maklum balas pasukan",
-            status: "tertunda",
+            title: "Review team feedback",
+            status: "pending",
             due_date: "2024-10-20"
         }
     ]

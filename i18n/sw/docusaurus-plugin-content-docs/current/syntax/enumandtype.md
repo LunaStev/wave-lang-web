@@ -16,7 +16,7 @@ Neno kuu la aina hutoa jina jipya kwa aina iliyopo.
 Hili si jambo la kuunda aina mpya, bali ni jina lingine (alias) lililofanana.
 
 ```wave
-aina ya MyInt = i32
+type MyInt = i32;
 ```
 
 Katika tamko hili, MyInt inafanana kabisa na i32.
@@ -35,11 +35,11 @@ Katika tamko hili, MyInt inafanana kabisa na i32.
 ### Mfano wa matumizi
 
 ```wave
-aina ya Ukubwa = i64;
-aina ya Kiashiria = u32;
+type Size = i64;
+type Index = u32;
 
-fanya kuongeza(a: Ukubwa, b: Ukubwa) -> Ukubwa {
-    rudisha a + b;
+fun add(a: Size, b: Size) -> Size {
+    return a + b;
 }
 ```
 
@@ -48,14 +48,14 @@ fanya kuongeza(a: Ukubwa, b: Ukubwa) -> Ukubwa {
 ### Usawa wa Aina
 
 ```wave
-aina ya A = i32;
-aina ya B = A;
+type A = i32;
+type B = A;
 
-fanya f(x: i32) -> i32 { rudisha x; }
+fun f(x: i32) -> i32 { return x; }
 
-fanya kuu() {
+fun main() {
     var v: B = 10;
-    f(v); // SAWA
+    f(v); // OK
 }
 ```
 
@@ -71,7 +71,7 @@ Orodha ya Wave ina msingi wa nambari kamili.
 Kila aina ya orodha lazima iwe na aina ya uwakilishi.
 
 ```wave
-orodha ShaderUniformType -> i32 {
+enum ShaderUniformType -> i32 {
     A = 0,
     B,
     C = 10,
@@ -88,13 +88,13 @@ orodha ShaderUniformType -> i32 {
 Aina zinazokubalika za uwakilishi:
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - `aina kifupi` ya aina husika
 
 ```wave
-aina MyInt = i32;
+type MyInt = i32;
 
-enum Mfano -> MyInt {
+enum Example -> MyInt {
     X,
     Y
 }
@@ -109,7 +109,7 @@ enum Mfano -> MyInt {
 - Anza na 0 ikiwa hakuna thamani ya kwanza
 
 ```wave
-orodha E -> i32 {
+enum E -> i32 {
     A,        // 0
     B,        // 1
     C = 10,   // 10
@@ -124,8 +124,8 @@ orodha E -> i32 {
 orodha ni thamani ya nambari kamili, na inaweza kutumika huru kama kipengele na thamani inayorudi.
 
 ```wave
-fanya f(t: Aina ya ShaderUniform) -> i32 {
-    rudisha t;
+fun f(t: ShaderUniformType) -> i32 {
+    return t;
 }
 ```
 
@@ -136,8 +136,8 @@ fanya f(t: Aina ya ShaderUniform) -> i32 {
 mseto wa orodha ni thabiti ya wakati wa kutambaza.
 
 ```wave
-thabiti X: i32 = B;
-thabiti Y: Aina ya ShaderUniform = D;
+const X: i32 = B;
+const Y: ShaderUniformType = D;
 ```
 
 ---
@@ -145,28 +145,28 @@ thabiti Y: Aina ya ShaderUniform = D;
 ## Mfano Halisi
 
 ```wave
-aina MyInt = i32;
+type MyInt = i32;
 
-enum Aina ya ShaderUniform -> MyInt {
+enum ShaderUniformType -> MyInt {
     A = 0,
     B,
     C = 10,
     D
 }
 
-thabiti X: MyInt = 123;
-thabiti Y: MyInt = B;
-thabiti Z: Aina ya ShaderUniform = D;
+const X: MyInt = 123;
+const Y: MyInt = B;
+const Z: ShaderUniformType = D;
 
-fanya f(t: Aina ya ShaderUniform) -> MyInt {
-    rudisha t;
+fun f(t: ShaderUniformType) -> MyInt {
+    return t;
 }
 
-fanya g(v: MyInt) -> MyInt {
-    rudisha v;
+fun g(v: MyInt) -> MyInt {
+    return v;
 }
 
-fanya kuu() {
+fun main() {
     println("{}", f(A)); // 0
     println("{}", f(B)); // 1
     println("{}", f(C)); // 10

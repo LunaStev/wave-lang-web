@@ -29,8 +29,8 @@ Katika Wave, kazi hufafanuliwa kwa kutumia neno kuu `fun`, ikiundwa na jina la k
 Muundo wa msingi wa ufafanuzi wa kazi katika Wave ni kama ifuatavyo.
 
 ```wave
-fun kuu() {
-    // Andika msimbo hapa
+fun main() {
+    // Andika nambari yako hapa
 }
 ```
 
@@ -50,8 +50,8 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // kuita kazi ya kuongeza
-    println(result);            // chapisha: 12
+    var result = add(5, 7);     // ongeza simu ya utendaji
+    println(result);            // Pato: 12
 }
 ```
 
@@ -89,7 +89,7 @@ Vigezo visivyobadilika hutangazwa kwa kutumia neno let.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // kosa: vigezo visivyobadilika haviwezi kubadilishwa thamani.
+// y = 10;   // Hitilafu: Vigezo visivyoweza kubadilika haviwezi kubadilisha thamani yake.
 ```
 
 Vigezo visivyobadilika vinahakikisha thamani haibadiliki, ikisaidia kuimarisha uthabiti na ubashiri wa programu.

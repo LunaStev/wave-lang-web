@@ -47,7 +47,7 @@ Configura la variable de entorno `LLVM_SYS_140_PREFIX` para que el compilador Wa
 Luego descarga y descomprime el paquete Wave (`.tar.gz`) de la versión especificada por el usuario.
 Después de descomprimir, instala el ejecutable `wavec` en `/usr/local/bin`, configurándolo para que el comando `wavec` se pueda usar desde cualquier parte del sistema.
 
-Una vez completada la instalación, verifica que se haya instalado correctamente con el comando `wavec --version`.
+Una vez completada la instalación, verifica que se haya instalado correctamente con el comando `wavec`.
 
 ## Confirmación de instalación
 

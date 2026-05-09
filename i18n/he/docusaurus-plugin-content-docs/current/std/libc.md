@@ -25,7 +25,7 @@ import("std::libc::string");
 
 ```wave
 fun main() {
-    puts("שלום מ-libc" כ-ptr<i8>);
+    puts("hello from libc" as ptr<i8>);
 }
 ```
 

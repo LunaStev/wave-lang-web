@@ -54,7 +54,7 @@ fun main() {
     var sock: UdpSocket = udp_bind(9000);
     var peer: UdpAddr = udp_addr_loopback(9001);
 
-    udp_send_str_to(sock, peer, "שלום");
+    udp_send_str_to(sock, peer, "hello");
 
     var src: UdpAddr;
     var buf: array<u8, 512>;

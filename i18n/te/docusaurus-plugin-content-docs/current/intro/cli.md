@@ -2,25 +2,25 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI 레퍼런스
+# `wavec` CLI సూచన
 
-이 문서는 **현재 Wave 컴파일러(`wavec`) 구현 기준**의 CLI 동작을 정밀하게 설명합니다.
+ఈ పత్రం **ప్రస్తుత Wave కంపైలర్ (`wavec`) అమలు బేస్** యొక్క CLI ప్రవర్తనను వివరిస్తుంది.
 
-핵심 원칙:
+ప్రధాన సూత్రాలు:
 
-- `wavec`는 컴파일러입니다.
-- 패키지 설치/해결(lockfile, registry, 다운로드)은 `wavec`의 책임이 아닙니다.
-- 외부 의존성은 `wavec` 실행 시 **명시적 CLI 인자**로 전달합니다.
+- `wavec` కంపైలర్.
+- ప్యాకేజీ ఇన్‌స్టాలేషన్/రిజల్యూషన్ (లాక్‌ఫైల్, రిజిస్ట్రీ, డౌన్‌లోడ్) `wavec` బాధ్యత కాదు.
+- `wavec`ని అమలు చేస్తున్నప్పుడు బాహ్య డిపెండెన్సీలు ** స్పష్టమైన CLI ఆర్గ్యుమెంట్**గా ఆమోదించబడతాయి.
 
 ---
 
-## 1. 기본 형식
+## 1. ప్రాథమిక ఆకృతి
 
 ```bash
 wavec [global-options] <command> [command-options]
 ```
 
-예:
+ఉదాహరణ:
 
 ```bash
 wavec -O2 run main.wave
@@ -30,11 +30,11 @@ wavec run app.wave --dep-root .vex/dep
 
 ---
 
-## 2. 명령 파싱 규칙 (중요)
+## 2. కమాండ్ పార్సింగ్ నియమాలు (ముఖ్యమైనది)
 
-`wavec`는 먼저 전체 인자에서 **global option**을 스캔한 뒤, 남은 인자로 `<command>`를 해석합니다.
+`wavec` ముందుగా **గ్లోబల్ ఆప్షన్** కోసం అన్ని ఆర్గ్యుమెంట్‌లను స్కాన్ చేస్తుంది మరియు `<command>`ని మిగిలిన ఆర్గ్యుమెంట్‌లుగా అన్వయిస్తుంది.
 
-즉 global option은 위치가 유연합니다.
+మరో మాటలో చెప్పాలంటే, గ్లోబల్ ఆప్షన్ యొక్క స్థానం అనువైనది.
 
 ```bash
 wavec -O3 run main.wave
@@ -42,9 +42,9 @@ wavec run main.wave -O3
 wavec run -O3 main.wave
 ```
 
-위 3개는 모두 유효합니다.
+పైన పేర్కొన్న మూడు చెల్లుబాటు అయ్యేవి.
 
-`--`를 사용하면 그 뒤는 global option 스캔을 멈추고 command 영역으로 넘깁니다.
+మీరు `--`ని ఉపయోగిస్తే, గ్లోబల్ ఆప్షన్ స్కాన్ ఆగి, కమాండ్ ఏరియాకి తరలించబడుతుంది.
 
 ```bash
 wavec -- run main.wave
@@ -56,40 +56,40 @@ wavec -- run main.wave
 
 ## 3.1 `run <file>`
 
-Wave 파일을 컴파일하고 실행합니다.
+Wave ఫైల్‌ను కంపైల్ చేసి రన్ చేయండి.
 
 ```bash
 wavec run hello.wave
 ```
 
-동작:
+చర్య:
 
-1. 소스 파싱 + import 확장
-2. LLVM IR 생성
-3. 네이티브 바이너리 링크 (`target/<file_stem>`)
-4. 실행
+1. మూలం పార్సింగ్ + దిగుమతి విస్తరణ
+2. LLVM IRని సృష్టించండి
+3. స్థానిక బైనరీ లింక్ (`target/<file_stem>`)
+4. పరుగు
 
-특징:
+ఫీచర్లు:
 
-- 실행된 프로그램의 종료 코드를 `wavec`가 전달합니다.
+- `wavec` అమలు చేయబడిన ప్రోగ్రామ్ యొక్క నిష్క్రమణ కోడ్‌ను పాస్ చేస్తుంది.
 
 ---
 
 ## 3.2 `build <file>`
 
-실행 파일(exe)을 생성합니다.
+ఎక్జిక్యూటబుల్ ఫైల్ (exe)ని సృష్టిస్తుంది.
 
 ```bash
 wavec build app.wave
 ```
 
-출력 바이너리:
+అవుట్‌పుట్ బైనరీ:
 
 - `target/<file_stem>`
 
-## 3.3 `build` 옵션 (`-o`, `-c`)
+## 3.3 `build` ఎంపిక (`-o`, `-c`)
 
-`build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
+`build` ఆదేశం ఐచ్ఛికంగా అవుట్‌పుట్ ఫైల్ పేరు మరియు అవుట్‌పుట్ ఆకృతిని నియంత్రించగలదు.
 
 ```bash
 wavec build app.wave -o ./bin/app
@@ -97,18 +97,18 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <file>`: 출력 파일명을 지정합니다.
-  - 기본(`-c` 없음): 실행 파일 출력 경로를 지정
-  - `-c`와 함께: 오브젝트 파일 출력 경로를 지정
-- `-c`: 링크를 생략하고 오브젝트 파일만 생성합니다.
-- `-c`를 사용할 때는 오브젝트 경로를 stdout으로 출력합니다.
+- `-o <file>`: అవుట్‌పుట్ ఫైల్ పేరును నిర్దేశిస్తుంది.
+  - ప్రాథమిక (`-c` లేదు): ఎక్జిక్యూటబుల్ అవుట్‌పుట్ పాత్‌ను పేర్కొంటుంది.
+  - `-c`తో: ఆబ్జెక్ట్ ఫైల్ అవుట్‌పుట్ పాత్‌ను పేర్కొనండి
+- `-c`: లింక్ చేయడాన్ని దాటవేసి, ఆబ్జెక్ట్ ఫైల్‌లను మాత్రమే రూపొందించండి.
+- `-c`ని ఉపయోగిస్తున్నప్పుడు, ఆబ్జెక్ట్ పాత్ stdoutకి అవుట్‌పుట్ అవుతుంది.
 
-기본 동작:
+డిఫాల్ట్ ప్రవర్తన:
 
 - `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (경로 출력)
+- `wavec build app.wave -c` -> `target/app.o` (పాత్ అవుట్‌పుట్)
 
-freestanding 커널 오브젝트 예시:
+ఉదాహరణ ఫ్రీస్టాండింగ్ కెర్నల్ ఆబ్జెక్ట్:
 
 ```bash
 wavec --llvm \
@@ -116,13 +116,13 @@ wavec --llvm \
   build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`도 같은 방식으로 사용할 수 있습니다.
+`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` కూడా అదే విధంగా ఉపయోగించవచ్చు.
 
 ---
 
 ## 3.4 `install std`, `update std`
 
-표준 라이브러리 설치/업데이트 명령입니다.
+ఇది ప్రామాణిక లైబ్రరీ ఇన్‌స్టాల్/అప్‌డేట్ కమాండ్.
 
 ```bash
 wavec install std
@@ -142,9 +142,9 @@ wavec --version
 
 ## 4. Global Options
 
-## 4.1 최적화
+## 4.1 ఆప్టిమైజేషన్
 
-허용 값:
+అనుమతించబడిన విలువలు:
 
 - `-O0`
 - `-O1`
@@ -154,7 +154,7 @@ wavec --version
 - `-Oz`
 - `-Ofast`
 
-예:
+ఉదాహరణ:
 
 ```bash
 wavec -O3 run main.wave
@@ -162,13 +162,13 @@ wavec -O3 run main.wave
 
 ---
 
-## 4.2 디버그 출력
+## 4.2 డీబగ్ అవుట్‌పుట్
 
 ```bash
 wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
-허용 항목:
+అనుమతించబడిన అంశాలు:
 
 - `tokens`
 - `ast`
@@ -179,36 +179,36 @@ wavec --debug-wave=tokens,ast,ir run main.wave
 
 ---
 
-## 4.3 링크 옵션
+## 4.3 లింక్ ఎంపికలు
 
 ```bash
 wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
-- `--link=<lib>` 또는 `--link <lib>`
-- `-L<path>` 또는 `-L <path>`
+- `--link=<lib>` లేదా `--link <lib>`
+- `-L<path>` లేదా `-L <path>`
 
-`wavec`는 링크 시 내부적으로 `-l<lib>`, `-L<path>` 형태로 전달합니다.
+లింక్ చేస్తున్నప్పుడు `wavec` అంతర్గతంగా `-l<lib>` మరియు `-L<path>` రూపంలో ప్రసారం చేయబడుతుంది.
 
 ---
 
-## 4.4 외부 의존성 옵션 (중요)
+## 4.4 బాహ్య డిపెండెన్సీ ఎంపికలు (ముఖ్యమైనది)
 
-외부 import(`pkg::...`) 해석용 옵션입니다.
+ఇది బాహ్య దిగుమతి (`pkg::...`) విశ్లేషణ కోసం ఒక ఎంపిక.
 
 ### `--dep-root <dir>`
 
-패키지 루트 디렉터리 후보를 추가합니다.
+ప్యాకేజీ రూట్ డైరెక్టరీ అభ్యర్థులను జోడించండి.
 
 ```bash
 wavec run app.wave --dep-root .vex/dep
 ```
 
-패키지 `math`를 찾을 때:
+`math` ప్యాకేజీ కోసం చూస్తున్నప్పుడు:
 
-- `.vex/dep/math` 를 검사
+- `.vex/dep/math`ని తనిఖీ చేయండి
 
-여러 번 지정 가능:
+అనేక సార్లు పేర్కొనవచ్చు:
 
 ```bash
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
@@ -216,38 +216,38 @@ wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 
 ### `--dep <name>=<path>`
 
-패키지 이름을 특정 경로에 고정합니다.
+ప్యాకేజీ పేరును నిర్దిష్ట మార్గంలో పరిష్కరిస్తుంది.
 
 ```bash
 wavec run app.wave --dep math=.vex/dep/math
 ```
 
-규칙:
+నియమాలు:
 
-- `name` 형식: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep`는 반드시 `name=path` 형식
-- 같은 패키지명을 중복 지정하면 에러
+- `name` ఫార్మాట్: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` తప్పనిసరిగా `name=path` ఆకృతిలో ఉండాలి
+- అదే ప్యాకేజీ పేరు పదేపదే పేర్కొనబడితే ఎర్రర్ ఏర్పడుతుంది.
 
 ---
 
-## 4.5 백엔드 옵션 (`--llvm`, `--whale`)
+## 4.5 బ్యాకెండ్ ఎంపికలు (`--llvm`, `--whale`)
 
-백엔드 제어 옵션은 `--llvm` 뒤에서만 해석됩니다.
+బ్యాకెండ్ నియంత్రణ ఎంపికలు `--llvm` వెనుక మాత్రమే వివరించబడతాయి.
 
 ```bash
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
-지원 항목(요약):
+మద్దతు ఉన్న అంశాలు (సారాంశం):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (반복 가능)
+- `-C link-arg=<arg>` (పునరావృతం)
 - `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
-현재 `wavec print target-list` 기준 주요 타깃:
+`wavec print target-list` ఆధారంగా ప్రస్తుత ప్రధాన లక్ష్యాలు:
 
 - `x86_64-unknown-linux-gnu`
 - `aarch64-unknown-linux-gnu`
@@ -257,26 +257,26 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 - `aarch64-unknown-none-elf`
 - `riscv64-unknown-none-elf`
 
-`--whale`은 현재 예약된 더미 플래그이며, 실제 백엔드 파이프라인은 아직 미구현(TODO)입니다.
+`--whale` ప్రస్తుతం రిజర్వ్ చేయబడిన డమ్మీ ఫ్లాగ్ మరియు అసలు బ్యాకెండ్ పైప్‌లైన్ TODO.
 
 ---
 
-## 5. Import 해석 규칙
+## 5. దిగుమతి వివరణ నియమాలు
 
-Wave import는 다음 3가지로 분기됩니다.
+Wave శాఖలను మూడు రకాలుగా దిగుమతి చేసుకోండి:
 
-1. 로컬 import
+1. స్థానిక దిగుమతి
 2. std import
-3. 외부 패키지 import
+3. బాహ్య ప్యాకేజీని దిగుమతి చేయండి
 
-## 5.1 로컬
+## 5.1 స్థానికం
 
 ```wave
 import("foo");
 import("path/to/mod.wave");
 ```
 
-기준 파일 디렉터리에서 `<path>.wave`를 찾습니다.
+బేస్ ఫైల్ డైరెక్టరీలో `<path>.wave`ని కనుగొనండి.
 
 ## 5.2 std
 
@@ -284,52 +284,52 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+`~/.wave/lib/wave/std/...` మార్గాన్ని ఉపయోగించండి.
 
-## 5.3 외부 패키지
+## 5.3 బాహ్య ప్యాకేజీ
 
 ```wave
 import("math::add");
 import("json::parser::core");
 ```
 
-형식:
+ఫార్మాట్:
 
-- 최소 `package::module` 2세그먼트 필요
+- కనిష్ట `package::module` 2 విభాగాలు అవసరం
 
-패키지 루트 결정 순서:
+ప్యాకేజీ రూట్ నిర్ధారణ క్రమం:
 
-1. `--dep name=path` 명시 매핑
-2. 각 `--dep-root`에서 `<root>/<package>` 검색
+1. `--dep name=path` స్పష్టమైన మ్యాపింగ్
+2. ప్రతి `--dep-root`లో `<root>/<package>` కోసం శోధించండి
 
-동일 패키지가 여러 dep-root에서 동시에 발견되면:
+ఒకే ప్యాకేజీ బహుళ డిప్-రూట్‌లలో ఏకకాలంలో కనుగొనబడితే:
 
-- 자동 선택하지 않고 **모호성 에러**
-- `--dep name=path`로 고정해야 함
+- స్వీయ-ఎంపిక లేకుండా **అస్పష్టత లోపం**
+- తప్పనిసరిగా `--dep name=path`తో స్థిరపరచబడాలి
 
-모듈 파일 탐색 순서:
+మాడ్యూల్ ఫైల్ నావిగేషన్ ఆర్డర్:
 
 1. `<package_root>/<module_path>.wave`
 2. `<package_root>/src/<module_path>.wave`
 
-예:
+ఉదాహరణ:
 
 ```wave
 import("math::core::vec");
 ```
 
-탐색:
+నావిగేషన్:
 
 - `<package_root>/core/vec.wave`
 - `<package_root>/src/core/vec.wave`
 
 ---
 
-## 6. 외부 import 실전 예시
+## 6. బాహ్య దిగుమతికి ఉదాహరణ
 
-### 6.1 단일 dep-root
+### 6.1 సింగిల్ డిప్-రూట్
 
-디렉터리:
+డైరెక్టరీ:
 
 ```text
 .vex/dep/
@@ -339,19 +339,19 @@ import("math::core::vec");
 main.wave
 ```
 
-코드:
+కోడ్:
 
 ```wave
 import("math::add");
 ```
 
-실행:
+అమలు:
 
 ```bash
 wavec run main.wave --dep-root .vex/dep
 ```
 
-### 6.2 모호성 해소
+### 6.2 అస్పష్టత స్పష్టత
 
 ```bash
 wavec run main.wave \
@@ -359,7 +359,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-양쪽에 `math`가 있으면 에러가 납니다. 아래처럼 고정합니다.
+`math` రెండు వైపులా ఉంటే, లోపం ఏర్పడుతుంది. క్రింద చూపిన విధంగా దాన్ని పరిష్కరించండి.
 
 ```bash
 wavec run main.wave \
@@ -370,25 +370,25 @@ wavec run main.wave \
 
 ---
 
-## 7. Vex와의 역할 분리
+## 7. Vex నుండి పాత్రల విభజన
 
-권장 구조:
+సిఫార్సు చేయబడిన నిర్మాణం:
 
-- `wavec`: 컴파일/링크/실행 + 명시된 의존성 해석
-- `vex`: 의존성 설치/관리 후 `wavec ... --dep-root ... --dep ...` 호출
+- `wavec`: కంపైల్/లింక్/ఎగ్జిక్యూట్ + పేర్కొన్న డిపెండెన్సీలను పరిష్కరించండి
+- `vex`: డిపెండెన్సీలను ఇన్‌స్టాల్ చేసిన/మేనేజింగ్ చేసిన తర్వాత `wavec ... --dep-root ... --dep ...`కి కాల్ చేయండి
 
-예:
+ఉదాహరణ:
 
 ```bash
-# 내부적으로 vex가 수행
+# అంతర్గతంగా, వెక్స్ చేస్తుంది
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
-이 모델은 컴파일러를 단순하고 결정적으로 유지하면서, 패키지 매니저가 자동화를 담당하게 합니다.
+ఈ మోడల్ కంపైలర్‌ను సరళంగా మరియు నిర్ణయాత్మకంగా ఉంచుతూ, ఆటోమేషన్‌కు బాధ్యత వహించే ప్యాకేజీ మేనేజర్‌ని వదిలివేస్తుంది.
 
 ---
 
-## 8. 빠른 참조
+## 8. త్వరిత సూచన
 
 ```bash
 wavec run main.wave

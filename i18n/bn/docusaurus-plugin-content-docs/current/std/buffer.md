@@ -1,5 +1,5 @@
 ---
-sidebar_position: ২
+sidebar_position: 2
 ---
 
 # std::buffer ব্যবহারের নিয়ম

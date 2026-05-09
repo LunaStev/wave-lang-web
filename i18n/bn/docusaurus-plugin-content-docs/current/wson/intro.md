@@ -34,9 +34,9 @@ sidebar_position: 2
 
 ```
 {
-    স্থিতি: "success",
-    কোড = 200,
-    ব্যবহারকারী = { id: 123, নাম: "John Doe" }
+    status: "success",
+    code = 200,
+    user = { id: 123, name: "John Doe" }
 }
 ```
 
@@ -51,9 +51,9 @@ sidebar_position: 2
 উদাহরণ:
 
 ```
-কাজগুলো: [
-    { কাজ_আইডি: 1, শিরোনাম: "পরিকল্পনা প্রতিবেদন সম্পন্ন" },
-    { কাজ_আইডি: 2, শিরোনাম: "দলগত মতামতের পর্যালোচনা" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -63,15 +63,15 @@ sidebar_position: 2
 
 - মানের ধরনে স্ট্রিং, সংখ্যা, বুলিয়ান, অবজেক্ট, অ্যারে ইত্যাদি অন্তর্ভুক্ত থাকতে পারে।
 
-- স্ট্রিংগুলি বড় উদ্ধৃতিচিহ্ন `"` দিয়ে আবৃত থাকে।
+- স্ট্রিংগুলি বড় উদ্ধৃতিচিহ্ন `“` দিয়ে আবৃত থাকে।
 
 - সংখ্যাগুলি বড় উদ্ধৃতি ছাড়া ব্যবহার করা হয় এবং পূর্ণসংখ্যা বা ভগ্নাংশ আকারে হতে পারে।
 
 উদাহরণ:
 
 ```
-নাম: "John Doe"
-বয়স = ২৫
+name: "John Doe"
+age = 25
 ```
 
 ## ৬. ডেটা প্রকার (Data Types)
@@ -79,20 +79,20 @@ sidebar_position: 2
 - স্ট্রিং: বড় উদ্ধৃতিচিহ্ন `"` দ্বারা আবদ্ধ পাঠ।
 
 ```
-"হ্যালো ওয়ার্ল্ড"
+"hello world"
 ```
 
 - সংখ্যা(Number): এটি একটি পূর্ণসংখ্যা বা ভগ্নাংশ মান।
 
 ```
-৪২
-৩.১৪
+42
+3.14
 ```
 
 - বুলিয়ান(Boolean): `true` অথবা `false` মান ব্যবহার করা হয়।
 
 ```
-is_active = সত্য
+is_active = true
 ```
 
 - অবজেক্ট(Object): বন্ধনী `{}` দ্বারা আবদ্ধ কী-মূল্য যুগল।
@@ -102,30 +102,30 @@ is_active = সত্য
 
 ```ws
 {
-    // অবস্থা কোড এবং বার্তা তথ্য
-    status: "সফলতা",
-    code: ২০০,
-    message: "তথ্য সফলভাবে প্রাপ্ত হয়েছে",
+    // স্থিতি কোড এবং বার্তা তথ্য
+    status: "success",
+    code: 200,
+    message: "Data retrieved successfully",
 
     user = {
-        id = ১২৩,
-        name: "জন ডো",
+        id = 123,
+        name: "John Doe",
         email: "john@example.com",
-        age: ২৫  # ব্যবহারকারীর বয়স
+        age: 25  # ব্যবহারকারীর বয়স
     },
 
     tasks: [
         {
-            task_id: ১,
-            title: "প্রকল্প রিপোর্ট সম্পন্ন করুন",
-            status: "গতি অব্যাহত",
-            due_date: "২০২৪-১০-১৫"
+            task_id: 1,
+            title: "Complete project report",
+            status: "in-progress",
+            due_date: "2024-10-15"
         },
         {
-            task_id: ২,
-            title: "টিম প্রতিক্রিয়া মূল্যায়ন",
-            status: "মুলতুবি",
-            due_date: "২০২৪-১০-২০"
+            task_id: 2,
+            title: "Review team feedback",
+            status: "pending",
+            due_date: "2024-10-20"
         }
     ]
 }

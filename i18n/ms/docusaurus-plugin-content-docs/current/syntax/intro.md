@@ -4,109 +4,109 @@ sidebar_position: 1
 
 # Fungsi dan Pembolehubah
 
-## Pengenalan
+## pengenalan
 
-Falsafah reka bentuk teras bahasa pengaturcaraan Wave terletak pada mengekalkan keseimbangan antara prestasi rendah dan abstraksi tinggi, serta menyediakan persekitaran pengembangan perisian yang efisien dan fleksibel.
-Bahagian ini memperkenalkan fungsi dan pembolehubah yang merupakan elemen paling asas dalam membina program Wave.
+Falsafah reka bentuk teras bahasa pengaturcaraan Wave adalah untuk menyediakan persekitaran pembangunan perisian yang cekap dan fleksibel sambil mengekalkan keseimbangan antara prestasi peringkat rendah dan abstraksi peringkat tinggi.
+Bahagian ini memperkenalkan elemen paling asas yang membentuk program Wave: fungsi dan pembolehubah.
 
-Fungsi adalah unit utama yang membentuk operasi dan logik program, manakala pembolehubah berperanan menyimpan dan mengurus data yang diperlukan dalam proses itu.
-Memahami cara untuk mendefinisikan dan menggunakan fungsi serta pembolehubah secara tepat akan membantu anda menggunakan struktur dan tujuan reka bentuk bahasa Wave dengan lebih mendalam.
+Fungsi ialah unit teras yang membentuk operasi dan logik program, dan pembolehubah memainkan peranan dalam menyimpan dan mengurus data yang diperlukan dalam proses.
+Dengan memahami dengan tepat cara mentakrif dan menggunakan fungsi dan pembolehubah, anda boleh menggunakan struktur dan niat reka bentuk bahasa Wave dengan lebih mendalam.
 
 ---
 
-## Fungsi
+## fungsi
 
-Dalam Wave, fungsi adalah blok kod yang boleh digunakan semula dan boleh dijalankan secara bebas.
-Ia membolehkan kita mengumpulkan dan menyatakan operasi atau pengiraan tertentu sebagai satu unit dan boleh dipanggil bila-bila saja diperlukan dalam keseluruhan program.
+Dalam Wave, fungsi ialah blok kod boleh guna semula yang boleh dilaksanakan secara bebas.
+Tindakan atau pengiraan khusus boleh dinyatakan sebagai satu unit, dan boleh dipanggil apabila perlu sepanjang program.
 
-Menggunakan fungsi juga dapat mengurangkan kod yang diulang dan memisahkan program dengan logik yang lebih baik, meningkatkan kebolehbacaan dan penyelenggaraan.
-Ia juga boleh digunakan untuk pelbagai tujuan seperti pengendalian pengiraan, pengurusan input-output, dan pemisahan logik.
+Menggunakan fungsi boleh mengurangkan kod berulang dan secara logik memisahkan atur cara untuk meningkatkan kebolehbacaan dan kebolehselenggaraan.
+Ia juga digunakan untuk pelbagai tujuan seperti pemprosesan pengiraan, pengurusan input/output, dan pemisahan logik.
 
-Dalam Wave, fungsi ditakrifkan dengan kata kunci `fun`, yang terdiri daripada nama fungsi, senarai parameter, dan badan fungsi yang dibungkus dalam tanda kurung `{}`.
+Dalam Wave, fungsi ditakrifkan dengan
 
-### Menentukan Fungsi
+### Tentukan fungsi
 
-Bentuk paling asas bagi definisi fungsi dalam Wave adalah seperti berikut.
+Bentuk definisi fungsi paling asas dalam Wave adalah seperti berikut.
 
 ```wave
-fun utama() {
-    // Tulis kod di sini
+fun main() {
+    // Tulis kod anda di sini
 }
 ```
 
-Fungsi `main` adalah titik utama bagi menjalankan program, dan setiap program Wave mesti mempunyai sekurang-kurangnya satu fungsi `main`.
-Program akan mula menjalankan dari fungsi ini.
+Fungsi `main` ialah titik masuk pelaksanaan program dan fungsi `main` mesti wujud dalam program Wave.
+Program ini memulakan pelaksanaan daripada fungsi ini.
 
-Fungsi boleh mempunyai parameter mengikut keperluan, dan boleh juga mengembalikan hasil atau nilai kepada tempat yang memanggilnya.
-Jika terdapat nilai pengembalian, jenis nilai harus dinyatakan dalam pengisytiharan fungsi.
+Fungsi boleh mengambil parameter mengikut keperluan, dan juga boleh mengembalikan hasil pengiraan atau nilai kepada pemanggil.
+Jika terdapat nilai pulangan, jenis pulangan ditentukan dalam pengisytiharan fungsi.
 
-### Contoh: Fungsi Ringkas
+### Contoh: Fungsi mudah
 
-Contoh berikut adalah fungsi ringkas yang menerima dua integer dan mengembalikan jumlahnya.
+Contoh berikut ialah fungsi mudah yang mengambil dua integer dan mengembalikan jumlahnya.
 
 ```wave
-fun tambah(a :i32, b :i32) -> i32 {
+fun add(a :i32, b :i32) -> i32 {
     return a + b;
 }
 
-fun utama() {
-    var hasil = tambah(5, 7);     // Panggil fungsi tambah
-    println(hasil);            // Output: 12
+fun main() {
+    var result = add(5, 7);     // tambah panggilan fungsi
+    println(result);            // Keluaran: 12
 }
 ```
 
-Dalam contoh ini, fungsi `add` mengambil dua parameter integer `a` dan `b`, mengumpulkan mereka, dan mengembalikan hasil.
-Dalam fungsi `main`, panggil fungsi `add`, simpan nilai yang dikembalikan ke dalam variabel, dan cetaknya.
+Dalam contoh ini, fungsi `add` mengambil dua parameter integer, `a` dan `b`, menambahnya dan mengembalikan hasilnya.
+Fungsi `main` memanggil fungsi `add`, menyimpan nilai yang dikembalikan dalam pembolehubah dan mengeluarkannya.
 
-Dengan cara ini, fungsi mengenkapsulasi tindakan tertentu dan dapat digunakan semula di pelbagai bahagian program.
+Dengan cara ini, fungsi merangkum tindakan tertentu dan membolehkannya digunakan semula dalam berbilang bahagian program.
 
-## Variabel
+## pembolehubah
 
-Variabel digunakan untuk menyimpan dan memanipulasi data dalam program.
-Wave merancang untuk memisahkan dengan jelas antara variabel yang boleh diubah dan tidak boleh diubah semasa deklarasi variabel, menunjukkan niat perubahan data di peringkat kod.
+Pembolehubah digunakan untuk menyimpan dan memanipulasi data dalam program.
+Wave direka bentuk untuk membezakan dengan jelas antara pembolehubah dan pembolehubah tidak berubah semasa mengisytiharkan pembolehubah, supaya niat untuk menukar data boleh didedahkan pada peringkat kod.
 
-Ini menjadikan perubahan status program lebih jelas dan mengurangkan kesalahan akibat perubahan nilai yang tidak disengajakan.
+Ini menjadikan perubahan keadaan program lebih jelas dan mengurangkan ralat yang disebabkan oleh perubahan nilai yang tidak disengajakan.
 
-### Variabel yang boleh diubah
+### pembolehubah boleh ubah
 
-Dalam Wave, variabel pada asasnya adalah mutable.
-Ini bermaksud bahawa setelah dinyatakan, nilai dapat diubah semasa pelaksanaan program.
+Dalam Wave, pembolehubah boleh diubah secara lalai.
+Ini bermakna walaupun sekali diisytiharkan, nilainya boleh diubah semasa pelaksanaan program.
 
-Variabel mutable dinyatakan menggunakan kata kunci var.
+Pembolehubah boleh ubah diisytiharkan menggunakan kata kunci var.
 
 ```wave
 var x :i32 = 10;
 x = 20;
 ```
 
-Dalam kod di atas, `x` mempunyai nilai awal `10`, dan nilai ini boleh diubah kepada `20`.
-Untuk data yang perlu mengubah status, gunakan variabel mutable.
+Dalam kod di atas, `x` mempunyai nilai awal `10`, dan kemudiannya boleh ditukar kepada `20`.
+Pembolehubah pembolehubah digunakan untuk data yang keadaannya mesti berubah.
 
-### Variabel yang tidak boleh diubah
+### pembolehubah tidak berubah
 
-Jika Anda menyatakan variabel sebagai immutable, setelah nilai awal ditetapkan, nilai tersebut tidak dapat diubah.
-Variabel immutable dinyatakan menggunakan kata kunci let.
+Apabila anda mengisytiharkan pembolehubah sebagai tidak berubah, nilainya tidak boleh diubah selepas ia diberikan nilai awal.
+Pembolehubah tidak berubah diisytiharkan menggunakan kata kunci let.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // Kesalahan: variabel immutable tidak dapat diubah.
+// y = 10;   // Ralat: Pembolehubah tidak berubah tidak boleh mengubah nilainya.
 ```
 
-Variabel immutable menjamin bahwa nilainya tidak berubah, yang membantu meningkatkan kestabilan program dan kebolehan ramal.
-Disarankan untuk menggunakan variabel immutable untuk data konstan yang tidak memerlukan perubahan nilai.
+Pembolehubah tidak berubah membantu meningkatkan kestabilan dan kebolehramalan program kerana ia menjamin bahawa nilainya tidak akan berubah.
+Adalah disyorkan untuk menggunakan pembolehubah tidak berubah untuk data tetap yang nilainya tidak perlu diubah.
 
-Dalam Wave, Anda juga boleh menggunakan `mut` bersama dengan kata kunci `let` untuk membenarkan mutabilitas secara eksplisit.
+Dalam Wave, anda juga boleh secara eksplisit membenarkan kebolehubah dengan menggunakan `let` dengan kata kunci `mut`.
 
 ```wave
 let mut y :i32 = 5;
 y = 10;
 ```
 
-Variabel ini dinyatakan dengan `let`, tetapi nilai boleh diubah melalui kata kunci `mut`.
+Pembolehubah diisytiharkan sebagai `let`, tetapi nilainya boleh diubah melalui kata kunci `mut`.
 
-### Contoh Deklarasi Variabel
+### Contoh pengisytiharan boleh ubah
 
-Berikut adalah contoh menyatakan variabel mutable dan immutable dengan pelbagai jenis.
+Berikut ialah contoh pengisytiharan pembolehubah boleh ubah dan tidak berubah dari pelbagai jenis.
 
 ```wave
 var x :i32 = 10;
@@ -115,7 +115,7 @@ var name :str = "Wave";
 let is_active :bool = true;
 ```
 
-Dalam contoh ini, `x` dan `name` adalah variabel mutable, manakala `y` dan `is_active` adalah variabel immutable.
-Dalam Wave, `var` dan `let` ditakrifkan secara jelas untuk menunjukkan kemungkinan perubahan data pada tahap kod.
+Dalam contoh ini, `x` dan `name` ialah pembolehubah boleh ubah, dan `y` dan `is_active` ialah pembolehubah tidak berubah.
+Wave dengan jelas membezakan antara `var` dan `let`, mendedahkan pada tahap kod sama ada data boleh ditukar.
 
-Dengan memisahkan penggunaan variabel mutable dan immutable dengan tepat, anda boleh membina program yang lebih ketat dan dapat diramal sambil mengekalkan konsistensi data.
+Dengan membezakan pembolehubah pembolehubah dan pemalar dengan betul, anda boleh mencipta program yang lebih mantap dan boleh diramal sambil mengekalkan ketekalan data.

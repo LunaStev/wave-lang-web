@@ -52,5 +52,5 @@ fun main() -> i32 {
 ## Einschränkungen
 
 - `var`, `let` können nicht auf der Top-Ebene verwendet werden.
-- `const`, `static` können nicht innerhalb von Funktionen oder Blöcken verwendet werden.
+- `var`, `let` können nicht innerhalb von Funktionen oder Blöcken verwendet werden.
 - `let` ist unveränderlich und kann nicht neu zugewiesen werden.

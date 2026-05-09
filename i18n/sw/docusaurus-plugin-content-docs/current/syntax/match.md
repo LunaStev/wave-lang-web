@@ -17,15 +17,15 @@ Yaani, `var x = match (...) { ... }` muundo kama huo hauwezi kutumika.
 ## Sarufi ya Msingi
 
 ```wave
-mechi (thamani) {
-    muundo1 => {
-        // block ya utekelezaji
+match (value) {
+    pattern1 => {
+        // kizuizi cha utekelezaji
     }
-    muundo2 => {
-        // block ya utekelezaji
+    pattern2 => {
+        // kizuizi cha utekelezaji
     }
     _ => {
-        // block ya msingi
+        // kizuizi chaguo-msingi
     }
 }
 ```
@@ -33,7 +33,7 @@ mechi (thamani) {
 Kanuni za sarufi:
 
 - Vichwa vinatumia muundo wa `match (expr)`.
-- Kila mkono hutumia muundo `muundo => { block }`.
+- Kila mkono hutumia muundo `{ ... }`.
 - Mwili wa mkono lazima uwe `{ ... }` block.
 - Unaweza kutumia mpya tu kati ya mikono au kutumia `,` au `;` kama watenganishi.
 
@@ -83,7 +83,7 @@ Mambo kama mistari ya maneno, alama zenye nukta au miundo haiwezi kutumika kama 
 fun classify_num(v: i32) -> i32 {
     var result: i32 = -1;
 
-    mechi (v) {
+    match (v) {
         0 => {
             result = 10;
         }
@@ -110,8 +110,8 @@ enum Mode -> i32 {
     Unknown = 2
 }
 
-fun gawan mode(m: Mode) -> i32 {
-    mechi (m) {
+fun classify_mode(m: Mode) -> i32 {
+    match (m) {
         Off => {
             return 1;
         }
@@ -130,7 +130,7 @@ fun gawan mode(m: Mode) -> i32 {
 ## Kanuni za Uendeshaji
 
 - Sawa na msururu wa `switch`, **ni mkono mmoja tu unaolingana utatekelezwa**.
-- Hakuna `fallthrough` otomatiki.
+- Hakuna `_` otomatiki.
 - Mkono wa `_` unaweza kutumika mara moja tu.
 - Kubuniwa kisheria kuweza kutokuwepo kwa mkono wa `_`. (Ikiwa hakuna mkono unaolingana, hakuna mkono unaotekelezwa)
 

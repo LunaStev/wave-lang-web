@@ -71,7 +71,7 @@ Wave的枚举是基于整数的枚举类型。
 所有枚举必须拥有repr类型。
 
 ```wave
-枚举ShaderUniformType -> i32 {
+enum ShaderUniformType -> i32 {
     A = 0,
     B,
     C = 10,
@@ -88,13 +88,13 @@ Wave的枚举是基于整数的枚举类型。
 允许的repr类型：
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - 该类型的`类型别名`
 
 ```wave
-类型 MyInt = i32;
+type MyInt = i32;
 
-枚举Example -> MyInt {
+enum Example -> MyInt {
     X,
     Y
 }
@@ -109,7 +109,7 @@ Wave的枚举是基于整数的枚举类型。
 - 如果没有第一个值，则从0开始
 
 ```wave
-枚举E -> i32 {
+enum E -> i32 {
     A,        // 0
     B,        // 1
     C = 10,   // 10
@@ -145,9 +145,9 @@ const Y: ShaderUniformType = D;
 ## 实际示例
 
 ```wave
-类型 MyInt = i32;
+type MyInt = i32;
 
-枚举 ShaderUniformType -> MyInt {
+enum ShaderUniformType -> MyInt {
     A = 0,
     B,
     C = 10,

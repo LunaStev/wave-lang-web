@@ -2,121 +2,122 @@
 sidebar_position: 4
 ---
 
-# Peta jalan pembangunan integrasi Wave + Whale v2
+# Wave + Whale pelan hala tuju pembangunan bersepadu v2
 
-Dokumen ini adalah peta jalan yang menyusun proses pembangunan terintegrasi antara bahasa Wave dan rangka kerja pengkompil Whale.
-Wave dan Whale bermula sebagai komponen berasingan tetapi berhasrat untuk sepenuhnya berintegrasi menjadi ekosistem bahasa yang berdiri sendiri pada akhirnya.
+Dokumen ini ialah peta jalan yang mengatur proses pembangunan bersepadu bahasa Wave dan rantai alat pengkompil Whale langkah demi langkah.
+Wave dan Whale pada mulanya akan bermula sebagai komponen yang berasingan, tetapi akhirnya bertujuan untuk disepadukan sepenuhnya ke dalam satu ekosistem bahasa bebas.
 
-Seluruh fasa pembangunan mengikuti aliran seperti berikut.
+Seluruh fasa pembangunan mengikuti aliran berikut:
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → keluaran
+pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
-Setiap langkah berlangsung berdasarkan keputusan dari langkah terdahulu, dan setelah satu langkah selesai, pembangunan satu arah yang tidak berpatah balik ke struktur awal.
+Setiap peringkat membina hasil peringkat sebelumnya dan menganggap pembangunan sehala, tanpa kembali ke struktur sebelumnya sebaik sahaja peringkat selesai.
 
 ---
 
-## Fasa Pre-Beta
+## Peringkat Pra-Beta
 
-Tujuan fasa Pre-Beta adalah untuk menyelesaikan front-end bahasa Wave dan melaksanakan keseluruhan fungsi bahasa berdasarkan back-end LLVM.
-Pada tahap ini, Whale tidak digunakan, dan pengkompilasi dan pelaksanaan dilakukan sepenuhnya melalui LLVM.
+Matlamat fasa Pra-Beta adalah untuk melengkapkan bahagian hadapan bahasa Wave dan melaksanakan kefungsian penuh bahasa berdasarkan bahagian belakang LLVM.
+Langkah ini tidak menggunakan Whale; penyusunan dan pelaksanaan dilakukan sepenuhnya melalui LLVM.
 
-Kerja untuk memperluaskan tatabahasa itu sendiri tidak akan dilakukan dalam tahap ini.
-Matlamat utama adalah untuk menjadikan semua elemen tatabahasa berfungsi berdasarkan spesifikasi yang telah ditentukan.
-Kami memberi tumpuan kepada menstabilkan struktur front-end,
-seperti kualiti pesanan ralat, pemeriksaan jenis, dan pengurusan skop Variabel.
+Memanjangkan tatabahasa itu sendiri tidak dilakukan pada peringkat ini.
+Matlamat teras adalah untuk menjadikan semua elemen tatabahasa benar-benar berfungsi berdasarkan spesifikasi yang telah ditetapkan.
+Kami memberi tumpuan kepada menstabilkan struktur bahagian hadapan, termasuk kualiti mesej ralat, pemeriksaan jenis dan pemprosesan skop berubah-ubah.
 
-Skop pelaksanaan merangkumi pengisytiharan dan output pemboleh ubah, operasi asas, definisi dan pemanggilan fungsi,
-pernyataan bersyarat (`if` / `else if` / `else`), dan gelung (`while` / `break` / `continue`) juga akan disiapkan dalam fasa ini.
-Ia juga merangkumi output format, penetapan jenis yang jelas, reka bentuk penunjuk bentuk `ptr<T>`,
-dan reka bentuk array bentuk `array<T, N>`.
+Skop pelaksanaan termasuk pengisytiharan dan output pembolehubah, operasi asas, definisi fungsi dan panggilan,
+Pernyataan bersyarat (`if` / `else if` / `else`) dan pernyataan gelung (`while` / `break` / `continue`) juga dilengkapkan pada peringkat ini.
+Juga termasuk output berformat, penaipan eksplisit, reka bentuk penunjuk jenis `ptr<T>`,
+Ia termasuk reka bentuk tatasusunan dalam bentuk `array<T, N>`.
 
-Penyusun Wave dalam fasa ini ditulis sepenuhnya dalam Rust dan menggunakan inkwell dan llvm-sys untuk menghasilkan LLVM IR dan pelaksanaan AOT.
+Pada peringkat ini, semua penyusun Wave ditulis sebagai Rust,
+LLVM IR Menggunakan inkwell dan llvm-sys untuk penciptaan dan pelaksanaan AOT.
 
 ---
 
-## Tahap Alpha
+## Peringkat alfa
 
-Matlamat fasa Alpha adalah untuk memperkenalkan backend Whale dan membina struktur yang menggunakan LLVM dan Whale bersama.
-LLVM masih kekal sebagai backend utama, dan Whale ditambah sebagai backend yang boleh digunakan secara pilihan.
+Matlamat peringkat Alpha adalah untuk memperkenalkan bahagian belakang Whale dan mewujudkan struktur yang menggunakan LLVM dan Whale secara selari.
+LLVM akan kekal sebagai hujung belakang lalai dan Whale akan ditambahkan sebagai hujung belakang pilihan.
 
-Apabila menjalankan kod Wave, anda boleh memilih backend yang ingin digunakan sama ada LLVM atau Whale melalui pilihan `--backend`.
+Apabila menjalankan kod Wave, pilihan `--backend` membolehkan anda memilih bahagian belakang yang hendak digunakan, LLVM atau Whale.
 
 ```bash
 wavec run main.wave --backend=whale
 wavec run main.wave --backend=llvm
 ```
 
-Dalam fasa ini, struktur IR untuk Whale akan direka dan ditakrif.
-Kami akan menyusun komponen utama seperti Instruction, Value, Block, dan mengimplementasikan IR Generator yang menukarkan Wave AST ke Whale IR.
+Dalam langkah ini, kami mereka bentuk dan mentakrifkan struktur IR Whale itu sendiri.
+Susun komponen utama seperti Arahan, Nilai dan Blok,
+Melaksanakan Penjana IR yang menukar Wave AST kepada Whale IR.
 
-Kami juga akan mengimplementasikan penjana kod untuk Whale agar boleh dijalankan dalam bentuk assembly atau binari.
-Jenis-jenis yang sukar atau tidak efisien untuk diimplementasikan dalam LLVM, seperti jenis integer besar `i1024` atau
-struktur pointer lanjutan, akan diperkenalkan sebagai ciri khusus Whale dalam fasa ini.
+Kami juga melaksanakan penjana kod untuk Whale, menjadikannya boleh laku dalam bentuk pemasangan atau binari.
+Dalam LLVM, jenis yang sukar atau tidak cekap untuk dilaksanakan, seperti jenis integer yang sangat besar seperti `i1024`,
+Struktur penunjuk lanjutan diperkenalkan pada peringkat ini sebagai ciri khusus Whale.
 
-Sebagai titik semakan, ia harus dapat mencetak Hello World dari backend Whale, dan
-pengisytiharan dan pengesahan pemboleh ubah, pengendalian pointer, dan alat penyahsulitan IR juga harus berfungsi dengan baik.
-Fasa di mana penukaran Wave → Whale IR sebenarnya sedang dijalankan.
-
----
-
-## Tahap Beta
-
-Matlamat fasa Beta adalah untuk beralih sepenuhnya kepada Whale dan menghapuskan kebergantungan LLVM.
-Dari fasa ini, penyusunan dan pelaksanaan Wave hanya akan menggunakan Whale.
-
-Semua kebergantungan dan modul yang berkaitan dengan LLVM akan dihapuskan, dan
-jalan pelaksanaan dan penjanaan kod akan dioptimumkan berdasarkan Whale.
-Tujuan utama adalah untuk membuat aliran dari penjanaan IR hingga pelaksanaan menjadi mudah dan cepat.
-
-Merancang laluan pengoptimuman untuk Whale IR dan
-meningkatkan kelajuan penjanaan kod serta kecekapan pelaksanaan.
-Semua tatabahasa Wave mesti disokong dengan sempurna berdasarkan backend Whale dalam fasa ini.
-
-Dari segi ujian, ujian unit dan keseluruhan suite ujian akan dilakukan,
-dan akan disahkan keserasian WSON dan pustaka standard serta apakah binaan Whale merentas platform.
+Sebagai pusat pemeriksaan, keluaran Hello World mesti boleh dilakukan dari bahagian belakang Whale.
+Pengisytiharan dan penugasan pembolehubah, pengendalian penuding dan alat penyahpepijatan IR mesti beroperasi secara normal.
+Ini ialah peringkat di mana penukaran Wave → Whale IR sebenarnya sedang dijalankan.
 
 ---
 
-## Tahap RC (Calon Pelepasan)
+## Peringkat beta
 
-Matlamat fasa RC adalah untuk memulakan bootstrap Wave.
-Dari fasa ini, pelaksanaan Rust penyusun Wave akan dihapuskan secara beransur-ansur,
-dan penyusun Wave akan mula ditulis semula dengan bahasa Wave itu sendiri.
+Matlamat fasa Beta adalah untuk beralih sepenuhnya kepada Whale dan mengalih keluar kebergantungan LLVM.
+Mulai langkah ini dan seterusnya, kompilasi dan pelaksanaan Wave hanya akan menggunakan Whale.
 
-Menulis semula penjana IR Wave berdasarkan Whale,
-dan menggantikan logik teras penyusun dan perpustakaan std / core dengan kod Wave.
-Melalui proses ini, Whale akan memasuki fasa self-hosting.
+Semua kebergantungan dan modul berkaitan LLVM dialih keluar.
+Penjanaan kod dan laluan pelaksanaan dioptimumkan berdasarkan Whale.
+Tugas utama adalah untuk membuat aliran daripada penciptaan IR kepada pelaksanaan yang mudah dan pantas.
 
-Sekiranya bootstrap berjaya, penyusun Wave-native pertama akan dicipta.
+Reka pas pengoptimuman untuk Whale IR,
+Meningkatkan kelajuan penjanaan kod dan kecekapan pelaksanaan.
+Semua tatabahasa Wave mesti disokong sepenuhnya oleh bahagian belakang Whale pada peringkat ini.
 
----
-
-## Tahap Pelepasan (v0.0.1)
-
-Fasa Pelepasan menandakan pelepasan rasmi pertama Wave.
-Pada ketika ini, Wave dan Whale akan membentuk ekosistem bahasa yang sepenuhnya terintegrasi dan berdikari.
-
-Komponen pelepasan termasuk bahasa Wave dan perpustakaan standard,
-toolchain penyusun Whale, pengurus pakej Vex,
-dan format data WSON.
-
-Wave pada fasa ini mesti mempunyai penyusun yang sepenuhnya ditulis dalam kod Wave,
-dan pengoptimuman Whale harus disiapkan.
-Aliran bina dan pengedaran melalui Vex harus diperkukuh,
-dan binaan merentas OS seperti `vex build --windows` juga perlu disokong.
+Di bahagian ujian, kami melakukan kedua-dua ujian unit dan suite ujian penuh.
+Mengesahkan WSON dan keserasian perpustakaan standard dan binaan Whale merentas platform.
 
 ---
 
-## Strategi Meta Pembangunan
+## Peringkat RC (Calon Pelepasan).
 
-Pembangunan Wave + Whale tidak hanya berkisar kepada kemajuan langkah demi langkah, tetapi dilakukan berdasarkan strategi yang jelas.
-Mengambil strategi kereta api + rel yang membangunkan Whale sambil membina backend Wave,
-membangunkan struktur backend dan reka bentuk bahasa secara serentak.
+Matlamat fasa RC adalah untuk memulakan bootstrapping Wave.
+Daripada langkah ini, kami akan mengalih keluar pelaksanaan Rust pengkompil Wave secara beransur-ansur,
+Kita mulakan dengan menulis semula pengkompil Wave dalam bahasa Wave itu sendiri.
 
-Dalam fasa Alpha, strategi cabang backend melalui pilihan `--backend` memainkan peranan penting,
-dan menyediakan asas untuk membandingkan dan mengesahkan LLVM dan Whale secara langsung.
+Berdasarkan Whale, kami menulis semula Wave
+Menggantikan logik teras pengkompil dan perpustakaan std/teras dengan kod Wave.
+Melalui proses ini, Whale memasuki fasa pengehosan sendiri.
 
-Selepas RC, struktur akan terbalik,
-di mana kod Wave akan merampas dan menyusun Wave sendiri melalui Whale.
+Jika bootstrapping berjaya, pengkompil asli Wave yang pertama akan dibuat.
+
+---
+
+## Fasa keluaran (v0.0.1)
+
+Fasa Keluaran menandakan keluaran rasmi pertama Wave.
+Pada ketika ini, Wave dan Whale membentuk ekosistem bahasa bebas bersepadu sepenuhnya.
+
+Komponen keluaran termasuk bahasa Wave dan perpustakaan standard;
+Rantai alat pengkompil Whale, pengurus pakej Vex,
+Dan ia termasuk format data WSON.
+
+Wave pada peringkat ini mempunyai pengkompil yang ditulis sepenuhnya dalam kod Wave,
+Pengoptimuman Whale harus lengkap.
+Aliran binaan dan pengedaran melalui Vex ditubuhkan,
+Binaan OS silang seperti `vex build --windows` juga sepatutnya boleh dilakukan.
+
+---
+
+## strategi meta pembangunan
+
+Pembangunan Wave + Whale bukanlah satu kemajuan langkah yang mudah, tetapi berdasarkan strategi yang jelas.
+Dengan menggunakan strategi kereta api+rel untuk membangunkan Whale dan mengkonfigurasi bahagian belakang Wave secara serentak,
+Kami membangunkan struktur bahagian belakang dan reka bentuk bahasa secara selari.
+
+Dalam peringkat Alpha, strategi percabangan bahagian belakang melalui pilihan `--backend` memainkan peranan penting.
+Ia menyediakan asas untuk membandingkan dan mengesahkan secara langsung LLVM dan Whale.
+
+Selepas RC, struktur diterbalikkan,
+Pelan pembalikan struktur sedang giat dijalankan, dengan kod Wave menyusun Wave sendiri melalui Whale.

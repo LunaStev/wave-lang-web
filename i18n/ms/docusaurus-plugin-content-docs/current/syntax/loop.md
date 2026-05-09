@@ -2,124 +2,125 @@
 sidebar_position: 4
 ---
 
-# Pernyataan Pengulangan
+# gelung
 
-## Pengenalan
+## pengenalan
 
-Dalam bahasa Wave, pernyataan pengulangan disediakan untuk mengendalikan situasi di mana kod yang sama perlu dilaksanakan berulang kali.
-Pernyataan pengulangan digunakan untuk mengeksekusi kod berulang kali sehingga syarat tertentu dipenuhi, atau untuk mengulangi sejumlah kali yang ditetapkan.
+Bahasa Wave menyediakan pernyataan gelung untuk mengendalikan situasi di mana kod yang sama mesti dilaksanakan beberapa kali.
+Penyataan gelung digunakan untuk meneruskan pelaksanaan kod sementara syarat tertentu dipenuhi atau untuk melaksanakannya berulang kali beberapa kali yang ditetapkan.
 
-Ini membolehkan anda menyatakan tugas yang diulang dengan kod yang pendek dan jelas tanpa perlu menulis logik yang sama berulang kali.
-Wave menyokong kedua-dua pengulangan berdasarkan syarat dan pengulangan berdasarkan bilangan, dan juga menyediakan kata kunci untuk mengawal aliran pelaksanaan semasa pengulangan.
+Ini membolehkan anda menyatakan tugasan berulang dalam kod yang ringkas dan jelas tanpa perlu menulis logik yang sama berulang kali.
+Wave menyokong kedua-dua lelaran berasaskan keadaan dan lelaran berasaskan kiraan, dan juga menyediakan kata kunci untuk mengawal aliran pelaksanaan semasa lelaran.
 
-Bahagian ini menerangkan cara menggunakan pernyataan `while` dan `for`, serta kata kunci `break` dan `continue` untuk mengawal aliran pengulangan.
+Bahagian ini menerangkan cara menggunakan pernyataan `while` dan `for`, serta kata kunci `break` dan `continue` untuk mengawal aliran lelaran.
 
 ---
 
-## Pernyataan while
+## manakala kenyataan
 
-Pernyataan `while` mengeksekusi blok kod berulang kali sementara syarat diberikan dinilai sebagai benar (`true`).
-Pengulangan akan berhenti segera apabila syarat menjadi salah (`false`).
+Pernyataan `while` berulang kali melaksanakan blok kod selagi ungkapan syarat yang diberikan dinilai kepada benar (`true`).
+Apabila ungkapan keadaan menjadi palsu (`false`), lelaran tamat serta-merta.
 
-Ini adalah sesuai untuk situasi di mana bilangan pengulangan tidak jelas dan perlu diulang sehingga syarat tertentu dipenuhi.
+Kaedah ini sesuai untuk situasi di mana bilangan lelaran tidak jelas dan mesti diulang sehingga syarat tertentu dipenuhi.
 
-### Struktur Asas
-
-Struktur asas bagi pernyataan while dalam Wave adalah seperti berikut.
+### struktur asas
+Struktur asas pernyataan sementara dalam Wave adalah seperti berikut:
 
 ```wave
-while (syarat) {
-    // Kod yang akan diulang
+while (condition) {
+    // kod untuk diulang
 }
 ```
 
-Syarat harus dinilai sebagai jenis `bool`, dan kod yang dibungkus dalam kurungan `{}` boleh mengandungi satu atau lebih arahan.
+Ungkapan bersyarat mesti dinilai sebagai jenis `bool`.
+Anda boleh menulis satu atau lebih pernyataan dalam blok kod yang disertakan dalam pendakap kerinting `{}`.
 
-### Contoh: Mencetak dari 0 hingga 4
+### Contoh: Cetak dari 0 hingga 4
 
 ```wave
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i = {}", i);
+    println("saya ialah {}.", i);
     i = i + 1;
 }
 ```
 
-Dalam contoh ini, pengulangan berlaku ketika variabel `i` adalah kurang daripada 5.
-Setiap pengulangan mencetak nilai semasa dan meningkatkan nilai `i` sebanyak 1, membuat syarat jadi salah akhirnya.
+Dalam contoh ini, lelaran dilakukan manakala pembolehubah `i` kurang daripada 5.
+Pada setiap lelaran, ia mencetak nilai semasa dan meningkatkan nilai `i` sebanyak 1 supaya keadaan akhirnya menjadi palsu.
 
 ---
 
-## Pernyataan for
+## untuk kenyataan
 
-`for` adalah jenis gelung yang sesuai digunakan apabila bilangan pengulangannya agak jelas.
-Anda boleh mendefinisikan nilai awal, ekspresi syarat, dan ekspresi pengurangan sekaligus untuk menjelaskan aliran gelung.
+Pernyataan `for` ialah pernyataan gelung yang sesuai digunakan apabila bilangan ulangan agak jelas.
+Anda boleh menyatakan dengan jelas aliran pengulangan dengan mentakrifkan nilai awal, ungkapan bersyarat dan ungkapan tambah/kurangkan sekali gus.
 
-Karena elemen yang diperlukan untuk pengendalian gelung terkumpul di satu tempat, mudah untuk memahami struktur gelung dengan cepat.
+Oleh kerana unsur-unsur yang diperlukan untuk kawalan ulangan dikumpulkan di satu tempat, ia mempunyai kelebihan kerana mudah memahami struktur ulangan sepintas lalu.
 
-### Struktur Asas
+### struktur asas
 
 ```wave
-for (inialisasi; syarat; pengulangan) {
-    // Kod yang akan diulang
+for (init; condition; step) {
+    // kod untuk diulang
 }
 ```
 
-Inisialisasi untuk gelung 'for' di Wave menyokong pelbagai bentuk.
+Wave untuk permulaan menyokong beberapa bentuk.
 
-- Inisialisasi jenis `var` yang tersirat.
-- Inisialisasi untuk pengisytiharan `var` / `let mut` / `const`.
-- Inisialisasi secara umum (menggunakan semula pembolehubah yang sedia ada).
+- Permulaan jenis `var` tersirat
+- Permulaan pengisytiharan `var` / `let mut` / `const`
+- Mulakan ungkapan biasa (guna semula pembolehubah sedia ada)
 
-### Contoh 1: Inisialisasi jenis tersirat.
+### Contoh 1: Inisialisasi jenis tersirat
 
 ```wave
 for (i :i32 = 1; i <= 5; i += 1) {
-    print("i = {}", i);
+    println("i = {}", i);
 }
 ```
 
-### Contoh 2: Inisialisasi `var` / `let mut`.
+### Contoh 2: Memulakan `var` / `let mut`
 
 ```wave
 for (var i: i32 = 0; i < 3; i += 1) {
-    print("var i = {}", i);
+    println("var i = {}", i);
 }
 
 for (let mut j: i32 = 0; j < 3; j += 1) {
-    print("let mut j = {}", j);
+    println("let mut j = {}", j);
 }
 ```
 
-### Contoh 3: Inisialisasi berdasarkan ungkapan (menggunakan semula pembolehubah yang sedia ada).
+### Contoh 3: Inisialisasi berasaskan ungkapan (menggunakan semula pembolehubah sedia ada)
 
 ```wave
 var i: i32 = 99;
 
 for (i = 3; i <= 5; i += 1) {
-    print("i = {}", i);
+    println("i = {}", i);
 }
 
-print("selepas gelung: {}", i); // 6
+println("after loop: {}", i); // 6
 ```
 
-Inisialisasi jenis pengisytiharan (`var`, `let mut`, `i :i32 = ...`) berfungsi dengan pembolehubah skop gelung, manakala inisialisasi berasaskan ungkapan (`i = ...`) mengemas kini pembolehubah luar itu sendiri.
+Permulaan deklaratif (`var`, `let mut`, `i :i32 = ...`) beroperasi sebagai pembolehubah skop gelung,
+Inisialisasi berasaskan ungkapan (`i = ...`) mengemas kini pembolehubah luar itu sendiri.
 
 ---
 
-## Gelung Dalam Gelung
+## gelung bersarang
 
-Gelung boleh ditulis di dalam gelung lain, dan ini dinamakan gelung bersarang.
-Gelung bersarang berguna untuk melintasi struktur data dua dimensi atau untuk memproses kombinasi beberapa syarat.
+Gelung boleh ditulis di dalam gelung lain, yang dipanggil gelung bersarang.
+Gelung bersarang berguna apabila melintasi struktur data dua dimensi atau memproses gabungan berbilang keadaan.
 
-### Contoh: Gelung while 2-lapis
+### Contoh: pernyataan double while
 
 ```wave
-var i: i32 = 0;
+var i :i32 = 0;
 
 while (i < 3) {
-    var j: i32 = 0;
+    var j :i32 = 0;
 
     while (j < 2) {
         println("i={}, j={}", i, j);
@@ -130,20 +131,20 @@ while (i < 3) {
 }
 ```
 
-Dalam contoh ini, setiap kali pernyataan `while` luar dijalankan, semua pernyataan `while` dalam akan dijalankan.
-Ini membolehkan anda untuk memproses kombinasi dalam bentuk (`i`, `j`) secara berurutan.
+Dalam contoh ini, setiap kali pernyataan `while` luar dilaksanakan, semua pernyataan `while` dalam dilaksanakan.
+Ini membolehkan gabungan borang (`i`, `j`) diproses secara berurutan.
 
 ---
 
-## Pernyataan break
+## pecah kenyataan
 
-Pernyataan `break` segera menghentikan gelung dan memindahkan aliran ke luar gelung itu.
-Digunakan apabila tiada lagi keperluan untuk meneruskan gelung.
+Pernyataan `break` segera menamatkan gelung dan mengalihkan aliran keluar daripada gelung.
+Digunakan semasa lelaran apabila tiada lelaran lanjut perlu dilakukan.
 
-### Contoh: Menghentikan gelung pada nilai tertentu
+### Contoh: Tamatkan lelaran pada nilai tertentu
 
 ```wave
-var i: i32 = 0;
+var i :i32 = 0;
 
 while (true) {
     if (i == 5) {
@@ -155,17 +156,17 @@ while (true) {
 }
 ```
 
-Dalam contoh ini, apabila `i` menjadi 5 dalam gelung tanpa henti, pernyataan `break` dilaksanakan dan gelung itu dihentikan.
-Dengan cara ini, pernyataan `break` berguna apabila anda ingin mengawal gelung di luar syarat gelung.
+Dalam contoh ini, apabila `i` menjadi 5 dalam gelung tak terhingga, `break` dilaksanakan dan pengulangan berakhir.
+Seperti ini, pernyataan `break` berguna apabila anda ingin mengawal pengulangan secara bebas daripada keadaan pengulangan.
 
 ---
 
-## Pernyataan continue
+## sambung kenyataan
 
-Pernyataan `continue` melangkau sebarang kod yang tinggal untuk gelung semasa dan segera memulakan gelung seterusnya.
-Digunakan apabila anda ingin mengabaikan sebahagian logik apabila syarat tertentu ditemui.
+Pernyataan `continue` melangkau kod yang tinggal dalam lelaran semasa dan segera memulakan lelaran seterusnya.
+Ini digunakan apabila anda ingin meninggalkan beberapa logik dalam keadaan tertentu.
 
-### Contoh: Hanya cetak angka genap
+### Contoh: Cetak nombor genap sahaja
 
 ```wave
 for (var i: i32 = 0; i <= 10; i = i + 1) {
@@ -177,14 +178,15 @@ for (var i: i32 = 0; i <= 10; i = i + 1) {
 }
 ```
 
-Dalam kod ini, apabila `i` adalah genap, pernyataan `continue` dilaksanakan dan bahagian cetakan dilangkau.
-Hasilnya, hanya nilai genap yang akan dicetak.
+Dalam kod ini, jika `i` ialah nombor ganjil, `continue` akan dilaksanakan, melangkau bahagian output.
+Akibatnya, hanya nilai genap yang dikeluarkan.
 
 ---
 
-## Ringkasan
+## ringkasan
 
-Gelung Wave dirancang untuk secara semula jadi menyampaikan kedua-dua pengulangan berdasarkan syarat dan bilangan.
-Pernyataan `while` sesuai untuk pengulangan berasaskan syarat, manakala pernyataan `for` berguna apabila bilangan pengulangan dan aliran adalah jelas.
+Gelung Wave direka untuk menyatakan pengulangan berasaskan keadaan dan kiraan secara semula jadi.
+Pernyataan `while` sesuai untuk lelaran dipacu keadaan, dan pernyataan `for` berguna apabila bilangan lelaran dan aliran jelas.
 
-Dengan menggunakan `break` dan `continue` bersamaan, anda boleh mengawal aliran pelaksanaan dengan lebih halus semasa pengulangan dan membina logik pengulangan yang lebih canggih dan fleksibel.
+Dengan menggunakan `break` dan `continue` bersama-sama, anda boleh mengawal aliran pelaksanaan dengan halus walaupun semasa lelaran.
+Anda boleh membina logik berulang yang lebih canggih dan fleksibel.

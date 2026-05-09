@@ -7,22 +7,22 @@ sidebar_position: 10
 `std::sys` یک لایه انتزاعی برای ماژول‌های سطح پایین مبتنی بر سیستم عامل است.
 
 ```text
-std(سطح بالا)
-  -> توزیع‌کننده sys
-  -> sys/linux یا sys/macos
-  -> فراخوانی سامانه
+std(high-level)
+  -> sys dispatcher
+  -> sys/linux or sys/macos
+  -> syscall
 ```
 
 ## قوانین پایه
 
 - اکثر توابع مقدار فراخوانی سامانه خام را برمی‌گردانند.
 - `>= 0` موفقیت، `< 0` شکست (`-errno`).
-- اگر امکان دارد، در کدهای اپلیکیشن سطح بالا اول از `std::net`، `std::time`، `std::env` بجای `std::sys` استفاده کنید.
+- اگر امکان دارد، در کدهای اپلیکیشن سطح بالا اول از `std::sys`، `std::net`، `std::time` بجای `std::env` استفاده کنید.
 
 ## 1. مثال خواندن فایل (`std::sys::fs`)
 
 ```wave
-واردات("std::sys::fs");
+import("std::sys::fs");
 
 fun main() {
     var fd: i64 = open("/etc/hosts", 0, 0);
@@ -39,7 +39,7 @@ fun main() {
 ## 2. مثال سوکت (`std::sys::socket`)
 
 ```wave
-واردات("std::sys::socket");
+import("std::sys::socket");
 
 fun main() {
     var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -54,7 +54,7 @@ fun main() {
 ## 3. مثال حافظه (`std::sys::memory`)
 
 ```wave
-واردات("std::sys::memory");
+import("std::sys::memory");
 
 fun main() {
     var p: ptr<u8> = sys_alloc(4096);

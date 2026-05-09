@@ -88,13 +88,13 @@ enum ShaderUniformType -> i32 {
 Types de représentation autorisés :
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - l`alias de type` du type correspondant
 
 ```wave
-type MonEntier = i32;
+type MyInt = i32;
 
-enum Exemple -> MonEntier {
+enum Example -> MyInt {
     X,
     Y
 }
@@ -124,7 +124,7 @@ enum E -> i32 {
 L'enum est une valeur entière et peut être utilisée librement comme paramètre ou valeur de retour de fonction.
 
 ```wave
-fun f(t: TypeUnifDiviseur) -> i32 {
+fun f(t: ShaderUniformType) -> i32 {
     return t;
 }
 ```
@@ -137,7 +137,7 @@ La variante enum est une constante au moment de la compilation.
 
 ```wave
 const X: i32 = B;
-const Y: TypeUnifDiviseur = D;
+const Y: ShaderUniformType = D;
 ```
 
 ---
@@ -145,24 +145,24 @@ const Y: TypeUnifDiviseur = D;
 ## Exemple réel
 
 ```wave
-type MonEntier = i32;
+type MyInt = i32;
 
-enum TypeUnifDiviseur -> MonEntier {
+enum ShaderUniformType -> MyInt {
     A = 0,
     B,
     C = 10,
     D
 }
 
-const X: MonEntier = 123;
-const Y: MonEntier = B;
-const Z: TypeUnifDiviseur = D;
+const X: MyInt = 123;
+const Y: MyInt = B;
+const Z: ShaderUniformType = D;
 
-fun f(t: TypeUnifDiviseur) -> MonEntier {
+fun f(t: ShaderUniformType) -> MyInt {
     return t;
 }
 
-fun g(v: MonEntier) -> MonEntier {
+fun g(v: MyInt) -> MyInt {
     return v;
 }
 

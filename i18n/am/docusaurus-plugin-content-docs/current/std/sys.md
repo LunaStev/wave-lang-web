@@ -2,9 +2,9 @@
 sidebar_position: 10
 ---
 
-# std::sys 사용법
+# std :: sys አጠቃቀም
 
-`std::sys`는 고수준 모듈 아래의 OS 추상화 계층입니다.
+`std::sys` ከከፍተኛ ደረጃ ሞጁሎች በታች የ OS ረቂቅ ንብርብር ነው።
 
 ```text
 std(high-level)
@@ -13,13 +13,13 @@ std(high-level)
   -> syscall
 ```
 
-## 기본 규약
+## መሠረታዊ ደንቦች
 
-- 대부분 함수는 raw syscall 값을 반환합니다.
-- `>= 0` 성공, `< 0` 실패(`-errno`).
-- 고수준 앱 코드에서는 가능하면 `std::sys` 대신 `std::net`, `std::time`, `std::env`를 먼저 사용하세요.
+- አብዛኛዎቹ ተግባራት ጥሬ የሳይካል እሴቶችን ይመለሳሉ።
+- `>= 0` ተሳክቷል፣ `< 0` አልተሳካም (`-errno`)።
+- በከፍተኛ ደረጃ መተግበሪያ ኮድ ከተቻለ `std::sys`፣ `std::net` እና `std::time` በመጀመሪያ ከ`std::env` ይጠቀሙ።
 
-## 1. 파일 읽기 예제 (`std::sys::fs`)
+## 1) የፋይል ንባብ ምሳሌ (`std::sys::fs`)
 
 ```wave
 import("std::sys::fs");
@@ -36,7 +36,7 @@ fun main() {
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2) የሶኬት ምሳሌ (`std::sys::socket`)
 
 ```wave
 import("std::sys::socket");
@@ -51,7 +51,7 @@ fun main() {
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3) የማህደረ ትውስታ ምሳሌ (`std::sys::memory`)
 
 ```wave
 import("std::sys::memory");
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 
-## dispatcher 모듈
+## መላኪያ ሞጁል
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+የ`#[target(os="linux")]`፣ `#[target(os="macos")]` ቅርንጫፎች በ ላኪው ውስጥ ብቻ ጥቅም ላይ ይውላሉ።

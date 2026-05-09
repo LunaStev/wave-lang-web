@@ -17,7 +17,7 @@ Principes de base :
 ## 1. Structure de base
 
 ```bash
-wavec [options globales] <commande> [options de commande]
+wavec [global-options] <command> [command-options]
 ```
 
 Exemple :
@@ -32,7 +32,7 @@ wavec run app.wave --dep-root .vex/dep
 
 ## 2. Paramètres de commande (importance)
 
-`wavec` analyse d'abord **les options globales** parmi tous les arguments avant d'analyser le reste en tant que `<commande>`.
+`wavec` analyse d'abord **les options globales** parmi tous les arguments avant d'analyser le reste en tant que `<command>`.
 
 Ainsi, les options globales ont une priorité.
 
@@ -54,7 +54,7 @@ wavec -- run main.wave
 
 ## 3. Commandes
 
-## 3.1 `run <fichier>`
+## 3.1 `run <file>`
 
 Compile et exécute le fichier Wave.
 
@@ -75,7 +75,7 @@ Caractéristiques :
 
 ---
 
-## 3.2 `build <fichier>`
+## 3.2 `build <file>`
 
 Crée un fichier exécutable.
 
@@ -97,7 +97,7 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <fichier>`: Spécifie le nom du fichier de sortie.
+- `-o <file>`: Spécifie le nom du fichier de sortie.
   - Par défaut (sans `-c`): Spécifie le chemin de sortie du fichier exécutable.
   - Avec `-c`: Spécifie le chemin de sortie du fichier objet.
 - `-c`: Ignore le lien et génère uniquement un fichier objet.
@@ -186,9 +186,9 @@ wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` ou `--link <lib>`
-- `-L<chemin>` ou `-L <chemin>`
+- `-L<path>` ou `-L <path>`
 
-Lors de l'établissement de liens, `wavec` transmet en interne sous la forme `-l<lib>`, `-L<chemin>`.
+Lors de l'établissement de liens, `wavec` transmet en interne sous la forme `-l<lib>`, `-L<path>`.
 
 ---
 
@@ -214,7 +214,7 @@ Peut être spécifié plusieurs fois :
 wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
-### `--dep <nom>=<chemin>`
+### `--dep <name>=<path>`
 
 Fixe le nom du package à un chemin spécifique.
 
@@ -224,8 +224,8 @@ wavec run app.wave --dep math=.vex/dep/math
 
 Règle :
 
-- Format `nom`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` doit être au format `nom=chemin`
+- Format `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` doit être au format `name=path`
 - Erreur si le même nom de package est spécifié en double
 
 ---
@@ -242,9 +242,9 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
-- `-C linker=<chemin>`
+- `-C linker=<path>`
 - `-C link-arg=<arg>` (répétable)
-- `-C link-sysroot=<chemin>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Cibles principales selon le `wavec print target-list` actuel :
@@ -273,7 +273,7 @@ L'importation Wave est divisée en 3 catégories suivantes.
 
 ```wave
 import("foo");
-import("chemin/vers/mod.wave");
+import("path/to/mod.wave");
 ```
 
 Trouve `<path>.wave` dans le répertoire du fichier de référence.
@@ -300,7 +300,7 @@ Format :
 Ordre de détermination de la racine du package :
 
 1. Mappage explicite `--dep name=path`
-2. Recherche `<root>/<package>` dans chaque `--dep-root`
+2. Recherche `--dep-root` dans chaque `<root>/<package>`
 
 Si le même package est trouvé simultanément dans plusieurs dep-root :
 
@@ -380,7 +380,7 @@ Structures recommandées :
 Exemple :
 
 ```bash
-# Internally, vex exécute
+# En interne, Vex le fait
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: réservé, non implémenté
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

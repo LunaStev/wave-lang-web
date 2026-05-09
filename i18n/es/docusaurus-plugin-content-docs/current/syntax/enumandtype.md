@@ -89,7 +89,7 @@ enum ShaderUniformType -> i32 {
 
 Tipos de representación (repr) permitidos:
 
-- `i8`, `i16`, `i32`, `i64`
+- `u8`, `u16`, `u32`, `u64`
 - `u8`, `u16`, `u32`, `u64`
 - `type alias` para el tipo correspondiente
 

@@ -8,8 +8,8 @@ Ce document explique comment **contrôler explicitement** le sysroot de l'étape
 
 Principes fondamentaux :
 
-- `--sysroot=<chemin>` : sysroot de l'étape de compilation (clang `-c`)
-- `-C link-sysroot=<chemin>` : sysroot de l'étape de liaison (linker)
+- `--sysroot=<path>` : sysroot de l'étape de compilation (clang `-c`)
+- `-C link-sysroot=<path>` : sysroot de l'étape de liaison (linker)
 
 Autrement dit, les sysroots de compilation et de liaison sont traités séparément.
 
@@ -17,7 +17,7 @@ Autrement dit, les sysroots de compilation et de liaison sont traités séparém
 
 ## 1. Pourquoi est-ce nécessaire
 
-Lors de l'utilisation de `-C linker=<chemin>` dans un lien croisé, il est souvent nécessaire de spécifier séparément les chemins d'exécution (`crt1.o`, `libc`, `libm`) référencés par le pilote de lien (p. ex. : `aarch64-linux-gnu-gcc`).
+Lors de l'utilisation de `-C linker=<path>` dans un lien croisé, il est souvent nécessaire de spécifier séparément les chemins d'exécution (`aarch64-linux-gnu-gcc`, `crt1.o`, `libc`) référencés par le pilote de lien (p. ex. : `libm`).
 
 À ce stade, le sysroot de lien n'est pas inféré automatiquement, il est prévu d'être passé explicitement dans la CLI.
 
@@ -25,22 +25,22 @@ Lors de l'utilisation de `-C linker=<chemin>` dans un lien croisé, il est souve
 
 ## 2. Définition des options
 
-## 2.1 `-C link-sysroot=<chemin>`
+## 2.1 `-C link-sysroot=<path>`
 
-Injection de `--sysroot=<chemin>` à l'étape de liaison.
+Injection de `--sysroot=<path>` à l'étape de liaison.
 
 ```bash
-wavec -C link-sysroot=/chemin/vers/sysroot ...
+wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-En interne, cela a le même sens que `-C link-arg=--sysroot=<chemin>`.
+En interne, cela a le même sens que `-C link-arg=--sysroot=<path>`.
 
-## 2.2 `-C link-arg=--sysroot=<chemin>`
+## 2.2 `-C link-arg=--sysroot=<path>`
 
 L'ancien mode d'arguments de lien brut est également pris en charge.
 
 ```bash
-wavec -C link-arg=--sysroot=/chemin/vers/sysroot ...
+wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ```
 
 ---
@@ -50,13 +50,13 @@ wavec -C link-arg=--sysroot=/chemin/vers/sysroot ...
 Dans les constructions nécessitant l'étape de liaison, lorsque les conditions suivantes sont remplies simultanément, cela se termine par une erreur d'utilisation.
 
 1. Utilisation de `-C linker=...`
-2. Utilisation de `--sysroot=<chemin>`
+2. Utilisation de `--sysroot=<path>`
 3. Sysroot de lien non spécifié (`-C link-sysroot` ou `-C link-arg=--sysroot=...`).
 
 Exemple de message d'erreur :
 
 ```text
-lors de l'utilisation de -C linker=..., --sysroot=<chemin> est uniquement pour l'étape de compilation ; passer explicitement le sysroot du lien avec -C link-sysroot=<chemin> (ou -C link-arg=--sysroot=<chemin>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -93,7 +93,7 @@ wavec \
 Lorsque l'étape de liaison est absente, le sysroot de lien n'est pas nécessaire.
 
 ```bash
-wavec --sysroot=/chemin/vers/sysroot build main.wave --emit=obj
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

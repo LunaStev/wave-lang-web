@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٧
+sidebar_position: 7
 ---
 
 # خيارات الخلفية (`--llvm`, `--whale`)

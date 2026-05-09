@@ -3,43 +3,43 @@
     "message": "Eine Sprache, unendliche Möglichkeiten"
   },
   "get-started": {
-    "message": "In 5 Minuten beginnen"
+    "message": "Beginnen Sie in 5 Minuten"
   },
   "read-the-docs": {
-    "message": "Dokumente lesen"
+    "message": "Lesen Sie das Dokument"
   },
   "homepage.hero.title": {
-    "message": "Eine moderne Sprache für die neue Welle der Entwicklung"
+    "message": "Eine moderne Sprache für eine neue Entwicklungswelle"
   },
   "homepage.hero.subtitle": {
-    "message": "Intuitive Syntax, starke Leistung und integrierte Sicherheit. Wave wurde entwickelt, um Ihre Produktivität zu steigern und Anwendungen robust zu machen."
+    "message": "Intuitive Syntax, leistungsstarke Leistung und integrierte Sicherheit. Wave wurde entwickelt, um Ihre Produktivität zu steigern und Ihre Anwendungen robust zu machen."
   },
   "homepage.why_wave.title": {
-    "message": "Warum sollten Sie sich für Wave entscheiden?"
+    "message": "Warum Wave wählen?"
   },
   "homepage.features.one.title": {
-    "message": "Kompakt und intuitiv"
+    "message": "prägnant und intuitiv"
   },
   "homepage.features.one.description": {
-    "message": "Wave reduziert unnötigen Code und ermöglicht es Ihnen, sich auf die Kernlogik zu konzentrieren. Die moderne Syntax macht es leicht zu lernen und angenehm zu verwenden."
+    "message": "Wave reduziert unnötigen Code und ermöglicht es Ihnen, sich auf die Kernlogik zu konzentrieren. Dank der modernen Syntax ist es leicht zu erlernen und macht Spaß."
   },
   "homepage.features.two.title": {
-    "message": "Schnell und effizient"
+    "message": "schnell und effizient"
   },
   "homepage.features.two.description": {
-    "message": "Es wird in nativen Code kompiliert und erreicht durch Zero-Cost-Abstraktion die Leistung auf C++-Niveau. Ideal für ressourcenintensive Aufgaben."
+    "message": "Durch die Kompilierung in nativen Code erreicht es durch Null-Kosten-Abstraktion eine Leistung auf C++-Niveau. Ideal für ressourcenkritische Aufgaben."
   },
   "homepage.features.three.title": {
-    "message": "Sicher und gleichzeitig"
+    "message": "sicher und gleichzeitig"
   },
   "homepage.features.three.description": {
-    "message": "Verhindert häufige Fehler wie Nullverweis-Ausnahmen zur Kompilierzeit. Mit dem integrierten Parallelitätsmodell war Multicore-Programmierung noch nie so einfach."
+    "message": "Verhindert häufige Fehler wie Nullreferenzfehler zur Kompilierungszeit. Das integrierte Parallelitätsmodell macht die Multicore-Programmierung einfacher als je zuvor."
   },
   "homepage.contributors.title": {
-    "message": "Mitwirkende"
+    "message": "Mitwirkender"
   },
   "homepage.contributors.role.founder": {
-    "message": "Sprachgründer"
+    "message": "Begründer der Sprache"
   },
   "homepage.contributors.role.designer": {
     "message": "Sprachdesigner"
@@ -48,33 +48,33 @@
     "message": "Compiler-Entwicklung"
   },
   "homepage.contributors.role.library": {
-    "message": "Verantwortlicher für die Standardbibliothek"
+    "message": "Standardbibliotheksmanager"
   },
   "homepage.contributors.role.contributor": {
-    "message": "Mitwirkende"
+    "message": "Mitwirkender"
   },
   "homepage.sponsors.title": {
-    "message": "Sponsoren"
+    "message": "Sponsor"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "Ehrensponsoren"
+    "message": "Ehrensponsor"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "Platin-Sponsoren"
+    "message": "Platin-Sponsor"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "Gold-Sponsoren"
+    "message": "Goldsponsor"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "Silber-Sponsoren"
+    "message": "Silbersponsor"
   },
   "homepage.translations.title": {
-    "message": "An der Übersetzung von Wave teilnehmen"
+    "message": "Wave An der Übersetzung teilnehmen"
   },
   "homepage.translations.subtitle": {
-    "message": "Bitte helfen Sie mit, die Übersetzung beizutragen, damit Entwickler weltweit Wave ohne Sprachbarrieren lernen können."
+    "message": "Bitte tragen Sie zu Übersetzungen bei, damit Entwickler auf der ganzen Welt Wave ohne Sprachbarrieren lernen können."
   },
   "homepage.translations.button": {
-    "message": "An der Übersetzung auf Crowdin teilnehmen"
+    "message": "Beteiligen Sie sich an der Übersetzung bei Crowdin"
   }
 }

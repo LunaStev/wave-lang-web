@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৮
+sidebar_position: 8
 ---
 
 # std::string ব্যবহারের নির্দেশিকা
@@ -42,13 +42,13 @@ fun main() {
 
 ```wave
 fun main() {
-    var s: str = "  হ্যালো\n";
+    var s: str = "  hello\n";
     var st: i32 = 0;
     var en: i32 = 0;
     trim_range(s, &st, &en);
 
-    var d: bool = is_digit(৫৩);   // '৫'
-    var up: u8 = to_upper(৯৭);   // 'a' -> 'A'
+    var d: bool = is_digit(53);    // '5'
+    var up: u8 = to_upper(97);     // 'a' -> 'A'
 }
 ```
 
@@ -56,8 +56,8 @@ fun main() {
 
 ```wave
 fun main() {
-    var h1: i32 = djb2_32("ক্যাশ-কী");
-    var h2: i64 = fnv1a_64("ক্যাশ-কী");
+    var h1: i32 = djb2_32("cache-key");
+    var h2: i64 = fnv1a_64("cache-key");
 }
 ```
 

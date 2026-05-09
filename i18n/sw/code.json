@@ -9,70 +9,70 @@
     "message": "Soma hati"
   },
   "homepage.hero.title": {
-    "message": "Lugha ya kisasa kwa ajili ya wimbi jipya la maendeleo"
+    "message": "Lugha ya kisasa kwa wimbi jipya la maendeleo"
   },
   "homepage.hero.subtitle": {
-    "message": "Sarufi inayoeleweka, utendaji wenye nguvu, na usalama uliyojengwa ndani. Wave imeundwa kuongeza tija yako na kuifanya maombi yako kuwa imara."
+    "message": "Sintaksia angavu, utendakazi thabiti na usalama uliojumuishwa. Wave imeundwa ili kuongeza tija yako na kufanya programu zako kuwa thabiti."
   },
   "homepage.why_wave.title": {
     "message": "Kwa nini uchague Wave?"
   },
   "homepage.features.one.title": {
-    "message": "Rahisi na inayoeleweka"
+    "message": "mafupi na angavu"
   },
   "homepage.features.one.description": {
-    "message": "Wave hupunguza msimbo usio wa lazima na inawezesha kukazia fikra kwenye mantiki kuu. Ni rahisi kujifunza na kufurahia kutumia kwa sarufi ya kisasa."
+    "message": "Wave hupunguza msimbo usio wa lazima na hukuruhusu kuzingatia mantiki ya msingi. Sintaksia ya kisasa hurahisisha kujifunza na kufurahisha kutumia."
   },
   "homepage.features.two.title": {
-    "message": "Haraka na yenye ufanisi"
+    "message": "haraka na kwa ufanisi"
   },
   "homepage.features.two.description": {
-    "message": "Inachakata kwa msimbo wa asili, ikifika utendaji wa kiwango cha C++ kupitia uondoaji wa gharama sifuri. Inafaa kwa kazi ambapo rasilimali ni muhimu."
+    "message": "Ikikusanywa kwa msimbo asili, inafanikisha utendakazi wa kiwango cha C++ kupitia uondoaji wa gharama sifuri. Inafaa kwa kazi muhimu za rasilimali."
   },
   "homepage.features.three.title": {
-    "message": "Salama na ya msingi wa wakati mmoja"
+    "message": "salama na kwa wakati mmoja"
   },
   "homepage.features.three.description": {
-    "message": "Inazuia hitilafu za kawaida kama za rejea ya Null wakati wa kuchakata. Na kwa mfano wa msingi wa wakati mmoja, programu ya multicore ni rahisi zaidi kuliko wakati wowote."
+    "message": "Huzuia hitilafu za kawaida kama makosa ya marejeleo matupu wakati wa kukusanya. Muundo wa sarafu uliojengewa ndani hurahisisha utayarishaji wa programu nyingi kuliko hapo awali."
   },
   "homepage.contributors.title": {
-    "message": "Wachangiaji"
+    "message": "mchangiaji"
   },
   "homepage.contributors.role.founder": {
-    "message": "Mwanzilishi wa lugha"
+    "message": "mwanzilishi wa lugha"
   },
   "homepage.contributors.role.designer": {
-    "message": "Mbunifu wa lugha"
+    "message": "mbunifu wa lugha"
   },
   "homepage.contributors.role.compiler": {
-    "message": "Maendeleo ya mchakataji"
+    "message": "maendeleo ya mkusanyaji"
   },
   "homepage.contributors.role.library": {
-    "message": "Msimamizi wa maktaba ya kawaida"
+    "message": "Meneja wa maktaba ya kawaida"
   },
   "homepage.contributors.role.contributor": {
-    "message": "Mchangiaji"
+    "message": "mchangiaji"
   },
   "homepage.sponsors.title": {
-    "message": "Mdhamini"
+    "message": "mfadhili"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "Mdhamini wa heshima"
+    "message": "mfadhili wa heshima"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "Mdhamini wa platinum"
+    "message": "Mfadhili wa Platinum"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "Mdhamini wa dhahabu"
+    "message": "mfadhili wa dhahabu"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "Mdhamini wa fedha"
+    "message": "mfadhili wa fedha"
   },
   "homepage.translations.title": {
-    "message": "Shiriki katika tafsiri ya Wave"
+    "message": "Wave Shiriki katika kutafsiri"
   },
   "homepage.translations.subtitle": {
-    "message": "Tafadhali changia ili watengenezaji duniani kote waweze kujifunza Wave bila vizuizi vya lugha."
+    "message": "Tafadhali changia tafsiri ili wasanidi programu kote ulimwenguni waweze kujifunza Wave bila vizuizi vya lugha."
   },
   "homepage.translations.button": {
     "message": "Shiriki katika kutafsiri katika Crowdin"

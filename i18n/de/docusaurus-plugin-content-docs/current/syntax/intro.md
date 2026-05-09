@@ -50,7 +50,7 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // Aufruf der add-Funktion
+    var result = add(5, 7);     // Funktionsaufruf hinzufügen
     println(result);            // Ausgabe: 12
 }
 ```
@@ -89,7 +89,7 @@ Unveränderliche Variablen werden mit dem `let` Schlüsselwort deklariert.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // Fehler: Unveränderliche Variablen können nicht verändert werden.
+// y = 10;   // Fehler: Unveränderliche Variablen können ihren Wert nicht ändern.
 ```
 
 Da unveränderliche Variablen garantieren, dass ihr Wert nicht geändert wird, tragen sie zur Erhöhung der Stabilität und Vorhersehbarkeit eines Programms bei.

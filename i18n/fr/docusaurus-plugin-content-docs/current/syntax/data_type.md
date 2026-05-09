@@ -70,8 +70,8 @@ Dans Wave, le type `bool` est utilisé, et les valeurs sont définies comme `tru
 Le type booléen joue un rôle central dans les instructions conditionnelles et les boucles, et est utilisé pour contrôler le flux du programme.
 
 ```wave
-var estActif: bool = true;
-var estDisponible: bool = true;
+var isActive: bool = true;
+var isAvailable: bool = true;
 ```
 
 ---
@@ -84,7 +84,7 @@ Il est déclaré à l'aide du mot-clé `char` et ne peut contenir qu'une seule v
 Les littéraux de caractère sont exprimés entre apostrophes (`'`).
 
 ```wave
-var lettre: char = 'A';
+var letter: char = 'A';
 ```
 
 ## Type d'octet
@@ -95,7 +95,7 @@ Ce type est utile lorsque le traitement de données de bas niveau est nécessair
 Dans Wave, le mot-clé `byte` est utilisé pour déclarer un type octet.
 
 ```wave
-var donneesOctet: byte = 0xFF;
+var byteData: byte = 0xFF;
 ```
 
 ## Type de pointeur
@@ -106,7 +106,7 @@ Dans Wave, les pointeurs sont déclarés sous la forme `ptr<T>`.
 Les pointeurs sont utilisés lorsque l'accès à la mémoire de bas niveau est nécessaire, et sont principalement utilisés dans la programmation système ou le code où la performance est cruciale.
 
 ```wave
-var ptr: ptr<T> = &quelqueVariable;
+var ptr: ptr<T> = &someVariable;
 ```
 
 ## Littéral `null`
@@ -119,8 +119,8 @@ Dans Wave, `null` est un littéral officiel.
 ```wave
 var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // ERREUR
-// var b: bool = null;   // ERREUR
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Type de tableau
@@ -131,7 +131,7 @@ Dans Wave, les tableaux sont déclarés sous la forme `array<type, taille>`, et 
 Cela rend la structure de la mémoire claire et permet un accès stable.
 
 ```wave
-var numeros: array<i32, 5> = [1, 2, 3, 4, 5];
+var numbers: array<i32, 5> = [1, 2, 3, 4, 5];
 ```
 
 Chaque type de données est conçu pour permettre de choisir la taille et la portée adaptées à son utilisation et à ses caractéristiques.

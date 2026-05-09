@@ -24,9 +24,9 @@ fun main() {
     if (n >= 0) {
         // buf es una cadena terminada en NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // Clave no encontrada
+        // sin llave
     } else if (n == ENV_ERR_NO_SPACE) {
-        // Espacio de búfer insuficiente
+        // Fuera del búfer
     }
 }
 ```

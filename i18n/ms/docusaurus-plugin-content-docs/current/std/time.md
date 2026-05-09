@@ -2,9 +2,9 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# std::penggunaan masa
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+Menyediakan pertanyaan masa semasa, pengiraan perbezaan masa dan fungsi tidur.
 
 ## import
 
@@ -15,7 +15,7 @@ import("std::time::sleep");
 import("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1) Pengukuran bahagian
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2) Cap masa nanosaat
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3) sleep
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## fungsi utama
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64

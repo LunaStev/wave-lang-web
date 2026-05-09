@@ -9,11 +9,11 @@ Inatoa kazi za nambari kamili/nambari halisi/vipande/vitendo vya hesabu/vitendo 
 ## ingiza
 
 ```wave
-ingiza("std::math::int");
-ingiza("std::math::float");
-ingiza("std::math::bits");
-ingiza("std::math::num");
-ingiza("std::math::trig");
+import("std::math::int");
+import("std::math::float");
+import("std::math::bits");
+import("std::math::num");
+import("std::math::trig");
 ```
 
 ## 1. Kazi ya nambari za generic

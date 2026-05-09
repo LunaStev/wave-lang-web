@@ -2,9 +2,9 @@
 sidebar_position: 10
 ---
 
-# std::sys 사용법
+# std::sys వినియోగం
 
-`std::sys`는 고수준 모듈 아래의 OS 추상화 계층입니다.
+`std::sys` అనేది హై-లెవల్ మాడ్యూల్స్ క్రింద ఉన్న OS యొక్క సంగ్రహణ పొర.
 
 ```text
 std(high-level)
@@ -13,13 +13,13 @@ std(high-level)
   -> syscall
 ```
 
-## 기본 규약
+## ప్రాథమిక నియమాలు
 
-- 대부분 함수는 raw syscall 값을 반환합니다.
-- `>= 0` 성공, `< 0` 실패(`-errno`).
-- 고수준 앱 코드에서는 가능하면 `std::sys` 대신 `std::net`, `std::time`, `std::env`를 먼저 사용하세요.
+- చాలా ఫంక్షన్‌లు ముడి సిస్కాల్ విలువలను అందిస్తాయి.
+- `>= 0` విజయవంతమైంది, `< 0` విఫలమైంది (`-errno`).
+- ఉన్నత-స్థాయి యాప్ కోడ్‌లో, వీలైతే, `std::sys`కి బదులుగా ముందుగా `std::net`, `std::time` మరియు `std::env`ని ఉపయోగించండి.
 
-## 1. 파일 읽기 예제 (`std::sys::fs`)
+## 1) ఫైల్ రీడింగ్ ఉదాహరణ (`std::sys::fs`)
 
 ```wave
 import("std::sys::fs");
@@ -36,7 +36,7 @@ fun main() {
 }
 ```
 
-## 2. 소켓 예제 (`std::sys::socket`)
+## 2) సాకెట్ ఉదాహరణ (`std::sys::socket`)
 
 ```wave
 import("std::sys::socket");
@@ -51,7 +51,7 @@ fun main() {
 }
 ```
 
-## 3. 메모리 예제 (`std::sys::memory`)
+## 3) మెమరీ ఉదాహరణ (`std::sys::memory`)
 
 ```wave
 import("std::sys::memory");
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 
-## dispatcher 모듈
+## డిస్పాచర్ మాడ్యూల్
 
 - `std::sys::socket`
 - `std::sys::fs`
@@ -76,4 +76,4 @@ fun main() {
 - `std::sys::time`
 - `std::sys::tty`
 
-`#[target(os="linux")]`, `#[target(os="macos")]` 분기는 dispatcher 내부에서만 사용됩니다.
+`#[target(os="linux")]`, `#[target(os="macos")]` శాఖలు డిస్పాచర్ లోపల మాత్రమే ఉపయోగించబడతాయి.

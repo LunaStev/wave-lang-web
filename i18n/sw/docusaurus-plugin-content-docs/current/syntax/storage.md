@@ -20,8 +20,8 @@ Hivyo, **katika kiwango cha juu, tangaza `const` na `static` pekee** na
 `const` inachukuliwa kama kigezo cha thamani inayotambulika wakati wa kuunganisha na haiwezi kupewa thamani tena.
 
 ```wave
-const UKUBWA_UKURASA: i32 = 4096;
-const VIKAO: i32 = 0x1BADB002;
+const PAGE_SIZE: i32 = 4096;
+const MAGIC: i32 = 0x1BADB002;
 ```
 
 ## Kigezo cha uhifadhi wa kimataifa: `static`
@@ -30,8 +30,8 @@ const VIKAO: i32 = 0x1BADB002;
 Inaweza kupewa thamani tena, na kama haijapewa thamani ya awali, inatambulika na thamani ya 0 kwa aina hiyo.
 
 ```wave
-static KIPIMA: i32 = 0;
-static VGA_BUFFA: ptr<char> = 0xb8000 kama ptr<char>;
+static COUNTER: i32 = 0;
+static VGA_BUFFER: ptr<char> = 0xb8000 as ptr<char>;
 ```
 
 ## Kigezo cha eneo: `var` / `let`
@@ -39,7 +39,7 @@ static VGA_BUFFA: ptr<char> = 0xb8000 kama ptr<char>;
 Tumia maneno muhimu ya kigezo cha eneo pekee ndani ya kazi au block.
 
 ```wave
-fun kuu() -> i32 {
+fun main() -> i32 {
     var x: i32 = 10;
     let y: i32 = 20;
     let mut z: i32 = 30;

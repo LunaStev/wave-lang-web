@@ -40,15 +40,15 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 2.1 יעד/קוד ייצור
 
-- `--target <משולש>` / `--target=<משולש>`
-- `--cpu <שם>` / `--cpu=<שם>`
+- `--target <triple>` / `--target=<triple>`
+- `--cpu <name>` / `--cpu=<name>`
 - `--features <csv>` / `--features=<csv>`
-- `--abi <שם>` / `--abi=<שם>`
+- `--abi <name>` / `--abi=<name>`
 
 נקודת יישום:
 
-- שלב יצירת IR (TargetMachine): `יעד`, `cpu`, `תכונות`
-- שלב אובייקט/קישור (קריאה ל-clang): `יעד`, `abi`
+- שלב יצירת IR (TargetMachine): `target`, `cpu`, `features`
+- שלב אובייקט/קישור (קריאה ל-clang): `target`, `abi`
 
 טריפל יעד מרכזיים לתיעוד כרגע:
 
@@ -58,10 +58,10 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 2.2 שרשרת כלים/קישור
 
-- `--sysroot <נתיב>` / `--sysroot=<נתיב>`
-- `-C linker=<נתיב>`
-- `-C link-arg=<ארגומנט>` (ניתן לחזור)
-- `-C link-sysroot=<נתיב>`
+- `--sysroot <path>` / `--sysroot=<path>`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (ניתן לחזור)
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 נקודת יישום:

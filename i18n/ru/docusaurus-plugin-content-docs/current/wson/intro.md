@@ -34,9 +34,9 @@ sidebar_position: 2
 
 ```
 {
-    статус: "успех",
-    код = 200,
-    пользователь = { id: 123, имя: "Джон Доу" }
+    status: "success",
+    code = 200,
+    user = { id: 123, name: "John Doe" }
 }
 ```
 
@@ -51,9 +51,9 @@ sidebar_position: 2
 Пример:
 
 ```
-задачи: [
-    { id_задачи: 1, название: "Завершите отчет о проекте" },
-    { id_задачи: 2, название: "Просмотрите отзыв команды" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -63,15 +63,15 @@ sidebar_position: 2
 
 - Типы значений включают строки, числа, булевые значения, объекты и массивы.
 
-- Строки заключаются в двойные кавычки `"`.
+- Строки заключаются в двойные кавычки `“`.
 
 - Числа используются без кавычек и могут быть в целочисленной или десятичной форме.
 
 Пример:
 
 ```
-имя: "John Doe"
-возраст = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Типы данных (Data Types)
@@ -79,14 +79,14 @@ sidebar_position: 2
 - Строка(String): текст, заключенный в двойные кавычки `"`.
 
 ```
-"привет мир"
+"hello world"
 ```
 
 - Число(Number): целое или вещественное число.
 
 ```
 42
-3,14
+3.14
 ```
 
 - Булево значение(Boolean): принимает `true` или `false`.
@@ -105,7 +105,7 @@ is_active = true
     // Код состояния и информация о сообщении
     status: "success",
     code: 200,
-    message: "Данные успешно извлечены",
+    message: "Data retrieved successfully",
 
     user = {
         id = 123,
@@ -117,13 +117,13 @@ is_active = true
     tasks: [
         {
             task_id: 1,
-            title: "Завершить отчет по проекту",
+            title: "Complete project report",
             status: "in-progress",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "Рассмотреть отзыв команды",
+            title: "Review team feedback",
             status: "pending",
             due_date: "2024-10-20"
         }

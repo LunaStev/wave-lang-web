@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Hello Wave 출력하기
+# Print Hello
 
 This document explains how to write the most basic output program in the Wave language.
 
 ---
 
-## Example Code
+## example code
 
 ```wave
 fun main() {
@@ -19,22 +19,21 @@ fun main() {
 ---
 
 ## Description
-
 - `fun main()`
 
-  This is the entry point function of a Wave program. It is called first when executed.
+    Wave This is the entry point function of the program. It is called first when run.
 
 - `println()`
 
-  A temporary output function that prints a string and adds a newline (`\n`) after output.
+    Outputs a string with a temporary output function, and adds a line break (`\n`) after output.
 
 - `;` (semicolon)
 
-  All statements in Wave end with a semicolon.
+    All statements in Wave are terminated with a semicolon.
 
 ---
 
-## Execution Result
+## execution result
 
 ```text
 Hello Wave
@@ -42,8 +41,7 @@ Hello Wave
 
 ---
 
-## Additional Example
-
+## Additional examples
 Wave supports string interpolation.
 
 ```wave
@@ -61,4 +59,4 @@ Hello, Wave!
 
 ---
 
-> This example shows how to use the basic output function of the Wave standard library.
+> This example demonstrates the use of the basic output functions of the Wave standard library.

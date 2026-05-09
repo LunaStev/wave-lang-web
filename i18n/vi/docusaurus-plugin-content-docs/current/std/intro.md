@@ -42,10 +42,10 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // xử lý lỗi
+        // Xử lý lỗi
         return;
     }
 
-    // raw chứa chuỗi kết thúc NUL
+    // raw chứa chuỗi kết thúc bằng NUL
 }
 ```

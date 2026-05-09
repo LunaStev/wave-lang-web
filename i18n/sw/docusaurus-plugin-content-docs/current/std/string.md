@@ -9,12 +9,12 @@ Ni zana ya mfuatano wa maandishi unaoishia na NUL (`str`).
 ## ingiza
 
 ```wave
-ingiza("std::string::len");
-ingiza("std::string::cmp");
-ingiza("std::string::find");
-ingiza("std::string::trim");
-ingiza("std::string::ascii");
-ingiza("std::string::hash");
+import("std::string::len");
+import("std::string::cmp");
+import("std::string::find");
+import("std::string::trim");
+import("std::string::ascii");
+import("std::string::hash");
 ```
 
 ## 1. Urefu/Ulinganisho

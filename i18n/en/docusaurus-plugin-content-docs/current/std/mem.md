@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // Safe move for overlapping memory regions
+    // Safe movement of overlapping memory areas
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

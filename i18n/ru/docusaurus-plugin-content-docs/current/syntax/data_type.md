@@ -119,8 +119,8 @@ var ptr: ptr<T> = &someVariable;
 ```wave
 var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // ОШИБКА
-// var b: bool = null;   // ОШИБКА
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Массивный тип

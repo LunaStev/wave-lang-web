@@ -25,7 +25,7 @@ import("std::libc::string");
 
 ```wave
 fun main() {
- puts("hello from libc" as ptr<i8>);
+    puts("hello from libc" as ptr<i8>);
 }
 ```
 
@@ -33,13 +33,13 @@ fun main() {
 
 ```wave
 fun main() {
- var p: ptr<i8> = malloc(128);
- if (p == null) {
- return;
- }
+    var p: ptr<i8> = malloc(128);
+    if (p == null) {
+        return;
+    }
 
- memset(p, 0, 128);
- free(p);
+    memset(p, 0, 128);
+    free(p);
 }
 ```
 
@@ -49,10 +49,10 @@ fun main() {
 import("std::libc::socket");
 
 fun main() {
- var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
- if (fd >= 0) {
- shutdown(fd, SHUT_RDWR);
- }
+    var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (fd >= 0) {
+        shutdown(fd, SHUT_RDWR);
+    }
 }
 ```
 

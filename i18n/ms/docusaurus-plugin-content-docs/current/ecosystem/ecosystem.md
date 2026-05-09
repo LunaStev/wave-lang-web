@@ -4,58 +4,53 @@ sidebar_position: 2
 
 # Ekosistem Wave
 
-## Gambaran Keseluruhan
+## Gambaran keseluruhan
 
 Ekosistem Wave bukan sekadar bahasa pengaturcaraan.
-Wave adalah ekosistem pembangunan yang komprehensif yang membantu pemrogram bekerja dengan kreatif dalam mana-mana bidang melalui persekitaran yang menggabungkan pelbagai alat, pustaka, dan falsafah pembangunan.
+Wave menyediakan persekitaran yang menggabungkan pelbagai alatan, perpustakaan dan falsafah pembangunan.
+Ia adalah ekosistem pembangunan komprehensif yang membantu pengaturcara bekerja secara kreatif dalam apa jua bidang.
 
-## Komposisi Ekosistem Wave
-
+## Komposisi ekosistem Wave
 ### Wave
+Teras ekosistem Wave ialah bahasa pengaturcaraan Wave.
+Berdasarkan falsafah C dan Rust, ia direka untuk mencapai keseimbangan antara kawalan peringkat rendah dan produktiviti peringkat tinggi.
 
-Inti ekosistem Wave adalah bahasa pengaturcaraan Wave.
-Ia direka dengan berpandukan falsafah C dan Rust, dengan tujuan untuk mencapai keseimbangan antara kawalan berperingkat rendah dan produktiviti tinggi.
+* **Keluk pembelajaran mudah**: Kesukaran sederhana antara C dan Rust.
+* **Ciri berkuasa**: Menyokong pelbagai jenis data seperti penunjuk, tatasusunan dan penyirian.
 
-- **Kurikulum Pembelajaran yang Mudah**: Kesukaran di antara C dan Rust.
-- **Fungsi yang Kuat**: Menyokong pelbagai jenis data seperti penunjuk, array, dan serialisasi.
+### perpustakaan standard
+Wave menyediakan banyak perpustakaan standard supaya pengaturcara tidak perlu bergantung pada perpustakaan luaran yang berasingan.
 
-### Pustaka Piawai
-
-Wave menyediakan pustaka piawai yang kaya supaya pengaturcara tidak perlu bergantung kepada pustaka luar.
-
-- **hardwave**: Kawalan perkakasan
-- **http**: Komunikasi HTTP dan WebSocket
-- **iosys**: Fail dan I/O jalur
-- **sys**: Kawalan sistem
-- **wson**: Format Serialisasi Data Tinggi Performa
-- **quantum**: Sokongan pengkomputeran kuantum
+* **gelombang keras**: kawalan perkakasan
+* **http**: komunikasi HTTP dan WebSocket
+* **iosys**: Fail dan jalur I/O
+* **sys**: kawalan sistem
+* **wson**: Format siri data berprestasi tinggi
+* **kuantum**: Sokongan pengkomputeran kuantum
 
 ### Falsafah Komuniti dan Ekosistem
+Wave menghargai interaksi dengan pembangun, bukan hanya bahasa itu sendiri.
 
-Wave menghargai interaksi dengan pembangun, bukan sekadar bahasa itu sendiri.
+* **Reka bentuk berpusatkan pembangun**: Menghormati pelbagai bahasa dan budaya.
+* **Sokongan untuk minoriti dan bahasa mati**: Menerima kepelbagaian linguistik global.
+* **Teknologi kalis masa hadapan**: Sokongan untuk pengkomputeran kuantum dan piawaian keselamatan generasi akan datang.
 
-- **Reka Bentuk Berorientasikan Pembangun**: Menghormati pelbagai bahasa dan budaya.
-- **Sokongan untuk Bahasa Minoriti dan Terancam**: Meliputi kepelbagaian bahasa global.
-- **Teknologi Masa Depan**: Sokongan untuk pengkomputeran kuantum dan piawaian keselamatan generasi depan.
+### rantai alat
+Wave memaksimumkan produktiviti melalui alat pembangunan yang lengkap.
 
-### Rantaian Alat
-
-Wave memaksimumkan produktiviti melalui ketepatan alat pembangun.
-
-- **Pengurus Pakej Wave (Vex)**: Pembinaan dan pengedaran bebas platform.
-- **Penyahpepijat Wave**: Nyahpepijat yang intuitif.
+* **Pengurus Pakej Wave (Vex)**: Binaan dan penggunaan bebas platform.
+* **Wave Debugger**: Penyahpepijatan intuitif.
 
 ---
 
 ## Matlamat Ekosistem Wave
+Ekosistem Wave berkembang mengikut nilai berikut:
 
-Ekosistem Wave berkembang berasaskan nilai-nilai berikut:
-
-1. **Bahasa yang Menerima Kepelbagaian**: Menyokong semua pembangun untuk menggunakan Wave sesuai dengan bahasa dan budaya mereka.
-2. **Integrasi Semua Bidang Pembangunan**: Digunakan di pelbagai bidang seperti web, perkakasan, AI, rangkaian.
-3. **Menyediakan untuk Masa Depan**: Menghadapi teknologi baru seperti pengkomputeran kuantum dan penyulitan pasca-kuantum.
+1. **Bahasa yang merangkumi kepelbagaian**: Menyokong semua pembangun untuk menggunakan Wave mengikut bahasa dan budaya mereka sendiri.
+2. **Penyatuan semua kawasan pembangunan**: Digunakan dalam pelbagai bidang seperti web, perkakasan, AI dan rangkaian.
+3. **Bersedia untuk masa depan**: Bertindak balas kepada teknologi baharu seperti pengkomputeran kuantum dan penyulitan pasca kuantum.
 
 ---
 
-Ekosistem Wave bertujuan untuk menjadi **persekitaran komprehensif dan inovatif** yang memberikan pengalaman dan kecekapan yang lebih baik kepada pembangun, bukan sekadar menyediakan alat.
-Jelajahi kemungkinan baru dengan Wave!
+Ekosistem Wave melampaui sekadar menyediakan alatan dan menyasarkan untuk menjadi **persekitaran yang komprehensif dan inovatif** yang menyediakan pemaju pengalaman dan kecekapan yang lebih baik.
+Terokai kemungkinan baharu dengan Wave!

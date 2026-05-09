@@ -30,7 +30,7 @@ Cấu trúc định nghĩa hàm cơ bản nhất trong Wave như sau.
 
 ```wave
 fun main() {
-    // Viết mã vào đây
+    // Viết mã của bạn ở đây
 }
 ```
 
@@ -50,8 +50,8 @@ fun add(a :i32, b :i32) -> i32 {
 }
 
 fun main() {
-    var result = add(5, 7);     // gọi hàm add
-    println(result);            // xuất: 12
+    var result = add(5, 7);     // thêm lệnh gọi hàm
+    println(result);            // Đầu ra: 12
 }
 ```
 
@@ -89,7 +89,7 @@ Biến bất biến được khai báo bằng cách sử dụng từ khóa let.
 
 ```wave
 let y :i32 = 5;
-// y = 10;   // lỗi: biến bất biến không thể thay đổi giá trị.
+// y = 10;   // Lỗi: Biến bất biến không thể thay đổi giá trị của chúng.
 ```
 
 Vì biến bất biến đảm bảo giá trị không thay đổi, nó giúp cải thiện độ ổn định và khả năng dự đoán của chương trình.

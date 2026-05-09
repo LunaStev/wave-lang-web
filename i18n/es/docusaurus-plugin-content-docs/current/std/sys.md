@@ -7,8 +7,8 @@ sidebar_position: 10
 `std::sys` es una capa de abstracción del sistema operativo bajo módulos de alto nivel.
 
 ```text
-std(alto nivel)
-  -> dispatcher de sys
+std(high-level)
+  -> sys dispatcher
   -> sys/linux or sys/macos
   -> syscall
 ```
@@ -17,7 +17,7 @@ std(alto nivel)
 
 - La mayoría de las funciones devuelven el valor raw del syscall.
 - `>= 0` éxito, `< 0` fallo(`-errno`).
-- En código de aplicaciones de alto nivel, utilice primero `std::net`, `std::time`, `std::env` en lugar de `std::sys` si es posible.
+- En código de aplicaciones de alto nivel, utilice primero `std::sys`, `std::net`, `std::time` en lugar de `std::env` si es posible.
 
 ## 1. Ejemplo de lectura de archivo (`std::sys::fs`)
 

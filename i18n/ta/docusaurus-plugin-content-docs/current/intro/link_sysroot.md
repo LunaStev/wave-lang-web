@@ -2,42 +2,42 @@
 sidebar_position: 8
 ---
 
-# 링크 sysroot 수동 제어 (`-C link-sysroot`)
+# இணைப்பு sysroot கைமுறை கட்டுப்பாடு (`-C link-sysroot`)
 
-이 문서는 `wavec`에서 링크 단계 sysroot를 **명시적으로 제어**하는 방법을 설명합니다.
+`wavec` இல் இணைப்பு கட்ட sysroot ஐ **வெளிப்படையாக கட்டுப்படுத்துவது** எப்படி என்பதை இந்த ஆவணம் விவரிக்கிறது.
 
-핵심 원칙:
+அடிப்படைக் கொள்கைகள்:
 
-- `--sysroot=<path>`: 컴파일 단계(clang `-c`) sysroot
-- `-C link-sysroot=<path>`: 링크 단계(linker) sysroot
+- `--sysroot=<path>`: தொகுத்தல் கட்டம் (கிளாங் `-c`) sysroot
+- `-C link-sysroot=<path>`: இணைப்பான் sysroot
 
-즉, 컴파일과 링크의 sysroot를 분리해서 다룹니다.
-
----
-
-## 1. 왜 필요한가
-
-크로스 링크에서 `-C linker=<path>`를 쓰면, 링크 드라이버(예: `aarch64-linux-gnu-gcc`)가 참조하는 런타임 경로(`crt1.o`, `libc`, `libm`)를 별도로 지정해야 하는 경우가 많습니다.
-
-이때 링크 sysroot를 자동 추론하지 않고, CLI에서 명시적으로 전달하도록 설계합니다.
+வேறு வார்த்தைகளில் கூறுவதானால், தொகுத்தல் மற்றும் இணைப்பிற்கான sysroot தனித்தனியாக கையாளப்படுகிறது.
 
 ---
 
-## 2. 옵션 정의
+## 1. அது ஏன் தேவைப்படுகிறது?
+
+குறுக்கு இணைப்பில் `-C linker=<path>` ஐப் பயன்படுத்தும் போது, இணைப்பு இயக்கி (எ.கா. `aarch64-linux-gnu-gcc`) குறிப்பிடும் இயக்க நேரப் பாதையை (`crt1.o`, `libc`, `libm`) நீங்கள் அடிக்கடி தனித்தனியாகக் குறிப்பிட வேண்டும்.
+
+இந்த நேரத்தில், இணைப்பு sysroot தானாகவே கழிக்கப்படவில்லை, ஆனால் CLI இல் வெளிப்படையாக அனுப்ப வடிவமைக்கப்பட்டுள்ளது.
+
+---
+
+## 2. விருப்ப வரையறை
 
 ## 2.1 `-C link-sysroot=<path>`
 
-링크 단계에 `--sysroot=<path>`를 주입합니다.
+இணைப்பு கட்டத்தில் `--sysroot=<path>` ஐ செலுத்தவும்.
 
 ```bash
 wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-내부적으로는 `-C link-arg=--sysroot=<path>`와 같은 의미입니다.
+உள்நாட்டில் இது `-C link-arg=--sysroot=<path>` போன்ற அதே பொருளைக் கொண்டுள்ளது.
 
 ## 2.2 `-C link-arg=--sysroot=<path>`
 
-기존 raw 링크 인자 방식도 계속 지원합니다.
+ஏற்கனவே உள்ள மூல இணைப்பு வாத முறையும் இன்னும் ஆதரிக்கப்படுகிறது.
 
 ```bash
 wavec -C link-arg=--sysroot=/path/to/sysroot ...
@@ -45,15 +45,15 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 
 ---
 
-## 3. 검증 규칙
+## 3. சரிபார்ப்பு விதிகள்
 
-링크 단계가 필요한 빌드에서 다음 조건이 동시에 성립하면 usage error로 종료합니다.
+பின்வரும் நிபந்தனைகள் ஒரே நேரத்தில் பூர்த்தி செய்யப்பட்டால், இணைப்புப் படி தேவைப்படும் உருவாக்கமானது பயன்பாட்டுப் பிழையுடன் முடிவடையும்:
 
-1. `-C linker=...` 사용
-2. `--sysroot=<path>` 사용
-3. 링크 sysroot(`-C link-sysroot` 또는 `-C link-arg=--sysroot=...`) 미지정
+1. `-C linker=...` ஐப் பயன்படுத்தவும்
+2. `--sysroot=<path>` ஐப் பயன்படுத்தவும்
+3. இணைப்பு sysroot (`-C link-sysroot` அல்லது `-C link-arg=--sysroot=...`) குறிப்பிடப்படவில்லை
 
-오류 메시지 예:
+எடுத்துக்காட்டு பிழை செய்தி:
 
 ```text
 when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
@@ -61,9 +61,9 @@ when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sy
 
 ---
 
-## 4. 사용 예시
+## 4. பயன்பாட்டின் உதாரணம்
 
-## 4.1 AArch64 Linux 크로스 링크
+## 4.1 AArch64 Linux குறுக்கு இணைப்பு
 
 ```bash
 wavec \
@@ -76,7 +76,7 @@ wavec \
   -o /tmp/test93-aarch64.bin
 ```
 
-## 4.2 raw 링크 인자 방식
+## 4.2 மூல இணைப்பு வாத முறை
 
 ```bash
 wavec \
@@ -88,9 +88,9 @@ wavec \
   --emit=bin
 ```
 
-## 4.3 링크가 없는 빌드 (`--emit=obj`)
+## 4.3 இணைப்பு இல்லாமல் உருவாக்கவும் (`--emit=obj`)
 
-링크 단계가 없으면 링크 sysroot는 필요하지 않습니다.
+இணைப்பு படி இல்லாமல், sysroot ஐ இணைக்க தேவையில்லை.
 
 ```bash
 wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
@@ -98,8 +98,8 @@ wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 
 ---
 
-## 5. 정리
+## 5. சுத்தம் செய்யவும்
 
-- `--sysroot`는 컴파일 단계 제어
-- `-C link-sysroot`는 링크 단계 제어
-- 자동 추론보다 명시적 제어를 우선
+- `--sysroot` தொகுப்பு கட்டத்தை கட்டுப்படுத்துகிறது
+- `-C link-sysroot` இணைப்பு கட்டத்தை கட்டுப்படுத்துகிறது
+- தானியங்கி அனுமானத்தின் மீது வெளிப்படையான கட்டுப்பாட்டிற்கு முன்னுரிமை கொடுங்கள்

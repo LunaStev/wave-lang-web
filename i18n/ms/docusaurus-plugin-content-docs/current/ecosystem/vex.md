@@ -4,19 +4,18 @@ sidebar_position: 2
 
 # Pengurus Pakej Vex
 
-## Gambaran Keseluruhan
+## Gambaran keseluruhan
 
-Vex adalah pengurus pakej dan sistem binaan khusus untuk bahasa pengaturcaraan Wave.
-Vex menyokong pengurusan projek secara menyeluruh termasuk pengurusan kebergantungan kod sumber, tetapan binaan, pemilihan platform sasaran, pemasangan dan pengedaran modul.
-Tidak mempertimbangkan keserasian dengan bahasa atau sistem luar, dan direka untuk beroperasi sepenuhnya di dalam ekosistem Wave.
+Vex ialah pengurus pakej khusus dan sistem binaan untuk bahasa pengaturcaraan Wave.
+Vex menyokong pengurusan projek secara keseluruhan, termasuk pengurusan pergantungan kod sumber, tetapan binaan, penetapan platform sasaran dan pemasangan dan penggunaan modul.
+Keserasian dengan bahasa atau sistem luaran tidak dipertimbangkan dan ia direka bentuk untuk beroperasi hanya dalam ekosistem Wave.
 
-## Matlamat Reka Bentuk
+## matlamat reka bentuk
+Vex telah direka dengan matlamat berikut dalam fikiran:
 
-Vex direka berdasarkan matlamat berikut:
+Direka secara eksklusif untuk Wave: Disasarkan hanya untuk projek Wave, ia dioptimumkan untuk sintaks, struktur modul dan persekitaran pelaksanaan Wave.
 
-Reka bentuk khusus untuk Wave: Sasaran hanya bagi projek Wave dan dioptimumkan untuk tatabahasa, struktur modul, dan persekitaran pelaksanaan Wave.
-
-- Sistem arahan intuitif: Direka untuk membolehkan pelaksanaan tugas utama dengan satu arahan tanpa skrip binaan yang rumit.
-- Sokongan multi-target: Memudahkan peralihan target binaan berdasarkan sistem operasi dan seni bina.
-- Pengurusan konfigurasi berdasarkan WSON: Semua maklumat konfigurasi projek ditakrifkan dalam format WSON (Wave Serialization Object Notation).
-- Pembinaan dan pengedaran statik: Fail pelaksanaan dibina secara statik, boleh diedarkan secara beban sendiri tanpa bergantung pada runtime luar.
+* Struktur arahan intuitif: Dianjurkan untuk melaksanakan tugas utama dengan satu arahan, tanpa skrip binaan yang kompleks.
+* Sokongan berbilang sasaran: Anda boleh menukar sasaran binaan dengan mudah bergantung pada sistem pengendalian dan seni bina.
+* Pengurusan konfigurasi berasaskan WSON: Semua maklumat konfigurasi projek ditakrifkan dalam format WSON (Wave Serialization Object Notation).
+* Binaan dan penggunaan statik: Boleh laku dibina secara statik dan boleh digunakan secara bebas tanpa bergantung pada masa jalan luaran.

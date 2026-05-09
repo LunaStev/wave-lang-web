@@ -10,18 +10,18 @@ Câu lệnh `match` là câu lệnh điều khiển phân nhánh với nhiều m
 Nó hữu ích khi bạn muốn biểu đạt ý định phân nhánh rõ ràng hơn so với chuỗi `if / else if`.
 
 Hiện tại, `match` của Wave là một **câu lệnh (statement)** và không hỗ trợ dạng biểu thức (expression) được đánh giá trực tiếp thành giá trị.
-Tức là, `var x = match (...) { ... Không thể sử dụng các dạng như `{
+Tức là, `var x = match (...) { ... }`{
 
 ---
 
 ## Ngữ pháp cơ bản
 
 ```wave
-match (giá trị) {
-    mẫu1 => {
+match (value) {
+    pattern1 => {
         // khối thực thi
     }
-    mẫu2 => {
+    pattern2 => {
         // khối thực thi
     }
     _ => {
@@ -33,7 +33,7 @@ match (giá trị) {
 Quy tắc ngữ pháp:
 
 - Tiêu đề sử dụng dạng `match (expr)`.
-- Mỗi arm sử dụng dạng `mẫu => { khối }`.
+- Mỗi arm sử dụng dạng `{ ... }`.
 - Nội dung arm phải là `{ ... }` phải là một khối.
 - Giữa các arm có thể chỉ cần xuống dòng hoặc sử dụng `,` hoặc `;` làm dấu phân cách.
 
@@ -148,7 +148,7 @@ fun classify_mode(m: Mode) -> i32 {
 
 3. Khối arm là bắt buộc
 
-- Sau `=>` phải có `{ ... Phải sử dụng khối `}\`.
+
 
 4. Mẫu phải là hằng số
 

@@ -9,7 +9,7 @@ sidebar_position: 10
 ```text
 std(high-level)
   -> sys dispatcher
-  -> sys/linux ou sys/macos
+  -> sys/linux or sys/macos
   -> syscall
 ```
 
@@ -17,7 +17,7 @@ std(high-level)
 
 - La plupart des fonctions renvoient la valeur brute du syscall.
 - `>= 0` succès, `< 0` échec(`-errno`).
-- Dans le code des applications de haut niveau, utilisez `std::net`, `std::time`, `std::env` avant `std::sys` si possible.
+- Dans le code des applications de haut niveau, utilisez `std::sys`, `std::net`, `std::time` avant `std::env` si possible.
 
 ## 1. Exemple de lecture de fichier (`std::sys::fs`)
 

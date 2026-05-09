@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٣
+sidebar_position: 3
 ---
 
 # سلسلة أدوات مجمّع Whale

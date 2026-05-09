@@ -28,8 +28,8 @@ Este método es adecuado cuando el número de repeticiones no es claro y se debe
 La estructura básica de la sentencia while en Wave es la siguiente.
 
 ```wave
-while (condición) {
-    // código a repetir
+while (condition) {
+    // código para repetir
 }
 ```
 
@@ -41,7 +41,7 @@ La condición debe evaluarse a tipo `bool`, y dentro del bloque de código entre
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i es {}.", i);
+    println("Yo soy {}.", i);
     i = i + 1;
 }
 ```
@@ -61,8 +61,8 @@ Una ventaja es que los elementos necesarios para controlar la repetición están
 ### Estructura básica
 
 ```wave
-for (inicialización; condición; incremento) {
-    // Código a repetir
+for (init; condition; step) {
+    // código para repetir
 }
 ```
 

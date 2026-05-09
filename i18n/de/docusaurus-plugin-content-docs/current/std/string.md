@@ -21,10 +21,10 @@ import("std::string::hash");
 
 ```wave
 fun main() {
-    var l: i32 = länge("wave");
-    var g: bool = gleich("a", "a");
-    var v: i32 = vergl("abc", "abd"); // -1
-    var bg: bool = beginnt_mit("/api/v1", "/api");
+    var l: i32 = len("wave");
+    var e: bool = eq("a", "a");
+    var c: i32 = cmp("abc", "abd"); // -1
+    var sw: bool = starts_with("/api/v1", "/api");
 }
 ```
 
@@ -32,9 +32,9 @@ fun main() {
 
 ```wave
 fun main() {
-    var p1: i32 = find_char("hallo", 108); // 'l' -> 2
-    var p2: i32 = finden("welle-spr", "spr");
-    var zähler: i32 = zählen("aaa", "aa");
+    var p1: i32 = find_char("hello", 108); // 'l' -> 2
+    var p2: i32 = find("wave-lang", "lang");
+    var cnt: i32 = count("aaaa", "aa");
 }
 ```
 
@@ -42,13 +42,13 @@ fun main() {
 
 ```wave
 fun main() {
-    var s: str = "  hallo\n";
+    var s: str = "  hello\n";
     var st: i32 = 0;
     var en: i32 = 0;
-    trimm_bereich(s, &st, &en);
+    trim_range(s, &st, &en);
 
-    var z: bool = ist_ziffer(53);    // '5'
-    var ho: u8 = zu_groß(97);     // 'a' -> 'A'
+    var d: bool = is_digit(53);    // '5'
+    var up: u8 = to_upper(97);     // 'a' -> 'A'
 }
 ```
 
@@ -56,25 +56,25 @@ fun main() {
 
 ```wave
 fun main() {
-    var h1: i32 = djb2_32("cache-schlüssel");
-    var h2: i64 = fnv1a_64("cache-schlüssel");
+    var h1: i32 = djb2_32("cache-key");
+    var h2: i64 = fnv1a_64("cache-key");
 }
 ```
 
 ## Hauptfunktionen
 
 ```wave
-fun länge(s: str) -> i32
-fun ist_leer(s: str) -> bool
-fun gleich(a: str, b: str) -> bool
-fun vergleiche(a: str, b: str) -> i32
-fun finde(s: str, nadel: str) -> i32
-fun enthält(s: str, nadel: str) -> bool
-fun zählen(s: str, nadel: str) -> i32
-fun trimm_bereich(s: str, aus_start: ptr<i32>, aus_ende: ptr<i32>)
-fun ist_ziffer(c: u8) -> bool
-fun zu_kleinbuchstabe(c: u8) -> u8
-fun zu_großbuchstabe(c: u8) -> u8
+fun len(s: str) -> i32
+fun is_empty(s: str) -> bool
+fun eq(a: str, b: str) -> bool
+fun cmp(a: str, b: str) -> i32
+fun find(s: str, needle: str) -> i32
+fun contains(s: str, needle: str) -> bool
+fun count(s: str, needle: str) -> i32
+fun trim_range(s: str, out_start: ptr<i32>, out_end: ptr<i32>)
+fun is_digit(c: u8) -> bool
+fun to_lower(c: u8) -> u8
+fun to_upper(c: u8) -> u8
 fun djb2_32(s: str) -> i32
 fun fnv1a_64(s: str) -> i64
 ```

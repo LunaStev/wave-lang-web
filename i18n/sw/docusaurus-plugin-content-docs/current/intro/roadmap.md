@@ -10,7 +10,7 @@ Wave na Whale huanza kama vipengele vilivyotengwa mwanzoni lakini kwa mwisho len
 Hatua zote za maendeleo hufuata mtiririko kama ufuatao.
 
 ```matlab
-pre-alpha → pre-beta → alfa → beta → rc → kutolewa
+pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
 Kila hatua inategemea matokeo ya hatua iliyotangulia, na maendeleo ya mwelekeo mmoja yamaanisha mtiririko wa ujenzi usioweza kurudishwa mara moja.

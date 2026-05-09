@@ -2,36 +2,38 @@
 sidebar_position: 6
 ---
 
-# Penunjuk
+# penunjuk
 
-## Model Jenis Memori Eksplisit Wave
+## Wave Explicit Memory Type Model
 
-Reka bentuk penunjuk Wave berdasarkan **Model Jenis Memori Eksplisit Wave**.
-Model ini bertujuan untuk mendefinisikan penunjuk dan array bukan sebagai trik sintaks atau pengabstrakan pustaka, tetapi sebagai **jenis memori eksplisit pada tahap bahasa**.
+Reka bentuk penunjuk Wave adalah berdasarkan **Model Jenis Memori Eksplisit Wave**.
+Model ini bertujuan untuk mentakrifkan penunjuk dan tatasusunan sebagai jenis ingatan eksplisit pada peringkat bahasa, dan bukannya sebagai helah sintaksis atau abstraksi perpustakaan.
 
-Menurut reka bentuk ini, Wave mempersembahkan penunjuk dalam bentuk jenis `ptr<T>`, yang dengan jelas menunjukkan bahawa jenis tersebut menunjukkan alamat memori yang menyimpan nilai jenis tertentu `T`.
-Pendekatan ini menguruskan penunjuk sebagai sebahagian daripada sistem jenis, bukan sebagai pengendali atau tatabahasa penyataan, memudahkan untuk mempersembahkan struktur memori dengan lebih intuitif dan konsisten.
+Mengikut reka bentuk ini, Wave menyatakan penunjuk sebagai jenis `ptr<T>`.
+Ini jelas mendedahkan bahawa ia adalah jenis yang menunjuk ke alamat memori yang menyimpan nilai jenis tertentu, `T`.
+Pendekatan ini menganggap penunjuk sebagai sebahagian daripada sistem jenis dan bukannya sebagai pengendali atau sintaks pengisytiharan.
+Membolehkan struktur ingatan dinyatakan dengan lebih intuitif dan konsisten.
 
 ---
 
-Dalam Wave, jenis penunjuk ditakrifkan dalam format `ptr<T>`.
-Pengambilan alamat dilakukan dengan menggunakan `&`, dan referensi balik menggunakan `deref`.
+Dalam Wave, penunjuk ialah jenis eksplisit jenis `ptr<T>`.
+Gunakan `&` untuk pemerolehan alamat dan `deref` untuk penolakan rujukan.
 
-## Penyataan dan Pengawalan
+## Pengisytiharan dan permulaan
 
 ```wave
 var x: i32 = 10;
 var p: ptr<i32> = &x;
 ```
 
-Jenis penunjuk boleh ditompok.
+Jenis penunjuk boleh bersarang.
 
 ```wave
 var p1: ptr<i32> = &x;
 var p2: ptr<ptr<i32>> = &p1;
 ```
 
-## Rujukan Terbalik
+## rujukan belakang
 
 ```wave
 var x: i32 = 10;
@@ -42,15 +44,14 @@ deref p = 20;
 println("{}", x);       // 20
 ```
 
-## Peraturan Literals `null`
+## Peraturan Literal `null`
 
-`null` adalah **literally sah**. Ia bukan pengenalan dan tidak boleh digunakan sebagai nama pembolehubah.
+`null` ialah **harfiah kanonik**. Ia bukan pengecam dan tidak boleh digunakan sebagai nama pembolehubah.
 
-Peraturan Utama:
-
-- `null` hanya boleh diberikan kepada objek bertujuan `ptr<T>`.
-- Tipe bukan penunjuk seperti `i32`, `bool`, `array<...>` tidak boleh diberi nilai.
-- Penunjuk tidak boleh diinisialisasi dengan literan integer (`0`, `123`, `-1`, dll). Menggunakan `null` secara eksplisit.
+Peraturan teras:
+- `null` hanya boleh diberikan kepada sasaran `ptr<T>`.
+- Ia tidak boleh diberikan kepada jenis bukan penuding seperti `i32`, `bool` dan `array<...>`.
+- Penunjuk tidak boleh dimulakan dengan literal integer (`0`, `123`, `-1`, dsb.). Gunakan `null` secara eksplisit.
 
 ```wave
 var p: ptr<i32> = null;
@@ -60,19 +61,18 @@ var arrp: ptr<array<i32, 3>> = null;
 // var b: bool = null; // ERROR
 ```
 
-## Arithmetik Penunjuk
+## aritmetik penunjuk
 
-Wave menyokong operasi aritmetik penunjuk berikut.
+Wave menyokong aritmetik penunjuk berikut:
 
-- `ptr + int`: Pembangunan Penunjuk Berdasarkan GEP
-- `int + ptr`: Tindakan yang Sama
-- `ptr - int`: Pembangunan Penunjuk Berdasarkan GEP
-- `ptr - ptr`: Mengira perbezaan byte `i64`.
+- `ptr + int`: Kemajuan penunjuk berasaskan GEP
+- `int + ptr`: Operasi yang sama
+- `ptr - int`: Penunjuk berasaskan GEP ke belakang
+- `ptr - ptr`: Kira perbezaan bait `i64`
 
-Point:
-
-- `ptr<T> +/- n` bergerak berdasarkan ukuran `T` (`sizeof(T)`).
-- Contohnya `ptr<i32> + 3` bergerak `+12` dalam ukuran byte.
+mata:
+- `ptr<T> +/- n` bergerak berdasarkan saiz `T` (`sizeof(T)`).
+- Dalam erti kata lain, `ptr<i32> + 3` bergerak ke `+12` bait.
 
 ```wave
 var base: ptr<i32> = 0x1000 as ptr<i32>;
@@ -81,10 +81,10 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (perbezaan byte) 
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
-## Perbandingan Penunjuk
+## perbandingan penunjuk
 
 Penunjuk boleh digunakan untuk perbandingan.
 
@@ -94,9 +94,9 @@ if (p != null) { ... }
 if (p1 == p2) { ... }
 ```
 
-## Hubungan dengan Array
+## Hubungan dengan Arrays
 
-Array Penunjuk:
+Tatasusunan penunjuk:
 
 ```wave
 var a: i32 = 10;
@@ -105,7 +105,7 @@ var arr: array<ptr<i32>, 2> = [&a, &b];
 println("{} {}", deref arr[0], deref arr[1]);
 ```
 
-Pointer Array:
+Penunjuk tatasusunan:
 
 ```wave
 var p: ptr<array<i32, 3>> = &[1, 2, 3];
@@ -114,7 +114,7 @@ if (p != null) {
 }
 ```
 
-## Nota Keselamatan
+## nota keselamatan
 
-Wave bukan model keselamatan penunjuk berasaskan pemilikan/kehidupan seperti Rust pada masa ini.
-Oleh itu, ia tidak secara automatik menghalang rujukan terbalik `null`. Disarankan untuk memasukkan pola pemeriksaan `null` secara eksplisit sebelum `deref`.
+Wave pada masa ini tidak mempunyai model keselamatan penunjuk berasaskan pemilikan/seumur hidup seperti Rust.
+Oleh itu, dereference `null` tidak dihalang secara automatik. Kami mengesyorkan corak yang secara eksplisit menyemak `deref` sebelum `null`.

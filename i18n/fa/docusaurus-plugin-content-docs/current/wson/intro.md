@@ -34,9 +34,9 @@ sidebar_position: 2
 
 ```
 {
-    status: "موفقیت‌آمیز",
+    status: "success",
     code = 200,
-    user = { id: 123, name: "جان دو" }
+    user = { id: 123, name: "John Doe" }
 }
 ```
 
@@ -52,8 +52,8 @@ sidebar_position: 2
 
 ```
 tasks: [
-    { task_id: 1, title: "تکمیل گزارش پروژه" },
-    { task_id: 2, title: "بررسی بازخورد تیم" }
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
@@ -70,7 +70,7 @@ tasks: [
 مثال:
 
 ```
-name: "جان دو"
+name: "John Doe"
 age = 25
 ```
 
@@ -79,7 +79,7 @@ age = 25
 - رشته (String): متنی است که با نقل قول بزرگ `"` بسته شده است.
 
 ```
-"سلام دنیا"
+"hello world"
 ```
 
 - عدد (Number): مقداری به صورت عدد صحیح یا اعشاری است.
@@ -103,13 +103,13 @@ is_active = true
 ```ws
 {
     // کد وضعیت و اطلاعات پیام
-    status: "موفقیت‌آمیز",
+    status: "success",
     code: 200,
-    message: "اطلاعات با موفقیت بازیابی شد",
+    message: "Data retrieved successfully",
 
     user = {
         id = 123,
-        name: "جان دو",
+        name: "John Doe",
         email: "john@example.com",
         age: 25  # سن کاربر
     },
@@ -117,14 +117,14 @@ is_active = true
     tasks: [
         {
             task_id: 1,
-            title: "تکمیل گزارش پروژه",
-            status: "درحال پیشرفت",
+            title: "Complete project report",
+            status: "in-progress",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "بررسی بازخورد تیم",
-            status: "در انتظار",
+            title: "Review team feedback",
+            status: "pending",
             due_date: "2024-10-20"
         }
     ]

@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٩
+sidebar_position: 9
 ---
 
 # واجهة الدوال الخارجية (FFI)
@@ -25,7 +25,7 @@ sidebar_position: ٩
 على الحالي، تحتاج إلى تحديد ABI في Wave وتدعم **`extern(c)` فقط**.
 
 ```wave
-extern(c) fun اسم الدالة(المدخلات...) -> نوع الناتج;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-يتم تحديد هذا الاعلان لاستخدام `puts` كرمز لينك في وقت استدعاء الدالة `rust_func`.
+يتم تحديد هذا الاعلان لاستخدام `rust_func` كرمز لينك في وقت استدعاء الدالة `puts`.
 
 ---
 
@@ -93,9 +93,9 @@ fun rust_func(i32);
 في إعلان مستوى الكتلة، يمكن تحديد اسم الرمز بشكل فردي لكل دالة في نهاية كل إعلان.
 
 ```wave
-(c) الخارج {
- fun my_puts(ptr<i8>) "puts";
- fun my_strlen(ptr<i8>) "strlen";
+extern(c) {
+    fun my_puts(ptr<i8>) "puts";
+    fun my_strlen(ptr<i8>) "strlen";
 }
 ```
 

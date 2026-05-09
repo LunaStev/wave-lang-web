@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Hantar Hello Wave
+# Cetak Hello Wave
 
-Dokumen ini menerangkan proses penyerahan asas untuk anggota Wave.
+Dokumen ini menerangkan cara menulis program keluaran paling asas dalam bahasa Wave.
 
 ---
 
-## Kode Contoh
+## contoh kod
 
 ```wave
 fun main() {
@@ -18,23 +18,22 @@ fun main() {
 
 ---
 
-## Tajuk
-
+## Penerangan
 - `fun main()`
 
-  Ini adalah bentuk kolektif pemrograman Wave. Ia dipanggil terlebih dahulu semasa pelaksanaan.
+    Wave Ini ialah fungsi titik masuk program. Ia dipanggil pertama apabila dijalankan.
 
 - `println()`
 
-  Menetapkan ruang pembolehubah output secara berasingan akan menyebabkan penambahan baris baru (`\n`) setelah pengeluaran.
+    Mengeluarkan rentetan dengan fungsi output sementara dan menambah pemisah baris (`\n`) selepas output.
 
-- `;` (Semi-colon)
+- `;` (titik bertitik)
 
-  Semua pernyataan dalam Wave dipisahkan dengan titik koma.
+    Semua pernyataan dalam Wave ditamatkan dengan koma bertitik.
 
 ---
 
-## Fungsi
+## hasil pelaksanaan
 
 ```text
 Hello Wave
@@ -42,9 +41,8 @@ Hello Wave
 
 ---
 
-## Subjek
-
-Wave menyokong pembolehubah kosong yang merangkumi ahli.
+## Contoh tambahan
+Wave menyokong interpolasi rentetan.
 
 ```wave
 fun main() {
@@ -61,4 +59,4 @@ Hello, Wave!
 
 ---
 
-> Tajuk ini adalah bentuk asas yang menerangkan cara pengaturcaraan berkaitan Wave.
+> Contoh ini menunjukkan penggunaan fungsi output asas perpustakaan standard Wave.

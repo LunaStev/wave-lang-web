@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Marejeleo ya CLI ya `wavec`
 
-Hati hii inaelezea kwa kina utekelezaji wa CLI kulingana na **kiwango cha sasa cha utekelezaji wa wa Mwave (`wavec`)**.
+Hati hii inaelezea kwa kina utekelezaji wa CLI kulingana na **kiwango cha sasa cha utekelezaji wa wa Wave (`wavec`)**.
 
 Misingi muhimu:
 
@@ -17,15 +17,15 @@ Misingi muhimu:
 ## 1. Umbizo la msingi
 
 ```bash
-wavec [chaguo-la-dunia] <amri> [chaguo-la-amri]
+wavec [global-options] <command> [command-options]
 ```
 
 Mf:
 
 ```bash
-wavec -O2 endesha main.wave
-wavec jenga app.wave --link ssl -L ./native/lib
-wavec endesha app.wave --dep-root .vex/dep
+wavec -O2 run main.wave
+wavec build app.wave --link ssl -L ./native/lib
+wavec run app.wave --dep-root .vex/dep
 ```
 
 ---
@@ -37,9 +37,9 @@ wavec endesha app.wave --dep-root .vex/dep
 Yaani chaguo-la-dunia hayana nafasi maalum.
 
 ```bash
-wavec -O3 endesha main.wave
-wavec endesha main.wave -O3
-wavec endesha -O3 main.wave
+wavec -O3 run main.wave
+wavec run main.wave -O3
+wavec run -O3 main.wave
 ```
 
 Nambari zote tatu zilizotajwa hapo juu ni sahihi.
@@ -47,19 +47,19 @@ Nambari zote tatu zilizotajwa hapo juu ni sahihi.
 Unapotumia `--`, utapunguza uchangaji wa chaguo-la-dunia baada yake na kuhamisha kwenye eneo la amri.
 
 ```bash
-wavec -- endesha main.wave
+wavec -- run main.wave
 ```
 
 ---
 
 ## 3. Amri
 
-## 3.1 `ondoa <faili>`
+## 3.1 `run <file>`
 
-Inakusanya na kuendesha faili ya Mwave.
+Inakusanya na kuendesha faili ya Wave.
 
 ```bash
-wavec endesha hello.wave
+wavec run hello.wave
 ```
 
 Kufanya kazi:
@@ -75,29 +75,29 @@ Tabia:
 
 ---
 
-## 3.2 `jenga <faili>`
+## 3.2 `build <file>`
 
 Huunda faili ya kutekeleza (exe).
 
 ```bash
-wavec jenga app.wave
+wavec build app.wave
 ```
 
 Failia zinazotoka:
 
-- `lengo/<shina_la_faili>`
+- `target/<file_stem>`
 
 ## 3.3 Machaguo ya `build` (`-o`, `-c`)
 
 Amri ya `build` inaweza kudhibiti jina la faili na muundo wa toleo kama chaguzi.
 
 ```bash
-wavec jenga app.wave -o ./bin/app
-wavec jenga app.wave -c
-wavec jenga app.wave -c -o ./build/app.o
+wavec build app.wave -o ./bin/app
+wavec build app.wave -c
+wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <faili>`: Taja jina la faili la pato.
+- `-o <file>`: Taja jina la faili la pato.
   - Kimya chaguo(`-c` haipo): taja njia ya pato la faili ya kutekeleza
   - Pamoja na `-c`: taja njia ya pato la faili la kitu
 - `-c`: Ruka kiungo na uzalishe faili la kitu pekee.
@@ -105,37 +105,37 @@ wavec jenga app.wave -c -o ./build/app.o
 
 Utendaji wa kawaida:
 
-- `wavec jenga app.wave` -> `lengo/app`
-- `wavec jenga app.wave -c` -> `lengo/app.o` (njia ya kutokea)
+- `wavec build app.wave` -> `target/app`
+- `wavec build app.wave -c` -> `target/app.o` (njia ya kutokea)
 
 Mfano wa kitu cha kernel cha kujitegemea:
 
 ```bash
 wavec --llvm \
-  --lengo=x86_64-unknown-none-elf \
-  jenga kernel.wave --emit=obj --freestanding -o kernel.o
+  --target=x86_64-unknown-none-elf \
+  build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
 Unaweza pia kutumia `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` kwa njia ile ile.
 
 ---
 
-## 3.4 `weka std`, `sasisha std`
+## 3.4 `install std`, `update std`
 
 Amri ya kusakinisha/kusasaisha maktaba ya kawaida.
 
 ```bash
-wavec weka std
-wavec sasisha std
+wavec install std
+wavec update std
 ```
 
 ---
 
-## 3.5 `--msaidizi`, `--toleo`
+## 3.5 `--help`, `--version`
 
 ```bash
-wavec --msaidizi
-wavec --toleo
+wavec --help
+wavec --version
 ```
 
 ---
@@ -157,7 +157,7 @@ Thamani za kuruhusiwa:
 Mf.:
 
 ```bash
-wavec -O3 endesha main.wave
+wavec -O3 run main.wave
 ```
 
 ---
@@ -165,7 +165,7 @@ wavec -O3 endesha main.wave
 ## 4.2 Toa Debug
 
 ```bash
-wavec --debug-wave=tokens,ast,ir endesha main.wave
+wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
 Vitu vya kuruhusiwa:
@@ -182,7 +182,7 @@ Vitu vya kuruhusiwa:
 ## 4.3 Chaguzi za Kiungo
 
 ```bash
-wavec kujenga app.wave --link ssl --link crypto -L ./native/lib
+wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` au `--link <lib>`
@@ -201,7 +201,7 @@ Ni chaguo la kutafsiri import ya nje (`pkg::...`).
 Huongeza chaguo la msimbo mzizi wa kifurushi.
 
 ```bash
-wavec endesha app.wave --dep-root .vex/dep
+wavec run app.wave --dep-root .vex/dep
 ```
 
 Wakati unapochunguza kifurushi `math`:
@@ -211,7 +211,7 @@ Wakati unapochunguza kifurushi `math`:
 Inaweza kuainishwa mara nyingi:
 
 ```bash
-wavec endesha app.wave --dep-root .vex/dep --dep-root ./vendor/dep
+wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
 ### `--dep <name>=<path>`
@@ -219,7 +219,7 @@ wavec endesha app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 Inafunga jina la kifurushi kwa njia mahususi.
 
 ```bash
-wavec endesha app.wave --dep math=.vex/dep/math
+wavec run app.wave --dep math=.vex/dep/math
 ```
 
 Kanuni:
@@ -235,7 +235,7 @@ Kanuni:
 Chaguo la udhibiti wa usaidizi wa nyuma linatafsiriwa baada ya kupita `--llvm` pekee.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu kujenga app.wave -c
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
 Vitu vilivyoandaliwa (muhtasari):
@@ -244,7 +244,7 @@ Vitu vilivyoandaliwa (muhtasari):
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (Inaweza kurudiwa)
-- `-C link-sysroot=<njia>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Lengo kuu kwa msingi wa `wavec print target-list` ya sasa:
@@ -289,8 +289,8 @@ Inatumia njia ya `~/.wave/lib/wave/std/...`.
 ## 5.3 Pakiti za Nje
 
 ```wave
-ingiza("math::add");
-ingiza("json::parser::core");
+import("math::add");
+import("json::parser::core");
 ```
 
 Fomati:
@@ -300,7 +300,7 @@ Fomati:
 Mpangilio wa Njia za Pakiti:
 
 1. Piga ramani `--dep name=path`
-2. Tafuta `<root>/<package>` katika kila `--dep-root`
+2. Tafuta `--dep-root` katika kila `<root>/<package>`
 
 Ikiwa pakiti sawa itapatikana katika mizizi kotekote kwa wakati mmoja:
 
@@ -309,19 +309,19 @@ Ikiwa pakiti sawa itapatikana katika mizizi kotekote kwa wakati mmoja:
 
 Mpangilio wa Utafutaji wa Njia ya Moduli:
 
-1. `<mzizi_wa_pakiti>/<njia_ya_moduli>.wave`
-2. `<mzizi_wa_pakiti>/src/<njia_ya_moduli>.wave`
+1. `<package_root>/<module_path>.wave`
+2. `<package_root>/src/<module_path>.wave`
 
 Mfano:
 
 ```wave
-ingiza("math::core::vec");
+import("math::core::vec");
 ```
 
 Utafutaji:
 
-- `<mzizi_wa_pakiti>/core/vec.wave`
-- `<mzizi_wa_pakiti>/src/core/vec.wave`
+- `<package_root>/core/vec.wave`
+- `<package_root>/src/core/vec.wave`
 
 ---
 
@@ -333,39 +333,39 @@ Saraka:
 
 ```text
 .vex/dep/
-  hesabu/
+  math/
     src/
-      ongeza.wave
-kuu.wave
+      add.wave
+main.wave
 ```
 
 Msimbo:
 
 ```wave
-ingiza("math::add");
+import("math::add");
 ```
 
 Utekelezaji:
 
 ```bash
-wavec endesha kuu.wave --dep-root .vex/dep
+wavec run main.wave --dep-root .vex/dep
 ```
 
 ### 6.2 Kushindwa kwa Mfuatano wa Mfuatano
 
 ```bash
-wavec endesha kuu.wave \
+wavec run main.wave \
   --dep-root .vex/dep \
-  --dep-root ./muuzaji/dep
+  --dep-root ./vendor/dep
 ```
 
 Ikiwa `math` ipo kwa pande zote mbili, kuna kosa. Inapaswa kuwekwa kama ifuatavyo.
 
 ```bash
-wavec endesha kuu.wave \
+wavec run main.wave \
   --dep-root .vex/dep \
-  --dep-root ./muuzaji/dep \
-  --dep math=./muuzaji/dep/math
+  --dep-root ./vendor/dep \
+  --dep math=./vendor/dep/math
 ```
 
 ---
@@ -375,13 +375,13 @@ wavec endesha kuu.wave \
 Muundo wa Ruhusa:
 
 - `wavec`: hariri/kufunga/utekelezaji + ufafanuzi uliotajwa
-- `vex`: usakinishaji/usimamizi wa utegemezi baada ya `wavec ...` --mizizi ya utegemezi ... --tegemezi ...\` ramani
+- `vex`: Piga simu `wavec ... --dep-root ... --dep ...` baada ya kusakinisha/kudhibiti vitegemezi.
 
 Mfano:
 
 ```bash
-# Vex inatekelezwa kwa ndani
-wavec endesha kuu.wave --dep-root .vex/dep --dep math=.vex/dep/math
+# Kwa ndani, hasira hufanya
+wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
 Mfuatano huu unahamisha mhariri kwa urahisi na kudumisha moja kwa moja usimamizi wa pakiti.
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: imehifadhiwa, haijatekelezwa
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

@@ -29,7 +29,7 @@ La structure de base de la boucle while dans Wave est la suivante.
 
 ```wave
 while (condition) {
-    // Code à répéter
+    // code à répéter
 }
 ```
 
@@ -41,7 +41,7 @@ La condition doit être évaluée comme un type `bool`, et le bloc de code entou
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i = {}", i);
+    println("je suis {}.", i);
     i = i + 1;
 }
 ```
@@ -61,8 +61,8 @@ Les éléments nécessaires au contrôle des répétitions étant regroupés en 
 ### Structure de base
 
 ```wave
-for (initialisation; condition; incrémentation) {
-    // Code à répéter
+for (init; condition; step) {
+    // code à répéter
 }
 ```
 
@@ -131,7 +131,7 @@ while (i < 3) {
 ```
 
 Dans cet exemple, chaque fois que la boucle `while` extérieure est exécutée, la boucle `while` intérieure est entièrement exécutée.
-Cela permet de traiter de manière séquentielle les combinaisons sous la forme (`i`, `j`).
+Cela permet de traiter de manière séquentielle les combinaisons sous la forme (`while`, `while`).
 
 ---
 

@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## Introduction
 
-L'assemblage en ligne de Wave commence par `asm { ... Se termine par un bloc `}\`.
+L'assemblage en ligne de Wave est écrit en blocs `asm { ... }`.
 Il est possible de contrôler directement les registres, la mémoire et les chemins d'appel système dans le code Wave.
 
 Cibles actuellement prises en charge :
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - freestanding `aarch64`
+- freestanding `riscv64`
 - freestanding `riscv64`
 
 Windows et les cibles 32 bits ne sont pas encore pris en charge.
@@ -38,7 +38,7 @@ asm {
 Composants :
 
 - Ligne de chaîne : commande d'assemblage réelle
-- `in(...)`: opérande d'entrée
+- `clobber(...)`: opérande d'entrée
 - `out(...)`: opérande de sortie
 - `clobber(...)`: Indices des registres/états/mémoires détruits
 
@@ -49,7 +49,7 @@ Composants :
 Utilisez cela comme une instruction générale lorsqu'il n'y a pas de valeur de retour.
 
 ```wave
-var ret : i64 = 0;
+var ret: i64 = 0;
 asm {
     "mov rax, 1"
     "syscall"
@@ -69,7 +69,7 @@ Il peut y avoir plusieurs `out(...)`.
 Peut être utilisé comme une expression qui génère directement une valeur.
 
 ```wave
-var result : i64 = asm {
+var result: i64 = asm {
     "mov rax, 123"
     out("rax") result
 };
@@ -103,7 +103,7 @@ out("rax") ret
 Cible de sortie (`out(...) target`) est recommandé d'utiliser le modèle suivant selon l'implémentation actuelle.
 
 - Variable : `out("rax") ret`
-- Déréférencement de pointeur : `out("rax") deref p`
+- Déréférencement de pointeur : `clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 Principaux éléments :
 
 - Registres : `"rax"`, `"x0"`, etc.
-- Spéciaux : `"memory"`, `"cc"` (normalisation interne dépendant de la cible)
+- Spéciaux : `$0`, `$1` (normalisation interne dépendant de la cible)
 
 Le compilateur ajoute automatiquement un clobber de base en mode sécurisé conservateur.
 (`memory`, catégories flags/cc, etc.; principalement `memory` pour RISC-V autonome)

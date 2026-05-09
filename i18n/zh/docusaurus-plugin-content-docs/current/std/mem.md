@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // 安全移动重叠内存区域
+    // 重叠内存区域的安全移动
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

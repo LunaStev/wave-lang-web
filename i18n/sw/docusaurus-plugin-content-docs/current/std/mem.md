@@ -9,9 +9,9 @@ Ni zana ya ugawaji/kopi/kulinganisha wa kumbukumbu wa kiwango cha chini.
 ## ingiza
 
 ```wave
-ingiza("std::mem::alloc");
-ingiza("std::mem::ops");
-ingiza("std::mem::cstr");
+import("std::mem::alloc");
+import("std::mem::ops");
+import("std::mem::cstr");
 ```
 
 ## 1. Ugawaji/Uondoaji msingi
@@ -19,7 +19,7 @@ ingiza("std::mem::cstr");
 ```wave
 fun main() {
     var p: ptr<u8> = mem_alloc_zeroed(256);
-    ikiwa (p == null) {
+    if (p == null) {
         return;
     }
 
@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // Uhamisho salama wa maeneo ya kumbukumbu yanayoingiliana
+    // Mwendo salama wa maeneo ya kumbukumbu yanayopishana
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
@@ -47,7 +47,7 @@ fun main() {
 ```wave
 fun main() {
     var arr: ptr<i32> = mem_alloc_items_zeroed<i32>(8, 4);
-    ikiwa (arr == null) {
+    if (arr == null) {
         return;
     }
 

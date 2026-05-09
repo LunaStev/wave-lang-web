@@ -23,8 +23,8 @@ Felder werden im Format `Name: Typ;` deklariert, und hinter jeder Felderklärung
 
 ```wave
 struct Box {
-    Größe: i32;
-    Gewicht: f32;
+    size: i32;
+    weight: f32;
 }
 ```
 
@@ -36,12 +36,12 @@ Die Logik wird separat außerhalb der Struktur definiert.
 ## Syntax der Strukturinstanziierung
 
 Strukturen werden in einem Literalsyntax mit dem Strukturnamen erstellt.
-Struktur-Literale werden als \`StructName { Feldname: Wert; ... } geschrieben.
+Strukturliterale werden in der Form `StructName { field_name: value; ... }` geschrieben.
 
 ```wave
 var b: Box = Box {
-    Größe: 42;
-    Gewicht: 10.5;
+    size: 42;
+    weight: 10.5;
 };
 ```
 
@@ -58,8 +58,8 @@ Auf die Felder einer Struktur wird mit der Punktnotation zugegriffen.
 Feldzugriff verwendet für Lesen und Schreiben die gleiche Syntax.
 
 ```wave
-println("Größe: {}", b.Größe);
-println("Gewicht: {}", b.Gewicht);
+println("Size: {}", b.size);
+println("Weight: {}", b.weight);
 ```
 
 Der Versuch, auf einen nicht vorhandenen Feldnamen zuzugreifen, führt zu einem Fehler beim Kompilieren.
@@ -75,15 +75,15 @@ Stattdessen wird das Schlüsselwort `proto` verwendet, um eine Menge von Methode
 Der `proto`-Block ist der Bereich für Funktionen, die zu einer bestimmten Struktur gehören, und die darin definierten Funktionen werden wie Methoden dieser Struktur verwendet.
 
 Methoden empfangen eine Strukturinstanz als ersten Parameter mit `self`.
-`self` steht für den gesamten Wert der Struktur und wird durch Wertkopie übergeben.
+`proto` steht für den gesamten Wert der Struktur und wird durch Wertkopie übergeben.
 
 ```wave
 proto Box {
-    fun drucken(self) {
-        println("Größe={}, Gewicht={}", self.size, self.weight);
+    fun print(self) {
+        println("size={}, weight={}", self.size, self.weight);
     }
 
-    fun hinzugefügte_größe(self, x: i32) -> i32 {
+    fun added_size(self, x: i32) -> i32 {
         return self.size + x;
     }
 }
@@ -94,8 +94,8 @@ proto Box {
 Methodenaufrufe verwenden die Punktnotation und funktionieren wie normale Funktionsaufrufe.
 
 ```wave
-b.drucken();
-var n: i32 = b.hinzugefügte_größe(5);
+b.print();
+var n: i32 = b.added_size(5);
 ```
 
 ---
@@ -106,7 +106,7 @@ Strukturen werden bei der Übergabe als Funktionsargumente durch Wertkopie verar
 Selbst wenn die Felder einer Struktur innerhalb der Funktion geändert werden, wird die Strukturinstanz auf der aufrufenden Seite nicht beeinflusst.
 
 ```wave
-fun berechne(box: Box) -> i32 {
+fun calc(box: Box) -> i32 {
     return box.size * 2;
 }
 ```
@@ -127,7 +127,7 @@ struct Position {
     y: i32;
 }
 
-struct Spieler {
+struct Player {
     name: str;
     pos: Position;
 }
@@ -136,13 +136,13 @@ struct Spieler {
 Auf die Felder verschachtelter Strukturen wird mit kontinuierlicher Punktnotation zugegriffen.
 
 ```wave
-var p: Spieler = Spieler {
+var p: Player = Player {
     name: "Alice";
     pos: Position { x: 10; y: 20; };
 };
 
-println("Spieler X: {}", p.pos.x);
-println("Spieler Y: {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 In Struktur-Literalen können weitere Struktur-Literale verschachtelt werden,
@@ -156,17 +156,17 @@ Strukturen können als Elementtypen in Arrays verwendet werden.
 Die Array-Syntax in Wave verwendet das Format `array<Typ, Länge>`, und die Typen der Strukturen können direkt spezifiziert werden.
 
 ```wave
-var spieler: array<Spieler, 3> = [
-    Spieler { name: "A"; pos: Position { x: 1; y: 2; }; },
-    Spieler { name: "B"; pos: Position { x: 3; y: 4; }; },
-    Spieler { name: "C"; pos: Position { x: 5; y: 6; }; }
+var players: array<Player, 3> = [
+    Player { name: "A"; pos: Position { x: 1; y: 2; }; },
+    Player { name: "B"; pos: Position { x: 3; y: 4; }; },
+    Player { name: "C"; pos: Position { x: 5; y: 6; }; }
 ];
 ```
 
 Beim Zugriff auf Elemente eines Struktur-Arrays wird zuerst der Array-Index verwendet, gefolgt von Punktnotation, um auf interne Felder der Struktur zuzugreifen.
 
 ```wave
-println("Zweiter Spieler X: {}", spieler[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

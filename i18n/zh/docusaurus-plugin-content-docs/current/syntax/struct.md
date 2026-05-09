@@ -36,7 +36,7 @@ struct Box {
 ## 结构体创建语法
 
 结构体以使用结构体名称的字面量形式创建。
-结构体字面量是 `StructName { 字段名: 值; ... 以 `}\` 的形式编写。
+结构文字以 `StructName { field_name: value; ... }` 的形式编写。
 
 ```wave
 var b: Box = Box {
@@ -146,8 +146,8 @@ var p: Player = Player {
     pos: Position { x: 10; y: 20; };
 };
 
-println("玩家 X: {}", p.pos.x);
-println("玩家 Y: {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 可以在结构体字面量内部嵌套其他结构体字面量，
@@ -172,7 +172,7 @@ var players: array<Player, 3> = [
 再通过点标记法访问结构体内部字段。
 
 ```wave
-println("第二位玩家 X: {}", players[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

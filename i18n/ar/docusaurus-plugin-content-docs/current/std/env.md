@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٣
+sidebar_position: 3
 ---
 
 # دليل استخدام std::env
@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf بها سلسلة منتهية بـ NUL
+        // buf عبارة عن سلسلة منتهية بـ NUL
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // المفتاح غير موجود
+        // لا يوجد مفتاح
     } else if (n == ENV_ERR_NO_SPACE) {
-        // المخزن المؤقت غير كافٍ
+        // خارج المخزن المؤقت
     }
 }
 ```

@@ -22,9 +22,9 @@ El nombre de la estructura utiliza la notación PascalCase, y el cuerpo de la es
 Los campos se declaran en el formato `nombre: tipo;` y cada declaración de campo debe terminar con un punto y coma.
 
 ```wave
-struct Caja {
- tamaño: i32;
- peso: f32;
+struct Box {
+    size: i32;
+    weight: f32;
 }
 ```
 
@@ -36,12 +36,12 @@ La lógica operativa se define por separado fuera de la estructura.
 ## Sintaxis de creación de estructura
 
 Una estructura se crea en un formato literal utilizando el nombre de la estructura.
-Un literal de estructura es \`NombreDeEstructura { nombreDelCampo: valor; ... Se escribe en el formato }.
+Los literales de estructura se escriben en la forma `StructName { field_name: value; ... }`.
 
 ```wave
-var b: Caja = Caja {
- tamaño: 42;
- peso: 10.5;
+var b: Box = Box {
+    size: 42;
+    weight: 10.5;
 };
 ```
 
@@ -58,8 +58,8 @@ Los campos de una estructura se acceden mediante la notación de punto.
 El acceso a los campos utiliza la misma sintaxis tanto para lectura como para escritura.
 
 ```wave
-println("Tamaño: {}", b.tamaño);
-println("Peso: {}", b.peso);
+println("Size: {}", b.size);
+println("Weight: {}", b.weight);
 ```
 
 Intentar utilizar un nombre de campo inexistente provocará un error en la etapa de compilación.
@@ -75,15 +75,15 @@ En su lugar, se utiliza la palabra clave `proto` para declarar un conjunto de m�
 El bloque `proto` es el ámbito de las funciones pertenecientes a una estructura específica, y las funciones definidas en este bloque se usan como métodos de dicha estructura.
 
 El método utiliza `self` como el primer parámetro para recibir una instancia de estructura.
-`self` representa el valor completo de la estructura y se pasa por copia de valor.
+`proto` representa el valor completo de la estructura y se pasa por copia de valor.
 
 ```wave
-prototipo Caja {
+proto Box {
     fun print(self) {
-        println("tamaño={}, peso={}", self.size, self.weight);
+        println("size={}, weight={}", self.size, self.weight);
     }
 
-    fun tamaño_agregado(self, x: i32) -> i32 {
+    fun added_size(self, x: i32) -> i32 {
         return self.size + x;
     }
 }
@@ -95,7 +95,7 @@ La llamada al método utiliza la notación de punto y funciona de la misma maner
 
 ```wave
 b.print();
-var n: i32 = b.tamaño_agregado(5);
+var n: i32 = b.added_size(5);
 ```
 
 ---
@@ -106,8 +106,8 @@ Las estructuras se procesan por copia de valor cuando se transmiten como argumen
 Incluso si se modifican los campos de la estructura dentro de una función, no afecta a la instancia de la estructura que hizo la llamada.
 
 ```wave
-fun calc(caja: Caja) -> i32 {
-    return caja.size * 2;
+fun calc(box: Box) -> i32 {
+    return box.size * 2;
 }
 ```
 
@@ -122,27 +122,27 @@ En Wave, se puede utilizar otra estructura como tipo de campo de una estructura.
 Las estructuras son tipos completos, por lo que se pueden anidar libremente incluyendo una estructura dentro de otra.
 
 ```wave
-struct Posición {
+struct Position {
     x: i32;
     y: i32;
 }
 
-struct Jugador {
-    nombre: str;
-    pos: Posición;
+struct Player {
+    name: str;
+    pos: Position;
 }
 ```
 
 Los campos de estructuras anidadas se acceden mediante el uso continuo de notación de punto.
 
 ```wave
-var p: Jugador = Jugador {
-    nombre: "Alice";
-    pos: Posición { x: 10; y: 20; };
+var p: Player = Player {
+    name: "Alice";
+    pos: Position { x: 10; y: 20; };
 };
 
-println("Jugador X: {}", p.pos.x);
-println("Jugador Y: {}", p.pos.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 Se puede anidar un literal de estructura dentro de otro literal de estructura y las reglas de inicialización de campos se aplican de la misma manera.
@@ -155,17 +155,17 @@ Las estructuras se pueden utilizar como tipo de elemento en un arreglo.
 La sintaxis de arreglos en Wave utiliza el formato `array<tipo, tamaño>` y se pueden especificar tipos de estructuras de manera similar.
 
 ```wave
-var jugadores: array<Jugador, 3> = [
-    Jugador { nombre: "A"; pos: Posición { x: 1; y: 2; }; },
-    Jugador { nombre: "B"; pos: Posición { x: 3; y: 4; }; },
-    Jugador { nombre: "C"; pos: Posición { x: 5; y: 6; }; }
+var players: array<Player, 3> = [
+    Player { name: "A"; pos: Position { x: 1; y: 2; }; },
+    Player { name: "B"; pos: Position { x: 3; y: 4; }; },
+    Player { name: "C"; pos: Position { x: 5; y: 6; }; }
 ];
 ```
 
 Al acceder a elementos de un arreglo de estructuras, se utiliza primero el índice del arreglo seguido de la notación de punto para acceder a los campos dentro de la estructura.
 
 ```wave
-println("Segundo Jugador X: {}", jugadores[1].pos.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

@@ -9,10 +9,10 @@ Inatoa huduma za kuchunguza wakati wa sasa, kuhesabu tofauti ya muda, na kuweka 
 ## ingiza
 
 ```wave
-ingiza("std::time::clock");
-ingiza("std::time::diff");
-ingiza("std::time::sleep");
-ingiza("std::sys::time");
+import("std::time::clock");
+import("std::time::diff");
+import("std::time::sleep");
+import("std::sys::time");
 ```
 
 ## 1. Upimaji wa vipindi

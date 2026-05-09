@@ -1,80 +1,80 @@
 {
   "tagline": {
-    "message": "שפה אחת, אפשרויות אינסופיות"
+    "message": "שפה אחת, אינסוף אפשרויות"
   },
   "get-started": {
-    "message": "להתחיל תוך 5 דקות"
+    "message": "התחל תוך 5 דקות"
   },
   "read-the-docs": {
-    "message": "קריאת המסמכים"
+    "message": "קרא את המסמך"
   },
   "homepage.hero.title": {
-    "message": "שפה מודרנית לגל חדש של פיתוחים"
+    "message": "שפה מודרנית לגל חדש של התפתחות"
   },
   "homepage.hero.subtitle": {
-    "message": "תחביר אינטואיטיבי, ביצועים מעולים ובטיחות מובנית. Wave תוכננה להעלות את הפרודוקטיביות שלך ולהפוך את האפליקציות שלך ליציבות יותר."
+    "message": "תחביר אינטואיטיבי, ביצועים רבי עוצמה ובטיחות מובנית. Wave נועד להגביר את הפרודוקטיביות שלך ולהפוך את היישומים שלך לחזקים."
   },
   "homepage.why_wave.title": {
-    "message": "למה לבחור ב-Wave?"
+    "message": "למה לבחור Wave?"
   },
   "homepage.features.one.title": {
-    "message": "תמציתי ואינטואיטיבי"
+    "message": "תמציתית ואינטואיטיבית"
   },
   "homepage.features.one.description": {
-    "message": "Wave מפחיתה את הקוד המיותר ומאפשרת להתרכז בלוגיקה העיקרית. התחביר המודרני הופך את הלמידה והשימוש לקלים ומהנים."
+    "message": "Wave מפחית קוד מיותר ומאפשר לך להתמקד בלוגיקה הליבה. התחביר המודרני מקל על הלמידה ומהנה לשימוש."
   },
   "homepage.features.two.title": {
     "message": "מהיר ויעיל"
   },
   "homepage.features.two.description": {
-    "message": "מתורגם לקוד מקורי ומגיע לביצועים ברמת C++ באמצעות הפשטה חסרת עלות. אידיאלי למשימות שבהן חשובים המשאבים."
+    "message": "הוא מקמפל לקוד מקורי ומשיג ביצועים ברמת C++ באמצעות הפשטה בעלות אפסית. אידיאלי למשימות קריטיות למשאבים."
   },
   "homepage.features.three.title": {
-    "message": "בטוח ותומך בו-זמניות"
+    "message": "מאובטח ובו זמנית"
   },
   "homepage.features.three.description": {
-    "message": "מונע באגים נפוצים כגון שגיאות הפניה ל-Null בזמן התרגום. הדגם המובנה לתמיכה במקביליות הופך את התכנות הרב-ליבתי לנגיש מאי פעם."
+    "message": "מונע באגים נפוצים כמו שגיאות הפניה Null בזמן ההידור. מודל מקביליות מובנה הופך תכנות מרובה ליבות לקל מתמיד."
   },
   "homepage.contributors.title": {
-    "message": "תורמים"
+    "message": "תוֹרֵם"
   },
   "homepage.contributors.role.founder": {
     "message": "מייסד השפה"
   },
   "homepage.contributors.role.designer": {
-    "message": "מעצב השפה"
+    "message": "מעצב שפה"
   },
   "homepage.contributors.role.compiler": {
-    "message": "פיתוח קומפיילר"
+    "message": "פיתוח מהדר"
   },
   "homepage.contributors.role.library": {
-    "message": "אחראי על ספריה סטנדרטית"
+    "message": "מנהל ספרייה רגיל"
   },
   "homepage.contributors.role.contributor": {
-    "message": "תורמים"
+    "message": "תוֹרֵם"
   },
   "homepage.sponsors.title": {
-    "message": "ספונסרים"
+    "message": "לָתֵת חָסוּת"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "ספונסרים של כבוד"
+    "message": "נותן חסות של כבוד"
   },
   "homepage.sponsors.tier.platinum": {
-    "message": "ספונסרים ברמת פלטינה"
+    "message": "חסות פלטינה"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "ספונסרים ברמת זהב"
+    "message": "חסות זהב"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "ספונסרים ברמת כסף"
+    "message": "חסות כסף"
   },
   "homepage.translations.title": {
-    "message": "להשתתף בתרגום ל-Wave"
+    "message": "Wave השתתף בתרגום"
   },
   "homepage.translations.subtitle": {
-    "message": "עזרו לשאר המפתחים בעולם ללמוד Wave ללא מחסומי שפה על ידי תרומה לתרגום."
+    "message": "אנא תרמו לתרגומים כדי שמפתחים ברחבי העולם יוכלו ללמוד Wave ללא מחסומי שפה."
   },
   "homepage.translations.button": {
-    "message": "השתתפות בתרגום ב-Crowdin"
+    "message": "השתתף בתרגום ב-Crowdin"
   }
 }

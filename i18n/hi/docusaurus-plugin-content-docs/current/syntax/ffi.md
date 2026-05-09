@@ -25,7 +25,7 @@ sidebar_position: 9
 वर्तमान में वेव में एबीआई निर्दिष्ट करना अनिवार्य है और केवल `extern(c)` का समर्थन करता है।
 
 ```wave
-extern(c) fun functionName(parameters...) -> returnType;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---

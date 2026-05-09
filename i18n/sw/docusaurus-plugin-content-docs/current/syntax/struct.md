@@ -22,9 +22,9 @@ Jina la muundo linatumia noti ya PascalCase, na mwili wa muundo unaweza kueleza 
 Mashamba yanatangazwa katika muundo wa `jina: aina;`, na kila tamko la uwanja lazima liwe na sehemu.
 
 ```wave
-muundo Sanduku {
- ukubwa: i32;
- uzito: f32;
+struct Box {
+    size: i32;
+    weight: f32;
 }
 ```
 
@@ -40,8 +40,8 @@ Kitamshi cha muundo ni `JinaLaMuundo { jina_la_uwanja: thamani; ... }` imeandikw
 
 ```wave
 var b: Box = Box {
-    ukubwa: 42;
-    uzito: 10.5;
+    size: 42;
+    weight: 10.5;
 };
 ```
 
@@ -58,8 +58,8 @@ Sehemu za muundo hufikiwa kupitia alama ya nukta.
 Ufikiaji wa uwanja hutumia mlingano wa mbinu sawa ya kusoma na kuandika.
 
 ```wave
-chapisha("Ukubwa: {}", b.ukubwa);
-chapisha("Uzito: {}", b.uzito);
+println("Size: {}", b.size);
+println("Weight: {}", b.weight);
 ```
 
 Ikiwa unajaribu kutumia jina la uwanja ambalo halipo, kutakuwa na hitilafu ya usanidi.
@@ -75,16 +75,16 @@ Badala yake, tumia neno kuu `proto` kubainisha mkusanyiko wa mbinu zinazohusishw
 Kizuizi cha `proto` ni mkusanyiko wa mbinu zinazoendela kwa muundo maalum, na mbinu ambazo zimebainika ndani ya kizuizi zinatumika kama mbinu za muundo husika.
 
 Mbinu hutumia `self` kama kigezo cha kwanza kufanikisha uidhinishaji wa mfano wa muundo.
-`self` inawakilisha thamani ya jumla ya muundo, na inapitishwa kwa njia ya nakala ya thamani.
+`proto` inawakilisha thamani ya jumla ya muundo, na inapitishwa kwa njia ya nakala ya thamani.
 
 ```wave
 proto Box {
-    furahia chapisha(mwenyewe) {
-        chapisha("ukubwa={}, uzito={}", mwenyewe.ukubwa, mwenyewe.uzito);
+    fun print(self) {
+        println("size={}, weight={}", self.size, self.weight);
     }
 
-    furahia ukubwa_ulioongezwa(mwenyewe, x: i32) -> i32 {
-        rudi mwenyewe.ukubwa + x;
+    fun added_size(self, x: i32) -> i32 {
+        return self.size + x;
     }
 }
 ```
@@ -94,8 +94,8 @@ Kizuizi cha `proto` hakiitaji kuwekwa kwenye faili sawa na ufafanuzi wa muundo, 
 Utoaji wa mbinu hutumia alama ya nukta, na hufanya kazi kwa njia sawa na mwito wa mbinu wa kawaida.
 
 ```wave
-b.chapisha();
-var n: i32 = b.ukubwa_ulioongezwa(5);
+b.print();
+var n: i32 = b.added_size(5);
 ```
 
 ---
@@ -106,8 +106,8 @@ Muundo unapopitishwa kama kigezo cha kazi, unashughulikiwa kwa kutumia mlinganyo
 Hata ikiwa utafanya mabadiliko kwenye uwanja wa muundo ndani ya kazi, haiathiri mfano wa muundo ulioitwa.
 
 ```wave
-furahia calc(box: Box) -> i32 {
-    rudi box.ukubwa * 2;
+fun calc(box: Box) -> i32 {
+    return box.size * 2;
 }
 ```
 
@@ -122,27 +122,27 @@ Katika Wave, unaweza kutumia muundo mwingine ndani ya uwanja wa aina ya muundo.
 Kwa kuwa muundo ni aina kamili, unaweza kupachika muundo mwingine kwa uhuru ndani ya muundo.
 
 ```wave
-muundo Nafasi {
+struct Position {
     x: i32;
     y: i32;
 }
 
-muundo Mchezaji {
-    jina: str;
-    pos: Nafasi;
+struct Player {
+    name: str;
+    pos: Position;
 }
 ```
 
 Shamba la miundo iliyopachikwa hutumiwa kwa kusema kwa nukta.
 
 ```wave
-var p: Mchezaji = Mchezaji {
-    jina: "Alice";
-    nafasi: Nafasi { x: 10; y: 20; };
+var p: Player = Player {
+    name: "Alice";
+    pos: Position { x: 10; y: 20; };
 };
 
-chapisha("Mchezaji X: {}", p.nafasi.x);
-chapisha("Mchezaji Y: {}", p.nafasi.y);
+println("Player X: {}", p.pos.x);
+println("Player Y: {}", p.pos.y);
 ```
 
 Ndani ya miundo sanifu, unaweza kuchanganya miundo mingine. Katika hali hii, sheria za uanzishaji wa amana zinaweza kutumika sawa.
@@ -155,17 +155,17 @@ Muundo unaweza kutumika kama aina ya kipengee cha safu.
 Marudio ya safu katika Wave hutumia muundo wa `array<aina, urefu>`, na aina ya muundo hufafanuliwa vilevile.
 
 ```wave
-var wachezaji: safu<Mchezaji, 3> = [
-    Mchezaji { jina: "A"; nafasi: Nafasi { x: 1; y: 2; }; },
-    Mchezaji { jina: "B"; nafasi: Nafasi { x: 3; y: 4; }; },
-    Mchezaji { jina: "C"; nafasi: Nafasi { x: 5; y: 6; }; }
+var players: array<Player, 3> = [
+    Player { name: "A"; pos: Position { x: 1; y: 2; }; },
+    Player { name: "B"; pos: Position { x: 3; y: 4; }; },
+    Player { name: "C"; pos: Position { x: 5; y: 6; }; }
 ];
 ```
 
 Unapopata kipengee cha safu ya muundo, kwanza tumia indeksi ya safu, kisha ufikie shamba la ndani la muundo kupitia alama ya nukta.
 
 ```wave
-chapisha("Mchezaji wa Pili X: {}", wachezaji[1].nafasi.x);
+println("Second Player X: {}", players[1].pos.x);
 ```
 
 ---

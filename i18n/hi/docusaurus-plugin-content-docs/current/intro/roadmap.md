@@ -41,8 +41,8 @@ LLVM अभी भी मुख्य बैकएंड के रूप मे
 Wave कोड को चलाते समय `--backend` विकल्प के माध्यम से LLVM और Whale में से किस बैकएंड का उपयोग करना है, चुन सकते हैं।
 
 ```bash
-wavec चलाएं main.wave --backend=whale
-wavec चलाएं main.wave --backend=llvm
+wavec run main.wave --backend=whale
+wavec run main.wave --backend=llvm
 ```
 
 इस चरण में Whale की स्वयं की IR संरचना को डिजाइन और परिभाषित किया जाता है।

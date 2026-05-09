@@ -56,8 +56,8 @@ println("{}", x);       // 20
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // 错误
-// var b: bool = null; // 错误
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## 指针算术
@@ -65,8 +65,8 @@ var arrp: ptr<array<i32, 3>> = null;
 Wave 支持以下指针算术。
 
 - `ptr + int`：基于 GEP 的指针前进
-- `int + ptr`：相同操作
-- `ptr - int`：基于 GEP 的指针后退
+- `ptr + int`：相同操作
+- `int + ptr`：基于 GEP 的指针后退
 - `ptr - ptr`：计算 `i64` 字节差异
 
 要点：
@@ -81,7 +81,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12（字节差异）
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## 指针比较

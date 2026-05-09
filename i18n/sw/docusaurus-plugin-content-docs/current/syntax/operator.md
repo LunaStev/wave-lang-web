@@ -32,7 +32,7 @@ Hati hii inatoa muhtasari wa waendeshaji wanaoweza kutumika kulingana na kiwango
 | Wendeshaji | Maelezo     |
 | ---------- | ----------- |
 | `&&`       | Mantiki AND |
-| \\`\\   | Mantiki OR  |
+| `\|\|` | mantiki AU |
 | `!`        | Mantiki NOT |
 
 ## Kidogo
@@ -40,7 +40,7 @@ Hati hii inatoa muhtasari wa waendeshaji wanaoweza kutumika kulingana na kiwango
 | Wendeshaji | Maelezo         |
 | ---------- | --------------- |
 | `&`        | Biti AND        |
-| \\`\\   | Biti OR         |
+| `\|` | kidogo AU |
 | `^`        | Biti XOR        |
 | `~`        | Biti SIO        |
 | `<<`       | Hamisha kushoto |
@@ -64,7 +64,7 @@ Hati hii inatoa muhtasari wa waendeshaji wanaoweza kutumika kulingana na kiwango
 | `++`, `--`           | Ongezeko/Kupungua Kabla ya/baada ya |
 | `&x`                 | Upatikanaji wa Anwani               |
 | `deref p`            | Rejeleo la Kinyume la Pointer       |
-| `expr kama T`        | Cast wazi                           |
+| `expr as T`        | Cast wazi                           |
 
 ## Shughuli za pointer
 

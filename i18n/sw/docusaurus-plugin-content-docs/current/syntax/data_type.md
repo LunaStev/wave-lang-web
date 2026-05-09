@@ -117,10 +117,10 @@ Katika Wave, `null` ni herufi muhimu rasmi.
 - `null` inaweza tu kupewa kwa aina `ptr<T>`.
 
 ```wave
-var p: ptr<i32> = null;  // SAWA
+var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // KOSA
-// var b: bool = null;   // KOSA
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Aina ya Array

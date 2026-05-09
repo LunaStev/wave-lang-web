@@ -75,7 +75,7 @@ Instead, the `proto` keyword is used to declare a set of methods associated with
 A `proto` block is an area for functions belonging to a specific struct, and functions defined in this block are used like methods of that struct.
 
 Methods use `self` as the first parameter to receive the struct instance.
-`self` signifies the entire struct value and is passed by value copying.
+`proto` signifies the entire struct value and is passed by value copying.
 
 ```wave
 proto Box {

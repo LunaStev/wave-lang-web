@@ -30,7 +30,7 @@ sidebar_position: 8
 יש להזין `--sysroot=<path>` במחלקת הלינק.
 
 ```bash
-wavec -C link-sysroot=/path/to/sysroot ... 
+wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
 באופן פנימי זה שקול ל-`-C link-arg=--sysroot=<path>`.
@@ -40,7 +40,7 @@ wavec -C link-sysroot=/path/to/sysroot ...
 שיטת הקלט של לינק raw נתמכת גם כן.
 
 ```bash
-wavec -C link-arg=--sysroot=/path/to/sysroot ...  
+wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ```
 
 ---
@@ -56,7 +56,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 דוגמה להודעת שגיאה:
 
 ```text
-כאשר משתמשים ב- -C linker=..., --sysroot=<path> הוא רק לשלב הקומפילציה; יש להעביר את הלינק sysroot במפורש עם -C link-sysroot=<path> (או -C link-arg=--sysroot=<path>) 
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -66,26 +66,26 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ## 4.1 לינק Cross של AArch64 Linux
 
 ```bash
- wavec \
+wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   build test/test93.wave \
   --target aarch64-unknown-linux-gnu \
   --emit=bin \
-  -o /tmp/test93-aarch64.bin 
+  -o /tmp/test93-aarch64.bin
 ```
 
 ## 4.2 שיטת קלט raw link
 
 ```bash
- wavec \
+wavec \
   -C linker=aarch64-linux-gnu-gcc \
   --sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   -C link-arg=--sysroot=/usr/aarch64-redhat-linux/sys-root/fc43 \
   build test/test93.wave \
   --target aarch64-unknown-linux-gnu \
-  --emit=bin 
+  --emit=bin
 ```
 
 ## 4.3 בנייה ללא לינק (`--emit=obj`)
@@ -93,7 +93,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 כאשר אין מחלקת לינק, לינק sysroot אינו הכרחי.
 
 ```bash
-wavec --sysroot=/path/to/sysroot build main.wave --emit=obj 
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

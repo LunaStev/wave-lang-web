@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // Sichere Verschiebung überlappender Speicherbereiche
+    // Sicheres Verschieben überlappender Speicherbereiche
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);
@@ -73,14 +73,14 @@ fun main() {
 ## Hauptfunktionen
 
 ```wave
-fun speicher_zuweisen(size: i64) -> ptr<u8>
-fun speicher_zuweisen_genullt(size: i64) -> ptr<u8>
-fun speicher_umzuweisen(old_ptr: ptr<u8>, old_size: i64, new_size: i64) -> ptr<u8>
-fun speicher_freigeben(p: ptr<u8>, size: i64) -> i64
+fun mem_alloc(size: i64) -> ptr<u8>
+fun mem_alloc_zeroed(size: i64) -> ptr<u8>
+fun mem_realloc(old_ptr: ptr<u8>, old_size: i64, new_size: i64) -> ptr<u8>
+fun mem_free(p: ptr<u8>, size: i64) -> i64
 
-fun speicher_kopieren(dst: ptr<u8>, src: ptr<u8>, size: i64)
-fun speicher_verschieben(dst: ptr<u8>, src: ptr<u8>, size: i64)
-fun speicher_vergleichen(a: ptr<u8>, b: ptr<u8>, size: i64) -> i32
-fun speicher_gleich(a: ptr<u8>, b: ptr<u8>, size: i64) -> bool
-fun speicher_byte_finden(src: ptr<u8>, size: i64, value: u8) -> i64
+fun mem_copy(dst: ptr<u8>, src: ptr<u8>, size: i64)
+fun mem_move(dst: ptr<u8>, src: ptr<u8>, size: i64)
+fun mem_cmp(a: ptr<u8>, b: ptr<u8>, size: i64) -> i32
+fun mem_eq(a: ptr<u8>, b: ptr<u8>, size: i64) -> bool
+fun mem_find_byte(src: ptr<u8>, size: i64, value: u8) -> i64
 ```

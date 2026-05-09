@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## 介绍
 
-Wave的内联汇编是通过 `asm { ... 通过 `}\` 块编写。
+Wave 的内联汇编写入 `asm { ... }` 块中。
 在Wave代码中可以直接控制寄存器、内存、系统调用路径。
 
 当前支持的目标:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- 独立 `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - 独立 `aarch64`
+- 独立 `riscv64`
 - 独立 `riscv64`
 
 Windows和32位目标尚不支持。
@@ -28,7 +28,7 @@ Windows和32位目标尚不支持。
 
 ```wave
 asm {
-    "指令"
+    "instruction"
     in("constraint_or_reg") value
     out("constraint_or_reg") target
     clobber("item")
@@ -38,7 +38,7 @@ asm {
 组成要素:
 
 - 字符串行: 实际汇编指令
-- `in(...)`: 输入操作数
+- `clobber(...)`: 输入操作数
 - `out(...)`: 输出操作数
 - `clobber(...)`: 被破坏的寄存器/状态/内存提示
 
@@ -100,10 +100,10 @@ in("r") &buf
 out("rax") ret
 ```
 
-输出目标(\`out(...) 根据当前实现，推荐使用以下模式。
+
 
 - 变量：`out("rax") ret`
-- 指针反向引用：`out("rax") deref p`
+- 指针反向引用：`clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 主要项目:
 
 - 寄存器：`"rax"`, `"x0"` 等
-- 特殊：`"memory"`, `"cc"`（基于目标的内部规范化）
+- 特殊：`$0`, `$1`（基于目标的内部规范化）
 
 编译器在保守安全模式下会自动添加基本的clobber。
 （`memory`，flags/cc 系列等；在 RISC-V 独立模式下主要为 `memory`）

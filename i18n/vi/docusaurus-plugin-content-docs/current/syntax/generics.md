@@ -91,7 +91,7 @@ fun main() {
 ## Những sai lầm thường gặp
 
 ```wave
-var x: i32 = identity(10); // Thiếu tham số loại (không được phép)
+var x: i32 = identity(10); // Đối số loại thiếu (không được phép)
 ```
 
 Cần phải gọi giống như sau.

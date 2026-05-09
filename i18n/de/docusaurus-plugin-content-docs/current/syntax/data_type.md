@@ -119,8 +119,8 @@ In Wave ist `null` ein reguläres Literal.
 ```wave
 var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // FEHLER
-// var b: bool = null;   // FEHLER
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## Array-Typ

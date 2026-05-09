@@ -42,7 +42,7 @@ Mfano:
 
 ## 4. Kiwango (Array)
 
-- Safu zimezungukwa na mabano `[]`, na vipengele vinatenganishwa kwa koma (`;`).
+- Safu zimezungukwa na mabano `[]`, na vipengele vinatenganishwa kwa koma (`,`).
 
 - Vipengele vya safu vinaweza kuwa aina mbalimbali za data kama vile vitu, maandishi, na namba.
 
@@ -51,7 +51,10 @@ Mfano:
 Mfano:
 
 ```
-kazi: [ { task_id: 1, title: "Maliza ripoti ya mradi" }, { task_id: 2, title: "Pitia maoni ya timu" }]
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
+]
 ```
 
 ## 5. Panda ya Kifunguo-Thamani
@@ -60,14 +63,15 @@ kazi: [ { task_id: 1, title: "Maliza ripoti ya mradi" }, { task_id: 2, title: "P
 
 - Aina za thamani ni pamoja na maandishi, namba, boolean, vitu, na safu.
 
-- Maandishi yamezungukwa na alama za nukuu `"`.
+- Maandishi yamezungukwa na alama za nukuu `“`.
 
 - Namba zinatumika bila alama za nukuu, na inaweza kuwa namba kamili au desimali.
 
 Mfano:
 
 ```
-jina: "John Doe" umri = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Aina za Takwimu
@@ -75,7 +79,7 @@ jina: "John Doe" umri = 25
 - Maandishi(String): Maandishi yaliyofungwa ndani ya alama za nukuu `"`.
 
 ```
-"salamu dunia"
+"hello world"
 ```
 
 - Namba(Number): Thamani ya nambari kamili au desimali.
@@ -88,7 +92,7 @@ jina: "John Doe" umri = 25
 - Boolean: Inatumia thamani za `true` au `false`.
 
 ```
-ni_aktive = kweli
+is_active = true
 ```
 
 - Kitu(Object): Panda ya Kifunguo-Thamani iliyofungwa ndani ya mabano `{}`.
@@ -98,29 +102,29 @@ ni_aktive = kweli
 
 ```ws
 {
-    // Nambari ya hali na maelezo ya ujumbe
-    hali: "mafanikio",
-    nambari: 200,
-    ujumbe: "Takwimu zimepatikana kwa mafanikio",
+    // Msimbo wa hali na habari ya ujumbe
+    status: "success",
+    code: 200,
+    message: "Data retrieved successfully",
 
-    mtumiaji = {
+    user = {
         id = 123,
-        jina: "John Doe",
-        baruapepe: "john@example.com",
-        umri: 25  # Umri wa mtumiaji
+        name: "John Doe",
+        email: "john@example.com",
+        age: 25  # umri wa mtumiaji
     },
 
-    kazi: [
+    tasks: [
         {
             task_id: 1,
-            title: "Kamilisha ripoti ya mradi",
-            status: "inaendelea",
+            title: "Complete project report",
+            status: "in-progress",
             due_date: "2024-10-15"
         },
         {
             task_id: 2,
-            title: "Pitia maoni ya timu",
-            status: "inasubiri",
+            title: "Review team feedback",
+            status: "pending",
             due_date: "2024-10-20"
         }
     ]

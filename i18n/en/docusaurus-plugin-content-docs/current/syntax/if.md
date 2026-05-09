@@ -21,7 +21,7 @@ The basic structure of the IF statement in Wave is as follows.
 
 ```wave
 if (condition) {
-    // Code to execute if the condition is true
+    // Code to be executed if condition is true
 }
 ```
 
@@ -57,9 +57,9 @@ The basic structure is as follows.
 
 ```wave
 if (condition) {
-    // Code to execute if the condition is true
+    // Code to be executed if condition is true
 } else {
-    // Code to execute if the condition is false
+    // Code to be executed if condition is false
 }
 ```
 
@@ -74,7 +74,7 @@ var score :i32 = 70;
 if (score >= 60) {
     println("You passed!");
 } else {
-    println("You failed.");
+    println("It failed.");
 }
 ```
 
@@ -93,12 +93,12 @@ var score :i32 = 85;
 
 if (score >= 60) {
     if (score >= 90) {
-        println("Excellent grade!");
+        println("Excellent grades!");
     } else {
-        println("You passed.");
-    } 
+        println("I passed.");
+    }
 } else {
-    println("You failed.");
+    println("It failed.");
 }
 ```
 

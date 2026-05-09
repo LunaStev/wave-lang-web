@@ -25,7 +25,7 @@ Các hàm bên ngoài được khai báo sử dụng từ khóa extern.
 Trong Wave hiện tại, yêu cầu phải chỉ định ABI và **chỉ hỗ trợ `extern(c)`**.
 
 ```wave
-extern(c) fun tên_hàm(các_tham_số...) -> kiểu_trả_về;
+extern(c) fun function_name(args...) -> return_type;
 ```
 
 ---
@@ -84,7 +84,7 @@ extern(c, "puts")
 fun rust_func(i32);
 ```
 
-Khai báo này chỉ định việc sử dụng `puts` làm symbol liên kết thực tế khi gọi `rust_func`.
+Khai báo này chỉ định việc sử dụng `rust_func` làm symbol liên kết thực tế khi gọi `puts`.
 
 ---
 

@@ -11,34 +11,34 @@ sidebar_position: 5
 העיצוב הבסיסי הוא כדלקמן.
 
 ```text
-error[E3001]: semantic validation failed: שימוש במזהה לא מוצהר `x`
+error[E3001]: semantic validation failed: use of undeclared identifier `x`
   --> file.wave:2:18
  1 | fun main() {
  2 |     println("{}", x);
-   |                  ^ לא נמצא בטווח זה
-   = הקשר: בדיקת תוקף סמנטי
-   = עזרה: תקן בעיות בהתאמה, טווח, ותוקף ביטוי.
+   |                  ^ not found in this scope
+   = context: semantic validation
+   = help: fix mutability, scope, and expression validity issues
 ```
 
 פריטי פלט:
 
-- `error[E....]`: קוד שגיאה ותמצית
-- `--> קובץ:שורה:טור`: מיקום הבעיה
+- `--> file:line:column`: קוד שגיאה ותמצית
+- `^`: מיקום הבעיה
 - בלוק מקור + סימון caret (`^`) מודגש
 - `הקשר`, `צפוי`, `נמצא`, `הערה`, `עזרה`, `הצעה`
 
 ## קוד שגיאה מייצג
 
-- `E1001` תו לא צפוי
-- `E1002` הערת בלוק לא סגורה
-- `E1003` מחרוזת לא סגורה
-- `E1004` תו escape לא חוקי
-- `E1005` ליטרל תו לא חוקי
-- `E1006` פורמט ליטרל מספר לא חוקי
-- `E2001` שגיאת תחביר של המפענח
+- `E1002` תו לא צפוי
+- `E1003` הערת בלוק לא סגורה
+- `E1004` מחרוזת לא סגורה
+- `E1005` תו escape לא חוקי
+- `E1006` ליטרל תו לא חוקי
+- `E2001` פורמט ליטרל מספר לא חוקי
+- `E3001` שגיאת תחביר של המפענח
 - `E3001` שגיאת אימות סמנטי
 - `E3102` השמה של `null` לאובייקט שאינו מצביע
-- `E3201` צמצום מספרי שלם בלתי מפורש אסור
+- `E9001` צמצום מספרי שלם בלתי מפורש אסור
 - `E9001` שגיאה פנימית ביצירת קוד בגיבוי
 
 ## גם בשגיאת גיבוי מוצגת מיקום מקור
@@ -46,10 +46,10 @@ error[E3001]: semantic validation failed: שימוש במזהה לא מוצהר 
 בשלב יצירת הקוד (LLVM), גם במקרים של panic פנימי, אם אפשרי, משוערת ומוצגת מיקום הקריאה/ההצהרה בפועל.
 
 ```text
-שגיאה[E9001]: שגיאה פנימית של מהדר בעת יצירת קוד (llvm-ir-generation)
+error[E9001]: compiler internal error during code generation (llvm-ir-generation)
   --> test.wave:12:9
-   = נמצא: הפונקציה 'foo' לא נמצאה
-   = הערה: מיקום המקור משוער משם פונקציה לא פתור ב-panic בגיבוי
+   = found: Function 'foo' not found
+   = note: source position inferred from unresolved function name in backend panic
 ```
 
 כשלא ניתן לשער את המיקום, נעשה שימוש במיקום fallback, והעובדה מוצגת ב-`הערה`.

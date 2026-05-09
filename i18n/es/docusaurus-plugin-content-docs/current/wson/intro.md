@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## 1. Estructura básica
 
-- El contenido del archivo comienza y termina con un objeto (`object`) rodeado por llaves `{}`.
+- El contenido del archivo comienza y termina con un objeto (`{}`) rodeado por llaves `object`.
 
 - El objeto se compone de pares de nombre de propiedad (key) y valor (value).
 
@@ -34,15 +34,15 @@ Ejemplo:
 
 ```
 {
-    estado: "éxito",
-    código = 200,
-    usuario = { id: 123, nombre: "John Doe" }
+    status: "success",
+    code = 200,
+    user = { id: 123, name: "John Doe" }
 }
 ```
 
 ## 4. Array (Array)
 
-- El array está rodeado por corchetes `[]` y los elementos se separan por comas (`;`).
+- El array está rodeado por corchetes `[]` y los elementos se separan por comas (`,`).
 
 - Los elementos de un array pueden ser de diversos tipos de datos, como objetos, cadenas, números, etc.
 
@@ -51,15 +51,15 @@ Ejemplo:
 Ejemplo:
 
 ```
-tareas: [
-    { id_tarea: 1, título: "Completar informe de proyecto" },
-    { id_tarea: 2, título: "Revisar comentarios del equipo" }
+tasks: [
+    { task_id: 1, title: "Complete project report" },
+    { task_id: 2, title: "Review team feedback" }
 ]
 ```
 
 ## 5. Par Clave-Valor (Key-Value Pair)
 
-- El nombre de la propiedad es una cadena de texto y el valor se coloca sin espacio detrás de `;`, `=`.
+- El nombre de la propiedad es una cadena de texto y el valor se coloca sin espacio detrás de `:`, `=`.
 
 - El valor puede ser de tipos como cadena, número, booleano, objeto, array, etc.
 
@@ -70,8 +70,8 @@ tareas: [
 Ejemplo:
 
 ```
-nombre: "John Doe"
-edad = 25
+name: "John Doe"
+age = 25
 ```
 
 ## 6. Tipos de Datos (Data Types)
@@ -79,7 +79,7 @@ edad = 25
 - Cadena (String): Texto encerrado con comillas dobles "".
 
 ```
-"hola mundo"
+"hello world"
 ```
 
 - Número (Number): Valor que es un entero o un flotante.
@@ -92,7 +92,7 @@ edad = 25
 - Booleano (Boolean): Utiliza los valores `true` o `false`.
 
 ```
-activo = true
+is_active = true
 ```
 
 - Objeto (Object): Par clave-valor encerrado con llaves `{}`.
@@ -102,30 +102,30 @@ activo = true
 
 ```ws
 {
-    // Código de estado e información del mensaje
-    estado: "éxito",
-    código: 200,
-    mensaje: "Datos recuperados con éxito",
+    // Código de estado e información del mensaje.
+    status: "success",
+    code: 200,
+    message: "Data retrieved successfully",
 
-    usuario = {
+    user = {
         id = 123,
-        nombre: "John Doe",
-        correo_e: "john@example.com",
-        edad: 25  # Edad del usuario
+        name: "John Doe",
+        email: "john@example.com",
+        age: 25  # edad del usuario
     },
 
-    tareas: [
+    tasks: [
         {
-            id_tarea: 1,
-            título: "Completar informe de proyecto",
-            estado: "en-progreso",
-            fecha_venc: "2024-10-15"
+            task_id: 1,
+            title: "Complete project report",
+            status: "in-progress",
+            due_date: "2024-10-15"
         },
         {
-            id_tarea: 2,
-            título: "Revisar comentarios del equipo",
-            estado: "pendiente",
-            fecha_venc: "2024-10-20"
+            task_id: 2,
+            title: "Review team feedback",
+            status: "pending",
+            due_date: "2024-10-20"
         }
     ]
 }

@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. मूल प्रारूप
 
 ```bash
-wavec [वैश्विक-विकल्प] <कमांड> [कमांड-विकल्प]
+wavec [global-options] <command> [command-options]
 ```
 
 उदाहरण:
@@ -32,7 +32,7 @@ wavec run app.wave --dep-root .vex/dep
 
 ## 2. आदेश पार्सिंग नियम (महत्वपूर्ण)
 
-`wavec` पहले सभी аргументов में से **ग्लोबल विकल्प** को स्कैन करता है, फिर बचे हुए аргументов को `<कमांड>` के रूप में पार्स करता है।
+`wavec` पहले सभी аргументов में से **ग्लोबल विकल्प** को स्कैन करता है, फिर बचे हुए аргументов को `<command>` के रूप में पार्स करता है।
 
 अर्थात, ग्लोबल विकल्प का स्थान लचीला होता है।
 
@@ -112,8 +112,8 @@ wavec build app.wave -c -o ./build/app.o
 
 ```bash
 wavec --llvm \
- --target=x86_64-unknown-none-elf \
- build kernel.wave --emit=obj --freestanding -o kernel.o
+  --target=x86_64-unknown-none-elf \
+  build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
 `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` को भी उसी तरह से उपयोग किया जा सकता है।
@@ -157,7 +157,7 @@ wavec --version
 उदाहरण:
 
 ```bash
-wavec -O3 मुख्य.wave चलाएँ
+wavec -O3 run main.wave
 ```
 
 ---
@@ -165,7 +165,7 @@ wavec -O3 मुख्य.wave चलाएँ
 ## 4.2 डिबग आउटपुट
 
 ```bash
-wavec --debug-wave=tokens,ast,ir मुख्य.wave चलाएँ
+wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
 स्वीकृत आइटम:
@@ -182,7 +182,7 @@ wavec --debug-wave=tokens,ast,ir मुख्य.wave चलाएँ
 ## 4.3 लिंक विकल्प
 
 ```bash
-wavec बिल्ड app.wave --link ssl --link crypto -L ./native/lib
+wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` या `--link <lib>`
@@ -235,7 +235,7 @@ wavec run app.wave --dep math=.vex/dep/math
 बैकएंड नियंत्रण विकल्प केवल `--llvm` के बाद ही व्याख्या किए जाते हैं।
 
 ```bash
-wavec --llvm --टार्गेट=x86_64-unknown-linux-gnu बिल्ड app.wave -c
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
 समर्थित आइटम (सारांश):
@@ -272,7 +272,7 @@ wavec --llvm --टार्गेट=x86_64-unknown-linux-gnu बिल्ड ap
 ## 5.1 स्थानीय
 
 ```wave
-import("फू");
+import("foo");
 import("path/to/mod.wave");
 ```
 
@@ -295,7 +295,7 @@ import("json::parser::core");
 
 प्रारूप:
 
-- कम से कम `पैकेज::मॉड्यूल` के 2 खंड आवश्यक हैं।
+- कम से कम `package::module` के 2 खंड आवश्यक हैं।
 
 पैकेज मूल निर्धारित करने की क्रम:
 
@@ -333,9 +333,9 @@ import("math::core::vec");
 
 ```text
 .vex/dep/
-  गणित/
+  math/
     src/
-      जोड़ें.wave
+      add.wave
 main.wave
 ```
 
@@ -359,7 +359,7 @@ wavec run main.wave \
   --dep-root ./vendor/dep
 ```
 
-अगर दोनों में `गणित` हो, तो त्रुटि होती है। नीचे दिए गए अनुसार सुनिश्चित करें।
+अगर दोनों में `math` हो, तो त्रुटि होती है। नीचे दिए गए अनुसार सुनिश्चित करें।
 
 ```bash
 wavec run main.wave \
@@ -375,12 +375,12 @@ wavec run main.wave \
 अनुशंसा की गई संरचना:
 
 - `wavec`: संकलन/लिंक/निष्पादन + निर्दिष्ट निर्भरता विश्लेषण
-- `vex`: `wavec ...` के बाद निर्भरता स्थापना/प्रबंधन --dep-root ... --dep ...\` कॉल
+- `vex`: निर्भरता स्थापित/प्रबंधित करने के बाद `wavec ... --dep-root ... --dep ...` पर कॉल करें।
 
 उदाहरण:
 
 ```bash
-# आंतरिक रूप से vex निष्पादित होता है
+# आंतरिक रूप से, खीझ होती है
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: सुरक्षित, लागू नहीं
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

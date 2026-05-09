@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf是NUL终止字符串
+        // buf 是一个以 NUL 结尾的字符串
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // 无键
+        // 没有钥匙
     } else if (n == ENV_ERR_NO_SPACE) {
-        // 缓冲区不足
+        // 缓冲区溢出
     }
 }
 ```

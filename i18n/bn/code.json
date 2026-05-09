@@ -1,80 +1,80 @@
 {
   "tagline": {
-    "message": "একটি ভাষা, 09a6েংশমে সম্ভবনা"
+    "message": "এক ভাষা, অসীম সম্ভাবনা"
   },
   "get-started": {
     "message": "5 মিনিটের মধ্যে শুরু করুন"
   },
   "read-the-docs": {
-    "message": "ডকুমেন্ট পড়"
+    "message": "ডকুমেন্ট পড়ুন"
   },
   "homepage.hero.title": {
-    "message": "আইটের ভাষার ঎র নেয়ার লোকসভাব"
+    "message": "উন্নয়নের একটি নতুন তরঙ্গের জন্য একটি আধুনিক ভাষা"
   },
   "homepage.hero.subtitle": {
-    "message": "নির্পেশ গ্রথা, শক্তিশাল পারফরমে, এবং নির্দিষ্ঠ নিরাপত্তা. Wave আপনাত প্রতিষ্ঠা বাড়াতে বাড়িয়ে এবং ব৑হুঠ অ্যাপ্লেকেশন মুকার্র বিন্তিত করাতে ইন্দুট করা হয়েছে."
+    "message": "স্বজ্ঞাত সিনট্যাক্স, শক্তিশালী কর্মক্ষমতা, এবং অন্তর্নির্মিত নিরাপত্তা। Wave আপনার উত্পাদনশীলতা বাড়াতে এবং আপনার অ্যাপ্লিকেশনগুলিকে শক্তিশালী করার জন্য ডিজাইন করা হয়েছে৷"
   },
   "homepage.why_wave.title": {
-    "message": "কেন আপনা বশি Wave নির্বাচন করবে?"
+    "message": "কেন Wave বেছে নিন?"
   },
   "homepage.features.one.title": {
-    "message": "সরল এবং করম্বন"
+    "message": "সংক্ষিপ্ত এবং স্বজ্ঞাত"
   },
   "homepage.features.one.description": {
-    "message": "Wave অনাবর্থ কোড কমানে ঔর মনাহুদ্য লোজিকে মনোক্ষ করার সমক্ষ করতে সহজুগ করে. আধুনিক গ্রথের মধ্যে শিখতে শহজ্জ করা আর আনন্দ করে মধুর্স."
+    "message": "Wave অপ্রয়োজনীয় কোড হ্রাস করে এবং আপনাকে মূল যুক্তিতে ফোকাস করতে দেয়। আধুনিক সিনট্যাক্স শিখতে সহজ এবং ব্যবহার করা মজাদার করে তোলে।"
   },
   "homepage.features.two.title": {
-    "message": "আগে এবং কার্মকষল"
+    "message": "দ্রুত এবং দক্ষ"
   },
   "homepage.features.two.description": {
-    "message": "নেটিভ কোডে কম্পাইল হয় এবং জিরো-কস্ট অ্যাবস্ট্রাকশন দ্বারা C++ স্তরের পারফরম্যান্স অর্জন করে। এটি রিসোর্স প্রয়োজনীয় কাজগুলির জন্য আদর্শ।"
+    "message": "নেটিভ কোডে সংকলিত, এটি শূন্য-খরচ বিমূর্ততার মাধ্যমে C++ স্তরের কর্মক্ষমতা অর্জন করে। সম্পদ-সমালোচনামূলক কাজের জন্য আদর্শ।"
   },
   "homepage.features.three.title": {
-    "message": "নিরাপয়ো উচচাল এবং ফলাভাটী"
+    "message": "নিরাপদ এবং একযোগে"
   },
   "homepage.features.three.description": {
-    "message": "নাল রেফারেন্স ভুলের মতো সাধারণ ত্রুটি কম্পাইল সময়ে প্রতিরোধ করে। এমবেডেড কনকারেন্সি মডেলের সাথে মাল্টিকোর প্রোগ্রামিং আগের চেয়ে সহজ হয়ে উঠেছে।"
+    "message": "কম্পাইল সময়ে নাল রেফারেন্স ত্রুটির মত সাধারণ বাগ প্রতিরোধ করে। বিল্ট-ইন কনকারেন্সি মডেল মাল্টিকোর প্রোগ্রামিংকে আগের চেয়ে সহজ করে তোলে।"
   },
   "homepage.contributors.title": {
-    "message": "যোগাদানৰ সপকৰ"
+    "message": "অবদানকারী"
   },
   "homepage.contributors.role.founder": {
-    "message": "ভাষাৰ পোৰিকাৰ"
+    "message": "ভাষার প্রতিষ্ঠাতা"
   },
   "homepage.contributors.role.designer": {
-    "message": "ভাষা পৰিক্ষকৰ"
+    "message": "ভাষা ডিজাইনার"
   },
   "homepage.contributors.role.compiler": {
-    "message": "কম্পাইলাৰ বিকশ্কেন"
+    "message": "কম্পাইলার উন্নয়ন"
   },
   "homepage.contributors.role.library": {
-    "message": "স্টেন্ডাৰ্ড ম্লময় মাস্টাৰে."
+    "message": "স্ট্যান্ডার্ড লাইব্রেরি ম্যানেজার"
   },
   "homepage.contributors.role.contributor": {
-    "message": "ৰিয়োগ্গা যগ্ₙরৰা"
+    "message": "অবদানকারী"
   },
   "homepage.sponsors.title": {
-    "message": "জস৮"
+    "message": "পৃষ্ঠপোষক"
   },
   "homepage.sponsors.tier.honor": {
-    "message": "সম্মান স্পনসর"
+    "message": "সম্মানসূচক স্পনসর"
   },
   "homepage.sponsors.tier.platinum": {
     "message": "প্লাটিনাম স্পনসর"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "গোল্ড স্পনসর"
+    "message": "সোনার পৃষ্ঠপোষক"
   },
   "homepage.sponsors.tier.silver": {
     "message": "সিলভার স্পনসর"
   },
   "homepage.translations.title": {
-    "message": "ওয়েভ অনুবাদে অংশগ্রহণ করুন"
+    "message": "Wave অনুবাদে অংশগ্রহণ করুন"
   },
   "homepage.translations.subtitle": {
-    "message": "বিশ্বব্যাপী বিকাশকারীরা ভাষার বাঁধা ছাড়াই ওয়েভ শিখতে পারে তা নিশ্চিত করতে অনুবাদে অবদান রাখুন।"
+    "message": "অনুগ্রহ করে অনুবাদগুলিতে অবদান রাখুন যাতে সারা বিশ্বের বিকাশকারীরা ভাষা বাধা ছাড়াই Wave শিখতে পারে৷"
   },
   "homepage.translations.button": {
-    "message": "কাউরডিনে অনুবাদে অংশগ্রহণ করুন"
+    "message": "Crowdin এ অনুবাদে অংশগ্রহণ করুন"
   }
 }

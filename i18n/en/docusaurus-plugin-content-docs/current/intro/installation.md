@@ -47,7 +47,7 @@ The `LLVM_SYS_140_PREFIX` environment variable is set so the Wave compiler can c
 Next, the user-specified version of the Wave package (`.tar.gz`) is downloaded and extracted.
 After extraction, the `wavec` executable is installed to `/usr/local/bin` so that the `wavec` command can be used from anywhere in the system.
 
-Once installation is complete, verify it by using the `wavec --version` command to ensure it's installed correctly.
+Once installation is complete, verify it by using the `wavec` command to ensure it's installed correctly.
 
 ## Installation Verification
 

@@ -300,7 +300,7 @@ Format:
 Order of determining package root:
 
 1. Explicit mapping with `--dep name=path`
-2. Search `<root>/<package>` in each `--dep-root`
+2. Search `--dep-root` in each `<root>/<package>`
 
 If the same package is found on multiple dep-roots simultaneously:
 
@@ -380,7 +380,7 @@ Recommended Structure:
 Example:
 
 ```bash
-# Internally handled by vex
+# Internally, vex does
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 

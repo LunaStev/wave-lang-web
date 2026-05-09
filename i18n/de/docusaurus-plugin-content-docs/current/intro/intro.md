@@ -63,4 +63,4 @@ Wir planen, umfassende offizielle Dokumente und Tutorials bereitzustellen, damit
 Aus Plattformperspektive streben wir an, konsistente Leistung und Entwicklungserfahrung auf wichtigen Betriebssystemen wie Windows, macOS und Linux zu bieten.
 
 Schließlich ist Wave ein Projekt, das durch die Zusammenarbeit mit der Open-Source-Community wächst.
-Wir fördern aktiv Beiträge und Beteiligung und werden gemeinsam mit einem offenen Entwicklungsprozess Waves Richtung und Vollständigkeit gestalten.
+Wir fördern aktiv Beiträge und Beteiligung und werden gemeinsam mit einem offenen Entwicklungsprozess Wave Richtung und Vollständigkeit gestalten.

@@ -10,7 +10,7 @@ Wave y Whale comienzan como componentes separados inicialmente, pero finalmente 
 Todas las etapas de desarrollo siguen el flujo siguiente.
 
 ```matlab
-pre-alpha → pre-beta → alpha → beta → rc → lanzamiento
+pre-alpha → pre-beta → alpha → beta → rc → release
 ```
 
 Cada etapa progresa sobre los resultados de la anterior y se basa en un desarrollo unidireccional que no permite volver a la estructura anterior una vez que la etapa se completa.

@@ -56,7 +56,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 错误消息示例：
 
 ```text
-使用 -C linker=... 时，--sysroot=<path> 仅用于编译阶段；通过 -C link-sysroot=<path> (或 -C link-arg=--sysroot=<path>) 明确传递链接器 sysroot
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---

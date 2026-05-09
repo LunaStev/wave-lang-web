@@ -55,7 +55,7 @@ fun f(x: i32) -> i32 { return x; }
 
 fun main() {
     var v: B = 10;
-    f(v); // ठीक है
+    f(v); // OK
 }
 ```
 
@@ -88,7 +88,7 @@ enum ShaderUniformType -> i32 {
 स्वीकृत repr प्रकार:
 
 - `i8`, `i16`, `i32`, `i64`
-- `u8`, `u16`, `u32`, `u64`
+- `i8`, `i16`, `i32`, `i64`
 - उक्त प्रकार के `type उपनाम`
 
 ```wave

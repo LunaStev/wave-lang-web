@@ -1,48 +1,48 @@
 {
   "tagline": {
-    "message": "1つの言語、無限の可能性"
+    "message": "一つの言語、無限の可能性"
   },
   "get-started": {
     "message": "5分で始める"
   },
   "read-the-docs": {
-    "message": "ドキュメントを読む"
+    "message": "文書を読む"
   },
   "homepage.hero.title": {
     "message": "開発の新しい波のための現代的な言語"
   },
   "homepage.hero.subtitle": {
-    "message": "直感的な文法、強力な性能、そして内蔵された安全性。Waveはあなたの生産性を高め、アプリケーションを堅固にするために設計されています。"
+    "message": "直感的な文法、強力なパフォーマンス、組み込みの安全性。 Waveはあなたの生産性を高め、アプリケーションを堅牢にするように設計されています。"
   },
   "homepage.why_wave.title": {
-    "message": "なぜWaveを選ぶべきですか?"
+    "message": "なぜWaveを選ぶべきですか？"
   },
   "homepage.features.one.title": {
-    "message": "シンプルで直感的"
+    "message": "簡潔で直感的な"
   },
   "homepage.features.one.description": {
-    "message": "Waveは不要なコードを減らし、コアロジックに集中できるようにします。現代的な文法で学びやすく、使うのが楽しいです。"
+    "message": "Waveは不要なコードを減らし、コアロジックに集中できるようにします。現代的な文法で学びやすく、使いやすいです。"
   },
   "homepage.features.two.title": {
-    "message": "速くて効率的"
+    "message": "迅速で効率的な"
   },
   "homepage.features.two.description": {
-    "message": "ネイティブコードとしてコンパイルされ、ゼロコストの抽象化を通じてC++レベルのパフォーマンスを達成します。リソースが重要な作業に理想的です。"
+    "message": "ネイティブコードにコンパイルされ、ゼロコスト抽象化によってC++レベルのパフォーマンスを達成します。リソースが重要な作業に最適です。"
   },
   "homepage.features.three.title": {
-    "message": "安全で並行的"
+    "message": "安全で同時"
   },
   "homepage.features.three.description": {
-    "message": "Null参照エラーのような一般的なバグをコンパイル時に防ぎます。組み込まれた並行性モデルでマルチコアプログラミングがこれまで以上に簡単になります。"
+    "message": "NULL参照エラーなどの一般的なバグをコンパイル時に回避します。組み込みの並行性モデルにより、マルチコアプログラミングがこれまで以上に簡単になります。"
   },
   "homepage.contributors.title": {
-    "message": "寄稿者"
+    "message": "貢献者"
   },
   "homepage.contributors.role.founder": {
-    "message": "言語の創設者"
+    "message": "言語創始者"
   },
   "homepage.contributors.role.designer": {
-    "message": "言語のデザイナー"
+    "message": "言語設計者"
   },
   "homepage.contributors.role.compiler": {
     "message": "コンパイラ開発"
@@ -51,7 +51,7 @@
     "message": "標準ライブラリ担当"
   },
   "homepage.contributors.role.contributor": {
-    "message": "寄稿者"
+    "message": "貢献者"
   },
   "homepage.sponsors.title": {
     "message": "スポンサー"
@@ -69,10 +69,10 @@
     "message": "シルバースポンサー"
   },
   "homepage.translations.title": {
-    "message": "Waveの翻訳に参加する"
+    "message": "Wave翻訳に参加する"
   },
   "homepage.translations.subtitle": {
-    "message": "世界中の開発者が言語の壁を越えてWaveを学べるように翻訳に貢献してください。"
+    "message": "世界中の開発者が言語バリアなしでWaveを学ぶために翻訳に貢献してください。"
   },
   "homepage.translations.button": {
     "message": "Crowdinで翻訳に参加する"

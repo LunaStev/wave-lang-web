@@ -2,31 +2,31 @@
 sidebar_position: 11
 ---
 
-# 주석
+# timah
 
-Wave는 두 가지 주석을 지원합니다.
+Wave menyokong dua anotasi:
 
-- 한 줄 주석: `//`
-- 블록 주석: `/* ... */`
+- Ulasan satu baris: `//`
+- Sekat ulasan: `/* ... */`
 
-## 한 줄 주석
+## komen satu baris
 
-`//` 뒤의 내용은 줄 끝까지 무시됩니다.
+Apa-apa sahaja selepas `//` diabaikan sehingga penghujung baris.
 
 ```wave
 var x: i32 = 10; // line comment
 x += 5;          // still works
 ```
 
-## 블록 주석
+## anotasi blok
 
-`/*` 와 `*/` 사이 내용을 무시합니다.
+Abaikan kandungan antara `/*` dan `*/`.
 
 ```wave
 var y: i32 = 1 /* inline block */ + 2;
 ```
 
-블록 주석은 여러 줄과 중첩을 지원합니다.
+Sekat ulasan menyokong berbilang baris dan bersarang.
 
 ```wave
 /* outer
@@ -35,20 +35,20 @@ var y: i32 = 1 /* inline block */ + 2;
 */
 ```
 
-## 문자열과 주석 기호
+## Rentetan dan Tanda Komen
 
-문자열 내부의 `/*`, `*/`, `//`는 주석 시작/종료로 처리되지 않습니다.
+`/*`, `*/`, `//` di dalam rentetan tidak dianggap sebagai permulaan/akhir ulasan.
 
 ```wave
 var marker: str = "/*//*/";
 ```
 
-## 주석 오류
+## Ralat anotasi
 
-블록 주석이 닫히지 않으면 컴파일 에러(`E1002`)가 발생합니다.
+Jika ulasan blok tidak ditutup, ralat kompilasi (`E1002`) akan berlaku.
 
 ```wave
 /* not closed
 ```
 
-컴파일러는 시작 위치, 원인, 수정 힌트를 함께 출력합니다.
+Pengkompil mengeluarkan petunjuk lokasi permulaan, punca dan pembetulan.

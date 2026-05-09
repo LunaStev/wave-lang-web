@@ -21,7 +21,7 @@ Kanuni muhimu:
 `--llvm` yenyewe ni alama ya kuanzia kwa block ya chaguo za mbele.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu jenga app.wave -c
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
 Kama hapo juu, miongoni mwa vigezo vya kuja baada ya `--llvm`, ni vigezo vilivyowekwa tu vitachukuliwa kama mipangilio ya mbele ya LLVM.
@@ -40,15 +40,15 @@ Kwa sasa `--whale` ni **alama ya dummy iliyohifadhiwa**.
 
 ## 2.1 Lengo/Uzalishaji wa Msimbo
 
-- `--lengo <troja>` / `--lengo=<troja>`
-- `--cpu <jina>` / `--cpu=<jina>`
-- `--vipengele <csv>` / `--vipengele=<csv>`
-- `--abi <jina>` / `--abi=<jina>`
+- `--target <triple>` / `--target=<triple>`
+- `--cpu <name>` / `--cpu=<name>`
+- `--features <csv>` / `--features=<csv>`
+- `--abi <name>` / `--abi=<name>`
 
 Sehemu za kutafakari:
 
-- Hatua za kuunda IR (MashineLengo): `lengo`, `cpu`, `vipengele`
-- Hatua za kitu/unganisho (kuita clang): `lengo`, `abi`
+- Hatua za kuunda IR (MashineLengo): `target`, `cpu`, `features`
+- Hatua za kitu/unganisho (kuita clang): `target`, `abi`
 
 Hivi sasa, troja muhimu za lengo kwa maandishi ni:
 
@@ -58,11 +58,11 @@ Hivi sasa, troja muhimu za lengo kwa maandishi ni:
 
 ## 2.2 Zana mnyororo/kiungo
 
-- `--sysroot <njia>` / `--sysroot=<njia>`
-- `-C kiunganishi=<njia>`
-- `-C kiungo-hoja=<hoja>` (Inaweza kurudiwa)
-- `-C link-sysroot=<njia>`
-- `-C hakuna maktaba chaguomsingi`
+- `--sysroot <path>` / `--sysroot=<path>`
+- `-C linker=<path>`
+- `-C link-arg=<arg>` (Inaweza kurudiwa)
+- `-C link-sysroot=<path>`
+- `-C no-default-libs`
 
 Sehemu za kutafakari:
 
@@ -79,13 +79,13 @@ Isipokuwa utumie `--llvm`, chaguo za kina za upande wa nyuma hazitafsiriwi kama 
 Kwa mfano, yafuatayo ni kosa.
 
 ```bash
-wavec --lengo=x86_64-unknown-linux-gnu jenga app.wave -c
+wavec --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
 Ni lazima iandikwe kama yafuatayo.
 
 ```bash
-wavec --llvm --lengo=x86_64-unknown-linux-gnu jenga app.wave -c
+wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 ```
 
 ---
@@ -95,30 +95,30 @@ wavec --llvm --lengo=x86_64-unknown-linux-gnu jenga app.wave -c
 Uundaji wa kitu msingi:
 
 ```bash
-wavec --llvm --lengo=aarch64-unknown-linux-gnu jenga app.wave -c
+wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
 ```
 
 Uundaji wa kitu cha kernel kisichosimama:
 
 ```bash
-wavec --llvm --lengo=riscv64-unknown-none-elf jenga kernel.wave --emit=obj --freestanding -o kernel.o
+wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
 ```
 
 Kiungo maalum:
 
 ```bash
 wavec --llvm \
-  --lengo=x86_64-unknown-linux-gnu \
+  --target=x86_64-unknown-linux-gnu \
   --sysroot=/opt/sysroot \
-  -C kiunganishi=clang \
-  -C kiungo-hoja=-Wl,--gc-sections \
-  jenga app.wave
+  -C linker=clang \
+  -C link-arg=-Wl,--gc-sections \
+  build app.wave
 ```
 
 Usiwezeshaji wa kiungo kiotomatiki cha libc/libm:
 
 ```bash
-wavec --llvm -C hakuna maktaba chaguomsingi jenga app.wave
+wavec --llvm -C no-default-libs build app.wave
 ```
 
 Unapotumia `--freestanding`, hufanya kazi kwa njia sawa na `-C no-default-libs` kwa ndani, ilhali inalingana na ujenzi ambao haufikirii maktaba msingi za runtamu kama kernel/kodi ya boot.

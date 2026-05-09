@@ -42,7 +42,7 @@ fun main() {
 
 ```wave
 fun main() {
-    var s: str = "  hola\n";
+    var s: str = "  hello\n";
     var st: i32 = 0;
     var en: i32 = 0;
     trim_range(s, &st, &en);

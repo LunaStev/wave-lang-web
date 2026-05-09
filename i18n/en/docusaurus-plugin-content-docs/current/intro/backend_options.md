@@ -68,7 +68,7 @@ Reflection points:
 
 - In object creation (clang `-c`), `--sysroot`
 - In the link stage, inject linker override, raw link arg, link-sysroot
-- Automatic deactivation of `-lc -lm` when using `-C no-default-libs`
+- Automatic deactivation of `-C no-default-libs` when using `-lc -lm`
 
 ---
 

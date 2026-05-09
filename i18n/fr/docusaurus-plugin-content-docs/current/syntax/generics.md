@@ -91,7 +91,7 @@ fun main() {
 ## Erreurs courantes
 
 ```wave
-var x: i32 = identity(10); // Paramètre de type manquant (non autorisé)
+var x: i32 = identity(10); // Argument de type manquant (non autorisé)
 ```
 
 Doit être appelé comme suit.

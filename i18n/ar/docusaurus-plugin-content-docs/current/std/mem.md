@@ -9,9 +9,9 @@ sidebar_position: 5
 ## استيراد
 
 ```wave
-استيراد("std::mem::alloc");
-استيراد("std::mem::ops");
-استيراد("std::mem::cstr");
+import("std::mem::alloc");
+import("std::mem::ops");
+import("std::mem::cstr");
 ```
 
 ## 1. تخصيص/تحرير أساسي
@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // نقل آمن للمناطق المتداخلة من الذاكرة
+    // الحركة الآمنة لمناطق الذاكرة المتداخلة
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

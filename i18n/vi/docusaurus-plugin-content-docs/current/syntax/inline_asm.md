@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## Giới thiệu
 
-Wave trong cụm hợp ngữ nội tuyến được viết dưới dạng `asm { ... Viết theo dạng khối `}\`.
+Tập hợp nội tuyến của Wave được viết bằng các khối `asm { ... }`.
 Có thể điều khiển trực tiếp thanh ghi, bộ nhớ và đường dẫn gọi hệ thống từ trong mã Wave.
 
 Các nền tảng hỗ trợ hiện tại:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - freestanding `aarch64`
+- freestanding `riscv64`
 - freestanding `riscv64`
 
 Chưa hỗ trợ Windows và nền tảng 32-bit.
@@ -28,9 +28,9 @@ Chưa hỗ trợ Windows và nền tảng 32-bit.
 
 ```wave
 asm {
-    "mệnh lệnh"
-    in("constraint_or_reg") giá trị
-    out("constraint_or_reg") mục tiêu
+    "instruction"
+    in("constraint_or_reg") value
+    out("constraint_or_reg") target
     clobber("item")
 }
 ```
@@ -38,7 +38,7 @@ asm {
 Các thành phần:
 
 - Dòng chuỗi: lệnh hợp ngữ thực tế
-- `in(...)`: toán hạng đầu vào
+- `clobber(...)`: toán hạng đầu vào
 - `out(...)`: toán hạng đầu ra
 - `clobber(...)`: gợi ý thanh ghi/trạng thái/bộ nhớ bị thay đổi
 
@@ -103,7 +103,7 @@ out("rax") ret
 Đối tượng đầu ra (`out(...) target`) hiện tại được khuyến khích theo mẫu sau.
 
 - Biến số: `out("rax") ret`
-- Tham chiếu ngược con trỏ: `out("rax") deref p`
+- Tham chiếu ngược con trỏ: `clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 Các mục chính:
 
 - Thanh ghi: `"rax"`, `"x0"`, v.v.
-- Đặc biệt: `"memory"`, `"cc"` (chuẩn hóa nội bộ theo mục tiêu)
+- Đặc biệt: `$0`, `$1` (chuẩn hóa nội bộ theo mục tiêu)
 
 Trình biên dịch sẽ tự động thêm clobber cơ bản trong chế độ an toàn bảo thủ.
 (`memory`, các chuỗi flags/cc, v.v.; Chủ yếu là `memory` trên nền RISC-V không phụ thuộc)

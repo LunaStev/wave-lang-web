@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // Déplacement sécurisé de régions de mémoire qui se chevauchent
+    // Déplacement sécurisé des zones de mémoire qui se chevauchent
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

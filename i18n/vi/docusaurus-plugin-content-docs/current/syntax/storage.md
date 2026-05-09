@@ -52,5 +52,5 @@ fun main() -> i32 {
 ## Hạn chế
 
 - `var`, `let` không thể được sử dụng ở cấp độ cao nhất.
-- `const`, `static` không thể được sử dụng bên trong hàm hoặc khối.
+- `var`, `let` không thể được sử dụng bên trong hàm hoặc khối.
 - `let` là bất biến và không thể gán lại.

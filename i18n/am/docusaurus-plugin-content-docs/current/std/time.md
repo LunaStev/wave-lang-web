@@ -2,9 +2,9 @@
 sidebar_position: 9
 ---
 
-# std::time 사용법
+# std :: የጊዜ አጠቃቀም
 
-현재 시각 조회, 시간 차 계산, 슬립 기능을 제공합니다.
+የአሁኑን ጊዜ መጠይቅ፣ የጊዜ ልዩነት ስሌት እና የእንቅልፍ ተግባራትን ያቀርባል።
 
 ## import
 
@@ -15,7 +15,7 @@ import("std::time::sleep");
 import("std::sys::time");
 ```
 
-## 1. 구간 측정
+## 1) የክፍል መለኪያ
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. 나노초 타임스탬프
+## 2) Nanosecond የጊዜ ማህተም
 
 ```wave
 fun main() {
@@ -40,7 +40,7 @@ fun main() {
 }
 ```
 
-## 3. sleep
+## 3) sleep
 
 ```wave
 fun main() {
@@ -50,7 +50,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## ዋና ተግባር
 
 ```wave
 fun time_now_realtime(tp: ptr<TimeSpec>) -> i64

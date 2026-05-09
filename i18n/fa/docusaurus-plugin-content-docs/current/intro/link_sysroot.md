@@ -1,5 +1,5 @@
 ---
-sidebar_position: ۸
+sidebar_position: 8
 ---
 
 # کنترل دستی sysroot لینک (`-C link-sysroot`)
@@ -8,8 +8,8 @@ sidebar_position: ۸
 
 اصول کلیدی:
 
-- `--sysroot=<مسیر>`: sysroot سطح کامپایل (clang `-c`)
-- `-C link-sysroot=<مسیر>`: sysroot سطح لینک
+- `--sysroot=<path>`: sysroot سطح کامپایل (clang `-c`)
+- `-C link-sysroot=<path>`: sysroot سطح لینک
 
 به عبارتی، sysroot کامپایل و لینک را به صورت مجزا مدیریت می‌کنیم.
 
@@ -25,22 +25,22 @@ sidebar_position: ۸
 
 ## ۲. تعریف گزینه‌ها
 
-## ۲.۱ `-C link-sysroot=<مسیر>`
+## ۲.۱ `-C link-sysroot=<path>`
 
-`--sysroot=<مسیر>` را در مرحله لینک تزریق می‌کند.
+`--sysroot=<path>` را در مرحله لینک تزریق می‌کند.
 
 ```bash
-wavec -C link-sysroot=/مسیر/به/sysroot ...
+wavec -C link-sysroot=/path/to/sysroot ...
 ```
 
-از نظر داخلی به معنای `-C link-arg=--sysroot=<مسیر>` است.
+از نظر داخلی به معنای `-C link-arg=--sysroot=<path>` است.
 
-## ۲.۲ `-C link-arg=--sysroot=<مسیر>`
+## ۲.۲ `-C link-arg=--sysroot=<path>`
 
 روش پارامتر خام لینک موجود همچنان پشتیبانی می‌شود.
 
 ```bash
-wavec -C link-arg=--sysroot=/مسیر/به/sysroot ...
+wavec -C link-arg=--sysroot=/path/to/sysroot ...
 ```
 
 ---
@@ -50,13 +50,13 @@ wavec -C link-arg=--sysroot=/مسیر/به/sysroot ...
 در فرایند بیلد که به مرحله لینک نیاز دارد، اگر همزمان شرایط زیر برقرار باشند، با خطای استفاده متوقف می‌شود.
 
 1. استفاده از `-C linker=...`
-2. استفاده از `--sysroot=<مسیر>`
+2. استفاده از `--sysroot=<path>`
 3. عدم ذکر sysroot لینک ( `-C link-sysroot` یا `-C link-arg=--sysroot=...`)
 
 نمونه پیام خطا:
 
 ```text
-هنگام استفاده از -C linker=...، --sysroot=<مسیر> فقط در مرحله کمپایل است؛  sysroot لینک را با -C link-sysroot=<مسیر> (یا -C link-arg=--sysroot=<مسیر>) به‌ وضوح ارسال کنید.
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---
@@ -93,7 +93,7 @@ wavec \
 اگر مرحله لینک وجود نداشته باشد، sysroot لینک نیازی نیست.
 
 ```bash
-wavec --sysroot=/مسیر/به/sysroot  build main.wave --emit=obj
+wavec --sysroot=/path/to/sysroot build main.wave --emit=obj
 ```
 
 ---

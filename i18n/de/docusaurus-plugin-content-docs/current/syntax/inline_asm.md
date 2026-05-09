@@ -6,16 +6,16 @@ sidebar_position: 7
 
 ## Einführung
 
-Die Inline-Assembly von Wave wird mit \`asm { ... } geschrieben.
+Die Inline-Assemblierung von Wave wird in `asm { ... }`-Blöcken geschrieben.
 Innerhalb von Wave-Code können Register, Speicher und Systemaufrufpfade direkt gesteuert werden.
 
 Derzeit unterstützte Ziele:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - freestanding `aarch64`
+- freestanding `riscv64`
 - freestanding `riscv64`
 
 Windows und 32-Bit-Ziele werden noch nicht unterstützt.​​
@@ -28,9 +28,9 @@ Windows und 32-Bit-Ziele werden noch nicht unterstützt.​​
 
 ```wave
 asm {
-    "Instruction"
-    in("constraint_or_reg") Wert
-    out("constraint_or_reg") Ziel
+    "instruction"
+    in("constraint_or_reg") value
+    out("constraint_or_reg") target
     clobber("item")
 }
 ```
@@ -38,7 +38,7 @@ asm {
 Komponenten:
 
 - Zeichenfolgenzeile: Tatsächliche Assembly-Befehle
-- `in(...)`: Eingabe-Operanden
+- `clobber(...)`: Eingabe-Operanden
 - `out(...)`: Ausgabe-Operanden
 - `clobber(...)`: Hinweise auf zerstörte Register/Zustände/Speicher
 
@@ -100,10 +100,10 @@ in("r") &buf
 out("rax") ret
 ```
 
-Ausgabeziel (`out(...) Zu diesem Zeitpunkt wird das folgende Muster für `target\`) empfohlen.
+
 
 - Variable: `out("rax") ret`
-- Zeiger-Dereferenzierung: `out("rax") deref p`
+- Zeiger-Dereferenzierung: `clobber(...)`
 
 ---
 
@@ -123,7 +123,7 @@ asm {
 Schlüsselpositionen:
 
 - Register: `"rax"`, `"x0"` usw.
-- Spezielle: `"memory"`, `"cc"` (zielabhängig interne Normalisierung)
+- Spezielle: `$0`, `$1` (zielabhängig interne Normalisierung)
 
 Der Compiler fügt im konservativen Sicherheitsmodus automatisch ein Standard-clobber hinzu.
 (`memory`, flags/cc-Familie usw.; Bei RISC-V freestanding hauptsächlich `memory`)​​

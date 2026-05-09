@@ -26,7 +26,7 @@ fun main() {
     } else if (n == ENV_ERR_NOT_FOUND) {
         // kein Schlüssel
     } else if (n == ENV_ERR_NO_SPACE) {
-        // Puffer nicht ausreichend
+        // Kein Puffer mehr
     }
 }
 ```

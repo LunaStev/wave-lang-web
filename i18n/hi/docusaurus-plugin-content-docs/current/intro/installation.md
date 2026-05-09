@@ -10,7 +10,7 @@ sidebar_position: 1
 टर्मिनल में नीचे दिए गए कमांड को चलाने पर, निर्दिष्ट संस्करण का वेव कंपाइलर (`wavec`) स्वचालित रूप से स्थापित हो जाएगा।
 
 ```bash
-curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <संस्करण>
+curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
 इंस्टॉलेशन स्क्रिप्ट सिस्टम वातावरण की जाँच करने के बाद, वेव के संचालन के लिए आवश्यक निर्भरताओं और कंपाइलर को स्वचालित रूप से सेट करती है।

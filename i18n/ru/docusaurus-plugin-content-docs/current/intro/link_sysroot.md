@@ -17,7 +17,7 @@ sidebar_position: 8
 
 ## 1. Почему это нужно
 
-При использовании `-C linker=<path>` в кросс-компиляции часто необходимо указывать пути выполнения (например, `crt1.o`, `libc`, `libm`), к которым обращается драйвер линковки (например, `aarch64-linux-gnu-gcc`).
+При использовании `-C linker=<path>` в кросс-компиляции часто необходимо указывать пути выполнения (например, `aarch64-linux-gnu-gcc`, `crt1.o`, `libc`), к которым обращается драйвер линковки (например, `libm`).
 
 В этом случае sysroot для линковки не подбирается автоматически, а должен быть явно передан через CLI.
 
@@ -56,7 +56,7 @@ wavec -C link-arg=--sysroot=/path/to/sysroot ...
 Пример сообщения об ошибке:
 
 ```text
-при использовании -C linker=..., --sysroot=<path> применяется только на этапе компиляции; передайте sysroot для линкера явно с помощью -C link-sysroot=<path> (или -C link-arg=--sysroot=<path>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---

@@ -22,11 +22,11 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // buf is a NUL-terminated string
+        // buf is a NUL terminated string
     } else if (n == ENV_ERR_NOT_FOUND) {
-        // No key
+        // no key
     } else if (n == ENV_ERR_NO_SPACE) {
-        // Buffer shortage
+        // Out of buffer
     }
 }
 ```

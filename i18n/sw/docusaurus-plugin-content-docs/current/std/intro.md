@@ -35,17 +35,17 @@ Kazi nyingi hufuata mkataba ufuatao.
 Mfano:
 
 ```wave
-ingiza("std::env::environ");
+import("std::env::environ");
 
 fun main() {
     var raw: array<u8, 64>;
     var n: i64 = env_get("HOME", &raw[0], 64);
 
-    ikiwa (n < 0) {
-        // Utunzaji wa makosa
+    if (n < 0) {
+        // Ushughulikiaji wa hitilafu
         return;
     }
 
-    // raw ina mfuatano wa maandishi unaoishia na NUL
+    // ghafi ina mfuatano wa NUL uliokatishwa
 }
 ```

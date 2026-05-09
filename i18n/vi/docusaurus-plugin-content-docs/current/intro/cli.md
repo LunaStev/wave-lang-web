@@ -120,22 +120,22 @@ wavec --llvm \
 
 ---
 
-## 3.4 `cài đặt std`, `cập nhật std`
+## 3.4 `install std`, `update std`
 
 Lệnh cài đặt/cập nhật thư viện tiêu chuẩn.
 
 ```bash
-wavec cài đặt std
-wavec cập nhật std
+wavec install std
+wavec update std
 ```
 
 ---
 
-## 3.5 `--trợ giúp`, `--phiên bản`
+## 3.5 `--help`, `--version`
 
 ```bash
-wavec --trợ giúp
-wavec --phiên bản
+wavec --help
+wavec --version
 ```
 
 ---
@@ -157,7 +157,7 @@ Giá trị cho phép:
 Ví dụ:
 
 ```bash
-wavec -O3 chạy main.wave
+wavec -O3 run main.wave
 ```
 
 ---
@@ -165,7 +165,7 @@ wavec -O3 chạy main.wave
 ## 4.2 Xuất gỡ lỗi
 
 ```bash
-wavec --gỡ lỗi-wave=tokens,ast,ir chạy main.wave
+wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
 Các mục cho phép:
@@ -182,7 +182,7 @@ Các mục cho phép:
 ## 4.3 Tùy chọn liên kết
 
 ```bash
-wavec dựng app.wave --link ssl --link crypto -L ./native/lib
+wavec build app.wave --link ssl --link crypto -L ./native/lib
 ```
 
 - `--link=<lib>` hoặc `--link <lib>`
@@ -201,7 +201,7 @@ Tùy chọn để phân tích import bên ngoài (`pkg::...`).
 Thêm ứng cử viên cho thư mục gốc của gói.
 
 ```bash
-wavec chạy app.wave --dep-root .vex/dep
+wavec run app.wave --dep-root .vex/dep
 ```
 
 Khi tìm gói `math`:
@@ -211,7 +211,7 @@ Khi tìm gói `math`:
 Có thể chỉ định nhiều lần:
 
 ```bash
-wavec chạy app.wave --dep-root .vex/dep --dep-root ./vendor/dep
+wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 ```
 
 ### `--dep <name>=<path>`
@@ -219,7 +219,7 @@ wavec chạy app.wave --dep-root .vex/dep --dep-root ./vendor/dep
 Gắn tên gói vào một đường dẫn cụ thể.
 
 ```bash
-wavec chạy app.wave --dep math=.vex/dep/math
+wavec run app.wave --dep math=.vex/dep/math
 ```
 
 Quy tắc:
@@ -244,7 +244,7 @@ Các mục hô trợ (tóm tắt):
 - `--sysroot`
 - `-C linker=<path>`
 - `-C link-arg=<arg>` (có thể lặp lại)
-- `-C link-sysroot=<đường dẫn>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Các mục tiêu chính hiện tại theo tiêu chuẩn `wavec print target-list`:
@@ -300,7 +300,7 @@ Hình thức:
 Thứ tự xác định gốc gói:
 
 1. Ánh xạ rõ ràng bằng `--dep name=path`
-2. Tìm kiếm `<root>/<package>` trong mỗi `--dep-root`
+2. Tìm kiếm `--dep-root` trong mỗi `<root>/<package>`
 
 Nếu cùng một gói được tìm thấy đồng thời trong nhiều dep-root:
 
@@ -348,13 +348,13 @@ import("math::add");
 Thực thi:
 
 ```bash
-wavec chạy main.wave --dep-root .vex/dep
+wavec run main.wave --dep-root .vex/dep
 ```
 
 ### 6.2 Giải quyết mơ hồ
 
 ```bash
-wavec chạy main.wave \
+wavec run main.wave \
   --dep-root .vex/dep \
   --dep-root ./vendor/dep
 ```
@@ -362,7 +362,7 @@ wavec chạy main.wave \
 Nếu có `math` ở cả hai bên, sẽ xảy ra lỗi. Sửa như dưới đây.
 
 ```bash
-wavec chạy main.wave \
+wavec run main.wave \
   --dep-root .vex/dep \
   --dep-root ./vendor/dep \
   --dep math=./vendor/dep/math
@@ -380,8 +380,8 @@ Cấu trúc khuyến nghị:
 Ví dụ:
 
 ```bash
-# Thực thi vex nội bộ
-wavec chạy main.wave --dep-root .vex/dep --dep math=.vex/dep/math
+# Trong nội bộ, vex có
+wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
 Mô hình này giữ cho trình biên dịch đơn giản và quyết định, trong khi trình quản lý gói đảm nhiệm tự động hóa.

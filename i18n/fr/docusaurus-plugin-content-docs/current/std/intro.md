@@ -42,7 +42,7 @@ fun main() {
     var n: i64 = env_get("HOME", &raw[0], 64);
 
     if (n < 0) {
-        // gestion des erreurs
+        // Gestion des erreurs
         return;
     }
 

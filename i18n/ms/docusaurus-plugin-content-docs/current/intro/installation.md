@@ -2,23 +2,23 @@
 sidebar_position: 1
 ---
 
-# Pemasangan
+# pemasangan
 
-## Cara Pemasangan
+## Kaedah pemasangan
 
-Wave boleh dipasang dengan mudah melalui skrip pemasangan yang disediakan.
-Menjalankan arahan di bawah di terminal akan memasang pengkompil Wave (`wavec`) versi yang ditentukan secara automatik.
+Wave boleh dipasang hanya melalui skrip pemasangan yang disediakan.
+Jika anda menjalankan arahan di bawah dalam terminal, versi pengkompil Wave (`wavec`) yang ditentukan akan dipasang secara automatik.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version <version>
 ```
 
-Skrip pemasangan akan mengesahkan persekitaran sistem dan secara automatik menyiapkan kebergantungan dan pengkompil yang diperlukan untuk menjalankan Wave.
-Jika versi tidak dinyatakan, versi stabil terkini atau versi asas berdasarkan kriteria yang ditetapkan akan dipasang.
+Skrip pemasangan menyemak persekitaran sistem dan secara automatik menyediakan kebergantungan dan pengkompil yang diperlukan untuk menjalankan Wave.
+Jika anda tidak menentukan versi, versi stabil terkini atau versi lalai mengikut kriteria yang ditentukan akan dipasang.
 
-## Contoh Pemasangan
+## Contoh pemasangan
 
-Untuk memasang versi terkini, jalankan seperti berikut.
+Untuk memasang versi terkini, jalankan:
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
@@ -30,49 +30,51 @@ Jika anda ingin memasang versi tertentu, gunakan pilihan `--version`.
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta
 ```
 
-Ia juga mungkin untuk menentukan versi yang lebih terperinci seperti binaan malam.
+Ia juga mungkin untuk menentukan versi yang lebih terperinci, seperti binaan setiap malam.
 
 ```bash
 curl -fsSL https://wave-lang.dev/install.sh | bash -s -- --version v0.1.3-pre-beta-nightly-2025-07-11
 ```
 
-## Tugasan yang dilakukan semasa pemasangan.
+## Apa yang berlaku semasa pemasangan
 
-Skrip pemasangan secara automatik akan mengendalikan pelbagai langkah untuk memastikan Wave dapat berjalan dengan normal.
-Pertama, pasang pakej yang diperlukan terkait dengan LLVM 14 melalui `apt-get`.
-Kemudian, buat pautan simbolik kepada `/usr/lib/libllvm-14.so` agar sistem dapat merujuk kepada LLVM dengan stabil.
+Skrip pemasangan secara automatik mengendalikan beberapa langkah untuk membolehkan Wave berjalan seperti biasa.
+Mula-mula, pasang pakej yang diperlukan berkaitan dengan LLVM 14 melalui `apt-get`.
+Cipta pautan simbolik ke `/usr/lib/libllvm-14.so` supaya sistem masa hadapan boleh merujuk LLVM dengan pasti.
 
-Tetapkan pembolehubah persekitaran `LLVM_SYS_140_PREFIX` agar Wave dapat mencari LLVM dengan betul, dan tetapan ini akan ditambah kepada `~/.bashrc` agar kekal dalam sesi terminal seterusnya.
+Wave Menetapkan pembolehubah persekitaran `LLVM_SYS_140_PREFIX` supaya pengkompil boleh mencari LLVM dengan betul.
+Tetapan ini ditambahkan pada `~/.bashrc` dan berterusan sepanjang sesi terminal akan datang.
 
-Seterusnya, muat turun dan ekstrak pakej Wave (`.tar.gz`) versi yang ditetapkan oleh pengguna.
-Selepas ekstrak, pasang fail eksekusi `wavec` ke dalam `/usr/local/bin` agar dapat menggunakan arahan `wavec` dari mana-mana dalam sistem.
+Seterusnya, muat turun dan nyahzip versi pakej Wave (`.tar.gz`) yang ditentukan pengguna.
+Selepas menyahzip, pasang fail boleh laku `wavec` ke dalam `/usr/local/bin`.
+Konfigurasikan arahan `wavec` untuk tersedia di mana-mana sahaja pada sistem.
 
-Setelah pemasangan selesai, sahkan sama ada ia dipasang dengan betul menggunakan perintah `wavec --version`.
+Setelah pemasangan selesai, semak sama ada ia telah dipasang dengan betul menggunakan arahan `wavec --version`.
 
-## Pengesahan Pemasangan
+## Semak pemasangan
 
-Selepas pemasangan selesai, anda boleh menjalankan arahan di bawah untuk memastikan pengkompil Wave telah dipasang dengan betul.
+Selepas pemasangan selesai, anda boleh menyemak sama ada pengkompil Wave telah dipasang dengan betul dengan menjalankan arahan di bawah.
 
 ```bash
-wavec --versi
+wavec --version
 ```
 
-Jika maklumat versi Wave yang dipasang dipaparkan semasa pelaksanaan arahan, maka ia telah dipasang dengan betul.
+Jika maklumat versi Wave yang dipasang dipaparkan semasa melaksanakan arahan, ia dipasang seperti biasa.
 
 ---
 
-## Panduan penyingkiran Wave (`uninstall.sh`)
+## Panduan Pembuangan Wave (`uninstall.sh`)
 
-Jika anda ingin membuang Wave dari sistem, anda boleh menggunakan skrip penghapusan yang disediakan.
+Jika anda ingin mengalih keluar Wave daripada sistem anda, anda boleh menggunakan skrip penyingkiran yang disediakan.
 Skrip ini bertanggungjawab untuk membersihkan fail dan tetapan yang ditambahkan semasa proses pemasangan.
 
-### Kaedah penyingkiran
+### Bagaimana untuk mengeluarkan
 
-Jalankan arahan berikut di terminal.
+Jalankan arahan berikut dalam terminal:
 
 ```bash
 curl -fsSL https://wave-lang.dev/uninstall.sh | bash
 ```
 
-Apabila penghapusan selesai, arahan wavec tidak akan lagi digunakan,
-dan fail serta tetapan yang berkaitan dengan Wave akan dipadam dari sistem.
+Setelah pengalihan keluar selesai, arahan wavec tidak akan digunakan lagi.
+Fail boleh laku dan tetapan yang dikaitkan dengan Wave akan dipadamkan daripada sistem anda.

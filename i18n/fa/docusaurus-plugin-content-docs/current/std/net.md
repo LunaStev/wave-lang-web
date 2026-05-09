@@ -9,8 +9,8 @@ sidebar_position: 6
 ## واردات
 
 ```wave
-واردات("std::net::tcp");
-واردات("std::net::udp");
+import("std::net::tcp");
+import("std::net::udp");
 ```
 
 ## 1. سرور TCP

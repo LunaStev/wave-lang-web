@@ -2,50 +2,49 @@
 sidebar_position: 3
 ---
 
-# Rantaian Alat Compiler Whale
+# Rantai Alat Penyusun Whale
 
-## Gambaran Keseluruhan
+## Gambaran keseluruhan
 
-Whale adalah rantaian alat compiler khusus untuk bahasa pengaturcaraan Wave.
-Whale bertanggungjawab untuk analisis, pengoptimuman, dan penukaran kod sumber yang ditulis dalam Wave kepada binaan untuk platform sasaran.
-Rantaian alat ini direka khusus untuk bahasa Wave, tidak mempertimbangkan sokongan bahasa lain atau integrasi dengan rantaian alat luar.
+Whale ialah rantai alat pengkompil khusus untuk bahasa pengaturcaraan Wave.
+Whale bertanggungjawab untuk keseluruhan proses menganalisis, mengoptimumkan dan menukar kod sumber yang ditulis dengan Wave kepada binari untuk platform sasaran.
+Rantai alat ini direka bentuk secara eksklusif untuk bahasa Wave dan tidak mempertimbangkan sokongan untuk bahasa lain atau penyepaduan dengan rantai alat luaran.
 
-## Matlamat Reka Bentuk
+## matlamat reka bentuk
+Matlamat reka bentuk utama Whale ialah:
 
-Matlamat reka bentuk utama Whale adalah seperti berikut:
+* Sokongan Wave sahaja: Whale hanya menyokong bahasa Wave dan tidak mempertimbangkan penyepaduan dengan bahasa lain.
+* Struktur modular: Setiap fungsi terdiri daripada modul bebas, yang boleh ditambah atau dikeluarkan mengikut keperluan.
+* Gunakan IR bebas: Whale mentakrifkan perwakilan perantaraannya sendiri, dan bukannya menggunakan IR luaran sedia ada seperti LLVM,
+* Sokongan platform berbilang sasaran: Bina terhadap pelbagai persekitaran tanpa mengira sistem pengendalian dan seni bina perkakasan.
+* Kawalan tepat: Ia berstruktur supaya pembangun boleh mengawal keseluruhan proses penyusunan secara terperinci.
+* Mengalih keluar kebergantungan luaran: Whale tidak bergantung pada masa jalan atau pengkompil C/C++ luaran.
 
-- Sokongan khusus untuk Wave: Whale hanya menyokong bahasa Wave dan tidak mengambil kira integrasi dengan bahasa lain.
-- Struktur modular: Setiap fungsi terdiri daripada modul bebas yang boleh ditambah atau dibuang mengikut keperluan.
-- Penggunaan IR yang berdikari: Whale mendefinisikan representasi tengah sendiri tanpa menggunakan IR luar yang ada seperti LLVM IR.
-- Sokongan pelbagai platform sasaran: Anda boleh membina untuk pelbagai persekitaran tanpa mengira sistem operasi dan seni bina perkakasan.
-- Pengawalan yang tepat: Proses pengkompilasian direka supaya pemaju boleh mengawasi setiap peringkat secara terperinci.
-- Penghapusan kebergantungan luar: Whale tidak bergantung kepada runtime C/C++ atau pengkompil.
+## sokongan sasaran
 
-## Sokongan Sasaran
+Whale bertujuan untuk menyokong persekitaran sasaran berikut:
 
-Whale mensasarkan untuk menyokong persekitaran sasaran berikut:
+* Sistem pengendalian:
+    * Linux
+    * Windows
+    * macOS
+    * UEFI (tidak termasuk BIOS)
+    * WaveOS (OS sendiri)
+* Seni bina:
+    * x86_64 (AMD64)
+    * ARM64
+    * Lain-lain boleh dikembangkan dengan menambah modul
 
-- Sistem Operasi:
-  - Linux
-  - Windows
-  - macOS
-  - UEFI (Tidak termasuk BIOS)
-  - WaveOS (OS sendiri)
-- Seni Bina:
-  - x86_64 (AMD64)
-  - ARM64
-  - Lain-lain boleh diperluas melalui penambahan modul.
+## Pautan luar (FFI)
 
-## Penyambungan Luar (FFI)
+Whale direka bentuk secara teknikal untuk menyokong FFI (Antara Muka Fungsi Asing),
+Disebabkan oleh falsafah Wave, penyepaduan dengan bahasa luar tidak disyorkan dan tidak disediakan sebagai standard.
+Wave direka bentuk supaya semua fungsi boleh dilaksanakan dalam bahasanya sendiri.
 
-Whale secara teknikal direka untuk menyokong FFI (Antaramuka Fungsi Asing), tetapi menurut falsafah Wave, integrasi dengan bahasa luar tidak disarankan dan tidak disediakan secara standard.
-Wave direka untuk melaksanakan semua fungsi dalam bahasanya sendiri.
+## kebolehskalaan
+Whale boleh dilanjutkan dengan cara berikut:
 
-## Kebolehan untuk Meluaskan
-
-Whale boleh diperluaskan dalam cara berikut:
-
-- Penambahan modul untuk sistem operasi atau seni bina baru.
-- Penyisipan algoritma pengoptimuman yang ditentukan oleh pengguna.
-- Penyesuaian profil binaan dan tetapan penghubung.
-- Definisi format pelaksanaan sendiri.
+* Tambah modul untuk sistem pengendalian atau seni bina baharu
+* Memasukkan algoritma pengoptimuman tersuai
+* Menyesuaikan profil binaan dan tetapan pemaut
+* Tentukan format boleh laku anda sendiri

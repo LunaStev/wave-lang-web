@@ -21,7 +21,7 @@ La structure de base de l'instruction IF dans Wave est la suivante.
 
 ```wave
 if (condition) {
-    // Code exécuté si la condition est vraie
+    // Code à exécuter si la condition est vraie
 }
 ```
 
@@ -56,9 +56,9 @@ Voici la structure de base.
 
 ```wave
 if (condition) {
-    // Code exécuté si la condition est vraie
+    // Code à exécuter si la condition est vraie
 } else {
-    // Code exécuté si la condition est fausse
+    // Code à exécuter si la condition est fausse
 }
 ```
 
@@ -71,9 +71,9 @@ Voici un exemple utilisant l'instruction IF-ELSE.
 var score :i32 = 70;
 
 if (score >= 60) {
-    println("Vous avez réussi!");
+    println("Vous avez réussi !");
 } else {
-    println("Échec.");
+    println("Cela a échoué.");
 }
 ```
 
@@ -92,12 +92,12 @@ var score :i32 = 85;
 
 if (score >= 60) {
     if (score >= 90) {
-        println("C'est une excellente note !");
+        println("Excellentes notes !");
     } else {
-        println("Vous avez réussi.");
-    } 
+        println("J'ai réussi.");
+    }
 } else {
-    println("Vous avez échoué.");
+    println("Cela a échoué.");
 }
 ```
 

@@ -17,7 +17,7 @@ Das heißt, Kompilierung und Verknüpfung werden getrennt behandelt.
 
 ## 1. Warum ist es notwendig?
 
-Beim Cross-Linking mit `-C linker=<path>` ist es oft nötig, die vom Linktreiber (`z. Bsp. `aarch64-linux-gnu-gcc`) referenzierten Laufzeitpfade (`crt1.o`, `libc`, `libm\`) separat zu spezifizieren.
+Wenn Sie `-C linker=<path>` in einem Cross-Link verwenden, müssen Sie häufig den Laufzeitpfad (`crt1.o`, `libc`, `libm`) separat angeben, auf den der Link-Treiber verweist (z. B. `aarch64-linux-gnu-gcc`).
 
 Daher wird das Link-Sysroot nicht automatisch erschlossen, sondern explizit über CLI übergeben.
 
@@ -56,7 +56,7 @@ Bei einem Build, das eine Verknüpfungsphase erfordert, führt das gleichzeitige
 Beispiel für eine Fehlermeldung:
 
 ```text
-bei Verwendung von -C linker=..., ist --sysroot=<path> nur für die Kompilierstufe; übergeben Sie das Linker-Sysroot explizit mit -C link-sysroot=<path> (oder -C link-arg=--sysroot=<path>)
+when using -C linker=..., --sysroot=<path> is compile-stage only; pass linker sysroot explicitly with -C link-sysroot=<path> (or -C link-arg=--sysroot=<path>)
 ```
 
 ---

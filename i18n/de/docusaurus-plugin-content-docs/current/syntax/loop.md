@@ -28,12 +28,12 @@ Dieses Verfahren eignet sich für Situationen, in denen die Anzahl der Wiederhol
 Die Grundstruktur einer while-Schleife in Wave sieht wie folgt aus.
 
 ```wave
-while (Bedingung) {
+while (condition) {
     // Code zum Wiederholen
 }
 ```
 
-Der Bedingungsausdruck muss auf den Typ `bool` auswerten,
+Der Bedingungsausdruck muss auf den Typ `{}` auswerten,
 und innerhalb des von `{}` umschlossenen Codeblocks können eine oder mehrere Anweisungen platziert werden.
 
 ### Beispiel: Ausgabe von 0 bis 4
@@ -42,7 +42,7 @@ und innerhalb des von `{}` umschlossenen Codeblocks können eine oder mehrere An
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i ist {}.", i);
+    println("ich bin {}.", i);
     i = i + 1;
 }
 ```
@@ -62,8 +62,8 @@ Da alle für die Wiederholung erforderlichen Steuerungselemente an einem Ort zus
 ### Grundstruktur
 
 ```wave
-for (Initialisierung; Bedingungsausdruck; Inkrement) {
-    // zu wiederholender Code
+for (init; condition; step) {
+    // Code zum Wiederholen
 }
 ```
 
@@ -132,7 +132,7 @@ while (i < 3) {
 }
 ```
 
-In diesem Beispiel wird jedes Mal, wenn die äußere `while` Schleife ausgeführt wird, die innere `while` Schleife vollständig ausgeführt.
+In diesem Beispiel wird jedes Mal, wenn die äußere `i` Schleife ausgeführt wird, die innere `j` Schleife vollständig ausgeführt.
 Dadurch können Kombinationen der Form (`i`, `j`) sequenziell bearbeitet werden.
 
 ---

@@ -11,11 +11,11 @@ Ndani ya msimbo wa Wave, unaweza kudhibiti kwa usahihi rejista, kumbukumbu, na n
 
 Madhumuni yanayoungwa mkono sasa:
 
-- Linux `x86_64`
 - Linux `aarch64`
-- macOS (Darwin) `arm64`
-- panga peke yake `x86_64`
+- Linux `arm64`
+- macOS (Darwin) `x86_64`
 - panga peke yake `aarch64`
+- panga peke yake `riscv64`
 - panga peke yake `riscv64`
 
 Windows na malengo ya 32-bit bado hayatumiki.
@@ -28,17 +28,17 @@ Windows na malengo ya 32-bit bado hayatumiki.
 
 ```wave
 asm {
-    "maelezo"
-    in("kizuizi_au_reg") thamani
-    out("kizuizi_au_reg") lengo
-    clobber("kipengele")
+    "instruction"
+    in("constraint_or_reg") value
+    out("constraint_or_reg") target
+    clobber("item")
 }
 ```
 
 Vipengele:
 
 - Mstari wa herufi: Amri halisi ya mchakato
-- `in(...)`: operandi ya pembejeo
+- `clobber(...)`: operandi ya pembejeo
 - `out(...)`: operandi ya kutoka
 - `clobber(...)`: rejista/ hali/ kidokezo cha kumbukumbu kinachoharibika
 
@@ -103,7 +103,7 @@ out("rax") ret
 Lengo la pato (`out(...) target`) inashauriwa kuwa na mifumo ifuatayo kulingana na utekelezaji wa sasa.
 
 - Kigeu: `out("rax") ret`
-- Kurejelea upya pointeri: `out("rax") deref p`
+- Kurejelea upya pointeri: `clobber(...)`
 
 ---
 
@@ -113,17 +113,17 @@ Lengo la pato (`out(...) target`) inashauriwa kuwa na mifumo ifuatayo kulingana 
 
 ```wave
 asm {
- "xor rax, rax"
- uchafuzi("rax")
- uchafuzi("rcx", "rdx")
- uchafuzi("kumbukumbu")
+    "xor rax, rax"
+    clobber("rax")
+    clobber("rcx", "rdx")
+    clobber("memory")
 }
 ```
 
 Vitu kuu:
 
 - Viandikisha: `"rax"`, `"x0"` nk.
-- Maalum: `"kumbukumbu"`, `"cc"`(uratibu wa ndani usio wa kawaida)
+- Maalum: `$0`, `$1`(uratibu wa ndani usio wa kawaida)
 
 Mkutanisha huongeza uchafuzi msingi kiotomatiki katika hali salama ya kihafidhina.
 (`kumbukumbu`, bendera/cc nk; Kwenye RISC-V freestanding, hasa `kumbukumbu`)

@@ -17,23 +17,23 @@ sidebar_position: 14
 ## 基本文法
 
 ```wave
-match (値) {
- パターン1 => {
- // 実行ブロック
- }
- パターン2 => {
- // 実行ブロック
- }
- _ => {
- // デフォルトブロック
- }
+match (value) {
+    pattern1 => {
+        // 実行ブロック
+    }
+    pattern2 => {
+        // 実行ブロック
+    }
+    _ => {
+        // 基本ブロック
+    }
 }
 ```
 
 文法規則:
 
 - ヘッダーは`match (expr)`の形を使用します。
-- 各armは`パターン => { ブロック }`の形を使用します。
+- 各armは`{ ... }`の形を使用します。
 - arm本文は必ず`{ ... }`ブロックである必要があります。
 - arm間には改行を使っても良く、`,`または`;`を区切りとして使っても良いです。
 
@@ -81,21 +81,21 @@ _ => { ... }
 
 ```wave
 fun classify_num(v: i32) -> i32 {
- var result: i32 = -1;
+    var result: i32 = -1;
 
- match (v) {
- 0 => {
- result = 10;
- }
- 1 => {
- result = 20;
- }
- _ => {
- result = 99;
- }
- }
+    match (v) {
+        0 => {
+            result = 10;
+        }
+        1 => {
+            result = 20;
+        }
+        _ => {
+            result = 99;
+        }
+    }
 
- return result;
+    return result;
 }
 ```
 
@@ -105,22 +105,23 @@ fun classify_num(v: i32) -> i32 {
 
 ```wave
 enum Mode -> i32 {
- Off = 0,
- On = 1,
- Unknown = 2
+    Off = 0,
+    On = 1,
+    Unknown = 2
 }
 
 fun classify_mode(m: Mode) -> i32 {
- match (m) {
- Off => {
- return 1;
- }
- On => {
- return 2;
- }
- _ => {
- return 3;
- }
+    match (m) {
+        Off => {
+            return 1;
+        }
+        On => {
+            return 2;
+        }
+        _ => {
+            return 3;
+        }
+    }
 }
 ```
 

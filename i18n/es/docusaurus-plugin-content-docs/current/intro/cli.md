@@ -17,7 +17,7 @@ Principio clave:
 ## 1. Formato básico
 
 ```bash
-wavec [opciones-globales] <comando> [opciones-de-comando]
+wavec [global-options] <command> [command-options]
 ```
 
 Por ejemplo:
@@ -32,7 +32,7 @@ wavec run app.wave --dep-root .vex/dep
 
 ## 2. Reglas de análisis de comandos (importante)
 
-`wavec` primero escanea las **opciones globales** en todos los argumentos y luego interpreta el `<comando>` con los argumentos restantes.
+`wavec` primero escanea las **opciones globales** en todos los argumentos y luego interpreta el `<command>` con los argumentos restantes.
 
 Es decir, la posición de la opción global es flexible.
 
@@ -54,7 +54,7 @@ wavec -- run main.wave
 
 ## 3. Comandos
 
-## 3.1 `run <archivo>`
+## 3.1 `run <file>`
 
 Compila y ejecuta el archivo Wave.
 
@@ -75,7 +75,7 @@ Características:
 
 ---
 
-## 3.2 `construir <archivo>`
+## 3.2 `build <file>`
 
 Genera un archivo ejecutable (exe).
 
@@ -97,7 +97,7 @@ wavec build app.wave -c
 wavec build app.wave -c -o ./build/app.o
 ```
 
-- `-o <archivo>`: Especifica el nombre del archivo de salida.
+- `-o <file>`: Especifica el nombre del archivo de salida.
   - Por defecto (sin `-c`): Especifica la ruta de salida del archivo ejecutable
   - Con `-c`: Especifica la ruta de salida del archivo objeto
 - `-c`: Omite el enlace y solo genera el archivo objeto.
@@ -157,7 +157,7 @@ Valores permitidos:
 Por ejemplo:
 
 ```bash
-wavec -O3 ejecutar main.wave
+wavec -O3 run main.wave
 ```
 
 ---
@@ -165,7 +165,7 @@ wavec -O3 ejecutar main.wave
 ## 4.2 Salida de depuración
 
 ```bash
-wavec --debug-wave=tokens,ast,ir ejecutar main.wave
+wavec --debug-wave=tokens,ast,ir run main.wave
 ```
 
 Elementos permitidos:
@@ -224,8 +224,8 @@ wavec run app.wave --dep math=.vex/dep/math
 
 Regla:
 
-- Formato de `nombre`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` debe ser en formato `nombre=ruta`
+- Formato de `name`: `[A-Za-z_][A-Za-z0-9_]*`
+- `--dep` debe ser en formato `name=path`
 - Es un error especificar nombres de paquete duplicados
 
 ---
@@ -242,9 +242,9 @@ Elementos compatibles (resumen):
 
 - `--target`, `--cpu`, `--features`, `--abi`
 - `--sysroot`
-- `-C linker=<ruta>`
+- `-C linker=<path>`
 - `-C link-arg=<arg>` (repetible)
-- `-C link-sysroot=<ruta>`
+- `-C link-sysroot=<path>`
 - `-C no-default-libs`
 
 Los principales objetivos según `wavec print target-list` actual:
@@ -295,17 +295,17 @@ import("json::parser::core");
 
 Formato:
 
-- Se requieren al menos dos segmentos `paquete::módulo`.
+- Se requieren al menos dos segmentos `package::module`.
 
 Orden de determinación del raíz del paquete:
 
-1. Mapa explícito `--dep nombre=ruta`
-2. Buscando `<root>/<package>` en cada `--dep-root`
+1. Mapa explícito `--dep name=path`
+2. Buscando `--dep-root` en cada `<root>/<package>`
 
 Si el mismo paquete se encuentra en varios dep-root simultáneamente:
 
 - **Error de ambigüedad** sin selección automática
-- Debe estar fijado mediante `--dep nombre=ruta`
+- Debe estar fijado mediante `--dep name=path`
 
 Orden de exploración de archivos de módulo:
 
@@ -375,12 +375,12 @@ wavec run main.wave \
 Estructura recomendada:
 
 - `wavec`: Compilar/enlazar/ejecutar + análisis de dependencias especificadas
-- `vex`: Instalación/gestión de dependencias tras `wavec ... --dep-root ... Llamar a --dep ...`
+- `vex`: Instalación/gestión de dependencias tras `wavec ... --dep-root ... --dep ...`
 
 Por ejemplo:
 
 ```bash
-# Ejecutado internamente por vex
+# Internamente, vex no
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reservado, no implementado
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

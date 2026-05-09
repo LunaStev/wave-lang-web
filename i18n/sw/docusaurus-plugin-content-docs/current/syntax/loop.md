@@ -28,8 +28,8 @@ Njia hii inafaa kwa hali ambapo idadi ya marudio haijulikani wazi na lazima kuru
 Muundo wa msingi wa sentensi ya while katika Wave ni kama ifuatavyo.
 
 ```wave
-while (hali) {
-    // misimbo ya kurudia
+while (condition) {
+    // kanuni ya kurudia
 }
 ```
 
@@ -41,7 +41,7 @@ Hali lazima itathminiwe kwa aina ya `bool`, na ndani ya block ya kificho inayofu
 var i :i32 = 0;
 
 while (i < 5) {
-    println("i ni {}.", i);
+    println("mimi ni {}.", i);
     i = i + 1;
 }
 ```
@@ -61,8 +61,8 @@ Kwa sababu sehemu zote zinazohitajika kwa kudhibiti marudio ziko sehemu moja, ni
 ### Muundo wa Msingi
 
 ```wave
-kwa (kuanzishwa; hali; uboreshaji) {
-    // misimbo ya kurudia
+for (init; condition; step) {
+    // kanuni ya kurudia
 }
 ```
 
@@ -75,7 +75,7 @@ Uanzishaji wa for katika Wave unatoa msaada kwa njia nyingi.
 ### Mfano 1: Uanzishaji wa aina ya kudhaniwa
 
 ```wave
-kwa (i :i32 = 1; i <= 5; i += 1) {
+for (i :i32 = 1; i <= 5; i += 1) {
     println("i = {}", i);
 }
 ```
@@ -83,11 +83,11 @@ kwa (i :i32 = 1; i <= 5; i += 1) {
 ### Mfano 2: Uanzishaji wa `var` / `let mut`
 
 ```wave
-kwa (var i: i32 = 0; i < 3; i += 1) {
+for (var i: i32 = 0; i < 3; i += 1) {
     println("var i = {}", i);
 }
 
-kwa (let mut j: i32 = 0; j < 3; j += 1) {
+for (let mut j: i32 = 0; j < 3; j += 1) {
     println("let mut j = {}", j);
 }
 ```
@@ -97,7 +97,7 @@ kwa (let mut j: i32 = 0; j < 3; j += 1) {
 ```wave
 var i: i32 = 99;
 
-kwa (i = 3; i <= 5; i += 1) {
+for (i = 3; i <= 5; i += 1) {
     println("i = {}", i);
 }
 
@@ -131,7 +131,7 @@ while (i < 3) {
 ```
 
 Katika mfano huu, kila wakati sentensi ya `while` ya nje inatekelezwa, sentensi ya ndani ya `while` inatekelezwa kabisa.
-Kwa njia hii, unaweza kushughulikia michanganyiko ya aina ya (`i`, `j`) kwa mpangilio.
+Kwa njia hii, unaweza kushughulikia michanganyiko ya aina ya (`while`, `while`) kwa mpangilio.
 
 ---
 
@@ -168,7 +168,7 @@ Hutumiwa wakati unataka kuacha sehemu fulani tu ya logi katika hali fulani.
 ### Mfano: Chapisha nambari shufwa pekee
 
 ```wave
-kwa (var i: i32 = 0; i <= 10; i = i + 1) {
+for (var i: i32 = 0; i <= 10; i = i + 1) {
     if (i % 2 == 1) {
         continue;
     }

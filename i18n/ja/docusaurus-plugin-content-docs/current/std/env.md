@@ -22,7 +22,7 @@ fun main() {
     var n: i64 = env_get("HOME", &buf[0], 256);
 
     if (n >= 0) {
-        // bufはNUL終端文字列
+        // bufはNUL終了文字列
     } else if (n == ENV_ERR_NOT_FOUND) {
         // キーなし
     } else if (n == ENV_ERR_NO_SPACE) {

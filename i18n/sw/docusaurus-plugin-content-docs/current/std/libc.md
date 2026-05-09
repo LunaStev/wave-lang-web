@@ -16,16 +16,16 @@ Kwa msimbo wa kawaida wa Wave, tumia `std::sys`/`std::*` kwanza.
 ## Mfano wa Ingizo
 
 ```wave
-ingiza("std::libc::stdio");
-ingiza("std::libc::stdlib");
-ingiza("std::libc::string");
+import("std::libc::stdio");
+import("std::libc::stdlib");
+import("std::libc::string");
 ```
 
 ## 1. Kuitwa kwa stdio
 
 ```wave
 fun main() {
-    weka("hello kutoka libc" kama ptr<i8>);
+    puts("hello from libc" as ptr<i8>);
 }
 ```
 
@@ -34,24 +34,24 @@ fun main() {
 ```wave
 fun main() {
     var p: ptr<i8> = malloc(128);
-    ikiwa (p == null) {
+    if (p == null) {
         return;
     }
 
     memset(p, 0, 128);
-    huria(p);
+    free(p);
 }
 ```
 
 ## 3. Soketi C ABI
 
 ```wave
-ingiza("std::libc::socket");
+import("std::libc::socket");
 
 fun main() {
     var fd: i32 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    ikiwa (fd >= 0) {
-        funga(fd, SHUT_RDWR);
+    if (fd >= 0) {
+        shutdown(fd, SHUT_RDWR);
     }
 }
 ```

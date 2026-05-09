@@ -7,59 +7,59 @@ sidebar_position: 10
 `std::sys` ni safu ya kufunika OS chini ya module zenye kiwango cha juu.
 
 ```text
-std(kiwango cha juu)
-  -> mtumaji wa sys
-  -> sys/linux au sys/macos
-  -> wito wa mfumo
+std(high-level)
+  -> sys dispatcher
+  -> sys/linux or sys/macos
+  -> syscall
 ```
 
 ## Mkataba wa msingi
 
 - Kazi nyingi zinarudisha thamani za mfumo za msingi.
 - `>= 0` mafanikio, `< 0` kushindwa(`-errno`).
-- Katika msimbo wa programu wa kiwango cha juu, tumia `std::net`, `std::time`, `std::env` kwanza badala ya `std::sys` inapowezekana.
+- Katika msimbo wa programu wa kiwango cha juu, tumia `std::sys`, `std::net`, `std::time` kwanza badala ya `std::env` inapowezekana.
 
 ## 1. Mfano wa kusoma faili (`std::sys::fs`)
 
 ```wave
-ingiza("std::sys::fs");
+import("std::sys::fs");
 
 fun main() {
-    var fd: i64 = fungua("/etc/hosts", 0, 0);
-    ikiwa (fd < 0) {
-        rudi;
+    var fd: i64 = open("/etc/hosts", 0, 0);
+    if (fd < 0) {
+        return;
     }
 
     var buf: array<u8, 256>;
-    var n: i64 = soma(fd, &buf[0], 256);
-    funga(fd);
+    var n: i64 = read(fd, &buf[0], 256);
+    close(fd);
 }
 ```
 
 ## 2. Mfano wa soketi (`std::sys::socket`)
 
 ```wave
-ingiza("std::sys::socket");
+import("std::sys::socket");
 
 fun main() {
     var fd: i64 = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    ikiwa (fd < 0) {
-        rudi;
+    if (fd < 0) {
+        return;
     }
 
-    zima(fd, SHUT_RDWR);
+    shutdown(fd, SHUT_RDWR);
 }
 ```
 
 ## 3. Mfano wa kumbukumbu (`std::sys::memory`)
 
 ```wave
-ingiza("std::sys::memory");
+import("std::sys::memory");
 
 fun main() {
     var p: ptr<u8> = sys_alloc(4096);
-    ikiwa (p == null) {
-        rudi;
+    if (p == null) {
+        return;
     }
 
     sys_free(p, 4096);

@@ -20,7 +20,7 @@ IF文はまず条件式を評価し、その結果が真(True)の場合にのみ
 WaveのIF文の基本構造は以下のとおりです。
 
 ```wave
-if (条件) {
+if (condition) {
     // 条件が真の場合に実行されるコード
 }
 ```
@@ -38,7 +38,7 @@ if (条件) {
 var temperature :i32 = 30;
 
 if (temperature > 25) {
-    println("天気が暑いです。");
+    println("天気は暑いです。");
 }
 ```
 
@@ -55,7 +55,7 @@ IF-ELSE文は条件の結果に応じて2つのコードブロックのいずれ
 基本的な構造は次の通りです。
 
 ```wave
-if (条件) {
+if (condition) {
     // 条件が真の場合に実行されるコード
 } else {
     // 条件が偽の場合に実行されるコード
@@ -92,10 +92,10 @@ var score :i32 = 85;
 
 if (score >= 60) {
     if (score >= 90) {
-        println("優秀な成績です！");
+        println("優れた成績です！");
     } else {
         println("合格です。");
-    } 
+    }
 } else {
     println("不合格です。");
 }

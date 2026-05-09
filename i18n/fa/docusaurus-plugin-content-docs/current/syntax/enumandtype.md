@@ -38,8 +38,8 @@ type MyInt = i32;
 type Size = i64;
 type Index = u32;
 
-فان add(a: Size, b: Size) -> Size {
-    برگردان a + b;
+fun add(a: Size, b: Size) -> Size {
+    return a + b;
 }
 ```
 
@@ -51,11 +51,11 @@ type Index = u32;
 type A = i32;
 type B = A;
 
-فان f(x: i32) -> i32 { برگردان x; }
+fun f(x: i32) -> i32 { return x; }
 
-فان main() {
-    متغیر v: B = 10;
-    f(v); // خوب است
+fun main() {
+    var v: B = 10;
+    f(v); // OK
 }
 ```
 
@@ -88,7 +88,7 @@ enum ShaderUniformType -> i32 {
 نوع‌های نمایشگر مجاز:
 
 - `i8`، `i16`، `i32`، `i64`
-- `u8`، `u16`، `u32`، `u64`
+- `i8`، `i16`، `i32`، `i64`
 - `نام دیگر نوع` برای آن نوع خاص
 
 ```wave
@@ -124,8 +124,8 @@ enum E -> i32 {
 نمایشگرها مقادیری عددی هستند و می‌توان آن‌ها را به‌طور آزادانه به‌عنوان آرگومان یا مقدار برگشتی تابع به‌کار برد.
 
 ```wave
-فان f(t: ShaderUniformType) -> i32 {
-    برگردان t;
+fun f(t: ShaderUniformType) -> i32 {
+    return t;
 }
 ```
 
@@ -158,22 +158,22 @@ const X: MyInt = 123;
 const Y: MyInt = B;
 const Z: ShaderUniformType = D;
 
-فان f(t: ShaderUniformType) -> MyInt {
-    برگردان t;
+fun f(t: ShaderUniformType) -> MyInt {
+    return t;
 }
 
-فان g(v: MyInt) -> MyInt {
-    برگردان v;
+fun g(v: MyInt) -> MyInt {
+    return v;
 }
 
-فان main() {
-    چاپ کن("{}", f(A)); // 0
-    چاپ کن("{}", f(B)); // 1
-    چاپ کن("{}", f(C)); // 10
-    چاپ کن("{}", f(D)); // 11
+fun main() {
+    println("{}", f(A)); // 0
+    println("{}", f(B)); // 1
+    println("{}", f(C)); // 10
+    println("{}", f(D)); // 11
 
-    چاپ کن("{}", g(X)); // 123
-    چاپ کن("{}", g(Y)); // 1
-    چاپ کن("{}", f(Z)); // 11
+    println("{}", g(X)); // 123
+    println("{}", g(Y)); // 1
+    println("{}", f(Z)); // 11
 }
 ```

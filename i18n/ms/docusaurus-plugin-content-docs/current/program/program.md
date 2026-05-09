@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 4
 ---
 
-# Ini adalah bahasa pengenalan yang ditulis dalam pelbagai kaedah pemrograman.
+# Buat program mudah
 
-Saat melatih pertama Anda dapat membuat pelbagai contoh dalam Wave.
+Dokumen ini adalah mengenai mencipta program mudah dengan Wave. Ia membantu anda membiasakan diri dengan Wave dengan mencipta program mudah dengan Wave.

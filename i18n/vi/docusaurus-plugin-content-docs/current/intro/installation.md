@@ -47,7 +47,7 @@ Sau đó, tạo liên kết tượng trưng tới `/usr/lib/libllvm-14.so` để
 Tiếp theo, tải về và giải nén gói Wave (`.tar.gz`) version người dùng chỉ định.
 Sau khi giải nén, cài đặt tập tin thực thi `wavec` vào `/usr/local/bin`, cấu hình để có thể sử dụng lệnh `wavec` từ bất kỳ đâu trên hệ thống.
 
-Sau khi cài đặt hoàn tất, xác minh cài đặt đúng cách bằng lệnh `wavec --version`.
+Sau khi cài đặt hoàn tất, xác minh cài đặt đúng cách bằng lệnh `wavec`.
 
 ## Kiểm tra cài đặt
 

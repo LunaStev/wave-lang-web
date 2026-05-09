@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৬
+sidebar_position: 6
 ---
 
 # std::net ব্যবহার নির্দেশ

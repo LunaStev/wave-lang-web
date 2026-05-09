@@ -2,79 +2,82 @@
 sidebar_position: 0
 ---
 
-# Pengenalan
-
+# pengenalan
 ## Falsafah dan matlamat Wave
 
-Wave tidak bertujuan untuk menggantikan bahasa pengaturcaraan rendah yang sedia ada.
-Sebaliknya, ia adalah bahasa yang direka untuk mengekalkan kawalan dan prestasi bahasa rendah sambil membaiki dan menyederhanakan,
-dan dapat mengendalikan pelbagai bidang pembangunan dalam satu bahasa dan ekosistem yang konsisten.
+Wave tidak bertujuan untuk menggantikan bahasa pengaturcaraan peringkat rendah sedia ada.
+Sebaliknya, ia melengkapkan dan memudahkan kawalan dan prestasi bahasa peringkat rendah sambil mengekalkannya.
+Ia adalah bahasa yang direka untuk mengendalikan pelbagai bidang pembangunan dalam satu bahasa dan ekosistem yang konsisten.
 
-Wave ingin keluar dari cara mengendalikan bidang yang sangat berbeza seperti pembangunan web, sistem operasi, kecerdasan buatan, blockchain, kawalan perkakasan, pemrograman, rangkaian, dan penyulitan dalam bahasa yang berbeza.
-Matlamat utama Wave adalah untuk menyediakan pengalaman pembangunan yang terpadu melalui satu bahasa, satu sistem alat, dan satu perpustakaan standard yang merangkumi bidang yang luas.
+Wave menyediakan pelbagai aplikasi seperti pembangunan web, sistem pengendalian, kecerdasan buatan, rantaian blok, kawalan perkakasan, pengkompil, rangkaian dan penyulitan.
+Kami mahu melepaskan diri daripada amalan membahagikan kawasan yang mempunyai ciri yang sangat berbeza kepada bahasa yang berbeza.
+Melalui satu bahasa, satu sistem alat, dan satu perpustakaan standard
+Matlamat teras Wave adalah untuk menyediakan pengalaman pembangunan bersepadu yang secara semula jadi merangkumi pelbagai bidang.
 
-Falsafah Wave terletak pada kewujudan abstraksi yang kuat pada tahap tinggi dan kawalan tahap rendah yang tepat.
-Melalui perpustakaan standard, tugas yang kompleks dapat ditangani secara intuitif,
-membuka jalan untuk akses langsung kepada memori, pendaftar, dan sumber perkakasan apabila diperlukan.
-Ini membolehkan pemaju membuat pilihan yang sesuai tanpa perlu mengorbankan kebolehcapaian dan prestasi.
+Falsafah Wave terletak pada kewujudan bersama abstraksi peringkat tinggi yang berkuasa dan kawalan peringkat rendah yang tepat.
+Sambil membenarkan tugas yang kompleks dikendalikan secara intuitif melalui perpustakaan standard,
+Ia membuka jalan untuk akses terus kepada memori, daftar, dan sumber perkakasan apabila diperlukan.
+Ini membolehkan pembangun membuat pilihan yang sesuai dengan keadaan mereka tanpa menjejaskan antara kemudahan dan prestasi.
 
-Terutama sekali, perpustakaan perkakasan Wave adalah salah satu elemen reka bentuk yang penting.
-Ia dirancang agar pemaju tanpa pengetahuan mendalam tentang perkakasan boleh menggunakannya dengan mudah,
-dan menyediakan fleksibiliti untuk kawalan langsung melalui antara muka tahap rendah jika diperlukan.
-Pendekatan ini membolehkan penggunaan fungsi perkakasan dengan lebih intuitif tanpa mengorbankan prestasi.
+Khususnya, perpustakaan perkakasan Wave ialah salah satu elemen reka bentuk yang penting.
+Ia direka supaya pemaju tanpa kepakaran perkakasan yang mendalam boleh menggunakannya dengan mudah.
+Pada masa yang sama, apabila kawalan yang tepat diperlukan, ia memberikan fleksibiliti untuk mengawal secara langsung melalui antara muka peringkat rendah.
+Pendekatan ini membolehkan penggunaan ciri perkakasan yang lebih intuitif tanpa mengorbankan prestasi.
 
-Wave bertujuan untuk meruntuhkan sempadan antara pengaturcaraan tingkat tinggi dan rendah,
-dan menyederhanakan pengalaman pembangunan dalam satu persekitaran bahasa yang konsisten.
+Wave memecahkan sempadan yang wujud antara pengaturcaraan peringkat tinggi dan peringkat rendah,
+Kami berhasrat untuk memudahkan pengalaman pembangunan dalam satu persekitaran bahasa yang konsisten.
 
-## Ciri-ciri dan sifat utama Wave
+## Ciri dan ciri utama Wave
 
-Salah satu ciri penting Wave adalah mengintegrasikan pelbagai bidang pembangunan ke dalam satu struktur bahasa.
-Ini membolehkan pemaju menyelesaikan masalah dari pelbagai bidang tanpa perlu belajar bahasa baru bagi setiap projek,
-dengan hanya menggunakan Wave.
+Ciri penting Wave ialah penyepaduan pelbagai bidang pembangunan ke dalam satu struktur bahasa.
+Ini membolehkan pembangun mengelakkan keperluan untuk mempelajari bahasa baharu untuk setiap projek.
+Satu Wave boleh menyelesaikan masalah dalam pelbagai bidang.
 
-Perpustakaan standard yang kuat adalah elemen utama yang menyokong produktiviti Wave.
-Ia direka agar tugas yang kompleks dapat dinyatakan dalam kod yang ringkas,
-membolehkan pemaju lebih menumpukan pada penyelesaian masalah daripada pelaksanaan berulang.
+Pustaka standard yang berkuasa adalah kunci kepada produktiviti Wave.
+Ia direka untuk menyatakan tugas yang kompleks dalam kod ringkas.
+Ini membolehkan pembangun menumpukan pada menyelesaikan masalah itu sendiri dan bukannya pelaksanaan berulang.
 
-Akses kepada perkakasan juga merupakan ciri penting Wave.
-Wave menyediakan antara muka tahap tinggi yang membolehkan akses yang mudah kepada perkakasan,
-dan direka untuk membolehkan kawalan tahap rendah secara langsung jika perlu.
-Ini membolehkan semua orang, dari pemula hingga pemaju sistem yang berpengalaman, untuk turut serta.
+Kebolehcapaian perkakasan juga merupakan ciri penting Wave.
+Wave menyediakan antara muka peringkat tinggi yang membolehkan pengendalian perkakasan yang mudah, manakala
+Ia direka bentuk supaya anda boleh terus melakukan kawalan tahap rendah apabila diperlukan.
+Ini menjadikannya inklusif untuk semua orang daripada pemula hingga pembangun sistem berpengalaman.
 
-Prestasi adalah elemen yang tidak boleh dikompromikan dalam reka bentuk Wave.
-Dari segi struktur pengkompil yang cekap dan model memori yang jelas,
-dirancang untuk berfungsi dengan stabil dalam aplikasi yang memerlukan prestasi tinggi.
+Prestasi ialah faktor tanpa kompromi dalam reka bentuk Wave.
+Berdasarkan struktur penyusun yang cekap dan model ingatan yang jelas,
+Ia direka bentuk untuk beroperasi dengan pasti walaupun dalam aplikasi kritikal prestasi.
 
-Wave menghargai modulariti dan kebolehan guna semula.
-Ia menyokong pemisahan dan penggunaan semula kod dalam unit yang jelas,
-membolehkan pengurusan kompleksiti secara berkesan walaupun dalam projek yang berskala besar.
+Wave menekankan modulariti dan kebolehgunaan semula.
+Dengan membantu anda memisahkan kod kepada unit yang jelas dan menggunakannya semula,
+Membolehkan anda mengurus kerumitan dengan berkesan apabila projek anda berkembang.
 
-Wave juga bertujuan untuk menyediakan mesej ralat yang jelas dan intuitif serta persekitaran debugging.
-Ini membolehkan pemaju mengenal pasti dan membetulkan punca masalah dengan cepat,
-serta mengurangkan kesilapan yang tidak perlu semasa proses pembelajaran.
+Wave juga bertujuan untuk menyediakan mesej ralat yang jelas dan intuitif serta persekitaran penyahpepijatan.
+Ini membolehkan pembangun mengenal pasti dan membetulkan punca masalah dengan cepat.
+Percubaan dan kesilapan yang tidak perlu boleh dikurangkan semasa proses pembelajaran.
 
-## Pelan dan roadmap Wave
+## Pelan hala tuju dan rancangan Wave
 
-Wave dirancang berdasarkan prinsip perkembangan berperingkat.
-Pada peringkat awal, tumpuan diberikan kepada tatabahasa dan fungsi bahasa asas,
-dengan pelan untuk secara beransur-ansur mengembangkan fungsi seperti pencocokan corak, pemrograman tidak segerak, dan struktur data lanjutan.
+Wave sedang direka bentuk atas premis pembangunan langkah demi langkah.
+Pada peringkat awal, kami memberi tumpuan kepada tatabahasa bahasa teras dan ciri asas;
+Kami merancang untuk mengembangkan ciri secara beransur-ansur seperti padanan corak, pengaturcaraan tak segerak dan struktur data lanjutan.
 
-Perpustakaan standard akan terus dikembangkan berdasarkan keperluan pengguna dan kes penggunaan sebenar.
-Ini akan membolehkan pemaju menyelesaikan semakin banyak fungsi di peringkat perpustakaan.
+Pustaka standard akan terus berkembang berdasarkan keperluan pengguna dan kes penggunaan dunia sebenar.
+Ini akan membolehkan pembangun menangani lebih banyak ciri di peringkat perpustakaan.
 
-Perpustakaan perkakasan juga merupakan elemen utama Wave yang sentiasa diperbaiki.
-Rancangan untuk memperoleh keserasian dengan pelbagai peranti, serta menambah ciri kawalan baru,
-akan memperluaskan skop penggunaan dalam persekitaran perkakasan sebenar.
+Pustaka perkakasan juga merupakan elemen teras Wave dan tertakluk kepada peningkatan berterusan.
+Dengan memastikan keserasian dengan pelbagai jenis peranti dan menambah fungsi kawalan baharu,
+Kami merancang untuk mengembangkan skop penggunaan dalam persekitaran perkakasan sebenar.
 
-Wave sangat menghargai maklum balas daripada masyarakat.
-Melalui forum dan pelbagai saluran maklum balas, kami secara aktif menerima pendapat pengguna,
-dan merancang untuk memasukkan maklum balas tersebut dalam pembangunan bahasa dan alat.
+Wave mengambil maklum balas komuniti dengan sangat serius.
+Kami secara aktif mengumpul pendapat pengguna melalui forum dan pelbagai saluran maklum balas,
+Kami merancang untuk mencerminkan perkara ini dalam pembangunan bahasa dan alatan.
 
-Dokumentasi dan bahan pendidikan juga merupakan salah satu arah perkembangan penting Wave.
-Melalui penyediaan dokumentasi rasmi yang lengkap dan tutorial, kami merancang untuk membantu pengguna pemula belajar dan menerapkan Wave dengan mudah.
+Dokumentasi dan bahan pendidikan juga merupakan salah satu hala tuju pembangunan Wave yang penting.
+Dengan menyediakan dokumentasi dan tutorial rasmi yang sangat lengkap,
+Kami merancang untuk membantu walaupun pengguna baru mempelajari Wave dengan mudah dan menggunakannya dalam amalan.
 
-Dari segi platform, sasaran adalah untuk menawarkan prestasi dan pengalaman pembangunan yang konsisten merentasi sistem operasi utama termasuk Windows, macOS, Linux.
+Dari segi platform, ia berjalan pada sistem pengendalian utama termasuk Windows, macOS dan
+Kami berhasrat untuk menyediakan pengalaman prestasi dan pembangunan yang konsisten.
 
-Akhirnya, Wave adalah projek yang berkembang melalui kerjasama dengan komuniti sumber terbuka.
+Akhir sekali, Wave ialah projek yang berkembang melalui kerjasama dengan komuniti sumber terbuka.
 Kami secara aktif menggalakkan sumbangan dan penyertaan,
-dalam proses pembangunan yang terbuka untuk membentuk arah dan kesempurnaan Wave.
+Kami akan bekerjasama untuk mencipta hala tuju dan kesempurnaan Wave melalui proses pembangunan terbuka.

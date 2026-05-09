@@ -57,7 +57,7 @@ Las cadenas se utilizan ampliamente en programas para la salida de mensajes, el 
 A continuación, se presenta un ejemplo básico del uso de tipos de cadena.
 
 ```wave
-var text: str = "Hola Wave";
+var text: str = "Hello Wave";
 ```
 
 ---

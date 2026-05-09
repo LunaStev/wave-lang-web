@@ -1,5 +1,5 @@
 ---
-sidebar_position: ৭
+sidebar_position: 7
 ---
 
 # std::path ব্যবহারের নীতি
@@ -22,7 +22,7 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // বাফার ত্রুটি
+        // বাফার আউট
     }
 }
 ```

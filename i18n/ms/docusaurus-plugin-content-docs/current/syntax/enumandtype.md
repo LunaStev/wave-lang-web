@@ -2,39 +2,38 @@
 sidebar_position: 10
 ---
 
-# 열거형 (enum)과 타입 별칭 (type alias)
+# Enum dan jenis alias
 
-Wave는 C와 유사한 명시적 타입 시스템을 유지하면서도,
-가독성과 ABI 안정성을 위해 타입 별칭(type alias) 과
-정수 기반 열거형(enum) 을 지원한다.
+Wave mengekalkan sistem jenis eksplisit yang serupa dengan C,
+Untuk kebolehbacaan dan kestabilan ABI, taip alias dan
+Menyokong penghitungan berasaskan integer.
 
 ---
 
-## 타입 별칭 (Type Alias)
+## Taip Alias
+### Gambaran keseluruhan
 
-### 개요
-
-type 키워드는 기존 타입에 새로운 이름을 부여한다.
-이는 새로운 타입을 만드는 것이 아니라, 완전한 동치(alias) 이다.
+Kata kunci jenis memberikan nama baharu kepada jenis sedia ada.
+Ini tidak mencipta jenis baharu, tetapi merupakan kesetaraan lengkap (alias).
 
 ```wave
 type MyInt = i32;
 ```
 
-위 선언에서 MyInt는 i32와 완전히 동일한 타입이다.
+Dalam pengisytiharan di atas, MyInt adalah jenis yang sama seperti i32.
 
 ---
 
-### 특징
+### Ciri-ciri
 
-- 런타임 오버헤드 없음
-- ABI 상 완전히 동일
-- 컴파일 타임에만 존재
-- enum의 repr 타입으로 사용 가능
+- Tiada overhed masa jalan
+- ABI adalah sama
+- Wujud hanya pada masa penyusunan
+- Boleh digunakan sebagai jenis repr enum
 
 ---
 
-### 사용 예시
+### Contoh penggunaan
 
 ```wave
 type Size = i64;
@@ -47,7 +46,7 @@ fun add(a: Size, b: Size) -> Size {
 
 ---
 
-### 타입 동치성
+### Jenis kesetaraan
 
 ```wave
 type A = i32;
@@ -61,16 +60,16 @@ fun main() {
 }
 ```
 
-type은 새 타입이 아니라 이름만 다른 타입이다.
+jenis bukan jenis baru, tetapi jenis dengan nama yang berbeza.
 
 ---
 
-## 열거형 (enum)
+## penghitungan
+### Gambaran keseluruhan
 
-### 개요
+Enum Wave ialah jenis penghitungan berasaskan integer.
+Setiap penghitungan mesti mempunyai jenis repr.
 
-Wave의 enum은 정수 기반 열거형이다.
-모든 열거형은 반드시 repr 타입을 가져야 한다.
 
 ```wave
 enum ShaderUniformType -> i32 {
@@ -83,15 +82,15 @@ enum ShaderUniformType -> i32 {
 
 ---
 
-### repr 타입
+### jenis repr
 
--> i32 는 이 enum이 어떤 정수 타입으로 표현되는지를 나타낸다.
+-> i32 menunjukkan jenis integer enum ini dinyatakan sebagai.
 
-허용되는 repr 타입:
+Jenis perwakilan yang diterima:
 
 - `i8`, `i16`, `i32`, `i64`
 - `u8`, `u16`, `u32`, `u64`
-- 해당 타입의 `type alias`
+- `type alias` daripada jenis yang sepadan
 
 ```wave
 type MyInt = i32;
@@ -104,11 +103,11 @@ enum Example -> MyInt {
 
 ---
 
-### 값 할당 규칙
+### Peraturan penugasan nilai
 
-- 명시적 값이 있으면 해당 값 사용
-- 없으면 이전 값 + 1
-- 첫 값이 없으면 0부터 시작
+- Jika terdapat nilai eksplisit, gunakan nilai tersebut
+- Jika tidak, nilai sebelumnya + 1
+- Jika tiada nilai pertama, mulakan dari 0
 
 ```wave
 enum E -> i32 {
@@ -121,9 +120,9 @@ enum E -> i32 {
 
 ---
 
-### enum은 값 타입이다
+### enum ialah jenis nilai
 
-enum은 정수 값이며, 함수 인자·리턴값으로 자유롭게 사용 가능하다.
+Enum ialah nilai integer dan boleh digunakan secara bebas sebagai hujah fungsi atau nilai pulangan.
 
 ```wave
 fun f(t: ShaderUniformType) -> i32 {
@@ -133,9 +132,9 @@ fun f(t: ShaderUniformType) -> i32 {
 
 ---
 
-### 상수로 사용
+### digunakan sebagai pemalar
 
-enum variant는 컴파일 타임 상수다.
+Varian enum ialah pemalar masa kompilasi.
 
 ```wave
 const X: i32 = B;
@@ -144,7 +143,7 @@ const Y: ShaderUniformType = D;
 
 ---
 
-## 실제 예제
+## contoh sebenar
 
 ```wave
 type MyInt = i32;

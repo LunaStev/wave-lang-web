@@ -32,7 +32,7 @@ Ce document résume les opérateurs actuellement disponibles selon le compilateu
 | Opérateurs | Description |
 | ---------- | ----------- |
 | `&&`       | ET logique  |
-| \\\`\\ | OU logique  |
+| `\|\|` | OU logique |
 | `!`        | NON logique |
 
 ## bit
@@ -40,7 +40,7 @@ Ce document résume les opérateurs actuellement disponibles selon le compilateu
 | Opérateurs | Description       |
 | ---------- | ----------------- |
 | `&`        | ET bit à bit      |
-| \\\`\\ | OU bit à bit      |
+| `\|` | bit OU |
 | `^`        | XOR bit à bit     |
 | `~`        | NON bit à bit     |
 | `<<`       | Décalage à gauche |
@@ -63,8 +63,8 @@ Ce document résume les opérateurs actuellement disponibles selon le compilateu
 | -------------------- | ------------------------------- |
 | `++`, `--`           | incrémentation préfixe/postfixe |
 | `&x`                 | référencement                   |
-| `déréférencer p`     | déréférencement de pointeur     |
-| `expr en tant que T` | cast explicite                  |
+| `deref p`     | déréférencement de pointeur     |
+| `expr as T` | cast explicite                  |
 
 ## opération de pointeur
 

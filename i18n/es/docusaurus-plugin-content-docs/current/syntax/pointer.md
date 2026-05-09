@@ -65,8 +65,8 @@ var arrp: ptr<array<i32, 3>> = null;
 Wave soporta la siguiente aritmética de punteros.
 
 - `ptr + int`: avance de puntero basado en GEP
-- `int + ptr`: operación equivalente
-- `ptr - int`: retroceso de puntero basado en GEP
+- `ptr + int`: operación equivalente
+- `int + ptr`: retroceso de puntero basado en GEP
 - `ptr - ptr`: cálculo de diferencia en bytes `i64`
 
 Puntos:
@@ -81,7 +81,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (diferencia en bytes)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## Comparación de punteros
@@ -117,4 +117,4 @@ if (p != null) {
 ## Nota de seguridad
 
 Wave no es actualmente un modelo de seguridad de puntero basado en propiedad/vida como Rust.
-Por lo tanto, no impide automáticamente la desreferencia `null`. Se recomienda implementar un patrón de verificación `null` explícito antes de `deref`.
+Por lo tanto, no impide automáticamente la desreferencia `null`. Se recomienda implementar un patrón de verificación `deref` explícito antes de `null`.

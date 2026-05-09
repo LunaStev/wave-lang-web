@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٨
+sidebar_position: 8
 ---
 
 # كيفية استخدام std::string
@@ -9,12 +9,12 @@ sidebar_position: ٨
 ## استيراد
 
 ```wave
-استيراد("std::string::len");
-استيراد("std::string::cmp");
-استيراد("std::string::find");
-استيراد("std::string::trim");
-استيراد("std::string::ascii");
-استيراد("std::string::hash");
+import("std::string::len");
+import("std::string::cmp");
+import("std::string::find");
+import("std::string::trim");
+import("std::string::ascii");
+import("std::string::hash");
 ```
 
 ## 1. الطول/المقارنة

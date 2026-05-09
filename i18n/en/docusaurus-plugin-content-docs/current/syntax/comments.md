@@ -15,7 +15,7 @@ The content following `//` is ignored until the end of the line.
 
 ```wave
 var x: i32 = 10; // line comment
-x += 5; // still works
+x += 5;          // still works
 ```
 
 ## Block comment

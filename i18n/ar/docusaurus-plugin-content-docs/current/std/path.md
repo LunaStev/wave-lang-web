@@ -1,5 +1,5 @@
 ---
-sidebar_position: ٧
+sidebar_position: 7
 ---
 
 # كيفية استخدام std::path
@@ -9,9 +9,9 @@ sidebar_position: ٧
 ## استيراد
 
 ```wave
-استيراد("std::path::core");
-استيراد("std::path::analyze");
-استيراد("std::path::copy");
+import("std::path::core");
+import("std::path::analyze");
+import("std::path::copy");
 ```
 
 ## 1. دمج المسارات
@@ -22,7 +22,7 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // نقص في المخزن المؤقت
+        // خارج المخزن المؤقت
     }
 }
 ```

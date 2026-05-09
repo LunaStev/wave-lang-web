@@ -2,9 +2,9 @@
 sidebar_position: 6
 ---
 
-# std::net 사용법
+# std::penggunaan bersih
 
-동기식 IPv4 TCP/UDP API입니다.
+API IPv4 TCP/UDP segerak.
 
 ## import
 
@@ -13,7 +13,7 @@ import("std::net::tcp");
 import("std::net::udp");
 ```
 
-## 1. TCP 서버
+## 1) Pelayan TCP
 
 ```wave
 fun main() {
@@ -31,7 +31,7 @@ fun main() {
 }
 ```
 
-## 2. TCP 클라이언트
+## 2) Pelanggan TCP
 
 ```wave
 fun main() {
@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 
-## 3. UDP 송수신
+## 3) Penghantaran dan penerimaan UDP
 
 ```wave
 fun main() {
@@ -64,7 +64,7 @@ fun main() {
 }
 ```
 
-## 주소 생성
+## Buat alamat
 
 ```wave
 fun main() {
@@ -73,7 +73,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## fungsi utama
 
 ```wave
 fun tcp_bind(port: i16) -> TcpListener

@@ -35,7 +35,7 @@ fun main() {
     var p: ptr<u8> = mem_alloc(16);
     p = mem_realloc(p, 16, 64);
 
-    // מעבר בטוח לזיכרון
+    // תנועה בטוחה של אזורי זיכרון חופפים
     mem_move(p + 1, p, 10);
 
     mem_free(p, 64);

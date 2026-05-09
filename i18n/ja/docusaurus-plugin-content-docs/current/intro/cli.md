@@ -17,7 +17,7 @@ sidebar_position: 6
 ## 1. 基本形式
 
 ```bash
-wavec [グローバルオプション] <コマンド> [コマンドオプション]
+wavec [global-options] <command> [command-options]
 ```
 
 例:
@@ -380,7 +380,7 @@ wavec run main.wave \
 例：
 
 ```bash
-# 内部的にvexを実行
+# 内部的に vex が行う
 wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
 ```
 
@@ -401,5 +401,5 @@ wavec build app.wave --link ssl -L ./native/lib
 wavec run main.wave --dep-root .vex/dep
 wavec run main.wave --dep math=.vex/dep/math
 wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: 予約済み、未実装
+wavec --whale build app.wave -c # TODO: reserved, not implemented
 ```

@@ -1,5 +1,5 @@
 ---
-sidebar_position: ١
+sidebar_position: 1
 ---
 
 # إظهار Hello موجة

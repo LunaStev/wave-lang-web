@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-# std::math 사용법
+# std::penggunaan matematik
 
-정수/실수/비트/수론/삼각 근사 함수를 제공합니다.
+Menyediakan integer/nombor nyata/bit/teori nombor/fungsi penghampiran trigonometri.
 
 ## import
 
@@ -16,7 +16,7 @@ import("std::math::num");
 import("std::math::trig");
 ```
 
-## 1. 제네릭 수치 함수
+## 1) Fungsi angka generik
 
 ```wave
 fun main() {
@@ -25,7 +25,7 @@ fun main() {
 }
 ```
 
-## 2. 비트/정렬 계산
+## 2) Pengiraan bit/penjajaran
 
 ```wave
 fun main() {
@@ -35,7 +35,7 @@ fun main() {
 }
 ```
 
-## 3. 수론/삼각 근사
+## 3) Teori nombor/penghampiran trigonometri
 
 ```wave
 fun main() {
@@ -48,7 +48,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## fungsi utama
 
 ```wave
 fun num_abs<T>(x: T, zero: T) -> T

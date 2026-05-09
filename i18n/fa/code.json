@@ -1,45 +1,45 @@
 {
   "tagline": {
-    "message": "یک زبان، بی نهایت امکان"
+    "message": "یک زبان، امکانات بی نهایت"
   },
   "get-started": {
-    "message": "شروع در ۵ دقیقه"
+    "message": "در 5 دقیقه شروع کنید"
   },
   "read-the-docs": {
-    "message": "خواندن مستندات"
+    "message": "سند را بخوانید"
   },
   "homepage.hero.title": {
-    "message": "زبانی مدرن برای موج جدید توسعه"
+    "message": "یک زبان مدرن برای موج جدیدی از توسعه"
   },
   "homepage.hero.subtitle": {
-    "message": "دستور زبان ساده، عملکرد قدرتمند، و امنیت داخلی. Wave برای افزایش بهره‌وری شما و ساخت برنامه‌های مستحکم طراحی شده است."
+    "message": "نحو بصری، عملکرد قدرتمند، و ایمنی داخلی. Wave برای افزایش بهره وری و قوی ساختن برنامه های شما طراحی شده است."
   },
   "homepage.why_wave.title": {
-    "message": "چرا باید Wave را انتخاب کنید؟"
+    "message": "چرا Wave را انتخاب کنید؟"
   },
   "homepage.features.one.title": {
-    "message": "ساده و قابل درک"
+    "message": "مختصر و شهودی"
   },
   "homepage.features.one.description": {
-    "message": "Wave باعث کاهش کدهای غیرضروری شده و تمرکز را بر روی منطق اصلی امکان‌پذیر می‌کند. یادگیری با دستور زبان مدرن، آسان و استفاده از آن لذت‌بخش است."
+    "message": "Wave کدهای غیر ضروری را کاهش می دهد و به شما امکان می دهد بر روی منطق اصلی تمرکز کنید. نحو مدرن یادگیری آن را آسان و استفاده را سرگرم کننده می کند."
   },
   "homepage.features.two.title": {
     "message": "سریع و کارآمد"
   },
   "homepage.features.two.description": {
-    "message": "به کد بومی کامپایل می‌شود و از طریق تجرید بدون هزینه به عملکردی در سطح C++ می‌رسد. برای کارهایی که منابع اهمیت بالایی دارند ایده‌آل است."
+    "message": "کامپایل شده در کد بومی، عملکرد سطح C++ را از طریق انتزاع هزینه صفر به دست می آورد. ایده آل برای وظایف حیاتی منابع."
   },
   "homepage.features.three.title": {
-    "message": "ایمن و همزمان"
+    "message": "امن و همزمان"
   },
   "homepage.features.three.description": {
-    "message": "اشتباهات متداول مانند خطای مرجع Null را در زمان کامپایل جلوگیری می‌کند. با استفاده از مدل همزمانی داخلی، برنامه‌نویسی چند هسته‌ای آسان‌تر از همیشه شده است."
+    "message": "از اشکالات رایج مانند خطاهای مرجع تهی در زمان کامپایل جلوگیری می کند. مدل همزمانی داخلی برنامه‌نویسی چند هسته‌ای را آسان‌تر از همیشه می‌کند."
   },
   "homepage.contributors.title": {
-    "message": "مشارکت‌کنندگان"
+    "message": "مشارکت کننده"
   },
   "homepage.contributors.role.founder": {
-    "message": "بنیان‌گذار زبان"
+    "message": "بنیانگذار زبان"
   },
   "homepage.contributors.role.designer": {
     "message": "طراح زبان"
@@ -48,13 +48,13 @@
     "message": "توسعه کامپایلر"
   },
   "homepage.contributors.role.library": {
-    "message": "مسئول کتابخانه استاندارد"
+    "message": "مدیر کتابخانه استاندارد"
   },
   "homepage.contributors.role.contributor": {
-    "message": "مشارکت‌کننده"
+    "message": "مشارکت کننده"
   },
   "homepage.sponsors.title": {
-    "message": "حامیان"
+    "message": "حامی"
   },
   "homepage.sponsors.tier.honor": {
     "message": "حامی افتخاری"
@@ -63,18 +63,18 @@
     "message": "حامی پلاتینیوم"
   },
   "homepage.sponsors.tier.gold": {
-    "message": "حامی طلایی"
+    "message": "حامی طلا"
   },
   "homepage.sponsors.tier.silver": {
-    "message": "حامی نقره‌ای"
+    "message": "اسپانسر نقره ای"
   },
   "homepage.translations.title": {
-    "message": "در ترجمه Wave مشارکت کنید"
+    "message": "Wave در ترجمه شرکت کنید"
   },
   "homepage.translations.subtitle": {
-    "message": "لطفاً در ترجمه کمک کنید تا توسعه‌دهندگان در سراسر جهان بتوانند بدون مانع زبانی، Wave را یاد بگیرند."
+    "message": "لطفاً در ترجمه ها مشارکت کنید تا توسعه دهندگان در سراسر جهان بتوانند Wave را بدون موانع زبانی یاد بگیرند."
   },
   "homepage.translations.button": {
-    "message": "در Crowdin مشارکت در ترجمه"
+    "message": "شرکت در ترجمه در Crowdin"
   }
 }

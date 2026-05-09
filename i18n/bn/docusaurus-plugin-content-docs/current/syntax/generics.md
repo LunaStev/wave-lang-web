@@ -1,5 +1,5 @@
 ---
-sidebar_position: ১৩
+sidebar_position: 13
 ---
 
 # জেনেরিকস (Generics)
@@ -23,8 +23,8 @@ fun identity<T>(x: T) -> T {
 
 ```wave
 fun main() {
-    var a: i32 = identity<i32>(১০);
-    var b: f64 = identity<f64>(৩.১৪);
+    var a: i32 = identity<i32>(10);
+    var b: f64 = identity<f64>(3.14);
 }
 ```
 
@@ -44,7 +44,7 @@ fun pair<A, B>(a: A, b: B) -> Pair<A, B> {
 }
 
 fun main() {
-    var p: Pair<i32, f64> = pair<i32, f64>(১, ২.৫);
+    var p: Pair<i32, f64> = pair<i32, f64>(1, 2.5);
 }
 ```
 
@@ -81,21 +81,21 @@ import("std::math::int");
 import("std::env::environ");
 
 fun main() {
-    var x: i32 = num_abs<i32>(-১০০, ০);
+    var x: i32 = num_abs<i32>(-100, 0);
 
     var r: EnvResult<i32> = env_get_i32("PORT");
-    var port: i32 = env_unwrap_or<i32>(r, ৮০৮০);
+    var port: i32 = env_unwrap_or<i32>(r, 8080);
 }
 ```
 
 ## অপরাধবোধ যা প্রায়শই ঘটে
 
 ```wave
-var x: i32 = identity(১০); // টাইপ প্যারামিটার অনুপস্থিত (অনুমোদিত নয়)
+var x: i32 = identity(10); // অনুপস্থিত টাইপ আর্গুমেন্ট (অনুমতি নেই)
 ```
 
 অবশ্যই নিম্নরূপ কল করতে হবে।
 
 ```wave
-var x: i32 = identity<i32>(১০);
+var x: i32 = identity<i32>(10);
 ```

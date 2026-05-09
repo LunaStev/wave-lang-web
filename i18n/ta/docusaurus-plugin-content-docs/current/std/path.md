@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-# std::path 사용법
+# std:: பாதை பயன்பாடு
 
-할당 없이 경로를 분석/복사합니다.
+ஒதுக்கீடு இல்லாமல் பாதைகளை பகுப்பாய்வு செய்யவும் / நகலெடுக்கவும்.
 
 ## import
 
@@ -14,7 +14,7 @@ import("std::path::analyze");
 import("std::path::copy");
 ```
 
-## 1. 경로 결합
+## 1) பாதைகளை இணைக்கவும்
 
 ```wave
 fun main() {
@@ -22,12 +22,12 @@ fun main() {
     var n: i32 = path_join2(&out[0], 256, "/var/log", "wave/app.log");
 
     if (n < 0) {
-        // 버퍼 부족
+        // தாங்கல் இல்லை
     }
 }
 ```
 
-## 2. basename / dirname 추출
+## 2) அடிப்படை பெயர்/இயற்பெயர் பிரித்தெடுக்கவும்
 
 ```wave
 fun main() {
@@ -39,7 +39,7 @@ fun main() {
 }
 ```
 
-## 3. 분석 함수
+## 3) பகுப்பாய்வு செயல்பாடு
 
 ```wave
 fun main() {
@@ -49,7 +49,7 @@ fun main() {
 }
 ```
 
-## 주요 함수
+## முக்கிய செயல்பாடு
 
 ```wave
 fun path_is_sep(c: u8) -> bool

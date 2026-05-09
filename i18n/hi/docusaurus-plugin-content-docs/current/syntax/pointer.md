@@ -40,9 +40,8 @@ var x: i32 = 10;
 var p: ptr<i32> = &x;
 
 println("{}", deref p); // 10
-
 deref p = 20;
-println("{}", x); // 20
+println("{}", x);       // 20
 ```
 
 ## `null` लिटरल नियम
@@ -59,16 +58,16 @@ println("{}", x); // 20
 var p: ptr<i32> = null;
 var arrp: ptr<array<i32, 3>> = null;
 
-// var n: i32 = null;  // त्रुटि
-// var b: bool = null; // त्रुटि
+// var n: i32 = null;  // ERROR
+// var b: bool = null; // ERROR
 ```
 
 ## पॉइंटर अंकगणित
 
 Wave निम्नलिखित पॉइंटर अंकगणित का समर्थन करता है।
 
-- `ptr + int`: GEP आधारित पॉइंटर अग्रिम
-- `int + ptr`: समान संचालन
+- `int + ptr`: GEP आधारित पॉइंटर अग्रिम
+- `ptr - int`: समान संचालन
 - `ptr - int`: GEP आधारित पॉइंटर रिवर्सल
 - `ptr - ptr`: `i64` बाइट अंतर गणना
 
@@ -84,7 +83,7 @@ var p1: ptr<i32> = base + 3; // 0x1000 + 12
 var p2: ptr<i32> = 2 + base; // 0x1000 + 8
 var p3: ptr<i32> = base - 1; // 0x1000 - 4
 
-var diff: i64 = p1 - base;   // 12 (बाइट अंतर)
+var diff: i64 = p1 - base;   // 12 (byte diff)
 ```
 
 ## पॉइंटर तुलना
@@ -105,7 +104,6 @@ if (p1 == p2) { ... }
 var a: i32 = 10;
 var b: i32 = 20;
 var arr: array<ptr<i32>, 2> = [&a, &b];
-
 println("{} {}", deref arr[0], deref arr[1]);
 ```
 

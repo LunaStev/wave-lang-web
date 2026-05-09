@@ -91,7 +91,7 @@ fun main() {
 ## Errores comunes
 
 ```wave
-var x: i32 = identity(10); // Falta de parámetro de tipo (no permitido)
+var x: i32 = identity(10); // Argumento de tipo faltante (no permitido)
 ```
 
 Debe llamarse así al enlazar.

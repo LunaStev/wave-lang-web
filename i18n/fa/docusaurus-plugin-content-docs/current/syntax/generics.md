@@ -77,8 +77,8 @@ fun main() {
 ## 5. استفاده با کتابخانه استاندارد
 
 ```wave
-واردات("std::math::int");
-واردات("std::env::environ");
+import("std::math::int");
+import("std::env::environ");
 
 fun main() {
     var x: i32 = num_abs<i32>(-100, 0);
@@ -91,7 +91,7 @@ fun main() {
 ## اشتباهات رایج
 
 ```wave
-var x: i32 = identity(10); // پارامتر تایپ مفقود (غیرمجاز)
+var x: i32 = identity(10); // آرگومان نوع وجود ندارد (مجاز نیست)
 ```
 
 باید به صورت زیر فراخوانی شود.

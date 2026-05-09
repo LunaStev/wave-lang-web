@@ -57,7 +57,7 @@ var e: f64 = 2.71828;
 להלן דוגמה בסיסית לשימוש בסוגי מחרוזות.
 
 ```wave
-var text: str = "שלום ווייב";
+var text: str = "Hello Wave";
 ```
 
 ---
@@ -117,10 +117,10 @@ var ptr: ptr<T> = &someVariable;
 - ניתן להקצות את `null` רק לסוג `ptr<T>`.
 
 ```wave
-var p: ptr<i32> = null;  // תקין
+var p: ptr<i32> = null;  // OK
 
-// var n: i32 = null;    // שגיאה
-// var b: bool = null;   // שגיאה
+// var n: i32 = null;    // ERROR
+// var b: bool = null;   // ERROR
 ```
 
 ## סוג מערך

@@ -47,7 +47,7 @@ Ili mkusanyaji wa Wave upate LLVM ipasavyo, kigezo cha mazingira `LLVM_SYS_140_P
 Kisha, pakiti ya Wave katika toleo lililobainishwa na mtumiaji (`.tar.gz`) inapakuliwa na inafunguliwa.
 Baada ya kufungua kifurushi, faili ya utekelezaji ya `wavec` inasakinishwa kwenye `/usr/local/bin` ili amri ya `wavec` itumike popote kwenye mfumo.
 
-Baada ya usakinishaji kukamilika, thibitisha kwa `wavec --version` kuona kama imesanikishwa vizuri.
+Baada ya usakinishaji kukamilika, thibitisha kwa `wavec` kuona kama imesanikishwa vizuri.
 
 ## thibitisha usakinishaji
 

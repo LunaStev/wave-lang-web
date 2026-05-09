@@ -47,7 +47,7 @@ Die Umgebungsvariable `LLVM_SYS_140_PREFIX` wird gesetzt, damit der Wave-Compile
 Dann wird das Wave-Paket (`.tar.gz`) der angegebenen Version heruntergeladen und entpackt.
 Nach dem Entpacken wird die ausführbare Datei `wavec` in `/usr/local/bin` installiert, sodass der Befehl `wavec` von überall im System verwendet werden kann.
 
-Nach Abschluss der Installation überprüfen Sie mit dem Befehl `wavec --version`, ob alles ordnungsgemäß installiert wurde.
+Nach Abschluss der Installation überprüfen Sie mit dem Befehl `wavec`, ob alles ordnungsgemäß installiert wurde.
 
 ## Installation überprüfen
 

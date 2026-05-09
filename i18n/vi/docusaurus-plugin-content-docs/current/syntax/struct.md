@@ -75,7 +75,7 @@ Thay vào đó, sử dụng từ khóa `proto` để khai báo một tập hợp
 Khối `proto` là vùng chứa các hàm thuộc về một cấu trúc cụ thể, và các hàm được định nghĩa trong khối này được sử dụng giống như các phương thức của cấu trúc đó.
 
 Các phương thức nhận thể hiện cấu trúc qua tham số đầu tiên là `self`.
-`self` tượng trưng cho toàn bộ giá trị của cấu trúc và được truyền đi theo phương thức sao chép giá trị.
+`proto` tượng trưng cho toàn bộ giá trị của cấu trúc và được truyền đi theo phương thức sao chép giá trị.
 
 ```wave
 proto Box {
