@@ -10,7 +10,7 @@ Câu lệnh `match` là câu lệnh điều khiển phân nhánh với nhiều m
 Nó hữu ích khi bạn muốn biểu đạt ý định phân nhánh rõ ràng hơn so với chuỗi `if / else if`.
 
 Hiện tại, `match` của Wave là một **câu lệnh (statement)** và không hỗ trợ dạng biểu thức (expression) được đánh giá trực tiếp thành giá trị.
-Tức là, `var x = match (...) { ... }`{
+Tức là, không hỗ trợ dạng `var x = match (...) { ... }`.
 
 ---
 
