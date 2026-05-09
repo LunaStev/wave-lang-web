@@ -92,9 +92,7 @@ wavec build app.wave
 `build` 명령은 출력 파일명과 출력 형식을 옵션으로 제어할 수 있습니다.
 
 ```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
+Sebagai contohnya
 ```
 
 - `-o <file>`: 출력 파일명을 지정합니다.
@@ -140,7 +138,7 @@ wavec --version
 
 ---
 
-## 4. Global Options
+## 4. Di sini
 
 ## 4.1 최적화
 
@@ -263,7 +261,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 ## 5. Import 해석 규칙
 
-Wave import는 다음 3가지로 분기됩니다.
+Semasa
 
 1. 로컬 import
 2. std import
@@ -284,7 +282,7 @@ import("path/to/mod.wave");
 import("std::io::format");
 ```
 
-`~/.wave/lib/wave/std/...` 경로를 사용합니다.
+Ralat
 
 ## 5.3 외부 패키지
 
