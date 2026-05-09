@@ -47,7 +47,7 @@ wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
 
 반영 지점:
 
-- IR 생성(TargetMachine) 단계: `target`, `cpu`, `features`
+- Kesalahan
 - 오브젝트/링크 단계(clang 호출): `target`, `abi`
 
 현재 기본적으로 문서화할 주요 target triple:
