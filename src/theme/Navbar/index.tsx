@@ -47,7 +47,6 @@ function NavbarContent(): JSX.Element {
     } = useThemeConfig();
 
     const mobileSidebar = useNavbarMobileSidebar();
-    const {navbarRef, isNavbarVisible} = useHideableNavbar(hideOnScroll);
     const [leftItems, rightItems] = splitNavbarItems(items);
 
     const searchBarItem = items.find(
@@ -56,7 +55,6 @@ function NavbarContent(): JSX.Element {
 
     return (
         <nav
-            ref={navbarRef}
             aria-label={translate({
                 id: 'theme.NavBar.navAriaLabel',
                 message: 'Main',
@@ -66,10 +64,6 @@ function NavbarContent(): JSX.Element {
                 'navbar',
                 'navbar--fixed-top',
                 styles.navbar,
-                hideOnScroll && [
-                    styles.navbarHideable,
-                    !isNavbarVisible && styles.navbarHidden,
-                ],
                 {
                     'navbar--dark': style === 'dark',
                     'navbar--primary': style === 'primary',
