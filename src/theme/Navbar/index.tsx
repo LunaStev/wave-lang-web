@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {translate} from '@docusaurus/Translate';
 import {ErrorCauseBoundary, useThemeConfig} from '@docusaurus/theme-common';
 import {
-    NavbarMobileSidebarProvider,
+    NavbarProvider,
     splitNavbarItems,
     useHideableNavbar,
     useNavbarMobileSidebar,
@@ -129,8 +129,8 @@ function NavbarContent(): JSX.Element {
 
 export default function Navbar(): JSX.Element {
     return (
-        <NavbarMobileSidebarProvider>
+        <NavbarProvider>
             <NavbarContent />
-        </NavbarMobileSidebarProvider>
+        </NavbarProvider>
     );
 }
