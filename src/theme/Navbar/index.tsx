@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 type NavLink = {
   label: string;
   to: string;
+  activeBase?: string;
   match?: 'prefix' | 'exact';
 };
 
@@ -25,11 +26,13 @@ const localeDropdownItem = {
 const t = (id: string, message: string) => translate({id, message});
 
 function isActive(pathname: string, item: NavLink): boolean {
+  const activeTarget = item.activeBase ?? item.to;
+
   if (item.match === 'exact') {
     return pathname === item.to;
   }
 
-  return item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
+  return activeTarget === '/' ? pathname === '/' : pathname.startsWith(activeTarget);
 }
 
 export default function Navbar(): JSX.Element {
@@ -39,7 +42,7 @@ export default function Navbar(): JSX.Element {
 
   const links: NavLink[] = [
     {label: t('nav.home', 'Home'), to: '/', match: 'exact'},
-    {label: t('nav.docs', 'Docs'), to: '/docs'},
+    {label: t('nav.docs', 'Docs'), to: '/docs/intro/', activeBase: '/docs'},
     {label: t('nav.learn', 'Learn'), to: '/learn'},
     {label: t('nav.ecosystem', 'Ecosystem'), to: '/ecosystem'},
     {label: t('nav.releases', 'Releases'), to: '/releases'},
