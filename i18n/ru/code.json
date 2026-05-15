@@ -1,80 +1,497 @@
 {
-  "tagline": {
-    "message": "Один язык, безграничные возможности"
+  "community.aside.title": {
+    "message": "기여 경로"
+  },
+  "community.guide.docs.title": {
+    "message": "Read the docs first"
+  },
+  "community.guide.issues.title": {
+    "message": "Discuss and open issues"
+  },
+  "community.guide.kicker": {
+    "message": "기여"
+  },
+  "community.guide.prs.title": {
+    "message": "Send focused changes"
+  },
+  "community.guide.title": {
+    "message": "어떤 식으로 기여하면 되는지 바로 보여줘야 합니다."
+  },
+  "community.hero.eyebrow": {
+    "message": "커뮤니티"
+  },
+  "community.hero.primary": {
+    "message": "Discord 참여하기"
+  },
+  "community.hero.secondary": {
+    "message": "GitHub 열기"
+  },
+  "community.hero.title": {
+    "message": "대화에 참여하고, 소스를 추적하고, 공개적으로 기여하세요."
+  },
+  "community.links.crowdin.title": {
+    "message": "Translations"
+  },
+  "community.links.discord.title": {
+    "message": "Real-time discussion"
+  },
+  "community.links.github.title": {
+    "message": "Source and issues"
+  },
+  "community.links.kicker": {
+    "message": "채널"
+  },
+  "community.links.title": {
+    "message": "프로젝트의 주요 공개 채널입니다."
+  },
+  "community.meta.title": {
+    "message": "Wave 커뮤니티"
+  },
+  "ecosystem.aside.title": {
+    "message": "핵심 구성요소"
+  },
+  "ecosystem.hero.eyebrow": {
+    "message": "생태계"
+  },
+  "ecosystem.hero.primary": {
+    "message": "생태계 문서 읽기"
+  },
+  "ecosystem.hero.secondary": {
+    "message": "소스 보기"
+  },
+  "ecosystem.hero.title": {
+    "message": "Wave는 언어만이 아니라 주변 스택 전체를 가진 프로젝트입니다."
+  },
+  "ecosystem.meta.title": {
+    "message": "Wave 생태계"
+  },
+  "ecosystem.stack.kicker": {
+    "message": "스택"
+  },
+  "ecosystem.stack.title": {
+    "message": "언어를 둘러싼 공식 스택입니다."
+  },
+  "ecosystem.stack.vex.title": {
+    "message": "Vex"
+  },
+  "ecosystem.stack.whale.title": {
+    "message": "Whale"
+  },
+  "ecosystem.stack.wson.title": {
+    "message": "WSON"
+  },
+  "ecosystem.std.env.title": {
+    "message": "System-facing modules"
+  },
+  "ecosystem.std.kicker": {
+    "message": "라이브러리"
+  },
+  "ecosystem.std.program.title": {
+    "message": "Program structure"
+  },
+  "ecosystem.std.roadmap.title": {
+    "message": "Roadmap fit"
+  },
+  "ecosystem.std.title": {
+    "message": "표준 라이브러리도 제품 이야기의 일부입니다."
+  },
+  "footer.aria": {
+    "message": "푸터 탐색"
+  },
+  "footer.description": {
+    "message": "Wave는 명시적인 시스템 프로그래밍, 들여다볼 수 있는 컴파일러 단계, 그리고 언어 자체를 둘러싼 일관된 생태계를 지향하는 언어 프로젝트입니다."
+  },
+  "footer.group.external": {
+    "message": "외부 링크"
+  },
+  "footer.group.product": {
+    "message": "제품"
+  },
+  "footer.group.project": {
+    "message": "프로젝트"
+  },
+  "footer.link.community": {
+    "message": "커뮤니티"
+  },
+  "footer.link.docs": {
+    "message": "문서"
+  },
+  "footer.link.ecosystem": {
+    "message": "생태계"
+  },
+  "footer.link.home": {
+    "message": "홈"
+  },
+  "footer.link.learn": {
+    "message": "배우기"
+  },
+  "footer.link.license": {
+    "message": "라이선스"
+  },
+  "footer.link.releases": {
+    "message": "릴리스"
+  },
+  "footer.link.roadmap": {
+    "message": "로드맵"
   },
   "get-started": {
-    "message": "Начни работу за 5 минут"
+    "message": "Начать за 5 минут"
   },
-  "read-the-docs": {
-    "message": "Прочтите документ"
+  "home.examples.hello.label": {
+    "message": "Hello"
   },
-  "homepage.hero.title": {
-    "message": "Современный язык для новой волны развития"
+  "home.examples.hello.title": {
+    "message": "Small entry point"
+  },
+  "home.examples.inspect.label": {
+    "message": "Inspect"
+  },
+  "home.examples.inspect.title": {
+    "message": "Compiler visibility"
+  },
+  "home.examples.kicker": {
+    "message": "예제"
+  },
+  "home.examples.output": {
+    "message": "Output"
+  },
+  "home.examples.server.label": {
+    "message": "Flow"
+  },
+  "home.examples.server.title": {
+    "message": "Typed control flow"
+  },
+  "home.examples.title": {
+    "message": "평범한 랜딩 페이지가 아니라 언어 자체를 보여줍니다."
+  },
+  "home.hero.eyebrow": {
+    "message": "Wave 프로그래밍 언어 공식 홈"
+  },
+  "home.hero.fact.philosophy.label": {
+    "message": "철학"
+  },
+  "home.hero.fact.philosophy.value": {
+    "message": "숨겨진 마법보다 명시적인 동작"
+  },
+  "home.hero.fact.status.label": {
+    "message": "상태"
+  },
+  "home.hero.fact.status.value": {
+    "message": "활발한 설계 및 컴파일러 개발 중"
+  },
+  "home.hero.fact.targets.label": {
+    "message": "초점"
+  },
+  "home.hero.fact.targets.value": {
+    "message": "컴파일러, std, 패키지 도구, 데이터 포맷"
+  },
+  "home.hero.lead": {
+    "message": "Wave는 명시적인 동작, 네이티브 출력, 들여다볼 수 있는 컴파일러 단계, 그리고 CLI 도구부터 저수준 시스템 작업까지 이어지는 표준 라이브러리를 중심으로 하나의 언어 생태계를 만들고 있습니다."
+  },
+  "home.hero.primary": {
+    "message": "문서 보기"
+  },
+  "home.hero.secondary": {
+    "message": "학습 시작하기"
+  },
+  "home.hero.title": {
+    "message": "시스템, 도구, 그리고 주변 스택을 하나의 언어로."
+  },
+  "home.principles.kicker": {
+    "message": "철학"
+  },
+  "home.principles.one.title": {
+    "message": "One language, many domains"
+  },
+  "home.principles.three.title": {
+    "message": "Libraries carry capability"
+  },
+  "home.principles.title": {
+    "message": "프로젝트 철학은 첫 화면에 있어야 합니다."
+  },
+  "home.principles.two.title": {
+    "message": "Compiler behavior should stay visible"
+  },
+  "home.quickstart.inspect.label": {
+    "message": "확인"
+  },
+  "home.quickstart.install.label": {
+    "message": "설치"
+  },
+  "home.quickstart.kicker": {
+    "message": "설치"
+  },
+  "home.quickstart.lead": {
+    "message": "공식 사이트는 첫 번째 실용 질문에 바로 답해야 합니다. Wave를 어떻게 설치하는지, 어떻게 실행하는지, 컴파일러가 무엇을 하는지 어떻게 확인하는지 보여줘야 합니다."
+  },
+  "home.quickstart.run.label": {
+    "message": "실행"
+  },
+  "home.quickstart.title": {
+    "message": "빠르게 설치하고 바로 코드로 들어갑니다."
+  },
+  "home.release.channels.title": {
+    "message": "Install targets"
+  },
+  "home.release.kicker": {
+    "message": "로드맵과 릴리스"
+  },
+  "home.release.notes.title": {
+    "message": "Published releases"
+  },
+  "home.release.primary": {
+    "message": "릴리스 보기"
+  },
+  "home.release.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "home.release.secondary": {
+    "message": "로드맵 읽기"
+  },
+  "home.release.title": {
+    "message": "진행 상황, 릴리스 노트, 로드맵을 한곳에서 보여줍니다."
+  },
+  "home.routes.community.title": {
+    "message": "커뮤니티"
+  },
+  "home.routes.docs.title": {
+    "message": "문서"
+  },
+  "home.routes.ecosystem.title": {
+    "message": "생태계"
+  },
+  "home.routes.kicker": {
+    "message": "구조"
+  },
+  "home.routes.learn.title": {
+    "message": "배우기"
+  },
+  "home.routes.releases.title": {
+    "message": "릴리스"
+  },
+  "home.routes.title": {
+    "message": "사이트 구조가 실제 프로젝트 지도를 반영합니다."
+  },
+  "home.translation.card.body": {
+    "message": "웹사이트와 문서 번역에 참여하고, 낙후된 페이지를 개선하며, 더 많은 커뮤니티가 Wave를 자연스럽게 접할 수 있도록 도와주세요."
+  },
+  "home.translation.card.title": {
+    "message": "Crowdin에서 번역하기"
+  },
+  "home.translation.kicker": {
+    "message": "번역"
+  },
+  "home.translation.primary": {
+    "message": "Crowdin 열기"
+  },
+  "home.translation.secondary": {
+    "message": "커뮤니티 안내 보기"
+  },
+  "home.translation.title": {
+    "message": "더 많은 언어로 Wave를 읽을 수 있게 도와주세요."
+  },
+  "homepage.contributors.role.compiler": {
+    "message": "Разработка компилятора"
+  },
+  "homepage.contributors.role.contributor": {
+    "message": "Участники"
+  },
+  "homepage.contributors.role.designer": {
+    "message": "Разработчик языка"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "Основатель языка"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Ответственный за стандартную библиотеку"
+  },
+  "homepage.contributors.title": {
+    "message": "Участники"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave сокращает ненужный код и позволяет сосредоточиться на основной логике. Изучать и использовать легко благодаря современной грамматике."
+  },
+  "homepage.features.one.title": {
+    "message": "Простой и интуитивно понятный"
+  },
+  "homepage.features.three.description": {
+    "message": "Предотвращает типичные ошибки, такие как null-ссылки, на этапе компиляции. Встроенная модель параллелизма делает многопоточное программирование проще, чем когда-либо."
+  },
+  "homepage.features.three.title": {
+    "message": "Безопасный и конкурентоспособный"
+  },
+  "homepage.features.two.description": {
+    "message": "Компилируется в нативный код и достигает уровня производительности C++ благодаря нулевой стоимости абстракции. Идеально для задач, требующих ресурсов."
+  },
+  "homepage.features.two.title": {
+    "message": "Быстрый и эффективный"
   },
   "homepage.hero.subtitle": {
-    "message": "Интуитивно понятный синтаксис, высокая производительность и встроенная безопасность. Wave предназначен для повышения вашей производительности и повышения надежности ваших приложений."
+    "message": "Интуитивная грамматика, мощная производительность и встроенная безопасность. Wave разработан для повышения вашей продуктивности и создания надежных приложений."
+  },
+  "homepage.hero.title": {
+    "message": "Современный язык для новой волны разработки"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "Золотые спонсоры"
+  },
+  "homepage.sponsors.tier.honor": {
+    "message": "Почётные спонсоры"
+  },
+  "homepage.sponsors.tier.platinum": {
+    "message": "Платиновые спонсоры"
+  },
+  "homepage.sponsors.tier.silver": {
+    "message": "Серебряные спонсоры"
+  },
+  "homepage.sponsors.title": {
+    "message": "Спонсоры"
+  },
+  "homepage.translations.button": {
+    "message": "Участвуйте в переводе на Crowdin"
+  },
+  "homepage.translations.subtitle": {
+    "message": "Помогите переводу, чтобы разработчики по всему миру могли обучаться Wave без языковых барьеров."
+  },
+  "homepage.translations.title": {
+    "message": "Участвуйте в переводе Wave"
   },
   "homepage.why_wave.title": {
     "message": "Почему стоит выбрать Wave?"
   },
-  "homepage.features.one.title": {
-    "message": "краткий и интуитивно понятный"
+  "learn.areas.cli.title": {
+    "message": "CLI and toolchain"
   },
-  "homepage.features.one.description": {
-    "message": "Wave сокращает количество ненужного кода и позволяет сосредоточиться на основной логике. Современный синтаксис делает его простым в освоении и интересным в использовании."
+  "learn.areas.kicker": {
+    "message": "학습 영역"
   },
-  "homepage.features.two.title": {
-    "message": "быстрый и эффективный"
+  "learn.areas.std.title": {
+    "message": "Standard library"
   },
-  "homepage.features.two.description": {
-    "message": "Скомпилированный в машинный код, он достигает производительности уровня C++ за счет абстракции с нулевой стоимостью. Идеально подходит для задач, критичных к ресурсам."
+  "learn.areas.title": {
+    "message": "핵심 개념은 이미 문서 안에 있습니다."
   },
-  "homepage.features.three.title": {
-    "message": "безопасный и одновременный"
+  "learn.areas.wson.title": {
+    "message": "WSON"
   },
-  "homepage.features.three.description": {
-    "message": "Предотвращает распространенные ошибки, такие как ошибки нулевой ссылки во время компиляции. Встроенная модель параллелизма делает многоядерное программирование проще, чем когда-либо."
+  "learn.aside.title": {
+    "message": "여기서 시작"
   },
-  "homepage.contributors.title": {
-    "message": "участник"
+  "learn.hero.eyebrow": {
+    "message": "배우기"
   },
-  "homepage.contributors.role.founder": {
-    "message": "основатель языка"
+  "learn.hero.primary": {
+    "message": "Wave 설치하기"
   },
-  "homepage.contributors.role.designer": {
-    "message": "языковой дизайнер"
+  "learn.hero.secondary": {
+    "message": "문서 열기"
   },
-  "homepage.contributors.role.compiler": {
-    "message": "разработка компилятора"
+  "learn.hero.title": {
+    "message": "Wave 언어로 들어가는 공식 학습 경로."
   },
-  "homepage.contributors.role.library": {
-    "message": "Стандартный менеджер библиотеки"
+  "learn.meta.title": {
+    "message": "Wave 배우기"
   },
-  "homepage.contributors.role.contributor": {
-    "message": "участник"
+  "learn.path.install.title": {
+    "message": "Install and run"
   },
-  "homepage.sponsors.title": {
-    "message": "спонсор"
+  "learn.path.kicker": {
+    "message": "경로"
   },
-  "homepage.sponsors.tier.honor": {
-    "message": "почетный спонсор"
+  "learn.path.projects.title": {
+    "message": "Build real programs"
   },
-  "homepage.sponsors.tier.platinum": {
-    "message": "Платиновый спонсор"
+  "learn.path.syntax.title": {
+    "message": "Understand syntax"
   },
-  "homepage.sponsors.tier.gold": {
-    "message": "золотой спонсор"
+  "learn.path.title": {
+    "message": "첫 설치부터 실전 감각까지 이어집니다."
   },
-  "homepage.sponsors.tier.silver": {
-    "message": "серебряный спонсор"
+  "nav.aria": {
+    "message": "기본 탐색"
   },
-  "homepage.translations.title": {
-    "message": "Wave Принять участие в переводе"
+  "nav.community": {
+    "message": "커뮤니티"
   },
-  "homepage.translations.subtitle": {
-    "message": "Пожалуйста, внесите свой вклад в переводы, чтобы разработчики по всему миру могли изучать Wave без языковых барьеров."
+  "nav.docs": {
+    "message": "문서"
   },
-  "homepage.translations.button": {
-    "message": "Примите участие в переводе на Crowdin"
+  "nav.ecosystem": {
+    "message": "생태계"
+  },
+  "nav.home": {
+    "message": "홈"
+  },
+  "nav.learn": {
+    "message": "배우기"
+  },
+  "nav.menu": {
+    "message": "탐색 메뉴 열기"
+  },
+  "nav.mobile.aria": {
+    "message": "모바일 탐색"
+  },
+  "nav.releases": {
+    "message": "릴리스"
+  },
+  "read-the-docs": {
+    "message": "Читать документацию"
+  },
+  "releases.aside.title": {
+    "message": "버전 설치"
+  },
+  "releases.current.install.title": {
+    "message": "Installation guide"
+  },
+  "releases.current.kicker": {
+    "message": "현재 흐름"
+  },
+  "releases.current.notes.title": {
+    "message": "Release notes"
+  },
+  "releases.current.roadmap.title": {
+    "message": "Development stages"
+  },
+  "releases.current.title": {
+    "message": "지금 릴리스와 진행 상황이 어디에 있는지 보여줍니다."
+  },
+  "releases.hero.eyebrow": {
+    "message": "릴리스"
+  },
+  "releases.hero.primary": {
+    "message": "GitHub 릴리스 열기"
+  },
+  "releases.hero.secondary": {
+    "message": "로드맵 읽기"
+  },
+  "releases.hero.title": {
+    "message": "공개 릴리스, 설치 채널, 그리고 로드맵 맥락."
+  },
+  "releases.meta.title": {
+    "message": "Wave 릴리스"
+  },
+  "releases.policy.future.title": {
+    "message": "Future summary"
+  },
+  "releases.policy.kicker": {
+    "message": "정책"
+  },
+  "releases.policy.latest.title": {
+    "message": "Latest channel"
+  },
+  "releases.policy.pin.title": {
+    "message": "Pinned versions"
+  },
+  "releases.policy.title": {
+    "message": "릴리스 페이지는 기대치를 분명히 전달해야 합니다."
+  },
+  "shared.copy.copied": {
+    "message": "복사됨"
+  },
+  "shared.copy.copy": {
+    "message": "복사"
+  },
+  "tagline": {
+    "message": "Один язык, безграничные возможности"
   }
 }
