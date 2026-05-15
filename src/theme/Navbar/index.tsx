@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import {translate} from '@docusaurus/Translate';
@@ -13,6 +13,13 @@ type NavLink = {
   label: string;
   to: string;
   match?: 'prefix' | 'exact';
+};
+
+const localeDropdownItem = {
+  type: 'localeDropdown' as const,
+  position: 'right' as const,
+  dropdownItemsBefore: [],
+  dropdownItemsAfter: [],
 };
 
 const t = (id: string, message: string) => translate({id, message});
@@ -30,17 +37,14 @@ export default function Navbar(): JSX.Element {
   const {pathname} = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const links = useMemo<NavLink[]>(
-    () => [
-      {label: t('nav.home', 'Home'), to: '/', match: 'exact'},
-      {label: t('nav.docs', 'Docs'), to: '/docs'},
-      {label: t('nav.learn', 'Learn'), to: '/learn'},
-      {label: t('nav.ecosystem', 'Ecosystem'), to: '/ecosystem'},
-      {label: t('nav.releases', 'Releases'), to: '/releases'},
-      {label: t('nav.community', 'Community'), to: '/community'},
-    ],
-    [],
-  );
+  const links: NavLink[] = [
+    {label: t('nav.home', 'Home'), to: '/', match: 'exact'},
+    {label: t('nav.docs', 'Docs'), to: '/docs'},
+    {label: t('nav.learn', 'Learn'), to: '/learn'},
+    {label: t('nav.ecosystem', 'Ecosystem'), to: '/ecosystem'},
+    {label: t('nav.releases', 'Releases'), to: '/releases'},
+    {label: t('nav.community', 'Community'), to: '/community'},
+  ];
 
   return (
     <header className={styles.navbar}>
@@ -66,7 +70,7 @@ export default function Navbar(): JSX.Element {
             GitHub
           </Link>
           <div className={styles.desktopLocale}>
-            <NavbarItem type="localeDropdown" position="right" />
+            <NavbarItem {...localeDropdownItem} />
           </div>
           <NavbarColorModeToggle className={styles.colorToggle} />
           <button
@@ -99,7 +103,7 @@ export default function Navbar(): JSX.Element {
             GitHub
           </Link>
           <div className={styles.mobileLocale}>
-            <NavbarItem type="localeDropdown" position="right" />
+            <NavbarItem {...localeDropdownItem} />
           </div>
         </nav>
       </div>
