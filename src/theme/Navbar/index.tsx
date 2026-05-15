@@ -50,7 +50,7 @@ export default function Navbar(): JSX.Element {
   ];
 
   return (
-    <header className={styles.navbar}>
+    <header className={clsx('navbar', 'navbar--fixed-top', styles.navbar)}>
       <div className={clsx('container', styles.shell)}>
         <Link to="/" className={styles.brand} onClick={() => setMobileOpen(false)}>
           <img src={logo} alt="" />
