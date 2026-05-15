@@ -1,12 +1,12 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import {translate} from '@docusaurus/Translate';
 import Heading from '@theme/Heading';
 
 import styles from './styles.module.css';
 
-type CodeTabKey = 'hello' | 'control' | 'raycaster';
+type CodeTabKey = 'hello' | 'server' | 'inspect';
 
 type CodeExample = {
   label: string;
@@ -22,135 +22,24 @@ type CommandItem = {
   detail: string;
 };
 
-type PlatformTier = {
-  tier: string;
+type RouteItem = {
   title: string;
-  platforms: string;
+  description: string;
+  to: string;
+  badge: string;
+};
+
+type Principle = {
+  title: string;
   detail: string;
 };
 
-const codeExamples: Record<CodeTabKey, CodeExample> = {
-  hello: {
-    label: 'Hello',
-    title: 'A small entry point',
-    summary:
-      'Wave keeps the program entry explicit and leaves functionality to the standard library.',
-    code: `fun main() {
-    println("Hello World");
-}`,
-    output: 'Hello World',
-  },
-  control: {
-    label: 'Control',
-    title: 'Typed flow without ceremony',
-    summary:
-      'Variables, conditionals, loops, and functions use direct syntax that stays close to the machine model.',
-    code: `fun greet(name: str) {
-    println("Hello, {}!", name);
-}
-
-fun main() {
-    var x: i32 = 5;
-    var y: i32 = 10;
-
-    if (x < y) {
-        greet("Wave");
-    }
-}`,
-    output: 'Hello, Wave!',
-  },
-  raycaster: {
-    label: 'Systems',
-    title: 'Low-level code stays visible',
-    summary:
-      'The compiler is being built for explicit runtime behavior, platform APIs, and native execution.',
-    code: `import("std::sys::linux::tty");
-import("std::time::clock");
-
-const SCREEN_W: i32 = 120;
-const SCREEN_H: i32 = 40;
-
-fun main() {
-    var player_x: f64 = 8.0;
-    var player_y: f64 = 8.0;
-    var running: bool = true;
-
-    while (running) {
-        var now_ns: i64 = time_now_monotonic_ns();
-        println("frame: {}", now_ns);
-    }
-}`,
-    output: 'frame: 1837469122',
-  },
+type ReleaseItem = {
+  title: string;
+  detail: string;
 };
 
-const commands: CommandItem[] = [
-  {
-    label: 'Install',
-    command: 'curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest',
-    detail: 'Get the latest compiler release on supported Unix-like systems.',
-  },
-  {
-    label: 'Run',
-    command: 'wavec run examples/hello.wave',
-    detail: 'Compile and execute a Wave source file from the CLI.',
-  },
-  {
-    label: 'Build',
-    command: 'wavec build app.wave -o app',
-    detail: 'Emit a native binary when you are ready to ship or inspect output.',
-  },
-  {
-    label: 'Debug',
-    command: 'wavec build app.wave --debug-wave=tokens,ast,ir',
-    detail: 'Inspect compiler stages while working on language behavior.',
-  },
-];
-
-const platformTiers: PlatformTier[] = [
-  {
-    tier: 'Tier 1',
-    title: 'Primary',
-    platforms: 'Linux, Darwin, WaveOS',
-    detail: 'Full standard library support, required CI coverage, and release-blocking status.',
-  },
-  {
-    tier: 'Tier 2',
-    title: 'Secondary',
-    platforms: 'FreeBSD, Redox, Fuchsia',
-    detail: 'Maintained build support with partial standard library coverage.',
-  },
-  {
-    tier: 'Tier 3',
-    title: 'Experimental',
-    platforms: 'OpenBSD',
-    detail: 'Compiler build and compile path prioritized while platform coverage grows.',
-  },
-  {
-    tier: 'Tier 4',
-    title: 'Unofficial',
-    platforms: 'Windows',
-    detail: 'Community-maintained status without official standard library target guarantees.',
-  },
-];
-
-const principles = [
-  {
-    title: 'No builtin functions',
-    detail:
-      'The compiler stays small and explicit; higher-level functionality belongs in libraries.',
-  },
-  {
-    title: 'No implicit runtime',
-    detail:
-      'Wave favors visible behavior and predictable native output over hidden language machinery.',
-  },
-  {
-    title: 'Compiler-first architecture',
-    detail:
-      'Token, AST, IR, machine-code, and hex debugging modes keep internals inspectable.',
-  },
-];
+const t = (id: string, message: string) => translate({id, message});
 
 function CopyButton({command}: {command: string}): JSX.Element {
   const [copied, setCopied] = useState(false);
@@ -171,38 +60,79 @@ function CopyButton({command}: {command: string}): JSX.Element {
 
   return (
     <button type="button" className={styles.copyButton} onClick={copyCommand}>
-      {copied ? 'Copied' : 'Copy'}
+      {copied
+        ? t('shared.copy.copied', 'Copied')
+        : t('shared.copy.copy', 'Copy')}
     </button>
   );
 }
 
 function HeroSection(): JSX.Element {
-  const logo = useBaseUrl('/img/logo.png');
-
   return (
     <header className={styles.hero}>
-      <div className={styles.heroMedia} aria-hidden="true" />
-      <div className="container">
-        <div className={styles.heroContent}>
-          <img src={logo} alt="" className={styles.heroLogo} />
-          <p className={styles.eyebrow}>Systems programming language</p>
-          <Heading as="h1" className={styles.heroTitle}>
-            Wave
-          </Heading>
-          <p className={styles.heroSubtitle}>
-            Native systems programming with explicit behavior, standard-library
-            driven capability, and compiler internals that stay inspectable.
-          </p>
+      <div className={styles.heroBackdrop} aria-hidden="true">
+        <div className={styles.heroGlow} />
+        <div className={styles.heroGrid} />
+      </div>
 
-          <div className={styles.heroActions}>
-            <Link className={clsx('button', styles.primaryAction)} to="/docs/intro/">
-              Read Docs
-            </Link>
-            <Link
-              className={clsx('button', styles.secondaryAction)}
-              to="https://github.com/wavefnd/Wave/releases">
-              Releases
-            </Link>
+      <div className="container">
+        <div className={styles.heroLayout}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>
+              {t('home.hero.eyebrow', 'Official home of the Wave programming language')}
+            </p>
+            <Heading as="h1" className={styles.heroTitle}>
+              {t('home.hero.title', 'One language for systems, tooling, and the stack around it.')}
+            </Heading>
+            <p className={styles.heroLead}>
+              {t(
+                'home.hero.lead',
+                'Wave is building a unified language ecosystem around explicit behavior, native output, inspectable compiler stages, and a standard library that scales from CLI tools to low-level systems work.',
+              )}
+            </p>
+
+            <div className={styles.heroActions}>
+              <Link className={clsx('button', styles.primaryAction)} to="/docs/intro/">
+                {t('home.hero.primary', 'Read the docs')}
+              </Link>
+              <Link className={clsx('button', styles.secondaryAction)} to="/learn">
+                {t('home.hero.secondary', 'Start learning')}
+              </Link>
+            </div>
+
+            <dl className={styles.heroFacts}>
+              <div>
+                <dt>{t('home.hero.fact.philosophy.label', 'Philosophy')}</dt>
+                <dd>{t('home.hero.fact.philosophy.value', 'Explicit behavior over hidden magic')}</dd>
+              </div>
+              <div>
+                <dt>{t('home.hero.fact.targets.label', 'Focus')}</dt>
+                <dd>{t('home.hero.fact.targets.value', 'Compiler, std, package tooling, data format')}</dd>
+              </div>
+              <div>
+                <dt>{t('home.hero.fact.status.label', 'Status')}</dt>
+                <dd>{t('home.hero.fact.status.value', 'Active design and compiler work')}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className={styles.heroPanel}>
+            <div className={styles.terminalHeader}>
+              <span />
+              <span />
+              <span />
+            </div>
+            <pre className={styles.terminal}>
+              <code>{`$ curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest
+$ wavec run hello.wave
+Hello, Wave
+
+$ wavec build kernel.wave --debug-wave=tokens,ast,ir
+[tokens] ok
+[ast] ok
+[ir] ok
+[codegen] native binary ready`}</code>
+            </pre>
           </div>
         </div>
       </div>
@@ -211,18 +141,46 @@ function HeroSection(): JSX.Element {
 }
 
 function QuickStartSection(): JSX.Element {
+  const commands: CommandItem[] = [
+    {
+      label: t('home.quickstart.install.label', 'Install'),
+      command: 'curl -fsSL https://wave-lang.dev/install.sh | bash -s -- latest',
+      detail: t(
+        'home.quickstart.install.detail',
+        'Install the latest published compiler quickly on supported Unix-like systems.',
+      ),
+    },
+    {
+      label: t('home.quickstart.run.label', 'Run'),
+      command: 'wavec run examples/hello.wave',
+      detail: t(
+        'home.quickstart.run.detail',
+        'Compile and execute a Wave source file from the command line.',
+      ),
+    },
+    {
+      label: t('home.quickstart.inspect.label', 'Inspect'),
+      command: 'wavec build app.wave --debug-wave=tokens,ast,ir',
+      detail: t(
+        'home.quickstart.inspect.detail',
+        'Inspect compiler stages while developing the language or debugging behavior.',
+      ),
+    },
+  ];
+
   return (
-    <section className={styles.quickStart}>
-      <div className={clsx('container', styles.quickStartGrid)}>
-        <div>
-          <p className={styles.sectionKicker}>Quick start</p>
+    <section className={styles.section}>
+      <div className={clsx('container', styles.twoColumn)}>
+        <div className={styles.sectionCopy}>
+          <p className={styles.sectionKicker}>{t('home.quickstart.kicker', 'Installation')}</p>
           <Heading as="h2" className={styles.sectionTitle}>
-            Install, run, inspect.
+            {t('home.quickstart.title', 'Install fast, then move directly into code.')}
           </Heading>
           <p className={styles.sectionLead}>
-            The website now reflects the compiler repository directly: a small
-            toolchain, explicit CLI commands, and debugging flags for compiler
-            development.
+            {t(
+              'home.quickstart.lead',
+              'The official site should answer the first practical question immediately: how to get Wave, how to run it, and how to inspect what the compiler is doing.',
+            )}
           </p>
         </div>
 
@@ -245,18 +203,67 @@ function QuickStartSection(): JSX.Element {
   );
 }
 
-function CodeLabSection(): JSX.Element {
+function ExampleSection(): JSX.Element {
+  const examples: Record<CodeTabKey, CodeExample> = {
+    hello: {
+      label: t('home.examples.hello.label', 'Hello'),
+      title: t('home.examples.hello.title', 'Small entry point'),
+      summary: t(
+        'home.examples.hello.summary',
+        'Wave keeps the entry point explicit and the source readable without hiding the mechanics.',
+      ),
+      code: `fun main() {
+    println("Hello, Wave");
+}`,
+      output: 'Hello, Wave',
+    },
+    server: {
+      label: t('home.examples.server.label', 'Flow'),
+      title: t('home.examples.server.title', 'Typed control flow'),
+      summary: t(
+        'home.examples.server.summary',
+        'Basic branching and loops stay direct, with little syntax between the programmer and the behavior.',
+      ),
+      code: `fun main() {
+    var retries: i32 = 3;
+
+    while (retries > 0) {
+        println("retry {}", retries);
+        retries -= 1;
+    }
+}`,
+      output: 'retry 3',
+    },
+    inspect: {
+      label: t('home.examples.inspect.label', 'Inspect'),
+      title: t('home.examples.inspect.title', 'Compiler visibility'),
+      summary: t(
+        'home.examples.inspect.summary',
+        'The toolchain is designed to expose tokens, AST, IR, and native output instead of obscuring them.',
+      ),
+      code: `fun add(a: i32, b: i32): i32 {
+    return a + b;
+}
+
+fun main() {
+    var sum: i32 = add(20, 22);
+    println("{}", sum);
+}`,
+      output: '42',
+    },
+  };
+
   const [activeTab, setActiveTab] = useState<CodeTabKey>('hello');
-  const activeExample = codeExamples[activeTab];
-  const tabKeys = useMemo(() => Object.keys(codeExamples) as CodeTabKey[], []);
+  const tabKeys = Object.keys(examples) as CodeTabKey[];
+  const activeExample = examples[activeTab];
 
   return (
-    <section className={styles.codeLab}>
+    <section className={clsx(styles.section, styles.bandSection)}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Language surface</p>
+          <p className={styles.sectionKicker}>{t('home.examples.kicker', 'Example')}</p>
           <Heading as="h2" className={styles.sectionTitle}>
-            Small syntax, visible systems intent.
+            {t('home.examples.title', 'Show the language, not a generic landing page.')}
           </Heading>
         </div>
 
@@ -268,8 +275,8 @@ function CodeLabSection(): JSX.Element {
                 key={key}
                 className={clsx(styles.editorTab, activeTab === key && styles.editorTabActive)}
                 onClick={() => setActiveTab(key)}>
-                <span>{codeExamples[key].label}</span>
-                <strong>{codeExamples[key].title}</strong>
+                <span>{examples[key].label}</span>
+                <strong>{examples[key].title}</strong>
               </button>
             ))}
           </div>
@@ -283,6 +290,7 @@ function CodeLabSection(): JSX.Element {
               </div>
               <span>examples/{activeTab}.wave</span>
             </div>
+
             <div className={styles.editorBody}>
               <pre>
                 <code>{activeExample.code}</code>
@@ -290,7 +298,7 @@ function CodeLabSection(): JSX.Element {
               <aside>
                 <p>{activeExample.summary}</p>
                 <div className={styles.outputBox}>
-                  <span>Output</span>
+                  <span>{t('home.examples.output', 'Output')}</span>
                   <code>{activeExample.output}</code>
                 </div>
               </aside>
@@ -302,14 +310,111 @@ function CodeLabSection(): JSX.Element {
   );
 }
 
-function PrinciplesSection(): JSX.Element {
+function RouteSection(): JSX.Element {
+  const routes: RouteItem[] = [
+    {
+      title: t('home.routes.docs.title', 'Docs'),
+      description: t(
+        'home.routes.docs.description',
+        'Language reference, compiler options, standard library, WSON, and ecosystem documents.',
+      ),
+      to: '/docs/intro/',
+      badge: '/docs',
+    },
+    {
+      title: t('home.routes.learn.title', 'Learn'),
+      description: t(
+        'home.routes.learn.description',
+        'A guided path from installation to syntax, project structure, and practical next steps.',
+      ),
+      to: '/learn',
+      badge: '/learn',
+    },
+    {
+      title: t('home.routes.ecosystem.title', 'Ecosystem'),
+      description: t(
+        'home.routes.ecosystem.description',
+        'The surrounding Wave stack: Vex, Whale, WSON, and the standard library direction.',
+      ),
+      to: '/ecosystem',
+      badge: '/ecosystem',
+    },
+    {
+      title: t('home.routes.releases.title', 'Releases'),
+      description: t(
+        'home.routes.releases.description',
+        'Release channels, installation targets, roadmap links, and published release notes.',
+      ),
+      to: '/releases',
+      badge: '/releases',
+    },
+    {
+      title: t('home.routes.community.title', 'Community'),
+      description: t(
+        'home.routes.community.description',
+        'Discord, GitHub, translation participation, and contribution guidance for the project.',
+      ),
+      to: '/community',
+      badge: '/community',
+    },
+  ];
+
   return (
-    <section className={styles.principles}>
+    <section className={styles.section}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Project philosophy</p>
+          <p className={styles.sectionKicker}>{t('home.routes.kicker', 'Structure')}</p>
           <Heading as="h2" className={styles.sectionTitle}>
-            The compiler does less hidden work.
+            {t('home.routes.title', 'The site now reflects the actual project map.')}
+          </Heading>
+        </div>
+
+        <div className={styles.routeGrid}>
+          {routes.map((route) => (
+            <Link key={route.to} className={styles.routeCard} to={route.to}>
+              <span>{route.badge}</span>
+              <Heading as="h3">{route.title}</Heading>
+              <p>{route.description}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PhilosophySection(): JSX.Element {
+  const principles: Principle[] = [
+    {
+      title: t('home.principles.one.title', 'One language, many domains'),
+      detail: t(
+        'home.principles.one.detail',
+        'Wave aims to cover systems work, tooling, networking, hardware-facing code, and more without forcing the project into unrelated languages.',
+      ),
+    },
+    {
+      title: t('home.principles.two.title', 'Compiler behavior should stay visible'),
+      detail: t(
+        'home.principles.two.detail',
+        'Inspection modes for tokens, AST, IR, machine code, and output keep the language honest about what it does.',
+      ),
+    },
+    {
+      title: t('home.principles.three.title', 'Libraries carry capability'),
+      detail: t(
+        'home.principles.three.detail',
+        'The language keeps core behavior explicit while the ecosystem grows capability through std, Vex, Whale, and WSON.',
+      ),
+    },
+  ];
+
+  return (
+    <section className={clsx(styles.section, styles.surfaceSection)}>
+      <div className="container">
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionKicker}>{t('home.principles.kicker', 'Philosophy')}</p>
+          <Heading as="h2" className={styles.sectionTitle}>
+            {t('home.principles.title', 'The project philosophy belongs on the front page.')}
           </Heading>
         </div>
 
@@ -326,30 +431,61 @@ function PrinciplesSection(): JSX.Element {
   );
 }
 
-function PlatformSection(): JSX.Element {
+function ReleaseSection(): JSX.Element {
+  const releases: ReleaseItem[] = [
+    {
+      title: t('home.release.roadmap.title', 'Roadmap'),
+      detail: t(
+        'home.release.roadmap.detail',
+        'Follow the staged path from pre-beta through release candidate in the project roadmap.',
+      ),
+    },
+    {
+      title: t('home.release.notes.title', 'Published releases'),
+      detail: t(
+        'home.release.notes.detail',
+        'Release notes live on GitHub so the official site can point clearly to what has shipped.',
+      ),
+    },
+    {
+      title: t('home.release.channels.title', 'Install targets'),
+      detail: t(
+        'home.release.channels.detail',
+        'The install script supports the latest channel and explicit version pinning for reproducible setups.',
+      ),
+    },
+  ];
+
   return (
-    <section className={styles.platforms}>
-      <div className={clsx('container', styles.platformGrid)}>
-        <div>
-          <p className={styles.sectionKicker}>Target policy</p>
+    <section className={clsx(styles.section, styles.releaseSection)}>
+      <div className={clsx('container', styles.twoColumn)}>
+        <div className={styles.sectionCopy}>
+          <p className={styles.sectionKicker}>{t('home.release.kicker', 'Roadmap and releases')}</p>
           <Heading as="h2" className={styles.sectionTitle}>
-            Platform support is tiered on purpose.
+            {t('home.release.title', 'Keep progress, release notes, and roadmap in one visible place.')}
           </Heading>
           <p className={styles.sectionLead}>
-            Wave sets expectations for standard library coverage, CI, and
-            release stability by target family.
+            {t(
+              'home.release.lead',
+              'The home page should not bury project status. It should point directly to what Wave is building next and what users can install today.',
+            )}
           </p>
+
+          <div className={styles.heroActions}>
+            <Link className={clsx('button', styles.primaryAction)} to="/releases">
+              {t('home.release.primary', 'View releases')}
+            </Link>
+            <Link className={clsx('button', styles.secondaryAction)} to="/docs/intro/roadmap">
+              {t('home.release.secondary', 'Read roadmap')}
+            </Link>
+          </div>
         </div>
 
-        <div className={styles.tierList}>
-          {platformTiers.map((tier) => (
-            <article className={styles.tierRow} key={tier.tier}>
-              <div>
-                <span>{tier.tier}</span>
-                <strong>{tier.title}</strong>
-              </div>
-              <p>{tier.platforms}</p>
-              <small>{tier.detail}</small>
+        <div className={styles.releaseList}>
+          {releases.map((item) => (
+            <article className={styles.releaseCard} key={item.title}>
+              <Heading as="h3">{item.title}</Heading>
+              <p>{item.detail}</p>
             </article>
           ))}
         </div>
@@ -358,37 +494,39 @@ function PlatformSection(): JSX.Element {
   );
 }
 
-function CommunitySection(): JSX.Element {
+function TranslationSection(): JSX.Element {
   return (
-    <section className={styles.community}>
-      <div className={clsx('container', styles.communityGrid)}>
-        <div>
-          <p className={styles.sectionKicker}>Contributing</p>
+    <section className={clsx(styles.section, styles.translationSection)}>
+      <div className={clsx('container', styles.translationShell)}>
+        <div className={styles.sectionCopy}>
+          <p className={styles.sectionKicker}>{t('home.translation.kicker', 'Translation')}</p>
           <Heading as="h2" className={styles.sectionTitle}>
-            Built in public with signed-off changes.
+            {t('home.translation.title', 'Help make Wave readable in more languages.')}
           </Heading>
           <p className={styles.sectionLead}>
-            Wave accepts GitHub pull requests and email patches. Contributions
-            are expected to be focused, signed off, and verified against the
-            compiler toolchain.
+            {t(
+              'home.translation.lead',
+              'Wave already has multi-language structure in the site. Crowdin should be part of the official front door so contributors can help keep the website and docs current across languages.',
+            )}
           </p>
         </div>
 
-        <div className={styles.contributePanel}>
-          <pre>
-            <code>{`git checkout -b fix/parser-bug
-git commit -s -m "Fix parser behavior"
-git format-patch -1
-git send-email --to wave-patches@lunastev.org *.patch`}</code>
-          </pre>
-          <div className={styles.communityActions}>
-            <Link className={clsx('button', styles.primaryAction)} to="/docs/intro/">
-              Start with Docs
-            </Link>
+        <div className={styles.translationCard}>
+          <Heading as="h3">{t('home.translation.card.title', 'Translate on Crowdin')}</Heading>
+          <p>
+            {t(
+              'home.translation.card.body',
+              'Join translation work for the website and documentation, improve outdated pages, and help the language project feel native to more communities.',
+            )}
+          </p>
+          <div className={styles.heroActions}>
             <Link
-              className={clsx('button', styles.secondaryAction)}
-              to="https://discord.gg/3nev5nHqq9">
-              Join Discord
+              className={clsx('button', styles.primaryAction)}
+              href="https://crowdin.com/project/wave-website">
+              {t('home.translation.primary', 'Open Crowdin')}
+            </Link>
+            <Link className={clsx('button', styles.secondaryAction)} to="/community">
+              {t('home.translation.secondary', 'See community guide')}
             </Link>
           </div>
         </div>
@@ -402,10 +540,11 @@ export default function HomepageFeatures(): JSX.Element {
     <>
       <HeroSection />
       <QuickStartSection />
-      <CodeLabSection />
-      <PrinciplesSection />
-      <PlatformSection />
-      <CommunitySection />
+      <ExampleSection />
+      <RouteSection />
+      <PhilosophySection />
+      <ReleaseSection />
+      <TranslationSection />
     </>
   );
 }

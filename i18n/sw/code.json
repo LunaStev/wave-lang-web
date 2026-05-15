@@ -1,60 +1,327 @@
 {
-  "tagline": {
-    "message": "Lugha moja, uwezekano usio na kikomo"
+  "community.aside.title": {
+    "message": "Contribution path"
+  },
+  "community.guide.docs.title": {
+    "message": "Read the docs first"
+  },
+  "community.guide.issues.title": {
+    "message": "Discuss and open issues"
+  },
+  "community.guide.kicker": {
+    "message": "Contributing"
+  },
+  "community.guide.prs.title": {
+    "message": "Send focused changes"
+  },
+  "community.guide.title": {
+    "message": "The page should show what contribution looks like."
+  },
+  "community.hero.eyebrow": {
+    "message": "Community"
+  },
+  "community.hero.primary": {
+    "message": "Join Discord"
+  },
+  "community.hero.secondary": {
+    "message": "Open GitHub"
+  },
+  "community.hero.title": {
+    "message": "Join discussion, track source, and contribute in public."
+  },
+  "community.links.crowdin.title": {
+    "message": "Translations"
+  },
+  "community.links.discord.title": {
+    "message": "Real-time discussion"
+  },
+  "community.links.github.title": {
+    "message": "Source and issues"
+  },
+  "community.links.kicker": {
+    "message": "Channels"
+  },
+  "community.links.title": {
+    "message": "The main public channels for the project."
+  },
+  "community.meta.title": {
+    "message": "Wave Community"
+  },
+  "ecosystem.aside.title": {
+    "message": "Core pieces"
+  },
+  "ecosystem.hero.eyebrow": {
+    "message": "Ecosystem"
+  },
+  "ecosystem.hero.primary": {
+    "message": "Read ecosystem docs"
+  },
+  "ecosystem.hero.secondary": {
+    "message": "View source"
+  },
+  "ecosystem.hero.title": {
+    "message": "Wave is a language project with a full surrounding stack."
+  },
+  "ecosystem.meta.title": {
+    "message": "Wave Ecosystem"
+  },
+  "ecosystem.stack.kicker": {
+    "message": "Stack"
+  },
+  "ecosystem.stack.title": {
+    "message": "The official stack around the language."
+  },
+  "ecosystem.stack.vex.title": {
+    "message": "Vex"
+  },
+  "ecosystem.stack.whale.title": {
+    "message": "Whale"
+  },
+  "ecosystem.stack.wson.title": {
+    "message": "WSON"
+  },
+  "ecosystem.std.env.title": {
+    "message": "System-facing modules"
+  },
+  "ecosystem.std.kicker": {
+    "message": "Library"
+  },
+  "ecosystem.std.program.title": {
+    "message": "Program structure"
+  },
+  "ecosystem.std.roadmap.title": {
+    "message": "Roadmap fit"
+  },
+  "ecosystem.std.title": {
+    "message": "The standard library is part of the product story."
+  },
+  "footer.aria": {
+    "message": "Footer navigation"
+  },
+  "footer.group.external": {
+    "message": "External"
+  },
+  "footer.group.product": {
+    "message": "Product"
+  },
+  "footer.group.project": {
+    "message": "Project"
+  },
+  "footer.link.community": {
+    "message": "Community"
+  },
+  "footer.link.docs": {
+    "message": "Docs"
+  },
+  "footer.link.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "footer.link.home": {
+    "message": "Home"
+  },
+  "footer.link.learn": {
+    "message": "Learn"
+  },
+  "footer.link.license": {
+    "message": "License"
+  },
+  "footer.link.releases": {
+    "message": "Releases"
+  },
+  "footer.link.roadmap": {
+    "message": "Roadmap"
   },
   "get-started": {
     "message": "Anza ndani ya dakika 5"
   },
-  "read-the-docs": {
-    "message": "Soma hati"
+  "home.examples.hello.label": {
+    "message": "Hello"
   },
-  "homepage.hero.title": {
-    "message": "Lugha ya kisasa kwa wimbi jipya la maendeleo"
+  "home.examples.hello.title": {
+    "message": "Small entry point"
   },
-  "homepage.hero.subtitle": {
-    "message": "Sintaksia angavu, utendakazi thabiti na usalama uliojumuishwa. Wave imeundwa ili kuongeza tija yako na kufanya programu zako kuwa thabiti."
+  "home.examples.inspect.label": {
+    "message": "Inspect"
   },
-  "homepage.why_wave.title": {
-    "message": "Kwa nini uchague Wave?"
+  "home.examples.inspect.title": {
+    "message": "Compiler visibility"
   },
-  "homepage.features.one.title": {
-    "message": "mafupi na angavu"
+  "home.examples.kicker": {
+    "message": "Example"
   },
-  "homepage.features.one.description": {
-    "message": "Wave hupunguza msimbo usio wa lazima na hukuruhusu kuzingatia mantiki ya msingi. Sintaksia ya kisasa hurahisisha kujifunza na kufurahisha kutumia."
+  "home.examples.output": {
+    "message": "Output"
   },
-  "homepage.features.two.title": {
-    "message": "haraka na kwa ufanisi"
+  "home.examples.server.label": {
+    "message": "Flow"
   },
-  "homepage.features.two.description": {
-    "message": "Ikikusanywa kwa msimbo asili, inafanikisha utendakazi wa kiwango cha C++ kupitia uondoaji wa gharama sifuri. Inafaa kwa kazi muhimu za rasilimali."
+  "home.examples.server.title": {
+    "message": "Typed control flow"
   },
-  "homepage.features.three.title": {
-    "message": "salama na kwa wakati mmoja"
+  "home.examples.title": {
+    "message": "Show the language, not a generic landing page."
   },
-  "homepage.features.three.description": {
-    "message": "Huzuia hitilafu za kawaida kama makosa ya marejeleo matupu wakati wa kukusanya. Muundo wa sarafu uliojengewa ndani hurahisisha utayarishaji wa programu nyingi kuliko hapo awali."
+  "home.hero.eyebrow": {
+    "message": "Official home of the Wave programming language"
   },
-  "homepage.contributors.title": {
-    "message": "mchangiaji"
+  "home.hero.fact.philosophy.label": {
+    "message": "Philosophy"
   },
-  "homepage.contributors.role.founder": {
-    "message": "mwanzilishi wa lugha"
+  "home.hero.fact.philosophy.value": {
+    "message": "Explicit behavior over hidden magic"
   },
-  "homepage.contributors.role.designer": {
-    "message": "mbunifu wa lugha"
+  "home.hero.fact.status.label": {
+    "message": "Status"
+  },
+  "home.hero.fact.status.value": {
+    "message": "Active design and compiler work"
+  },
+  "home.hero.fact.targets.label": {
+    "message": "Focus"
+  },
+  "home.hero.fact.targets.value": {
+    "message": "Compiler, std, package tooling, data format"
+  },
+  "home.hero.primary": {
+    "message": "Read the docs"
+  },
+  "home.hero.secondary": {
+    "message": "Start learning"
+  },
+  "home.hero.title": {
+    "message": "One language for systems, tooling, and the stack around it."
+  },
+  "home.principles.kicker": {
+    "message": "Philosophy"
+  },
+  "home.principles.one.title": {
+    "message": "One language, many domains"
+  },
+  "home.principles.three.title": {
+    "message": "Libraries carry capability"
+  },
+  "home.principles.title": {
+    "message": "The project philosophy belongs on the front page."
+  },
+  "home.principles.two.title": {
+    "message": "Compiler behavior should stay visible"
+  },
+  "home.quickstart.inspect.label": {
+    "message": "Inspect"
+  },
+  "home.quickstart.install.label": {
+    "message": "Install"
+  },
+  "home.quickstart.kicker": {
+    "message": "Installation"
+  },
+  "home.quickstart.run.label": {
+    "message": "Run"
+  },
+  "home.quickstart.title": {
+    "message": "Install fast, then move directly into code."
+  },
+  "home.release.channels.title": {
+    "message": "Install targets"
+  },
+  "home.release.kicker": {
+    "message": "Roadmap and releases"
+  },
+  "home.release.notes.title": {
+    "message": "Published releases"
+  },
+  "home.release.primary": {
+    "message": "View releases"
+  },
+  "home.release.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "home.release.secondary": {
+    "message": "Read roadmap"
+  },
+  "home.release.title": {
+    "message": "Keep progress, release notes, and roadmap in one visible place."
+  },
+  "home.routes.community.title": {
+    "message": "Community"
+  },
+  "home.routes.docs.title": {
+    "message": "Docs"
+  },
+  "home.routes.ecosystem.title": {
+    "message": "Ecosystem"
+  },
+  "home.routes.kicker": {
+    "message": "Structure"
+  },
+  "home.routes.learn.title": {
+    "message": "Learn"
+  },
+  "home.routes.releases.title": {
+    "message": "Releases"
+  },
+  "home.routes.title": {
+    "message": "The site now reflects the actual project map."
+  },
+  "home.translation.card.title": {
+    "message": "Translate on Crowdin"
+  },
+  "home.translation.kicker": {
+    "message": "Translation"
+  },
+  "home.translation.primary": {
+    "message": "Open Crowdin"
+  },
+  "home.translation.secondary": {
+    "message": "See community guide"
+  },
+  "home.translation.title": {
+    "message": "Help make Wave readable in more languages."
   },
   "homepage.contributors.role.compiler": {
     "message": "maendeleo ya mkusanyaji"
   },
-  "homepage.contributors.role.library": {
-    "message": "Meneja wa maktaba ya kawaida"
-  },
   "homepage.contributors.role.contributor": {
     "message": "mchangiaji"
   },
-  "homepage.sponsors.title": {
-    "message": "mfadhili"
+  "homepage.contributors.role.designer": {
+    "message": "mbunifu wa lugha"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "mwanzilishi wa lugha"
+  },
+  "homepage.contributors.role.library": {
+    "message": "Meneja wa maktaba ya kawaida"
+  },
+  "homepage.contributors.title": {
+    "message": "mchangiaji"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave hupunguza msimbo usio wa lazima na hukuruhusu kuzingatia mantiki ya msingi. Sintaksia ya kisasa hurahisisha kujifunza na kufurahisha kutumia."
+  },
+  "homepage.features.one.title": {
+    "message": "mafupi na angavu"
+  },
+  "homepage.features.three.description": {
+    "message": "Huzuia hitilafu za kawaida kama makosa ya marejeleo matupu wakati wa kukusanya. Muundo wa sarafu uliojengewa ndani hurahisisha utayarishaji wa programu nyingi kuliko hapo awali."
+  },
+  "homepage.features.three.title": {
+    "message": "salama na kwa wakati mmoja"
+  },
+  "homepage.features.two.description": {
+    "message": "Ikikusanywa kwa msimbo asili, inafanikisha utendakazi wa kiwango cha C++ kupitia uondoaji wa gharama sifuri. Inafaa kwa kazi muhimu za rasilimali."
+  },
+  "homepage.features.two.title": {
+    "message": "haraka na kwa ufanisi"
+  },
+  "homepage.hero.subtitle": {
+    "message": "Sintaksia angavu, utendakazi thabiti na usalama uliojumuishwa. Wave imeundwa ili kuongeza tija yako na kufanya programu zako kuwa thabiti."
+  },
+  "homepage.hero.title": {
+    "message": "Lugha ya kisasa kwa wimbi jipya la maendeleo"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "mfadhili wa dhahabu"
   },
   "homepage.sponsors.tier.honor": {
     "message": "mfadhili wa heshima"
@@ -62,19 +329,157 @@
   "homepage.sponsors.tier.platinum": {
     "message": "Mfadhili wa Platinum"
   },
-  "homepage.sponsors.tier.gold": {
-    "message": "mfadhili wa dhahabu"
-  },
   "homepage.sponsors.tier.silver": {
     "message": "mfadhili wa fedha"
   },
-  "homepage.translations.title": {
-    "message": "Wave Shiriki katika kutafsiri"
+  "homepage.sponsors.title": {
+    "message": "mfadhili"
+  },
+  "homepage.translations.button": {
+    "message": "Shiriki katika kutafsiri katika Crowdin"
   },
   "homepage.translations.subtitle": {
     "message": "Tafadhali changia tafsiri ili wasanidi programu kote ulimwenguni waweze kujifunza Wave bila vizuizi vya lugha."
   },
-  "homepage.translations.button": {
-    "message": "Shiriki katika kutafsiri katika Crowdin"
+  "homepage.translations.title": {
+    "message": "Wave Shiriki katika kutafsiri"
+  },
+  "homepage.why_wave.title": {
+    "message": "Kwa nini uchague Wave?"
+  },
+  "learn.areas.cli.title": {
+    "message": "CLI and toolchain"
+  },
+  "learn.areas.kicker": {
+    "message": "Study areas"
+  },
+  "learn.areas.std.title": {
+    "message": "Standard library"
+  },
+  "learn.areas.title": {
+    "message": "The main concepts are already in the docs."
+  },
+  "learn.areas.wson.title": {
+    "message": "WSON"
+  },
+  "learn.aside.title": {
+    "message": "Start here"
+  },
+  "learn.hero.eyebrow": {
+    "message": "Learn"
+  },
+  "learn.hero.primary": {
+    "message": "Install Wave"
+  },
+  "learn.hero.secondary": {
+    "message": "Open docs"
+  },
+  "learn.hero.title": {
+    "message": "A guided path into the Wave language."
+  },
+  "learn.meta.title": {
+    "message": "Learn Wave"
+  },
+  "learn.path.install.title": {
+    "message": "Install and run"
+  },
+  "learn.path.kicker": {
+    "message": "Path"
+  },
+  "learn.path.projects.title": {
+    "message": "Build real programs"
+  },
+  "learn.path.syntax.title": {
+    "message": "Understand syntax"
+  },
+  "learn.path.title": {
+    "message": "Move from first install to practical fluency."
+  },
+  "nav.aria": {
+    "message": "Primary navigation"
+  },
+  "nav.community": {
+    "message": "Community"
+  },
+  "nav.docs": {
+    "message": "Docs"
+  },
+  "nav.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "nav.home": {
+    "message": "Home"
+  },
+  "nav.learn": {
+    "message": "Learn"
+  },
+  "nav.menu": {
+    "message": "Toggle navigation menu"
+  },
+  "nav.mobile.aria": {
+    "message": "Mobile navigation"
+  },
+  "nav.releases": {
+    "message": "Releases"
+  },
+  "read-the-docs": {
+    "message": "Soma hati"
+  },
+  "releases.aside.title": {
+    "message": "Version install"
+  },
+  "releases.current.install.title": {
+    "message": "Installation guide"
+  },
+  "releases.current.kicker": {
+    "message": "Current flow"
+  },
+  "releases.current.notes.title": {
+    "message": "Release notes"
+  },
+  "releases.current.roadmap.title": {
+    "message": "Development stages"
+  },
+  "releases.current.title": {
+    "message": "Where releases and progress live today."
+  },
+  "releases.hero.eyebrow": {
+    "message": "Releases"
+  },
+  "releases.hero.primary": {
+    "message": "Open GitHub releases"
+  },
+  "releases.hero.secondary": {
+    "message": "Read roadmap"
+  },
+  "releases.hero.title": {
+    "message": "Published releases, install channels, and roadmap context."
+  },
+  "releases.meta.title": {
+    "message": "Wave Releases"
+  },
+  "releases.policy.future.title": {
+    "message": "Future summary"
+  },
+  "releases.policy.kicker": {
+    "message": "Policy"
+  },
+  "releases.policy.latest.title": {
+    "message": "Latest channel"
+  },
+  "releases.policy.pin.title": {
+    "message": "Pinned versions"
+  },
+  "releases.policy.title": {
+    "message": "The release page should set expectations clearly."
+  },
+  "shared.copy.copied": {
+    "message": "Copied"
+  },
+  "shared.copy.copy": {
+    "message": "Copy"
+  },
+  "tagline": {
+    "message": "Lugha moja, uwezekano usio na kikomo"
   }
 }

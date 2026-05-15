@@ -1,60 +1,327 @@
 {
-  "tagline": {
-    "message": "یک زبان، امکانات بی نهایت"
+  "community.aside.title": {
+    "message": "Contribution path"
+  },
+  "community.guide.docs.title": {
+    "message": "Read the docs first"
+  },
+  "community.guide.issues.title": {
+    "message": "Discuss and open issues"
+  },
+  "community.guide.kicker": {
+    "message": "Contributing"
+  },
+  "community.guide.prs.title": {
+    "message": "Send focused changes"
+  },
+  "community.guide.title": {
+    "message": "The page should show what contribution looks like."
+  },
+  "community.hero.eyebrow": {
+    "message": "Community"
+  },
+  "community.hero.primary": {
+    "message": "Join Discord"
+  },
+  "community.hero.secondary": {
+    "message": "Open GitHub"
+  },
+  "community.hero.title": {
+    "message": "Join discussion, track source, and contribute in public."
+  },
+  "community.links.crowdin.title": {
+    "message": "Translations"
+  },
+  "community.links.discord.title": {
+    "message": "Real-time discussion"
+  },
+  "community.links.github.title": {
+    "message": "Source and issues"
+  },
+  "community.links.kicker": {
+    "message": "Channels"
+  },
+  "community.links.title": {
+    "message": "The main public channels for the project."
+  },
+  "community.meta.title": {
+    "message": "Wave Community"
+  },
+  "ecosystem.aside.title": {
+    "message": "Core pieces"
+  },
+  "ecosystem.hero.eyebrow": {
+    "message": "Ecosystem"
+  },
+  "ecosystem.hero.primary": {
+    "message": "Read ecosystem docs"
+  },
+  "ecosystem.hero.secondary": {
+    "message": "View source"
+  },
+  "ecosystem.hero.title": {
+    "message": "Wave is a language project with a full surrounding stack."
+  },
+  "ecosystem.meta.title": {
+    "message": "Wave Ecosystem"
+  },
+  "ecosystem.stack.kicker": {
+    "message": "Stack"
+  },
+  "ecosystem.stack.title": {
+    "message": "The official stack around the language."
+  },
+  "ecosystem.stack.vex.title": {
+    "message": "Vex"
+  },
+  "ecosystem.stack.whale.title": {
+    "message": "Whale"
+  },
+  "ecosystem.stack.wson.title": {
+    "message": "WSON"
+  },
+  "ecosystem.std.env.title": {
+    "message": "System-facing modules"
+  },
+  "ecosystem.std.kicker": {
+    "message": "Library"
+  },
+  "ecosystem.std.program.title": {
+    "message": "Program structure"
+  },
+  "ecosystem.std.roadmap.title": {
+    "message": "Roadmap fit"
+  },
+  "ecosystem.std.title": {
+    "message": "The standard library is part of the product story."
+  },
+  "footer.aria": {
+    "message": "Footer navigation"
+  },
+  "footer.group.external": {
+    "message": "External"
+  },
+  "footer.group.product": {
+    "message": "Product"
+  },
+  "footer.group.project": {
+    "message": "Project"
+  },
+  "footer.link.community": {
+    "message": "Community"
+  },
+  "footer.link.docs": {
+    "message": "Docs"
+  },
+  "footer.link.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "footer.link.home": {
+    "message": "Home"
+  },
+  "footer.link.learn": {
+    "message": "Learn"
+  },
+  "footer.link.license": {
+    "message": "License"
+  },
+  "footer.link.releases": {
+    "message": "Releases"
+  },
+  "footer.link.roadmap": {
+    "message": "Roadmap"
   },
   "get-started": {
     "message": "در 5 دقیقه شروع کنید"
   },
-  "read-the-docs": {
-    "message": "سند را بخوانید"
+  "home.examples.hello.label": {
+    "message": "Hello"
   },
-  "homepage.hero.title": {
-    "message": "یک زبان مدرن برای موج جدیدی از توسعه"
+  "home.examples.hello.title": {
+    "message": "Small entry point"
   },
-  "homepage.hero.subtitle": {
-    "message": "نحو بصری، عملکرد قدرتمند، و ایمنی داخلی. Wave برای افزایش بهره وری و قوی ساختن برنامه های شما طراحی شده است."
+  "home.examples.inspect.label": {
+    "message": "Inspect"
   },
-  "homepage.why_wave.title": {
-    "message": "چرا Wave را انتخاب کنید؟"
+  "home.examples.inspect.title": {
+    "message": "Compiler visibility"
   },
-  "homepage.features.one.title": {
-    "message": "مختصر و شهودی"
+  "home.examples.kicker": {
+    "message": "Example"
   },
-  "homepage.features.one.description": {
-    "message": "Wave کدهای غیر ضروری را کاهش می دهد و به شما امکان می دهد بر روی منطق اصلی تمرکز کنید. نحو مدرن یادگیری آن را آسان و استفاده را سرگرم کننده می کند."
+  "home.examples.output": {
+    "message": "Output"
   },
-  "homepage.features.two.title": {
-    "message": "سریع و کارآمد"
+  "home.examples.server.label": {
+    "message": "Flow"
   },
-  "homepage.features.two.description": {
-    "message": "کامپایل شده در کد بومی، عملکرد سطح C++ را از طریق انتزاع هزینه صفر به دست می آورد. ایده آل برای وظایف حیاتی منابع."
+  "home.examples.server.title": {
+    "message": "Typed control flow"
   },
-  "homepage.features.three.title": {
-    "message": "امن و همزمان"
+  "home.examples.title": {
+    "message": "Show the language, not a generic landing page."
   },
-  "homepage.features.three.description": {
-    "message": "از اشکالات رایج مانند خطاهای مرجع تهی در زمان کامپایل جلوگیری می کند. مدل همزمانی داخلی برنامه‌نویسی چند هسته‌ای را آسان‌تر از همیشه می‌کند."
+  "home.hero.eyebrow": {
+    "message": "Official home of the Wave programming language"
   },
-  "homepage.contributors.title": {
-    "message": "مشارکت کننده"
+  "home.hero.fact.philosophy.label": {
+    "message": "Philosophy"
   },
-  "homepage.contributors.role.founder": {
-    "message": "بنیانگذار زبان"
+  "home.hero.fact.philosophy.value": {
+    "message": "Explicit behavior over hidden magic"
   },
-  "homepage.contributors.role.designer": {
-    "message": "طراح زبان"
+  "home.hero.fact.status.label": {
+    "message": "Status"
+  },
+  "home.hero.fact.status.value": {
+    "message": "Active design and compiler work"
+  },
+  "home.hero.fact.targets.label": {
+    "message": "Focus"
+  },
+  "home.hero.fact.targets.value": {
+    "message": "Compiler, std, package tooling, data format"
+  },
+  "home.hero.primary": {
+    "message": "Read the docs"
+  },
+  "home.hero.secondary": {
+    "message": "Start learning"
+  },
+  "home.hero.title": {
+    "message": "One language for systems, tooling, and the stack around it."
+  },
+  "home.principles.kicker": {
+    "message": "Philosophy"
+  },
+  "home.principles.one.title": {
+    "message": "One language, many domains"
+  },
+  "home.principles.three.title": {
+    "message": "Libraries carry capability"
+  },
+  "home.principles.title": {
+    "message": "The project philosophy belongs on the front page."
+  },
+  "home.principles.two.title": {
+    "message": "Compiler behavior should stay visible"
+  },
+  "home.quickstart.inspect.label": {
+    "message": "Inspect"
+  },
+  "home.quickstart.install.label": {
+    "message": "Install"
+  },
+  "home.quickstart.kicker": {
+    "message": "Installation"
+  },
+  "home.quickstart.run.label": {
+    "message": "Run"
+  },
+  "home.quickstart.title": {
+    "message": "Install fast, then move directly into code."
+  },
+  "home.release.channels.title": {
+    "message": "Install targets"
+  },
+  "home.release.kicker": {
+    "message": "Roadmap and releases"
+  },
+  "home.release.notes.title": {
+    "message": "Published releases"
+  },
+  "home.release.primary": {
+    "message": "View releases"
+  },
+  "home.release.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "home.release.secondary": {
+    "message": "Read roadmap"
+  },
+  "home.release.title": {
+    "message": "Keep progress, release notes, and roadmap in one visible place."
+  },
+  "home.routes.community.title": {
+    "message": "Community"
+  },
+  "home.routes.docs.title": {
+    "message": "Docs"
+  },
+  "home.routes.ecosystem.title": {
+    "message": "Ecosystem"
+  },
+  "home.routes.kicker": {
+    "message": "Structure"
+  },
+  "home.routes.learn.title": {
+    "message": "Learn"
+  },
+  "home.routes.releases.title": {
+    "message": "Releases"
+  },
+  "home.routes.title": {
+    "message": "The site now reflects the actual project map."
+  },
+  "home.translation.card.title": {
+    "message": "Translate on Crowdin"
+  },
+  "home.translation.kicker": {
+    "message": "Translation"
+  },
+  "home.translation.primary": {
+    "message": "Open Crowdin"
+  },
+  "home.translation.secondary": {
+    "message": "See community guide"
+  },
+  "home.translation.title": {
+    "message": "Help make Wave readable in more languages."
   },
   "homepage.contributors.role.compiler": {
     "message": "توسعه کامپایلر"
   },
-  "homepage.contributors.role.library": {
-    "message": "مدیر کتابخانه استاندارد"
-  },
   "homepage.contributors.role.contributor": {
     "message": "مشارکت کننده"
   },
-  "homepage.sponsors.title": {
-    "message": "حامی"
+  "homepage.contributors.role.designer": {
+    "message": "طراح زبان"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "بنیانگذار زبان"
+  },
+  "homepage.contributors.role.library": {
+    "message": "مدیر کتابخانه استاندارد"
+  },
+  "homepage.contributors.title": {
+    "message": "مشارکت کننده"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave کدهای غیر ضروری را کاهش می دهد و به شما امکان می دهد بر روی منطق اصلی تمرکز کنید. نحو مدرن یادگیری آن را آسان و استفاده را سرگرم کننده می کند."
+  },
+  "homepage.features.one.title": {
+    "message": "مختصر و شهودی"
+  },
+  "homepage.features.three.description": {
+    "message": "از اشکالات رایج مانند خطاهای مرجع تهی در زمان کامپایل جلوگیری می کند. مدل همزمانی داخلی برنامه‌نویسی چند هسته‌ای را آسان‌تر از همیشه می‌کند."
+  },
+  "homepage.features.three.title": {
+    "message": "امن و همزمان"
+  },
+  "homepage.features.two.description": {
+    "message": "کامپایل شده در کد بومی، عملکرد سطح C++ را از طریق انتزاع هزینه صفر به دست می آورد. ایده آل برای وظایف حیاتی منابع."
+  },
+  "homepage.features.two.title": {
+    "message": "سریع و کارآمد"
+  },
+  "homepage.hero.subtitle": {
+    "message": "نحو بصری، عملکرد قدرتمند، و ایمنی داخلی. Wave برای افزایش بهره وری و قوی ساختن برنامه های شما طراحی شده است."
+  },
+  "homepage.hero.title": {
+    "message": "یک زبان مدرن برای موج جدیدی از توسعه"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "حامی طلا"
   },
   "homepage.sponsors.tier.honor": {
     "message": "حامی افتخاری"
@@ -62,19 +329,157 @@
   "homepage.sponsors.tier.platinum": {
     "message": "حامی پلاتینیوم"
   },
-  "homepage.sponsors.tier.gold": {
-    "message": "حامی طلا"
-  },
   "homepage.sponsors.tier.silver": {
     "message": "اسپانسر نقره ای"
   },
-  "homepage.translations.title": {
-    "message": "Wave در ترجمه شرکت کنید"
+  "homepage.sponsors.title": {
+    "message": "حامی"
+  },
+  "homepage.translations.button": {
+    "message": "شرکت در ترجمه در Crowdin"
   },
   "homepage.translations.subtitle": {
     "message": "لطفاً در ترجمه ها مشارکت کنید تا توسعه دهندگان در سراسر جهان بتوانند Wave را بدون موانع زبانی یاد بگیرند."
   },
-  "homepage.translations.button": {
-    "message": "شرکت در ترجمه در Crowdin"
+  "homepage.translations.title": {
+    "message": "Wave در ترجمه شرکت کنید"
+  },
+  "homepage.why_wave.title": {
+    "message": "چرا Wave را انتخاب کنید؟"
+  },
+  "learn.areas.cli.title": {
+    "message": "CLI and toolchain"
+  },
+  "learn.areas.kicker": {
+    "message": "Study areas"
+  },
+  "learn.areas.std.title": {
+    "message": "Standard library"
+  },
+  "learn.areas.title": {
+    "message": "The main concepts are already in the docs."
+  },
+  "learn.areas.wson.title": {
+    "message": "WSON"
+  },
+  "learn.aside.title": {
+    "message": "Start here"
+  },
+  "learn.hero.eyebrow": {
+    "message": "Learn"
+  },
+  "learn.hero.primary": {
+    "message": "Install Wave"
+  },
+  "learn.hero.secondary": {
+    "message": "Open docs"
+  },
+  "learn.hero.title": {
+    "message": "A guided path into the Wave language."
+  },
+  "learn.meta.title": {
+    "message": "Learn Wave"
+  },
+  "learn.path.install.title": {
+    "message": "Install and run"
+  },
+  "learn.path.kicker": {
+    "message": "Path"
+  },
+  "learn.path.projects.title": {
+    "message": "Build real programs"
+  },
+  "learn.path.syntax.title": {
+    "message": "Understand syntax"
+  },
+  "learn.path.title": {
+    "message": "Move from first install to practical fluency."
+  },
+  "nav.aria": {
+    "message": "Primary navigation"
+  },
+  "nav.community": {
+    "message": "Community"
+  },
+  "nav.docs": {
+    "message": "Docs"
+  },
+  "nav.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "nav.home": {
+    "message": "Home"
+  },
+  "nav.learn": {
+    "message": "Learn"
+  },
+  "nav.menu": {
+    "message": "Toggle navigation menu"
+  },
+  "nav.mobile.aria": {
+    "message": "Mobile navigation"
+  },
+  "nav.releases": {
+    "message": "Releases"
+  },
+  "read-the-docs": {
+    "message": "سند را بخوانید"
+  },
+  "releases.aside.title": {
+    "message": "Version install"
+  },
+  "releases.current.install.title": {
+    "message": "Installation guide"
+  },
+  "releases.current.kicker": {
+    "message": "Current flow"
+  },
+  "releases.current.notes.title": {
+    "message": "Release notes"
+  },
+  "releases.current.roadmap.title": {
+    "message": "Development stages"
+  },
+  "releases.current.title": {
+    "message": "Where releases and progress live today."
+  },
+  "releases.hero.eyebrow": {
+    "message": "Releases"
+  },
+  "releases.hero.primary": {
+    "message": "Open GitHub releases"
+  },
+  "releases.hero.secondary": {
+    "message": "Read roadmap"
+  },
+  "releases.hero.title": {
+    "message": "Published releases, install channels, and roadmap context."
+  },
+  "releases.meta.title": {
+    "message": "Wave Releases"
+  },
+  "releases.policy.future.title": {
+    "message": "Future summary"
+  },
+  "releases.policy.kicker": {
+    "message": "Policy"
+  },
+  "releases.policy.latest.title": {
+    "message": "Latest channel"
+  },
+  "releases.policy.pin.title": {
+    "message": "Pinned versions"
+  },
+  "releases.policy.title": {
+    "message": "The release page should set expectations clearly."
+  },
+  "shared.copy.copied": {
+    "message": "Copied"
+  },
+  "shared.copy.copy": {
+    "message": "Copy"
+  },
+  "tagline": {
+    "message": "یک زبان، امکانات بی نهایت"
   }
 }

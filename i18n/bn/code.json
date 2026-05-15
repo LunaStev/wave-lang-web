@@ -1,60 +1,327 @@
 {
-  "tagline": {
-    "message": "এক ভাষা, অসীম সম্ভাবনা"
+  "community.aside.title": {
+    "message": "Contribution path"
+  },
+  "community.guide.docs.title": {
+    "message": "Read the docs first"
+  },
+  "community.guide.issues.title": {
+    "message": "Discuss and open issues"
+  },
+  "community.guide.kicker": {
+    "message": "Contributing"
+  },
+  "community.guide.prs.title": {
+    "message": "Send focused changes"
+  },
+  "community.guide.title": {
+    "message": "The page should show what contribution looks like."
+  },
+  "community.hero.eyebrow": {
+    "message": "Community"
+  },
+  "community.hero.primary": {
+    "message": "Join Discord"
+  },
+  "community.hero.secondary": {
+    "message": "Open GitHub"
+  },
+  "community.hero.title": {
+    "message": "Join discussion, track source, and contribute in public."
+  },
+  "community.links.crowdin.title": {
+    "message": "Translations"
+  },
+  "community.links.discord.title": {
+    "message": "Real-time discussion"
+  },
+  "community.links.github.title": {
+    "message": "Source and issues"
+  },
+  "community.links.kicker": {
+    "message": "Channels"
+  },
+  "community.links.title": {
+    "message": "The main public channels for the project."
+  },
+  "community.meta.title": {
+    "message": "Wave Community"
+  },
+  "ecosystem.aside.title": {
+    "message": "Core pieces"
+  },
+  "ecosystem.hero.eyebrow": {
+    "message": "Ecosystem"
+  },
+  "ecosystem.hero.primary": {
+    "message": "Read ecosystem docs"
+  },
+  "ecosystem.hero.secondary": {
+    "message": "View source"
+  },
+  "ecosystem.hero.title": {
+    "message": "Wave is a language project with a full surrounding stack."
+  },
+  "ecosystem.meta.title": {
+    "message": "Wave Ecosystem"
+  },
+  "ecosystem.stack.kicker": {
+    "message": "Stack"
+  },
+  "ecosystem.stack.title": {
+    "message": "The official stack around the language."
+  },
+  "ecosystem.stack.vex.title": {
+    "message": "Vex"
+  },
+  "ecosystem.stack.whale.title": {
+    "message": "Whale"
+  },
+  "ecosystem.stack.wson.title": {
+    "message": "WSON"
+  },
+  "ecosystem.std.env.title": {
+    "message": "System-facing modules"
+  },
+  "ecosystem.std.kicker": {
+    "message": "Library"
+  },
+  "ecosystem.std.program.title": {
+    "message": "Program structure"
+  },
+  "ecosystem.std.roadmap.title": {
+    "message": "Roadmap fit"
+  },
+  "ecosystem.std.title": {
+    "message": "The standard library is part of the product story."
+  },
+  "footer.aria": {
+    "message": "Footer navigation"
+  },
+  "footer.group.external": {
+    "message": "External"
+  },
+  "footer.group.product": {
+    "message": "Product"
+  },
+  "footer.group.project": {
+    "message": "Project"
+  },
+  "footer.link.community": {
+    "message": "Community"
+  },
+  "footer.link.docs": {
+    "message": "Docs"
+  },
+  "footer.link.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "footer.link.home": {
+    "message": "Home"
+  },
+  "footer.link.learn": {
+    "message": "Learn"
+  },
+  "footer.link.license": {
+    "message": "License"
+  },
+  "footer.link.releases": {
+    "message": "Releases"
+  },
+  "footer.link.roadmap": {
+    "message": "Roadmap"
   },
   "get-started": {
     "message": "5 মিনিটের মধ্যে শুরু করুন"
   },
-  "read-the-docs": {
-    "message": "ডকুমেন্ট পড়ুন"
+  "home.examples.hello.label": {
+    "message": "Hello"
   },
-  "homepage.hero.title": {
-    "message": "উন্নয়নের একটি নতুন তরঙ্গের জন্য একটি আধুনিক ভাষা"
+  "home.examples.hello.title": {
+    "message": "Small entry point"
   },
-  "homepage.hero.subtitle": {
-    "message": "স্বজ্ঞাত সিনট্যাক্স, শক্তিশালী কর্মক্ষমতা, এবং অন্তর্নির্মিত নিরাপত্তা। Wave আপনার উত্পাদনশীলতা বাড়াতে এবং আপনার অ্যাপ্লিকেশনগুলিকে শক্তিশালী করার জন্য ডিজাইন করা হয়েছে৷"
+  "home.examples.inspect.label": {
+    "message": "Inspect"
   },
-  "homepage.why_wave.title": {
-    "message": "কেন Wave বেছে নিন?"
+  "home.examples.inspect.title": {
+    "message": "Compiler visibility"
   },
-  "homepage.features.one.title": {
-    "message": "সংক্ষিপ্ত এবং স্বজ্ঞাত"
+  "home.examples.kicker": {
+    "message": "Example"
   },
-  "homepage.features.one.description": {
-    "message": "Wave অপ্রয়োজনীয় কোড হ্রাস করে এবং আপনাকে মূল যুক্তিতে ফোকাস করতে দেয়। আধুনিক সিনট্যাক্স শিখতে সহজ এবং ব্যবহার করা মজাদার করে তোলে।"
+  "home.examples.output": {
+    "message": "Output"
   },
-  "homepage.features.two.title": {
-    "message": "দ্রুত এবং দক্ষ"
+  "home.examples.server.label": {
+    "message": "Flow"
   },
-  "homepage.features.two.description": {
-    "message": "নেটিভ কোডে সংকলিত, এটি শূন্য-খরচ বিমূর্ততার মাধ্যমে C++ স্তরের কর্মক্ষমতা অর্জন করে। সম্পদ-সমালোচনামূলক কাজের জন্য আদর্শ।"
+  "home.examples.server.title": {
+    "message": "Typed control flow"
   },
-  "homepage.features.three.title": {
-    "message": "নিরাপদ এবং একযোগে"
+  "home.examples.title": {
+    "message": "Show the language, not a generic landing page."
   },
-  "homepage.features.three.description": {
-    "message": "কম্পাইল সময়ে নাল রেফারেন্স ত্রুটির মত সাধারণ বাগ প্রতিরোধ করে। বিল্ট-ইন কনকারেন্সি মডেল মাল্টিকোর প্রোগ্রামিংকে আগের চেয়ে সহজ করে তোলে।"
+  "home.hero.eyebrow": {
+    "message": "Official home of the Wave programming language"
   },
-  "homepage.contributors.title": {
-    "message": "অবদানকারী"
+  "home.hero.fact.philosophy.label": {
+    "message": "Philosophy"
   },
-  "homepage.contributors.role.founder": {
-    "message": "ভাষার প্রতিষ্ঠাতা"
+  "home.hero.fact.philosophy.value": {
+    "message": "Explicit behavior over hidden magic"
   },
-  "homepage.contributors.role.designer": {
-    "message": "ভাষা ডিজাইনার"
+  "home.hero.fact.status.label": {
+    "message": "Status"
+  },
+  "home.hero.fact.status.value": {
+    "message": "Active design and compiler work"
+  },
+  "home.hero.fact.targets.label": {
+    "message": "Focus"
+  },
+  "home.hero.fact.targets.value": {
+    "message": "Compiler, std, package tooling, data format"
+  },
+  "home.hero.primary": {
+    "message": "Read the docs"
+  },
+  "home.hero.secondary": {
+    "message": "Start learning"
+  },
+  "home.hero.title": {
+    "message": "One language for systems, tooling, and the stack around it."
+  },
+  "home.principles.kicker": {
+    "message": "Philosophy"
+  },
+  "home.principles.one.title": {
+    "message": "One language, many domains"
+  },
+  "home.principles.three.title": {
+    "message": "Libraries carry capability"
+  },
+  "home.principles.title": {
+    "message": "The project philosophy belongs on the front page."
+  },
+  "home.principles.two.title": {
+    "message": "Compiler behavior should stay visible"
+  },
+  "home.quickstart.inspect.label": {
+    "message": "Inspect"
+  },
+  "home.quickstart.install.label": {
+    "message": "Install"
+  },
+  "home.quickstart.kicker": {
+    "message": "Installation"
+  },
+  "home.quickstart.run.label": {
+    "message": "Run"
+  },
+  "home.quickstart.title": {
+    "message": "Install fast, then move directly into code."
+  },
+  "home.release.channels.title": {
+    "message": "Install targets"
+  },
+  "home.release.kicker": {
+    "message": "Roadmap and releases"
+  },
+  "home.release.notes.title": {
+    "message": "Published releases"
+  },
+  "home.release.primary": {
+    "message": "View releases"
+  },
+  "home.release.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "home.release.secondary": {
+    "message": "Read roadmap"
+  },
+  "home.release.title": {
+    "message": "Keep progress, release notes, and roadmap in one visible place."
+  },
+  "home.routes.community.title": {
+    "message": "Community"
+  },
+  "home.routes.docs.title": {
+    "message": "Docs"
+  },
+  "home.routes.ecosystem.title": {
+    "message": "Ecosystem"
+  },
+  "home.routes.kicker": {
+    "message": "Structure"
+  },
+  "home.routes.learn.title": {
+    "message": "Learn"
+  },
+  "home.routes.releases.title": {
+    "message": "Releases"
+  },
+  "home.routes.title": {
+    "message": "The site now reflects the actual project map."
+  },
+  "home.translation.card.title": {
+    "message": "Translate on Crowdin"
+  },
+  "home.translation.kicker": {
+    "message": "Translation"
+  },
+  "home.translation.primary": {
+    "message": "Open Crowdin"
+  },
+  "home.translation.secondary": {
+    "message": "See community guide"
+  },
+  "home.translation.title": {
+    "message": "Help make Wave readable in more languages."
   },
   "homepage.contributors.role.compiler": {
     "message": "কম্পাইলার উন্নয়ন"
   },
-  "homepage.contributors.role.library": {
-    "message": "স্ট্যান্ডার্ড লাইব্রেরি ম্যানেজার"
-  },
   "homepage.contributors.role.contributor": {
     "message": "অবদানকারী"
   },
-  "homepage.sponsors.title": {
-    "message": "পৃষ্ঠপোষক"
+  "homepage.contributors.role.designer": {
+    "message": "ভাষা ডিজাইনার"
+  },
+  "homepage.contributors.role.founder": {
+    "message": "ভাষার প্রতিষ্ঠাতা"
+  },
+  "homepage.contributors.role.library": {
+    "message": "স্ট্যান্ডার্ড লাইব্রেরি ম্যানেজার"
+  },
+  "homepage.contributors.title": {
+    "message": "অবদানকারী"
+  },
+  "homepage.features.one.description": {
+    "message": "Wave অপ্রয়োজনীয় কোড হ্রাস করে এবং আপনাকে মূল যুক্তিতে ফোকাস করতে দেয়। আধুনিক সিনট্যাক্স শিখতে সহজ এবং ব্যবহার করা মজাদার করে তোলে।"
+  },
+  "homepage.features.one.title": {
+    "message": "সংক্ষিপ্ত এবং স্বজ্ঞাত"
+  },
+  "homepage.features.three.description": {
+    "message": "কম্পাইল সময়ে নাল রেফারেন্স ত্রুটির মত সাধারণ বাগ প্রতিরোধ করে। বিল্ট-ইন কনকারেন্সি মডেল মাল্টিকোর প্রোগ্রামিংকে আগের চেয়ে সহজ করে তোলে।"
+  },
+  "homepage.features.three.title": {
+    "message": "নিরাপদ এবং একযোগে"
+  },
+  "homepage.features.two.description": {
+    "message": "নেটিভ কোডে সংকলিত, এটি শূন্য-খরচ বিমূর্ততার মাধ্যমে C++ স্তরের কর্মক্ষমতা অর্জন করে। সম্পদ-সমালোচনামূলক কাজের জন্য আদর্শ।"
+  },
+  "homepage.features.two.title": {
+    "message": "দ্রুত এবং দক্ষ"
+  },
+  "homepage.hero.subtitle": {
+    "message": "স্বজ্ঞাত সিনট্যাক্স, শক্তিশালী কর্মক্ষমতা, এবং অন্তর্নির্মিত নিরাপত্তা। Wave আপনার উত্পাদনশীলতা বাড়াতে এবং আপনার অ্যাপ্লিকেশনগুলিকে শক্তিশালী করার জন্য ডিজাইন করা হয়েছে৷"
+  },
+  "homepage.hero.title": {
+    "message": "উন্নয়নের একটি নতুন তরঙ্গের জন্য একটি আধুনিক ভাষা"
+  },
+  "homepage.sponsors.tier.gold": {
+    "message": "সোনার পৃষ্ঠপোষক"
   },
   "homepage.sponsors.tier.honor": {
     "message": "সম্মানসূচক স্পনসর"
@@ -62,19 +329,157 @@
   "homepage.sponsors.tier.platinum": {
     "message": "প্লাটিনাম স্পনসর"
   },
-  "homepage.sponsors.tier.gold": {
-    "message": "সোনার পৃষ্ঠপোষক"
-  },
   "homepage.sponsors.tier.silver": {
     "message": "সিলভার স্পনসর"
   },
-  "homepage.translations.title": {
-    "message": "Wave অনুবাদে অংশগ্রহণ করুন"
+  "homepage.sponsors.title": {
+    "message": "পৃষ্ঠপোষক"
+  },
+  "homepage.translations.button": {
+    "message": "Crowdin এ অনুবাদে অংশগ্রহণ করুন"
   },
   "homepage.translations.subtitle": {
     "message": "অনুগ্রহ করে অনুবাদগুলিতে অবদান রাখুন যাতে সারা বিশ্বের বিকাশকারীরা ভাষা বাধা ছাড়াই Wave শিখতে পারে৷"
   },
-  "homepage.translations.button": {
-    "message": "Crowdin এ অনুবাদে অংশগ্রহণ করুন"
+  "homepage.translations.title": {
+    "message": "Wave অনুবাদে অংশগ্রহণ করুন"
+  },
+  "homepage.why_wave.title": {
+    "message": "কেন Wave বেছে নিন?"
+  },
+  "learn.areas.cli.title": {
+    "message": "CLI and toolchain"
+  },
+  "learn.areas.kicker": {
+    "message": "Study areas"
+  },
+  "learn.areas.std.title": {
+    "message": "Standard library"
+  },
+  "learn.areas.title": {
+    "message": "The main concepts are already in the docs."
+  },
+  "learn.areas.wson.title": {
+    "message": "WSON"
+  },
+  "learn.aside.title": {
+    "message": "Start here"
+  },
+  "learn.hero.eyebrow": {
+    "message": "Learn"
+  },
+  "learn.hero.primary": {
+    "message": "Install Wave"
+  },
+  "learn.hero.secondary": {
+    "message": "Open docs"
+  },
+  "learn.hero.title": {
+    "message": "A guided path into the Wave language."
+  },
+  "learn.meta.title": {
+    "message": "Learn Wave"
+  },
+  "learn.path.install.title": {
+    "message": "Install and run"
+  },
+  "learn.path.kicker": {
+    "message": "Path"
+  },
+  "learn.path.projects.title": {
+    "message": "Build real programs"
+  },
+  "learn.path.syntax.title": {
+    "message": "Understand syntax"
+  },
+  "learn.path.title": {
+    "message": "Move from first install to practical fluency."
+  },
+  "nav.aria": {
+    "message": "Primary navigation"
+  },
+  "nav.community": {
+    "message": "Community"
+  },
+  "nav.docs": {
+    "message": "Docs"
+  },
+  "nav.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "nav.home": {
+    "message": "Home"
+  },
+  "nav.learn": {
+    "message": "Learn"
+  },
+  "nav.menu": {
+    "message": "Toggle navigation menu"
+  },
+  "nav.mobile.aria": {
+    "message": "Mobile navigation"
+  },
+  "nav.releases": {
+    "message": "Releases"
+  },
+  "read-the-docs": {
+    "message": "ডকুমেন্ট পড়ুন"
+  },
+  "releases.aside.title": {
+    "message": "Version install"
+  },
+  "releases.current.install.title": {
+    "message": "Installation guide"
+  },
+  "releases.current.kicker": {
+    "message": "Current flow"
+  },
+  "releases.current.notes.title": {
+    "message": "Release notes"
+  },
+  "releases.current.roadmap.title": {
+    "message": "Development stages"
+  },
+  "releases.current.title": {
+    "message": "Where releases and progress live today."
+  },
+  "releases.hero.eyebrow": {
+    "message": "Releases"
+  },
+  "releases.hero.primary": {
+    "message": "Open GitHub releases"
+  },
+  "releases.hero.secondary": {
+    "message": "Read roadmap"
+  },
+  "releases.hero.title": {
+    "message": "Published releases, install channels, and roadmap context."
+  },
+  "releases.meta.title": {
+    "message": "Wave Releases"
+  },
+  "releases.policy.future.title": {
+    "message": "Future summary"
+  },
+  "releases.policy.kicker": {
+    "message": "Policy"
+  },
+  "releases.policy.latest.title": {
+    "message": "Latest channel"
+  },
+  "releases.policy.pin.title": {
+    "message": "Pinned versions"
+  },
+  "releases.policy.title": {
+    "message": "The release page should set expectations clearly."
+  },
+  "shared.copy.copied": {
+    "message": "Copied"
+  },
+  "shared.copy.copy": {
+    "message": "Copy"
+  },
+  "tagline": {
+    "message": "এক ভাষা, অসীম সম্ভাবনা"
   }
 }

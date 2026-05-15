@@ -1,130 +1,108 @@
-import React from 'react';
+import React, {useMemo, useState} from 'react';
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import {translate} from '@docusaurus/Translate';
-import {ErrorCauseBoundary, useThemeConfig} from '@docusaurus/theme-common';
-import {
-    NavbarProvider,
-    splitNavbarItems,
-    useHideableNavbar,
-    useNavbarMobileSidebar,
-} from '@docusaurus/theme-common/internal';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import {useLocation} from '@docusaurus/router';
 import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 import NavbarItem from '@theme/NavbarItem';
-import NavbarLogo from '@theme/Navbar/Logo';
-import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
-import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
-import NavbarSearch from '@theme/Navbar/Search';
-import SearchBar from '@theme/SearchBar';
 
 import styles from './styles.module.css';
 
-type NavbarItemConfig = Record<string, unknown>;
+type NavLink = {
+  label: string;
+  to: string;
+  match?: 'prefix' | 'exact';
+};
 
-function NavbarItems({items}: {items: NavbarItemConfig[]}): JSX.Element {
-    return (
-        <>
-            {items.map((item, index) => (
-                <ErrorCauseBoundary
-                    key={index}
-                    onError={(error) =>
-                        new Error(
-                            `A theme navbar item failed to render.
-Please check this item in themeConfig.navbar.items:
-${JSON.stringify(item, null, 2)}`,
-                            {cause: error},
-                        )
-                    }>
-                    <NavbarItem {...(item as React.ComponentProps<typeof NavbarItem>)} />
-                </ErrorCauseBoundary>
-            ))}
-        </>
-    );
-}
+const t = (id: string, message: string) => translate({id, message});
 
-function NavbarContent(): JSX.Element {
-    const {
-        navbar: {hideOnScroll, items, style},
-    } = useThemeConfig();
+function isActive(pathname: string, item: NavLink): boolean {
+  if (item.match === 'exact') {
+    return pathname === item.to;
+  }
 
-    const mobileSidebar = useNavbarMobileSidebar();
-    const [leftItems, rightItems] = splitNavbarItems(items);
-
-    const searchBarItem = items.find(
-        (item) => (item as {type?: string}).type === 'search',
-    );
-
-    return (
-        <nav
-            aria-label={translate({
-                id: 'theme.NavBar.navAriaLabel',
-                message: 'Main',
-                description: 'The ARIA label for the main navigation',
-            })}
-            className={clsx(
-                'navbar',
-                'navbar--fixed-top',
-                styles.navbar,
-                {
-                    'navbar--dark': style === 'dark',
-                    'navbar--primary': style === 'primary',
-                    'navbar-sidebar--show': mobileSidebar.shown,
-                },
-            )}>
-            <div className={clsx('navbar__inner', styles.inner)}>
-                <div className={clsx('navbar__items', styles.items, styles.itemsLeft)}>
-                    {!mobileSidebar.disabled && (
-                        <div className={styles.mobileOnly}>
-                            <NavbarMobileSidebarToggle />
-                        </div>
-                    )}
-
-                    <div className={styles.logo}>
-                        <NavbarLogo />
-                    </div>
-
-                    <div className={styles.desktopOnly}>
-                        <NavbarItems items={leftItems} />
-                    </div>
-                </div>
-
-                <div
-                    className={clsx(
-                        'navbar__items',
-                        'navbar__items--right',
-                        styles.items,
-                        styles.itemsRight,
-                    )}>
-                    <div className={styles.desktopOnly}>
-                        <NavbarItems items={rightItems} />
-                    </div>
-
-                    <NavbarColorModeToggle className={styles.colorModeToggle} />
-
-                    {!searchBarItem && (
-                        <div className={styles.search}>
-                            <NavbarSearch>
-                                <SearchBar />
-                            </NavbarSearch>
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            <div
-                role="presentation"
-                className={clsx('navbar-sidebar__backdrop', styles.backdrop)}
-                onClick={mobileSidebar.toggle}
-            />
-
-            <NavbarMobileSidebar />
-        </nav>
-    );
+  return item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
 }
 
 export default function Navbar(): JSX.Element {
-    return (
-        <NavbarProvider>
-            <NavbarContent />
-        </NavbarProvider>
-    );
+  const logo = useBaseUrl('/img/logo.png');
+  const {pathname} = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const links = useMemo<NavLink[]>(
+    () => [
+      {label: t('nav.home', 'Home'), to: '/', match: 'exact'},
+      {label: t('nav.docs', 'Docs'), to: '/docs'},
+      {label: t('nav.learn', 'Learn'), to: '/learn'},
+      {label: t('nav.ecosystem', 'Ecosystem'), to: '/ecosystem'},
+      {label: t('nav.releases', 'Releases'), to: '/releases'},
+      {label: t('nav.community', 'Community'), to: '/community'},
+    ],
+    [],
+  );
+
+  return (
+    <header className={styles.navbar}>
+      <div className={clsx('container', styles.shell)}>
+        <Link to="/" className={styles.brand} onClick={() => setMobileOpen(false)}>
+          <img src={logo} alt="" />
+          <span>Wave</span>
+        </Link>
+
+        <nav className={styles.desktopNav} aria-label={t('nav.aria', 'Primary navigation')}>
+          {links.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={clsx(styles.navLink, isActive(pathname, item) && styles.navLinkActive)}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className={styles.actions}>
+          <Link href="https://github.com/wavefnd/Wave" className={styles.githubLink}>
+            GitHub
+          </Link>
+          <div className={styles.desktopLocale}>
+            <NavbarItem type="localeDropdown" position="right" />
+          </div>
+          <NavbarColorModeToggle className={styles.colorToggle} />
+          <button
+            type="button"
+            className={styles.menuButton}
+            onClick={() => setMobileOpen((value) => !value)}
+            aria-expanded={mobileOpen}
+            aria-label={t('nav.menu', 'Toggle navigation menu')}>
+            <span />
+            <span />
+          </button>
+        </div>
+      </div>
+
+      <div className={clsx(styles.mobileMenu, mobileOpen && styles.mobileMenuOpen)}>
+        <nav className={styles.mobileNav} aria-label={t('nav.mobile.aria', 'Mobile navigation')}>
+          {links.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={clsx(styles.mobileLink, isActive(pathname, item) && styles.mobileLinkActive)}
+              onClick={() => setMobileOpen(false)}>
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="https://github.com/wavefnd/Wave"
+            className={styles.mobileLink}
+            onClick={() => setMobileOpen(false)}>
+            GitHub
+          </Link>
+          <div className={styles.mobileLocale}>
+            <NavbarItem type="localeDropdown" position="right" />
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
 }
