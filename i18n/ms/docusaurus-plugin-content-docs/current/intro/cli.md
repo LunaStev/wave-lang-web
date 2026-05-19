@@ -2,404 +2,105 @@
 sidebar_position: 6
 ---
 
-# Rujukan `wavec` CLI
+# `wavec` CLI 레퍼런스
 
-Dokumen ini memperincikan kelakuan CLI ** pangkalan pelaksanaan pengkompil Wave (`wavec`) semasa**.
+이 문서는 현재 Wave 컴파일러(`wavec`) 구현 기준의 CLI 동작을 설명합니다. `wavec`는 Rust의 `rustc`나 C의 `cc`처럼 낮은 수준의 컴파일러이며, 패키지 해결과 워크스페이스 관리는 Vex 같은 상위 도구의 책임입니다.
 
-Prinsip teras:
-
-- `wavec` ialah pengkompil.
-- Pemasangan/peleraian pakej (fail kunci, pendaftaran, muat turun) bukan tanggungjawab `wavec`.
-- Kebergantungan luaran diluluskan sebagai **argumen CLI eksplisit** apabila melaksanakan `wavec`.
-
----
-
-## 1. Format asas
+## 기본 형식
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [global-options] <command> [command-options] [input...]
 ```
 
-Contoh:
+주요 명령은 다음과 같습니다.
+
+- `build <input...>`: 컴파일, 검사, 링크, 실행을 플래그 중심으로 제어합니다.
+- `check <file>`: `build <file> --emit=check` 별칭입니다.
+- `run <file>`: `build <file> --run` 별칭입니다.
+- `print <item>`: 지원 target, emit kind, input type 같은 capability를 출력합니다.
+- `install std`, `update std`: 표준 라이브러리 설치/업데이트 명령입니다.
+
+## build 입력 규칙
+
+`build`는 하나 이상의 입력을 받습니다.
 
 ```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
+wavec build main.wave
+wavec build main.wave util.wave --emit=bin
+wavec build start.o runtime.o --link-only --emit=bin
 ```
 
----
+입력 타입은 확장자로 자동 추론됩니다.
 
-## 2. Peraturan penghuraian perintah (penting)
+- `.wave` -> Wave source
+- `.ll` -> LLVM IR
+- `.bc` -> LLVM bitcode
+- `.s`, `.asm` -> assembly
+- `.o`, `.obj` -> object
 
-`wavec` mula-mula mengimbas semua argumen untuk **pilihan global** dan kemudian mentafsir `<command>` sebagai argumen yang tinggal.
+`--input-type=<kind>`를 지정하면 모든 입력에 같은 타입을 강제로 적용합니다.
 
-Dalam erti kata lain, lokasi pilihan global adalah fleksibel.
+## emit 규칙
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec build main.wave --emit=check
+wavec build main.wave --emit=ir,obj
+wavec build main.wave --emit=bin -o app
 ```
 
-Ketiga-tiga di atas adalah sah.
+지원 kind는 `check`, `ast`, `ir`, `bc`, `asm`, `obj`, `bin`입니다. `check`는 산출물이 아니라 front-end 검사용 제어 모드이므로 단독으로만 사용할 수 있습니다.
 
-Jika anda menggunakan `--`, imbasan pilihan global akan berhenti dan beralih ke kawasan arahan.
+`-o <file>`은 `bin`이 포함되면 최종 링크 산출물에 적용됩니다. `obj`, `ir`, `asm`, `bc` 같은 중간 산출물은 `--out-dir` 또는 기본 규칙을 따릅니다.
+
+## run과 실행 인자
 
 ```bash
-wavec -- run main.wave
+wavec run main.wave -- arg1 arg2
+wavec build main.wave --run -- arg1 arg2
 ```
 
----
+`--run`은 최종 실행 가능한 `bin` 산출물이 정확히 하나일 때만 허용됩니다. `--shared` 또는 실행 불가능한 emit 조합과 함께 사용할 수 없습니다.
 
-## 3. Commands
+## freestanding / bare-metal
 
-## 3.1 `run <file>`
-
-Susun dan jalankan fail Wave.
+운영체제, 커널, UEFI 부트로더 같은 환경에서는 `--freestanding`을 사용합니다.
 
 ```bash
-wavec run hello.wave
+wavec build kernel.wave   --target x86_64-unknown-none-elf   --freestanding   --emit=obj   -o kernel.o
 ```
 
-Tindakan:
+`--freestanding`은 기본 libc/libm 링크를 끄고, backend에서 red zone을 비활성화하며, 함수에 `noredzone`/`nounwind` 성격의 코드를 생성합니다. bare-metal target(`*-none-*`, ELF freestanding target)도 같은 방향으로 처리됩니다.
 
-1. Penghuraian sumber + pengembangan import
-2. Cipta LLVM IR
-3. Pautan binari asli (`target/<file_stem>`)
-4. lari
-
-ciri-ciri:
-
-- `wavec` melepasi kod keluar program yang dilaksanakan.
-
----
-
-## 3.2 `build <file>`
-
-Mencipta fail boleh laku (exe).
+UEFI 애플리케이션은 현재 COFF object를 만든 뒤 `lld-link`로 PE32+ EFI를 만드는 경로를 권장합니다.
 
 ```bash
-wavec build app.wave
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-Perduaan keluaran:
+## backend 옵션
 
-- `target/<file_stem>`
+주요 backend 옵션은 다음과 같습니다.
 
-## 3.3 Pilihan `build` (`-o`, `-c`)
-
-Perintah `build` boleh mengawal nama fail output dan format output.
-
-```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-```
-
-- `-o <file>`: Menentukan nama fail output.
-  - Asas (tiada `-c`): Menentukan laluan output boleh laku.
-  - Dengan `-c`: tentukan laluan output fail objek
-- `-c`: Langkau pemautan dan jana fail objek sahaja.
-- Apabila menggunakan `-c`, laluan objek adalah output kepada stdout.
-
-Tingkah laku lalai:
-
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (output laluan)
-
-Contoh objek kernel berdiri bebas:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` juga boleh digunakan dengan cara yang sama.
-
----
-
-## 3.4 `install std`, `update std`
-
-Ini ialah arahan pemasangan/kemas kini perpustakaan standard.
-
-```bash
-wavec install std
-wavec update std
-```
-
----
-
-## 3.5 `--help`, `--version`
-
-```bash
-wavec --help
-wavec --version
-```
-
----
-
-## 4. Global Options
-
-## 4.1 Pengoptimuman
-
-Nilai yang dibenarkan:
-
-- `-O0`
-- `-O1`
-- `-O2`
-- `-O3`
-- `-Os`
-- `-Oz`
-- `-Ofast`
-
-Contoh:
-
-```bash
-wavec -O3 run main.wave
-```
-
----
-
-## 4.2 Keluaran nyahpepijat
-
-```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
-```
-
-Item yang dibenarkan:
-
-- `tokens`
-- `ast`
-- `ir`
-- `mc`
-- `hex`
-- `all`
-
----
-
-## 4.3 Pilihan Pautan
-
-```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
-```
-
-- `--link=<lib>` atau `--link <lib>`
-- `-L<path>` atau `-L <path>`
-
-`wavec` dihantar secara dalaman dalam bentuk `-l<lib>` dan `-L<path>` apabila memaut.
-
----
-
-## 4.4 Pilihan Kebergantungan Luaran (Penting)
-
-Ini ialah pilihan untuk analisis import luaran (`pkg::...`).
-
-### `--dep-root <dir>`
-
-Tambah calon direktori akar pakej.
-
-```bash
-wavec run app.wave --dep-root .vex/dep
-```
-
-Apabila mencari pakej `math`:
-
-- Semak `.vex/dep/math`
-
-Boleh dinyatakan beberapa kali:
-
-```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
-```
-
-### `--dep <name>=<path>`
-
-Membetulkan nama pakej ke laluan tertentu.
-
-```bash
-wavec run app.wave --dep math=.vex/dep/math
-```
-
-Peraturan:
-
-- Format `name`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` mestilah dalam format `name=path`
-- Ralat berlaku jika nama pakej yang sama dinyatakan berulang kali.
-
----
-
-## 4.5 Pilihan hujung belakang (`--llvm`, `--whale`)
-
-Pilihan kawalan hujung belakang hanya ditafsirkan di belakang `--llvm`.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-Item yang disokong (ringkasan):
-
-- `--target`, `--cpu`, `--features`, `--abi`
-- `--sysroot`
+- `--target=<triple>`
+- `--cpu=<name>`
+- `--features=<csv>`
+- `--abi=<name>`
+- `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (boleh diulang)
+- `-C link-arg=<arg>`
 - `-C link-sysroot=<path>`
+- `-C relocation-model=<model>`
+- `-C code-model=<model>`
 - `-C no-default-libs`
 
-Sasaran utama semasa berdasarkan `wavec print target-list`:
-
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
-- `x86_64-unknown-none-elf`
-- `aarch64-unknown-none-elf`
-- `riscv64-unknown-none-elf`
-
-`--whale` pada masa ini ialah bendera tiruan tersimpan dan saluran paip bahagian belakang sebenar ialah TODO.
-
----
-
-## 5. Peraturan tafsiran import
-
-Wave mengimport cawangan kepada tiga jenis:
-
-1. import tempatan
-2. std import
-3. import pakej luaran
-
-## 5.1 Tempatan
-
-```wave
-import("foo");
-import("path/to/mod.wave");
-```
-
-Cari `<path>.wave` dalam direktori fail asas.
-
-## 5.2 std
-
-```wave
-import("std::io::format");
-```
-
-Gunakan laluan `~/.wave/lib/wave/std/...`.
-
-## 5.3 Pakej luaran
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-Format:
-
-- Minimum `package::module` 2 segmen diperlukan
-
-Urutan penentuan akar pakej:
-
-1. `--dep name=path` pemetaan eksplisit
-2. Cari `--dep-root` dalam setiap `<root>/<package>`
-
-Jika pakej yang sama ditemui dalam berbilang dep-roots secara serentak:
-
-- Tanpa auto-pilihan **ralat kekaburan**
-- Mesti dibetulkan dengan `--dep name=path`
-
-Perintah navigasi fail modul:
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-Contoh:
-
-```wave
-import("math::core::vec");
-```
-
-Navigasi:
-
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
-
----
-
-## 6. Contoh import luar
-
-### 6.1 Satu dep-root
-
-Direktori:
-
-```text
-.vex/dep/
-  math/
-    src/
-      add.wave
-main.wave
-```
-
-Kod:
-
-```wave
-import("math::add");
-```
-
-Jalankan:
+## print
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
 
-### 6.2 Penyelesaian kekaburan
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep
-```
-
-Jika `math` hadir pada kedua-dua belah pihak, ralat berlaku. Betulkan seperti yang ditunjukkan di bawah.
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
-```
-
----
-
-## 7. Pengasingan peranan daripada Vex
-
-Struktur yang disyorkan:
-
-- `wavec`: kompil/paut/laksanakan + selesaikan kebergantungan yang ditentukan
-- `vex`: Panggil `wavec ... --dep-root ... --dep ...` selepas memasang/mengurus kebergantungan
-
-Contoh:
-
-```bash
-# Secara dalaman, vex tidak
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
-```
-
-Model ini meninggalkan pengurus pakej bertanggungjawab untuk automasi, sambil memastikan pengkompil mudah dan deterministik.
-
----
-
-## 8. Rujukan pantas
-
-```bash
-wavec run main.wave
-wavec build app.wave
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-wavec run main.wave --debug-wave=tokens,ast
-wavec build app.wave --link ssl -L ./native/lib
-wavec run main.wave --dep-root .vex/dep
-wavec run main.wave --dep math=.vex/dep/math
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
-```
+`print`는 Vex 같은 상위 도구가 현재 `wavec`의 capability를 자동 검증할 때 사용하기 위한 명령입니다.
