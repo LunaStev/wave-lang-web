@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# گزینه‌های Backend (`--llvm`, `--whale`)
+# 백엔드 옵션
 
-این سند گزینه‌های CLI مربوط به Backend در `wavec` را شرح می‌دهد.
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-اصول مهم:
+## 주요 옵션
 
-- `wavec` یک مدیر بسته نیست.
-- عملکرد Backend تا حد ممکن با **آرگومان‌های صریح** کنترل می‌شود.
-- تنها پس از `--llvm` گزینه‌های جزئی Backend مورد تفسیر قرار می‌گیرند.
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. انتخاب‌گر Backend
-
-## 1.1 `--llvm`
-
-`--llvm` به‌تنهایی نشان‌دهنده شروع یک بلوک از گزینه‌های Backend است.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-همان‌طور که در بالا ذکر شد، تنها آرگومان‌هایی که بعد از `--llvm` پشتیبانی می‌شوند به عنوان تنظیمات Backend LLVM پردازش می‌شوند.
-
-## 1.2 `--whale` (در حال حاضر TODO)
-
-در حال حاضر `--whale` به‌عنوان یک **پرچم ساختگی رزرو شده** تلقی می‌شود.
-
-- تجزیه‌کننده آن را تشخیص می‌دهد.
-- خط لوله Backend واقعی Whale هنوز متصل نشده است.
-- در صورت استفاده به عنوان خطای TODO ختم می‌شود.
-
----
-
-## 2. گزینه‌های پشتیبانی‌شده پس از `--llvm`
-
-## 2.1 هدف/تولید کد
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-نقاط انعکاس:
-
-- مرحله تولید IR (ماشین هدف): `target`,`cpu`,`features`
-- مرحله شیء/لینک (در هنگام فراخوانی کلنگ): `target`,`abi`
-
-در حال حاضر، یک سه‌گانه هدف اصلی برای مستندسازی به‌صورت پیش‌فرض:
-
-- لینوکس: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- داروین: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- فری‌ستندینگ: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 ابزارک/لینک
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (قابل تکرار)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-نقاط انعکاس:
-
-- `-c` در زمان تولید شیء (از طریق کلنگ `--sysroot`) نگاشت می‌شود.
-- در مرحله لینک، از برونزد خطی استفاده کنید، تغییر دستور کار، برونزاد sysroot لینک.
-- هنگام استفاده از `-C no-default-libs`، `-lc -lm` به‌طور خودکار غیرفعال می‌شود.
-
----
-
-## 3. قوانین تجزیه (مهم)
-
-بدون گنجاندن `--llvm`، گزینه‌های جزئی Backend به‌عنوان گزینه‌های عمومی تفسیر نمی‌شوند.
-
-به‌عنوان مثال، مورد زیر خطا است.
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-حتماً باید به این شکل نوشته شود.
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. نمونه‌های استفاده
+## capability 조회
 
-تولید شیء پایه:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-ایجاد شیء هسته فری‌ستندینگ:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-لینک سفارشی:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-بدون فعالسازی پیوند libc/libm خودکار:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-هنگام استفاده از `--freestanding`، به‌صورت داخلی مشابه `-C no-default-libs` عمل می‌کند و برای ساخت‌هایی که فرض بر عدم استفاده از کتابخانه‌های پیش‌فرض در زمان اجرای کد هسته یا بوت است، تطبیق داده می‌شود.
-
----
-
-## 5. خلاصه وضعیت
-
-- Backend LLVM: در حال اجرا
-- Backend Whale: رزرو شده (TODO)، غیر قابل اجرا
