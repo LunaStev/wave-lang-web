@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# バックエンドオプション (`--llvm`, `--whale`)
+# 백엔드 옵션
 
-このドキュメントは、`wavec` のバックエンド関連 CLI オプションについて説明します。
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-重要原則:
+## 주요 옵션
 
-- `wavec` はパッケージマネージャではありません。
-- バックエンド動作は、可能な限り **明示的な引数** で制御します。
-- バックエンドの詳細オプションは `--llvm` の後でのみ解釈されます。
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. バックエンドセレクタ
-
-## 1.1 `--llvm`
-
-`--llvm` 自体はバックエンドオプションブロックの開始マーカーです。
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-上記のように、`--llvm` の後に来る引数のうち対応するものだけがLLVMバックエンド設定として処理されます。
-
-## 1.2 `--whale` (現在TODO)
-
-現在、`--whale` は **予約されたダミーフラグ** です。
-
-- パーサは認識します。
-- 実際のWhaleバックエンドパイプラインはまだ接続されていません。
-- 使用時にTODOエラーで終了します。
-
----
-
-## 2. `--llvm` の後でサポートされているオプション
-
-## 2.1 ターゲット/コード生成
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-反映ポイント:
-
-- IR生成（TargetMachine）ステップ：`target`、`cpu`、`features`
-- オブジェクト/リンクステップ（clang呼び出し）：`target`、`abi`
-
-現在基本的に文書化する主要なターゲットトリプルは:
-
-- Linux: `x86_64-unknown-linux-gnu`、`aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`、`aarch64-apple-darwin`
-- フリースタンディング: `x86_64-unknown-none-elf`、`aarch64-unknown-none-elf`、`riscv64-unknown-none-elf`
-
-## 2.2 ツールチェーン/リンク
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (繰り返し可能)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-反映ポイント:
-
-- オブジェクト生成（clang `-c`）で`--sysroot`
-- リンク単位でlinker override, raw link arg入力, link-sysroot入力
-- `-C no-default-libs`使用時の自動`-lc -lm`無効化
-
----
-
-## 3. コマンド解析ルール（重要）
-
-`--llvm`を使わないとバックエンドの詳細オプションはグローバルオプションとして解釈されません。
-
-例えば以下はエラーです。
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-必ず以下のように記述してください。
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. 使用例
+## capability 조회
 
-基本オブジェクト生成:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-フリースタンディングカーネルオブジェクト生成:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-カスタムリンク:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-libc/libm自動リンク無効化:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-`--freestanding`を使用すると内部的に`-C no-default-libs`と同じ方向で動作し、カーネル/ブートコードのようにランタイム標準ライブラリを仮定しないビルドに合わせられます。
-
----
-
-## 5. 状態要約
-
-- LLVMバックエンド：動作中
-- Whaleバックエンド：予約済み（TODO）、未実装
