@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# 后端选项（`--llvm`，`--whale`）
+# 백엔드 옵션
 
-本文档描述了 `wavec` 的后端相关CLI选项。
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-重要原则：
+## 주요 옵션
 
-- `wavec` 不是包管理器。
-- 后端操作尽可能通过 **显式参数** 进行控制。
-- 后端详细选项仅在`--llvm`之后解析。
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. 后端选择器
-
-## 1.1 `--llvm`
-
-`--llvm` 本身是后端选项块的起始标记。
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-如上所示，`--llvm`之后的参数仅支持作为LLVM后端设置处理。
-
-## 1.2 `--whale`（当前TODO）
-
-当前`--whale`是**预留的虚设标志**。
-
-- 解析器可以识别。
-- 实际的Whale后端流水线尚未连接。
-- 使用时以TODO错误终止。
-
----
-
-## 2. `--llvm`之后支持的选项
-
-## 2.1 目标/代码生成
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-应用点：
-
-- IR 生成（TargetMachine）阶段：`target`、`cpu`、`features`
-- 对象/链接阶段（调用 clang）：`target`、`abi`
-
-当前默认将记录的主要目标三重体：
-
-- Linux：`x86_64-unknown-linux-gnu`，`aarch64-unknown-linux-gnu`
-- Darwin：`x86_64-apple-darwin`，`aarch64-apple-darwin`
-- 独立：`x86_64-unknown-none-elf`，`aarch64-unknown-none-elf`，`riscv64-unknown-none-elf`
-
-## 2.2 工具链/链接
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>`（可重复）
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-应用点：
-
-- 对象生成（clang `-c`）时使用 `--sysroot`
-- 在链接阶段进行链接器覆盖，注入原始链接参数，注入 link-sysroot
-- 使用 `-C no-default-libs` 时自动禁用 `-lc -lm`
-
----
-
-## 3. 解析规则（重要）
-
-如果不使用 `--llvm`，后台详细选项不会被解释为全局选项。
-
-例如，以下是错误的。
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-必须如下所示撰写。
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. 使用示例
+## capability 조회
 
-生成基本对象：
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-独立内核对象生成：
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-自定义链接：
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-禁用 libc/libm 自动链接：
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-使用 `--freestanding` 时，其效果与 `-C no-default-libs` 一样，适用于不依赖运行时默认库的构建，例如内核/启动代码。
-
----
-
-## 5. 状态摘要
-
-- LLVM 后端: 运行中
-- Whale 后端：已预订（TODO），未实现
