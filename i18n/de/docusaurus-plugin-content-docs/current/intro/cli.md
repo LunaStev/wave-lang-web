@@ -4,402 +4,103 @@ sidebar_position: 6
 
 # `wavec` CLI-Referenz
 
-Dieses Dokument beschreibt detailliert das CLI-Verhalten auf Grundlage der **aktuellen Implementierung des Wave-Compilers (`wavec`)**.
+이 문서는 현재 Wave 컴파일러(`wavec`) 구현 기준의 CLI 동작을 설명합니다. `wavec`는 Rust의 `rustc`나 C의 `cc`처럼 낮은 수준의 컴파일러이며, 패키지 해결과 워크스페이스 관리는 Vex 같은 상위 도구의 책임입니다.
 
-Kernprinzipien:
-
-- `wavec` ist ein Compiler.
-- Die Installation/Auflösung von Paketen (Lockfile, Registry, Download) liegt nicht in der Verantwortung von `wavec`.
-- Externe Abhängigkeiten werden beim Ausführen von `wavec` durch **explizite CLI-Argumente** übergeben.
-
----
-
-## 1. Grundform
+## Grundform
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [global-options] <command> [command-options] [input...]
 ```
 
-Beispiel:
+주요 명령은 다음과 같습니다.
+
+- `build <input...>`: 컴파일, 검사, 링크, 실행을 플래그 중심으로 제어합니다.
+- `check <file>`: `build <file> --emit=check` 별칭입니다.
+- `run <file>`: `build <file> --run` 별칭입니다.
+- `print <item>`: 지원 target, emit kind, input type 같은 capability를 출력합니다.
+- `install std`, `update std`: 표준 라이브러리 설치/업데이트 명령입니다.
+
+## build 입력 규칙
+
+`build`는 하나 이상의 입력을 받습니다.
 
 ```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
+wavec build main.wave
+wavec build main.wave util.wave --emit=bin
+wavec build start.o runtime.o --link-only --emit=bin
 ```
 
----
+입력 타입은 확장자로 자동 추론됩니다.
 
-## 2. Befehlsanalyse-Regeln (wichtig)
+- `.wave` -> Wave source
+- `.ll` -> LLVM IR
+- `.bc` -> LLVM bitcode
+- `.s`, `.asm` -> assembly
+- `.o`, `.obj` -> object
 
-Zuerst scannt `wavec` die **globalen Optionen** in allen Argumenten und interpretiert dann den verbleibenden Teil als `<command>`.
+`--input-type=<kind>`를 지정하면 모든 입력에 같은 타입을 강제로 적용합니다.
 
-Das bedeutet, dass die Position der globalen Option flexibel ist.
+## emit 규칙
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec build main.wave --emit=check
+wavec build main.wave --emit=ir,obj
+wavec build main.wave --emit=bin -o app
 ```
 
-Alle drei oben genannten Beispiele sind gültig.
+지원 kind는 `check`, `ast`, `ir`, `bc`, `asm`, `obj`, `bin`입니다. `check`는 산출물이 아니라 front-end 검사용 제어 모드이므로 단독으로만 사용할 수 있습니다.
 
-Mit `--` werden die nachfolgenden globalen Optionen nicht mehr gescannt und in den Befehlsbereich übergeben.
+`-o <file>`은 `bin`이 포함되면 최종 링크 산출물에 적용됩니다. `obj`, `ir`, `asm`, `bc` 같은 중간 산출물은 `--out-dir` 또는 기본 규칙을 따릅니다.
+
+## run과 실행 인자
 
 ```bash
-wavec -- run main.wave
+wavec run main.wave -- arg1 arg2
+wavec build main.wave --run -- arg1 arg2
 ```
 
----
+`--run`은 최종 실행 가능한 `bin` 산출물이 정확히 하나일 때만 허용됩니다. `--shared` 또는 실행 불가능한 emit 조합과 함께 사용할 수 없습니다.
 
-## 3. Befehle
+## freestanding / bare-metal
 
-## 3.1 `run <file>`
-
-Kompiliert und führt die Wave-Datei aus.
+운영체제, 커널, UEFI 부트로더 같은 환경에서는 `--freestanding`을 사용합니다.
 
 ```bash
-wavec run hello.wave
+wavec build kernel.wave   --target x86_64-unknown-none-elf   --freestanding   --emit=obj   -o kernel.o
 ```
 
-Funktion:
+`--freestanding`은 기본 libc/libm 링크를 끄고, backend에서 red zone을 비활성화하며, 함수에 `noredzone`/`nounwind` 성격의 코드를 생성합니다. bare-metal target(`*-none-*`, ELF freestanding target)도 같은 방향으로 처리됩니다.
 
-1. Quelle parsen + import erweitern
-2. Erstellung von LLVM IR
-3. Native Binärlink (`target/<file_stem>`)
-4. Ausführung
-
-Merkmale:
-
-- Der Exit-Code des ausgeführten Programms wird von `wavec` übergeben.
-
----
-
-## 3.2 `build <file>`
-
-Erstellt eine ausführbare Datei (exe).
+UEFI 애플리케이션은 현재 COFF object를 만든 뒤 `lld-link`로 PE32+ EFI를 만드는 경로를 권장합니다.
 
 ```bash
-wavec build app.wave
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-Ausgabebinärdatei:
+## backend 옵션
 
-- `target/<file_stem>`
+주요 backend 옵션은 다음과 같습니다.
 
-## 3.3 `build` Optionen (`-o`, `-c`)
-
-Der `build`-Befehl kann den Namen und das Format der Ausgabedatei über Optionen steuern.
-
-```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-```
-
-- `-o <file>`: Gibt den Namen der Ausgabedatei an.
-  - Standard (kein `-c`): Gibt den Ausgabepfad für die ausführbare Datei an
-  - Mit `-c`: Gibt den Ausgabepfad für die Objektdatei an
-- `-c`: Überspringt die Verlinkung und erzeugt nur Objektdateien.
-- Bei Verwendung von `-c` wird der Objektpfad auf stdout ausgegeben.
-
-Standardverhalten:
-
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (Pfadausgabe)
-
-Beispiel eines eigenständigen Kernelobjekts:​​
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` können auf die gleiche Weise verwendet werden.​​
-
----
-
-## 3.4 `install std`, `update std`
-
-Befehl zur Installation/Aktualisierung der Standardbibliothek.
-
-```bash
-wavec install std
-wavec update std
-```
-
----
-
-## 3.5 `--help`, `--version`
-
-```bash
-wavec --help
-wavec --version
-```
-
----
-
-## 4. Globale Optionen
-
-## 4.1 Optimierung
-
-Zulässige Werte:
-
-- `-O0`
-- `-O1`
-- `-O2`
-- `-O3`
-- `-Os`
-- `-Oz`
-- `-Ofast`
-
-Beispiel:
-
-```bash
-wavec -O3 run main.wave
-```
-
----
-
-## 4.2 Debug-Ausgabe
-
-```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
-```
-
-Zulässige Elemente:
-
-- `tokens`
-- `ast`
-- `ir`
-- `mc`
-- `hex`
-- `all`
-
----
-
-## 4.3 Linkoptionen
-
-```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
-```
-
-- `--link=<lib>` oder `--link <lib>`
-- `-L<path>` oder `-L <path>`
-
-`wavec` übergibt beim Linken intern in der Form von `-l<lib>`, `-L<path>`.
-
----
-
-## 4.4 Optionen für externe Abhängigkeiten (wichtig)
-
-Dies sind Optionen für die Interpretation externer Importe (`pkg::...`).
-
-### `--dep-root <dir>`
-
-Fügt Kandidaten für das Paket-Root-Verzeichnis hinzu.
-
-```bash
-wavec run app.wave --dep-root .vex/dep
-```
-
-Beim Suchen nach dem Paket `math`:
-
-- Prüfen Sie `.vex/dep/math`
-
-Kann mehrfach angegeben werden:
-
-```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
-```
-
-### `--dep <name>=<path>`
-
-Fixiert den Paketnamen auf einen bestimmten Pfad.
-
-```bash
-wavec run app.wave --dep math=.vex/dep/math
-```
-
-Regeln:
-
-- Format von `name`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` muss im Format `name=path` sein.
-- Fehler bei mehrfacher Angabe desselben Paketnamens.
-
----
-
-## 4.5 Backend-Optionen (`--llvm`, `--whale`)​​
-
-Backend-Steuerungsoptionen werden nur nach `--llvm` interpretiert.​​
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-Unterstützte Elemente (Zusammenfassung):​​
-
-- `--target`, `--cpu`, `--features`, `--abi`
-- `--sysroot`
+- `--target=<triple>`
+- `--cpu=<name>`
+- `--features=<csv>`
+- `--abi=<name>`
+- `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (wiederholbar)​​
+- `-C link-arg=<arg>`
 - `-C link-sysroot=<path>`
+- `-C relocation-model=<model>`
+- `-C code-model=<model>`
 - `-C no-default-libs`
 
-Derzeitige Hauptziele laut `wavec print target-list`:​​
-
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
-- `x86_64-unknown-none-elf`
-- `aarch64-unknown-none-elf`
-- `riscv64-unknown-none-elf`
-
-`--whale` ist derzeit ein reserviertes Dummy-Flag, und die tatsächliche Backend-Pipeline ist noch nicht implementiert (TODO).​​
-
----
-
-## 5. Regeln für die Interpretation von Importen
-
-Wave-Importe werden in folgende 3 Typen unterteilt.
-
-1. Lokaler Import
-2. std-Import
-3. Externer Paketimport
-
-## 5.1 Lokal
-
-```wave
-import("foo");
-import("path/to/mod.wave");
-```
-
-Suche nach `<path>.wave` im Verzeichnis der Basisdatei.
-
-## 5.2 std
-
-```wave
-import("std::io::format");
-```
-
-Verwendet den Pfad `~/.wave/lib/wave/std/...`.
-
-## 5.3 Externe Pakete
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-Format:
-
-- Mindestens zwei Segmente `package::module` erforderlich
-
-Reihenfolge zur Bestimmung des Paket-Roots:
-
-1. Explizite Zuordnung durch `--dep name=path`
-2. Suche in jedem `--dep-root` nach `<root>/<package>`
-
-Wenn dasselbe Paket in mehreren dep-root gleichzeitig gefunden wird:
-
-- Keine automatische Auswahl und es wird ein **Mehrdeutigkeitsfehler** generiert.
-- Muss mit `--dep name=path` festgelegt werden.
-
-Moduldatei-Suchreihenfolge:
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-Beispiel:
-
-```wave
-import("math::core::vec");
-```
-
-Durchsuchen:
-
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
-
----
-
-## 6. Praxisbeispiele für externe Importe
-
-### 6.1 Einzelner dep-root
-
-Verzeichnis:
-
-```text
-.vex/dep/
-  math/
-    src/
-      add.wave
-main.wave
-```
-
-Code:
-
-```wave
-import("math::add");
-```
-
-Ausführung:
+## print
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
 
-### 6.2 Auflösung von Mehrdeutigkeiten
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep
-```
-
-Wenn auf beiden Seiten `math` vorhanden ist, tritt ein Fehler auf. Es wird wie unten korrigiert.
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
-```
-
----
-
-## 7. Trennung der Rollen von Vex
-
-Empfohlene Struktur:
-
-- `wavec`: Kompilation/Verknüpfung/Ausführen + Interpretation der angegebenen Abhängigkeiten
-- `vex`: Installation/Verwaltung der Abhängigkeiten vor `wavec ... --dep-root ... --dep ...` Aufruf
-
-Beispiel:
-
-```bash
-# Intern tut Vex es
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
-```
-
-Dieses Modell hält den Compiler einfach und entschlossen, während der Paketmanager sich um die Automatisierung kümmert.
-
----
-
-## 8. Schnellreferenz
-
-```bash
-wavec run main.wave
-wavec build app.wave
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-wavec run main.wave --debug-wave=tokens,ast
-wavec build app.wave --link ssl -L ./native/lib
-wavec run main.wave --dep-root .vex/dep
-wavec run main.wave --dep math=.vex/dep/math
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
-```
+`print`는 Vex 같은 상위 도구가 현재 `wavec`의 capability를 자동 검증할 때 사용하기 위한 명령입니다.
