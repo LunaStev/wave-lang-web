@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# बैकएंड विकल्प (`--llvm`, `--whale`)
+# 백엔드 옵션
 
-यह दस्तावेज़ `wavec` के बैकएंड से संबंधित CLI विकल्पों का वर्णन करता है।
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-महत्वपूर्ण सिद्धांत:
+## 주요 옵션
 
-- `wavec` कोई पैकेज प्रबंधक नहीं है।
-- बैकएंड संचालन को यथासंभव **सटीक तर्कों** के माध्यम से नियंत्रित किया जाता है।
-- बैकएंड के विस्तृत विकल्प केवल `--llvm` के बाद ही व्याख्या किए जाते हैं।
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. बैकएंड चयनकर्ता
-
-## 1.1 `--llvm`
-
-`--llvm` स्वयं बैकएंड विकल्प ब्लॉक का प्रारंभिक मार्कर है।
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-जैसा कि ऊपर दिखाया गया है, केवल समर्थित तर्क `--llvm` के बाद आने वाले तर्कों में से LLVM बैकएंड सेटिंग के रूप में संसाधित होते हैं।
-
-## 1.2 `--whale` (वर्तमान में TODO)
-
-वर्तमान में `--whale` एक **आरक्षित डमी फ्लैग** है।
-
-- पार्सर पहचानता है।
-- वास्तविक Whale बैकएंड पाइपलाइन अभी तक जुड़ा नहीं है।
-- प्रयोग करने पर TODO त्रुटि के साथ समाप्त होता है।
-
----
-
-## 2. `--llvm` के बाद समर्थित विकल्प
-
-## 2.1 लक्ष्य/कोडजन
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-प्रतिबिंबित बिंदु:
-
-- आईआर निर्माण (टारगेटमशीन) चरण: `target`, `cpu`, `features`
-- ऑब्जेक्ट/लिंक चरण (क्लैंग कॉल): `target`, `abi`
-
-वर्तमान में मुख्य लक्षित ट्रिपल्स का दस्तावेज़ीकरण करने के लिए:
-
-- लिनक्स: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- डार्विन: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- फ्रीस्टैंडिंग: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 टूलचैन/लिंक
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (दोहराया जा सकता है)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-प्रतिबिंबित बिंदु:
-
-- ऑब्जेक्ट निर्माण (क्लैंग `-c`) में `--sysroot`
-- लिंक चरण पर लिंक ओवरराइड करें, रॉ लिंक तर्क का इंजेक्शन करें, लिंक-sysroot को इंजेक्ट करें
-- `-C no-default-libs` के उपयोग के समय स्वत: `-lc -lm` निष्क्रियता
-
----
-
-## 3. पार्सिंग नियम (महत्वपूर्ण)
-
-`--llvm` का उपयोग नहीं किया जाता है, तो बैकएंड के विस्तृत विकल्प ग्लोबल विकल्प के रूप में व्याख्या नहीं किए जाते हैं।
-
-उदाहरण के लिए, नीचे एक त्रुटि है।
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-निश्चित रूप से नीचे की तरह लिखा होना चाहिए।
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. उपयोग उदाहरण
+## capability 조회
 
-मूल ऑब्जेक्ट निर्माण:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-फ्रीस्टैंडिंग कर्नेल ऑब्जेक्ट निर्माण:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-कस्टम लिंक:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-libc/libm ऑटो लिंक निष्क्रिय करें:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-`--freestanding` का उपयोग करने से यह आंतरिक रूप से `-C no-default-libs` के समान कार्य करता है, और इसे उन बिल्ड के लिए अनुकूलित किया जाता है जो कर्नेल/बूट कोड जैसे लिए रनटाइम डिफॉल्ट लाइब्रेरियों पर निर्भर नहीं होते हैं।
-
----
-
-## 5. स्थिति सारांश
-
-- LLVM बैकेंड: चालू
-- व्हेल बैकएंड: आरक्षित(TODO), अपूर्ण
