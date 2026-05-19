@@ -4,402 +4,103 @@ sidebar_position: 6
 
 # Tham khảo CLI `wavec`
 
-Tài liệu này giải thích chi tiết hoạt động của CLI **theo tiêu chuẩn triển khai hiện tại của trình biên dịch Wave (`wavec`)**.
+이 문서는 현재 Wave 컴파일러(`wavec`) 구현 기준의 CLI 동작을 설명합니다. `wavec`는 Rust의 `rustc`나 C의 `cc`처럼 낮은 수준의 컴파일러이며, 패키지 해결과 워크스페이스 관리는 Vex 같은 상위 도구의 책임입니다.
 
-Nguyên tắc cơ bản:
-
-- `wavec` là trình biên dịch.
-- Cài đặt/giải quyết gói (lockfile, registry, tải xuống) không phải là trách nhiệm của `wavec`.
-- Phụ thuộc bên ngoài được truyền dưới dạng **tham số CLI tường minh** khi chạy `wavec`.
-
----
-
-## 1. Dạng cơ bản
+## Dạng cơ bản
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [global-options] <command> [command-options] [input...]
 ```
 
-Ví dụ:
+주요 명령은 다음과 같습니다.
+
+- `build <input...>`: 컴파일, 검사, 링크, 실행을 플래그 중심으로 제어합니다.
+- `check <file>`: `build <file> --emit=check` 별칭입니다.
+- `run <file>`: `build <file> --run` 별칭입니다.
+- `print <item>`: 지원 target, emit kind, input type 같은 capability를 출력합니다.
+- `install std`, `update std`: 표준 라이브러리 설치/업데이트 명령입니다.
+
+## build 입력 규칙
+
+`build`는 하나 이상의 입력을 받습니다.
 
 ```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
+wavec build main.wave
+wavec build main.wave util.wave --emit=bin
+wavec build start.o runtime.o --link-only --emit=bin
 ```
 
----
+입력 타입은 확장자로 자동 추론됩니다.
 
-## 2. Quy tắc phân tích cú pháp lệnh (quan trọng)
+- `.wave` -> Wave source
+- `.ll` -> LLVM IR
+- `.bc` -> LLVM bitcode
+- `.s`, `.asm` -> assembly
+- `.o`, `.obj` -> object
 
-`wavec` quét **global option** từ toàn bộ các tham số trước, sau đó giải thích `<command>` từ các tham số còn lại.
+`--input-type=<kind>`를 지정하면 모든 입력에 같은 타입을 강제로 적용합니다.
 
-Có nghĩa là, vị trí của global option là linh hoạt.
+## emit 규칙
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec build main.wave --emit=check
+wavec build main.wave --emit=ir,obj
+wavec build main.wave --emit=bin -o app
 ```
 
-Cả 3 đều có hiệu lực.
+지원 kind는 `check`, `ast`, `ir`, `bc`, `asm`, `obj`, `bin`입니다. `check`는 산출물이 아니라 front-end 검사용 제어 모드이므로 단독으로만 사용할 수 있습니다.
 
-Sử dụng `--` để dừng quét global option sau dấu và chuyển sang vùng lệnh.
+`-o <file>`은 `bin`이 포함되면 최종 링크 산출물에 적용됩니다. `obj`, `ir`, `asm`, `bc` 같은 중간 산출물은 `--out-dir` 또는 기본 규칙을 따릅니다.
+
+## run과 실행 인자
 
 ```bash
-wavec -- run main.wave
+wavec run main.wave -- arg1 arg2
+wavec build main.wave --run -- arg1 arg2
 ```
 
----
+`--run`은 최종 실행 가능한 `bin` 산출물이 정확히 하나일 때만 허용됩니다. `--shared` 또는 실행 불가능한 emit 조합과 함께 사용할 수 없습니다.
 
-## 3. Lệnh
+## freestanding / bare-metal
 
-## 3.1 `run <file>`
-
-Biên dịch và thực thi tập tin Wave.
+운영체제, 커널, UEFI 부트로더 같은 환경에서는 `--freestanding`을 사용합니다.
 
 ```bash
-wavec run hello.wave
+wavec build kernel.wave   --target x86_64-unknown-none-elf   --freestanding   --emit=obj   -o kernel.o
 ```
 
-Hoạt động:
+`--freestanding`은 기본 libc/libm 링크를 끄고, backend에서 red zone을 비활성화하며, 함수에 `noredzone`/`nounwind` 성격의 코드를 생성합니다. bare-metal target(`*-none-*`, ELF freestanding target)도 같은 방향으로 처리됩니다.
 
-1. Phân tích cú pháp và mở rộng import
-2. Tạo LLVM IR
-3. Liên kết nhị phân bản địa (`target/<file_stem>`)
-4. Thực thi
-
-Đặc điểm:
-
-- `wavec` truyền mã thoát của chương trình thực thi.
-
----
-
-## 3.2 `build <file>`
-
-Tạo các tệp thực thi (exe).
+UEFI 애플리케이션은 현재 COFF object를 만든 뒤 `lld-link`로 PE32+ EFI를 만드는 경로를 권장합니다.
 
 ```bash
-wavec build app.wave
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-Nhị phân đầu ra:
+## backend 옵션
 
-- `target/<file_stem>`
+주요 backend 옵션은 다음과 같습니다.
 
-## 3.3 Tùy chọn `build` (`-o`, `-c`)
-
-Lệnh `build` có thể kiểm soát tên và định dạng của tệp đầu ra như một tùy chọn.
-
-```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-```
-
-- `-o <file>`: chỉ định tên tệp đầu ra.
-  - Mặc định (không có `-c`): chỉ định đường dẫn đầu ra của tệp thực thi
-  - Kèm với `-c`: chỉ định đường dẫn đầu ra của tệp đối tượng
-- `-c`: bỏ qua liên kết và chỉ tạo tệp đối tượng.
-- Khi sử dụng `-c`, sẽ xuất đường dẫn tệp đối tượng ra stdout.
-
-Hành động mặc định:
-
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (xuất đường dẫn)
-
-Ví dụ đối tượng kernel không phụ thuộc:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-`aarch64-unknown-none-elf`, `riscv64-unknown-none-elf` cũng có thể được sử dụng theo cách như vậy.
-
----
-
-## 3.4 `install std`, `update std`
-
-Lệnh cài đặt/cập nhật thư viện tiêu chuẩn.
-
-```bash
-wavec install std
-wavec update std
-```
-
----
-
-## 3.5 `--help`, `--version`
-
-```bash
-wavec --help
-wavec --version
-```
-
----
-
-## 4. Tùy chọn toàn cầu
-
-## 4.1 Tối ưu hóa
-
-Giá trị cho phép:
-
-- `-O0`
-- `-O1`
-- `-O2`
-- `-O3`
-- `-Os`
-- `-Oz`
-- `-Ofast`
-
-Ví dụ:
-
-```bash
-wavec -O3 run main.wave
-```
-
----
-
-## 4.2 Xuất gỡ lỗi
-
-```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
-```
-
-Các mục cho phép:
-
-- `tokens`
-- `ast`
-- `ir`
-- `mc`
-- `hex`
-- `all`
-
----
-
-## 4.3 Tùy chọn liên kết
-
-```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
-```
-
-- `--link=<lib>` hoặc `--link <lib>`
-- `-L<path>` hoặc `-L <path>`
-
-`wavec` sẽ truyền nội bộ dưới dạng `-l<lib>`, `-L<path>` khi liên kết.
-
----
-
-## 4.4 Tùy chọn phụ thuộc bên ngoài (quan trọng)
-
-Tùy chọn để phân tích import bên ngoài (`pkg::...`).
-
-### `--dep-root <dir>`
-
-Thêm ứng cử viên cho thư mục gốc của gói.
-
-```bash
-wavec run app.wave --dep-root .vex/dep
-```
-
-Khi tìm gói `math`:
-
-- Kiểm tra `.vex/dep/math`
-
-Có thể chỉ định nhiều lần:
-
-```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
-```
-
-### `--dep <name>=<path>`
-
-Gắn tên gói vào một đường dẫn cụ thể.
-
-```bash
-wavec run app.wave --dep math=.vex/dep/math
-```
-
-Quy tắc:
-
-- Định dạng `name`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` phải có dạng `name=path`
-- Lỗi nếu chỉ định trùng tên gói
-
----
-
-## 4.5 Tùy chọn backend (`--llvm`, `--whale`)
-
-Các tùy chọn điều khiển backend chỉ được diễn giải sau `--llvm`.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-Các mục hô trợ (tóm tắt):
-
-- `--target`, `--cpu`, `--features`, `--abi`
-- `--sysroot`
+- `--target=<triple>`
+- `--cpu=<name>`
+- `--features=<csv>`
+- `--abi=<name>`
+- `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (có thể lặp lại)
-- `-C link-sysroot=<path>`
+- `-C link-arg=<arg>`
+- `-C link-sysroot=<đường dẫn>`
+- `-C relocation-model=<model>`
+- `-C code-model=<model>`
 - `-C no-default-libs`
 
-Các mục tiêu chính hiện tại theo tiêu chuẩn `wavec print target-list`:
-
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
-- `x86_64-unknown-none-elf`
-- `aarch64-unknown-none-elf`
-- `riscv64-unknown-none-elf`
-
-`--whale` hiện là cờ dummy đã được đặt trước, pipeline backend thực tế chưa được triển khai (TODO).
-
----
-
-## 5. Quy tắc diễn giải nhập khẩu
-
-Nhập khẩu Wave được phân chia thành 3 loại sau.
-
-1. nhập khẩu cục bộ
-2. nhập khẩu std
-3. nhập khẩu gói ngoại vi
-
-## 5.1 Cục bộ
-
-```wave
-import("foo");
-import("path/to/mod.wave");
-```
-
-Tìm kiếm `<path>.wave` trong thư mục tiêu chuẩn.
-
-## 5.2 std
-
-```wave
-import("std::io::format");
-```
-
-Sử dụng đường dẫn `~/.wave/lib/wave/std/...`.
-
-## 5.3 Gói ngoại vi
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-Hình thức:
-
-- Cần ít nhất 2 đoạn `package::module`
-
-Thứ tự xác định gốc gói:
-
-1. Ánh xạ rõ ràng bằng `--dep name=path`
-2. Tìm kiếm `--dep-root` trong mỗi `<root>/<package>`
-
-Nếu cùng một gói được tìm thấy đồng thời trong nhiều dep-root:
-
-- Không tự động lựa chọn, dan phát sinh lỗi mơ hồ
-- Cần cố định bằng `--dep name=path`
-
-Thứ tự khám phá tệp mô-đun:
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-Ví dụ:
-
-```wave
-import("math::core::vec");
-```
-
-Khám phá:
-
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
-
----
-
-## 6. Ví dụ thực tế về nhập khẩu ngoại vi
-
-### 6.1 dep-root đơn nhất
-
-Thư mục:
-
-```text
-.vex/dep/
-  math/
-    src/
-      add.wave
-main.wave
-```
-
-Mã:
-
-```wave
-import("math::add");
-```
-
-Thực thi:
+## print
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
 
-### 6.2 Giải quyết mơ hồ
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep
-```
-
-Nếu có `math` ở cả hai bên, sẽ xảy ra lỗi. Sửa như dưới đây.
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
-```
-
----
-
-## 7. Tách biệt vai trò với Vex
-
-Cấu trúc khuyến nghị:
-
-- `wavec`: biên dịch/liên kết/thực thi + phân giải phụ thuộc rõ ràng
-- `vex`: cài đặt/quản lý phụ thuộc sau đó `wavec ... --dep-root ... --dep ...` gọi
-
-Ví dụ:
-
-```bash
-# Trong nội bộ, vex có
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
-```
-
-Mô hình này giữ cho trình biên dịch đơn giản và quyết định, trong khi trình quản lý gói đảm nhiệm tự động hóa.
-
----
-
-## 8. Tham khảo nhanh
-
-```bash
-wavec run main.wave
-wavec build app.wave
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-wavec run main.wave --debug-wave=tokens,ast
-wavec build app.wave --link ssl -L ./native/lib
-wavec run main.wave --dep-root .vex/dep
-wavec run main.wave --dep math=.vex/dep/math
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
-```
+`print`는 Vex 같은 상위 도구가 현재 `wavec`의 capability를 자동 검증할 때 사용하기 위한 명령입니다.
