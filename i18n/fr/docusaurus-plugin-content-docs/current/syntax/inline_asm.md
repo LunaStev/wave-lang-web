@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # Assemblage en ligne
 
-## Introduction
+L'assemblage en ligne de Wave commence par `asm { ... Se termine par un bloc `}\`. 이 기능은 운영체제, UEFI 부트로더, 시스템 호출, 포트 I/O, CPU 제어처럼 일반 Wave 문법만으로 표현하기 어려운 저수준 코드를 위해 존재합니다.
 
-L'assemblage en ligne de Wave est écrit en blocs `asm { ... }`.
-Il est possible de contrôler directement les registres, la mémoire et les chemins d'appel système dans le code Wave.
-
-Cibles actuellement prises en charge :
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-- freestanding `riscv64`
-
-Windows et les cibles 32 bits ne sont pas encore pris en charge.
-
----
+현재 구현 기준 지원 타깃은 Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, freestanding `x86_64`/`aarch64`/`riscv64`입니다. 32비트 타깃은 아직 지원 대상이 아닙니다.
 
 ## Forme de base
-
-`asm` peut être utilisé à la fois comme **instruction** et **expression**.
 
 ```wave
 asm {
@@ -35,141 +19,137 @@ asm {
 }
 ```
 
-Composants :
+- 문자열 줄은 실제 어셈블리 명령입니다.
+- `in(...)`은 입력 오퍼랜드입니다.
+- `out(...)`은 출력 오퍼랜드입니다.
+- `clobber(...)`는 asm이 파괴하거나 관찰 가능하게 변경하는 상태를 선언합니다.
 
-- Ligne de chaîne : commande d'assemblage réelle
-- `clobber(...)`: opérande d'entrée
-- `out(...)`: opérande de sortie
-- `clobber(...)`: Indices des registres/états/mémoires détruits
+## statement asm
 
----
-
-## Instruction `asm` (Statement)
-
-Utilisez cela comme une instruction générale lorsqu'il n'y a pas de valeur de retour.
+statement asm은 반환값이 필요 없는 위치에서 사용합니다. 출력은 여러 개를 둘 수 있습니다.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-Il peut y avoir plusieurs `out(...)`.
+## expression asm
 
----
-
-## Expression `asm` (Expression)
-
-Peut être utilisé comme une expression qui génère directement une valeur.
+expression asm은 값을 생성하는 식입니다. 현재는 정확히 하나의 `out(...)`만 허용합니다.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Attention :
+`clobber("noreturn")`은 expression asm에서 금지됩니다. 값을 반환해야 하는 식이 현재 블록으로 돌아오지 않는 것은 타입/제어 흐름과 충돌하기 때문입니다.
 
-- Une expression `asm` autorise **exactement un seul `out(...)`**.
+## 오퍼랜드와 제약식
 
----
+`in("...")`과 `out("...")`에는 구체 레지스터나 제약 클래스를 지정합니다.
 
-## Contraintes `in(...)` / `out(...)`
+- x86_64 예: `rax`, `rbx`, `rcx`, `rdx`, `rdi`, `rsi`, `r8` ... `r15`, `r`
+- AArch64 예: `x0` ... `x30`, `w0` ... `w30`, `sp`, `lr`, `r`
+- RISC-V 예: `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `x10`, `r`
+- 공통 클래스: `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`
 
-Les chaînes pour `in("...")`, `out("...")` peuvent être parmi les deux suivantes :
-
-1. Registre spécifique
-
-- Ex : `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. Classe de contrainte (constraint class)
-
-- Ex : `"r"`, `"m"`, `"rm"`
-
-Exemple :
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-Cible de sortie (`out(...) target`) est recommandé d'utiliser le modèle suivant selon l'implémentation actuelle.
-
-- Variable : `out("rax") ret`
-- Déréférencement de pointeur : `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` peut recevoir plusieurs éléments à la fois et être utilisé plusieurs fois.
+같은 물리 레지스터를 입력/출력과 clobber에 동시에 지정하면 오류입니다.
 
 ```wave
 asm {
-    "xor rax, rax"
+    "mov rax, rax"
+    in("rax") x
+    // 오류: rax는 입력 오퍼랜드로 이미 사용 중입니다.
     clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
 }
 ```
 
-Principaux éléments :
+## clobber 계약
 
-- Registres : `"rax"`, `"x0"`, etc.
-- Spéciaux : `$0`, `$1` (normalisation interne dépendant de la cible)
+| 항목                                  | 의미                                                                    |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| `clobber("memory")`                 | asm이 메모리를 읽거나 쓸 수 있음을 알립니다.                           |
+| `clobber("flags")`, `clobber("cc")` | 조건 플래그/상태 레지스터 변경을 알립니다.                              |
+| `clobber("stack")`                  | asm이 stack pointer나 call/return/push/pop을 사용함을 명시합니다. |
+| `clobber("nostack")`                | asm이 stack을 건드리지 않는다는 명시적 계약입니다.                      |
+| `clobber("noreturn")`               | asm이 현재 함수/블록으로 돌아오지 않음을 알립니다.                        |
 
-Le compilateur ajoute automatiquement un clobber de base en mode sécurisé conservateur.
-(`memory`, catégories flags/cc, etc.; principalement `memory` pour RISC-V autonome)
+`stack`과 `nostack`은 동시에 사용할 수 없습니다.
 
----
+## stack discipline
 
-## Oprérateurs ($0, $1, ...)
+일반 asm은 stack을 변경하면 안 됩니다. 다음 명령 패턴은 `clobber("stack")`가 필요합니다.
 
-Utilisez `$N` pour référencer les opérandes dans une chaîne de commande.
+- x86_64: `call`, `push`, `pop`, `ret`, `iret`, `leave`, `enter`, `rsp`/`esp` 직접 접근
+- AArch64: `bl`, `blr`, `ret`, `sp` 직접 접근
+- RISC-V: `call`, `jal`, `jalr`, `ret`, `sp` 직접 접근
+
+`clobber("stack")`를 선언해도 stack pointer는 원래 값으로 복구해야 합니다. 컴파일러가 단순 `sub/add rsp` 같은 균형을 확인할 수 없는 경우 오류가 발생할 수 있습니다.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Note :
+원래 위치로 돌아오지 않는 커널 진입이나 tail jump는 `clobber("noreturn")`을 사용합니다.
 
-- Même si vous utilisez le style `%0`, il est converti en style `$0` en interne.
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+`clobber("noreturn")`이 있는 statement asm은 IR에서 `unreachable`로 끝납니다.
 
-## Plage de support actuelle pour les opérandes d'entrée
+## local label과 jump
 
-Actuellement, `in(...)` prend en charge les formes suivantes :
+로컬 label로 이동하는 asm은 현재 블록으로 돌아오는 흐름이므로 `noreturn`이 필요하지 않습니다.
 
-- Identificateur de variable
-- Littéral entier
-- Littéral de chaîne
-- `&identifier`
-- `deref identifier`
-- Littéral entier/flottant négatif
+```wave
+asm {
+    "jmp 1f"
+    "1:"
+}
+```
 
-Les expressions complexes générales peuvent être limitées, il est donc recommandé de les transmettre via une variable temporaire si nécessaire.
+반대로 `jmp rax`, `jmp r11`, `br x0`, `jr ra`처럼 레지스터/메모리로 간접 분기하는 asm은 현재 블록으로 돌아오지 않는 흐름으로 간주하므로 `clobber("noreturn")`가 필요합니다.
 
----
+## 출력 대상
 
-## Précautions
+현재 안정적으로 권장되는 출력 대상은 다음과 같습니다.
 
-L'asm inline contourne partiellement les protections du système de types.
-La spécification incorrecte des registres, les conflits de contraintes et l'oubli de clobber peuvent entraîner la génération de code incorrect ou un dysfonctionnement en temps d'exécution.
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-Recommandations :
+복잡한 `out("rax") object.field` 또는 `out("rax") array[i]` 형태는 아직 안정화 대상입니다. 필요하면 임시 변수에 받은 뒤 Wave 코드로 저장하세요.
 
-- Confirmez d'abord l'ABI cible et la convention d'appel
-- Gérez explicitement les registres d'entrée/sortie et les clobbers
-- Déclarez `clobber("memory")` si vous accédez directement à la mémoire.
+## 제한 사항
+
+- inline asm은 항상 side effect가 있는 것으로 취급됩니다.
+- 복잡한 stack 조작은 컴파일러가 완전히 증명하지 못할 수 있습니다.
+- 함수 포인터와 명시적 call convention 타입은 아직 별도 언어 기능으로 안정화되지 않았습니다.
+- UEFI service call 같은 코드는 당분간 asm wrapper를 사용할 수 있지만, 장기적으로는 함수 포인터/callconv 기능으로 대체하는 것이 목표입니다.
