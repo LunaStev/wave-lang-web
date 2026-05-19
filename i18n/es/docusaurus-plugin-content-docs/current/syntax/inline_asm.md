@@ -2,29 +2,13 @@
 sidebar_position: 7
 ---
 
-# Ensambliado en línea
+# Ensamblador en línea
 
-## Introducción
+El ensamblador en línea de Wave se escribe con `asm { ... }`. Está pensado para código de bajo nivel como kernels, cargadores UEFI, llamadas al sistema, E/S de puertos y control de CPU.
 
-El ensamblaje en línea de Wave está escrito en bloques `asm { ... }`.
-Se pueden controlar directamente los registros, la memoria y los caminos de llamada del sistema dentro del código Wave.
-
-Objetivos actualmente soportados:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- `aarch64` independiente
-- `riscv64` independiente
-- `riscv64` independiente
-
-Windows y los objetivos de 32 bits no están soportados aún.
-
----
+Los targets actuales son Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64` y freestanding `x86_64`/`aarch64`/`riscv64`. Los targets de 32 bits todavía no están soportados.
 
 ## Forma básica
-
-`asm` puede usarse tanto como una **declaración** como una **expresión**.
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-Componentes:
+Las líneas de cadena son instrucciones de ensamblador. `in(...)` declara entradas, `out(...)` declara salidas y `clobber(...)` declara el estado que el asm modifica.
 
-- Línea de cadena: instrucción de ensamblaje real
-- `clobber(...)`: operando de entrada
-- `out(...)`: operando de salida
-- `clobber(...)`: pista de registros/estado/memoria destruidos
+## asm como sentencia
 
----
-
-## Declaración `asm`
-
-Se usa como una declaración general cuando no se requiere un valor de retorno.
+El asm como sentencia se usa cuando no se necesita un valor de expresión. Puede tener varias salidas.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-`out(...)` puede admitir varios.
+## asm como expresión
 
----
-
-## Expresión `asm`
-
-Se puede usar como una expresión que genera valores directamente.
+El asm como expresión produce un valor y actualmente exige exactamente un `out(...)`. `clobber("noreturn")` está prohibido en asm de expresión.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Aviso:
+## Operandos y restricciones
 
-- La expresión `asm` solo permite **exactamente 1 `out(...)`**.
+Los operandos pueden usar registros concretos o clases de restricción. x86_64 usa `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 usa `x0` ... `x30` y `w0` ... `w30`; RISC-V usa `a0`, `a1`, `t0`, `s0`, `ra`, `sp` y `xN`. Las clases comunes son `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. Un registro físico no puede ser a la vez operando y clobber.
 
----
+## Contrato de clobber
 
-## Restricción `in(...)` / `out(...)`
+`clobber("memory")` indica que el asm puede leer o escribir memoria. `clobber("flags")` y `clobber("cc")` indican modificación de flags. `clobber("stack")` es obligatorio si se usan la pila o instrucciones call/return. `clobber("nostack")` promete no tocar la pila. `clobber("noreturn")` indica que el control no vuelve al bloque actual. `stack` y `nostack` no pueden combinarse.
 
-La cadena de `in("...")`, `out("...")` es una de las dos siguientes.
+## Disciplina de pila
 
-1. Registro específico
-
-- Ejemplo: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. Clase de restricción
-
-- Por ejemplo: `"r"`, `"m"`, `"rm"`
-
-Ejemplo:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-
-
-- Variable: `out("rax") ret`
-- Desreferencia de puntero: `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` puede aceptar varios elementos a la vez y también se puede usar múltiples veces.
+El asm normal no debe modificar la pila. `call`, `push`, `pop`, `ret`, el uso directo de `rsp`/`esp` o `sp`, e instrucciones similares requieren `clobber("stack")`. Aun así, el puntero de pila debe restaurarse antes de volver.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Elementos principales:
+## asm sin retorno
 
-- Registros: `"rax"`, `"x0"`, etc.
-- Especial: `$0`, `$1` (normalización interna por objetivo)
+Los saltos indirectos como `jmp rax`, `jmp r11`, `br x0` o `jr ra` necesitan `clobber("noreturn")`. Un asm de sentencia con este clobber termina el bloque IR con `unreachable`.
 
-El compilador añade automáticamente clobber básico en modo seguro conservador.
-(`memory`, y series de flags/cc; en RISC-V independiente generalmente `memory`)
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## Etiquetas locales
 
-## Marcadores de posición de operando (`$0`, `$1`, ...)
-
-Se usa `$N` para referenciar operandos dentro de una cadena de comandos.
+Un salto a una etiqueta local permanece dentro del mismo camino de asm/control flow y no requiere `noreturn`.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-Nota:
+## Destinos de salida
 
-- El estilo `%0` se convierte internamente en el estilo `$0`.
+Los destinos de salida estables son variables y `deref` de variables puntero. Para campos o arrays, escribe primero en una variable temporal.
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## Rango de soporte actual para operandos de entrada
+## Limitaciones
 
-Los valores `in(...)` actualmente admiten las siguientes formas.
-
-- Identificador de variable
-- Literal de entero
-- Literal de cadena
-- `&identifier`
-- Identificador de desreferencia (`deref identifier`)
-- Literal de número entero/real negativo
-
-Las expresiones generales complejas pueden estar limitadas, por lo que se recomienda transmitirlas a través de variables temporales cuando sea necesario.
-
----
-
-## Advertencias
-
-El ensamblaje en línea esquiva parcialmente las protecciones del sistema de tipos.
-Asignaciones incorrectas de registros, conflictos de restricciones o la falta de clobber pueden provocar la generación de código incorrecto o errores en tiempo de ejecución.
-
-Recomendaciones:
-
-- Primero, confirme el ABI y las convenciones de llamada de destino.
-- Administre explícitamente los registros de entrada/salida y clobber.
-- Declare `clobber("memory")` cuando manipule memoria directamente.
+El inline asm siempre se trata como con efectos laterales. La manipulación compleja de pila aún puede rechazarse. Los punteros de función y los tipos de convención de llamada explícita todavía no son estables, por lo que las llamadas UEFI pueden usar wrappers asm por ahora.

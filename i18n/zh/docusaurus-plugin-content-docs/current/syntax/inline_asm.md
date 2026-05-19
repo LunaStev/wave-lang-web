@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # 内联汇编
 
-## 介绍
+Wave 的内联汇编使用 `asm { ... }` 块编写。它面向内核、UEFI 引导加载器、系统调用、端口 I/O 和 CPU 控制等低层代码。
 
-Wave 的内联汇编写入 `asm { ... }` 块中。
-在Wave代码中可以直接控制寄存器、内存、系统调用路径。
-
-当前支持的目标:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- 独立 `aarch64`
-- 独立 `riscv64`
-- 独立 `riscv64`
-
-Windows和32位目标尚不支持。
-
----
+当前目标包括 Linux `x86_64`/`aarch64`、Darwin `x86_64`/`aarch64`、Windows GNU `x86_64`，以及 freestanding `x86_64`/`aarch64`/`riscv64`。暂不支持 32 位目标。
 
 ## 基本形式
-
-`asm`可以用于**语句**，也可以用于**表达式**。
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-组成要素:
+字符串行是实际的汇编指令。`in(...)` 声明输入，`out(...)` 声明输出，`clobber(...)` 声明 asm 会修改的状态。
 
-- 字符串行: 实际汇编指令
-- `clobber(...)`: 输入操作数
-- `out(...)`: 输出操作数
-- `clobber(...)`: 被破坏的寄存器/状态/内存提示
+## 语句 asm
 
----
-
-## `asm` 语句
-
-在不需要返回值的情况下作为一般语句使用。
+语句 asm 用在不需要表达式值的位置。它可以有多个输出。
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-`out(...)` 可以放置多个。
+## 表达式 asm
 
----
-
-## `asm` 表达式
-
-可以用作直接生成值的表达式。
+表达式 asm 会产生一个值，目前必须且只能有一个 `out(...)`。表达式 asm 中禁止使用 `clobber("noreturn")`。
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-注意:
+## 操作数和约束
 
-- `asm` 表达式**只允许一个 `out(...)`**。
+操作数可以使用具体寄存器或约束类。x86_64 使用 `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`；AArch64 使用 `x0` ... `x30` 和 `w0` ... `w30`；RISC-V 使用 `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN`。通用约束类包括 `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`。同一个物理寄存器不能同时作为操作数和 clobber。
 
----
+## Clobber 契约
 
-## `in(...)` / `out(...)` 约束
+`clobber("memory")` 表示 asm 可能读写内存。`clobber("flags")` 和 `clobber("cc")` 表示条件标志被修改。使用栈或 call/return 指令时需要 `clobber("stack")`。`clobber("nostack")` 承诺不使用栈。`clobber("noreturn")` 表示控制流不会返回当前块。`stack` 和 `nostack` 不能同时使用。
 
-`in("...")`, `out("...")`的字符串是以下两者之一。
+## 栈规则
 
-1. 具体寄存器
-
-- 例如：`"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. 约束类(constraint class)
-
-- 例如：`"r"`, `"m"`, `"rm"`
-
-例:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-
-
-- 变量：`out("rax") ret`
-- 指针反向引用：`clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` 可以一次接收多个项目，也可以多次使用。
+普通 asm 不应修改栈。`call`, `push`, `pop`, `ret`，直接使用 `rsp`/`esp` 或 `sp`，以及类似指令都需要 `clobber("stack")`。即使如此，返回前也必须恢复栈指针。
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-主要项目:
+## 不返回的 asm
 
-- 寄存器：`"rax"`, `"x0"` 等
-- 特殊：`$0`, `$1`（基于目标的内部规范化）
+`jmp rax`, `jmp r11`, `br x0`, `jr ra` 等间接跳转需要 `clobber("noreturn")`。带有该 clobber 的语句 asm 会用 `unreachable` 结束 IR 块。
 
-编译器在保守安全模式下会自动添加基本的clobber。
-（`memory`，flags/cc 系列等；在 RISC-V 独立模式下主要为 `memory`）
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## 局部标签
 
-## 操作数占位符 (`$0`, `$1`, ...)
-
-在命令字符串中引用操作数时使用 `$N`。
+跳转到局部标签仍位于同一个 asm/control-flow 路径中，因此不需要 `noreturn`。
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-注意：
+## 输出目标
 
-- 即使使用 `%0` 样式，也会在内部转换为 `$0` 样式。
+稳定支持的输出目标是变量和指针变量的 `deref`。如果要输出到字段或数组，请先写入临时变量。
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## 输入操作数当前支持范围
+## 限制
 
-`in(...)` 值目前支持以下形式：
-
-- 变量标识符
-- 整数字面量
-- 字符串字面量
-- `&identifier`
-- `deref identifier`
-- 负整数/实数字面量
-
-复杂的通用表达式可能会受到限制，因此建议在需要时先放入临时变量中传递。
-
----
-
-## 注意事项
-
-内联汇编部分绕过了类型系统的保护。
-错误的寄存器指定、约束冲突、漏掉 clobber 可能导致错误的代码生成或运行时行为。
-
-建议:
-
-- 首先确定目标 ABI 和调用约定
-- 明确管理输入/输出寄存器和 clobber
-- 如果直接操作内存，请同时声明 `clobber("memory")`。
+inline asm 始终被视为有副作用。复杂的栈操作仍可能被拒绝。函数指针和显式调用约定类型尚未稳定，因此 UEFI 服务调用目前仍可使用 asm 包装器。

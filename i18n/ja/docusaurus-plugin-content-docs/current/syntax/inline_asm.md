@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # インラインアセンブリ
 
-## 紹介
+Wave のインラインアセンブリは `asm { ... }` ブロックで記述します。カーネル、UEFI ブートローダ、システムコール、ポート I/O、CPU 制御などの低レベルコード向けの機能です。
 
-Waveのインラインアセンブリは`asm { ... }`ブロックとして記述します。
-Waveコード内でレジスタ、メモリ、システムコール経路を直接制御できます。
+現在の対象は Linux `x86_64`/`aarch64`、Darwin `x86_64`/`aarch64`、Windows GNU `x86_64`、freestanding `x86_64`/`aarch64`/`riscv64` です。32 ビットターゲットはまだ未対応です。
 
-現在サポートされているターゲット:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- フリースタンディング `aarch64`
-- フリースタンディング `riscv64`
-- フリースタンディング `riscv64`
-
-Windowsと32ビットターゲットはまだサポートされていません。
-
----
-
-## 基本形態
-
-`asm`は\*\*文(statement)\*\*としても、\*\*式(expression)\*\*としても使用できます。
+## 基本形
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-構成要素:
+文字列行は実際のアセンブリ命令です。`in(...)` は入力、`out(...)` は出力、`clobber(...)` は asm が変更する状態を宣言します。
 
-- 文字列行: 実際のアセンブリ命令
-- `clobber(...)`: 入力オペランド
-- `out(...)`: 出力オペランド
-- `clobber(...)`: 破壊されるレジスタ/状態/メモリのヒント
+## 文としての asm
 
----
-
-## `asm`文 (Statement)
-
-戻り値がなくてもよい場合は通常の文として使用します。
+文としての asm は式の値が不要な場所で使います。出力は複数持てます。
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-`out(...)`は複数を置くことができます。
+## 式としての asm
 
----
-
-## `asm`式 (Expression)
-
-値を直接生成する式として使用できます。
+式としての asm は値を生成し、現在は正確に 1 つの `out(...)` を要求します。`clobber("noreturn")` は式 asm では禁止です。
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-注意:
+## オペランドと制約
 
-- `asm`式は\*\*正確に1つの`out(...)`\*\*のみ許可します。
+オペランドには具体的なレジスタまたは制約クラスを指定できます。x86_64 は `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`、AArch64 は `x0` ... `x30` と `w0` ... `w30`、RISC-V は `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN` を使います。共通クラスは `r`, `m`, `rm`, `i`, `ri`, `im`, `irm` です。同じ物理レジスタをオペランドと clobber の両方に指定することはできません。
 
----
+## clobber 契約
 
-## `in(...)` / `out(...)`制約式
+`clobber("memory")` は asm がメモリを読み書きする可能性を示します。`clobber("flags")` と `clobber("cc")` はフラグ変更を示します。`clobber("stack")` はスタックや call/return 命令を使う場合に必要です。`clobber("nostack")` はスタックを触らない契約です。`clobber("noreturn")` は現在のブロックに戻らないことを示します。`stack` と `nostack` は同時に使えません。
 
-`in("...")`, `out("...")`の文字列は次のうちのいずれかです。
+## スタック規律
 
-1. 具体的なレジスタ
-
-- 例: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. 制約クラス(constraint class)
-
-- 例: `"r"`, `"m"`, `"rm"`
-
-例:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-出力対象(`out(...) target`)は現在の実装基準として次のパターンを推奨します。
-
-- 変数: `out("rax") ret`
-- ポインタ参照外し: `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)`は一度に複数の項目を受け取ることができ、何度も書くことができます。
+通常の asm はスタックを変更してはいけません。`call`, `push`, `pop`, `ret`, `rsp`/`esp` または `sp` の直接使用などは `clobber("stack")` が必要です。それでも戻る前にスタックポインタを復元する必要があります。
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-主要項目:
+## 戻らない asm
 
-- レジスタ: `"rax"`, `"x0"` など
-- 特殊: `$0`, `$1`(ターゲット別内部正規化)
+`jmp rax`, `jmp r11`, `br x0`, `jr ra` のような間接ジャンプには `clobber("noreturn")` が必要です。この clobber を持つ文 asm は IR ブロックを `unreachable` で終えます。
 
-コンパイラは保守的安全モードで基本的なclobberを自動で追加します。
-（`memory`、フラグ/cc 系列など; RISC-V フリースタンディングでは主に `memory`）
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## ローカルラベル
 
-## オペランドプレースホルダー (`$0`, `$1`, ...)
-
-命令文字列内でオペランドを参照する際に`$N`を使用します。
+ローカルラベルへのジャンプは同じ asm/control-flow 経路内に留まるため、`noreturn` は不要です。
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-参考:
+## 出力先
 
-- `%0`スタイルを使用しても、内部的に`$0`スタイルに変換されます。
+安定している出力先は変数とポインタ変数の `deref` です。フィールドや配列へ出力する場合は、まず一時変数に受けてから保存してください。
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## 入力オペランドの現在のサポート範囲
+## 制限事項
 
-`in(...)`値は現在次の形式をサポートしています。
-
-- 変数識別子
-- 整数リテラル
-- 文字列リテラル
-- `&identifier`
-- `deref identifier`
-- 負の整数/実数リテラル
-
-複雑な一般表現は制限される場合があるため、必要に応じて一時変数に入れて渡すパターンを推奨します。
-
----
-
-## 段落1
-
-インラインアセンブリは型システムの保護を部分的に回避します。
-不正なレジスターの指定、制約式の競合、clobberの欠如は、不正なコード生成やランタイム動作不良を引き起こす可能性があります。
-
-推奨事項:
-
-- ターゲットABIと呼び出し規約を最初に確定
-- 入力/出力レジスターとclobberを明示的に管理
-- メモリに直接触れる場合は`clobber("memory")`を一緒に宣言
+inline asm は常に副作用を持つものとして扱われます。複雑なスタック操作はまだ拒否される場合があります。関数ポインタと明示的な calling convention 型はまだ安定していないため、UEFI サービス呼び出しは当面 asm ラッパーを使うことがあります。

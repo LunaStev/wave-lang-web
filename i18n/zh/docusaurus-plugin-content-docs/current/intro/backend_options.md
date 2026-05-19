@@ -2,130 +2,38 @@
 sidebar_position: 7
 ---
 
-# 后端选项（`--llvm`，`--whale`）
+# 后端选项
 
-本文档描述了 `wavec` 的后端相关CLI选项。
+这些选项控制 `wavec` 使用的 LLVM backend 和 linker 路径。Wave 面向 native code、freestanding system、UEFI 和 cross-compilation，因此优先采用显式控制。
 
-重要原则：
+## 重要选项
 
-- `wavec` 不是包管理器。
-- 后端操作尽可能通过 **显式参数** 进行控制。
-- 后端详细选项仅在`--llvm`之后解析。
+`--target=<triple>` 选择 LLVM target。`--cpu`, `--features`, `--abi` 细化 code generation。`--sysroot` 影响 compile/link 搜索路径。`-C linker=...`, `-C link-arg=...`, `-C link-sysroot=...` 控制 linker。`-C no-default-libs` 关闭自动 `libc`/`libm` 链接。`-C relocation-model=...` 和 `-C code-model=...` 选择低层 code generation model。
 
----
+## Freestanding 策略
 
-## 1. 后端选择器
-
-## 1.1 `--llvm`
-
-`--llvm` 本身是后端选项块的起始标记。
+`--freestanding` 假定没有 hosted C runtime。它关闭默认库，禁用 red zone，生成 no-unwind 风格的 IR，并在没有显式覆盖时为 freestanding target 倾向 static relocation。
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-如上所示，`--llvm`之后的参数仅支持作为LLVM后端设置处理。
+## UEFI 路径
 
-## 1.2 `--whale`（当前TODO）
-
-当前`--whale`是**预留的虚设标志**。
-
-- 解析器可以识别。
-- 实际的Whale后端流水线尚未连接。
-- 使用时以TODO错误终止。
-
----
-
-## 2. `--llvm`之后支持的选项
-
-## 2.1 目标/代码生成
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-应用点：
-
-- IR 生成（TargetMachine）阶段：`target`、`cpu`、`features`
-- 对象/链接阶段（调用 clang）：`target`、`abi`
-
-当前默认将记录的主要目标三重体：
-
-- Linux：`x86_64-unknown-linux-gnu`，`aarch64-unknown-linux-gnu`
-- Darwin：`x86_64-apple-darwin`，`aarch64-apple-darwin`
-- 独立：`x86_64-unknown-none-elf`，`aarch64-unknown-none-elf`，`riscv64-unknown-none-elf`
-
-## 2.2 工具链/链接
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>`（可重复）
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-应用点：
-
-- 对象生成（clang `-c`）时使用 `--sysroot`
-- 在链接阶段进行链接器覆盖，注入原始链接参数，注入 link-sysroot
-- 使用 `-C no-default-libs` 时自动禁用 `-lc -lm`
-
----
-
-## 3. 解析规则（重要）
-
-如果不使用 `--llvm`，后台详细选项不会被解释为全局选项。
-
-例如，以下是错误的。
+UEFI 使用 PE/COFF 而不是 SysV ELF。推荐路径是用 `--target x86_64-pc-windows-gnu --freestanding --emit=obj` 生成 COFF object，然后用 `lld-link` 加 `/subsystem:efi_application`, `/entry:<symbol>`, `/machine:x64`, `/nodefaultlib` 链接。
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-必须如下所示撰写。
+## Capability 查询
+
+上层工具应查询 `wavec print target-list`, `supported-emit-kinds`, `supported-input-types`, `default-linker`，而不是硬编码假设。
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
----
-
-## 4. 使用示例
-
-生成基本对象：
-
-```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
-```
-
-独立内核对象生成：
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-自定义链接：
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-禁用 libc/libm 自动链接：
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-使用 `--freestanding` 时，其效果与 `-C no-default-libs` 一样，适用于不依赖运行时默认库的构建，例如内核/启动代码。
-
----
-
-## 5. 状态摘要
-
-- LLVM 后端: 运行中
-- Whale 后端：已预订（TODO），未实现

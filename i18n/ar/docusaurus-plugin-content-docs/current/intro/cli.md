@@ -4,402 +4,66 @@ sidebar_position: 6
 
 # مرجع CLI لـ `wavec`
 
-توضح هذه الوثيقة بعناية سلوك CLI لـ **Wave Compiler الحالي (`wavec`)** بناءً على التنفيذ الحالي.
+`wavec` هو مترجم منخفض المستوى مثل `rustc` أو `cc`. حل الحزم وملفات lockfile والـ registry والـ workspace هي مسؤولية أدوات أعلى مثل Vex.
 
-المبادئ الأساسية:
-
-- `wavec` هو مترجم.
-- تثبيت/حل الحزم (lockfile, registry, التحميل) ليس من مسؤولية `wavec`.
-- يتم تمرير التبعيات الخارجية كـ **معامل CLI صريح** عند تشغيل `wavec`.
-
----
-
-## 1. الصيغة الأساسية
+## الشكل الأساسي
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [global-options] <command> [command-options] [input...]
 ```
 
-مثال:
+## الأوامر الأساسية
+
+ينفذ `build <input...>` الترجمة والفحص والربط والتشغيل الاختياري عبر flags. `check <file>` هو alias لـ `build <file> --emit=check`. `run <file>` هو alias لـ `build <file> --run`. يعرض `print <item>` قدرات compiler مثل targets وأنواع emit وأنواع input والـ linker الافتراضي.
+
+## قواعد الإدخال
+
+يقبل `build` مدخلاً واحداً أو أكثر. يتم استنتاج الامتدادات تلقائياً: `.wave` لمصدر Wave، و`.ll` لـ LLVM IR، و`.bc` لـ bitcode، و`.s` أو `.asm` لـ assembly، و`.o` أو `.obj` لـ object files. يفرض `--input-type=<kind>` نوعاً واحداً لكل المدخلات.
 
 ```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
+wavec build main.wave
+wavec build main.wave util.wave --emit=bin
+wavec build start.o runtime.o --link-only --emit=bin
 ```
 
----
+## قواعد emit
 
-## 2. قواعد تحليل الأوامر (مهم)
-
-يقوم `wavec` أولاً بمسح **الخيار العام** من إجمالي المعاملات ثم يحلل `<command>` بما تبقى.
-
-وبالتالي، فإن الخيار العام مرن في الموقع.
+يدعم `--emit` القيم `check`, `ast`, `ir`, `bc`, `asm`, `obj`, `bin`. `check` وضع تحكم وليس artifact عادياً، لذلك يستخدم منفرداً. إذا أُنتج `bin` مع artifacts أخرى فإن `-o` يسمي binary النهائي، بينما تتبع artifacts الوسيطة `--out-dir` أو المسارات الافتراضية.
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec build main.wave --emit=check
+wavec build main.wave --emit=ir,obj
+wavec build main.wave --emit=bin -o app
 ```
 
-الثلاثة أعلاه جميعها صالحة.
+## تشغيل الناتج
 
-عند استخدام `--`، يتوقف المسح للخيار العام بعده ويتم تمريره إلى منطقة الأمر.
+يسمح بـ `--run` فقط عند إنتاج artifact `bin` قابل للتنفيذ واحد بالضبط. لا يصح مع `--shared` أو أوضاع emit غير القابلة للتنفيذ. الوسائط بعد `--` تمرر إلى الملف التنفيذي الناتج.
 
 ```bash
-wavec -- run main.wave
+wavec run main.wave -- arg1 arg2
+wavec build main.wave --run -- arg1 arg2
 ```
 
----
+## Freestanding و bare-metal
 
-## 3. الأوامر
-
-## 3.1 `run <file>`
-
-يقوم بتجميع وتشغيل ملف Wave.
+`--freestanding` مخصص للـ kernels والـ bootloaders والـ firmware وembedded targets. يعطل ربط `libc`/`libm` الافتراضي، ويعطل red zone في backend، وينتج كوداً مناسباً لبيئات بلا runtime.
 
 ```bash
-wavec run hello.wave
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-السلوك:
+## التحكم في backend
 
-1. تحليل المصدر + توسيع الاستيراد
-2. إنشاء LLVM IR
-3. رابط ثنائي أصلي (`target/<file_stem>`)
-4. تشغيل
+استخدم `--target`, `--cpu`, `--features`, `--abi`, `--sysroot`, `-C linker=...`, `-C link-arg=...`, `-C link-sysroot=...`, `-C relocation-model=...`, `-C code-model=...`, و`-C no-default-libs` للتحكم الدقيق في compiler وlinker.
 
-الخصائص:
+## استعلامات capability
 
-- ينقل `wavec` كود إنهاء البرنامج الذي تم تشغيله.
-
----
-
-## 3.2 `build <file>`
-
-إنشاء ملف قابل للتنفيذ (exe).
+`wavec print target-list`, `supported-emit-kinds`, `supported-input-types`, و`default-linker` مخصصة لأدوات مثل Vex للتحقق من compiler المثبت دون تخمين.
 
 ```bash
-wavec build app.wave
-```
-
-ثنائي الإخراج:
-
-- `target/<file_stem>`
-
-## 3.3 خيارات `build` (`-o`, `-c`)
-
-يمكن للأمر `build` التحكم في اسم ملف الإخراج وتنسيق الإخراج كخيارات.
-
-```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-```
-
-- `-o <file>`: يحدد اسم ملف الإخراج.
-  - افتراضيًا (بدون `-c`): تحديد مسار إخراج الملف القابل للتنفيذ.
-  - مع `-c`: تحديد مسار إخراج ملف الكائن.
-- `-c`: حذف الرابط وإنشاء ملف الكائن فقط.
-- عند استخدام `-c` يتم إخراج مسار الكائن إلى stdout.
-
-السلوك الافتراضي:
-
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (مسار الإخراج)
-
-مثال على كائن نواة منفصل:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-يمكن أيضًا استخدام `aarch64-unknown-none-elf` و `riscv64-unknown-none-elf` بنفس الطريقة.
-
----
-
-## 3.4 `install std`, `update std`
-
-هذا هو الأمر لتثبيت/تحديث مكتبة القياسية.
-
-```bash
-wavec install std
-wavec update std
-```
-
----
-
-## 3.5 `--help`, `--version`
-
-```bash
-wavec --help
-wavec --version
-```
-
----
-
-## ٤. خيارات عامة
-
-## ٤.١ تحسين
-
-القيم المسموح بها:
-
-- `-O0`
-- `-O1`
-- `-O2`
-- `-O3`
-- `-Os`
-- `-Oz`
-- `-Ofast`
-
-مثال:
-
-```bash
-wavec -O3 run main.wave
-```
-
----
-
-## ٤.٢ إخراج التصحيح
-
-```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
-```
-
-العناصر المسموح بها:
-
-- `tokens`
-- `ast`
-- `ir`
-- `mc`
-- `hex`
-- `all`
-
----
-
-## ٤.٣ خيارات الربط
-
-```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
-```
-
-- `--link=<lib>` أو `--link <lib>`
-- `-L<path>` أو `-L <path>`
-
-يتم تمرير `wavec` داخليًا في شكل `-l<lib>`، `-L<path>` أثناء الربط.
-
----
-
-## 4.4 خيارات الاعتمادات الخارجية (مهم)
-
-خيارات التحليل للاستيراد الخارجي (`pkg::...`).
-
-### `--dep-root <dir>`
-
-إضافة مرشحين لدليل جذر الحزمة.
-
-```bash
-wavec run app.wave --dep-root .vex/dep
-```
-
-عند البحث عن الحزمة `math`:
-
-- افحص `.vex/dep/math`
-
-يمكن تحديده عدة مرات:
-
-```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
-```
-
-### `--dep <name>=<path>`
-
-تثبيت اسم الحزمة في مسار محدد.
-
-```bash
-wavec run app.wave --dep math=.vex/dep/math
-```
-
-القواعد:
-
-- صيغة `name`: `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` يجب أن يكون بصيغة `name=path`
-- عند تكرار تحديد نفس اسم الحزمة، يحدث خطأ
-
----
-
-## 4.5 خيارات الخلفية (`--llvm`, `--whale`)
-
-خيارات التحكم في الخلفية تُفسر فقط وراء `--llvm`.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-العناصر المدعومة (ملخص):
-
-- `--target`, `--cpu`, `--features`, `--abi`
-- `--sysroot`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (يمكن تكراره)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-الأهداف الرئيسية الحالية بناءً على `wavec print target-list`:
-
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
-- `x86_64-unknown-none-elf`
-- `aarch64-unknown-none-elf`
-- `riscv64-unknown-none-elf`
-
-`--whale` هو علم افتراضي محجوز حالياً، وخط أنابيب الخلفية الفعلي لم يتم تنفيذه بعد (TODO).
-
----
-
-## 5. قواعد تحليل الاستيراد
-
-ينقسم استيراد Wave إلى 3 أنواع:
-
-1. استيراد محلي
-2. استيراد std
-3. استيراد حزمة خارجية
-
-## 5.1 محلي
-
-```wave
-import("foo");
-import("path/to/mod.wave");
-```
-
-ابحث عن `<path>.wave` في الدليل المرجعي للملف.
-
-## 5.2 std
-
-```wave
-import("std::io::format");
-```
-
-استخدم المسار `~/.wave/lib/wave/std/...`.
-
-## 5.3 حزمة خارجية
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-الصيغة:
-
-- مطلوب على الأقل 2 قطعة `package::module`
-
-ترتيب تحديد الجذر للحزمة:
-
-1. تعيين محدد بـ `--dep name=path`
-2. ابحث في كل `--dep-root` عن `<root>/<package>`
-
-إذا تم العثور على نفس الحزمة في عدة جذور dep في نفس الوقت:
-
-- لن يتم التحديد تلقائيًا و **خطأ عدم الوضوح**
-- يجب التثبيت بـ `--dep name=path`
-
-ترتيب بحث ملفات الوحدة:
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-مثال:
-
-```wave
-import("math::core::vec");
-```
-
-البحث:
-
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
-
----
-
-## 6. أمثلة حقيقية على استيراد خارجي
-
-### 6.1 جذر dep واحد
-
-الدليل:
-
-```text
-.vex/dep/
-  math/
-    src/
-      add.wave
-main.wave
-```
-
-الرمز:
-
-```wave
-import("math::add");
-```
-
-التشغيل:
-
-```bash
-wavec run main.wave --dep-root .vex/dep
-```
-
-### 6.2 إزالة الالتباس
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep
-```
-
-يحدث خطأ إذا كان `math` موجود على كلا الجانبين. ثبّت كما هو موضح أدناه.
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
-```
-
----
-
-## 7. فصل الأدوار مع Vex
-
-الهيكل الموصى به:
-
-- `wavec`: تجميع/ربط/تنفيذ + تحليل التبعية المحددة
-- `vex`: اتصل بـ `wavec ... --dep-root ... --dep ...` بعد تثبيت/إدارة التبعيات.
-
-مثال:
-
-```bash
-# داخليًا، فيكس يفعل ذلك
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
-```
-
-يحافظ هذا النموذج على بساطة وحسم المترجم، بينما يتولى مدير الحزم مهام الأتمتة.
-
----
-
-## ٨. مرجع سريع
-
-```bash
-wavec run main.wave
-wavec build app.wave
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-wavec run main.wave --debug-wave=tokens,ast
-wavec build app.wave --link ssl -L ./native/lib
-wavec run main.wave --dep-root .vex/dep
-wavec run main.wave --dep math=.vex/dep/math
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```

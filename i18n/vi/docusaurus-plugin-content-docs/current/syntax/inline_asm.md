@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # Hợp ngữ nội tuyến
 
-## Giới thiệu
+Hợp ngữ nội tuyến của Wave được viết bằng khối `asm { ... }`. Nó dành cho mã mức thấp như kernel, bootloader UEFI, syscall, port I/O và điều khiển CPU.
 
-Tập hợp nội tuyến của Wave được viết bằng các khối `asm { ... }`.
-Có thể điều khiển trực tiếp thanh ghi, bộ nhớ và đường dẫn gọi hệ thống từ trong mã Wave.
+Các target hiện tại gồm Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64` và freestanding `x86_64`/`aarch64`/`riscv64`. Target 32-bit chưa được hỗ trợ.
 
-Các nền tảng hỗ trợ hiện tại:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-- freestanding `riscv64`
-
-Chưa hỗ trợ Windows và nền tảng 32-bit.
-
----
-
-## Hình thức cơ bản
-
-`asm` có thể được sử dụng như **câu lệnh (statement)** hoặc **biểu thức (expression)**.
+## Dạng cơ bản
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-Các thành phần:
+Các dòng chuỗi là lệnh hợp ngữ. `in(...)` khai báo đầu vào, `out(...)` khai báo đầu ra, và `clobber(...)` khai báo trạng thái mà asm sửa đổi.
 
-- Dòng chuỗi: lệnh hợp ngữ thực tế
-- `clobber(...)`: toán hạng đầu vào
-- `out(...)`: toán hạng đầu ra
-- `clobber(...)`: gợi ý thanh ghi/trạng thái/bộ nhớ bị thay đổi
+## asm dạng câu lệnh
 
----
-
-## Câu lệnh `asm` (Statement)
-
-Sử dụng như câu lệnh thông thường nếu không cần giá trị trả về.
+asm dạng câu lệnh dùng khi không cần giá trị biểu thức. Nó có thể có nhiều đầu ra.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-Có thể đặt nhiều `out(...)`.
+## asm dạng biểu thức
 
----
-
-## Biểu thức `asm` (Expression)
-
-Có thể được sử dụng như một biểu thức tạo giá trị trực tiếp.
+asm dạng biểu thức tạo ra một giá trị và hiện yêu cầu đúng một `out(...)`. `clobber("noreturn")` bị cấm trong asm dạng biểu thức.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Lưu ý:
+## Toán hạng và ràng buộc
 
-- Biểu thức `asm` chỉ cho phép **duy nhất 1 `out(...)`**.
+Toán hạng có thể dùng thanh ghi cụ thể hoặc lớp ràng buộc. x86_64 dùng `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 dùng `x0` ... `x30` và `w0` ... `w30`; RISC-V dùng `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN`. Các lớp chung là `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. Một thanh ghi vật lý không thể vừa là toán hạng vừa là clobber.
 
----
+## Hợp đồng clobber
 
-## Ràng buộc `in(...)` / `out(...)`
+`clobber("memory")` nghĩa là asm có thể đọc hoặc ghi bộ nhớ. `clobber("flags")` và `clobber("cc")` nghĩa là cờ điều kiện bị thay đổi. `clobber("stack")` cần thiết khi dùng stack hoặc lệnh call/return. `clobber("nostack")` cam kết không dùng stack. `clobber("noreturn")` nghĩa là điều khiển không quay lại block hiện tại. Không thể kết hợp `stack` và `nostack`.
 
-Chuỗi trong `in("...")`, `out("...")` có thể là một trong hai dạng sau.
+## Kỷ luật stack
 
-1. Thanh ghi cụ thể
-
-- Ví dụ: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. Lớp ràng buộc (constraint class)
-
-- Ví dụ: `"r"`, `"m"`, `"rm"`
-
-Ví dụ:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-Đối tượng đầu ra (`out(...) target`) hiện tại được khuyến khích theo mẫu sau.
-
-- Biến số: `out("rax") ret`
-- Tham chiếu ngược con trỏ: `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` có thể nhận nhiều mục cùng lúc và có thể được sử dụng nhiều lần.
+asm thông thường không được sửa stack. `call`, `push`, `pop`, `ret`, dùng trực tiếp `rsp`/`esp` hoặc `sp`, và các lệnh tương tự cần `clobber("stack")`. Dù vậy, stack pointer vẫn phải được khôi phục trước khi trả về.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Các mục chính:
+## asm không quay lại
 
-- Thanh ghi: `"rax"`, `"x0"`, v.v.
-- Đặc biệt: `$0`, `$1` (chuẩn hóa nội bộ theo mục tiêu)
+Các nhảy gián tiếp như `jmp rax`, `jmp r11`, `br x0`, hoặc `jr ra` cần `clobber("noreturn")`. asm dạng câu lệnh có clobber này kết thúc block IR bằng `unreachable`.
 
-Trình biên dịch sẽ tự động thêm clobber cơ bản trong chế độ an toàn bảo thủ.
-(`memory`, các chuỗi flags/cc, v.v.; Chủ yếu là `memory` trên nền RISC-V không phụ thuộc)
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## Nhãn cục bộ
 
-## Placeholder cho toán hạng (`$0`, `$1`, ...)
-
-Sử dụng `$N` để tham chiếu toán hạng trong chuỗi lệnh.
+Nhảy tới nhãn cục bộ vẫn nằm trong cùng đường asm/control-flow nên không cần `noreturn`.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-Tham khảo:
+## Đích đầu ra
 
-- Dù sử dụng kiểu `%0`, nội bộ sẽ chuyển thành kiểu `$0`.
+Đích đầu ra ổn định là biến và `deref` của biến con trỏ. Với field hoặc array, hãy ghi vào biến tạm trước.
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## Phạm vi hỗ trợ hiện tại cho toán hạng đầu vào
+## Giới hạn
 
-Giá trị `in(...)` hiện tại hỗ trợ các dạng sau.
-
-- Biến số định danh
-- Số nguyên kiểu literal
-- Chuỗi kiểu literal
-- `&identifier`
-- `deref identifier`
-- Số nguyên âm/ số thực kiểu literal
-
-Các biểu thức phức hợp thường bị hạn chế, do đó khuyến khích truyền qua biến tạm thời khi cần.
-
----
-
-## Lưu ý.
-
-Inline assembly có thể phần nào vượt qua được sự bảo vệ của hệ thống kiểu.
-Chỉ định thanh ghi sai, xung đột ràng buộc, hoặc thiếu clobber có thể dẫn đến tạo mã sai hoặc hành vi sai khi chạy.
-
-Khuyến nghị:
-
-- Xác định ABI và quy ước gọi hàm của mục tiêu trước tiên
-- Quản lý nhập/xuất và clobber một cách rõ ràng
-- Nếu truy cập trực tiếp vào bộ nhớ thì cùng khai báo `clobber("memory")`.
+inline asm luôn được xem là có side effect. Thao tác stack phức tạp vẫn có thể bị từ chối. Function pointer và kiểu calling convention tường minh chưa ổn định, vì vậy lời gọi dịch vụ UEFI hiện vẫn có thể dùng asm wrapper.

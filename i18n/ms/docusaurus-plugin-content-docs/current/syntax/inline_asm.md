@@ -2,28 +2,13 @@
 sidebar_position: 7
 ---
 
-# pemasangan sebaris
+# Himpunan sebaris
 
-## pengenalan
+Himpunan sebaris Wave ditulis dengan blok `asm { ... }`. Ia digunakan untuk kod aras rendah seperti kernel, pemuat but UEFI, panggilan sistem, port I/O dan kawalan CPU.
 
-Pemasangan sebaris Wave ditulis dengan blok `asm { ... }`.
-Anda boleh mengawal terus daftar, memori dan laluan panggilan sistem dalam kod Wave anda.
+Sasaran semasa ialah Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, dan freestanding `x86_64`/`aarch64`/`riscv64`. Sasaran 32-bit belum disokong.
 
-Sasaran sokongan semasa:
-- Linux `x86_64`
-- Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-
-Sasaran Windows dan 32-bit belum lagi disokong.
-
----
-
-## bentuk asas
-
-`asm` boleh digunakan sebagai **penyata** atau **ungkapan**.
+## Bentuk asas
 
 ```wave
 asm {
@@ -34,132 +19,95 @@ asm {
 }
 ```
 
-Komponen:
-- Talian rentetan: arahan pemasangan sebenar
-- `in(...)`: operan input
-- `out(...)`: Operan output
-- `clobber(...)`: Daftar/nyatakan/petunjuk ingatan dimusnahkan
+Baris rentetan ialah arahan assembly. `in(...)` mengisytiharkan input, `out(...)` output, dan `clobber(...)` keadaan yang diubah oleh asm.
 
----
+## asm sebagai pernyataan
 
-## Penyata `asm`
-
-Jika tidak ada keperluan untuk nilai pulangan, gunakannya sebagai penyata biasa.
+asm sebagai pernyataan digunakan apabila nilai ekspresi tidak diperlukan. Ia boleh mempunyai beberapa output.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-Anda boleh mempunyai berbilang `out(...)`.
+## asm sebagai ekspresi
 
----
-
-## Ekspresi `asm`
-
-Anda boleh menggunakannya dengan mencipta nilai secara langsung.
+asm sebagai ekspresi menghasilkan nilai dan buat masa ini memerlukan tepat satu `out(...)`. `clobber("noreturn")` dilarang dalam asm ekspresi.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Nota:
-- Ungkapan `asm` membenarkan **tepat satu `out(...)`**.
+## Operand dan kekangan
 
----
+Operand boleh menggunakan daftar khusus atau kelas kekangan. x86_64 menggunakan `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 menggunakan `x0` ... `x30` dan `w0` ... `w30`; RISC-V menggunakan `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN`. Kelas umum ialah `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. Satu daftar fizikal tidak boleh menjadi operand dan clobber serentak.
 
-## `in(...)` / `out(...)` farmaseutikal
+## Kontrak clobber
 
-Rentetan untuk `in("...")`, `out("...")` ialah salah satu daripada yang berikut:
+`clobber("memory")` bermaksud asm boleh membaca atau menulis memori. `clobber("flags")` dan `clobber("cc")` bermaksud flag keadaan diubah. `clobber("stack")` diperlukan apabila stack atau arahan call/return digunakan. `clobber("nostack")` menjanjikan stack tidak disentuh. `clobber("noreturn")` bermaksud kawalan tidak kembali ke blok semasa. `stack` dan `nostack` tidak boleh digabungkan.
 
-1. daftar konkrit
-- Contoh: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`,
+## Disiplin stack
 
-2. kelas kekangan
-- Contoh: `"r"`, `"m"`, `"rm"`
-
-Contoh:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-Untuk sasaran output (`out(...) target`), corak berikut disyorkan berdasarkan pelaksanaan semasa:
-- Pembolehubah:
-- Penyahrujukan penunjuk: `out("rax") deref p`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` boleh menerima berbilang item sekaligus dan boleh digunakan berbilang kali.
+asm biasa tidak patut mengubah stack. `call`, `push`, `pop`, `ret`, penggunaan terus `rsp`/`esp` atau `sp`, dan arahan seumpamanya memerlukan `clobber("stack")`. Walaupun begitu, stack pointer mesti dipulihkan sebelum kembali.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Item utama:
-- Daftar: `"rax"`, `"x0"`, dsb.
-- Istimewa: `"memory"`, `"cc"` (penormalan dalaman setiap sasaran)
+## asm tanpa kembali
 
-Pengkompil secara automatik menambah clobber lalai dalam mod selamat konservatif.
-(`memory`, siri bendera/cc, dsb.; terutamanya `memory` dalam RISC-V berdiri bebas)
+Lompatan tidak langsung seperti `jmp rax`, `jmp r11`, `br x0`, atau `jr ra` memerlukan `clobber("noreturn")`. asm pernyataan dengan clobber ini menamatkan blok IR dengan `unreachable`.
 
----
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
-## Pemegang tempat operan (`$0`, `$1`, ...)
+## Label tempatan
 
-Gunakan `$N` apabila merujuk kepada operan dalam rentetan arahan.
+Lompatan ke label tempatan kekal dalam laluan asm/control-flow yang sama dan tidak memerlukan `noreturn`.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-Nota:
-- Walaupun anda menggunakan gaya `%0`, ia ditukar secara dalaman kepada gaya `$0`.
+## Sasaran output
 
----
+Sasaran output stabil ialah pemboleh ubah dan `deref` pemboleh ubah penunjuk. Untuk field atau array, tulis ke pemboleh ubah sementara dahulu.
 
-## Input Opera dan Julat Disokong Semasa
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-Nilai `in(...)` pada masa ini menyokong bentuk berikut:
-- pengecam pembolehubah
-- integer literal
-- rentetan literal
-- `&identifier`
-- `deref identifier`
-- Integer negatif/tersurat sebenar
+## Had
 
-Ungkapan biasa yang kompleks mungkin terhad, jadi kami mengesyorkan agar corak tersebut dihantar dalam pembolehubah sementara apabila perlu.
-
----
-
-## Langkah berjaga-jaga
-
-Pemasangan sebaris sebahagiannya memintas perlindungan sistem jenis.
-Spesifikasi daftar yang salah, konflik kekangan, atau clobber yang hilang boleh menyebabkan penjanaan kod yang salah atau kerosakan masa jalan.
-
-Cadangan:
-- Sahkan sasaran ABI dan protokol panggilan dahulu
-- Mengurus daftar input/output dan clobber secara eksplisit
-- Jika ingatan disentuh terus, `clobber("memory")` juga diisytiharkan.
+inline asm sentiasa dianggap mempunyai side effect. Manipulasi stack yang kompleks masih boleh ditolak. Function pointer dan jenis calling convention eksplisit belum stabil, jadi panggilan perkhidmatan UEFI masih boleh menggunakan asm wrapper buat masa ini.

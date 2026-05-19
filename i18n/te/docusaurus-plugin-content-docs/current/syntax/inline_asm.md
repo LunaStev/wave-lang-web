@@ -2,28 +2,13 @@
 sidebar_position: 7
 ---
 
-# ఇన్లైన్ అసెంబ్లీ
+# ఇన్‌లైన్ అసెంబ్లీ
 
-## పరిచయం
+Wave inline assembly `asm { ... }` block తో వ్రాయబడుతుంది. kernel, UEFI bootloader, system call, port I/O, CPU control వంటి low-level code కోసం ఇది ఉపయోగపడుతుంది.
 
-Wave యొక్క ఇన్‌లైన్ అసెంబ్లీ `asm { ... }` బ్లాక్‌తో వ్రాయబడింది.
-మీరు మీ Wave కోడ్‌లో రిజిస్టర్‌లు, మెమరీ మరియు సిస్టమ్ కాల్ పాత్‌లను నేరుగా నియంత్రించవచ్చు.
-
-ప్రస్తుత మద్దతు లక్ష్యాలు:
-- Linux `x86_64`
-- Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-
-Windows మరియు 32-బిట్ లక్ష్యాలకు ఇంకా మద్దతు లేదు.
-
----
+ప్రస్తుత targets: Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, మరియు freestanding `x86_64`/`aarch64`/`riscv64`. 32-bit targets ఇంకా మద్దతు పొందలేదు.
 
 ## ప్రాథమిక రూపం
-
-`asm`ని **స్టేట్‌మెంట్** లేదా **ఎక్స్‌ప్రెషన్**గా ఉపయోగించవచ్చు.
 
 ```wave
 asm {
@@ -34,132 +19,95 @@ asm {
 }
 ```
 
-భాగాలు:
-- స్ట్రింగ్ లైన్: అసలైన అసెంబ్లీ సూచన
-- `in(...)`: ఇన్‌పుట్ ఆపరాండ్
-- `out(...)`: అవుట్‌పుట్ ఆపరాండ్
-- `clobber(...)`: రిజిస్టర్/స్టేట్/మెమరీ సూచన నాశనం చేయబడింది
+String lines assembly instructions. `in(...)` inputs, `out(...)` outputs, మరియు `clobber(...)` asm మార్చే state-ని ప్రకటిస్తాయి.
 
----
+## statement asm
 
-## `asm` స్టేట్‌మెంట్
-
-రిటర్న్ విలువ అవసరం లేకపోతే, దాన్ని సాధారణ స్టేట్‌మెంట్‌గా ఉపయోగించండి.
+expression value అవసరం లేని చోట statement asm ఉపయోగిస్తారు. దీనికి అనేక outputs ఉండవచ్చు.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-మీరు బహుళ `out(...)`ని కలిగి ఉండవచ్చు.
+## expression asm
 
----
-
-## `asm` వ్యక్తీకరణ
-
-మీరు నేరుగా విలువను సృష్టించడం ద్వారా దాన్ని ఉపయోగించవచ్చు.
+expression asm ఒక value ఉత్పత్తి చేస్తుంది; ప్రస్తుతం ఖచ్చితంగా ఒక `out(...)` కావాలి. expression asm లో `clobber("noreturn")` నిషేధం.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-గమనిక:
-- `asm` అనే వ్యక్తీకరణ ** సరిగ్గా ఒక `out(...)`**ని అనుమతిస్తుంది.
+## Operands మరియు constraints
 
----
+Operands concrete registers లేదా constraint classes వాడవచ్చు. x86_64 `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 `x0` ... `x30` మరియు `w0` ... `w30`; RISC-V `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN` వాడుతుంది. సాధారణ classes `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. ఒక physical register operand మరియు clobber రెండూ కాలేదు.
 
-## `in(...)` / `out(...)` ఫార్మాస్యూటికల్
+## clobber ఒప్పందం
 
-`in("...")`, `out("...")` కోసం స్ట్రింగ్ క్రింది వాటిలో ఒకటి:
+`clobber("memory")` అంటే asm memory చదవవచ్చు లేదా వ్రాయవచ్చు. `clobber("flags")` మరియు `clobber("cc")` flags మారుతాయని సూచిస్తాయి. stack లేదా call/return instructions వాడితే `clobber("stack")` అవసరం. `clobber("nostack")` stack తాకదని హామీ. `clobber("noreturn")` control ప్రస్తుత block కు తిరిగి రాదని అర్థం. `stack` మరియు `nostack` కలిపి వాడలేరు.
 
-1. కాంక్రీట్ రిజిస్టర్
-- ఉదాహరణ: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`,
+## Stack discipline
 
-2. నిర్బంధ తరగతి
-- ఉదాహరణ: `"r"`, `"m"`, `"rm"`
-
-ఉదాహరణ:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-అవుట్‌పుట్ లక్ష్యం (`out(...) target`) కోసం, ప్రస్తుత అమలు ఆధారంగా కింది నమూనా సిఫార్సు చేయబడింది:
-- వేరియబుల్:
-- పాయింటర్ సూచన: `out("rax") deref p`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` ఒకేసారి బహుళ అంశాలను స్వీకరించగలదు మరియు అనేకసార్లు ఉపయోగించవచ్చు.
+సాధారణ asm stack మార్చకూడదు. `call`, `push`, `pop`, `ret`, `rsp`/`esp` లేదా `sp` నేరుగా వాడటం వంటి instructions కు `clobber("stack")` అవసరం. అయినప్పటికీ return ముందు stack pointer restore చేయాలి.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-ప్రధాన అంశాలు:
-- రిజిస్టర్లు: `"rax"`, `"x0"`, మొదలైనవి.
-- ప్రత్యేకం: `"memory"`, `"cc"` (ఒక లక్ష్యానికి అంతర్గత సాధారణీకరణ)
+## తిరిగి రాని asm
 
-కంపైలర్ స్వయంచాలకంగా సాంప్రదాయిక సురక్షిత మోడ్‌లో డిఫాల్ట్ క్లోబర్‌ను జోడిస్తుంది.
-(`memory`, ఫ్లాగ్‌లు/cc సిరీస్, మొదలైనవి; ప్రధానంగా `memory` RISC-V ఫ్రీస్టాండింగ్‌లో)
+`jmp rax`, `jmp r11`, `br x0`, లేదా `jr ra` వంటి indirect jumps కు `clobber("noreturn")` అవసరం. ఈ clobber ఉన్న statement asm IR block ను `unreachable` తో ముగిస్తుంది.
 
----
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
-## ఆపరాండ్ ప్లేస్‌హోల్డర్ (`$0`, `$1`, ...)
+## Local labels
 
-కమాండ్ స్ట్రింగ్‌లోని ఒపెరాండ్‌లను సూచించేటప్పుడు `$N`ని ఉపయోగించండి.
+local label కు jump అదే asm/control-flow path లోనే ఉంటుంది కాబట్టి `noreturn` అవసరం లేదు.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-గమనిక:
-- మీరు `%0` శైలిని ఉపయోగించినప్పటికీ, అది అంతర్గతంగా `$0` శైలికి మార్చబడుతుంది.
+## Output targets
 
----
+స్థిర output targets variables మరియు pointer variables యొక్క `deref`. field లేదా array కోసం ముందుగా temporary variable లో వ్రాయండి.
 
-## ఇన్‌పుట్ ఆపరేటింగ్ మరియు ప్రస్తుత మద్దతు గల పరిధి
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-`in(...)` విలువ ప్రస్తుతం కింది ఫారమ్‌లకు మద్దతు ఇస్తుంది:
-- వేరియబుల్ ఐడెంటిఫైయర్
-- పూర్ణాంకం అక్షరార్థం
-- స్ట్రింగ్ లిటరల్
-- `&identifier`
-- `deref identifier`
-- ప్రతికూల పూర్ణాంకం/వాస్తవ అక్షరం
+## పరిమితులు
 
-కాంప్లెక్స్ రెగ్యులర్ ఎక్స్‌ప్రెషన్‌లు పరిమితం కావచ్చు, కాబట్టి అవసరమైనప్పుడు తాత్కాలిక వేరియబుల్‌లో నమూనాను పాస్ చేయమని మేము సిఫార్సు చేస్తున్నాము.
-
----
-
-## జాగ్రత్తలు
-
-ఇన్లైన్ అసెంబ్లీ రకం వ్యవస్థ యొక్క రక్షణలను పాక్షికంగా దాటవేస్తుంది.
-సరికాని రిజిస్టర్ స్పెసిఫికేషన్‌లు, పరిమితి వైరుధ్యాలు లేదా తప్పిపోయిన క్లోబర్‌లు తప్పు కోడ్ ఉత్పత్తి లేదా రన్‌టైమ్ వైఫల్యాలకు కారణం కావచ్చు.
-
-సిఫార్సులు:
-- లక్ష్యం ABI మరియు కాలింగ్ ప్రోటోకాల్‌ను ముందుగా నిర్ధారించండి
-- ఇన్‌పుట్/అవుట్‌పుట్ రిజిస్టర్‌లు మరియు క్లోబర్‌లను స్పష్టంగా నిర్వహించండి
-- మెమరీని నేరుగా తాకినట్లయితే, `clobber("memory")` కూడా ప్రకటించబడుతుంది.
+inline asm ఎల్లప్పుడూ side effect ఉన్నదిగా పరిగణించబడుతుంది. క్లిష్టమైన stack manipulation ఇంకా తిరస్కరించబడవచ్చు. Function pointer మరియు explicit calling convention types ఇంకా stable కావు, కాబట్టి UEFI service calls ఇప్పటికి asm wrappers ఉపయోగించవచ్చు.

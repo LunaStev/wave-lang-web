@@ -2,29 +2,13 @@
 sidebar_position: 7
 ---
 
-# Mkusanyiko wa Kwenye Mstari
+# Assembly ya ndani ya msimbo
 
-## Utangulizi
+Assembly ya ndani ya Wave huandikwa kwa kizuizi `asm { ... }`. Inafaa kwa msimbo wa kiwango cha chini kama kernel, vipakiaji vya UEFI, system calls, port I/O na udhibiti wa CPU.
 
-Kusanyiko la moja kwa moja la Wave ni `asm { ... }` imeandikwa kama block.
-Ndani ya msimbo wa Wave, unaweza kudhibiti kwa usahihi rejista, kumbukumbu, na njia za kuita mfumo.
+Malengo ya sasa ni Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, na freestanding `x86_64`/`aarch64`/`riscv64`. Malengo ya 32-bit bado hayajaungwa mkono.
 
-Madhumuni yanayoungwa mkono sasa:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- panga peke yake `aarch64`
-- panga peke yake `riscv64`
-- panga peke yake `riscv64`
-
-Windows na malengo ya 32-bit bado hayatumiki.
-
----
-
-## Umbo la msingi
-
-`asm` inaweza kutumika kama **kauli(statement)** au **maneno(expression)**.
+## Muundo wa msingi
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-Vipengele:
+Mistari ya string ni maagizo ya assembly. `in(...)` hutangaza ingizo, `out(...)` hutangaza matokeo, na `clobber(...)` hutangaza hali inayobadilishwa na asm.
 
-- Mstari wa herufi: Amri halisi ya mchakato
-- `clobber(...)`: operandi ya pembejeo
-- `out(...)`: operandi ya kutoka
-- `clobber(...)`: rejista/ hali/ kidokezo cha kumbukumbu kinachoharibika
+## asm kama statement
 
----
-
-## `asm` tamko (Statement)
-
-Hutumia sentensi ya kawaida ikiwa hakuna thamani ya kurudisha.
+asm kama statement hutumika pale ambapo thamani ya expression haihitajiki. Inaweza kuwa na matokeo kadhaa.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-`out(...)` inaweza kuwa na vipengele vingi.
+## asm kama expression
 
----
-
-## `asm` usemi (Expression)
-
-Inaweza kutumika kama usemi unaotengeneza thamani moja kwa moja.
+asm kama expression huzalisha thamani na kwa sasa inahitaji `out(...)` moja tu. `clobber("noreturn")` hairuhusiwi katika asm ya expression.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Tahadhari:
+## Operands na constraints
 
-- `asm` usemi unaruhusu **kwa hakika `out(...)` 1 pekee**.
+Operand zinaweza kutumia register maalum au darasa la constraint. x86_64 hutumia `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 hutumia `x0` ... `x30` na `w0` ... `w30`; RISC-V hutumia `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN`. Madarasa ya kawaida ni `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. Register moja ya kimwili haiwezi kuwa operand na clobber kwa wakati mmoja.
 
----
+## Mkataba wa clobber
 
-## `in(...)` / `out(...)` vikwazo vya usemi
+`clobber("memory")` humaanisha asm inaweza kusoma au kuandika memory. `clobber("flags")` na `clobber("cc")` humaanisha flags zimebadilishwa. `clobber("stack")` inahitajika stack au maagizo ya call/return yanapotumika. `clobber("nostack")` huahidi kutogusa stack. `clobber("noreturn")` humaanisha control hairudi kwenye block ya sasa. `stack` na `nostack` haziwezi kuunganishwa.
 
-Kamba ya `in("...")`, `out("...")` ni moja kati ya yafuatayo.
+## Nidhamu ya stack
 
-1. Rejista maalum
-
-- Mfano: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. Darasa la kizuizi (constraint class)
-
-- Mfano: `"r"`, `"m"`, `"rm"`
-
-Mfano:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-Lengo la pato (`out(...) target`) inashauriwa kuwa na mifumo ifuatayo kulingana na utekelezaji wa sasa.
-
-- Kigeu: `out("rax") ret`
-- Kurejelea upya pointeri: `clobber(...)`
-
----
-
-## `uchafuzi(...)`
-
-`uchafuzi(...)` unaweza kupokea vitu kadhaa kwa wakati mmoja, na inaweza kuandikwa mara kadhaa.
+asm ya kawaida haipaswi kubadilisha stack. `call`, `push`, `pop`, `ret`, matumizi ya moja kwa moja ya `rsp`/`esp` au `sp`, na maagizo yanayofanana yanahitaji `clobber("stack")`. Hata hivyo stack pointer lazima irejeshwe kabla ya kurudi.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Vitu kuu:
+## asm isiyorudi
 
-- Viandikisha: `"rax"`, `"x0"` nk.
-- Maalum: `$0`, `$1`(uratibu wa ndani usio wa kawaida)
+Miruko isiyo ya moja kwa moja kama `jmp rax`, `jmp r11`, `br x0`, au `jr ra` inahitaji `clobber("noreturn")`. asm statement yenye clobber hii humaliza block ya IR kwa `unreachable`.
 
-Mkutanisha huongeza uchafuzi msingi kiotomatiki katika hali salama ya kihafidhina.
-(`kumbukumbu`, bendera/cc nk; Kwenye RISC-V freestanding, hasa `kumbukumbu`)
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## Lebo za ndani
 
-## Vishikizi vya nafasi za operandi (`$0`, `$1`, ...)
-
-Katika mistari ya maagizo, tumia `$N` kurejelea kiasi cha uingizaji.
+Kuruka kwenda lebo ya ndani hubaki ndani ya njia ileile ya asm/control-flow na hakuhitaji `noreturn`.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-Marejeo:
+## Malengo ya output
 
-- Hata ukiandika `%0` mtindo wa kazi ya ndani, inabadilishwa na `$0` katika mtindo wa ndani.
+Malengo thabiti ya output ni variables na `deref` ya variables za pointer. Kwa field au array, andika kwanza kwenye variable ya muda.
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## Maeneo yanayoungwa mkono sasa ya uingizaji wa vitengo
+## Mipaka
 
-Thamani za `in(...)` zinasaidiwa kwa fomu zifuatazo.
-
-- Mtambulishaji wa kigezo
-- Nambari iliyowekwa
-- Maandiko halisi ya Kamba ya Herufi
-- `&kitambulisho`
-- `fungua kitambulisho`
-- Tarakimu hasi za nambari kamili/kondoo za maandiko halisi
-
-Nakala tata inaweza kuwa na vizuizi, kwa hivyo inashauriwa kutumia mduara wa muda inapohitajika.
-
----
-
-## Tahadhari
-
-Mkota ulionganishwa moja kwa moja unapuuza sehemu ya ulinzi wa mfumo wa aina.
-Uwekaji wa usajili mbaya, mivutano ya migogoro, au uhaba wa kuhifadhi inaweza kusababisha kizazi cha kanuni kibaya au utendaji usiofaa wakati wa uendeshaji.
-
-Mapendekezo:
-
-- Thibitisha sheria za ABI za msingi na rejea kwanza
-- Dhibiti kwa wazi usajili wa pembejeo/pato na kuhifadhi
-- Weka wazi `clobber("kumbukumbu")` unaposhughulikia moja kwa moja kumbukumbu
+inline asm huchukuliwa kuwa na side effect kila wakati. Ubadilishaji mgumu wa stack bado unaweza kukataliwa. Function pointer na aina za calling convention zilizo wazi bado hazijathibitika, hivyo UEFI service calls zinaweza kutumia asm wrappers kwa sasa.

@@ -2,130 +2,38 @@
 sidebar_position: 7
 ---
 
-# گزینه‌های Backend (`--llvm`, `--whale`)
+# گزینه‌های backend
 
-این سند گزینه‌های CLI مربوط به Backend در `wavec` را شرح می‌دهد.
+این گزینه‌ها backend مربوط به LLVM و مسیر linker مورد استفاده `wavec` را کنترل می‌کنند.
 
-اصول مهم:
+## گزینه‌های مهم
 
-- `wavec` یک مدیر بسته نیست.
-- عملکرد Backend تا حد ممکن با **آرگومان‌های صریح** کنترل می‌شود.
-- تنها پس از `--llvm` گزینه‌های جزئی Backend مورد تفسیر قرار می‌گیرند.
+`--target=<triple>`، LLVM target را انتخاب می‌کند. `--cpu`, `--features`, و `--abi` code generation را دقیق‌تر می‌کنند. `--sysroot` روی مسیرهای جستجوی compile/link اثر می‌گذارد. `-C linker=...`, `-C link-arg=...`, و `-C link-sysroot=...` linker را کنترل می‌کنند. `-C no-default-libs` لینک خودکار `libc`/`libm` را خاموش می‌کند.
 
----
+## سیاست freestanding
 
-## 1. انتخاب‌گر Backend
-
-## 1.1 `--llvm`
-
-`--llvm` به‌تنهایی نشان‌دهنده شروع یک بلوک از گزینه‌های Backend است.
+`--freestanding` نبود hosted C runtime را فرض می‌کند. کتابخانه‌های پیش‌فرض و red zone را غیرفعال می‌کند، IR با سبک no-unwind می‌سازد و برای freestanding targetها static relocation را ترجیح می‌دهد مگر اینکه override صریح وجود داشته باشد.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-همان‌طور که در بالا ذکر شد، تنها آرگومان‌هایی که بعد از `--llvm` پشتیبانی می‌شوند به عنوان تنظیمات Backend LLVM پردازش می‌شوند.
+## مسیر UEFI
 
-## 1.2 `--whale` (در حال حاضر TODO)
-
-در حال حاضر `--whale` به‌عنوان یک **پرچم ساختگی رزرو شده** تلقی می‌شود.
-
-- تجزیه‌کننده آن را تشخیص می‌دهد.
-- خط لوله Backend واقعی Whale هنوز متصل نشده است.
-- در صورت استفاده به عنوان خطای TODO ختم می‌شود.
-
----
-
-## 2. گزینه‌های پشتیبانی‌شده پس از `--llvm`
-
-## 2.1 هدف/تولید کد
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-نقاط انعکاس:
-
-- مرحله تولید IR (ماشین هدف): `target`,`cpu`,`features`
-- مرحله شیء/لینک (در هنگام فراخوانی کلنگ): `target`,`abi`
-
-در حال حاضر، یک سه‌گانه هدف اصلی برای مستندسازی به‌صورت پیش‌فرض:
-
-- لینوکس: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- داروین: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- فری‌ستندینگ: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 ابزارک/لینک
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (قابل تکرار)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-نقاط انعکاس:
-
-- `-c` در زمان تولید شیء (از طریق کلنگ `--sysroot`) نگاشت می‌شود.
-- در مرحله لینک، از برونزد خطی استفاده کنید، تغییر دستور کار، برونزاد sysroot لینک.
-- هنگام استفاده از `-C no-default-libs`، `-lc -lm` به‌طور خودکار غیرفعال می‌شود.
-
----
-
-## 3. قوانین تجزیه (مهم)
-
-بدون گنجاندن `--llvm`، گزینه‌های جزئی Backend به‌عنوان گزینه‌های عمومی تفسیر نمی‌شوند.
-
-به‌عنوان مثال، مورد زیر خطا است.
+UEFI از PE/COFF استفاده می‌کند، نه SysV ELF. مسیر پیشنهادی تولید COFF object با `--target x86_64-pc-windows-gnu --freestanding --emit=obj` و سپس link با `lld-link` و گزینه‌های `/subsystem:efi_application`, `/entry:<symbol>`, `/machine:x64`, `/nodefaultlib` است.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-حتماً باید به این شکل نوشته شود.
+## پرس‌وجوی capability
+
+ابزارهای بالادستی باید به جای hard-code کردن فرضیات، `wavec print target-list`, `supported-emit-kinds`, `supported-input-types`, و `default-linker` را query کنند.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
----
-
-## 4. نمونه‌های استفاده
-
-تولید شیء پایه:
-
-```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
-```
-
-ایجاد شیء هسته فری‌ستندینگ:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-لینک سفارشی:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-بدون فعالسازی پیوند libc/libm خودکار:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-هنگام استفاده از `--freestanding`، به‌صورت داخلی مشابه `-C no-default-libs` عمل می‌کند و برای ساخت‌هایی که فرض بر عدم استفاده از کتابخانه‌های پیش‌فرض در زمان اجرای کد هسته یا بوت است، تطبیق داده می‌شود.
-
----
-
-## 5. خلاصه وضعیت
-
-- Backend LLVM: در حال اجرا
-- Backend Whale: رزرو شده (TODO)، غیر قابل اجرا

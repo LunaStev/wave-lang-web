@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # Inline Assembly
 
-## Introduction
+Wave inline assembly is written with `asm { ... }`. It is for low-level code such as kernels, UEFI bootloaders, system calls, port I/O, and CPU control.
 
-Inline assembly of Wave is written in `asm { ... }` blocks.
-Within Wave code, you can directly control registers, memory, and system call paths.
-
-Currently supported targets:
-
-- Linux `aarch64`
-- Linux `arm64`
-- macOS (Darwin) `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-- freestanding `riscv64`
-
-Windows and 32-bit targets are not supported yet.
-
----
+Current targets: Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, and freestanding `x86_64`/`aarch64`/`riscv64`. 32-bit targets are not supported yet.
 
 ## Basic Form
-
-`asm` can be used both as a **statement** and as an **expression**.
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-Components:
+String lines are assembly instructions. `in(...)` declares inputs, `out(...)` declares outputs, and `clobber(...)` declares state modified by the asm.
 
-- String line: actual assembly instruction
-- `clobber(...)`: input operands
-- `out(...)`: output operands
-- `clobber(...)`: hints for clobbered registers/status/memory
+## Statement asm
 
----
-
-## `asm` Statement
-
-It is used as a regular statement if no return value is needed.
+Statement asm is used where no expression value is required. It may have multiple outputs.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-Multiple `out(...)` can be used.
+## Expression asm
 
----
-
-## `asm` Expression
-
-It can be used as an expression that directly generates a value.
+Expression asm produces a value and currently requires exactly one `out(...)`. `clobber("noreturn")` is forbidden in expression asm.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-Caution:
+## Operands and Constraints
 
-- `asm` expressions allow **exactly 1 `out(...)`**.
+Operands may use concrete registers or constraint classes. x86_64 uses `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 uses `x0` ... `x30` and `w0` ... `w30`; RISC-V uses `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, and `xN`. Common classes are `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. A physical register cannot be both an operand and a clobber.
 
----
+## Clobber Contract
 
-## `in(...)` / `out(...)` Constraints
+`clobber("memory")` means the asm may read or write memory. `clobber("flags")` and `clobber("cc")` mean condition flags are modified. `clobber("stack")` is required when stack or call/return instructions are used. `clobber("nostack")` promises no stack use. `clobber("noreturn")` means control never returns to the current block. `stack` and `nostack` cannot be combined.
 
-The strings for `in("...")`, `out("...")` are one of the following.
+## Stack Discipline
 
-1. Specific Registers
-
-- Example: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. Constraint Class
-
-- Examples: `"r"`, `"m"`, `"rm"`
-
-Example:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-Output Target (`out(...) target`) the following pattern is recommended based on current implementation.
-
-- Variable: `out("rax") ret`
-- Pointer dereference: `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` can take multiple items at once, and can be used multiple times.
+Normal asm must not modify the stack. `call`, `push`, `pop`, `ret`, direct `rsp`/`esp` or `sp` use, and similar instructions require `clobber("stack")`. Even then, the stack pointer must be restored before returning.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-Key Items:
+## Non-returning asm
 
-- Registers: `"rax"`, `"x0"`, etc.
-- Special: `$0`, `$1` (internally normalized per target)
+Indirect jumps such as `jmp rax`, `jmp r11`, `br x0`, or `jr ra` need `clobber("noreturn")`. Statement asm with this clobber ends the IR block with `unreachable`.
 
-The compiler automatically adds default clobbers in conservative safety mode.
-(`memory`, flags/cc family, etc.; primarily `memory` for RISC-V freestanding)
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## Local Labels
 
-## Operand placeholders (`$0`, `$1`, ...)
-
-Use `$N` to refer to operands within a command string.
+A jump to a local label stays inside the same asm/control-flow path and does not require `noreturn`.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-Note:
+## Output Targets
 
-- Even if `%0` style is used, it is internally converted to `$0` style.
+Stable output targets are variables and `deref` of pointer variables. For field or array output, write to a temporary first.
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## Current support range for input operands
+## Limitations
 
-`in(...)` values currently support the following forms.
-
-- Variable identifier
-- Integer literal
-- String literal
-- `&identifier`
-- `deref identifier`
-- Negative integer/real literal
-
-Complex general expressions may be restricted, so it is recommended to store them in temporary variables for transmission when necessary.
-
----
-
-## Precautions
-
-Inline assembly partially bypasses the protection of the type system.
-Incorrect register specification, constraint conflicts, and missing clobbers can cause incorrect code generation or runtime malfunctions.
-
-Recommendations:
-
-- First finalize the target ABI and calling conventions
-- Explicitly manage input/output registers and clobbers
-- Declare `clobber("memory")` when directly touching memory
+Inline asm is always side-effecting. Complex stack manipulation may still be rejected. Function pointer and explicit call-convention types are not stable yet, so UEFI service calls may still use asm wrappers for now.

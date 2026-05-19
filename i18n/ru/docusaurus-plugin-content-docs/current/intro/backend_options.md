@@ -2,130 +2,38 @@
 sidebar_position: 7
 ---
 
-# Опции бэкенда (`--llvm`, `--whale`)
+# Параметры backend
 
-Этот документ описывает CLI параметры, относящиеся к бэкенду `wavec`.
+Эти параметры управляют backend LLVM и путём linker, используемыми `wavec`.
 
-Основные принципы:
+## Важные параметры
 
-- `wavec` не является менеджером пакетов.
-- Работа бэкенда контролируется по возможности **явными параметрами**.
-- Детальные опции бэкенда интерпретируются только после `--llvm`.
+`--target=<triple>` выбирает LLVM target. `--cpu`, `--features` и `--abi` уточняют code generation. `--sysroot` влияет на пути поиска compile/link. `-C linker=...`, `-C link-arg=...` и `-C link-sysroot=...` управляют linker. `-C no-default-libs` отключает автоматическую линковку `libc`/`libm`. `-C relocation-model=...` и `-C code-model=...` выбирают низкоуровневые модели генерации кода.
 
----
+## Политика freestanding
 
-## 1. Выбор бэкенда
-
-## 1.1 `--llvm`
-
-`--llvm` сам по себе является начальной меткой блока опций бэкенда.
+`--freestanding` предполагает отсутствие hosted C runtime. Он отключает библиотеки по умолчанию, отключает red zone, генерирует IR в стиле no-unwind и предпочитает static relocation для freestanding targets, если нет явного override.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-Как указано выше, только поддерживаемые параметры после `--llvm` обрабатываются как настройки LLVM бэкенда.
+## Путь UEFI
 
-## 1.2 `--whale` (в настоящее время TODO)
-
-В настоящее время `--whale` является **зарезервированным пустым флагом**.
-
-- Парсер распознает его.
-- Фактический канал бэкэнда пока не подключен.
-- Если используется, завершает выполнение ошибкой TODO.
-
----
-
-## 2. Поддерживаемые опции после `--llvm`
-
-## 2.1 Цель/Генерация кода
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-Точка применения:
-
-- Этап генерации IR (TargetMachine): `target`, `cpu`, `features`
-- Этап объекта/ссылки (вызов clang): `target`, `abi`
-
-Основные target triple, которые документируются по умолчанию:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- Freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 Цепочка инструментов/ссылки
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (можно повторить)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-Точка применения:
-
-- Создание объекта (clang `-c`) с использованием `--sysroot`
-- На этапе линковки замена компоновщика, добавление необработанных аргументов для линковки, добавление link-sysroot
-- Автоматическая деактивация `-C no-default-libs` при использовании `-lc -lm`
-
----
-
-## 3. Правила синтаксического анализа (важно)
-
-Без использования `--llvm` подробные опции бэкенда не будут интерпретироваться как глобальные.
-
-Например, ниже приведена ошибка.
+UEFI использует PE/COFF, а не SysV ELF. Рекомендуемый путь: создать COFF object через `--target x86_64-pc-windows-gnu --freestanding --emit=obj`, затем линковать `lld-link` с `/subsystem:efi_application`, `/entry:<symbol>`, `/machine:x64` и `/nodefaultlib`.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-Необходимо записать следующим образом.
+## Запросы capability
+
+Инструменты верхнего уровня должны запрашивать `wavec print target-list`, `supported-emit-kinds`, `supported-input-types` и `default-linker`, а не жёстко кодировать предположения.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
----
-
-## 4. Пример использования
-
-Создание базового объекта:
-
-```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
-```
-
-Создание freestanding объектного ядра:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-Пользовательская ссылка:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-Автоматическая деактивация ссылки libc/libm:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-При использовании `--freestanding` выравнивается с `-C no-default-libs` и подходит для сборки, которая не предполагает наличие стандартных библиотек времени выполнения, например, для ядра или загрузочного кода.
-
----
-
-## 5. Резюме состояния
-
-- LLVM бэкенд: работает
-- Whale бэкенд: запланировано(TODO), не реализовано

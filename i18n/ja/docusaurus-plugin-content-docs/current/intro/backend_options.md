@@ -2,130 +2,38 @@
 sidebar_position: 7
 ---
 
-# バックエンドオプション (`--llvm`, `--whale`)
+# バックエンドオプション
 
-このドキュメントは、`wavec` のバックエンド関連 CLI オプションについて説明します。
+これらのオプションは `wavec` が使う LLVM backend と linker 経路を制御します。Wave は native code、freestanding system、UEFI、cross-compilation を対象にするため、明示的な制御を優先します。
 
-重要原則:
+## 重要なオプション
 
-- `wavec` はパッケージマネージャではありません。
-- バックエンド動作は、可能な限り **明示的な引数** で制御します。
-- バックエンドの詳細オプションは `--llvm` の後でのみ解釈されます。
+`--target=<triple>` は LLVM target を選びます。`--cpu`, `--features`, `--abi` は code generation を細分化します。`--sysroot` は compile/link の検索経路に影響します。`-C linker=...`, `-C link-arg=...`, `-C link-sysroot=...` は linker を制御します。`-C no-default-libs` は自動 `libc`/`libm` リンクを無効化します。`-C relocation-model=...` と `-C code-model=...` は低レベル code generation model を選びます。
 
----
+## Freestanding ポリシー
 
-## 1. バックエンドセレクタ
-
-## 1.1 `--llvm`
-
-`--llvm` 自体はバックエンドオプションブロックの開始マーカーです。
+`--freestanding` は hosted C runtime がない前提です。既定ライブラリを無効化し、red zone を無効化し、no-unwind 系の IR を出し、明示的 override がなければ freestanding target で static relocation を優先します。
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-上記のように、`--llvm` の後に来る引数のうち対応するものだけがLLVMバックエンド設定として処理されます。
+## UEFI 経路
 
-## 1.2 `--whale` (現在TODO)
-
-現在、`--whale` は **予約されたダミーフラグ** です。
-
-- パーサは認識します。
-- 実際のWhaleバックエンドパイプラインはまだ接続されていません。
-- 使用時にTODOエラーで終了します。
-
----
-
-## 2. `--llvm` の後でサポートされているオプション
-
-## 2.1 ターゲット/コード生成
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-反映ポイント:
-
-- IR生成（TargetMachine）ステップ：`target`、`cpu`、`features`
-- オブジェクト/リンクステップ（clang呼び出し）：`target`、`abi`
-
-現在基本的に文書化する主要なターゲットトリプルは:
-
-- Linux: `x86_64-unknown-linux-gnu`、`aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`、`aarch64-apple-darwin`
-- フリースタンディング: `x86_64-unknown-none-elf`、`aarch64-unknown-none-elf`、`riscv64-unknown-none-elf`
-
-## 2.2 ツールチェーン/リンク
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (繰り返し可能)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-反映ポイント:
-
-- オブジェクト生成（clang `-c`）で`--sysroot`
-- リンク単位でlinker override, raw link arg入力, link-sysroot入力
-- `-C no-default-libs`使用時の自動`-lc -lm`無効化
-
----
-
-## 3. コマンド解析ルール（重要）
-
-`--llvm`を使わないとバックエンドの詳細オプションはグローバルオプションとして解釈されません。
-
-例えば以下はエラーです。
+UEFI は SysV ELF ではなく PE/COFF を使います。推奨経路は `--target x86_64-pc-windows-gnu --freestanding --emit=obj` で COFF object を出し、`lld-link` に `/subsystem:efi_application`, `/entry:<symbol>`, `/machine:x64`, `/nodefaultlib` を渡してリンクする方法です。
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-必ず以下のように記述してください。
+## Capability 問い合わせ
+
+上位ツールは仮定をハードコードせず、`wavec print target-list`, `supported-emit-kinds`, `supported-input-types`, `default-linker` を問い合わせるべきです。
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
----
-
-## 4. 使用例
-
-基本オブジェクト生成:
-
-```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
-```
-
-フリースタンディングカーネルオブジェクト生成:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-カスタムリンク:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-libc/libm自動リンク無効化:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-`--freestanding`を使用すると内部的に`-C no-default-libs`と同じ方向で動作し、カーネル/ブートコードのようにランタイム標準ライブラリを仮定しないビルドに合わせられます。
-
----
-
-## 5. 状態要約
-
-- LLVMバックエンド：動作中
-- Whaleバックエンド：予約済み（TODO）、未実装

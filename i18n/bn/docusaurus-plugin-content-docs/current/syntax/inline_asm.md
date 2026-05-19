@@ -4,27 +4,11 @@ sidebar_position: 7
 
 # ইনলাইন অ্যাসেম্বলি
 
-## পরিচিতি
+Wave-এর inline assembly `asm { ... }` ব্লক দিয়ে লেখা হয়। এটি kernel, UEFI bootloader, system call, port I/O এবং CPU control-এর মতো low-level code-এর জন্য।
 
-ওয়েভের ইনলাইন অ্যাসেমব্লি `asm { ... }` ব্লকে লেখা হয়।
-ওয়েভ কোডের মধ্যে রেজিস্টার, মেমরি, এবং সিস্টেম কল পাথ সরাসরি নিয়ন্ত্রণ করা যায়।
+বর্তমান target হলো Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, এবং freestanding `x86_64`/`aarch64`/`riscv64`। 32-bit target এখনও সমর্থিত নয়।
 
-বর্তমান সমর্থিত লক্ষ্য:
-
-- লিনাক্স `aarch64`
-- লিনাক্স `arm64`
-- ম্যাক ওএস (ডারউইন) `x86_64`
-- ফ্রিস্ট্যান্ডিং `aarch64`
-- ফ্রিস্ট্যান্ডিং `riscv64`
-- ফ্রিস্ট্যান্ডিং `riscv64`
-
-উইন্ডোজ এবং 32-বিট টার্গেট এখনও সমর্থিত নয়।
-
----
-
-## মূল ফর্ম
-
-`asm` **বিবৃতি(statement)** এবং **অভিব্যক্তি(expression)** উভয় হিসেবেই ব্যবহার করা যেতে পারে।
+## মৌলিক রূপ
 
 ```wave
 asm {
@@ -35,141 +19,95 @@ asm {
 }
 ```
 
-উপাদান:
+String line হলো assembly instruction। `in(...)` input, `out(...)` output, আর `clobber(...)` asm যে state পরিবর্তন করে তা ঘোষণা করে।
 
-- স্ট্রিং লাইন: আসল অ্যাসেমব্লি কমান্ড
-- `clobber(...)`: ইনপুট অপার্যান্ড
-- `out(...)`: আউটপুট অপার্যান্ড
-- `clobber(...)`: ক্ষতিগ্রস্ত রেজিস্টার/স্ট্যাটাস/মেমরি হিন্ট
+## statement asm
 
----
-
-## `asm` বিবৃতি (Statement)
-
-যখন রিটার্ন ভ্যালু না থাকলেও চলে, তখন সাধারণ স্টেটমেন্ট হিসেবে ব্যবহার করুন।
+statement asm ব্যবহার হয় যখন expression value দরকার নেই। এতে একাধিক output থাকতে পারে।
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-`out(...)` একাধিক থাকতে পারে।
+## expression asm
 
----
-
-## `asm` অভিব্যক্তি (Expression)
-
-এটি সরাসরি মান তৈরি করার জন্য বিবেচনা করা যায়।
+expression asm একটি value তৈরি করে এবং বর্তমানে ঠিক একটি `out(...)` প্রয়োজন। expression asm-এ `clobber("noreturn")` নিষিদ্ধ।
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-লক্ষ্য করুন:
+## Operands ও constraints
 
-- `asm` প্রকাশগুলো **শুধুমাত্র 1টি `out(...)`** গ্রহণ করে।
+Operand concrete register অথবা constraint class ব্যবহার করতে পারে। x86_64 ব্যবহার করে `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 ব্যবহার করে `x0` ... `x30` ও `w0` ... `w30`; RISC-V ব্যবহার করে `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN`। সাধারণ class হলো `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`। একই physical register operand ও clobber দুটোই হতে পারে না।
 
----
+## clobber চুক্তি
 
-## `in(...)` / `out(...)` নিঃসারণসূচক
+`clobber("memory")` মানে asm memory পড়তে বা লিখতে পারে। `clobber("flags")` ও `clobber("cc")` flags পরিবর্তনের কথা জানায়। stack বা call/return instruction ব্যবহারে `clobber("stack")` দরকার। `clobber("nostack")` stack না ছোঁয়ার প্রতিশ্রুতি। `clobber("noreturn")` মানে control বর্তমান block-এ ফিরে আসে না। `stack` ও `nostack` একসাথে ব্যবহার করা যায় না।
 
-`in("...")`, `out("...")` এর স্ট্রিং দুইটির মধ্যে একটি হবে।
+## Stack discipline
 
-1. কংক্রিট রেজিস্টার
-
-- উদাহরণ: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`, `"x10"`
-
-2. নিয়ন্ত্রণ শ্রেণী(constraint class)
-
-- উদাহরণ: `"r"`, `"m"`, `"rm"`
-
-উদাহরণ:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-আউটপুট লক্ষ্যস্থল(`out(...) target`) এই মুহূর্তে প্রয়োগের মানদণ্ডের ভিত্তিতে নিচের প্যাটার্নগুলি সুপারিশ করা হয়।
-
-- চলক: `out("rax") ret`
-- পয়েন্টার ডেরিফারেন্স: `clobber(...)`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` একবারে বিভিন্ন আইটেম গ্রহণ করতে পারে এবং এটি বারবার ব্যবহৃত হতে পারে।
+সাধারণ asm stack পরিবর্তন করা উচিত নয়। `call`, `push`, `pop`, `ret`, `rsp`/`esp` বা `sp` সরাসরি ব্যবহার, এবং অনুরূপ instruction-এ `clobber("stack")` দরকার। তবুও return করার আগে stack pointer restore করতে হবে।
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-প্রধান আইটেমসমূহ:
+## ফিরে না আসা asm
 
-- রেজিস্টার: `"rax"`, `"x0"` প্রভৃতি
-- বিশেষ: `$0`, `$1`(লক্ষ্যভিত্তিক অভ্যন্তরীণ নিয়মিতা)
+`jmp rax`, `jmp r11`, `br x0`, বা `jr ra`-এর মতো indirect jump-এ `clobber("noreturn")` দরকার। এই clobber থাকা statement asm IR block-কে `unreachable` দিয়ে শেষ করে।
 
-কম্পাইলার রক্ষণশীল নিরাপত্তা মোডে মূল clobber স্বয়ংক্রিয়ভাবে যোগ করে।
-(`মেমরি`, পতাকা/cc সিকোয়েন্স ইত্যাদি; RISC-V ফ্রিস্ট্যান্ডিংয়ের জন্য এটি প্রধানত `মেমরি`)
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
----
+## Local label
 
-## অপারান্ড স্থানধারক (`$0`, `$1`, ...)
-
-প্রশাসনের স্ট্রিংএ অপারান্ড উল্লেখ করতে `$N` ব্যবহার করুন।
+local label-এ jump একই asm/control-flow path-এর ভিতরে থাকে, তাই `noreturn` দরকার নেই।
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-পরিশিষ্ট:
+## Output target
 
-- `%0` স্টাইল ব্যবহার করা হলেও অভ্যন্তর বিভৃতি এটি `$0` স্টাইলেব রূপান্তরিত হয়।
+স্থির output target হলো variable এবং pointer variable-এর `deref`। field বা array-এর জন্য আগে temporary variable-এ লিখুন।
 
----
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-## ইনপুট অপারান্ড বর্তমানে সমর্থিত পরিসীমা
+## সীমাবদ্ধতা
 
-`in(...)` মানটি বর্তমানে নীচের ফরম্যাটে সমর্থন করে।
-
-- পরিবর্তনকারী শনাক্তক
-- পূর্ণসংখ্যা লিটারেল
-- স্ট্রিং লিটারেল
-- `&যাচক`
-- `deref শনাক্তক`
-- ঋণাত্মক পূর্ণসংখ্যা/ভগ্ন অংশ লিটারেল
-
-জটিল সাধারণ প্রকাশগুলি সীমাবদ্ধ হতে পারে, তাই প্রয়োজন হলে কোনও অস্থায়ী ভেরিয়েবলে সঞ্চয় করে প্যাটার্নটি প্রেরণের পরামর্শ দেওয়া হয়।
-
----
-
-## সতর্কতা
-
-ইনলাইন অ্যাসেম্বলি আংশিকভাবে টাইপ সিস্টেমএর সুরক্ষা এড়িয়ে যায়।
-অসুবিধে সরবরাহ,Constraint সহ্যচাপ,clobber অনুপস্থিতির নির্ণয় অব্যর্থকিত কোড উত্পন্ন করে বা ভুল আচরণ হতে পারে গণকাল।
-
-সুপারিশ:
-
-- প্রথম লক্ষ্য ABI এবং কলিং কনভেনশন যাচাই করুন
-- ইনপুট/আউটপুট রেজিস্টার এবং ক্লবরকে স্পষ্টভাবে নিয়ন্ত্রণ করুন
-- যদি মেমরি সরাসরি পরিবর্তিত হয় তবে `clobber("memory")` ঘোষণা করা হয়
+inline asm সবসময় side effect আছে ধরে নেওয়া হয়। জটিল stack manipulation এখনও reject হতে পারে। Function pointer এবং explicit calling convention type এখনও stable নয়, তাই UEFI service call আপাতত asm wrapper ব্যবহার করতে পারে।

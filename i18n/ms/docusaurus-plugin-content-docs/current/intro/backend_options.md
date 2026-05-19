@@ -2,130 +2,38 @@
 sidebar_position: 7
 ---
 
-# Pilihan hujung belakang (`--llvm`, `--whale`)
+# Pilihan backend
 
-Dokumen ini menerangkan pilihan CLI khusus hujung belakang untuk `wavec`.
+Pilihan ini mengawal backend LLVM dan laluan linker yang digunakan oleh `wavec`.
 
-Prinsip penting:
+## Pilihan penting
 
-- `wavec` bukan pengurus pakej.
-- Tingkah laku bahagian belakang dikawal oleh **argumen eksplisit** apabila boleh.
-- Pilihan terperinci bahagian belakang hanya ditafsirkan di belakang `--llvm`.
+Options ini memilih LLVM target, codegen detail, sysroot dan linker. `-C no-default-libs` menutup link automatik `libc`/`libm`.
 
----
+## Dasar freestanding
 
-## 1. Pemilih bahagian belakang
-
-## 1.1 `--llvm`
-
-`--llvm` sendiri ialah penanda permulaan untuk blok pilihan hujung belakang.
+`--freestanding` menganggap tiada hosted C runtime, menutup default libraries dan red zone, serta memilih static relocation jika sesuai.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-Seperti yang ditunjukkan di atas, hanya item yang disokong antara argumen berikut `--llvm` diproses sebagai tetapan hujung belakang LLVM.
+## Laluan UEFI
 
-## 1.2 `--whale` (TODO pada masa ini)
-
-Pada masa ini `--whale` ialah **bendera dummy tersimpan**.
-
-- Penghurai mengenalinya.
-- Saluran paip belakang Whale sebenar belum disambungkan lagi.
-- Apabila digunakan, ia berakhir dengan ralat TODO.
-
----
-
-## 2. Pilihan disokong di belakang `--llvm`
-
-## 2.1 Sasaran/Kodegen
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-Titik refleksi:
-
-- Buat IR (TargetMachine) Langkah: `target`, `cpu`, `features`
-- Tahap objek/pautan (panggilan denting): `target`, `abi`
-
-Pada masa ini sasaran utama tiga kali ganda untuk didokumenkan secara lalai:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 Rantaian Alat/Pautan
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (boleh diulang)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-Titik refleksi:
-
-- `-c` kepada penciptaan objek (dentang `--sysroot`)
-- override linker, suntikan arg link mentah, suntikan link-sysroot pada peringkat link
-- Lumpuhkan `-C no-default-libs` secara automatik apabila menggunakan `-lc -lm`
-
----
-
-## 3. Peraturan Penghuraian (Penting)
-
-Jika `--llvm` tidak digunakan, pilihan terperinci bahagian belakang tidak ditafsirkan sebagai pilihan global.
-
-Sebagai contoh, di bawah adalah ralat:
+UEFI menggunakan PE/COFF. Emit COFF object dengan Windows GNU target, kemudian link menggunakan `lld-link` dan option EFI.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-Ia mesti ditulis seperti di bawah.
+## Pertanyaan capability
+
+Tools aras tinggi patut query capability melalui `wavec print ...`, bukan hard-code andaian.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
----
-
-## 4. Contoh penggunaan
-
-Buat objek asas:
-
-```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
-```
-
-Buat objek kernel berdiri bebas:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-Pautan Tersuai:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-Lumpuhkan pemautan auto libc/libm:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-Penggunaan
-
----
-
-## 5. Ringkasan Status
-
-- Bahagian belakang LLVM: Berfungsi
-- Bahagian Belakang Whale: Terpelihara (TODO), tidak dilaksanakan

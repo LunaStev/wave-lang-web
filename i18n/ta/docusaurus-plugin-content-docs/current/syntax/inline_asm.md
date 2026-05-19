@@ -2,28 +2,13 @@
 sidebar_position: 7
 ---
 
-# இன்லைன் சட்டசபை
+# உள்ளமை assembly
 
-## அறிமுகம்
+Wave inline assembly `asm { ... }` block மூலம் எழுதப்படுகிறது. kernel, UEFI bootloader, system call, port I/O, CPU control போன்ற low-level code க்கான வசதிதான் இது.
 
-Wave இன் இன்லைன் அசெம்பிளி `asm { ... }` தொகுதியுடன் எழுதப்பட்டுள்ளது.
-உங்கள் Wave குறியீட்டில் பதிவுகள், நினைவகம் மற்றும் கணினி அழைப்பு பாதைகளை நீங்கள் நேரடியாகக் கட்டுப்படுத்தலாம்.
-
-தற்போதைய ஆதரவு இலக்குகள்:
-- Linux `x86_64`
-- Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-
-Windows மற்றும் 32-பிட் இலக்குகள் இன்னும் ஆதரிக்கப்படவில்லை.
-
----
+தற்போதைய targets: Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, மற்றும் freestanding `x86_64`/`aarch64`/`riscv64`. 32-bit targets இன்னும் ஆதரிக்கப்படவில்லை.
 
 ## அடிப்படை வடிவம்
-
-`asm` ஐ ** அறிக்கை** அல்லது ** வெளிப்பாடு** ஆகப் பயன்படுத்தலாம்.
 
 ```wave
 asm {
@@ -34,132 +19,95 @@ asm {
 }
 ```
 
-கூறுகள்:
-- சரம் வரி: உண்மையான சட்டசபை வழிமுறை
-- `in(...)`: உள்ளீடு இயக்கம்
-- `out(...)`: வெளியீட்டு செயல்பாடு
-- `clobber(...)`: பதிவு/நிலை/நினைவக குறிப்பு அழிக்கப்பட்டது
+String வரிகள் assembly instructions ஆகும். `in(...)` input-ஐ, `out(...)` output-ஐ, `clobber(...)` asm மாற்றும் state-ஐ அறிவிக்கிறது.
 
----
+## statement asm
 
-## `asm` அறிக்கை
-
-திரும்ப மதிப்பு தேவையில்லை என்றால், அதை வழக்கமான அறிக்கையாகப் பயன்படுத்தவும்.
+expression value தேவையில்லாத இடத்தில் statement asm பயன்படுத்தப்படுகிறது. பல outputs இருக்கலாம்.
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-நீங்கள் பல `out(...)` ஐ வைத்திருக்கலாம்.
+## expression asm
 
----
-
-## `asm` வெளிப்பாடு
-
-மதிப்பை நேரடியாக உருவாக்குவதன் மூலம் நீங்கள் அதைப் பயன்படுத்தலாம்.
+expression asm ஒரு value உருவாக்குகிறது; தற்போது சரியாக ஒரு `out(...)` தேவை. expression asm-இல் `clobber("noreturn")` அனுமதிக்கப்படாது.
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-குறிப்பு:
-- `asm` என்ற வெளிப்பாடு **சரியாக ஒரு `out(...)`**ஐ அனுமதிக்கிறது.
+## Operands மற்றும் constraints
 
----
+Operands concrete registers அல்லது constraint classes பயன்படுத்தலாம். x86_64 `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 `x0` ... `x30` மற்றும் `w0` ... `w30`; RISC-V `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN` பயன்படுத்துகிறது. பொதுவான classes `r`, `m`, `rm`, `i`, `ri`, `im`, `irm`. ஒரே physical register operand மற்றும் clobber இரண்டாக இருக்க முடியாது.
 
-## `in(...)` / `out(...)` மருந்து
+## clobber ஒப்பந்தம்
 
-`in("...")`, `out("...")` க்கான சரம் பின்வருவனவற்றில் ஒன்றாகும்:
+`clobber("memory")` asm memory-ஐ படிக்கலாம் அல்லது எழுதலாம் என்பதைக் குறிக்கும். `clobber("flags")` மற்றும் `clobber("cc")` flags மாறுவதை குறிக்கும். stack அல்லது call/return instructions பயன்படுத்தினால் `clobber("stack")` தேவை. `clobber("nostack")` stack-ஐ தொடாதது என்ற வாக்குறுதி. `clobber("noreturn")` control தற்போதைய block-க்கு திரும்பாது என்பதைக் குறிக்கும். `stack` மற்றும் `nostack` சேர்ந்து வர முடியாது.
 
-1. உறுதியான பதிவு
-- எடுத்துக்காட்டு: `"rax"`, `"rdi"`, `"x0"`, `"w1"`, `"a0"`, `"t0"`,
+## Stack discipline
 
-2. கட்டுப்பாடு வகுப்பு
-- எடுத்துக்காட்டு: `"r"`, `"m"`, `"rm"`
-
-எடுத்துக்காட்டு:
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-வெளியீட்டு இலக்குக்கு (`out(...) target`), தற்போதைய செயலாக்கத்தின் அடிப்படையில் பின்வரும் முறை பரிந்துரைக்கப்படுகிறது:
-- மாறி:
-- சுட்டி குறிப்பு: `out("rax") deref p`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` ஒரே நேரத்தில் பல பொருட்களைப் பெறலாம் மற்றும் பல முறை பயன்படுத்தலாம்.
+சாதாரண asm stack-ஐ மாற்றக் கூடாது. `call`, `push`, `pop`, `ret`, `rsp`/`esp` அல்லது `sp` நேரடி பயன்பாடு போன்றவை `clobber("stack")` தேவைப்படுத்தும். இருந்தாலும் return ஆகும் முன் stack pointer மீட்டமைக்கப்பட வேண்டும்.
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-முக்கிய பொருட்கள்:
-- பதிவுகள்: `"rax"`, `"x0"`, போன்றவை.
-- சிறப்பு: `"memory"`, `"cc"` (இலக்குக்கு உள் இயல்பாக்கம்)
+## திரும்பாத asm
 
-கம்பைலர் தானாகவே பழமைவாத பாதுகாப்பான பயன்முறையில் இயல்புநிலை க்ளோபரைச் சேர்க்கிறது.
-(`memory`, கொடிகள்/cc தொடர் போன்றவை; முக்கியமாக `memory` RISC-V ஃப்ரீஸ்டாண்டிங்கில்)
+`jmp rax`, `jmp r11`, `br x0`, அல்லது `jr ra` போன்ற indirect jumps `clobber("noreturn")` தேவை. இந்த clobber உடைய statement asm IR block-ஐ `unreachable` மூலம் முடிக்கிறது.
 
----
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
-## செயல்பாட்டு ஒதுக்கிட (`$0`, `$1`, ...)
+## Local labels
 
-கட்டளைச் சரத்திற்குள் ஆபராண்ட்களைக் குறிப்பிடும்போது `$N` ஐப் பயன்படுத்தவும்.
+local label-க்கு jump செய்வது அதே asm/control-flow path-இல் தங்குகிறது; `noreturn` தேவையில்லை.
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-குறிப்பு:
-- நீங்கள் `%0` பாணியைப் பயன்படுத்தினாலும், அது `$0` பாணிக்கு உட்புறமாக மாற்றப்படும்.
+## Output targets
 
----
+நிலையான output targets variables மற்றும் pointer variables-ன் `deref`. field அல்லது array-க்கு output வேண்டும் என்றால் முதலில் temporary variable-இல் எழுதவும்.
 
-## உள்ளீடு இயக்கம் மற்றும் தற்போதைய ஆதரவு வரம்பு
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-`in(...)` மதிப்பு தற்போது பின்வரும் படிவங்களை ஆதரிக்கிறது:
-- மாறி அடையாளங்காட்டி
-- முழு எண் எழுத்து
-- சரம் எழுத்து
-- `&identifier`
-- `deref identifier`
-- எதிர்மறை முழு எண்/உண்மையான எழுத்து
+## வரம்புகள்
 
-சிக்கலான வழக்கமான வெளிப்பாடுகள் குறைவாக இருக்கலாம், எனவே தேவைப்படும் போது ஒரு தற்காலிக மாறியில் வடிவத்தை அனுப்ப பரிந்துரைக்கிறோம்.
-
----
-
-## முன்னெச்சரிக்கைகள்
-
-இன்லைன் அசெம்பிளி வகை அமைப்பின் பாதுகாப்பை ஓரளவு புறக்கணிக்கிறது.
-தவறான பதிவு விவரக்குறிப்புகள், கட்டுப்பாடு முரண்பாடுகள் அல்லது காணாமல் போன க்ளோபர்கள் தவறான குறியீடு உருவாக்கம் அல்லது இயக்க நேர செயலிழப்புகளை ஏற்படுத்தலாம்.
-
-பரிந்துரைகள்:
-- இலக்கு ABI மற்றும் அழைப்பு நெறிமுறையை முதலில் உறுதிப்படுத்தவும்
-- உள்ளீடு/வெளியீடு பதிவேடுகள் மற்றும் க்ளோபரை வெளிப்படையாக நிர்வகிக்கவும்
-- நினைவகம் நேரடியாக தொட்டால், `clobber("memory")` அறிவிக்கப்படும்.
+inline asm எப்போதும் side effect உடையதாக கருதப்படுகிறது. சிக்கலான stack manipulation இன்னும் மறுக்கப்படலாம். Function pointer மற்றும் explicit calling convention types இன்னும் stable அல்ல; ஆகவே UEFI service calls தற்காலிகமாக asm wrappers பயன்படுத்தலாம்.

@@ -2,28 +2,13 @@
 sidebar_position: 7
 ---
 
-# የመስመር ውስጥ ስብሰባ
+# የውስጥ አሰምብሊ
 
-## መግቢያ
+የWave inline assembly በ `asm { ... }` block ይጻፋል። kernel, UEFI bootloader, system call, port I/O እና CPU control ያሉ low-level code ለመጻፍ ይጠቅማል።
 
-የWave የመስመር ላይ ስብሰባ የተፃፈው ከ`asm { ... }` ብሎክ ነው።
-በእርስዎ Wave ኮድ ውስጥ መዝገቦችን፣ ማህደረ ትውስታን እና የስርዓት ጥሪ መንገዶችን በቀጥታ መቆጣጠር ይችላሉ።
+የአሁኑ targets Linux `x86_64`/`aarch64`, Darwin `x86_64`/`aarch64`, Windows GNU `x86_64`, እና freestanding `x86_64`/`aarch64`/`riscv64` ናቸው። 32-bit targets እስካሁን አይደገፉም።
 
-አሁን ያሉ የድጋፍ ግቦች፡-
-- Linux `x86_64`
-- Linux `aarch64`
-- macOS (Darwin) `arm64`
-- freestanding `x86_64`
-- freestanding `aarch64`
-- freestanding `riscv64`
-
-Windows እና 32-ቢት ኢላማዎች ገና አልተደገፉም።
-
----
-
-## መሰረታዊ ቅፅ
-
-`asm` እንደ **መግለጫ** ወይም **መግለጫ** ሆኖ ሊያገለግል ይችላል።
+## መሠረታዊ ቅርጽ
 
 ```wave
 asm {
@@ -34,132 +19,95 @@ asm {
 }
 ```
 
-አካላት፡-
-- የሕብረቁምፊ መስመር፡ ትክክለኛው የመሰብሰቢያ መመሪያ
-- `in(...)`፡ የግቤት ኦፕሬተር
-- `out(...)`፡ የውጤት ኦፕሬተር
-- `clobber(...)`፡ ይመዝገቡ/ግዛት/የማስታወሻ ፍንጭ ተደምስሷል
+String lines assembly instructions ናቸው። `in(...)` input, `out(...)` output, እና `clobber(...)` asm የሚቀይረውን state ያሳውቃሉ።
 
----
+## statement asm
 
-## `asm` መግለጫ
-
-የመመለሻ ዋጋ የማያስፈልግ ከሆነ እንደ መደበኛ መግለጫ ይጠቀሙበት።
+statement asm የexpression value በማያስፈልግበት ቦታ ይጠቀማል። ብዙ outputs ሊኖሩት ይችላሉ።
 
 ```wave
-var ret: i64 = 0;
+let mut ret: i64 = 0;
 asm {
-    "mov rax, 1"
+    "mov rax, 39"
     "syscall"
-    in("rdi") 1
-    in("rsi") msg_ptr
-    in("rdx") 20
     out("rax") ret
+    clobber("memory")
+    clobber("flags")
 }
 ```
 
-ብዙ `out(...)` ሊኖርዎት ይችላል።
+## expression asm
 
----
-
-## `asm` አገላለጽ
-
-እሴቱን በቀጥታ በመፍጠር ሊጠቀሙበት ይችላሉ.
+expression asm value ያመነጫል፣ በአሁኑ ጊዜ ትክክለኛ አንድ `out(...)` ይፈልጋል። በexpression asm ውስጥ `clobber("noreturn")` አይፈቀድም።
 
 ```wave
-var result: i64 = asm {
+let mut value: i64 = 0;
+value = asm {
     "mov rax, 123"
-    out("rax") result
+    out("rax") value
 };
 ```
 
-ማስታወሻ፡-
-- `asm` የሚለው አገላለጽ ** በትክክል አንድ `out(...)`** ይፈቅዳል።
+## Operands እና constraints
 
----
+Operands concrete registers ወይም constraint classes ሊጠቀሙ ይችላሉ። x86_64 `rax`, `rbx`, `rcx`, `rdx`, `r8` ... `r15`; AArch64 `x0` ... `x30` እና `w0` ... `w30`; RISC-V `a0`, `a1`, `t0`, `s0`, `ra`, `sp`, `xN` ይጠቀማል። የጋራ classes `r`, `m`, `rm`, `i`, `ri`, `im`, `irm` ናቸው። አንድ physical register በተመሳሳይ ጊዜ operand እና clobber መሆን አይችልም።
 
-## `in(...)` / `out(...)` ፋርማሲዩቲካል
+## የclobber ውል
 
-የ`in("...")`፣ `out("...")` ሕብረቁምፊ ከሚከተሉት ውስጥ አንዱ ነው።
+`clobber("memory")` asm memory ሊያነብ ወይም ሊጽፍ ይችላል ማለት ነው። `clobber("flags")` እና `clobber("cc")` flags መቀየራቸውን ያሳያሉ። stack ወይም call/return instructions ሲጠቀሙ `clobber("stack")` ያስፈልጋል። `clobber("nostack")` stack እንዳይነካ ቃል ኪዳን ነው። `clobber("noreturn")` control ወደ current block አይመለስም ማለት ነው። `stack` እና `nostack` አብረው መጠቀም አይቻልም።
 
-1. የኮንክሪት መዝገብ
-- ምሳሌ፡ `"rax"`፣ `"rdi"`፣ `"x0"`፣ `"w1"`፣ `"a0"`፣ `"t0"`፣
+## Stack discipline
 
-2. ገደብ ክፍል
-- ምሳሌ፡ `"r"`፣ `"m"`፣ `"rm"`
-
-ምሳሌ፡-
-
-```wave
-in("r") &buf
-out("rax") ret
-```
-
-ለውጤት ዒላማ (`out(...) target`)፣ አሁን ባለው ትግበራ ላይ በመመስረት የሚከተለው ንድፍ ይመከራል።
-- ተለዋዋጭ፡
-- የጠቋሚ ማጣቀሻ፡ `out("rax") deref p`
-
----
-
-## `clobber(...)`
-
-`clobber(...)` ብዙ እቃዎችን በአንድ ጊዜ መቀበል ይችላል እና ብዙ ጊዜ ጥቅም ላይ ሊውል ይችላል።
+መደበኛ asm stack መቀየር የለበትም። `call`, `push`, `pop`, `ret`, `rsp`/`esp` ወይም `sp` በቀጥታ መጠቀም ያሉ instructions `clobber("stack")` ይፈልጋሉ። ቢሆንም return ከመደረጉ በፊት stack pointer መመለስ አለበት።
 
 ```wave
 asm {
-    "xor rax, rax"
-    clobber("rax")
-    clobber("rcx", "rdx")
-    clobber("memory")
+    "sub rsp, 8"
+    "add rsp, 8"
+    clobber("stack")
 }
 ```
 
-ዋና እቃዎች፡-
-- ተመዝጋቢዎች፡ `"rax"`፣ `"x0"`፣ ወዘተ
-- ልዩ፡ `"memory"`፣ `"cc"` (ውስጣዊ መደበኛነት በአንድ ዒላማ)
+## የማይመለስ asm
 
-አቀናባሪው በራስ ሰር ነባሪ ክሎበርን በወግ አጥባቂ ደህንነቱ ሁኔታ ያክላል።
-(`memory`፣ ባንዲራዎች/ሲሲ ተከታታዮች፣ወዘተ፤ በዋናነት `memory` በ RISC-V ነፃ አቋም)
+`jmp rax`, `jmp r11`, `br x0`, ወይም `jr ra` ያሉ indirect jumps `clobber("noreturn")` ይፈልጋሉ። ይህ clobber ያለው statement asm IR block በ `unreachable` ያበቃል።
 
----
+```wave
+fun jump_to_kernel(entry: u64, boot_info: ptr<u8>, stack_top: u64) {
+    asm {
+        "mov rsp, rdx"
+        "and rsp, -16"
+        "mov rdi, rcx"
+        "jmp rbx"
+        in("rbx") entry
+        in("rcx") boot_info
+        in("rdx") stack_top
+        clobber("stack")
+        clobber("noreturn")
+    }
+}
+```
 
-## የኦፔራ ቦታ ያዥ (`$0`፣ `$1`፣ ...)
+## Local labels
 
-በትእዛዝ ሕብረቁምፊ ውስጥ ኦፔራዶችን ሲያመለክቱ `$N` ይጠቀሙ።
+ወደ local label የሚደረግ jump በዚያው asm/control-flow path ውስጥ ይቆያል፣ ስለዚህ `noreturn` አያስፈልግም።
 
 ```wave
 asm {
-    "mov QWORD PTR [$0], 777"
-    in("r") &buf
-    clobber("memory")
+    "jmp 1f"
+    "1:"
 }
 ```
 
-ማስታወሻ፡-
-- የ`%0` ዘይቤን ብትጠቀምም ከውስጥ ወደ `$0` ዘይቤ ተቀይሯል።
+## Output targets
 
----
+የተረጋጋ output targets variables እና የpointer variables `deref` ናቸው። field ወይም array ላይ output ካስፈለገ መጀመሪያ temporary variable ውስጥ ይጻፉ።
 
-## የግቤት ኦፔራ የአሁኑ የሚደገፍ ክልል
+```wave
+out("rax") value
+out("rax") deref ptr
+```
 
-የ`in(...)` እሴት በአሁኑ ጊዜ የሚከተሉትን ቅጾች ይደግፋል፡
-- ተለዋዋጭ መለያ
-- ኢንቲጀር ቀጥተኛ
-- ሕብረቁምፊ ቃል በቃል
-- `&identifier`
-- `deref identifier`
-- አሉታዊ ኢንቲጀር/እውነተኛ ቃል በቃል
+## ገደቦች
 
-ውስብስብ መደበኛ መግለጫዎች የተገደቡ ሊሆኑ ይችላሉ, ስለዚህ አስፈላጊ ሆኖ ሲገኝ ንድፉን በጊዜያዊ ተለዋዋጭ ውስጥ እንዲያልፉ እንመክራለን.
-
----
-
-## ጥንቃቄዎች
-
-የውስጠ-መስመር ስብሰባ የስርዓቱን አይነት ጥበቃዎች በከፊል ያልፋል።
-የተሳሳቱ የመመዝገቢያ ዝርዝሮች፣ የግጭት ግጭቶች ወይም የጎደሉ ክሎበርስ የተሳሳተ የኮድ ማመንጨት ወይም የአሂድ ጊዜ ብልሽቶችን ሊያስከትሉ ይችላሉ።
-
-ምክሮች፡-
-- መጀመሪያ ኢላማውን ABI እና የጥሪ ፕሮቶኮልን ያረጋግጡ
-- የግቤት/ውጤት መዝገቦችን እና ክሎበርን በግልፅ ያስተዳድሩ
-- ማህደረ ትውስታ በቀጥታ ከተነካ `clobber("memory")` እንዲሁ ታውጇል።
+inline asm ሁልጊዜ side effect እንዳለው ይታያል። ውስብስብ stack manipulation አሁንም ሊታገድ ይችላል። Function pointer እና explicit calling convention types ገና stable አይደሉም፣ ስለዚህ UEFI service calls ለአሁን asm wrappers ሊጠቀሙ ይችላሉ።
