@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# Опции бэкенда (`--llvm`, `--whale`)
+# 백엔드 옵션
 
-Этот документ описывает CLI параметры, относящиеся к бэкенду `wavec`.
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-Основные принципы:
+## 주요 옵션
 
-- `wavec` не является менеджером пакетов.
-- Работа бэкенда контролируется по возможности **явными параметрами**.
-- Детальные опции бэкенда интерпретируются только после `--llvm`.
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. Выбор бэкенда
-
-## 1.1 `--llvm`
-
-`--llvm` сам по себе является начальной меткой блока опций бэкенда.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-Как указано выше, только поддерживаемые параметры после `--llvm` обрабатываются как настройки LLVM бэкенда.
-
-## 1.2 `--whale` (в настоящее время TODO)
-
-В настоящее время `--whale` является **зарезервированным пустым флагом**.
-
-- Парсер распознает его.
-- Фактический канал бэкэнда пока не подключен.
-- Если используется, завершает выполнение ошибкой TODO.
-
----
-
-## 2. Поддерживаемые опции после `--llvm`
-
-## 2.1 Цель/Генерация кода
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-Точка применения:
-
-- Этап генерации IR (TargetMachine): `target`, `cpu`, `features`
-- Этап объекта/ссылки (вызов clang): `target`, `abi`
-
-Основные target triple, которые документируются по умолчанию:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- Freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 Цепочка инструментов/ссылки
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (можно повторить)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-Точка применения:
-
-- Создание объекта (clang `-c`) с использованием `--sysroot`
-- На этапе линковки замена компоновщика, добавление необработанных аргументов для линковки, добавление link-sysroot
-- Автоматическая деактивация `-C no-default-libs` при использовании `-lc -lm`
-
----
-
-## 3. Правила синтаксического анализа (важно)
-
-Без использования `--llvm` подробные опции бэкенда не будут интерпретироваться как глобальные.
-
-Например, ниже приведена ошибка.
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-Необходимо записать следующим образом.
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. Пример использования
+## capability 조회
 
-Создание базового объекта:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-Создание freestanding объектного ядра:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-Пользовательская ссылка:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-Автоматическая деактивация ссылки libc/libm:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-При использовании `--freestanding` выравнивается с `-C no-default-libs` и подходит для сборки, которая не предполагает наличие стандартных библиотек времени выполнения, например, для ядра или загрузочного кода.
-
----
-
-## 5. Резюме состояния
-
-- LLVM бэкенд: работает
-- Whale бэкенд: запланировано(TODO), не реализовано
