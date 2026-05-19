@@ -2,404 +2,105 @@
 sidebar_position: 6
 ---
 
-# `wavec` CLI ማጣቀሻ
+# `wavec` CLI 레퍼런스
 
-ይህ ሰነድ **የአሁኑን Wave አጠናቃሪ (`wavec`) ትግበራ መሰረትን** የCLI ባህሪን ይዘረዝራል።
+이 문서는 현재 Wave 컴파일러(`wavec`) 구현 기준의 CLI 동작을 설명합니다. `wavec`는 Rust의 `rustc`나 C의 `cc`처럼 낮은 수준의 컴파일러이며, 패키지 해결과 워크스페이스 관리는 Vex 같은 상위 도구의 책임입니다.
 
-ዋና መርሆዎች፡-
-
-- `wavec` አቀናባሪ ነው።
-- የጥቅል ጭነት/ጥራት (የመቆለፊያ ፋይል፣ መዝገብ ቤት፣ ማውረድ) የ`wavec` ኃላፊነት አይደለም።
-- ውጫዊ ጥገኞች `wavec` ን ሲሰሩ እንደ ** ግልጽ CLI ነጋሪ እሴት ተላልፈዋል።
-
----
-
-## 1. መሰረታዊ ቅርጸት
+## 기본 형식
 
 ```bash
-wavec [global-options] <command> [command-options]
+wavec [global-options] <command> [command-options] [input...]
 ```
 
-ምሳሌ፡-
+주요 명령은 다음과 같습니다.
+
+- `build <input...>`: 컴파일, 검사, 링크, 실행을 플래그 중심으로 제어합니다.
+- `check <file>`: `build <file> --emit=check` 별칭입니다.
+- `run <file>`: `build <file> --run` 별칭입니다.
+- `print <item>`: 지원 target, emit kind, input type 같은 capability를 출력합니다.
+- `install std`, `update std`: 표준 라이브러리 설치/업데이트 명령입니다.
+
+## build 입력 규칙
+
+`build`는 하나 이상의 입력을 받습니다.
 
 ```bash
-wavec -O2 run main.wave
-wavec build app.wave --link ssl -L ./native/lib
-wavec run app.wave --dep-root .vex/dep
+wavec build main.wave
+wavec build main.wave util.wave --emit=bin
+wavec build start.o runtime.o --link-only --emit=bin
 ```
 
----
+입력 타입은 확장자로 자동 추론됩니다.
 
-## 2. የትዕዛዝ መተንተን ደንቦች (አስፈላጊ)
+- `.wave` -> Wave source
+- `.ll` -> LLVM IR
+- `.bc` -> LLVM bitcode
+- `.s`, `.asm` -> assembly
+- `.o`, `.obj` -> object
 
-`wavec` በመጀመሪያ ሁሉንም ነጋሪ እሴቶች ለ ** ዓለም አቀፍ አማራጭ ** ይቃኛል እና `<command>` እንደ ቀሪ ነጋሪ እሴቶች ይተረጉመዋል።
+`--input-type=<kind>`를 지정하면 모든 입력에 같은 타입을 강제로 적용합니다.
 
-በሌላ አነጋገር የአለምአቀፍ አማራጭ ቦታ ተለዋዋጭ ነው.
+## emit 규칙
 
 ```bash
-wavec -O3 run main.wave
-wavec run main.wave -O3
-wavec run -O3 main.wave
+wavec build main.wave --emit=check
+wavec build main.wave --emit=ir,obj
+wavec build main.wave --emit=bin -o app
 ```
 
-ከላይ ያሉት ሦስቱም ልክ ናቸው።
+지원 kind는 `check`, `ast`, `ir`, `bc`, `asm`, `obj`, `bin`입니다. `check`는 산출물이 아니라 front-end 검사용 제어 모드이므로 단독으로만 사용할 수 있습니다.
 
-`--` ን ከተጠቀሙ የአለምአቀፍ አማራጭ ቅኝት ይቆማል እና ወደ ትዕዛዝ ቦታ ይንቀሳቀሳል.
+`-o <file>`은 `bin`이 포함되면 최종 링크 산출물에 적용됩니다. `obj`, `ir`, `asm`, `bc` 같은 중간 산출물은 `--out-dir` 또는 기본 규칙을 따릅니다.
+
+## run과 실행 인자
 
 ```bash
-wavec -- run main.wave
+wavec run main.wave -- arg1 arg2
+wavec build main.wave --run -- arg1 arg2
 ```
 
----
+`--run`은 최종 실행 가능한 `bin` 산출물이 정확히 하나일 때만 허용됩니다. `--shared` 또는 실행 불가능한 emit 조합과 함께 사용할 수 없습니다.
 
-## 3. Commands
+## freestanding / bare-metal
 
-## 3.1 `run <file>`
-
-የWave ፋይልን ሰብስብ እና አሂድ።
+운영체제, 커널, UEFI 부트로더 같은 환경에서는 `--freestanding`을 사용합니다.
 
 ```bash
-wavec run hello.wave
+wavec build kernel.wave   --target x86_64-unknown-none-elf   --freestanding   --emit=obj   -o kernel.o
 ```
 
-እርምጃ፡
+`--freestanding`은 기본 libc/libm 링크를 끄고, backend에서 red zone을 비활성화하며, 함수에 `noredzone`/`nounwind` 성격의 코드를 생성합니다. bare-metal target(`*-none-*`, ELF freestanding target)도 같은 방향으로 처리됩니다.
 
-1. ምንጭ መተንተን + የማስመጣት መስፋፋት።
-2. LLVM IR ፍጠር
-3. ቤተኛ ሁለትዮሽ አገናኝ (`target/<file_stem>`)
-4. መሮጥ
-
-ባህሪያት፡
-
-- `wavec` የተፈፀመውን ፕሮግራም መውጫ ኮድ ያልፋል።
-
----
-
-## 3.2 `build <file>`
-
-ሊተገበር የሚችል ፋይል (exe) ይፈጥራል።
+UEFI 애플리케이션은 현재 COFF object를 만든 뒤 `lld-link`로 PE32+ EFI를 만드는 경로를 권장합니다.
 
 ```bash
-wavec build app.wave
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
-የውጤት ሁለትዮሽ፡
+## backend 옵션
 
-- `target/<file_stem>`
+주요 backend 옵션은 다음과 같습니다.
 
-## 3.3 `build` አማራጭ (`-o`፣ `-c`)
-
-የ`build` ትዕዛዝ እንደ አማራጭ የውጤት ፋይል ስም እና የውጤት ቅርጸቱን መቆጣጠር ይችላል።
-
-```bash
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-```
-
-- `-o <file>`፡ የውጤት ፋይል ስም ይገልጻል።
-  - መሰረታዊ (`-c` የለም)፡ የሚፈፀመውን የውጤት መንገድ ይገልጻል።
-  - በ`-c`፡ የነገር ፋይል ውፅዓት መንገድን ይግለጹ
-- `-c`፡ ማገናኘትን ይዝለሉ እና የነገር ፋይሎችን ብቻ ያመንጩ።
-- `-c` ሲጠቀሙ የነገር ዱካ ወደ stdout ይወጣል።
-
-ነባሪ ባህሪ፡
-
-- `wavec build app.wave` -> `target/app`
-- `wavec build app.wave -c` -> `target/app.o` (የመንገድ ውፅዓት)
-
-ነፃ የከርነል ነገር ምሳሌ፡-
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-none-elf \
-  build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-`aarch64-unknown-none-elf`፣ `riscv64-unknown-none-elf` እንዲሁ በተመሳሳይ መንገድ ጥቅም ላይ ሊውል ይችላል።
-
----
-
-## 3.4 `install std`, `update std`
-
-ይህ መደበኛ የላይብረሪ መጫን/አዘምን ትዕዛዝ ነው።
-
-```bash
-wavec install std
-wavec update std
-```
-
----
-
-## 3.5 `--help`, `--version`
-
-```bash
-wavec --help
-wavec --version
-```
-
----
-
-## 4. Global Options
-
-## 4.1 ማመቻቸት
-
-የተፈቀዱ እሴቶች፡-
-
-- `-O0`
-- `-O1`
-- `-O2`
-- `-O3`
-- `-Os`
-- `-Oz`
-- `-Ofast`
-
-ምሳሌ፡-
-
-```bash
-wavec -O3 run main.wave
-```
-
----
-
-## 4.2 የውጤት ማረም
-
-```bash
-wavec --debug-wave=tokens,ast,ir run main.wave
-```
-
-የተፈቀዱ እቃዎች፡
-
-- `tokens`
-- `ast`
-- `ir`
-- `mc`
-- `hex`
-- `all`
-
----
-
-## 4.3 የአገናኝ አማራጮች
-
-```bash
-wavec build app.wave --link ssl --link crypto -L ./native/lib
-```
-
-- `--link=<lib>` ወይም `--link <lib>`
-- `-L<path>` ወይም `-L <path>`
-
-ሲገናኙ `wavec` በውስጥ በኩል በ`-l<lib>` እና `-L<path>` መልክ ይተላለፋል።
-
----
-
-## 4.4 የውጭ ጥገኛ አማራጮች (አስፈላጊ)
-
-ይህ ለውጫዊ ማስመጣት (`pkg::...`) ትንተና አማራጭ ነው።
-
-### `--dep-root <dir>`
-
-የጥቅል ስር ማውጫ እጩዎችን ያክሉ።
-
-```bash
-wavec run app.wave --dep-root .vex/dep
-```
-
-ጥቅል `math` ሲፈልጉ፡-
-
-- `.vex/dep/math` ን ያረጋግጡ
-
-ብዙ ጊዜ ሊገለጽ ይችላል፡-
-
-```bash
-wavec run app.wave --dep-root .vex/dep --dep-root ./vendor/dep
-```
-
-### `--dep <name>=<path>`
-
-የጥቅል ስሙን ወደ አንድ የተወሰነ መንገድ ያስተካክላል።
-
-```bash
-wavec run app.wave --dep math=.vex/dep/math
-```
-
-ደንቦች፡-
-
-- `name` ቅርጸት፡ `[A-Za-z_][A-Za-z0-9_]*`
-- `--dep` በ`name=path` ቅርጸት መሆን አለበት።
-- ተመሳሳይ የጥቅል ስም በተደጋጋሚ ከተገለጸ ስህተት ይከሰታል።
-
----
-
-## 4.5 የጀርባ አማራጮች (`--llvm`፣ `--whale`)
-
-የኋላ መቆጣጠሪያ አማራጮች የሚተረጎሙት ከ`--llvm` ጀርባ ብቻ ነው።
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-የሚደገፉ ዕቃዎች (ማጠቃለያ)
-
-- `--target`, `--cpu`, `--features`, `--abi`
-- `--sysroot`
+- `--target=<triple>`
+- `--cpu=<name>`
+- `--features=<csv>`
+- `--abi=<name>`
+- `--sysroot=<path>`
 - `-C linker=<path>`
-- `-C link-arg=<arg>` (የሚደጋገም)
+- `-C link-arg=<arg>`
 - `-C link-sysroot=<path>`
+- `-C relocation-model=<model>`
+- `-C code-model=<model>`
 - `-C no-default-libs`
 
-በ`wavec print target-list` ላይ የተመሠረቱ ዋና ዋና ኢላማዎች፡-
-
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
-- `x86_64-unknown-none-elf`
-- `aarch64-unknown-none-elf`
-- `riscv64-unknown-none-elf`
-
-`--whale` በአሁኑ ጊዜ የተጠበቀ ዲሚ ባንዲራ ነው እና ትክክለኛው የኋላ መስመር ቧንቧው TODO ነው።
-
----
-
-## 5. የትርጓሜ ደንቦችን አስመጣ
-
-Wave ቅርንጫፎችን ወደ ሶስት ዓይነቶች ያስመጣል
-
-1. የአገር ውስጥ ማስመጣት
-2. std import
-3. የውጭ ጥቅል አስመጣ
-
-## 5.1 አካባቢያዊ
-
-```wave
-import("foo");
-import("path/to/mod.wave");
-```
-
-በመሠረታዊ ፋይል ማውጫ ውስጥ `<path>.wave` ያግኙ።
-
-## 5.2 std
-
-```wave
-import("std::io::format");
-```
-
-የ`~/.wave/lib/wave/std/...` መንገድን ተጠቀም።
-
-## 5.3 ውጫዊ ጥቅል
-
-```wave
-import("math::add");
-import("json::parser::core");
-```
-
-ቅርጸት፡-
-
-- ቢያንስ `package::module` 2 ክፍሎች ያስፈልጋል
-
-የጥቅል ሥር አወሳሰን ቅደም ተከተል፡-
-
-1. `--dep name=path` ግልጽ ካርታ ስራ
-2. በእያንዳንዱ `--dep-root` `<root>/<package>` ፈልግ
-
-ተመሳሳዩ ጥቅል በአንድ ጊዜ በበርካታ ዲፕ-ሥሮች ውስጥ ከተገኘ፡-
-
-- ያለ ራስ-ምርጫ ** አሻሚ ስህተት**
-- በ`--dep name=path` መስተካከል አለበት።
-
-የሞዱል ፋይል አሰሳ ቅደም ተከተል፡-
-
-1. `<package_root>/<module_path>.wave`
-2. `<package_root>/src/<module_path>.wave`
-
-ምሳሌ፡-
-
-```wave
-import("math::core::vec");
-```
-
-አሰሳ፡
-
-- `<package_root>/core/vec.wave`
-- `<package_root>/src/core/vec.wave`
-
----
-
-## 6. የውጭ ማስመጣት ምሳሌ
-
-### 6.1 ነጠላ ዲፕ-ስር
-
-ማውጫ፡
-
-```text
-.vex/dep/
-  math/
-    src/
-      add.wave
-main.wave
-```
-
-ኮድ፡-
-
-```wave
-import("math::add");
-```
-
-አሂድ፡
+## print
 
 ```bash
-wavec run main.wave --dep-root .vex/dep
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
 
-### 6.2 አሻሚ መፍታት
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep
-```
-
-`math` በሁለቱም በኩል ካለ, ስህተት ይከሰታል. ከታች እንደሚታየው ያስተካክሉት.
-
-```bash
-wavec run main.wave \
-  --dep-root .vex/dep \
-  --dep-root ./vendor/dep \
-  --dep math=./vendor/dep/math
-```
-
----
-
-## 7. ሚናዎችን ከ Vex መለየት
-
-የሚመከር መዋቅር፡
-
-- `wavec`፡ ማጠናቀር/ማገናኘት/አስፈፃሚ + የተገለጹ ጥገኞችን መፍታት
-- `vex`፡ ጥገኞችን ከጫኑ/ከማስተዳደር በኋላ ለ`wavec ... --dep-root ... --dep ...` ይደውሉ
-
-ምሳሌ፡-
-
-```bash
-# ከውስጥ፣ ቬክስ ያደርጋል
-wavec run main.wave --dep-root .vex/dep --dep math=.vex/dep/math
-```
-
-ይህ ሞዴል የጥቅል አስተዳዳሪውን ለአውቶሜሽን ሃላፊነት ይተወዋል፣ አቀናባሪውን ቀላል እና ቆራጥ ሆኖ እንዲቆይ ያደርገዋል።
-
----
-
-## 8. ፈጣን ማጣቀሻ
-
-```bash
-wavec run main.wave
-wavec build app.wave
-wavec build app.wave -o ./bin/app
-wavec build app.wave -c
-wavec build app.wave -c -o ./build/app.o
-wavec run main.wave --debug-wave=tokens,ast
-wavec build app.wave --link ssl -L ./native/lib
-wavec run main.wave --dep-root .vex/dep
-wavec run main.wave --dep math=.vex/dep/math
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-wavec --whale build app.wave -c # TODO: reserved, not implemented
-```
+`print`는 Vex 같은 상위 도구가 현재 `wavec`의 capability를 자동 검증할 때 사용하기 위한 명령입니다.
