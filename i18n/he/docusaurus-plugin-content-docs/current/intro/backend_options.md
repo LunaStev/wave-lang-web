@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# אופציות של ה-backend (`--llvm`, `--whale`)
+# 백엔드 옵션
 
-מסמך זה מסביר את אפשרויות ה-CLI הקשורות ל-backend של `wavec`.
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-עקרונות חשובים:
+## 주요 옵션
 
-- `wavec` הוא אינו מנהל חבילות.
-- יש לשלוט בפעולות ה-backend בעזרת **ארגומנטים מפורשים** ככל האפשר.
-- אופציות מפורטות של ה-backend מפורשות רק אחרי `--llvm`.
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. בחירת ה-backend
-
-## 1.1 `--llvm`
-
-`--llvm` עצמו הוא סימן תחילת חלקת אופציות ה-backend.
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-כפי שמופיע, רק פריטים נתמכים מבין הארגומנטים אחרי `--llvm` מעובדים כהגדרות ה-backend של LLVM.
-
-## 1.2 `--whale` (כרגע TODO)
-
-כרגע `--whale` הוא **דגל דמי שמור**.
-
-- ה-parser מזהה זאת.
-- פipeline ה-backend של Whale עדיין לא משולב בפועל.
-- בעת שימוש, זה מסתיים בשגיאת TODO.
-
----
-
-## 2. אופציות נתמכות אחרי `--llvm`
-
-## 2.1 יעד/קוד ייצור
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-נקודת יישום:
-
-- שלב יצירת IR (TargetMachine): `target`, `cpu`, `features`
-- שלב אובייקט/קישור (קריאה ל-clang): `target`, `abi`
-
-טריפל יעד מרכזיים לתיעוד כרגע:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 שרשרת כלים/קישור
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (ניתן לחזור)
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-נקודת יישום:
-
-- ביצירת אובייקט (עם clang `-c`) ב `--sysroot`
-- במחלקת הלינק, ניתן להגדיר override ל-linker, להזין קלט לינק raw ולהזין link-sysroot.
-- בעת השימוש ב-`-C no-default-libs` מושבת באופן אוטומטי `-lc -lm`
-
----
-
-## 3. חוקי ניתוח (חשוב)
-
-אם לא משתמשים ב-`--llvm`, פרטי האופציות של backend לא מתפרשות כאופציות גלובליות.
-
-לדוגמה, הבאות ייחשבו שגיאות.
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-יש לכתוב כפי שמוצג להלן.
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. דוגמה לשימוש
+## capability 조회
 
-יצירת אובייקט בסיסי:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-יצירת אובייקט קרנל freestanding:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-קישור מותאם אישית:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-השבתת קישור אוטומטי של libc/libm:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-השימוש ב-`--freestanding` משפיע באופן פנימי כמו `-C no-default-libs`, ומתאים לבניות שלא מניחות ספריות ריצה בסיסיות, כמו קוד קרנל/בוט.
-
----
-
-## 5. סיכום מצב
-
-- Backend של LLVM: פועל
-- Backend של Whale: מתוכנן (TODO), לא מיושם
