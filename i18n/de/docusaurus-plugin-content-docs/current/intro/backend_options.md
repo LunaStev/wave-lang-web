@@ -2,130 +2,58 @@
 sidebar_position: 7
 ---
 
-# Backend-Optionen (`--llvm`, `--whale`)​​
+# 백엔드 옵션
 
-Dieses Dokument erklärt die CLI-Optionen im Zusammenhang mit dem Backend von `wavec`.​​
+이 문서는 현재 `wavec`의 LLVM backend 제어 옵션을 설명합니다. Wave는 네이티브 코드를 직접 생성하는 언어이므로, target triple, linker, sysroot, relocation model 같은 낮은 수준의 제어가 중요합니다.
 
-Wichtige Prinzipien:​​
+## 주요 옵션
 
-- `wavec` ist kein Paketmanager.​
-- Das Backend-Verhalten wird so weit wie möglich durch **explizite Argumente** gesteuert.​​
-- Detaillierte Backend-Optionen werden nur nach `--llvm` interpretiert.​​
+- `--target=<triple>`: LLVM target triple입니다.
+- `--cpu=<name>`: target CPU입니다.
+- `--features=<csv>`: target feature 목록입니다.
+- `--abi=<name>`: target ABI입니다.
+- `--sysroot=<path>`: compile/link 단계에서 사용할 sysroot입니다.
+- `-C linker=<path>`: linker 실행 파일을 지정합니다.
+- `-C link-arg=<arg>`: linker에 raw argument를 추가합니다. 반복 가능합니다.
+- `-C link-sysroot=<path>`: link 단계에 `--sysroot=<path>`를 전달합니다.
+- `-C no-default-libs`: 자동 `libc`/`libm` 링크를 끕니다.
+- `-C relocation-model=<model>`: `default`, `static`, `pic`, `pie`, `dynamic-no-pic` 중 하나입니다.
+- `-C code-model=<model>`: `default`, `small`, `kernel`, `medium`, `large` 등을 사용합니다.
 
----
+## freestanding 정책
 
-## 1. Backend-Auswahl​​
-
-## 1.1 `--llvm`
-
-`--llvm` selbst ist ein Startmarker für den Backend-Optionsblock.​​
-
-```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
-```
-
-Wie oben werden nur die unterstützten Elemente unter den Argumenten nach `--llvm` als LLVM-Backend-Einstellungen behandelt.​​
-
-## 1.2 `--whale` (derzeit TODO)​​
-
-Derzeit ist `--whale` ein **reserviertes Dummy-Flag**.​​
-
-- Der Parser erkennt es.​​
-- Die tatsächliche Whale-Backend-Pipeline ist noch nicht verbunden.​​
-- Bei Verwendung wird es mit einem TODO-Fehler beendet.​​
-
----
-
-## 2. Optionen, die nach `--llvm` unterstützt werden​​
-
-## 2.1 Ziel/Codegen
-
-- `--target <triple>` / `--target=<triple>`
-- `--cpu <name>` / `--cpu=<name>`
-- `--features <csv>` / `--features=<csv>`
-- `--abi <name>` / `--abi=<name>`
-
-Implementierungsstelle:
-
-- IR-Erstellungsphase (TargetMachine): `target`, `cpu`, `features`
-- Objekt/Link-Stufe (clang Aufruf): `target`, `abi`
-
-Derzeit primäre Ziel-Triple, die standardmäßig dokumentiert werden sollen:
-
-- Linux: `x86_64-unknown-linux-gnu`, `aarch64-unknown-linux-gnu`
-- Darwin: `x86_64-apple-darwin`, `aarch64-apple-darwin`
-- Freestanding: `x86_64-unknown-none-elf`, `aarch64-unknown-none-elf`, `riscv64-unknown-none-elf`
-
-## 2.2 Toolchain/Link
-
-- `--sysroot <path>` / `--sysroot=<path>`
-- `-C linker=<path>`
-- `-C link-arg=<arg>` (wiederholbar)​​
-- `-C link-sysroot=<path>`
-- `-C no-default-libs`
-
-Implementierungsstelle:
-
-- `-c` für die Objekterstellung (clang `--sysroot`)
-- Linker-Überschreibung in der Verknüpfungsphase, Einfügen von Rohlinkargumenten, Einfügen von link-sysroot.
-- Automatisches Deaktivieren von `-C no-default-libs` bei Verwendung von `-lc -lm`
-
----
-
-## 3. Parsing-Regeln (wichtig)
-
-Ohne die Verwendung von `--llvm` werden Backend-Detailoptionen nicht als globale Optionen interpretiert.
-
-Zum Beispiel ist das Folgende ein Fehler.
+`--freestanding`은 커널, 부트로더, firmware, embedded 환경을 위한 빌드 모드입니다.
 
 ```bash
-wavec --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build kernel.wave --target x86_64-unknown-none-elf --freestanding --emit=obj -o kernel.o
 ```
 
-Es sollte unbedingt wie unten geschrieben werden.
+이 모드에서는 다음 정책이 적용됩니다.
+
+- 기본 `libc`/`libm` 링크를 하지 않습니다.
+- red zone을 사용하지 않도록 함수에 `noredzone` 속성을 붙입니다.
+- 예외 unwind를 가정하지 않도록 `nounwind` 성격의 IR을 생성합니다.
+- 명시적인 relocation model이 없으면 freestanding target에서 static relocation을 기본으로 사용합니다.
+- x86_64 freestanding 기본 code model은 kernel에 맞춥니다.
+
+## UEFI 경로
+
+UEFI는 SysV ELF가 아니라 PE/COFF ABI를 사용합니다. WaveOS에서 검증한 현재 권장 경로는 다음과 같습니다.
 
 ```bash
-wavec --llvm --target=x86_64-unknown-linux-gnu build app.wave -c
+wavec build boot.wave --target x86_64-pc-windows-gnu --freestanding --emit=obj -o boot.obj
+lld-link /subsystem:efi_application /entry:efi_entry /machine:x64 /nodefaultlib /out:BOOTX64.EFI boot.obj
 ```
 
----
+UEFI image에는 relocation directory가 필요할 수 있으므로, 빌드 시스템에서 `.reloc` 섹션을 포함한 COFF object를 함께 링크하는 방식을 권장합니다.
 
-## 4. Beispielverwendung
+## capability 조회
 
-Erstellung des Standardobjekts:
+상위 빌드 도구는 다음 명령으로 현재 compiler capability를 확인할 수 있습니다.
 
 ```bash
-wavec --llvm --target=aarch64-unknown-linux-gnu build app.wave -c
+wavec print target-list
+wavec print supported-emit-kinds
+wavec print supported-input-types
+wavec print default-linker
 ```
-
-Erstellung eines freistehenden Kernel-Objekts:
-
-```bash
-wavec --llvm --target=riscv64-unknown-none-elf build kernel.wave --emit=obj --freestanding -o kernel.o
-```
-
-Benutzerdefinierter Link:
-
-```bash
-wavec --llvm \
-  --target=x86_64-unknown-linux-gnu \
-  --sysroot=/opt/sysroot \
-  -C linker=clang \
-  -C link-arg=-Wl,--gc-sections \
-  build app.wave
-```
-
-Automatisches Deaktivieren der libc/libm-Verknüpfung:
-
-```bash
-wavec --llvm -C no-default-libs build app.wave
-```
-
-Die Verwendung von `--freestanding` funktioniert intern ähnlich wie `-C no-default-libs` und ist für Builds geeignet, die keine Runtime-Standardbibliotheken wie Kernel/Boot-Code annehmen.
-
----
-
-## 5. Statusübersicht
-
-- LLVM-Backend: Wird ausgeführt
-- Whale-Backend: Geplant (TODO), nicht implementiert
