@@ -6,7 +6,6 @@ param(
 $ErrorActionPreference = "Stop"
 
 $Repo = "wavefnd/Wave"
-$LLVMVersion = "21"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -21,6 +20,16 @@ function Write-Step($Message) {
 function Fail($Message) {
     Write-Error "[error] $Message"
     exit 1
+}
+
+function Normalize-Version($Value) {
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return ""
+    }
+    if ($Value.StartsWith("v")) {
+        return $Value
+    }
+    return "v$Value"
 }
 
 function Add-UserPath($Directory) {
@@ -38,66 +47,7 @@ function Add-UserPath($Directory) {
     }
 
     [Environment]::SetEnvironmentVariable("Path", $next, "User")
-}
-
-function Find-ClangPath {
-    $cmd = Get-Command clang.exe -ErrorAction SilentlyContinue
-    if ($cmd) {
-        return Split-Path -Parent $cmd.Source
-    }
-
-    $candidates = @(
-        "$env:ProgramFiles\LLVM\bin",
-        "${env:ProgramFiles(x86)}\LLVM\bin",
-        "$env:LOCALAPPDATA\Programs\LLVM\bin",
-        "$env:USERPROFILE\scoop\apps\llvm\current\bin",
-        "C:\msys64\ucrt64\bin",
-        "C:\msys64\mingw64\bin"
-    )
-
-    foreach ($candidate in $candidates) {
-        if ($candidate -and (Test-Path (Join-Path $candidate "clang.exe"))) {
-            return $candidate
-        }
-    }
-
-    return $null
-}
-
-function Install-LLVM {
-    Write-Info "Checking LLVM/Clang for Windows..."
-
-    $clangPath = Find-ClangPath
-    if ($clangPath) {
-        Write-Info "LLVM bin: $clangPath"
-        $env:Path = "$clangPath;$env:Path"
-        Add-UserPath $clangPath
-        return
-    }
-
-    if (Get-Command winget.exe -ErrorAction SilentlyContinue) {
-        Write-Info "Installing LLVM via winget..."
-        winget.exe install --id LLVM.LLVM -e --source winget --accept-package-agreements --accept-source-agreements
-    } elseif (Get-Command choco.exe -ErrorAction SilentlyContinue) {
-        Write-Info "Installing LLVM via Chocolatey..."
-        choco.exe install llvm -y
-    } elseif (Get-Command scoop -ErrorAction SilentlyContinue) {
-        Write-Info "Installing LLVM via Scoop..."
-        scoop install llvm
-    } else {
-        Fail "LLVM/Clang is required. Install LLVM manually or install winget, Chocolatey, or Scoop."
-    }
-
-    $clangPath = Find-ClangPath
-    if (-not $clangPath) {
-        Write-Warning "LLVM was installed, but clang.exe is not visible in this PowerShell session yet."
-        Write-Warning "Restart PowerShell if wavec cannot find clang."
-        return
-    }
-
-    Write-Info "LLVM bin: $clangPath"
-    $env:Path = "$clangPath;$env:Path"
-    Add-UserPath $clangPath
+    Write-Info "Added $fullPath to user PATH"
 }
 
 Write-Info "Detecting system..."
@@ -112,9 +62,14 @@ if (-not [Environment]::Is64BitOperatingSystem -or ($arch -ne "AMD64" -and $arch
 }
 
 if ($Latest) {
-    $release = Invoke-RestMethod "https://api.github.com/repos/$Repo/releases/latest"
+    $release = Invoke-RestMethod "https://api.github.com/repos/$Repo/releases?per_page=1"
+    if ($release -is [array]) {
+        $release = $release[0]
+    }
     $Version = $release.tag_name
     Write-Info "Latest version: $Version"
+} else {
+    $Version = Normalize-Version $Version
 }
 
 if ([string]::IsNullOrWhiteSpace($Version)) {
@@ -122,37 +77,72 @@ if ([string]::IsNullOrWhiteSpace($Version)) {
     Write-Host "Usage:"
     Write-Host "  powershell -ExecutionPolicy Bypass -File install.ps1 -Version <tag>"
     Write-Host "  powershell -ExecutionPolicy Bypass -File install.ps1 -Latest"
-    exit 1
+    Fail "Missing version. Use -Version <tag> or -Latest."
 }
 
-Write-Step "[1/4] Installing LLVM $LLVMVersion..."
-Install-LLVM
-
-Write-Step "[2/4] Downloading Wave binary..."
+Write-Step "[1/3] Downloading Wave $Version..."
 
 $fileSuffix = "x86_64-pc-windows-gnu"
 $fileName = "wave-$Version-$fileSuffix.zip"
 $url = "https://github.com/$Repo/releases/download/$Version/$fileName"
-$downloadPath = Join-Path (Get-Location) $fileName
+$tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("wave-install-" + [System.Guid]::NewGuid().ToString("N"))
+$downloadPath = Join-Path $tempRoot $fileName
 
-Write-Info "Download: $url"
-Invoke-WebRequest -Uri $url -OutFile $downloadPath
+New-Item -ItemType Directory -Force -Path $tempRoot | Out-Null
 
-Write-Step "[3/4] Installing Wave..."
+try {
+    Write-Info "Download: $url"
+    Invoke-WebRequest -Uri $url -OutFile $downloadPath
 
-$installDir = Join-Path $env:LOCALAPPDATA "Wave\bin"
-New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-Expand-Archive -Force -Path $downloadPath -DestinationPath $installDir
-Add-UserPath $installDir
-$env:Path = "$installDir;$env:Path"
+    Write-Step "[2/3] Installing Wave..."
 
-Write-Step "[4/4] Verifying installation..."
+    Expand-Archive -Force -Path $downloadPath -DestinationPath $tempRoot
 
-$wavec = Join-Path $installDir "wavec.exe"
-if (-not (Test-Path $wavec)) {
-    Fail "Installation failed. wavec.exe was not found in $installDir."
+    $packageDir = Join-Path $tempRoot ("wave-$Version-$fileSuffix")
+    if (-not (Test-Path $packageDir)) {
+        $packageDir = Get-ChildItem -Path $tempRoot -Directory | Select-Object -First 1 -ExpandProperty FullName
+    }
+
+    if (-not $packageDir -or -not (Test-Path $packageDir)) {
+        Fail "Invalid package layout."
+    }
+
+    $wavec = Join-Path $packageDir "wavec.exe"
+    $llvm = Join-Path $packageDir "llvm"
+    if (-not (Test-Path $wavec)) {
+        Fail "Package does not contain wavec.exe."
+    }
+    if (-not (Test-Path $llvm)) {
+        Fail "Package does not contain bundled llvm/."
+    }
+
+    if ($env:WAVE_INSTALL_DIR) {
+        $installDir = $env:WAVE_INSTALL_DIR
+    } else {
+        $installDir = Join-Path $env:LOCALAPPDATA "Wave\bin"
+    }
+
+    New-Item -ItemType Directory -Force -Path $installDir | Out-Null
+
+    $installedLlvm = Join-Path $installDir "llvm"
+    if (Test-Path $installedLlvm) {
+        Remove-Item -Recurse -Force $installedLlvm
+    }
+
+    Copy-Item -Force -Path (Join-Path $packageDir "*") -Destination $installDir -Recurse
+    Add-UserPath $installDir
+    $env:Path = "$installDir;$env:Path"
+
+    Write-Step "[3/3] Verifying installation..."
+
+    $installedWavec = Join-Path $installDir "wavec.exe"
+    if (-not (Test-Path $installedWavec)) {
+        Fail "Installation failed. wavec.exe was not found in $installDir."
+    }
+
+    & $installedWavec --version
+    Write-Host "Installation completed successfully."
+    Write-Host "Restart PowerShell if 'wavec' is not available from PATH."
+} finally {
+    Remove-Item -Recurse -Force $tempRoot -ErrorAction SilentlyContinue
 }
-
-& $wavec --version
-Write-Host "Installation completed successfully."
-Write-Host "Restart PowerShell if 'wavec' is not available from PATH."
